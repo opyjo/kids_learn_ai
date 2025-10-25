@@ -18,10 +18,11 @@ const SampleLessonsSection = () => {
           Try It Out
         </Badge>
         <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-          Start with These Fun Lessons
+          Start with These AI Adventures
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-          Get a taste of what you'll learn in our interactive Python courses
+          Peek inside the Python lessons where kids learn coding basics first,
+          then teach computers to help, create, and imagine responsibly.
         </p>
       </div>
 
@@ -45,16 +46,18 @@ const SampleLessonsSection = () => {
                 ))}
               </div>
             </div>
-            <CardTitle className="text-2xl">Hello, World! 👋</CardTitle>
+            <CardTitle className="text-2xl">Teach the Bot to Say Hi 🤖</CardTitle>
           </CardHeader>
           <CardContent>
             <CardDescription className="mb-6 text-base leading-relaxed">
-              Your first Python program! Learn how to display messages and start
-              your amazing coding journey.
+              Your first Python + AI mission! Discover variables and lists while
+              creating a friendly greeter that shares encouraging words every
+              time someone joins your project.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-primary/30 transition-colors">
+              <div className="text-foreground">cheers = ["You're awesome!", "Let's build! 💡"]</div>
               <div className="text-accent">print</div>
-              <div className="text-foreground">("Hello, World! 🌍")</div>
+              <div className="text-foreground">(cheers[0])</div>
             </div>
             <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="h-4 w-4 text-primary" />
@@ -71,7 +74,7 @@ const SampleLessonsSection = () => {
                 variant="secondary"
                 className="rounded-full bg-accent/10 text-accent"
               >
-                Lesson 3
+                Lesson 4
               </Badge>
               <div className="flex items-center gap-1">
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -82,22 +85,24 @@ const SampleLessonsSection = () => {
                 ))}
               </div>
             </div>
-            <CardTitle className="text-2xl">Math Magic 🔢</CardTitle>
+            <CardTitle className="text-2xl">Emoji Mood Meter 😊</CardTitle>
           </CardHeader>
           <CardContent>
             <CardDescription className="mb-6 text-base leading-relaxed">
-              Store information in variables and perform calculations. Build a
-              simple calculator!
+              Use loops and conditionals to help your AI guess if a message
+              sounds happy or needs a pep talk—no complex math required.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-accent/30 transition-colors">
-              <div className="text-foreground">age = 10</div>
-              <div className="text-foreground">next_year = age + 1</div>
-              <div className="text-accent mt-2">print</div>
-              <div className="text-foreground">(next_year)</div>
+              <div className="text-foreground">words = ["yay", "amazing", "ugh"]</div>
+              <div className="text-accent mt-2">for</div>
+              <div className="text-foreground">word in words:</div>
+              <div className="pl-4 text-foreground">
+                <span className="text-accent">print</span>(word, "→ happy" if word != "ugh" else "→ needs a boost")
+              </div>
             </div>
             <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="h-4 w-4 text-accent" />
-              <span>8 min • Beginner</span>
+              <span>10 min • Explorer</span>
             </div>
           </CardContent>
         </Card>
@@ -118,24 +123,22 @@ const SampleLessonsSection = () => {
                 ))}
               </div>
             </div>
-            <CardTitle className="text-2xl">Lists & Loops 🔄</CardTitle>
+            <CardTitle className="text-2xl">Story Remix Studio ✨</CardTitle>
           </CardHeader>
           <CardContent>
             <CardDescription className="mb-6 text-base leading-relaxed">
-              Work with collections of data and repeat actions efficiently.
-              Create awesome patterns!
+              Blend storytelling and Python prompts to guide a creative model in
+              co-authoring safe, uplifting adventures.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-primary/30 transition-colors">
-              <div className="text-foreground">colors = ["red", "blue"]</div>
-              <div className="text-accent mt-2">for</div>
-              <div className="text-foreground">color in colors:</div>
-              <div className="text-foreground pl-4">
-                <span className="text-accent">print</span>(color)
-              </div>
+              <div className="text-foreground">prompt = "Tell a brave story about a kid inventor"</div>
+              <div className="text-accent mt-2">print</div>
+              <div className="text-foreground">("🤖 Story Idea:", prompt)</div>
+              <div className="text-muted-foreground mt-2"># Guide the AI to add safe, uplifting twists</div>
             </div>
             <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="h-4 w-4 text-primary" />
-              <span>12 min • Intermediate</span>
+              <span>12 min • Story Maker</span>
             </div>
           </CardContent>
         </Card>

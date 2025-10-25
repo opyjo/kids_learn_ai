@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteHeader } from "@/components/site-header";
 import { Progress } from "@/components/ui/progress";
-import { Code, Trophy, Clock, Play } from "lucide-react";
+import { Code, Trophy, Play } from "lucide-react";
 import Link from "next/link";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { requireAuth } from "@/lib/auth-helpers";
@@ -71,40 +71,139 @@ export default async function DashboardPage() {
     .eq("id", authUser.id)
     .single();
 
-  // Fetch user progress
-  const { data: progress, count: completedCount } = await supabase
+  // Fetch user progress with lesson metadata
+  const { data: progressRecords } = await supabase
     .from("student_progress")
-    .select("*", { count: "exact" })
+    .select(
+      `
+        lesson_id,
+        status,
+        updated_at,
+        lessons (
+          id,
+          title,
+          difficulty_level,
+          order_index
+        )
+      `
+    )
     .eq("student_id", authUser.id)
-    .eq("status", "completed");
+    .order("updated_at", { ascending: false });
 
   // Fetch total lessons count
   const { count: totalLessons } = await supabase
     .from("lessons")
     .select("*", { count: "exact" });
 
-  // Fetch recent lessons with progress
-  const { data: recentLessons } = await supabase
-    .from("student_progress")
+  // Fetch completed lessons with lesson metadata for accurate counts
+  const {
+    data: completedLessonRecords,
+    count: completedLessonsCount,
+  } = await supabase
+    .from("completed_lessons")
     .select(
       `
-      *,
-      lessons (
-        id,
-        title,
-        difficulty_level,
-        order_index
-      )
-    `
+        lesson_id,
+        completed_at,
+        lessons (
+          id,
+          title,
+          difficulty_level,
+          order_index
+        )
+      `,
+      { count: "exact" }
     )
     .eq("student_id", authUser.id)
-    .order("updated_at", { ascending: false })
-    .limit(4);
+    .order("completed_at", { ascending: false })
+    .limit(10);
+
+  type LessonActivity = {
+    lessonId: string;
+    status: string;
+    updatedAt: string | null;
+    lesson: {
+      id: string;
+      title: string;
+      difficulty_level: string;
+      order_index: number;
+    } | null;
+  };
+
+  const progressActivities: LessonActivity[] =
+    progressRecords?.map((record: any) => ({
+      lessonId: record.lesson_id,
+      status: record.status,
+      updatedAt: record.updated_at ?? null,
+      lesson: record.lessons ?? null,
+    })) ?? [];
+
+  const completedActivities: LessonActivity[] =
+    completedLessonRecords?.map((record: any) => ({
+      lessonId: record.lesson_id,
+      status: "completed",
+      updatedAt: record.completed_at ?? null,
+      lesson: record.lessons ?? null,
+    })) ?? [];
+
+  const activityMap = new Map<string, LessonActivity>();
+
+  progressActivities.forEach((activity) => {
+    activityMap.set(activity.lessonId, activity);
+  });
+
+  completedActivities.forEach((activity) => {
+    const existing = activityMap.get(activity.lessonId);
+    const existingTimestamp = existing?.updatedAt
+      ? Date.parse(existing.updatedAt)
+      : 0;
+    const activityTimestamp = activity.updatedAt
+      ? Date.parse(activity.updatedAt)
+      : 0;
+
+    if (!existing || activityTimestamp > existingTimestamp) {
+      activityMap.set(activity.lessonId, {
+        ...(existing ?? {}),
+        ...activity,
+        status: "completed",
+      });
+    }
+  });
+
+  const getActivityTimestamp = (activity: LessonActivity) =>
+    activity.updatedAt ? Date.parse(activity.updatedAt) : 0;
+
+  const formatActivityDate = (timestamp: string | null) => {
+    if (!timestamp) {
+      return "No recent activity";
+    }
+    const date = new Date(timestamp);
+    return date.toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+      year: date.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
+    });
+  };
+
+  const recentLessonsToDisplay = Array.from(activityMap.values())
+    .sort((a, b) => getActivityTimestamp(b) - getActivityTimestamp(a))
+    .slice(0, 4);
+
+  const metadata = authUser.user_metadata as { full_name?: string } | null;
+  const userName =
+    profile?.full_name ||
+    metadata?.full_name ||
+    authUser.email?.split("@")[0] ||
+    "Student";
+
+  const userEmail = profile?.email || authUser.email || "Not provided";
+  const userSubscription = profile?.subscription_status || "free";
 
   const user = {
-    full_name: profile?.full_name || "Student",
-    subscription_status: profile?.subscription_status || "free",
-    completedLessons: completedCount || 0,
+    full_name: userName,
+    email: userEmail,
+    subscription_status: userSubscription,
+    completedLessons: completedLessonsCount || 0,
     totalLessons: totalLessons || 15,
   };
 
@@ -138,6 +237,42 @@ export default async function DashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
+            <CardHeader className="space-y-2">
+              <CardTitle className="text-sm font-medium">Your Profile</CardTitle>
+              <CardDescription>Quick snapshot of your account</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm">
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                  Name
+                </p>
+                <p className="font-medium text-gray-900 dark:text-gray-100">
+                  {user.full_name}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                  Email
+                </p>
+                <p className="font-medium text-gray-900 dark:text-gray-100 break-all">
+                  {user.email}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                  Membership
+                </p>
+                <Badge
+                  variant="outline"
+                  className="rounded-full bg-indigo-50 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-200"
+                >
+                  {user.subscription_status === "premium" ? "Premium" : "Free"}
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -178,24 +313,6 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Time Coding</CardTitle>
-              <div className="p-2 bg-purple-100 rounded-full">
-                <Clock className="h-4 w-4 text-purple-600" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-                {progress?.reduce((acc, p) => acc + (p.time_spent || 0), 0) ||
-                  0}
-                m
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">
-                total time spent coding
-              </p>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Recent Lessons */}
@@ -206,28 +323,33 @@ export default async function DashboardPage() {
               <CardDescription>Pick up where you left off</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {recentLessons && recentLessons.length > 0 ? (
-                recentLessons.map((lessonProgress: any) => (
+              {recentLessonsToDisplay.length > 0 ? (
+                recentLessonsToDisplay.map((lessonActivity) => (
                   <div
-                    key={lessonProgress.lesson_id}
+                    key={lessonActivity.lessonId}
                     className="flex items-center justify-between p-4 border rounded-xl hover:shadow-md transition-shadow"
                   >
                     <div className="flex-1">
                       <h4 className="font-medium">
-                        {lessonProgress.lessons?.title}
+                        {lessonActivity.lesson?.title || "Lesson"}
                       </h4>
                       <div className="flex items-center gap-2 mt-1">
                         <Badge variant="outline" className="text-xs">
-                          {lessonProgress.lessons?.difficulty_level}
+                          {lessonActivity.lesson?.difficulty_level || "beginner"}
                         </Badge>
                         <span className="text-sm text-gray-500">
-                          {Math.ceil((lessonProgress.time_spent || 0) / 60)}m
-                          spent
+                          {lessonActivity.status === "completed"
+                            ? `Completed ${formatActivityDate(
+                                lessonActivity.updatedAt
+                              )}`
+                            : `Updated ${formatActivityDate(
+                                lessonActivity.updatedAt
+                              )}`}
                         </span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      {lessonProgress.status === "completed" ? (
+                      {lessonActivity.status === "completed" ? (
                         <Badge
                           variant="default"
                           className="bg-green-100 text-green-800 rounded-full"
@@ -242,8 +364,7 @@ export default async function DashboardPage() {
                         >
                           <Link
                             href={`/lessons/${
-                              lessonProgress.lessons?.order_index ||
-                              lessonProgress.lesson_id
+                              lessonActivity.lesson?.order_index ?? 1
                             }`}
                           >
                             <Play className="h-4 w-4 mr-1" />

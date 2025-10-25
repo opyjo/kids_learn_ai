@@ -6,7 +6,9 @@ import { Play, CheckCircle, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 const InteractiveCodeEditor = () => {
-  const [code, setCode] = React.useState('print("Hello, World!")');
+  const [code, setCode] = React.useState(
+    'facts = ["You can solve any puzzle!", "AI needs your ideas! 💡"]\nfor fact in facts:\n    print("🤖 ", fact)'
+  );
   const [output, setOutput] = React.useState("");
   const [isRunning, setIsRunning] = React.useState(false);
 
@@ -69,10 +71,22 @@ const InteractiveCodeEditor = () => {
   };
 
   const examples = [
-    { label: "Hello World", code: 'print("Hello, World!")' },
-    { label: "Math", code: "print(10 + 5)" },
-    { label: "Variables", code: 'name = "Coder"\nprint(name)' },
-    { label: "Fun Message", code: 'print("I love coding! 🚀")' },
+    {
+      label: "AI Cheer Squad",
+      code: 'facts = ["You learn quick!", "Robots applaud you!"]\nprint("🤖 ", facts[0])',
+    },
+    {
+      label: "Mood Meter",
+      code: '# score a message\nword = "awesome"\nif word == "awesome":\n    print("Mood: 😀")\nelse:\n    print("Mood: 🤔")',
+    },
+    {
+      label: "Idea Prompt",
+      code: 'topic = "recycling"\nprompt = f"Suggest an AI project about {topic}."\nprint(prompt)',
+    },
+    {
+      label: "Story Seed",
+      code: 'print("Once upon a time, an AI and kid saved the day!")',
+    },
   ];
 
   return (
@@ -84,11 +98,11 @@ const InteractiveCodeEditor = () => {
             Try It Now
           </Badge>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-            Write Your First Python Code
+            Write Python that Guides AI
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            No signup needed! Type some Python code below and click Run to see
-            it work
+            No signup needed! Type the Python instructions below, click run,
+            and watch how code turns into AI behavior.
           </p>
         </div>
 
@@ -121,7 +135,7 @@ const InteractiveCodeEditor = () => {
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
                     className="w-full h-48 p-4 bg-secondary/50 border-2 border-border rounded-xl font-mono text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
-                    placeholder="Type your Python code here..."
+                    placeholder="Type your AI-friendly Python code here..."
                   />
                 </div>
 
@@ -196,11 +210,12 @@ const InteractiveCodeEditor = () => {
                     <Sparkles className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
                     <div>
                       <div className="font-medium text-foreground mb-1">
-                        Ready to learn more?
+                        Ready to train bigger ideas?
                       </div>
                       <p className="text-sm text-muted-foreground mb-3">
-                        This is just the beginning! Sign up to access 50+
-                        interactive lessons.
+                        This demo shows a tiny slice of KidsLearn AI. Unlock 60+
+                        guided missions with safety tips, creative challenges,
+                        and mentor feedback.
                       </p>
                       <Link href="/signup">
                         <Button size="sm" className="rounded-full">

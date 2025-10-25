@@ -39,6 +39,7 @@ interface LessonViewerProps {
 export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
   const [lessonProgress, setLessonProgress] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [currentCode, setCurrentCode] = useState(lesson.starter_code);
   const supabase = getSupabaseBrowserClient();
 
   // Mark lesson as completed in database
@@ -46,10 +47,11 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
     if (!userId || !lesson.dbId || isCompleted) return;
 
     try {
+      const completionTimestamp = new Date().toISOString();
       const { error } = await supabase.from("completed_lessons").insert({
         student_id: userId,
         lesson_id: lesson.dbId,
-        completed_at: new Date().toISOString(),
+        completed_at: completionTimestamp,
       });
 
       if (error) {
@@ -59,11 +61,31 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
           !error.message.includes("unique")
         ) {
           console.error("Error marking lesson complete:", error);
-        } else {
-          setIsCompleted(true);
+          return;
         }
-      } else {
-        setIsCompleted(true);
+      }
+
+      const { error: progressError } = await supabase
+        .from("student_progress")
+        .upsert(
+          {
+            student_id: userId,
+            lesson_id: lesson.dbId,
+            status: "completed",
+            completion_date: completionTimestamp,
+            updated_at: completionTimestamp,
+          },
+          { onConflict: "student_id,lesson_id" }
+        );
+
+      if (progressError) {
+        console.error("Error updating student progress:", progressError);
+      }
+
+      setIsCompleted(true);
+      setLessonProgress(100);
+
+      if (!error) {
         console.log("✅ Lesson marked as complete!");
       }
     } catch (error) {
@@ -73,6 +95,11 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
 
   // Update progress based on code changes
   const handleCodeChange = (code: string) => {
+    setCurrentCode(code);
+    if (isCompleted) {
+      return;
+    }
+
     // Update visual progress indicator
     if (code.trim() === lesson.solution_code.trim()) {
       setLessonProgress(100);
@@ -87,6 +114,10 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
 
   const handleRunComplete = (output: string, isSuccess: boolean) => {
     console.log("[v0] Code execution completed:", { output, isSuccess });
+    if (isSuccess && currentCode.trim().length > 0) {
+      setLessonProgress(100);
+      markLessonComplete();
+    }
   };
 
   const getDifficultyColor = (difficulty: string) => {

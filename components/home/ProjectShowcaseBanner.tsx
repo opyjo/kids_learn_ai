@@ -11,34 +11,36 @@ import { Sparkles } from "lucide-react";
 const ProjectShowcaseBanner = () => {
   const projects = [
     {
-      title: "Space Invaders Game",
+      title: "Feelings Helper Bot",
       description:
-        "Build a classic arcade game with moving aliens and shooting mechanics",
-      emoji: "👾",
+        "Use simple Python rules to help a friendly chatbot spot when a classmate might need a kind message.",
+      emoji: "🤖",
       color: "from-blue-500/20 to-purple-500/20",
-      skills: ["Loops", "Functions", "Game Logic"],
+      skills: ["Conditionals", "Empathy Prompts", "Kind Replies"],
     },
     {
-      title: "Drawing App",
-      description: "Create colorful art and patterns using turtle graphics",
+      title: "Idea Poster Maker",
+      description:
+        "Write short Python instructions that guide an image tool to draw club posters, book covers, or pet badges.",
       emoji: "🎨",
       color: "from-pink-500/20 to-orange-500/20",
-      skills: ["Turtle Graphics", "Colors", "Shapes"],
+      skills: ["Prompt Writing", "Creativity", "Safe Sharing"],
     },
     {
-      title: "Quiz Master",
+      title: "Habit Tracker Buddy",
       description:
-        "Make an interactive quiz game with scores and multiple choice questions",
-      emoji: "🧠",
+        "Collect daily choices in a Python list and teach your mini AI to cheer on healthy habits like drinking water or reading.",
+      emoji: "🌱",
       color: "from-green-500/20 to-teal-500/20",
-      skills: ["If/Else", "Lists", "Input"],
+      skills: ["Lists", "Positive Feedback", "Daily Streaks"],
     },
     {
-      title: "Password Generator",
-      description: "Build a tool that creates super secure random passwords",
-      emoji: "🔐",
+      title: "Homework Explain-It",
+      description:
+        "Build a Python-powered study buddy that breaks down tough topics using kid-friendly language and fun examples.",
+      emoji: "📚",
       color: "from-yellow-500/20 to-red-500/20",
-      skills: ["Random", "Strings", "Functions"],
+      skills: ["Summaries", "Kid-Friendly Tips", "Responsible AI"],
     },
   ];
 
@@ -48,13 +50,14 @@ const ProjectShowcaseBanner = () => {
         <div className="text-center mb-12">
           <Badge className="mb-4 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
             <Sparkles className="w-4 h-4 inline mr-2" />
-            Student Projects
+            AI Project Show & Tell
           </Badge>
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 text-balance">
             See What You Will Build
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Real projects you'll create as you learn Python programming
+            Realistic, age-appropriate AI projects your child can build by
+            mastering Python basics first, then adding tiny intelligent boosts.
           </p>
         </div>
 

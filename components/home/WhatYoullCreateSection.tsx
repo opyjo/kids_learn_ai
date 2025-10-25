@@ -14,14 +14,14 @@ const WhatYoullCreateSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <Badge className="mb-4 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
-            Learning Path
+            AI Journey Map
           </Badge>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-            What You'll Create
+            What You'll Create with AI
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            From simple programs to awesome projects, you'll build real things
-            you can show off!
+            Each milestone blends Python skills with age-appropriate AI tools so
+            kids learn to invent, explain, and act responsibly.
           </p>
         </div>
 
@@ -36,15 +36,15 @@ const WhatYoullCreateSection = () => {
                   Week 1-2
                 </Badge>
               </div>
-              <CardTitle className="text-xl">Your First Programs</CardTitle>
+              <CardTitle className="text-xl">AI Building Blocks</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Learn to print messages, use variables, and do math. Create a
-                name generator and age calculator!
+                Discover how computers learn, practice clear instructions, and
+                collect positive language for friendly bots.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
-                {["print()", "variables", "math"].map((tag) => (
+                {["python basics", "kind words", "ethics"].map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
@@ -67,15 +67,16 @@ const WhatYoullCreateSection = () => {
                   Week 3-4
                 </Badge>
               </div>
-              <CardTitle className="text-xl">Interactive Games</CardTitle>
+              <CardTitle className="text-xl">Chatbot Designers</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Make decisions with if/else and create guessing games, quiz
-                apps, and choose-your-own-adventure stories!
+                Use Python conditionals and prompt patterns to shape
+                personality, tone, and safe replies while building bots that
+                help classmates study or feel encouraged.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
-                {["if/else", "input()", "games"].map((tag) => (
+                {["prompts", "if/else", "empathy"].map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
@@ -98,15 +99,16 @@ const WhatYoullCreateSection = () => {
                   Week 5-6
                 </Badge>
               </div>
-              <CardTitle className="text-xl">Loops & Lists</CardTitle>
+              <CardTitle className="text-xl">Data Detectives</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Repeat actions and work with collections. Build a todo list,
-                shopping cart, and pattern maker!
+                Collect clues from numbers and text with Python, then teach
+                simple models to spot helpful patterns like mood or weather
+                trends.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
-                {["for loops", "lists", "while"].map((tag) => (
+                {["datasets", "loops", "predictions"].map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
@@ -129,15 +131,15 @@ const WhatYoullCreateSection = () => {
                   Week 7-8
                 </Badge>
               </div>
-              <CardTitle className="text-xl">Functions & More</CardTitle>
+              <CardTitle className="text-xl">Vision Lab</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Organize code with functions. Create a calculator, password
-                generator, and reusable tools!
+                Explore how AI sees images—use Python to label pictures, design
+                safety overlays, and celebrate inclusive representations.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
-                {["functions", "parameters", "return"].map((tag) => (
+                {["image prompts", "functions", "teamwork"].map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
@@ -160,15 +162,16 @@ const WhatYoullCreateSection = () => {
                   Premium
                 </Badge>
               </div>
-              <CardTitle className="text-xl">Graphics & Art</CardTitle>
+              <CardTitle className="text-xl">Creative AI Studio</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Draw shapes, patterns, and animations with Turtle graphics.
-                Create digital art with code!
+                Mix Python automation with storytelling, sound, and art tools to
+                co-create experiences with AI while keeping human ideas in
+                control.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
-                {["turtle", "graphics", "art"].map((tag) => (
+                {["generative art", "music", "story craft"].map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
@@ -191,15 +194,15 @@ const WhatYoullCreateSection = () => {
                   Premium
                 </Badge>
               </div>
-              <CardTitle className="text-xl">Final Projects</CardTitle>
+              <CardTitle className="text-xl">Showcase & Ethics Lab</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Build complete games like Snake, Pong, and your own custom
-                projects. Show the world what you can do!
+                Present capstone creations, write AI safety pledges, and share
+                impact stories with family and friends.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
-                {["games", "projects", "portfolio"].map((tag) => (
+                {["presentations", "guidelines", "portfolio"].map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
