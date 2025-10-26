@@ -21,7 +21,6 @@ import {
   BookOpen,
   LayoutDashboard,
   TerminalSquare,
-  BadgeDollarSign,
   Download,
   HelpCircle,
   Info,
@@ -30,6 +29,7 @@ import {
   ChevronDown,
   GraduationCap,
   Library,
+  Newspaper,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
@@ -50,10 +50,11 @@ const dashboardItem: NavItem = {
   label: "Dashboard",
   Icon: LayoutDashboard,
 };
-const pricingItem: NavItem = {
-  href: "/pricing",
-  label: "Pricing",
-  Icon: BadgeDollarSign,
+const aboutItem: NavItem = { href: "/about", label: "About", Icon: Info };
+const blogItem: NavItem = {
+  href: "/blog",
+  label: "Blog",
+  Icon: Newspaper,
 };
 
 // Learn dropdown items
@@ -65,7 +66,6 @@ const learnItems: NavItem[] = [
 
 // Resources dropdown items
 const resourceItems: NavItem[] = [
-  { href: "/about", label: "About", Icon: Info },
   { href: "/faq", label: "FAQ", Icon: HelpCircle },
   { href: "/get-thonny", label: "Get Thonny", Icon: Download },
 ];
@@ -242,11 +242,14 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
           {/* Dashboard (auth-only) */}
           {isAuthenticated && renderNavLink(dashboardItem)}
 
+          {/* About */}
+          {renderNavLink(aboutItem)}
+
           {/* Resources Dropdown */}
           {renderDropdown("Resources", Library, resourceItems)}
 
-          {/* Pricing */}
-          {renderNavLink(pricingItem)}
+          {/* Blog */}
+          {renderNavLink(blogItem)}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -341,6 +344,20 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   </Link>
                 )}
 
+                {/* About */}
+                <Link
+                  href={aboutItem.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300",
+                    isActive(aboutItem.href)
+                      ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
+                      : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
+                  )}
+                >
+                  <aboutItem.Icon className="h-5 w-5" />
+                  <span>{aboutItem.label}</span>
+                </Link>
+
                 {/* Resources Collapsible */}
                 <Collapsible>
                   <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70">
@@ -369,18 +386,18 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   </CollapsibleContent>
                 </Collapsible>
 
-                {/* Pricing */}
+                {/* Blog */}
                 <Link
-                  href={pricingItem.href}
+                  href={blogItem.href}
                   className={cn(
                     "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300",
-                    isActive(pricingItem.href)
+                    isActive(blogItem.href)
                       ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
                       : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
                   )}
                 >
-                  <pricingItem.Icon className="h-5 w-5" />
-                  <span>{pricingItem.label}</span>
+                  <blogItem.Icon className="h-5 w-5" />
+                  <span>{blogItem.label}</span>
                 </Link>
 
                 <div className="mt-6 pt-4 border-t space-y-2">

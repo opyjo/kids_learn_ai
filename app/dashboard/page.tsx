@@ -426,7 +426,7 @@ export default async function DashboardPage() {
                   className="w-full justify-start bg-yellow-50 border-yellow-200 text-yellow-800 hover:bg-yellow-100 rounded-full"
                   asChild
                 >
-                  <Link href="/pricing">⭐ Upgrade to Premium</Link>
+                  <Link href="/signup">⭐ Upgrade to Premium</Link>
                 </Button>
               )}
             </CardContent>

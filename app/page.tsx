@@ -10,7 +10,6 @@ import FeaturesSection from "@/components/home/FeaturesSection";
 import InteractiveCodeEditor from "@/components/home/InteractiveCodeEditor";
 import WhatYoullCreateSection from "@/components/home/WhatYoullCreateSection";
 import SampleLessonsSection from "@/components/home/SampleLessonsSection";
-import PricingSection from "@/components/home/PricingSection";
 import FAQTeaser from "@/components/home/FAQTeaser";
 import CTASection from "@/components/home/CTASection";
 
@@ -24,7 +23,6 @@ const HomePage = () => {
       <InteractiveCodeEditor />
       <WhatYoullCreateSection />
       <SampleLessonsSection />
-      <PricingSection />
       <FAQTeaser />
       <CTASection />
       <Footer />

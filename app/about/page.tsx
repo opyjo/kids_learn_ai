@@ -1,369 +1,259 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Heart,
-  Target,
-  Users,
+  Compass,
+  Globe2,
   Sparkles,
-  Rocket,
-  Shield,
-  Zap,
-  BookOpen,
-  Star,
+  GraduationCap,
   Code,
+  Users,
+  BookOpen,
+  ShieldCheck,
+  Rocket,
 } from "lucide-react";
+
+const pillars = [
+  {
+    title: "Mission",
+    icon: Heart,
+    description:
+      "Give every child the chance to master Python fundamentals and understand how AI affects their world—no gatekeepers, no intimidation, just joyful learning.",
+  },
+  {
+    title: "Vision",
+    icon: Compass,
+    description:
+      "A generation of young innovators who can question, build, and guide intelligent technology with empathy, creativity, and confidence.",
+  },
+  {
+    title: "Promise",
+    icon: ShieldCheck,
+    description:
+      "We design experiences that are safe, caring, and culturally aware, so families feel seen and supported every step of the journey.",
+  },
+];
+
+const impactHighlights = [
+  {
+    stat: "70%",
+    label: "Of tomorrow's jobs",
+    detail:
+      "are projected to require advanced digital skills. Python and AI literacy prepare kids to make bold choices, not play catch-up.",
+  },
+  {
+    stat: "3x",
+    label: "Higher confidence",
+    detail:
+      "is reported by young learners who build projects that reflect their voice, culture, and community stories.",
+  },
+  {
+    stat: "100%",
+    label: "Parent peace of mind",
+    detail:
+      "comes from transparent curricula, realistic timelines, and mentors who care about the whole child—not just the code they write.",
+  },
+];
+
+const commitments = [
+  {
+    title: "Start with heart",
+    body:
+      "We listen before we teach. Student check-ins, family feedback, and community advisors shape every update we release.",
+  },
+  {
+    title: "Teach the " + "why" + " behind AI",
+    body:
+      "Our lessons explore fairness, bias, and responsible use. Kids learn to ask better questions before they write better code.",
+  },
+  {
+    title: "Make it accessible",
+    body:
+      "Scholarships, teacher toolkits, and bilingual resources ensure cost or language never become the reason a child is left behind.",
+  },
+  {
+    title: "Celebrate small wins",
+    body:
+      "From a first successful print statement to a full project showcase, we capture progress with reflection journals, badges, and family wrap-ups.",
+  },
+];
 
 export default function AboutPage() {
   return (
     <MainLayout>
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto text-center">
+      <article className="container mx-auto px-4 py-20 lg:py-28">
+        {/* Hero */}
+        <section className="max-w-4xl mx-auto text-center mb-20">
           <Badge className="mb-6 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
-            <Heart className="w-4 h-4 inline mr-2" />
-            About Us
+            <Sparkles className="w-4 h-4 inline mr-2" />
+            About Kids Learn AI
           </Badge>
           <h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
-            We're on a Mission to Make{" "}
-            <span className="text-primary block mt-2">Coding Fun for Kids</span>
+            Every child deserves a seat in the future of AI.
           </h1>
           <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed text-pretty">
-            KidsCode Academy was created to help young minds discover the joy of
-            programming through interactive, engaging, and age-appropriate
-            Python lessons.
+            We combine warm teaching, rigorous Python foundations, and honest
+            conversations about artificial intelligence to help curious kids
+            become thoughtful creators—not passive users—of technology.
           </p>
-        </div>
-      </section>
+        </section>
 
-      {/* Mission Section */}
-      <section className="bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/10 py-20 lg:py-28">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-                  Our Mission
-                </Badge>
-                <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-                  Empowering the Next Generation of Coders
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  We believe every child should have the opportunity to learn
-                  coding in a way that's fun, accessible, and inspiring.
-                  Programming isn't just about computers - it's about
-                  problem-solving, creativity, and bringing ideas to life.
+        {/* Mission | Vision | Promise */}
+        <section className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto mb-20">
+          {pillars.map((pillar) => (
+            <Card key={pillar.title} className="border-2 rounded-3xl h-full">
+              <CardHeader className="flex flex-col items-center text-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <pillar.icon className="h-7 w-7 text-primary" />
+                </div>
+                <CardTitle className="text-xl">{pillar.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base leading-relaxed text-center">
+                  {pillar.description}
+                </CardDescription>
+              </CardContent>
+            </Card>
+          ))}
+        </section>
+
+        {/* Our Story */}
+        <section className="max-w-4xl mx-auto mb-20">
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            We started with one question: who gets to build tomorrow?
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+            Kids Learn AI was born after watching brilliant young minds feel
+            intimidated by code—or worse, convinced technology wasn&apos;t “for
+            them.” We knew that if kids could see Python as playful, and if they
+            could explore AI in a safe, transparent way, they would realise the
+            future was theirs to shape.
+          </p>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            So we gathered educators, engineers, parents, and students to design
+            a learning path that respects curiosity, embraces culture, and meets
+            families exactly where they are. The result is a platform that feels
+            like a friend cheering you on, backed by curriculum rigour and
+            real-world relevance.
+          </p>
+        </section>
+
+        {/* Impact Highlights */}
+        <section className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto mb-20">
+          {impactHighlights.map((item) => (
+            <Card key={item.label} className="rounded-3xl border-2 h-full">
+              <CardContent className="p-6 text-center space-y-3">
+                <div className="text-5xl font-bold text-primary">{item.stat}</div>
+                <div className="text-sm font-semibold uppercase tracking-wide text-foreground/70">
+                  {item.label}
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {item.detail}
                 </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Our platform makes Python programming approachable for kids
-                  ages 8-16, with interactive lessons that feel more like games
-                  than schoolwork. We're here to spark curiosity and build
-                  confidence, one line of code at a time.
-                </p>
-              </div>
-
-              <div className="relative">
-                <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl p-8 shadow-2xl">
-                  <div className="grid grid-cols-2 gap-6">
-                    <Card className="border-2 rounded-2xl text-center p-6">
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <Users className="h-6 w-6 text-primary" />
-                      </div>
-                      <div className="text-3xl font-bold text-foreground mb-2">
-                        10,000+
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Students Learning
-                      </div>
-                    </Card>
-
-                    <Card className="border-2 rounded-2xl text-center p-6">
-                      <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <BookOpen className="h-6 w-6 text-accent" />
-                      </div>
-                      <div className="text-3xl font-bold text-foreground mb-2">
-                        50+
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Interactive Lessons
-                      </div>
-                    </Card>
-
-                    <Card className="border-2 rounded-2xl text-center p-6">
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <Code className="h-6 w-6 text-primary" />
-                      </div>
-                      <div className="text-3xl font-bold text-foreground mb-2">
-                        100+
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Projects Built
-                      </div>
-                    </Card>
-
-                    <Card className="border-2 rounded-2xl text-center p-6">
-                      <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <Star className="h-6 w-6 text-accent" />
-                      </div>
-                      <div className="text-3xl font-bold text-foreground mb-2">
-                        4.9/5
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Parent Rating
-                      </div>
-                    </Card>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What Makes Us Special */}
-      <section className="container mx-auto px-4 py-20 lg:py-28">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
-              <Sparkles className="w-4 h-4 inline mr-2" />
-              What Makes Us Different
-            </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-              Why Kids Love Learning With Us
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-              We've designed every aspect of our platform with young learners in
-              mind
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all rounded-2xl">
-              <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Target className="h-8 w-8 text-primary-foreground" />
-                </div>
-                <CardTitle className="text-xl">
-                  Age-Appropriate Content
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-base leading-relaxed">
-                  Every lesson uses language and examples that make sense to
-                  kids. No boring technical jargon - just clear, fun
-                  explanations!
-                </CardDescription>
               </CardContent>
             </Card>
+          ))}
+        </section>
 
-            <Card className="border-2 hover:border-accent/50 hover:shadow-xl transition-all rounded-2xl">
-              <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/60 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Rocket className="h-8 w-8 text-accent-foreground" />
-                </div>
-                <CardTitle className="text-xl">Learn by Building</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-base leading-relaxed">
-                  Create real projects like games, quizzes, and art. Kids learn
-                  best when they're making something cool they can show off!
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all rounded-2xl">
-              <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/80 to-accent/80 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Zap className="h-8 w-8 text-primary-foreground" />
-                </div>
-                <CardTitle className="text-xl">Instant Feedback</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-base leading-relaxed">
-                  See your code run immediately! Our interactive editor shows
-                  results in real-time, making learning exciting and rewarding.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-accent/50 hover:shadow-xl transition-all rounded-2xl">
-              <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-accent/80 to-primary/80 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Shield className="h-8 w-8 text-accent-foreground" />
-                </div>
-                <CardTitle className="text-xl">Safe & Ad-Free</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-base leading-relaxed">
-                  A completely safe learning environment with no ads, no chat
-                  features, and full privacy protection for young learners.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all rounded-2xl">
-              <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Star className="h-8 w-8 text-primary-foreground" />
-                </div>
-                <CardTitle className="text-xl">Progress Tracking</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-base leading-relaxed">
-                  Earn badges, track achievements, and see your skills grow.
-                  Parents can monitor progress and celebrate milestones!
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-accent/50 hover:shadow-xl transition-all rounded-2xl">
-              <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Heart className="h-8 w-8 text-accent-foreground" />
-                </div>
-                <CardTitle className="text-xl">Built with Love</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-base leading-relaxed">
-                  Created by educators and parents who understand how kids
-                  learn. Every detail is designed to inspire and encourage.
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Values */}
-      <section className="bg-gradient-to-br from-secondary/30 via-background to-primary/5 py-20 lg:py-28">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-                Our Values
-              </Badge>
-              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-                What We Believe In
+        {/* Why AI matters for kids */}
+        <section className="bg-secondary/40 border border-secondary/60 rounded-3xl p-10 mb-20">
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3">
+              <GraduationCap className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-semibold text-foreground">
+                Why we believe AI literacy can&apos;t wait until high school
               </h2>
             </div>
-
-            <div className="space-y-8">
-              <Card className="border-2 rounded-2xl overflow-hidden">
-                <CardHeader className="bg-primary/5">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="h-6 w-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-2xl">
-                      Every Child Can Code
-                    </CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-6">
-                  <CardDescription className="text-base leading-relaxed">
-                    We believe coding is for everyone, regardless of background
-                    or experience. Our platform is designed to be accessible and
-                    welcoming to all young learners who are curious about
-                    technology.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="border-2 rounded-2xl overflow-hidden">
-                <CardHeader className="bg-accent/5">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Rocket className="h-6 w-6 text-accent" />
-                    </div>
-                    <CardTitle className="text-2xl">
-                      Learning Should Be Fun
-                    </CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-6">
-                  <CardDescription className="text-base leading-relaxed">
-                    Education doesn't have to be boring! We make learning Python
-                    feel like playing games, solving puzzles, and creating art.
-                    When kids are having fun, they learn faster and remember
-                    more.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="border-2 rounded-2xl overflow-hidden">
-                <CardHeader className="bg-primary/5">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Shield className="h-6 w-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-2xl">
-                      Safety First, Always
-                    </CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-6">
-                  <CardDescription className="text-base leading-relaxed">
-                    We take child safety seriously. Our platform has no social
-                    features, no ads, and strict privacy protections. Parents
-                    can trust that their kids are learning in a secure,
-                    monitored environment.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </div>
+            <ul className="list-disc pl-6 space-y-3 text-muted-foreground text-base leading-relaxed">
+              <li>
+                AI already shapes the stories our kids watch, the music they
+                stream, and the news they read. Understanding how algorithms
+                decide things builds healthy skepticism and critical thinking.
+              </li>
+              <li>
+                Learning Python first gives children the mental models they need
+                to stay curious and in control when they encounter AI systems.
+                They see behind the curtain and learn to ask better questions.
+              </li>
+              <li>
+                Early exposure is protective. Kids learn about bias, privacy,
+                and consent before they adopt harmful habits or internalise the
+                idea that technology is neutral.
+              </li>
+              <li>
+                The earlier we nurture confidence, the more diverse voices we
+                welcome into advanced courses, internships, and careers.
+              </li>
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="container mx-auto px-4 py-20 lg:py-28">
-        <div className="max-w-4xl mx-auto text-center bg-gradient-to-br from-primary via-primary/90 to-accent rounded-3xl p-12 lg:p-16 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
-
-          <div className="relative z-10">
-            <div className="text-6xl mb-6">👋</div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary-foreground mb-6 text-balance">
-              Ready to Join Our Community?
-            </h2>
-            <p className="text-xl text-primary-foreground/90 mb-8 text-pretty leading-relaxed max-w-2xl mx-auto">
-              Start your coding journey today with thousands of other young
-              learners. It's free to get started!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/signup">
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  className="text-lg px-8 py-6 rounded-full shadow-xl hover:scale-105 transition-transform"
-                >
-                  <Rocket className="mr-2 h-5 w-5" />
-                  Start Learning Free
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="text-lg px-8 py-6 rounded-full border-2 border-primary-foreground/30 text-primary-foreground hover:bg-white/10 bg-transparent"
-                >
-                  Contact Us
-                </Button>
-              </Link>
-            </div>
+        {/* Commitments */}
+        <section className="max-w-5xl mx-auto mb-20">
+          <h2 className="text-3xl font-bold text-foreground mb-6 text-balance">
+            How we turn this mission into daily practice
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            {commitments.map((commitment) => (
+              <Card key={commitment.title} className="border rounded-2xl h-full">
+                <CardContent className="p-6 space-y-3">
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {commitment.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {commitment.body}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Join Us CTA */}
+        <section className="bg-gradient-to-br from-primary via-primary/90 to-accent rounded-3xl p-12 lg:p-16 text-center text-primary-foreground shadow-2xl">
+          <div className="text-6xl mb-6">🌟</div>
+          <h2 className="text-4xl font-bold mb-4 text-balance">
+            Together, we can write a new story for the next generation.
+          </h2>
+          <p className="text-lg mb-8 leading-relaxed text-primary-foreground/90 max-w-3xl mx-auto">
+            Whether you&apos;re a parent, educator, community leader, or technologist,
+            Kids Learn AI invites you to co-create a world where every child can
+            speak the language of innovation and guide intelligent technology
+            with courage.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/signup">
+              <Button
+                size="lg"
+                variant="secondary"
+                className="text-lg px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-transform"
+              >
+                <Rocket className="mr-2 h-5 w-5" /> Start learning for free
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg px-8 py-6 rounded-full border-2 border-primary-foreground/30 text-primary-foreground hover:bg-white/10"
+              >
+                Connect with our team
+              </Button>
+            </Link>
+          </div>
+        </section>
+      </article>
     </MainLayout>
   );
 }

@@ -34,9 +34,9 @@ export default function CheckoutPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="sm" asChild>
-                <Link href="/pricing">
+                <Link href="/">
                   <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Pricing
+                  Back to Home
                 </Link>
               </Button>
               <div className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export default function CheckoutPage() {
                   width={40}
                   height={40}
                 />
-                <h1 className="text-xl font-semibold">KidsCode Academy</h1>
+                <h1 className="text-xl font-semibold">Kids Learn AI</h1>
               </div>
             </div>
             <Badge variant="outline" className="bg-green-50 text-green-700">
@@ -64,7 +64,8 @@ export default function CheckoutPage() {
               Complete Your Purchase
             </h2>
             <p className="text-gray-600 dark:text-gray-400">
-              Join thousands of kids learning Python programming
+              Join thousands of kids mastering Python fundamentals and building
+              confidence for future AI adventures
             </p>
           </div>
 

@@ -1,4 +1,4 @@
--- KidsCode Academy Database Schema
+-- Kids Learn AI Database Schema
 -- This script creates the core tables for the platform
 
 -- Enable Row Level Security

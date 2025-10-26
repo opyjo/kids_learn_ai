@@ -16,11 +16,11 @@ export const Footer = () => {
                 height={48}
                 className="rounded-xl"
               />
-              <span className="text-xl font-bold">KidsCode Academy</span>
+              <span className="text-xl font-bold">Kids Learn AI</span>
             </div>
             <p className="text-background/70 leading-relaxed">
-              Making Python programming fun and accessible for kids everywhere.
-              Learn, create, and share!
+              Helping kids build a rock-solid Python foundation so they can grow
+              into confident AI creators.
             </p>
           </div>
 
@@ -44,11 +44,8 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/pricing"
-                  className="hover:text-background transition-colors"
-                >
-                  Pricing Plans
+                <Link href="/blog" className="hover:text-background transition-colors">
+                  Blog
                 </Link>
               </li>
               <li>
@@ -141,7 +138,7 @@ export const Footer = () => {
 
         <div className="border-t border-background/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-background/70 text-sm">
-            &copy; 2025 KidsCode Academy. All rights reserved. Made with{" "}
+            &copy; 2025 Kids Learn AI. All rights reserved. Made with{" "}
             <Heart className="inline h-4 w-4 text-red-400 fill-red-400" /> for
             young coders.
           </p>

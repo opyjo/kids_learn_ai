@@ -5,10 +5,10 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "KidsCode Academy - Learn Python Programming for Kids",
+  title: "Kids Learn AI — Python Foundations for Future Innovators",
   description:
-    "Interactive Python programming lessons designed for kids ages 8-16. Learn coding with fun, engaging tutorials and real code execution.",
-  generator: "v0.app",
+    "Kids Learn AI helps kids ages 8-16 master Python fundamentals and explore beginner-friendly AI concepts through hands-on projects and supportive instructors.",
+  generator: "Kids Learn AI",
   icons: {
     icon: "/Logo.png",
     shortcut: "/Logo.png",

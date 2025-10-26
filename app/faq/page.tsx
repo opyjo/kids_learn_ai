@@ -35,7 +35,7 @@ const FAQPage = () => {
     {
       question: "What age is this for?",
       answer:
-        "KidsCode Academy is perfect for kids ages 8-16. Our lessons use simple language and fun examples that make sense to young learners. Younger kids (6-7) can also try with parent help!",
+        "Kids Learn AI is perfect for kids ages 8-16. Our lessons use simple language, playful challenges, and AI-friendly examples. Younger kids (6-7) can also try with parent help!",
     },
     {
       question: "Can parents track my progress?",

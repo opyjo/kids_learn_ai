@@ -1,4 +1,4 @@
--- Seed data for KidsCode Academy
+-- Seed data for Kids Learn AI
 -- This script adds sample lessons and data for testing
 
 -- Insert sample lessons

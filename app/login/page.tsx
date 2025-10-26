@@ -17,7 +17,7 @@ export default function LoginPage() {
         <div className="mb-8 flex items-center justify-center gap-2">
           <Code className="h-8 w-8 text-blue-600" />
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            KidsCode Academy
+            Kids Learn AI
           </h1>
         </div>
 

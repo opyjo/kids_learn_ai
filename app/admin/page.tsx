@@ -106,9 +106,7 @@ export default function AdminDashboard() {
                 width={40}
                 height={40}
               />
-              <h1 className="text-xl font-semibold">
-                KidsCode Academy - Admin
-              </h1>
+              <h1 className="text-xl font-semibold">Kids Learn AI — Admin</h1>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="outline" size="sm">
