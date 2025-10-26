@@ -216,7 +216,7 @@ export default async function DashboardPage() {
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       <SiteHeader />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="mx-auto w-full max-w-6xl px-4 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">

@@ -30,6 +30,7 @@ import {
   GraduationCap,
   Library,
   Newspaper,
+  Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
@@ -60,6 +61,7 @@ const blogItem: NavItem = {
 // Learn dropdown items
 const learnItems: NavItem[] = [
   { href: "/lessons", label: "Lessons", Icon: BookOpen },
+  { href: "/tutor", label: "AI Tutor", Icon: Sparkles },
   { href: "/playground", label: "Playground", Icon: TerminalSquare },
   { href: "/games", label: "Games", Icon: Gamepad2 },
 ];
@@ -155,7 +157,11 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
     );
   };
 
-  const renderDropdown = (label: string, icon: LucideIcon, items: NavItem[]) => {
+  const renderDropdown = (
+    label: string,
+    icon: LucideIcon,
+    items: NavItem[]
+  ) => {
     const Icon = icon;
     const isAnyActive = items.some((item) => isActive(item.href));
 

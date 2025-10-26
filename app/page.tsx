@@ -2,7 +2,6 @@
 
 import React from "react";
 import { MainLayout } from "@/components/layouts/main-layout";
-import { Footer } from "@/components/layouts/footer";
 import Hero from "@/components/home/Hero";
 import ProjectShowcaseBanner from "@/components/home/ProjectShowcaseBanner";
 import StatsSection from "@/components/home/StatsSection";
@@ -25,7 +24,6 @@ const HomePage = () => {
       <SampleLessonsSection />
       <FAQTeaser />
       <CTASection />
-      <Footer />
     </MainLayout>
   );
 };

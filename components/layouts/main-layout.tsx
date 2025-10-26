@@ -1,5 +1,6 @@
 "use client";
 
+import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
 import { type ReactNode } from "react";
 
@@ -9,9 +10,10 @@ interface MainLayoutProps {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
-      {children}
+      <main className="flex-1">{children}</main>
+      <Footer />
     </div>
   );
 };
