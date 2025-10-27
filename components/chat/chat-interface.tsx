@@ -1,6 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -30,7 +37,11 @@ const INITIAL_MESSAGE: ChatMessage = {
   timestamp: Date.now(),
 };
 
-export const ChatInterface = () => {
+export interface ChatInterfaceRef {
+  sendMessage: (message: string) => void;
+}
+
+export const ChatInterface = forwardRef<ChatInterfaceRef>((props, ref) => {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +68,13 @@ export const ChatInterface = () => {
   useEffect(() => {
     textareaRef.current?.focus();
   }, []);
+
+  // Expose sendMessage method via ref
+  useImperativeHandle(ref, () => ({
+    sendMessage: (message: string) => {
+      handleSubmit(message);
+    },
+  }));
 
   const handleSubmit = useCallback(
     async (content?: string) => {
@@ -187,7 +205,7 @@ export const ChatInterface = () => {
   }, [handleClearChat]);
 
   return (
-    <div className="flex flex-col h-[85vh] max-h-[700px] max-w-4xl mx-auto border-2 border-primary/20 rounded-2xl bg-card shadow-xl shadow-primary/10 overflow-hidden">
+    <div className="flex flex-col h-[85vh] lg:h-[calc(100vh-16rem)] max-h-[700px] lg:max-h-none max-w-4xl mx-auto border-2 border-primary/20 rounded-2xl bg-card shadow-xl shadow-primary/10 overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between gap-3 p-3 border-b border-primary/20 bg-gradient-to-r from-primary/10 via-primary/5 to-accent/10 shrink-0">
         <div className="flex items-center gap-3">
@@ -312,4 +330,6 @@ export const ChatInterface = () => {
       </div>
     </div>
   );
-};
+});
+
+ChatInterface.displayName = "ChatInterface";

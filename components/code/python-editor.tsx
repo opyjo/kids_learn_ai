@@ -12,12 +12,14 @@ import {
   CheckCircle,
   AlertCircle,
   Loader2,
+  MessageSquare,
 } from "lucide-react";
 
 interface PythonEditorProps {
   initialCode?: string;
   onCodeChange?: (code: string) => void;
   onRunComplete?: (output: string, isSuccess: boolean) => void;
+  onAskAboutCode?: () => void;
   className?: string;
 }
 
@@ -25,6 +27,7 @@ export function PythonEditor({
   initialCode = "",
   onCodeChange,
   onRunComplete,
+  onAskAboutCode,
   className,
 }: PythonEditorProps) {
   const [code, setCode] = useState(initialCode);
@@ -176,8 +179,8 @@ export function PythonEditor({
   const lineNumberWidth = lineCount.toString().length * 8 + 16;
 
   return (
-    <Card className={className}>
-      <CardHeader className="bg-white/70 dark:bg-gray-900/60 backdrop-blur-sm border-b">
+    <Card className={`flex flex-col ${className}`}>
+      <CardHeader className="bg-white/70 dark:bg-gray-900/60 backdrop-blur-sm border-b shrink-0">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-3 text-lg">
             <div className="flex items-center gap-2">
@@ -202,6 +205,18 @@ export function PythonEditor({
             )}
           </CardTitle>
           <div className="flex items-center gap-2">
+            {onAskAboutCode && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onAskAboutCode}
+                className="rounded-full border-primary/40 hover:bg-primary/10 hover:border-primary"
+                disabled={!code.trim()}
+              >
+                <MessageSquare className="h-4 w-4 mr-2" />
+                Ask BrightByte
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
@@ -239,9 +254,9 @@ export function PythonEditor({
         </div>
       </CardHeader>
 
-      <CardContent className="p-0">
+      <CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
         {/* Code Editor */}
-        <div className="relative bg-gray-900 text-gray-100">
+        <div className="relative bg-gray-900 text-gray-100 flex-1 overflow-hidden">
           {/* Line numbers */}
           <div
             className="absolute left-0 top-0 p-4 text-gray-500 font-mono text-sm pointer-events-none select-none border-r border-gray-700"
@@ -260,11 +275,11 @@ export function PythonEditor({
             value={code}
             onChange={(e) => handleCodeChange(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full bg-transparent text-gray-100 font-mono text-sm resize-none border-0 outline-none focus:ring-0"
+            className="w-full h-full bg-transparent text-gray-100 font-mono text-sm resize-none border-0 outline-none focus:ring-0"
             placeholder="Write your Python code here..."
             spellCheck={false}
             style={{
-              minHeight: "300px",
+              minHeight: "250px",
               lineHeight: "1.5",
               tabSize: 4,
               paddingLeft: lineNumberWidth + 16,
@@ -278,7 +293,7 @@ export function PythonEditor({
         <Separator />
 
         {/* Output */}
-        <div className="bg-gray-950 text-green-400 font-mono text-sm">
+        <div className="bg-gray-950 text-green-400 font-mono text-sm flex-shrink-0">
           <div className="flex items-center justify-between p-3 border-b border-gray-800">
             <div className="flex items-center gap-2">
               <span className="text-gray-400">Output:</span>
@@ -296,7 +311,7 @@ export function PythonEditor({
               </Button>
             )}
           </div>
-          <div className="p-4 min-h-[120px] max-h-[300px] overflow-auto">
+          <div className="p-4 min-h-[100px] max-h-[200px] overflow-auto">
             {output ? (
               <pre className="whitespace-pre-wrap text-sm">
                 {error ? (
