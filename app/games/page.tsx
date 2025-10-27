@@ -9,7 +9,7 @@ export default function GamesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50">
       <SiteHeader />
-      <main className="container mx-auto px-4 py-12">
+      <main className="max-w-6xl mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
@@ -42,7 +42,7 @@ export default function GamesPage() {
         </div>
 
         {/* Games Grid */}
-        <div className="grid gap-6 max-w-6xl mx-auto">
+        <div className="grid gap-6">
           {games.map((game) => (
             <GameCard key={game.id} game={game} />
           ))}
