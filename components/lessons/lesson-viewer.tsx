@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -12,11 +12,14 @@ import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, ArrowRight, CheckCircle, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { PythonEditor } from "@/components/code/python-editor";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface Lesson {
   id: number;
@@ -37,87 +40,94 @@ interface LessonViewerProps {
 }
 
 export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
-  const [lessonProgress, setLessonProgress] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentCode, setCurrentCode] = useState(lesson.starter_code);
   const supabase = getSupabaseBrowserClient();
 
-  // Mark lesson as completed in database
-  const markLessonComplete = async () => {
-    if (!userId || !lesson.dbId || isCompleted) return;
+  // Fetch completion status on mount
+  useEffect(() => {
+    const checkCompletionStatus = async () => {
+      if (!userId || !lesson.dbId) return;
 
-    try {
-      const completionTimestamp = new Date().toISOString();
-      const { error } = await supabase.from("completed_lessons").insert({
-        student_id: userId,
-        lesson_id: lesson.dbId,
-        completed_at: completionTimestamp,
-      });
+      try {
+        const { data, error } = await supabase
+          .from("completed_lessons")
+          .select("id")
+          .eq("student_id", userId)
+          .eq("lesson_id", lesson.dbId)
+          .single();
 
-      if (error) {
-        // If error is duplicate (already completed), that's fine
-        if (
-          !error.message.includes("duplicate") &&
-          !error.message.includes("unique")
-        ) {
-          console.error("Error marking lesson complete:", error);
-          return;
+        if (data && !error) {
+          setIsCompleted(true);
         }
+      } catch (error) {
+        // Not completed or error - either way, show as not completed
+        setIsCompleted(false);
       }
+    };
 
-      const { error: progressError } = await supabase
-        .from("student_progress")
-        .upsert(
-          {
-            student_id: userId,
-            lesson_id: lesson.dbId,
-            status: "completed",
-            completion_date: completionTimestamp,
-            updated_at: completionTimestamp,
-          },
-          { onConflict: "student_id,lesson_id" }
-        );
+    checkCompletionStatus();
+  }, [userId, lesson.dbId, supabase]);
 
-      if (progressError) {
-        console.error("Error updating student progress:", progressError);
-      }
-
-      setIsCompleted(true);
-      setLessonProgress(100);
-
-      if (!error) {
-        console.log("✅ Lesson marked as complete!");
-      }
-    } catch (error) {
-      console.error("Error marking lesson complete:", error);
-    }
-  };
-
-  // Update progress based on code changes
-  const handleCodeChange = (code: string) => {
-    setCurrentCode(code);
-    if (isCompleted) {
+  // Toggle lesson completion
+  const toggleCompletion = async () => {
+    if (!userId || !lesson.dbId) {
+      alert("Please sign in to track your progress");
       return;
     }
 
-    // Update visual progress indicator
-    if (code.trim() === lesson.solution_code.trim()) {
-      setLessonProgress(100);
-      // Mark as completed in database
-      markLessonComplete();
-    } else if (code.trim() !== lesson.starter_code.trim()) {
-      setLessonProgress(50);
-    } else {
-      setLessonProgress(0);
+    setIsLoading(true);
+
+    try {
+      if (isCompleted) {
+        // Unmark as completed
+        const { error } = await supabase
+          .from("completed_lessons")
+          .delete()
+          .eq("student_id", userId)
+          .eq("lesson_id", lesson.dbId);
+
+        if (error) {
+          console.error("Error unmarking lesson:", error);
+          alert("Failed to update completion status");
+        } else {
+          setIsCompleted(false);
+          console.log("✅ Lesson unmarked as complete");
+        }
+      } else {
+        // Mark as completed
+        const completionTimestamp = new Date().toISOString();
+        const { error } = await supabase.from("completed_lessons").insert({
+          student_id: userId,
+          lesson_id: lesson.dbId,
+          completed_at: completionTimestamp,
+        });
+
+        if (error) {
+          console.error("Error marking lesson complete:", error);
+          alert("Failed to mark lesson as complete");
+        } else {
+          setIsCompleted(true);
+          console.log("✅ Lesson marked as complete!");
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling completion:", error);
+      alert("An error occurred");
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  // Simple code change handler (no automatic tracking)
+  const handleCodeChange = (code: string) => {
+    setCurrentCode(code);
+  };
+
   const handleRunComplete = (output: string, isSuccess: boolean) => {
-    console.log("[v0] Code execution completed:", { output, isSuccess });
-    if (isSuccess && currentCode.trim().length > 0) {
-      setLessonProgress(100);
-      markLessonComplete();
-    }
+    console.log("Code execution completed:", { output, isSuccess });
+    // No automatic completion tracking
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -171,201 +181,88 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                     {lesson.description}
                   </CardDescription>
                 </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="mt-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Progress
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`text-sm font-semibold transition-colors ${
-                        lessonProgress === 100
-                          ? "text-green-600"
-                          : lessonProgress >= 50
-                          ? "text-yellow-600"
-                          : "text-gray-500"
-                      }`}
-                    >
-                      {lessonProgress}%
-                    </span>
-                    {lessonProgress === 100 && (
-                      <CheckCircle className="h-4 w-4 text-green-600 animate-bounce" />
-                    )}
-                  </div>
-                </div>
-                <Progress
-                  value={lessonProgress}
-                  className="h-3 rounded-full transition-all duration-500"
-                />
+                {isCompleted && (
+                  <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 flex items-center gap-1">
+                    <CheckCircle className="h-3 w-3" />
+                    Completed
+                  </Badge>
+                )}
               </div>
             </CardHeader>
 
             <Separator />
 
             <CardContent className="flex-1 overflow-auto p-6">
-              <div className="prose prose-base md:prose-lg max-w-none dark:prose-invert prose-headings:font-extrabold prose-headings:text-indigo-700 dark:prose-headings:text-indigo-300 prose-p:leading-relaxed prose-strong:text-indigo-600 dark:prose-strong:text-indigo-400">
-                {lesson.content.split("\n").map((line, index) => {
-                  // Headings
-                  if (line.startsWith("### ")) {
-                    return (
-                      <h3
-                        key={`line-${index}`}
-                        className="text-xl font-bold mt-4 mb-2 text-indigo-600 dark:text-indigo-400"
-                      >
-                        {line.slice(4)}
-                      </h3>
-                    );
-                  }
-                  if (line.startsWith("## ")) {
-                    return (
-                      <h2
-                        key={`line-${index}`}
-                        className="text-2xl font-bold mt-6 mb-3 text-indigo-700 dark:text-indigo-300"
-                      >
-                        {line.slice(3)}
-                      </h2>
-                    );
-                  }
-                  if (line.startsWith("# ")) {
-                    return (
-                      <h1
-                        key={`line-${index}`}
-                        className="text-3xl font-extrabold mt-6 mb-4 text-indigo-800 dark:text-indigo-200"
-                      >
-                        {line.slice(2)}
-                      </h1>
-                    );
-                  }
-
-                  // Code blocks
-                  if (line.startsWith("```python")) {
-                    return <div key={`line-${index}`} className="hidden" />;
-                  }
-                  if (line === "```") {
-                    return <div key={`line-${index}`} className="hidden" />;
-                  }
-
-                  // Bullet points (- or *)
-                  if (
-                    line.trim().startsWith("- ") ||
-                    line.trim().startsWith("* ")
-                  ) {
-                    const content = line.trim().slice(2);
-                    return (
-                      <div
-                        key={`line-${index}`}
-                        className="flex gap-3 mb-3 items-start"
-                      >
-                        <span className="text-indigo-500 text-xl leading-6 flex-shrink-0">
-                          •
-                        </span>
-                        <span className="flex-1 leading-relaxed">
-                          {content}
-                        </span>
-                      </div>
-                    );
-                  }
-
-                  // Numbered lists
-                  if (/^\d+\.\s/.test(line.trim())) {
-                    const match = line.trim().match(/^(\d+)\.\s(.+)$/);
-                    if (match) {
-                      return (
-                        <div
-                          key={`line-${index}`}
-                          className="flex gap-3 mb-3 items-start"
+              <div className="prose prose-lg max-w-none dark:prose-invert
+                  prose-headings:font-bold prose-headings:tracking-tight
+                  prose-h1:text-3xl prose-h1:text-indigo-800 dark:prose-h1:text-indigo-200 prose-h1:mt-8 prose-h1:mb-4
+                  prose-h2:text-2xl prose-h2:text-indigo-700 dark:prose-h2:text-indigo-300 prose-h2:mt-8 prose-h2:mb-4
+                  prose-h3:text-xl prose-h3:text-indigo-600 dark:prose-h3:text-indigo-400 prose-h3:mt-6 prose-h3:mb-3
+                  prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                  prose-strong:text-indigo-600 dark:prose-strong:text-indigo-400 prose-strong:font-bold
+                  prose-code:text-indigo-600 dark:prose-code:text-indigo-400 prose-code:bg-indigo-50 dark:prose-code:bg-indigo-950 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+                  prose-ul:my-4 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-li:my-2
+                  prose-ol:my-4
+                  prose-blockquote:border-indigo-500 prose-blockquote:bg-indigo-50 dark:prose-blockquote:bg-indigo-950/30 prose-blockquote:py-2 prose-blockquote:px-4
+                  prose-img:rounded-lg prose-img:shadow-lg
+                  prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-a:no-underline hover:prose-a:underline">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    code(props) {
+                      const { children, className } = props;
+                      const match = /language-(\w+)/.exec(className || "");
+                      return match ? (
+                        <SyntaxHighlighter
+                          PreTag="div"
+                          language={match[1]}
+                          style={vscDarkPlus as any}
+                          className="rounded-lg my-4 shadow-lg !mt-4 !mb-6"
                         >
-                          <span className="text-indigo-600 font-bold flex-shrink-0">
-                            {match[1]}.
-                          </span>
-                          <span className="flex-1 leading-relaxed">
-                            {match[2]}
-                          </span>
-                        </div>
+                          {String(children).replace(/\n$/, "")}
+                        </SyntaxHighlighter>
+                      ) : (
+                        <code className={className}>
+                          {children}
+                        </code>
                       );
-                    }
-                  }
+                    },
+                  }}
+                >
+                  {lesson.content}
+                </ReactMarkdown>
+              </div>
 
-                  // Inline code and bold text
-                  if (line.includes("`") || line.includes("**")) {
-                    const elements: React.ReactNode[] = [];
-                    let lastIndex = 0;
-
-                    // Combine patterns
-                    const combinedRegex = /(`[^`]+`|\*\*[^*]+\*\*)/g;
-                    const matches = [...line.matchAll(combinedRegex)];
-
-                    if (matches.length > 0) {
-                      matches.forEach((match, i) => {
-                        const matchText = match[0];
-                        const matchIndex = match.index ?? 0;
-
-                        // Add text before match
-                        if (matchIndex > lastIndex) {
-                          elements.push(line.substring(lastIndex, matchIndex));
-                        }
-
-                        // Add formatted match
-                        if (
-                          matchText.startsWith("`") &&
-                          matchText.endsWith("`")
-                        ) {
-                          elements.push(
-                            <code
-                              key={`code-${index}-${i}`}
-                              className="bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded-md font-mono text-sm font-semibold shadow-sm"
-                            >
-                              {matchText.slice(1, -1)}
-                            </code>
-                          );
-                        } else if (
-                          matchText.startsWith("**") &&
-                          matchText.endsWith("**")
-                        ) {
-                          elements.push(
-                            <strong
-                              key={`bold-${index}-${i}`}
-                              className="font-bold text-indigo-600 dark:text-indigo-400"
-                            >
-                              {matchText.slice(2, -2)}
-                            </strong>
-                          );
-                        }
-
-                        lastIndex = matchIndex + matchText.length;
-                      });
-
-                      // Add remaining text
-                      if (lastIndex < line.length) {
-                        elements.push(line.substring(lastIndex));
-                      }
-
-                      return (
-                        <p
-                          key={`line-${index}`}
-                          className="mb-3 leading-relaxed"
-                        >
-                          {elements}
-                        </p>
-                      );
-                    }
-                  }
-
-                  // Empty lines
-                  if (line.trim() === "") {
-                    return <div key={`line-${index}`} className="h-2" />;
-                  }
-
-                  // Regular paragraphs
-                  return (
-                    <p key={`line-${index}`} className="mb-3 leading-relaxed">
-                      {line}
-                    </p>
-                  );
-                })}
+              {/* Mark as Complete Button */}
+              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <Button
+                  onClick={toggleCompletion}
+                  disabled={isLoading || !userId}
+                  className={`w-full rounded-full text-base font-semibold py-6 transition-all ${
+                    isCompleted
+                      ? "bg-green-600 hover:bg-green-700 text-white"
+                      : "bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
+                  }`}
+                >
+                  {isLoading ? (
+                    "Updating..."
+                  ) : isCompleted ? (
+                    <>
+                      <CheckCircle className="h-5 w-5 mr-2" />
+                      Lesson Completed - Click to Unmark
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle className="h-5 w-5 mr-2" />
+                      Mark as Complete
+                    </>
+                  )}
+                </Button>
+                {!userId && (
+                  <p className="text-sm text-gray-500 text-center mt-2">
+                    Sign in to track your progress
+                  </p>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -390,7 +287,7 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
           </Button>
 
           <div className="text-center">
-            {lessonProgress === 100 && (
+            {isCompleted && (
               <div className="flex items-center gap-2 text-green-600">
                 <CheckCircle className="h-5 w-5" />
                 <span className="font-medium">Lesson Complete!</span>

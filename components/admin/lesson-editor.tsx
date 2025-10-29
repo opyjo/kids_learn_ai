@@ -1,27 +1,39 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { PythonEditor } from "@/components/code/python-editor"
-import { Save, Eye, AlertCircle } from "lucide-react"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { PythonEditor } from "@/components/code/python-editor";
+import { Save, Eye, AlertCircle } from "lucide-react";
 
 interface LessonData {
-  title: string
-  description: string
-  content: string
-  difficulty: string
-  orderIndex: number
-  isPremium: boolean
-  starterCode: string
-  solutionCode: string
+  title: string;
+  description: string;
+  content: string;
+  difficulty: string;
+  orderIndex: number;
+  isPremium: boolean;
+  starterCode: string;
+  solutionCode: string;
 }
 
 export function LessonEditor() {
@@ -34,22 +46,22 @@ export function LessonEditor() {
     isPremium: false,
     starterCode: "# Write your Python code here\n",
     solutionCode: "",
-  })
+  });
 
-  const [saving, setSaving] = useState(false)
-  const [error, setError] = useState("")
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSave = async () => {
-    setSaving(true)
-    setError("")
+    setSaving(true);
+    setError("");
 
     try {
       // Validate required fields
       if (!lesson.title || !lesson.description || !lesson.content) {
-        throw new Error("Please fill in all required fields")
+        throw new Error("Please fill in all required fields");
       }
 
-      console.log("[v0] Saving lesson:", lesson)
+      console.log("[v0] Saving lesson:", lesson);
 
       // TODO: Replace with actual API call to save lesson
       const response = await fetch("/api/admin/lessons", {
@@ -58,34 +70,38 @@ export function LessonEditor() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(lesson),
-      })
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to save lesson")
+        throw new Error("Failed to save lesson");
       }
 
       // Success - could redirect or show success message
-      console.log("[v0] Lesson saved successfully")
+      console.log("[v0] Lesson saved successfully");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred")
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
-  }
+  };
 
   const handlePreview = () => {
     // Open preview in new tab
-    const previewData = encodeURIComponent(JSON.stringify(lesson))
-    window.open(`/admin/lessons/preview?data=${previewData}`, "_blank")
-  }
+    const previewData = encodeURIComponent(JSON.stringify(lesson));
+    window.open(`/admin/lessons/preview?data=${previewData}`, "_blank");
+  };
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Create New Lesson</h2>
-          <p className="text-gray-600 dark:text-gray-400">Design an engaging Python lesson for students</p>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Create New Lesson
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400">
+            Design an engaging Python lesson for students
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" onClick={handlePreview}>
@@ -127,7 +143,9 @@ export function LessonEditor() {
           <Card>
             <CardHeader>
               <CardTitle>Lesson Details</CardTitle>
-              <CardDescription>Basic information about the lesson</CardDescription>
+              <CardDescription>
+                Basic information about the lesson
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -137,7 +155,9 @@ export function LessonEditor() {
                     id="title"
                     placeholder="e.g., Hello, Python!"
                     value={lesson.title}
-                    onChange={(e) => setLesson({ ...lesson, title: e.target.value })}
+                    onChange={(e) =>
+                      setLesson({ ...lesson, title: e.target.value })
+                    }
                   />
                 </div>
 
@@ -148,7 +168,12 @@ export function LessonEditor() {
                     type="number"
                     min="1"
                     value={lesson.orderIndex}
-                    onChange={(e) => setLesson({ ...lesson, orderIndex: Number.parseInt(e.target.value) })}
+                    onChange={(e) =>
+                      setLesson({
+                        ...lesson,
+                        orderIndex: Number.parseInt(e.target.value),
+                      })
+                    }
                   />
                 </div>
               </div>
@@ -159,7 +184,9 @@ export function LessonEditor() {
                   id="description"
                   placeholder="Brief description of what students will learn..."
                   value={lesson.description}
-                  onChange={(e) => setLesson({ ...lesson, description: e.target.value })}
+                  onChange={(e) =>
+                    setLesson({ ...lesson, description: e.target.value })
+                  }
                   rows={3}
                 />
               </div>
@@ -169,7 +196,9 @@ export function LessonEditor() {
                   <Label htmlFor="difficulty">Difficulty Level</Label>
                   <Select
                     value={lesson.difficulty}
-                    onValueChange={(value) => setLesson({ ...lesson, difficulty: value })}
+                    onValueChange={(value) =>
+                      setLesson({ ...lesson, difficulty: value })
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -186,7 +215,9 @@ export function LessonEditor() {
                   <Switch
                     id="premium"
                     checked={lesson.isPremium}
-                    onCheckedChange={(checked) => setLesson({ ...lesson, isPremium: checked })}
+                    onCheckedChange={(checked) =>
+                      setLesson({ ...lesson, isPremium: checked })
+                    }
                   />
                   <Label htmlFor="premium">Premium Lesson</Label>
                 </div>
@@ -200,7 +231,9 @@ export function LessonEditor() {
           <Card>
             <CardHeader>
               <CardTitle>Lesson Content</CardTitle>
-              <CardDescription>Write the lesson content in Markdown format</CardDescription>
+              <CardDescription>
+                Write the lesson content in Markdown format
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -209,17 +242,19 @@ export function LessonEditor() {
                   id="content"
                   placeholder="# Welcome to Python!
 
-In this lesson, you'll learn...
+                    In this lesson, you'll learn...
 
-## Your Task
-Write a program that...
+                    ## Your Task
+                    Write a program that...
 
-## Example
-```python
-print('Hello, World!')
-```"
+                    ## Example
+                    ```python
+                    print('Hello, World!')
+                    ```"
                   value={lesson.content}
-                  onChange={(e) => setLesson({ ...lesson, content: e.target.value })}
+                  onChange={(e) =>
+                    setLesson({ ...lesson, content: e.target.value })
+                  }
                   rows={20}
                   className="font-mono text-sm"
                 />
@@ -243,12 +278,16 @@ print('Hello, World!')
             <Card>
               <CardHeader>
                 <CardTitle>Starter Code</CardTitle>
-                <CardDescription>Initial code that students will see</CardDescription>
+                <CardDescription>
+                  Initial code that students will see
+                </CardDescription>
               </CardHeader>
               <CardContent className="p-0">
                 <PythonEditor
                   initialCode={lesson.starterCode}
-                  onCodeChange={(code) => setLesson({ ...lesson, starterCode: code })}
+                  onCodeChange={(code) =>
+                    setLesson({ ...lesson, starterCode: code })
+                  }
                 />
               </CardContent>
             </Card>
@@ -256,12 +295,16 @@ print('Hello, World!')
             <Card>
               <CardHeader>
                 <CardTitle>Solution Code</CardTitle>
-                <CardDescription>Expected solution (for reference)</CardDescription>
+                <CardDescription>
+                  Expected solution (for reference)
+                </CardDescription>
               </CardHeader>
               <CardContent className="p-0">
                 <PythonEditor
                   initialCode={lesson.solutionCode}
-                  onCodeChange={(code) => setLesson({ ...lesson, solutionCode: code })}
+                  onCodeChange={(code) =>
+                    setLesson({ ...lesson, solutionCode: code })
+                  }
                 />
               </CardContent>
             </Card>
@@ -269,5 +312,5 @@ print('Hello, World!')
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
