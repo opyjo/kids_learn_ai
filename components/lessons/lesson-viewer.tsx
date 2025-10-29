@@ -193,7 +193,8 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
             <Separator />
 
             <CardContent className="flex-1 overflow-auto p-6">
-              <div className="prose prose-lg max-w-none dark:prose-invert
+              <div
+                className="prose prose-lg max-w-none dark:prose-invert
                   prose-headings:font-bold prose-headings:tracking-tight
                   prose-h1:text-3xl prose-h1:text-indigo-800 dark:prose-h1:text-indigo-200 prose-h1:mt-8 prose-h1:mb-4
                   prose-h2:text-2xl prose-h2:text-indigo-700 dark:prose-h2:text-indigo-300 prose-h2:mt-8 prose-h2:mb-4
@@ -205,7 +206,8 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                   prose-ol:my-4
                   prose-blockquote:border-indigo-500 prose-blockquote:bg-indigo-50 dark:prose-blockquote:bg-indigo-950/30 prose-blockquote:py-2 prose-blockquote:px-4
                   prose-img:rounded-lg prose-img:shadow-lg
-                  prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-a:no-underline hover:prose-a:underline">
+                  prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-a:no-underline hover:prose-a:underline"
+              >
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
@@ -222,9 +224,7 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                           {String(children).replace(/\n$/, "")}
                         </SyntaxHighlighter>
                       ) : (
-                        <code className={className}>
-                          {children}
-                        </code>
+                        <code className={className}>{children}</code>
                       );
                     },
                   }}
