@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, ArrowRight, CheckCircle, BookOpen, Copy, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { PythonEditor } from "@/components/code/python-editor";
 import { TrinketEditor } from "@/components/code/trinket-editor";
@@ -46,7 +46,6 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
   const [isLoading, setIsLoading] = useState(false);
   const [currentCode, setCurrentCode] = useState(lesson.starter_code);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
   const supabase = getSupabaseBrowserClient();
 
   // Fetch completion status on mount
@@ -186,7 +185,10 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
 
       <div className="container mx-auto px-4 py-6">
         {/* Playful progress stepper with navigation */}
-        <div className="mb-6 flex items-center justify-between gap-4 flex-wrap" aria-label="Learning steps">
+        <div
+          className="mb-6 flex items-center justify-between gap-4 flex-wrap"
+          aria-label="Learning steps"
+        >
           <div className="flex items-center gap-3 flex-1 min-w-0">
             <div className="flex items-center gap-3 rounded-2xl px-4 py-3 bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 ring-1 ring-blue-300/40 dark:ring-blue-700/40">
               <span className="text-xl" role="img" aria-label="Read">
@@ -312,40 +314,9 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                       const { children, className } = props;
                       const match = /language-(\w+)/.exec(className || "");
                       const codeString = String(children).replace(/\n$/, "");
-                      const codeId = `code-${codeString.slice(0, 20).replace(/\s/g, "-")}`;
-                      const isCopied = copiedCodeId === codeId;
-
-                      const handleCopy = () => {
-                        navigator.clipboard.writeText(codeString);
-                        setCopiedCodeId(codeId);
-                        setTimeout(() => setCopiedCodeId(null), 2000);
-                      };
 
                       return match ? (
-                        <div className="relative group my-3">
-                          <button
-                            onClick={handleCopy}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                handleCopy();
-                              }
-                            }}
-                            aria-label={isCopied ? "Copied to clipboard" : "Copy code"}
-                            className="absolute top-2 right-2 z-10 flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-md bg-background/90 hover:bg-background border border-border/50 transition-all hover:scale-105 opacity-0 group-hover:opacity-100 focus:opacity-100"
-                          >
-                            {isCopied ? (
-                              <>
-                                <Check className="h-3 w-3 text-green-600" />
-                                <span className="text-green-600">Copied!</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="h-3 w-3" />
-                                <span>Copy</span>
-                              </>
-                            )}
-                          </button>
+                        <div className="relative my-3">
                           <SyntaxHighlighter
                             PreTag="div"
                             language={match[1]}

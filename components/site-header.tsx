@@ -31,6 +31,7 @@ import {
   Library,
   Newspaper,
   Sparkles,
+  ExternalLink,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
@@ -70,6 +71,7 @@ const learnItems: NavItem[] = [
 const resourceItems: NavItem[] = [
   { href: "/faq", label: "FAQ", Icon: HelpCircle },
   { href: "/get-thonny", label: "Get Thonny", Icon: Download },
+  { href: "/get-trinket", label: "Get Trinket.io", Icon: ExternalLink },
 ];
 
 // Visual separator component for navigation zones
