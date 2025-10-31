@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, ArrowRight, CheckCircle, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, BookOpen, Copy, Check } from "lucide-react";
 import Link from "next/link";
 import { PythonEditor } from "@/components/code/python-editor";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -44,6 +44,7 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
   const [isLoading, setIsLoading] = useState(false);
   const [currentCode, setCurrentCode] = useState(lesson.starter_code);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
   const supabase = getSupabaseBrowserClient();
 
   // Fetch completion status on mount
@@ -182,9 +183,9 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
       />
 
       <div className="container mx-auto px-4 py-6">
-        {/* Playful progress stepper */}
-        <div className="mb-6" aria-label="Learning steps">
-          <div className="grid grid-cols-3 gap-3">
+        {/* Playful progress stepper with navigation */}
+        <div className="mb-6 flex items-center justify-between gap-4 flex-wrap" aria-label="Learning steps">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
             <div className="flex items-center gap-3 rounded-2xl px-4 py-3 bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 ring-1 ring-blue-300/40 dark:ring-blue-700/40">
               <span className="text-xl" role="img" aria-label="Read">
                 📖
@@ -210,25 +211,45 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
               </span>
             </div>
           </div>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <Link
+              href={`/lessons/${lesson.id - 1}`}
+              aria-label="Go to previous lesson"
+              data-slot="button"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-4 py-2 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Previous Lesson
+            </Link>
+            <Link
+              href={`/lessons/${lesson.id + 1}`}
+              aria-label="Go to next lesson"
+              data-slot="button"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all"
+            >
+              Next Lesson 🚀
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Lesson Content */}
           <Card className="flex flex-col rounded-2xl border-0 shadow-2xl ring-2 ring-primary/20 dark:ring-primary/30 max-h-[calc(100vh-140px)]">
-            <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 backdrop-blur-sm rounded-t-2xl border-b-2 border-border flex-shrink-0 py-6">
+            <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 backdrop-blur-sm rounded-t-2xl border-b-2 border-border flex-shrink-0 py-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
+                  <CardTitle className="flex items-center gap-2 text-lg">
                     <div
-                      className="p-2 bg-gradient-to-br from-primary to-accent rounded-xl"
+                      className="p-1.5 bg-gradient-to-br from-primary to-accent rounded-xl"
                       aria-hidden="true"
                     >
-                      <BookOpen className="h-6 w-6 text-white" />
+                      <BookOpen className="h-4 w-4 text-white" />
                     </div>
                     <span className="tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
                       Lesson {lesson.order_index}: {lesson.title} ✨
                     </span>
                   </CardTitle>
-                  <CardDescription className="text-muted-foreground text-base mt-3 ml-14">
+                  <CardDescription className="text-muted-foreground text-sm mt-2 ml-11">
                     {lesson.description}
                   </CardDescription>
                 </div>
@@ -243,7 +264,7 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
 
             <Separator />
 
-            <CardContent className="flex-1 overflow-auto p-8 relative">
+            <CardContent className="flex-1 overflow-auto p-4 relative">
               {/* Confetti overlay */}
               {showConfetti && (
                 <div className="pointer-events-none absolute inset-0 flex items-start justify-center z-10">
@@ -268,19 +289,19 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                 </div>
               )}
               <div
-                className="prose prose-lg max-w-none dark:prose-invert
+                className="lesson-content prose max-w-none dark:prose-invert
                   prose-headings:font-bold prose-headings:tracking-tight
-                  prose-h1:text-4xl prose-h1:text-primary prose-h1:mt-12 prose-h1:mb-8 prose-h1:leading-tight
-                  prose-h2:text-3xl prose-h2:text-accent prose-h2:mt-14 prose-h2:mb-7 prose-h2:leading-snug
-                  prose-h3:text-2xl prose-h3:text-primary/90 prose-h3:mt-12 prose-h3:mb-6 prose-h3:leading-snug
-                  prose-p:text-foreground prose-p:leading-[1.9] prose-p:mb-8 prose-p:text-lg
-                  prose-strong:text-primary prose-strong:font-bold
-                  prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:text-base prose-code:before:content-none prose-code:after:content-none prose-code:font-semibold
-                  prose-ul:my-8 prose-ul:space-y-4 prose-li:text-foreground prose-li:my-4 prose-li:text-lg prose-li:leading-relaxed
-                  prose-ol:my-8 prose-ol:space-y-4
-                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-5 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:my-10
-                  prose-img:rounded-xl prose-img:shadow-2xl prose-img:ring-2 prose-img:ring-border prose-img:my-10
-                  prose-a:text-primary dark:prose-a:text-primary hover:prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors"
+                  prose-h1:text-xl prose-h1:text-primary prose-h1:mt-1 prose-h1:mb-3 prose-h1:leading-tight prose-h1:first:mt-0
+                  prose-h2:text-lg prose-h2:text-accent prose-h2:mt-2 prose-h2:mb-3 prose-h2:leading-snug prose-h2:first:mt-0
+                  prose-h3:text-base prose-h3:text-primary/90 prose-h3:mt-2 prose-h3:mb-3 prose-h3:leading-snug prose-h3:first:mt-0
+                  prose-h4:text-sm prose-h4:text-primary/80 prose-h4:mt-4 prose-h4:mb-2 prose-h4:leading-snug prose-h4:first:mt-0
+                  prose-p:text-foreground prose-p:leading-[1.7] prose-p:mb-3 prose-p:text-sm prose-p:first:mt-0
+                  prose-strong:text-primary prose-strong:font-bold prose-strong:text-[1.02em]
+                  prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:text-xs prose-code:before:content-none prose-code:after:content-none prose-code:font-semibold
+                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:my-4 prose-blockquote:italic
+                  prose-img:rounded-xl prose-img:shadow-2xl prose-img:ring-2 prose-img:ring-border prose-img:my-4
+                  prose-a:text-primary dark:prose-a:text-primary hover:prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors
+                  prose-hr:my-4 prose-hr:border-t-2 prose-hr:border-border"
               >
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
@@ -288,20 +309,55 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                     code(props) {
                       const { children, className } = props;
                       const match = /language-(\w+)/.exec(className || "");
+                      const codeString = String(children).replace(/\n$/, "");
+                      const codeId = `code-${codeString.slice(0, 20).replace(/\s/g, "-")}`;
+                      const isCopied = copiedCodeId === codeId;
+
+                      const handleCopy = () => {
+                        navigator.clipboard.writeText(codeString);
+                        setCopiedCodeId(codeId);
+                        setTimeout(() => setCopiedCodeId(null), 2000);
+                      };
+
                       return match ? (
-                        <SyntaxHighlighter
-                          PreTag="div"
-                          language={match[1]}
-                          style={vscDarkPlus as any}
-                          className="rounded-xl my-10 shadow-lg !mt-10 !mb-12 ring-2 ring-border"
-                          customStyle={{
-                            padding: "2rem",
-                            fontSize: "1rem",
-                            lineHeight: "1.8",
-                          }}
-                        >
-                          {String(children).replace(/\n$/, "")}
-                        </SyntaxHighlighter>
+                        <div className="relative group my-3">
+                          <button
+                            onClick={handleCopy}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                handleCopy();
+                              }
+                            }}
+                            aria-label={isCopied ? "Copied to clipboard" : "Copy code"}
+                            className="absolute top-2 right-2 z-10 flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-md bg-background/90 hover:bg-background border border-border/50 transition-all hover:scale-105 opacity-0 group-hover:opacity-100 focus:opacity-100"
+                          >
+                            {isCopied ? (
+                              <>
+                                <Check className="h-3 w-3 text-green-600" />
+                                <span className="text-green-600">Copied!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-3 w-3" />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </button>
+                          <SyntaxHighlighter
+                            PreTag="div"
+                            language={match[1]}
+                            style={vscDarkPlus as any}
+                            className="rounded-none shadow-lg !mt-3 !mb-3 ring-2 ring-border"
+                            customStyle={{
+                              padding: "1rem",
+                              fontSize: "0.875rem",
+                              lineHeight: "1.6",
+                            }}
+                          >
+                            {codeString}
+                          </SyntaxHighlighter>
+                        </div>
                       ) : (
                         <code className={className}>{children}</code>
                       );
@@ -313,7 +369,7 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
               </div>
 
               {/* Mark as Complete Button */}
-              <div className="mt-12 pt-8 border-t-2 border-border">
+              <div className="mt-12 pt-8 border-t-2 border-border flex flex-col items-center gap-4">
                 <Button
                   onClick={toggleCompletion}
                   onKeyDown={(e) => {
@@ -329,7 +385,7 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                       : "Mark lesson as complete"
                   }
                   disabled={isLoading || !userId}
-                  className={`w-full rounded-2xl text-lg font-bold py-7 transition-all shadow-xl hover:shadow-2xl transform hover:scale-[1.02] ${
+                  className={`w-auto px-8 rounded-2xl text-base font-bold py-5 transition-all shadow-xl hover:shadow-2xl transform hover:scale-[1.02] ${
                     isCompleted
                       ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
                       : "bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white"
@@ -339,18 +395,18 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                     "Updating..."
                   ) : isCompleted ? (
                     <>
-                      <CheckCircle className="h-6 w-6 mr-3" />
-                      🎉 Lesson Completed - Click to Unmark
+                      <CheckCircle className="h-5 w-5 mr-2" />
+                      🎉 Completed
                     </>
                   ) : (
                     <>
-                      <CheckCircle className="h-6 w-6 mr-3" />
-                      Mark as Complete & Celebrate!
+                      <CheckCircle className="h-5 w-5 mr-2" />
+                      Mark as Complete
                     </>
                   )}
                 </Button>
                 {!userId && (
-                  <p className="text-sm text-muted-foreground text-center mt-4 font-medium">
+                  <p className="text-sm text-muted-foreground text-center font-medium">
                     Sign in to track your progress
                   </p>
                 )}
@@ -395,45 +451,6 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
               className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
             />
           </div>
-        </div>
-
-        {/* Navigation */}
-        <div className="flex items-center justify-between mt-8">
-          <Button
-            variant="outline"
-            asChild
-            className="rounded-2xl shadow-lg hover:shadow-xl border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 px-6 py-6 text-base font-semibold bg-white dark:bg-gray-900 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
-          >
-            <Link
-              href={`/lessons/${lesson.id - 1}`}
-              aria-label="Go to previous lesson"
-            >
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Previous Lesson
-            </Link>
-          </Button>
-
-          <div className="text-center">
-            {isCompleted && (
-              <div className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-full shadow-lg">
-                <CheckCircle className="h-6 w-6" />
-                <span className="font-bold text-lg">🎉 Lesson Complete!</span>
-              </div>
-            )}
-          </div>
-
-          <Button
-            asChild
-            className="rounded-2xl shadow-lg hover:shadow-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 px-6 py-6 text-base font-semibold text-white transform hover:scale-105 transition-all"
-          >
-            <Link
-              href={`/lessons/${lesson.id + 1}`}
-              aria-label="Go to next lesson"
-            >
-              Next Lesson 🚀
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Link>
-          </Button>
         </div>
       </div>
     </div>

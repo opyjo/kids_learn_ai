@@ -124,3 +124,137 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Lesson Content Typography Improvements */
+.lesson-content p {
+  @apply mb-3 text-sm leading-[1.7] text-foreground;
+}
+
+.lesson-content p:first-child {
+  @apply mt-0;
+}
+
+.lesson-content h1 {
+  @apply text-xl font-bold tracking-tight text-primary mt-1 mb-3 leading-tight;
+}
+
+.lesson-content h1:first-child {
+  @apply mt-0;
+}
+
+.lesson-content > h1:first-child {
+  @apply mt-0;
+}
+
+.lesson-content h2 {
+  @apply text-lg font-bold tracking-tight text-accent mt-2 mb-3 leading-snug;
+}
+
+.lesson-content h2:first-child {
+  @apply mt-0;
+}
+
+.lesson-content h3 {
+  @apply text-base font-bold tracking-tight text-primary/90 mt-2 mb-3 leading-snug;
+}
+
+.lesson-content h3:first-child {
+  @apply mt-0;
+}
+
+.lesson-content h4 {
+  @apply text-sm font-bold tracking-tight text-primary/80 mt-4 mb-2 leading-snug;
+}
+
+.lesson-content h4:first-child {
+  @apply mt-0;
+}
+
+/* Unordered lists */
+.lesson-content ul {
+  @apply my-4 space-y-1.5 pl-6;
+  list-style-type: disc;
+}
+
+.lesson-content ul::marker {
+  color: hsl(var(--primary));
+  font-size: 0.875rem;
+}
+
+.lesson-content ul li {
+  @apply my-1.5 text-sm leading-relaxed pl-2 text-foreground;
+  display: list-item;
+}
+
+.lesson-content ul li ul {
+  @apply mt-1.5 mb-1.5 ml-5;
+  list-style-type: circle;
+}
+
+.lesson-content ul li ol {
+  @apply mt-1.5 mb-1.5 ml-5;
+}
+
+/* Ordered lists */
+.lesson-content ol {
+  @apply my-4 space-y-1.5 pl-6;
+  list-style-type: decimal;
+}
+
+.lesson-content ol::marker {
+  color: hsl(var(--primary));
+  font-weight: 700;
+}
+
+.lesson-content ol li {
+  @apply my-1.5 text-sm leading-relaxed pl-2 text-foreground;
+  display: list-item;
+}
+
+.lesson-content ol li ul {
+  @apply mt-1.5 mb-1.5 ml-5;
+  list-style-type: disc;
+}
+
+.lesson-content ol li ol {
+  @apply mt-1.5 mb-1.5 ml-5;
+  list-style-type: lower-alpha;
+}
+
+/* List items in general */
+.lesson-content li {
+  @apply my-1.5 text-sm leading-relaxed pl-2 text-foreground;
+}
+
+.lesson-content li p {
+  @apply mb-1.5 mt-0;
+}
+
+.lesson-content li > * {
+  @apply mb-1;
+}
+
+.lesson-content li > *:last-child {
+  @apply mb-0;
+}
+
+/* Blockquotes */
+.lesson-content blockquote {
+  @apply border-l-4 border-primary bg-primary/5 py-3 px-5 rounded-r-lg my-4 italic;
+}
+
+/* Code blocks */
+.lesson-content pre {
+  @apply my-3;
+}
+
+/* Strong text */
+.lesson-content strong {
+  @apply text-primary font-bold;
+  font-size: 1.02em;
+}
+
+/* Horizontal rules */
+.lesson-content hr {
+  @apply my-4 border-t-2 border-border;
+}

@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
 import {
   Play,
   RotateCcw,
@@ -13,6 +12,7 @@ import {
   AlertCircle,
   Loader2,
   MessageSquare,
+  Trash2,
 } from "lucide-react";
 
 interface PythonEditorProps {
@@ -175,6 +175,14 @@ export function PythonEditor({
     onCodeChange?.(initialCode);
   };
 
+  const handleClear = () => {
+    setCode("");
+    setOutput("");
+    setError("");
+    setIsSuccess(false);
+    onCodeChange?.("");
+  };
+
   const lineCount = code.split("\n").length;
   const lineNumberWidth = lineCount.toString().length * 8 + 16;
 
@@ -182,27 +190,13 @@ export function PythonEditor({
     <Card className={`flex flex-col ${className}`}>
       <CardHeader className="bg-white/70 dark:bg-gray-900/60 backdrop-blur-sm border-b shrink-0">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-3 text-lg">
+          <CardTitle className="flex items-center gap-3 text-base">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               <span className="font-semibold tracking-tight">
                 Python Code Editor
               </span>
             </div>
-            {!pyodideReady && (
-              <Badge variant="outline" className="text-xs">
-                <Loader2 className="h-3 w-3 mr-1 animate-spin" />
-                Loading Python...
-              </Badge>
-            )}
-            {pyodideReady && (
-              <Badge
-                variant="outline"
-                className="text-xs bg-green-50 text-green-700"
-              >
-                Python Ready
-              </Badge>
-            )}
           </CardTitle>
           <div className="flex items-center gap-2">
             {onAskAboutCode && (
@@ -222,25 +216,30 @@ export function PythonEditor({
               size="sm"
               onClick={handleReset}
               className="rounded-full"
+              aria-label="Reset code"
             >
-              <RotateCcw className="h-4 w-4 mr-2" />
-              Reset
+              <RotateCcw className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleClear}
+              className="rounded-full"
+              aria-label="Clear code"
+              disabled={!code.trim()}
+            >
+              <Trash2 className="h-4 w-4" />
             </Button>
             <Button
               onClick={handleRunCode}
               disabled={isRunning || !pyodideReady}
               className="rounded-full bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600"
+              aria-label={isRunning ? "Running code" : "Run code"}
             >
               {isRunning ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Running...
-                </>
+                <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
-                <>
-                  <Play className="h-4 w-4 mr-2" />
-                  Run Code
-                </>
+                <Play className="h-4 w-4" />
               )}
             </Button>
           </div>
