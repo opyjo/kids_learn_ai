@@ -75,6 +75,10 @@ CREATE POLICY "Students can view own completed lessons" ON completed_lessons
 CREATE POLICY "Students can mark lessons complete" ON completed_lessons
   FOR INSERT WITH CHECK (auth.uid() = student_id);
 
+-- Allow students to unmark their own completed lessons
+CREATE POLICY "Students can unmark completed lessons" ON completed_lessons
+  FOR DELETE USING (auth.uid() = student_id);
+
 CREATE POLICY "Admins can view all completed lessons" ON completed_lessons
   FOR SELECT USING (
     EXISTS (

@@ -21,6 +21,16 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useToast } from "@/components/ui/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface Lesson {
   id: number;
@@ -47,82 +57,144 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
   const [currentCode, setCurrentCode] = useState(lesson.starter_code);
   const [showConfetti, setShowConfetti] = useState(false);
   const supabase = getSupabaseBrowserClient();
+  const { toast } = useToast();
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
-  // Fetch completion status on mount
+  // Fetch completion status on mount (use client auth user to avoid RLS mismatches)
   useEffect(() => {
     const checkCompletionStatus = async () => {
-      if (!userId || !lesson.dbId) return;
+      if (!lesson.dbId) return;
 
       try {
-        const { data, error } = await supabase
+        const {
+          data: { user: authUser },
+        } = await supabase.auth.getUser();
+
+        if (!authUser) {
+          setIsCompleted(false);
+          return;
+        }
+
+        const { data } = await supabase
           .from("completed_lessons")
           .select("id")
-          .eq("student_id", userId)
+          .eq("student_id", authUser.id)
           .eq("lesson_id", lesson.dbId)
-          .single();
+          .maybeSingle();
 
-        if (data && !error) {
-          setIsCompleted(true);
-        }
-      } catch (error) {
+        setIsCompleted(!!data);
+      } catch (_error) {
         // Not completed or error - either way, show as not completed
         setIsCompleted(false);
       }
     };
 
     checkCompletionStatus();
-  }, [userId, lesson.dbId, supabase]);
+  }, [lesson.dbId, supabase]);
 
   // Toggle lesson completion
-  const toggleCompletion = async () => {
+  const toggleCompletion = async (action?: "complete" | "uncomplete") => {
     if (!userId || !lesson.dbId) {
       alert("Please sign in to track your progress");
+      return;
+    }
+
+    // Ensure the browser has a valid session before hitting RLS
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError) {
+      console.error("Session fetch error:", sessionError);
+    }
+    if (!session) {
+      alert("Your session expired. Please sign in again.");
+      return;
+    }
+
+    const {
+      data: { user: authUser },
+    } = await supabase.auth.getUser();
+    if (!authUser) {
+      alert("Your session expired. Please sign in again.");
       return;
     }
 
     setIsLoading(true);
 
     try {
-      if (isCompleted) {
+      const shouldUnmark = action ? action === "uncomplete" : isCompleted;
+      if (shouldUnmark) {
         // Unmark as completed
         const { error } = await supabase
           .from("completed_lessons")
           .delete()
-          .eq("student_id", userId)
+          .eq("student_id", authUser.id)
           .eq("lesson_id", lesson.dbId);
 
         if (error) {
           console.error("Error unmarking lesson:", error);
-          alert("Failed to update completion status");
-        } else {
-          setIsCompleted(false);
-          console.log("✅ Lesson unmarked as complete");
+          alert(error.message ?? "Failed to update completion status");
+          return;
         }
-      } else {
-        // Mark as completed
-        const completionTimestamp = new Date().toISOString();
-        const { error } = await supabase.from("completed_lessons").insert({
-          student_id: userId,
-          lesson_id: lesson.dbId,
-          completed_at: completionTimestamp,
-        });
 
-        if (error) {
-          console.error("Error marking lesson complete:", error);
-          alert("Failed to mark lesson as complete");
-        } else {
-          setIsCompleted(true);
-          console.log("✅ Lesson marked as complete!");
-          setShowConfetti(true);
-          setTimeout(() => setShowConfetti(false), 2200);
-        }
+        setIsCompleted(false);
+        console.log("✅ Lesson unmarked as complete");
+        return;
       }
-    } catch (error) {
+
+      // Mark as completed (let DB default handle completed_at)
+      const { error } = await supabase.from("completed_lessons").insert({
+        student_id: authUser.id,
+        lesson_id: lesson.dbId,
+      });
+
+      if (error) {
+        console.error("Error marking lesson complete:", error);
+        alert(error.message ?? "Failed to mark lesson as complete");
+        return;
+      }
+
+      setIsCompleted(true);
+      console.log("✅ Lesson marked as complete!");
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 2200);
+    } catch (error: any) {
       console.error("Error toggling completion:", error);
-      alert("An error occurred");
+      alert(error?.message ?? "An error occurred");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Optimistic mark complete with Undo toast
+  const handleMarkClick = async () => {
+    if (isCompleted) return;
+    setIsCompleted(true);
+    toast({
+      title: "Marked complete",
+      description: "Lesson marked as complete.",
+      action: (
+        <button
+          className="ml-3 rounded-md bg-white/10 px-2 py-1 text-xs"
+          onClick={() => {
+            setIsCompleted(false);
+            void toggleCompletion("uncomplete");
+          }}
+          aria-label="Undo mark as complete"
+        >
+          Undo
+        </button>
+      ),
+    });
+    await toggleCompletion("complete");
+  };
+
+  const handleUnmarkRequest = () => setConfirmOpen(true);
+  const handleConfirmUnmark = async () => {
+    setConfirmOpen(false);
+    await toggleCompletion("uncomplete");
   };
 
   // Simple code change handler (no automatic tracking)
@@ -344,11 +416,15 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
               {/* Mark as Complete Button */}
               <div className="mt-12 pt-8 border-t-2 border-border flex flex-col items-center gap-4">
                 <Button
-                  onClick={toggleCompletion}
+                  onClick={isCompleted ? handleUnmarkRequest : handleMarkClick}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      toggleCompletion();
+                      if (isCompleted) {
+                        handleUnmarkRequest();
+                      } else {
+                        handleMarkClick();
+                      }
                     }
                   }}
                   aria-pressed={isCompleted}
@@ -357,7 +433,7 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                       ? "Unmark lesson as complete"
                       : "Mark lesson as complete"
                   }
-                  disabled={isLoading || !userId}
+                  disabled={isLoading}
                   className={`w-auto px-8 rounded-2xl text-base font-bold py-5 transition-all shadow-xl hover:shadow-2xl transform hover:scale-[1.02] ${
                     isCompleted
                       ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
@@ -383,6 +459,21 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                     Sign in to track your progress
                   </p>
                 )}
+                <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+                  <AlertDialogContent className="rounded-2xl">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle className="text-base">
+                        Unmark this lesson as complete?
+                      </AlertDialogTitle>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel className="rounded-full">Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleConfirmUnmark} className="rounded-full">
+                        Yes, Unmark
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
                 <output className="sr-only" aria-live="polite">
                   {isCompleted
                     ? "Lesson marked as complete"

@@ -133,7 +133,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
         href={item.href}
         aria-current={active ? "page" : undefined}
         className={cn(
-          "group relative inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out",
+          "group relative inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out cursor-pointer",
           "text-gray-700 hover:text-blue-600 dark:text-gray-300",
           "hover:bg-white/60 dark:hover:bg-gray-800/70 hover:shadow-[0_8px_20px_-12px_rgba(37,99,235,0.45)] hover:-translate-y-0.5",
           active
@@ -172,7 +172,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
         <DropdownMenuTrigger asChild>
           <button
             className={cn(
-              "group relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out",
+              "group relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out cursor-pointer",
               "text-gray-700 hover:text-blue-600 dark:text-gray-300",
               "hover:bg-white/60 dark:hover:bg-gray-800/70 hover:shadow-[0_8px_20px_-12px_rgba(37,99,235,0.45)] hover:-translate-y-0.5",
               isAnyActive
@@ -220,17 +220,17 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-4 py-0.5">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-shrink-0">
           {leftExtras}
           <Link
             href="/"
-            className="flex items-center group"
+            className="flex items-center group cursor-pointer flex-shrink-0"
             aria-label="Go to homepage"
           >
             <img
               src="/Logo.png"
               alt="Kids Learn AI Logo"
-              className="h-16 w-auto transition-transform duration-200 group-hover:rotate-6"
+              className="h-16 w-auto flex-shrink-0 object-contain"
             />
           </Link>
         </div>
@@ -284,7 +284,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                 variant="ghost"
                 size="icon"
                 aria-label="Open menu"
-                className="md:hidden rounded-full border border-white/40 bg-white/50 text-gray-700 shadow-[0_8px_24px_-18px_rgba(37,99,235,0.65)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/70 dark:border-white/10 dark:bg-gray-900/70 dark:text-gray-100"
+                className="md:hidden cursor-pointer rounded-full border border-white/40 bg-white/50 text-gray-700 shadow-[0_8px_24px_-18px_rgba(37,99,235,0.65)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/70 hover:text-gray-700 dark:border-white/10 dark:bg-gray-900/70 dark:text-gray-100 dark:hover:text-gray-100"
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -298,7 +298,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                 <Link
                   href={homeItem.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300",
+                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
                     isActive(homeItem.href)
                       ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
                       : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
@@ -310,7 +310,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
                 {/* Learn Collapsible */}
                 <Collapsible>
-                  <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70">
+                  <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
                     <div className="flex items-center gap-3">
                       <GraduationCap className="h-5 w-5" />
                       <span className="font-medium">Learn</span>
@@ -323,7 +323,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                         key={item.href}
                         href={item.href}
                         className={cn(
-                          "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors",
+                          "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors cursor-pointer",
                           isActive(item.href)
                             ? "bg-blue-50/80 text-blue-700 shadow-[0_6px_20px_-12px_rgba(37,99,235,0.45)] dark:bg-blue-950/40 dark:text-blue-200"
                             : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
@@ -341,7 +341,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <Link
                     href={dashboardItem.href}
                     className={cn(
-                      "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300",
+                      "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
                       isActive(dashboardItem.href)
                         ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
                         : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
@@ -356,7 +356,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                 <Link
                   href={aboutItem.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300",
+                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
                     isActive(aboutItem.href)
                       ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
                       : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
@@ -368,7 +368,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
                 {/* Resources Collapsible */}
                 <Collapsible>
-                  <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70">
+                  <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
                     <div className="flex items-center gap-3">
                       <Library className="h-5 w-5" />
                       <span className="font-medium">Resources</span>
@@ -381,7 +381,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                         key={item.href}
                         href={item.href}
                         className={cn(
-                          "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors",
+                          "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors cursor-pointer",
                           isActive(item.href)
                             ? "bg-blue-50/80 text-blue-700 shadow-[0_6px_20px_-12px_rgba(37,99,235,0.45)] dark:bg-blue-950/40 dark:text-blue-200"
                             : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
@@ -398,7 +398,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                 <Link
                   href={blogItem.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300",
+                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
                     isActive(blogItem.href)
                       ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
                       : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"

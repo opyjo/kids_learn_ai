@@ -96,13 +96,11 @@ export default async function DashboardPage() {
     .select("*", { count: "exact" });
 
   // Fetch completed lessons with lesson metadata for accurate counts
-  const {
-    data: completedLessonRecords,
-    count: completedLessonsCount,
-  } = await supabase
-    .from("completed_lessons")
-    .select(
-      `
+  const { data: completedLessonRecords, count: completedLessonsCount } =
+    await supabase
+      .from("completed_lessons")
+      .select(
+        `
         lesson_id,
         completed_at,
         lessons (
@@ -112,11 +110,11 @@ export default async function DashboardPage() {
           order_index
         )
       `,
-      { count: "exact" }
-    )
-    .eq("student_id", authUser.id)
-    .order("completed_at", { ascending: false })
-    .limit(10);
+        { count: "exact" }
+      )
+      .eq("student_id", authUser.id)
+      .order("completed_at", { ascending: false })
+      .limit(10);
 
   type LessonActivity = {
     lessonId: string;
@@ -181,7 +179,8 @@ export default async function DashboardPage() {
     return date.toLocaleDateString(undefined, {
       month: "short",
       day: "numeric",
-      year: date.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
+      year:
+        date.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
     });
   };
 
@@ -239,7 +238,9 @@ export default async function DashboardPage() {
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
             <CardHeader className="space-y-2">
-              <CardTitle className="text-sm font-medium">Your Profile</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Your Profile
+              </CardTitle>
               <CardDescription>Quick snapshot of your account</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
@@ -312,7 +313,6 @@ export default async function DashboardPage() {
               </p>
             </CardContent>
           </Card>
-
         </div>
 
         {/* Recent Lessons */}
@@ -335,7 +335,8 @@ export default async function DashboardPage() {
                       </h4>
                       <div className="flex items-center gap-2 mt-1">
                         <Badge variant="outline" className="text-xs">
-                          {lessonActivity.lesson?.difficulty_level || "beginner"}
+                          {lessonActivity.lesson?.difficulty_level ||
+                            "beginner"}
                         </Badge>
                         <span className="text-sm text-gray-500">
                           {lessonActivity.status === "completed"
@@ -410,25 +411,6 @@ export default async function DashboardPage() {
                   Python Playground
                 </Link>
               </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start bg-transparent rounded-full"
-                asChild
-              >
-                <Link href="/progress">
-                  <Trophy className="mr-2 h-4 w-4" />
-                  View Progress Report
-                </Link>
-              </Button>
-              {user.subscription_status === "free" && (
-                <Button
-                  variant="outline"
-                  className="w-full justify-start bg-yellow-50 border-yellow-200 text-yellow-800 hover:bg-yellow-100 rounded-full"
-                  asChild
-                >
-                  <Link href="/signup">⭐ Upgrade to Premium</Link>
-                </Button>
-              )}
             </CardContent>
           </Card>
         </div>
