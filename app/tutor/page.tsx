@@ -6,7 +6,7 @@ import { PythonEditor } from "@/components/code/python-editor";
 import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code2, MessageSquare, GripVertical } from "lucide-react";
+import { Code2, GripVertical } from "lucide-react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 const TutorPage = () => {
@@ -55,44 +55,22 @@ print(f"Happy coding, {name}!")
   return (
     <MainLayout>
       <div className="mx-auto w-full min-h-[calc(100vh-5rem)] px-4 py-3 sm:px-6 lg:px-8">
-        {/* Page Header */}
-        <div className="text-center mb-3">
-          <h1 className="mb-1 text-2xl font-bold sm:text-3xl">
-            <span className="bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent">
-              Meet BrightByte 🐍
-            </span>
-          </h1>
-          <p className="mx-auto max-w-2xl text-xs text-muted-foreground sm:text-sm">
-            Your personal Python tutor with integrated playground
-          </p>
-        </div>
-
-        {/* Toggle Editor Button */}
-        <div className="flex justify-center gap-2 mb-3">
-          <Button
-            variant={showEditor ? "default" : "outline"}
-            size="sm"
-            onClick={handleToggleEditor}
-            className="rounded-full"
-          >
-            <Code2 className="h-4 w-4 mr-2" />
-            {showEditor ? "Hide" : "Show"} Code Playground
-          </Button>
-        </div>
-
         {/* Layout - Without Editor (Mobile) */}
         {!showEditor && (
           <div className="lg:hidden max-w-4xl mx-auto">
-            <div className="mb-2">
-              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <MessageSquare className="h-4 w-4 text-primary" />
-                AI Tutor Chat
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                Ask BrightByte for help with your Python code
-              </p>
-            </div>
             <ChatInterface ref={chatInterfaceRef} />
+            {/* Toggle Editor Button - below chat */}
+            <div className="flex justify-center gap-2 mt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleToggleEditor}
+                className="rounded-full"
+              >
+                <Code2 className="h-4 w-4 mr-2" />
+                Show Code Playground
+              </Button>
+            </div>
           </div>
         )}
 
@@ -100,30 +78,32 @@ print(f"Happy coding, {name}!")
         {showEditor && (
           <div className="lg:hidden max-w-[1600px] mx-auto">
             <div className="grid grid-cols-1 gap-6">
-              {/* AI Tutor Section */}
+              {/* AI Tutor Section - at top */}
               <div className="flex flex-col">
-                <div className="mb-2">
-                  <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                    <MessageSquare className="h-4 w-4 text-primary" />
-                    AI Tutor Chat
-                  </h2>
-                  <p className="text-xs text-muted-foreground">
-                    Ask BrightByte for help with your Python code
-                  </p>
-                </div>
                 <ChatInterface ref={chatInterfaceRef} />
               </div>
 
               {/* Python Playground Section */}
               <div className="flex flex-col">
-                <div className="mb-2">
-                  <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                    <Code2 className="h-4 w-4 text-primary" />
-                    Python Playground
-                  </h2>
-                  <p className="text-xs text-muted-foreground">
-                    Test and experiment with Python code in real-time
-                  </p>
+                <div className="mb-2 flex items-center justify-between">
+                  <div>
+                    <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                      <Code2 className="h-4 w-4 text-primary" />
+                      Python Playground
+                    </h2>
+                    <p className="text-xs text-muted-foreground">
+                      Test and experiment with Python code in real-time
+                    </p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleToggleEditor}
+                    className="rounded-full shrink-0"
+                  >
+                    <Code2 className="h-4 w-4 mr-2" />
+                    Hide
+                  </Button>
                 </div>
 
                 <PythonEditor
@@ -163,16 +143,19 @@ print(f"Happy coding, {name}!")
         {/* Layout - Without Editor (Desktop) */}
         {!showEditor && (
           <div className="hidden lg:block max-w-4xl mx-auto">
-            <div className="mb-2">
-              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                <MessageSquare className="h-4 w-4 text-primary" />
-                AI Tutor Chat
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                Ask BrightByte for help with your Python code
-              </p>
-            </div>
             <ChatInterface ref={chatInterfaceRef} />
+            {/* Toggle Editor Button - below chat */}
+            <div className="flex justify-center gap-2 mt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleToggleEditor}
+                className="rounded-full"
+              >
+                <Code2 className="h-4 w-4 mr-2" />
+                Show Code Playground
+              </Button>
+            </div>
           </div>
         )}
 
@@ -186,15 +169,6 @@ print(f"Happy coding, {name}!")
               {/* AI Tutor Panel */}
               <Panel defaultSize={50} minSize={30} id="chat-panel">
                 <div className="flex flex-col h-full pr-3">
-                  <div className="mb-2">
-                    <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                      <MessageSquare className="h-4 w-4 text-primary" />
-                      AI Tutor Chat
-                    </h2>
-                    <p className="text-xs text-muted-foreground">
-                      Ask BrightByte for help with your Python code
-                    </p>
-                  </div>
                   <ChatInterface ref={chatInterfaceRef} />
                 </div>
               </Panel>
@@ -210,14 +184,25 @@ print(f"Happy coding, {name}!")
               {/* Python Playground Panel */}
               <Panel defaultSize={50} minSize={30} id="editor-panel">
                 <div className="flex flex-col h-full pl-3">
-                  <div className="mb-2">
-                    <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                      <Code2 className="h-4 w-4 text-primary" />
-                      Python Playground
-                    </h2>
-                    <p className="text-xs text-muted-foreground">
-                      Test and experiment with Python code in real-time
-                    </p>
+                  <div className="mb-2 flex items-center justify-between">
+                    <div>
+                      <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                        <Code2 className="h-4 w-4 text-primary" />
+                        Python Playground
+                      </h2>
+                      <p className="text-xs text-muted-foreground">
+                        Test and experiment with Python code in real-time
+                      </p>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleToggleEditor}
+                      className="rounded-full shrink-0"
+                    >
+                      <Code2 className="h-4 w-4 mr-2" />
+                      Hide
+                    </Button>
                   </div>
 
                   <PythonEditor

@@ -39,6 +39,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     is_premium: lesson.is_premium,
     starter_code: lesson.starter_code || "",
     solution_code: lesson.solution_code || "",
+    requires_trinket: lesson.requires_trinket || false,
   };
 
   return <LessonViewer lesson={transformedLesson} userId={user?.id} />;

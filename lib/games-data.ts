@@ -10,6 +10,7 @@ export interface Game {
   code: string;
   howItWorks: string[];
   challenges: string[];
+  trinketLink?: string;
 }
 
 export const games: Game[] = [
@@ -32,8 +33,8 @@ attempts = 0
 max_attempts = 10
 
 print("🎯 Welcome to the Number Guessing Game!")
-print(f"I'm thinking of a number between 1 and 100.")
-print(f"You have {max_attempts} attempts to guess it!\\n")
+print("I'm thinking of a number between 1 and 100.")
+print("You have " + str(max_attempts) + " attempts to guess it!\\n")
 
 # Game loop
 while attempts < max_attempts:
@@ -43,7 +44,7 @@ while attempts < max_attempts:
     
     # Check if guess is correct
     if guess == secret_number:
-        print(f"🎉 Congratulations! You guessed it in {attempts} attempts!")
+        print("🎉 Congratulations! You guessed it in " + str(attempts) + " attempts!")
         break
     elif guess < secret_number:
         print("📈 Too low! Try a higher number.")
@@ -53,9 +54,9 @@ while attempts < max_attempts:
     # Show remaining attempts
     remaining = max_attempts - attempts
     if remaining > 0:
-        print(f"Attempts remaining: {remaining}\\n")
+        print("Attempts remaining: " + str(remaining) + "\\n")
     else:
-        print(f"😢 Game Over! The number was {secret_number}")`,
+        print("😢 Game Over! The number was " + str(secret_number))`,
     howItWorks: [
       "We use random.randint() to generate a secret number between 1 and 100",
       "A while loop keeps the game running until the player guesses correctly or runs out of attempts",
@@ -68,6 +69,7 @@ while attempts < max_attempts:
       "Add hints after 5 wrong guesses",
       "Create a two-player mode where players take turns",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "rock-paper-scissors",
@@ -169,6 +171,7 @@ else:
       "Add sound effects or ASCII art for each choice",
       "Track win/loss statistics across multiple games",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "hangman",
@@ -323,6 +326,7 @@ if tries_left == 0:
       "Add a two-player mode where one player enters the word",
       "Keep track of wins and losses with a score counter",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "dice-roller",
@@ -459,6 +463,7 @@ while True:
       "Add colored output for different dice results",
       "Create a probability calculator showing chances of rolling certain numbers",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "mad-libs",
@@ -572,6 +577,7 @@ else:
       "Add a random story mode that picks a story automatically",
       "Create themed story packs (holiday, space, underwater)",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "quiz-game",
@@ -696,6 +702,7 @@ else:
       "Add a hint system that costs points",
       "Save high scores to a file and display leaderboard",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "fortune-teller",
@@ -808,6 +815,7 @@ while True:
       "Add ASCII art of a crystal ball or mystical symbols",
       "Make fortunes more specific based on keywords in the question",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "snake",
@@ -998,6 +1006,7 @@ screen.mainloop()`,
       "Make the snake change colors as it grows",
       "Add a pause feature with the spacebar",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "pong",
@@ -1164,6 +1173,7 @@ screen.mainloop()`,
       'Create a "first to 10" mode or custom win conditions',
       "Add a center line and make the ball flash when scored",
     ],
+    trinketLink: "https://trinket.io/python",
   },
   {
     id: "tic-tac-toe",
@@ -1360,5 +1370,6 @@ screen.mainloop()`,
       "Highlight the winning combination when someone wins",
       'Add a "Play Again" button to reset the game',
     ],
+    trinketLink: "https://trinket.io/python",
   },
 ];

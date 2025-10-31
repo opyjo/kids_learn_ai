@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 import { DifficultyBadge } from "./difficulty-badge";
 import { SkillBadge } from "./skill-badge";
 import { GameTabs } from "./game-tabs";
 import { type Game } from "@/lib/games-data";
+import { Button } from "@/components/ui/button";
 
 interface GameCardProps {
   game: Game;
@@ -18,19 +19,25 @@ export const GameCard = ({ game }: GameCardProps) => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleOpenTrinket = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card expansion when clicking the button
+    const trinketUrl = game.trinketLink || "https://trinket.io/python";
+    window.open(trinketUrl, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-gray-100 transition-all hover:shadow-xl">
       {/* Game Card Header */}
       <button
         onClick={handleToggle}
-        className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
+        className="w-full p-4 text-left hover:bg-gray-50 transition-colors"
       >
         <div className="flex items-start justify-between gap-4">
-          <div className="flex items-start gap-4 flex-1">
-            <div className="text-5xl">{game.emoji}</div>
+          <div className="flex items-start gap-3 flex-1">
+            <div className="text-3xl">{game.emoji}</div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold mb-2">{game.title}</h3>
-              <p className="text-gray-600 mb-4">{game.description}</p>
+              <h3 className="text-lg font-bold mb-1">{game.title}</h3>
+              <p className="text-sm text-gray-600 mb-3">{game.description}</p>
               <div className="flex flex-wrap items-center gap-3">
                 <DifficultyBadge difficulty={game.difficulty} />
                 <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">
@@ -47,7 +54,19 @@ export const GameCard = ({ game }: GameCardProps) => {
               </div>
             </div>
           </div>
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center gap-2">
+            {game.trinketLink && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleOpenTrinket}
+                className="rounded-full shrink-0"
+                aria-label="Open in Trinket.io"
+              >
+                <ExternalLink className="w-4 h-4 mr-1.5" />
+                Try It
+              </Button>
+            )}
             {isExpanded ? (
               <ChevronUp className="w-6 h-6 text-gray-400" />
             ) : (

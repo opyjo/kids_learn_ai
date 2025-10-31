@@ -16,7 +16,7 @@ export default function GamesPage() {
             <Sparkles className="w-4 h-4" />
             Build Amazing Games
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-balance">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
             Create Your Own Python Games! 🎮
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto text-pretty">

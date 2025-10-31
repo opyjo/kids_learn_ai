@@ -236,7 +236,10 @@ export const ChatInterface = forwardRef<ChatInterfaceRef>((props, ref) => {
       </div>
 
       {/* Messages */}
-      <ScrollArea className="flex-1 p-3 overflow-y-auto" ref={scrollAreaRef}>
+      <ScrollArea
+        className="flex-1 p-3 overflow-y-auto overflow-x-hidden"
+        ref={scrollAreaRef}
+      >
         <div className="space-y-4 min-h-full">
           {messages.map((message) => (
             <Message
@@ -270,7 +273,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef>((props, ref) => {
 
         {/* Starter Prompts - Show only when no user messages yet */}
         {messages.length === 1 && !isLoading && (
-          <div className="mt-4 space-y-2 pb-2">
+          <div className="mt-4 space-y-2 pb-2 px-1">
             <p className="text-sm font-bold text-foreground flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-primary" />
               Try asking:
@@ -282,7 +285,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef>((props, ref) => {
                   onClick={() => handleStarterPrompt(prompt)}
                   tabIndex={0}
                   aria-label={`Ask: ${prompt}`}
-                  className="text-left p-3 rounded-xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent hover:from-primary/10 hover:border-primary/30 transition-all text-sm font-medium hover:shadow-md hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="text-left p-3 rounded-xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent hover:from-primary/10 hover:border-primary/30 transition-all text-sm font-medium hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/50"
                 >
                   {prompt}
                 </button>

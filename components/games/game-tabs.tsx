@@ -38,10 +38,10 @@ export const GameTabs = ({ game }: GameTabsProps) => {
   return (
     <div className="border-t border-gray-200 bg-gray-50">
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 bg-white px-6">
+      <div className="flex border-b border-gray-200 bg-white px-4">
         <button
           onClick={() => setActiveTab("about")}
-          className={`px-6 py-4 font-medium transition-colors border-b-2 ${
+          className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
             activeTab === "about"
               ? "border-blue-500 text-blue-600"
               : "border-transparent text-gray-600 hover:text-gray-900"
@@ -51,7 +51,7 @@ export const GameTabs = ({ game }: GameTabsProps) => {
         </button>
         <button
           onClick={() => setActiveTab("code")}
-          className={`px-6 py-4 font-medium transition-colors border-b-2 ${
+          className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
             activeTab === "code"
               ? "border-blue-500 text-blue-600"
               : "border-transparent text-gray-600 hover:text-gray-900"
@@ -61,7 +61,7 @@ export const GameTabs = ({ game }: GameTabsProps) => {
         </button>
         <button
           onClick={() => setActiveTab("how")}
-          className={`px-6 py-4 font-medium transition-colors border-b-2 ${
+          className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
             activeTab === "how"
               ? "border-blue-500 text-blue-600"
               : "border-transparent text-gray-600 hover:text-gray-900"
@@ -71,7 +71,7 @@ export const GameTabs = ({ game }: GameTabsProps) => {
         </button>
         <button
           onClick={() => setActiveTab("challenges")}
-          className={`px-6 py-4 font-medium transition-colors border-b-2 ${
+          className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
             activeTab === "challenges"
               ? "border-blue-500 text-blue-600"
               : "border-transparent text-gray-600 hover:text-gray-900"
@@ -82,13 +82,13 @@ export const GameTabs = ({ game }: GameTabsProps) => {
       </div>
 
       {/* Tab Content */}
-      <div className="p-6">
+      <div className="p-4">
         {activeTab === "about" && (
           <div>
-            <h4 className="text-lg font-bold mb-3">About This Game</h4>
-            <p className="text-gray-700 mb-4">{game.preview}</p>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-              <h5 className="font-bold text-blue-900 mb-2">
+            <h4 className="text-base font-bold mb-2">About This Game</h4>
+            <p className="text-sm text-gray-700 mb-3">{game.preview}</p>
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
+              <h5 className="text-sm font-bold text-blue-900 mb-2">
                 What You'll Learn:
               </h5>
               <div className="flex flex-wrap gap-2">
@@ -102,8 +102,8 @@ export const GameTabs = ({ game }: GameTabsProps) => {
 
         {activeTab === "code" && (
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h4 className="text-lg font-bold">Complete Code</h4>
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-base font-bold">Complete Code</h4>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" onClick={handleCopyCode}>
                   <Copy className="w-4 h-4 mr-2" />
@@ -119,13 +119,13 @@ export const GameTabs = ({ game }: GameTabsProps) => {
                 </Button>
               </div>
             </div>
-            <div className="bg-gray-900 rounded-xl p-6 overflow-x-auto">
-              <pre className="text-sm text-gray-100 font-mono">
+            <div className="bg-gray-900 rounded-xl p-4 overflow-x-auto">
+              <pre className="text-xs text-gray-100 font-mono">
                 <code>{game.code}</code>
               </pre>
             </div>
-            <div className="mt-4 bg-green-50 border border-green-200 rounded-xl p-4">
-              <p className="text-sm text-green-800">
+            <div className="mt-3 bg-green-50 border border-green-200 rounded-xl p-3">
+              <p className="text-xs text-green-800">
                 <strong>💡 Tip:</strong> Copy this code into Thonny and run it
                 to play the game! Don't have Thonny yet?{" "}
                 <Link href="/get-thonny" className="underline font-medium">
@@ -138,17 +138,17 @@ export const GameTabs = ({ game }: GameTabsProps) => {
 
         {activeTab === "how" && (
           <div>
-            <h4 className="text-lg font-bold mb-4">How It Works</h4>
-            <div className="space-y-3">
+            <h4 className="text-base font-bold mb-3">How It Works</h4>
+            <div className="space-y-2">
               {game.howItWorks.map((point, index) => (
                 <div
                   key={`${game.id}-how-${index}-${point.slice(0, 20)}`}
-                  className="flex gap-3"
+                  className="flex gap-2"
                 >
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
                     {index + 1}
                   </div>
-                  <p className="text-gray-700 pt-1">{point}</p>
+                  <p className="text-sm text-gray-700 pt-0.5">{point}</p>
                 </div>
               ))}
             </div>
@@ -157,22 +157,22 @@ export const GameTabs = ({ game }: GameTabsProps) => {
 
         {activeTab === "challenges" && (
           <div>
-            <h4 className="text-lg font-bold mb-4">Try These Challenges!</h4>
-            <p className="text-gray-600 mb-4">
+            <h4 className="text-base font-bold mb-3">Try These Challenges!</h4>
+            <p className="text-sm text-gray-600 mb-3">
               Once you have the game working, try these modifications to make it
               your own:
             </p>
-            <div className="space-y-3">
+            <div className="space-y-2">
               {game.challenges.map((challenge, index) => (
                 <div
                   key={`${game.id}-challenge-${index}-${challenge.slice(
                     0,
                     20
                   )}`}
-                  className="flex gap-3 bg-white rounded-xl p-4 border border-gray-200"
+                  className="flex gap-2 bg-white rounded-xl p-3 border border-gray-200"
                 >
-                  <div className="flex-shrink-0 text-2xl">🎯</div>
-                  <p className="text-gray-700 pt-1">{challenge}</p>
+                  <div className="flex-shrink-0 text-lg">🎯</div>
+                  <p className="text-sm text-gray-700 pt-0.5">{challenge}</p>
                 </div>
               ))}
             </div>

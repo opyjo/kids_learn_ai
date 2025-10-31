@@ -31,7 +31,7 @@ for color in colors:
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <SiteHeader />
 
-      <div className="max-w-6xl mx-auto px-4 py-6">
+      <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col min-h-[calc(100vh-200px)]">
         {/* Page Header */}
         <div className="mb-6">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -43,8 +43,22 @@ for color in colors:
           </p>
         </div>
 
+        {/* Python Editor */}
+        <div className="flex-1 mb-6">
+          <PythonEditor
+            initialCode={starterCode}
+            onCodeChange={(code) => {
+              // Save code to localStorage for persistence
+              localStorage.setItem("playground-code", code);
+            }}
+            onRunComplete={(output, isSuccess) => {
+              console.log("[v0] Playground execution:", { output, isSuccess });
+            }}
+          />
+        </div>
+
         {/* Tips Card */}
-        <Card className="mb-6">
+        <Card className="mt-auto">
           <CardHeader>
             <CardTitle className="text-lg">💡 Playground Tips</CardTitle>
             <CardDescription>
@@ -82,18 +96,6 @@ for color in colors:
             </div>
           </CardContent>
         </Card>
-
-        {/* Python Editor */}
-        <PythonEditor
-          initialCode={starterCode}
-          onCodeChange={(code) => {
-            // Save code to localStorage for persistence
-            localStorage.setItem("playground-code", code);
-          }}
-          onRunComplete={(output, isSuccess) => {
-            console.log("[v0] Playground execution:", { output, isSuccess });
-          }}
-        />
       </div>
     </div>
   );

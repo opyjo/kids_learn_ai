@@ -258,3 +258,18 @@
 .lesson-content hr {
   @apply my-4 border-t-2 border-border;
 }
+
+/* Custom floating animation for chatbot */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}

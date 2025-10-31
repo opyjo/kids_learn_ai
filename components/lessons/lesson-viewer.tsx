@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, ArrowRight, CheckCircle, BookOpen, Copy, Check } from "lucide-react";
 import Link from "next/link";
 import { PythonEditor } from "@/components/code/python-editor";
+import { TrinketEditor } from "@/components/code/trinket-editor";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -32,6 +33,7 @@ interface Lesson {
   is_premium: boolean;
   starter_code: string;
   solution_code: string;
+  requires_trinket?: boolean;
 }
 
 interface LessonViewerProps {
@@ -420,36 +422,19 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
           </Card>
 
           <div className="sticky top-24 self-start w-full">
-            <div className="mb-4 rounded-2xl p-4 bg-gradient-to-r from-violet-100 via-fuchsia-100 to-pink-100 dark:from-violet-900/30 dark:via-fuchsia-900/30 dark:to-pink-900/30 ring-1 ring-violet-300/40 dark:ring-violet-700/40">
-              <div className="flex items-start gap-3">
-                <span
-                  className="text-2xl"
-                  role="img"
-                  aria-label="Friendly robot"
-                >
-                  🤖
-                </span>
-                <div>
-                  <p className="font-bold text-violet-900 dark:text-violet-200">
-                    Tip from Robo-Buddy
-                  </p>
-                  <p className="text-sm text-violet-800/90 dark:text-violet-200/80">
-                    Read the lesson on the left, try the code on the right, then
-                    hit
-                    <span className="mx-1 inline-flex items-center gap-1 font-semibold">
-                      Complete
-                    </span>
-                    when you’re done. You got this!
-                  </p>
-                </div>
-              </div>
-            </div>
-            <PythonEditor
-              initialCode={lesson.starter_code}
-              onCodeChange={handleCodeChange}
-              onRunComplete={handleRunComplete}
-              className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
-            />
+            {lesson.requires_trinket ? (
+              <TrinketEditor
+                initialCode={lesson.starter_code}
+                className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
+              />
+            ) : (
+              <PythonEditor
+                initialCode={lesson.starter_code}
+                onCodeChange={handleCodeChange}
+                onRunComplete={handleRunComplete}
+                className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
+              />
+            )}
           </div>
         </div>
       </div>
