@@ -32,6 +32,9 @@ import {
   Newspaper,
   Sparkles,
   ExternalLink,
+  Shield,
+  DollarSign,
+  CreditCard,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
@@ -58,6 +61,11 @@ const blogItem: NavItem = {
   label: "Blog",
   Icon: Newspaper,
 };
+const pricingItem: NavItem = {
+  href: "/pricing",
+  label: "Pricing",
+  Icon: DollarSign,
+};
 
 // Learn dropdown items
 const learnItems: NavItem[] = [
@@ -74,6 +82,12 @@ const resourceItems: NavItem[] = [
   { href: "/get-trinket", label: "Get Trinket.io", Icon: ExternalLink },
 ];
 
+// Admin dropdown items
+const adminItems: NavItem[] = [
+  { href: "/admin", label: "Dashboard", Icon: LayoutDashboard },
+  { href: "/admin/payments", label: "Payments", Icon: CreditCard },
+];
+
 // Visual separator component for navigation zones
 const Separator = () => (
   <div className="h-4 w-px bg-gray-300 dark:bg-gray-600 mx-1" />
@@ -84,6 +98,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
@@ -108,6 +123,30 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const checkAdminRole = async () => {
+      if (!isAuthenticated) {
+        setIsAdmin(false);
+        return;
+      }
+
+      const supabase = getSupabaseBrowserClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+        
+        setIsAdmin(profile?.role === "admin");
+      }
+    };
+
+    checkAdminRole();
+  }, [isAuthenticated]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -250,6 +289,12 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
           {/* Dashboard (auth-only) */}
           {isAuthenticated && renderNavLink(dashboardItem)}
 
+          {/* Admin Dropdown (admin-only) */}
+          {isAdmin && renderDropdown("Admin", Shield, adminItems)}
+
+          {/* Pricing */}
+          {renderNavLink(pricingItem)}
+
           {/* About */}
           {renderNavLink(aboutItem)}
 
@@ -351,6 +396,50 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     <span>{dashboardItem.label}</span>
                   </Link>
                 )}
+
+                {/* Admin Collapsible (admin-only) */}
+                {isAdmin && (
+                  <Collapsible>
+                    <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
+                      <div className="flex items-center gap-3">
+                        <Shield className="h-5 w-5" />
+                        <span className="font-medium">Admin</span>
+                      </div>
+                      <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="mt-1 space-y-1 pl-6">
+                      {adminItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={cn(
+                            "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors cursor-pointer",
+                            isActive(item.href)
+                              ? "bg-blue-50/80 text-blue-700 shadow-[0_6px_20px_-12px_rgba(37,99,235,0.45)] dark:bg-blue-950/40 dark:text-blue-200"
+                              : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
+                          )}
+                        >
+                          <item.Icon className="h-4 w-4" />
+                          <span>{item.label}</span>
+                        </Link>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+                )}
+
+                {/* Pricing */}
+                <Link
+                  href={pricingItem.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
+                    isActive(pricingItem.href)
+                      ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
+                      : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
+                  )}
+                >
+                  <pricingItem.Icon className="h-5 w-5" />
+                  <span>{pricingItem.label}</span>
+                </Link>
 
                 {/* About */}
                 <Link

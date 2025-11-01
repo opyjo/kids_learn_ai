@@ -12,112 +12,84 @@ import {
   Users,
   BookOpen,
   TrendingUp,
-  DollarSign,
   Plus,
-  Settings,
   BarChart3,
+  Settings,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { SiteHeader } from "@/components/site-header";
 
-export default function AdminDashboard() {
-  // Mock data - replace with actual data from Supabase
+export default async function AdminDashboard() {
+  const supabase = await getSupabaseServerClient();
+
+  // Fetch total students
+  const { count: totalStudents } = await supabase
+    .from("profiles")
+    .select("*", { count: "exact", head: true });
+
+  // Fetch premium students
+  const { count: premiumStudents } = await supabase
+    .from("profiles")
+    .select("*", { count: "exact", head: true })
+    .eq("subscription_status", "premium");
+
+  // Fetch total lessons
+  const { count: totalLessons } = await supabase
+    .from("lessons")
+    .select("*", { count: "exact", head: true });
+
+  // Fetch total completed lessons
+  const { count: totalCompletedLessons } = await supabase
+    .from("completed_lessons")
+    .select("*", { count: "exact", head: true });
+
+  // Fetch recent students
+  const { data: recentStudentsData } = await supabase
+    .from("profiles")
+    .select("id, email, full_name, created_at, subscription_status")
+    .order("created_at", { ascending: false })
+    .limit(4);
+
+  const recentStudents = (recentStudentsData || []).map((student) => ({
+    id: student.id,
+    name: student.full_name || "Unknown User",
+    email: student.email,
+    joinDate: new Date(student.created_at).toLocaleDateString("en-CA"),
+    status: student.subscription_status === "premium" ? "premium" : "free",
+  }));
+
+  // Fetch lessons with completion counts
+  const { data: lessonsData } = await supabase
+    .from("lessons")
+    .select(`
+      id,
+      title,
+      difficulty_level,
+      order_index,
+      completed_lessons(count)
+    `)
+    .order("order_index", { ascending: true })
+    .limit(10);
+
+  const lessonStats = (lessonsData || []).map((lesson: any) => ({
+    id: lesson.order_index,
+    title: lesson.title,
+    completions: lesson.completed_lessons?.[0]?.count || 0,
+    avgTime: 0, // No time tracking yet
+    difficulty: lesson.difficulty_level,
+  }));
+
   const stats = {
-    totalStudents: 1247,
-    activeStudents: 892,
-    totalLessons: 15,
-    completedLessons: 8934,
-    revenue: 12450,
-    conversionRate: 23.5,
+    totalStudents: totalStudents || 0,
+    premiumStudents: premiumStudents || 0,
+    totalLessons: totalLessons || 0,
+    completedLessons: totalCompletedLessons || 0,
   };
-
-  const recentStudents = [
-    {
-      id: 1,
-      name: "Alex Johnson",
-      email: "alex@example.com",
-      joinDate: "2024-01-15",
-      status: "active",
-    },
-    {
-      id: 2,
-      name: "Sarah Chen",
-      email: "sarah@example.com",
-      joinDate: "2024-01-14",
-      status: "active",
-    },
-    {
-      id: 3,
-      name: "Mike Wilson",
-      email: "mike@example.com",
-      joinDate: "2024-01-13",
-      status: "inactive",
-    },
-    {
-      id: 4,
-      name: "Emma Davis",
-      email: "emma@example.com",
-      joinDate: "2024-01-12",
-      status: "active",
-    },
-  ];
-
-  const lessonStats = [
-    {
-      id: 1,
-      title: "Hello, Python!",
-      completions: 1156,
-      avgTime: 12,
-      difficulty: "beginner",
-    },
-    {
-      id: 2,
-      title: "Variables and Numbers",
-      completions: 987,
-      avgTime: 18,
-      difficulty: "beginner",
-    },
-    {
-      id: 3,
-      title: "Lists and Loops",
-      completions: 654,
-      avgTime: 25,
-      difficulty: "intermediate",
-    },
-    {
-      id: 4,
-      title: "Functions",
-      completions: 432,
-      avgTime: 32,
-      difficulty: "intermediate",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
-      <header className="bg-white dark:bg-gray-800 border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Image
-                src="/Logo.png"
-                alt="Kids Learn AI Logo"
-                width={40}
-                height={40}
-              />
-              <h1 className="text-xl font-semibold">Kids Learn AI — Admin</h1>
-            </div>
-            <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
-              </Button>
-              <Badge variant="default">Admin</Badge>
-            </div>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
@@ -132,7 +104,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -145,7 +117,7 @@ export default function AdminDashboard() {
                 {stats.totalStudents.toLocaleString()}
               </div>
               <p className="text-xs text-muted-foreground">
-                <span className="text-green-600">+12%</span> from last month
+                Registered accounts
               </p>
             </CardContent>
           </Card>
@@ -153,16 +125,18 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Active Students
+                Premium Students
               </CardTitle>
               <TrendingUp className="h-4 w-4 text-green-600" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {stats.activeStudents.toLocaleString()}
+                {stats.premiumStudents.toLocaleString()}
               </div>
               <p className="text-xs text-muted-foreground">
-                {Math.round((stats.activeStudents / stats.totalStudents) * 100)}
+                {stats.totalStudents > 0
+                  ? Math.round((stats.premiumStudents / stats.totalStudents) * 100)
+                  : 0}
                 % of total students
               </p>
             </CardContent>
@@ -179,24 +153,6 @@ export default function AdminDashboard() {
               <div className="text-2xl font-bold">{stats.totalLessons}</div>
               <p className="text-xs text-muted-foreground">
                 {stats.completedLessons.toLocaleString()} total completions
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                Monthly Revenue
-              </CardTitle>
-              <DollarSign className="h-4 w-4 text-green-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                ${stats.revenue.toLocaleString()}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                <span className="text-green-600">+{stats.conversionRate}%</span>{" "}
-                conversion rate
               </p>
             </CardContent>
           </Card>
@@ -238,7 +194,7 @@ export default function AdminDashboard() {
                         <div className="text-right">
                           <Badge
                             variant={
-                              student.status === "active"
+                              student.status === "premium"
                                 ? "default"
                                 : "secondary"
                             }
@@ -330,7 +286,6 @@ export default function AdminDashboard() {
                         <h4 className="font-medium">{lesson.title}</h4>
                         <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
                           <span>{lesson.completions} completions</span>
-                          <span>Avg: {lesson.avgTime}min</span>
                           <Badge variant="outline" className="text-xs">
                             {lesson.difficulty}
                           </Badge>
@@ -384,15 +339,15 @@ export default function AdminDashboard() {
                       <div className="flex items-center gap-2">
                         <Badge
                           variant={
-                            student.status === "active"
+                            student.status === "premium"
                               ? "default"
                               : "secondary"
                           }
                         >
                           {student.status}
                         </Badge>
-                        <Button variant="outline" size="sm">
-                          View Progress
+                        <Button variant="outline" size="sm" asChild>
+                          <Link href={`/dashboard`}>View Progress</Link>
                         </Button>
                       </div>
                     </div>
@@ -420,20 +375,33 @@ export default function AdminDashboard() {
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span>Daily Active Users</span>
-                      <span className="font-medium">342</span>
+                      <span>Total Students</span>
+                      <span className="font-medium">
+                        {stats.totalStudents}
+                      </span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Average Session Time</span>
-                      <span className="font-medium">24 minutes</span>
+                      <span>Premium Students</span>
+                      <span className="font-medium">
+                        {stats.premiumStudents}
+                      </span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Lesson Completion Rate</span>
-                      <span className="font-medium">78%</span>
+                      <span>Free Students</span>
+                      <span className="font-medium">
+                        {stats.totalStudents - stats.premiumStudents}
+                      </span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Student Retention (30d)</span>
-                      <span className="font-medium">65%</span>
+                      <span>Conversion Rate</span>
+                      <span className="font-medium">
+                        {stats.totalStudents > 0
+                          ? Math.round(
+                              (stats.premiumStudents / stats.totalStudents) * 100
+                            )
+                          : 0}
+                        %
+                      </span>
                     </div>
                   </div>
                 </CardContent>
@@ -441,32 +409,36 @@ export default function AdminDashboard() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Revenue Metrics</CardTitle>
+                  <CardTitle>Lesson Metrics</CardTitle>
                   <CardDescription>
-                    Subscription and payment analytics
+                    Lesson completion statistics
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span>Monthly Recurring Revenue</span>
+                      <span>Total Lessons</span>
+                      <span className="font-medium">{stats.totalLessons}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Total Completions</span>
                       <span className="font-medium">
-                        ${stats.revenue.toLocaleString()}
+                        {stats.completedLessons}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Premium Subscribers</span>
-                      <span className="font-medium">294</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Conversion Rate</span>
+                      <span>Avg Completions/Lesson</span>
                       <span className="font-medium">
-                        {stats.conversionRate}%
+                        {stats.totalLessons > 0
+                          ? Math.round(stats.completedLessons / stats.totalLessons)
+                          : 0}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Churn Rate</span>
-                      <span className="font-medium">5.2%</span>
+                      <span>Payment Verification</span>
+                      <Button variant="link" size="sm" asChild className="h-auto p-0">
+                        <Link href="/admin/payments">View Pending →</Link>
+                      </Button>
                     </div>
                   </div>
                 </CardContent>

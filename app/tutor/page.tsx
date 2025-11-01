@@ -6,10 +6,45 @@ import { PythonEditor } from "@/components/code/python-editor";
 import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code2, GripVertical } from "lucide-react";
+import { Code2, GripVertical, Lock } from "lucide-react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const TutorPage = () => {
+  const [isCheckingAccess, setIsCheckingAccess] = useState(true);
+  const [hasAccess, setHasAccess] = useState(false);
+  const router = useRouter();
+
+  // Check if user has premium access
+  useEffect(() => {
+    const checkAccess = async () => {
+      const supabase = getSupabaseBrowserClient();
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        setIsCheckingAccess(false);
+        setHasAccess(false);
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("subscription_status")
+        .eq("id", user.id)
+        .single();
+
+      const isPremium = profile?.subscription_status === "premium";
+      setHasAccess(isPremium);
+      setIsCheckingAccess(false);
+    };
+
+    checkAccess();
+  }, []);
   const [code, setCode] = useState("");
   const [showEditor, setShowEditor] = useState(false);
   const chatInterfaceRef = useRef<{
@@ -51,6 +86,51 @@ print(f"Happy coding, {name}!")
   const handleToggleEditor = () => {
     setShowEditor(!showEditor);
   };
+
+  // Show loading state while checking access
+  if (isCheckingAccess) {
+    return (
+      <MainLayout>
+        <div className="flex items-center justify-center min-h-[calc(100vh-5rem)]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      </MainLayout>
+    );
+  }
+
+  // Show access denied message for free users
+  if (!hasAccess) {
+    return (
+      <MainLayout>
+        <div className="flex items-center justify-center min-h-[calc(100vh-5rem)] px-4">
+          <Card className="max-w-md w-full">
+            <CardContent className="pt-6 text-center">
+              <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
+                <Lock className="h-8 w-8 text-accent" />
+              </div>
+              <h2 className="text-2xl font-bold mb-2">Premium Feature</h2>
+              <p className="text-muted-foreground mb-6">
+                The AI Tutor (BrightByte) is available exclusively to premium
+                subscribers. Upgrade now to get unlimited access to your
+                personal AI coding assistant!
+              </p>
+              <div className="space-y-3">
+                <Button asChild className="w-full" size="lg">
+                  <Link href="/pricing">Upgrade to Premium</Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full" size="lg">
+                  <Link href="/lessons">View Free Lessons</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>

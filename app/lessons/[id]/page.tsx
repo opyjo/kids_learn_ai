@@ -1,5 +1,5 @@
 import { LessonViewer } from "@/components/lessons/lesson-viewer";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface LessonPageProps {
@@ -25,6 +25,26 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   if (error || !lesson) {
     notFound();
+  }
+
+  // Check access for premium lessons (order_index > 3)
+  if (lesson.order_index > 3) {
+    // Fetch user profile to check subscription status
+    let userSubscription = "free";
+    if (user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("subscription_status")
+        .eq("id", user.id)
+        .single();
+      
+      userSubscription = profile?.subscription_status || "free";
+    }
+
+    // Redirect free users to pricing page
+    if (userSubscription === "free") {
+      redirect("/pricing");
+    }
   }
 
   // Transform the lesson data to match the expected format

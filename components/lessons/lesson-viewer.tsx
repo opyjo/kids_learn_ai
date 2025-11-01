@@ -467,8 +467,13 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                       </AlertDialogTitle>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel className="rounded-full">Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleConfirmUnmark} className="rounded-full">
+                      <AlertDialogCancel className="rounded-full">
+                        Cancel
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={handleConfirmUnmark}
+                        className="rounded-full"
+                      >
                         Yes, Unmark
                       </AlertDialogAction>
                     </AlertDialogFooter>

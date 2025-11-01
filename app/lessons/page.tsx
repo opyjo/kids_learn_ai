@@ -79,6 +79,11 @@ export default async function LessonsPage() {
     };
   });
 
+  // Filter lessons based on subscription status - free users only see first 3
+  const visibleLessons = userSubscription === "free" 
+    ? lessons.filter(l => l.order_index <= 3)
+    : lessons;
+
   const getStatusIcon = (status: string, progress: number) => {
     if (status === "completed") {
       return <CheckCircle className="h-5 w-5 text-green-600" />;
@@ -114,8 +119,8 @@ export default async function LessonsPage() {
     }
   };
 
-  const completedCount = lessons.filter((l) => l.status === "completed").length;
-  const overallProgress = lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0;
+  const completedCount = visibleLessons.filter((l) => l.status === "completed").length;
+  const overallProgress = visibleLessons.length > 0 ? (completedCount / visibleLessons.length) * 100 : 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary/5 dark:from-gray-900 dark:via-gray-900 dark:to-primary/10">
@@ -167,9 +172,9 @@ export default async function LessonsPage() {
                     </span>
                   </div>
                 </div>
-                <div className="text-left">
+                  <div className="text-left">
                   <div className="text-xs font-medium text-foreground">
-                    {completedCount}/{lessons.length}
+                    {completedCount}/{visibleLessons.length}
                   </div>
                   <div className="text-xs text-muted-foreground">Completed</div>
                 </div>
@@ -179,7 +184,7 @@ export default async function LessonsPage() {
         </div>
 
         {/* Lessons Grid - Compact Cards */}
-        {lessons.length === 0 ? (
+        {visibleLessons.length === 0 ? (
           <Card className="p-8 text-center">
             <CardContent className="pt-6">
               <h3 className="text-lg font-semibold text-foreground mb-2">
@@ -197,8 +202,8 @@ export default async function LessonsPage() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {lessons.map((lesson) => {
-              const isLocked = lesson.is_premium && userSubscription === "free";
+            {visibleLessons.map((lesson) => {
+              const isLocked = false; // No locked lessons shown for free users
 
               return (
                 <Card
@@ -307,7 +312,7 @@ export default async function LessonsPage() {
         )}
 
         {/* Compact Upgrade CTA */}
-        {userSubscription === "free" && lessons.some((l) => l.is_premium) && (
+        {userSubscription === "free" && lessons.length > 3 && (
           <Card className="mt-6 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
@@ -317,15 +322,15 @@ export default async function LessonsPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground">
-                      Unlock Premium Lessons
+                      Unlock All {lessons.length - 3} Premium Lessons + AI Tutor
                     </h3>
                     <p className="text-xs text-muted-foreground">
-                      Get access to advanced Python concepts & projects
+                      Get full access with teacher-led instruction for $79.99 CAD/month
                     </p>
                   </div>
                 </div>
-                <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 rounded-full">
-                  Upgrade Now
+                <Button asChild size="sm" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 rounded-full">
+                  <Link href="/pricing">Upgrade Now</Link>
                 </Button>
               </div>
             </CardContent>
