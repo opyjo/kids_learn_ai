@@ -47,26 +47,12 @@ export default function PricingPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary/5 dark:from-gray-900 dark:via-gray-900 dark:to-primary/10">
       <SiteHeader />
 
-      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-            Simple, Transparent Pricing
-          </Badge>
-          <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Start Learning Python & AI
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Follow the instructions below to subscribe and start your learning
-            journey.
-          </p>
-        </div>
-
+      <div className="container mx-auto px-4 py-0 sm:px-6 lg:px-8">
         {/* Payment Instructions - Only show if authenticated */}
         {isAuthenticated && (
           <div
             id="payment-instructions"
-            className="max-w-3xl mx-auto mt-16 scroll-mt-20"
+            className="max-w-3xl mx-auto scroll-mt-20"
           >
             <div className="text-center mb-8">
               <Badge className="mb-4 bg-green-50 text-green-700 border-green-300 rounded-full px-4 py-2">
