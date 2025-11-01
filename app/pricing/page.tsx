@@ -14,9 +14,6 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Check,
-  X,
-  Sparkles,
-  Crown,
   Mail,
   DollarSign,
   FileText,
@@ -45,44 +42,6 @@ export default function PricingPage() {
 
     checkAuth();
   }, []);
-  const freeTier = {
-    name: "Free",
-    price: 0,
-    period: "forever",
-    description: "Perfect to get started with Python basics",
-    features: [
-      "First 3 beginner lessons",
-      "Interactive code editor",
-      "Basic progress tracking",
-      "Community support",
-    ],
-    limitations: [
-      "No AI tutor access",
-      "Limited to 3 lessons",
-      "No certificates",
-      "No teacher support",
-    ],
-  };
-
-  const premiumTier = {
-    name: "Premium",
-    price: 79.99,
-    period: "month",
-    currency: "CAD",
-    description: "Full access with teacher-led instruction",
-    features: [
-      "All 15+ lessons (beginner to advanced)",
-      "Live teacher-led sessions",
-      "Unlimited AI tutor (BrightByte) access",
-      "Interactive code editor with advanced features",
-      "Detailed progress analytics",
-      "Completion certificates",
-      "Priority support",
-      "New lessons added regularly",
-      "Access to all future content",
-    ],
-    popular: true,
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary/5 dark:from-gray-900 dark:via-gray-900 dark:to-primary/10">
@@ -98,127 +57,9 @@ export default function PricingPage() {
             Start Learning Python & AI
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Choose the plan that fits your learning journey. Start free, upgrade
-            anytime.
+            Follow the instructions below to subscribe and start your learning
+            journey.
           </p>
-        </div>
-
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
-          {/* Free Tier */}
-          <Card className="relative border-2 hover:shadow-lg transition-all">
-            <CardHeader>
-              <div className="flex items-center justify-between mb-2">
-                <CardTitle className="text-2xl">{freeTier.name}</CardTitle>
-              </div>
-              <div className="mb-4">
-                <span className="text-4xl font-bold">${freeTier.price}</span>
-                <span className="text-muted-foreground ml-2">
-                  / {freeTier.period}
-                </span>
-              </div>
-              <CardDescription className="text-base">
-                {freeTier.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="w-full mb-6"
-              >
-                <Link href="/signup">Get Started Free</Link>
-              </Button>
-
-              <div className="space-y-3 mb-4">
-                <p className="text-sm font-semibold text-foreground">
-                  What's included:
-                </p>
-                {freeTier.features.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="space-y-3 pt-4 border-t">
-                <p className="text-sm font-semibold text-muted-foreground">
-                  Not included:
-                </p>
-                {freeTier.limitations.map((limitation, index) => (
-                  <div key={index} className="flex items-start gap-2">
-                    <X className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-muted-foreground">
-                      {limitation}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Premium Tier */}
-          <Card className="relative border-2 border-primary shadow-xl hover:shadow-2xl transition-all">
-            {/* Popular Badge */}
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-              <Badge className="bg-gradient-to-r from-primary to-accent text-white border-0 px-4 py-1">
-                <Sparkles className="h-3 w-3 mr-1" />
-                Most Popular
-              </Badge>
-            </div>
-
-            <CardHeader>
-              <div className="flex items-center justify-between mb-2">
-                <CardTitle className="text-2xl flex items-center gap-2">
-                  {premiumTier.name}
-                  <Crown className="h-5 w-5 text-yellow-500" />
-                </CardTitle>
-              </div>
-              <div className="mb-4">
-                <span className="text-4xl font-bold">${premiumTier.price}</span>
-                <span className="text-muted-foreground ml-2">
-                  {premiumTier.currency} / {premiumTier.period}
-                </span>
-              </div>
-              <CardDescription className="text-base">
-                {premiumTier.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {isAuthenticated ? (
-                <a href="#payment-instructions">
-                  <Button
-                    size="lg"
-                    className="w-full mb-6 bg-gradient-to-r from-primary to-accent hover:opacity-90"
-                  >
-                    Subscribe Now
-                  </Button>
-                </a>
-              ) : (
-                <Button
-                  asChild
-                  size="lg"
-                  className="w-full mb-6 bg-gradient-to-r from-primary to-accent hover:opacity-90"
-                >
-                  <Link href="/signup">Sign Up to Subscribe</Link>
-                </Button>
-              )}
-
-              <div className="space-y-3">
-                <p className="text-sm font-semibold text-foreground">
-                  Everything included:
-                </p>
-                {premiumTier.features.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Payment Instructions - Only show if authenticated */}

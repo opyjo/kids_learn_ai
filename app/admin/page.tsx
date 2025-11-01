@@ -62,13 +62,15 @@ export default async function AdminDashboard() {
   // Fetch lessons with completion counts
   const { data: lessonsData } = await supabase
     .from("lessons")
-    .select(`
+    .select(
+      `
       id,
       title,
       difficulty_level,
       order_index,
       completed_lessons(count)
-    `)
+    `
+    )
     .order("order_index", { ascending: true })
     .limit(10);
 
@@ -135,7 +137,9 @@ export default async function AdminDashboard() {
               </div>
               <p className="text-xs text-muted-foreground">
                 {stats.totalStudents > 0
-                  ? Math.round((stats.premiumStudents / stats.totalStudents) * 100)
+                  ? Math.round(
+                      (stats.premiumStudents / stats.totalStudents) * 100
+                    )
                   : 0}
                 % of total students
               </p>
@@ -376,9 +380,7 @@ export default async function AdminDashboard() {
                   <div className="space-y-4">
                     <div className="flex justify-between">
                       <span>Total Students</span>
-                      <span className="font-medium">
-                        {stats.totalStudents}
-                      </span>
+                      <span className="font-medium">{stats.totalStudents}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Premium Students</span>
@@ -397,7 +399,8 @@ export default async function AdminDashboard() {
                       <span className="font-medium">
                         {stats.totalStudents > 0
                           ? Math.round(
-                              (stats.premiumStudents / stats.totalStudents) * 100
+                              (stats.premiumStudents / stats.totalStudents) *
+                                100
                             )
                           : 0}
                         %
@@ -430,13 +433,20 @@ export default async function AdminDashboard() {
                       <span>Avg Completions/Lesson</span>
                       <span className="font-medium">
                         {stats.totalLessons > 0
-                          ? Math.round(stats.completedLessons / stats.totalLessons)
+                          ? Math.round(
+                              stats.completedLessons / stats.totalLessons
+                            )
                           : 0}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Payment Verification</span>
-                      <Button variant="link" size="sm" asChild className="h-auto p-0">
+                      <Button
+                        variant="link"
+                        size="sm"
+                        asChild
+                        className="h-auto p-0"
+                      >
                         <Link href="/admin/payments">View Pending →</Link>
                       </Button>
                     </div>
