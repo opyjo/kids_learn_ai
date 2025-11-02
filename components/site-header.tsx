@@ -131,19 +131,30 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
         return;
       }
 
-      const supabase = getSupabaseBrowserClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      try {
+        const supabase = getSupabaseBrowserClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
 
-      if (user) {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", user.id)
-          .single();
+        if (user) {
+          const { data: profile, error } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .single();
 
-        setIsAdmin(profile?.role === "admin");
+          if (error) {
+            console.error("Error fetching profile role:", error);
+            setIsAdmin(false);
+            return;
+          }
+
+          setIsAdmin(profile?.role === "admin");
+        }
+      } catch (error) {
+        console.error("Error in checkAdminRole:", error);
+        setIsAdmin(false);
       }
     };
 
@@ -297,14 +308,14 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
           {/* Pricing */}
           {renderNavLink(pricingItem)}
 
-          {/* About */}
-          {renderNavLink(aboutItem)}
-
           {/* Resources Dropdown */}
           {renderDropdown("Resources", Library, resourceItems)}
 
           {/* Blog */}
           {renderNavLink(blogItem)}
+
+          {/* About */}
+          {renderNavLink(aboutItem)}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -443,20 +454,6 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <span>{pricingItem.label}</span>
                 </Link>
 
-                {/* About */}
-                <Link
-                  href={aboutItem.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
-                    isActive(aboutItem.href)
-                      ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
-                      : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                  )}
-                >
-                  <aboutItem.Icon className="h-5 w-5" />
-                  <span>{aboutItem.label}</span>
-                </Link>
-
                 {/* Resources Collapsible */}
                 <Collapsible>
                   <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
@@ -497,6 +494,20 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                 >
                   <blogItem.Icon className="h-5 w-5" />
                   <span>{blogItem.label}</span>
+                </Link>
+
+                {/* About */}
+                <Link
+                  href={aboutItem.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
+                    isActive(aboutItem.href)
+                      ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
+                      : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
+                  )}
+                >
+                  <aboutItem.Icon className="h-5 w-5" />
+                  <span>{aboutItem.label}</span>
                 </Link>
 
                 <div className="mt-6 pt-4 border-t space-y-2">

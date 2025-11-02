@@ -46,11 +46,17 @@ export function UserMenu() {
         }
 
         // Fetch user profile
-        const { data: profile } = await supabase
+        const { data: profile, error } = await supabase
           .from("profiles")
           .select("*")
           .eq("id", authUser.id)
           .single();
+
+        if (error) {
+          console.error("Error fetching user profile:", error);
+          setLoading(false);
+          return;
+        }
 
         if (profile) {
           setUser({

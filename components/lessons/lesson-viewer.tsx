@@ -261,49 +261,64 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
           className="mb-6 flex items-center justify-between gap-4 flex-wrap"
           aria-label="Learning steps"
         >
-          <div className="flex items-center gap-3 flex-1 min-w-0">
-            <div className="flex items-center gap-3 rounded-2xl px-4 py-3 bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 ring-1 ring-blue-300/40 dark:ring-blue-700/40">
-              <span className="text-xl" role="img" aria-label="Read">
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 ring-1 ring-blue-300/40 dark:ring-blue-700/40">
+              <span className="text-lg sm:text-xl" role="img" aria-label="Read">
                 📖
               </span>
-              <span className="text-sm font-semibold text-blue-900 dark:text-blue-200">
+              <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 hidden sm:inline">
                 1. Read
               </span>
+              <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 sm:hidden">
+                1.
+              </span>
             </div>
-            <div className="flex items-center gap-3 rounded-2xl px-4 py-3 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 ring-1 ring-green-300/40 dark:ring-green-700/40">
-              <span className="text-xl" role="img" aria-label="Code">
+            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 ring-1 ring-green-300/40 dark:ring-green-700/40">
+              <span className="text-lg sm:text-xl" role="img" aria-label="Code">
                 🧑‍💻
               </span>
-              <span className="text-sm font-semibold text-emerald-900 dark:text-emerald-200">
+              <span className="text-xs sm:text-sm font-semibold text-emerald-900 dark:text-emerald-200 hidden sm:inline">
                 2. Code
               </span>
+              <span className="text-xs sm:text-sm font-semibold text-emerald-900 dark:text-emerald-200 sm:hidden">
+                2.
+              </span>
             </div>
-            <div className="flex items-center gap-3 rounded-2xl px-4 py-3 bg-gradient-to-r from-pink-100 to-fuchsia-100 dark:from-pink-900/30 dark:to-fuchsia-900/30 ring-1 ring-pink-300/40 dark:ring-pink-700/40">
-              <span className="text-xl" role="img" aria-label="Celebrate">
+            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-pink-100 to-fuchsia-100 dark:from-pink-900/30 dark:to-fuchsia-900/30 ring-1 ring-pink-300/40 dark:ring-pink-700/40">
+              <span
+                className="text-lg sm:text-xl"
+                role="img"
+                aria-label="Celebrate"
+              >
                 🎉
               </span>
-              <span className="text-sm font-semibold text-fuchsia-900 dark:text-fuchsia-200">
+              <span className="text-xs sm:text-sm font-semibold text-fuchsia-900 dark:text-fuchsia-200 hidden sm:inline">
                 3. Complete
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-fuchsia-900 dark:text-fuchsia-200 sm:hidden">
+                3.
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-2 w-full sm:w-auto sm:flex-shrink-0 mt-3 sm:mt-0">
             <Link
               href={`/lessons/${lesson.id - 1}`}
               aria-label="Go to previous lesson"
               data-slot="button"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-4 py-2 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all flex-1 sm:flex-none"
             >
               <ArrowLeft className="h-4 w-4" />
-              Previous Lesson
+              <span className="hidden sm:inline">Previous Lesson</span>
+              <span className="sm:hidden">Previous</span>
             </Link>
             <Link
               href={`/lessons/${lesson.id + 1}`}
               aria-label="Go to next lesson"
               data-slot="button"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all flex-1 sm:flex-none"
             >
-              Next Lesson 🚀
+              <span className="hidden sm:inline">Next Lesson 🚀</span>
+              <span className="sm:hidden">Next 🚀</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
