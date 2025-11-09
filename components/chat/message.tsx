@@ -5,16 +5,18 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Bot, User } from "lucide-react";
 import { MessageContent } from "./message-content";
+import { TutorCharacter } from "@/lib/constants/tutor-characters";
 
 interface MessageProps {
   id: string;
   role: "user" | "assistant";
   content: string;
   timestamp: number;
+  tutor?: TutorCharacter;
 }
 
 export const Message = memo(
-  ({ id, role, content, timestamp }: MessageProps) => {
+  ({ id, role, content, timestamp, tutor }: MessageProps) => {
     const isAssistant = role === "assistant";
 
     return (
@@ -46,7 +48,11 @@ export const Message = memo(
         <div className="flex-1 space-y-2 overflow-hidden min-w-0">
           <div className="flex items-center justify-between gap-2">
             <p className="text-sm font-bold text-foreground">
-              {isAssistant ? "🐍 BrightByte" : "You"}
+              {isAssistant
+                ? tutor
+                  ? `${tutor.emoji} ${tutor.name}`
+                  : "🤖 AI Tutor"
+                : "You"}
             </p>
             <time className="text-xs text-muted-foreground">
               {new Date(timestamp).toLocaleTimeString([], {
@@ -65,7 +71,8 @@ export const Message = memo(
     return (
       prevProps.id === nextProps.id &&
       prevProps.content === nextProps.content &&
-      prevProps.timestamp === nextProps.timestamp
+      prevProps.timestamp === nextProps.timestamp &&
+      prevProps.tutor?.id === nextProps.tutor?.id
     );
   }
 );

@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  BRIGHTBYTE_SYSTEM_PROMPT,
+  TUTOR_PROMPTS,
   FALLBACK_RESPONSES,
 } from "@/lib/constants/chatbot-prompts";
+import { TutorId, DEFAULT_TUTOR_ID } from "@/lib/constants/tutor-characters";
 import {
   checkContentSafety,
   sanitizeMessage,
   validateConversationLength,
   logSafetyEvent,
-  isPythonRelated,
+  isOnTopicForTutor,
   isRequestingCompleteSolution,
 } from "@/lib/utils/content-safety";
 
@@ -21,6 +22,22 @@ interface ChatMessage {
 
 // Rate limiting map (in production, use Redis or similar)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+
+// Helper function to get tutor-specific off-topic response
+const getOffTopicResponse = (tutorId: TutorId): string => {
+  switch (tutorId) {
+    case "brightbyte":
+      return "I only help with Python programming! What Python question can I help you with?";
+    case "mathbot":
+      return "I only help with mathematics! What math question can I help you with?";
+    case "scienceowl":
+      return "Hoot hoot! I only help with science questions! What would you like to explore today?";
+    case "artai":
+      return "I only help with creative projects! What would you like to create today?";
+    default:
+      return "I only help with Python programming! What Python question can I help you with?";
+  }
+};
 
 const checkRateLimit = (identifier: string): boolean => {
   const now = Date.now();
@@ -45,7 +62,7 @@ const checkRateLimit = (identifier: string): boolean => {
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { messages } = await req.json();
+    const { messages, tutorId = DEFAULT_TUTOR_ID } = await req.json();
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
@@ -53,6 +70,9 @@ export const POST = async (req: NextRequest) => {
         { status: 400 }
       );
     }
+
+    // Get the appropriate system prompt for the tutor
+    const systemPrompt = TUTOR_PROMPTS[tutorId as TutorId] || TUTOR_PROMPTS[DEFAULT_TUTOR_ID];
 
     // Check for API key
     const apiKey = process.env.OPENAI_API_KEY;
@@ -119,12 +139,15 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
-    // Check if message is Python-related
-    if (!isPythonRelated(sanitizedContent)) {
+    // Check if message is on-topic for the tutor
+    if (!isOnTopicForTutor(sanitizedContent, tutorId)) {
       logSafetyEvent("warn", "Off-topic question", sanitizedContent);
+      
+      // Get tutor-specific off-topic response
+      const offTopicResponse = getOffTopicResponse(tutorId);
       return NextResponse.json({
         role: "assistant",
-        content: FALLBACK_RESPONSES.offTopic,
+        content: offTopicResponse,
       });
     }
 
@@ -147,21 +170,21 @@ export const POST = async (req: NextRequest) => {
     const openAIMessages: ChatMessage[] = [
       {
         role: "system",
-        content: `${BRIGHTBYTE_SYSTEM_PROMPT}
+        content: `${systemPrompt}
 
 CRITICAL SAFETY REMINDER:
 - You are chatting with a child (ages 8-16)
-- ONLY discuss Python programming
+- ONLY discuss topics within your subject area
 - NEVER give complete solutions - guide them to learn
 - Use age-appropriate language
 - Be encouraging and supportive
-- If anything seems inappropriate, redirect to Python programming`,
+- If anything seems inappropriate, redirect to appropriate topics`,
       },
       ...sanitizedMessages,
     ];
 
     // Log allowed interaction
-    logSafetyEvent("allow", "Python question approved", sanitizedContent);
+    logSafetyEvent("allow", `${tutorId} question approved`, sanitizedContent);
 
     // Call OpenAI API with safety parameters
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -216,19 +239,20 @@ CRITICAL SAFETY REMINDER:
       });
     }
 
-    // Check if AI is staying on topic (Python)
+    // Check if AI is staying on topic for the tutor
     if (
       assistantMessage.content.length > 100 &&
-      !isPythonRelated(assistantMessage.content)
+      !isOnTopicForTutor(assistantMessage.content, tutorId)
     ) {
       logSafetyEvent(
         "warn",
         "AI response went off-topic",
         assistantMessage.content
       );
+      const offTopicResponse = getOffTopicResponse(tutorId);
       return NextResponse.json({
         role: "assistant",
-        content: FALLBACK_RESPONSES.offTopic,
+        content: offTopicResponse,
       });
     }
 

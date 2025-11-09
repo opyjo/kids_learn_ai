@@ -51,9 +51,9 @@ export const TeacherNotesViewer = ({
   lesson,
   teacherNote,
 }: Readonly<TeacherNotesViewerProps>) => {
-  const [tableOfContents, setTableOfContents] = useState<
-    TableOfContentsItem[]
-  >([]);
+  const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>(
+    []
+  );
   const [showToc, setShowToc] = useState(false);
 
   // Extract H1 headers from markdown content for table of contents
@@ -142,7 +142,11 @@ export const TeacherNotesViewer = ({
         >
           <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
             <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30 ring-1 ring-purple-300/40 dark:ring-purple-700/40">
-              <span className="text-lg sm:text-xl" role="img" aria-label="Teacher">
+              <span
+                className="text-lg sm:text-xl"
+                role="img"
+                aria-label="Teacher"
+              >
                 👨‍🏫
               </span>
               <span className="text-xs sm:text-sm font-semibold text-purple-900 dark:text-purple-200 hidden sm:inline">
@@ -153,7 +157,11 @@ export const TeacherNotesViewer = ({
               </span>
             </div>
             <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 ring-1 ring-blue-300/40 dark:ring-blue-700/40">
-              <span className="text-lg sm:text-xl" role="img" aria-label="Lesson">
+              <span
+                className="text-lg sm:text-xl"
+                role="img"
+                aria-label="Lesson"
+              >
                 📚
               </span>
               <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 hidden sm:inline">
@@ -202,56 +210,56 @@ export const TeacherNotesViewer = ({
           </div>
         </div>
 
-          {/* Table of Contents */}
-          {teacherNote && tableOfContents.length > 0 && (
-            <Card className="mb-6 rounded-2xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20">
-              <CardHeader
-                className="cursor-pointer hover:bg-muted/50 transition-colors rounded-t-2xl"
-                onClick={() => setShowToc(!showToc)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setShowToc(!showToc);
-                  }
-                }}
-                tabIndex={0}
-                role="button"
-                aria-expanded={showToc}
-                aria-label="Toggle table of contents"
-              >
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2 text-base">
-                    <List className="h-4 w-4 text-primary" />
-                    <span>Quick Navigation</span>
-                  </CardTitle>
-                  <Badge variant="outline" className="text-xs">
-                    {showToc ? "Hide" : "Show"} ({tableOfContents.length}{" "}
-                    sections)
-                  </Badge>
-                </div>
-              </CardHeader>
-              {showToc && (
-                <>
-                  <Separator />
-                  <CardContent className="pt-4">
-                    <nav className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {tableOfContents.map((item) => (
-                        <Button
-                          key={item.id}
-                          variant="ghost"
-                          className="justify-start h-auto py-2 px-3 text-left"
-                          onClick={() => handleScrollToSection(item.id)}
-                          aria-label={`Jump to ${item.text}`}
-                        >
-                          <span className="text-sm truncate">{item.text}</span>
-                        </Button>
-                      ))}
-                    </nav>
-                  </CardContent>
-                </>
-              )}
-            </Card>
-          )}
+        {/* Table of Contents */}
+        {teacherNote && tableOfContents.length > 0 && (
+          <Card className="mb-6 rounded-2xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20">
+            <CardHeader
+              className="cursor-pointer hover:bg-muted/50 transition-colors rounded-t-2xl"
+              onClick={() => setShowToc(!showToc)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setShowToc(!showToc);
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-expanded={showToc}
+              aria-label="Toggle table of contents"
+            >
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <List className="h-4 w-4 text-primary" />
+                  <span>Quick Navigation</span>
+                </CardTitle>
+                <Badge variant="outline" className="text-xs">
+                  {showToc ? "Hide" : "Show"} ({tableOfContents.length}{" "}
+                  sections)
+                </Badge>
+              </div>
+            </CardHeader>
+            {showToc && (
+              <>
+                <Separator />
+                <CardContent className="pt-4">
+                  <nav className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {tableOfContents.map((item) => (
+                      <Button
+                        key={item.id}
+                        variant="ghost"
+                        className="justify-start h-auto py-2 px-3 text-left"
+                        onClick={() => handleScrollToSection(item.id)}
+                        aria-label={`Jump to ${item.text}`}
+                      >
+                        <span className="text-sm truncate">{item.text}</span>
+                      </Button>
+                    ))}
+                  </nav>
+                </CardContent>
+              </>
+            )}
+          </Card>
+        )}
 
         {/* Main Content */}
         <div className="max-w-6xl mx-auto">
@@ -396,4 +404,3 @@ export const TeacherNotesViewer = ({
     </div>
   );
 };
-

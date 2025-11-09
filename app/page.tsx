@@ -11,7 +11,6 @@ import WhatYoullCreateSection from "@/components/home/WhatYoullCreateSection";
 import SampleLessonsSection from "@/components/home/SampleLessonsSection";
 import FAQTeaser from "@/components/home/FAQTeaser";
 import CTASection from "@/components/home/CTASection";
-import AnimatedChatbot from "@/components/home/animated-chatbot";
 
 const HomePage = () => {
   return (
@@ -25,7 +24,6 @@ const HomePage = () => {
       <SampleLessonsSection />
       <FAQTeaser />
       <CTASection />
-      <AnimatedChatbot />
     </MainLayout>
   );
 };

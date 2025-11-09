@@ -116,15 +116,13 @@ export default function PricingPage() {
                   <span className="text-sm">Practice games and challenges</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <X className="h-5 w-5 text-gray-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-muted-foreground">
-                    Advanced lessons
-                  </span>
+                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm">AI Tutors (4 subjects: Python, Math, Science, Arts)</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <X className="h-5 w-5 text-gray-400 mt-0.5 flex-shrink-0" />
                   <span className="text-sm text-muted-foreground">
-                    AI Tutor access
+                    Advanced lessons
                   </span>
                 </div>
                 <div className="flex items-start gap-3">
@@ -171,12 +169,6 @@ export default function PricingPage() {
                   <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
                   <span className="text-sm">
                     All advanced Python & AI lessons
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">
-                    24/7 AI Tutor (BrightByte) access
                   </span>
                 </div>
                 <div className="flex items-start gap-3">
@@ -281,10 +273,10 @@ export default function PricingPage() {
                     <tr>
                       <td className="p-4 flex items-center gap-2">
                         <Sparkles className="h-4 w-4 text-primary" />
-                        <span>24/7 AI Tutor (BrightByte)</span>
+                        <span>AI Tutors (Python, Math, Science, Arts)</span>
                       </td>
                       <td className="text-center p-4">
-                        <X className="h-5 w-5 text-gray-400 mx-auto" />
+                        <Check className="h-5 w-5 text-green-600 mx-auto" />
                       </td>
                       <td className="text-center p-4 bg-primary/5">
                         <Check className="h-5 w-5 text-green-600 mx-auto" />
@@ -552,14 +544,14 @@ export default function PricingPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  How does the AI tutor work?
+                  How do the AI tutors work?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  BrightByte, our AI tutor, is available 24/7 to premium
-                  members. Ask coding questions, get help debugging, learn new
-                  concepts, and practice with interactive examples—all through a
+                  We have 4 specialized AI tutors available 24/7 to all registered users - completely free! 
+                  Choose from BrightByte (Python), MathBot (Math), ScienceOwl (Science), or ArtAI (Creative Arts). 
+                  Ask questions, get help with homework, learn new concepts, and practice—all through a 
                   friendly chat interface.
                 </p>
               </CardContent>

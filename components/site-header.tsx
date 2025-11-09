@@ -25,7 +25,6 @@ import {
   HelpCircle,
   Info,
   Gamepad2,
-  Home,
   ChevronDown,
   GraduationCap,
   Library,
@@ -51,7 +50,6 @@ type SiteHeaderProps = {
 type NavItem = { href: string; label: string; Icon: LucideIcon };
 
 // Standalone items
-const homeItem: NavItem = { href: "/", label: "Home", Icon: Home };
 const dashboardItem: NavItem = {
   href: "/dashboard",
   label: "Dashboard",
@@ -297,9 +295,6 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
             isMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           )}
         >
-          {/* Home */}
-          {renderNavLink(homeItem)}
-
           {/* Learn Dropdown */}
           {renderDropdown("Learn", GraduationCap, learnItems)}
 
@@ -356,20 +351,6 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
               className="w-72 border-r border-white/20 bg-white/80 p-0 backdrop-blur-2xl dark:border-white/10 dark:bg-gray-950/80"
             >
               <div className="mt-6 flex flex-col gap-2 px-4 pb-6">
-                {/* Home */}
-                <Link
-                  href={homeItem.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
-                    isActive(homeItem.href)
-                      ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
-                      : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                  )}
-                >
-                  <homeItem.Icon className="h-5 w-5" />
-                  <span>{homeItem.label}</span>
-                </Link>
-
                 {/* Learn Collapsible */}
                 <Collapsible>
                   <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
