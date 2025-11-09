@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { SiteHeader } from "@/components/site-header";
+import { Footer } from "@/components/layouts/footer";
 import {
   Card,
   CardContent,
@@ -620,6 +621,7 @@ export default function PricingPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

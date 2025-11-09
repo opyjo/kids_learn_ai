@@ -35,6 +35,8 @@ import {
   Shield,
   DollarSign,
   CreditCard,
+  MessageSquare,
+  FileText,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
@@ -78,6 +80,7 @@ const learnItems: NavItem[] = [
 // Resources dropdown items
 const resourceItems: NavItem[] = [
   { href: "/faq", label: "FAQ", Icon: HelpCircle },
+  { href: "/contact", label: "Contact", Icon: MessageSquare },
   { href: "/get-thonny", label: "Get Thonny", Icon: Download },
   { href: "/get-trinket", label: "Get Trinket.io", Icon: ExternalLink },
 ];
@@ -85,6 +88,7 @@ const resourceItems: NavItem[] = [
 // Admin dropdown items
 const adminItems: NavItem[] = [
   { href: "/admin", label: "Dashboard", Icon: LayoutDashboard },
+  { href: "/admin/teacher-notes", label: "Teacher Notes", Icon: FileText },
   { href: "/admin/payments", label: "Payments", Icon: CreditCard },
 ];
 
