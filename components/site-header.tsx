@@ -9,6 +9,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
 import {
   Collapsible,
@@ -36,6 +39,7 @@ import {
   CreditCard,
   MessageSquare,
   FileText,
+  Brain,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
@@ -67,9 +71,22 @@ const pricingItem: NavItem = {
   Icon: DollarSign,
 };
 
+// Lessons sub-items (nested under Lessons in Learn dropdown)
+const lessonsSubItems: NavItem[] = [
+  {
+    href: "/lessons?course=python-foundations",
+    label: "Python Foundations for AI",
+    Icon: BookOpen,
+  },
+  {
+    href: "/lessons?course=ai-ml",
+    label: "AI & Machine Learning",
+    Icon: Brain,
+  },
+];
+
 // Learn dropdown items
 const learnItems: NavItem[] = [
-  { href: "/lessons", label: "Lessons", Icon: BookOpen },
   { href: "/tutor", label: "AI Tutor", Icon: Sparkles },
   { href: "/playground", label: "Playground", Icon: TerminalSquare },
   { href: "/games", label: "Games", Icon: Gamepad2 },
@@ -77,6 +94,7 @@ const learnItems: NavItem[] = [
 
 // Resources dropdown items
 const resourceItems: NavItem[] = [
+  { href: "/ai-playgrounds", label: "AI Playgrounds", Icon: Sparkles },
   { href: "/faq", label: "FAQ", Icon: HelpCircle },
   { href: "/contact", label: "Contact", Icon: MessageSquare },
   { href: "/get-thonny", label: "Get Thonny", Icon: Download },
@@ -267,36 +285,106 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
     <header
       className={cn(
         "relative sticky top-0 z-50 border-b transition-all duration-300",
-        "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-b-[28px] before:bg-gradient-to-r before:from-blue-500/5 before:via-transparent before:to-purple-500/5",
+        "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-b-[28px] before:bg-linear-to-r before:from-blue-500/5 before:via-transparent before:to-purple-500/5",
         isScrolled
           ? "border-white/10 bg-white/80 dark:border-white/10 dark:bg-gray-950/80 backdrop-blur-xl shadow-[0_20px_45px_-24px_rgba(15,23,42,0.55)]"
           : "border-white/5 bg-white/60 dark:border-white/5 dark:bg-gray-900/60 backdrop-blur-lg shadow-[0_8px_32px_rgba(15,23,42,0.12)]"
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-4 py-0.5">
-        <div className="flex items-center gap-3 flex-shrink-0">
+        <div className="flex items-center gap-3 shrink-0">
           {leftExtras}
           <Link
             href="/"
-            className="flex items-center group cursor-pointer flex-shrink-0"
+            className="flex items-center group cursor-pointer shrink-0"
             aria-label="Go to homepage"
           >
             <img
               src="/Logo.png"
               alt="Kids Learn AI Logo"
-              className="h-16 w-auto flex-shrink-0 object-contain"
+              className="h-16 w-auto shrink-0 object-contain"
             />
           </Link>
         </div>
 
         <nav
           className={cn(
-            "hidden md:flex items-center gap-2 rounded-full border border-white/40 dark:border-white/10 bg-white/30 dark:bg-gray-950/60 px-2 py-1 backdrop-blur-2xl shadow-[0_12px_34px_-22px_rgba(15,23,42,0.6)] transition-all duration-500 ease-out",
+            "relative hidden md:flex items-center gap-2 rounded-full",
+            // Glass container
+            "border border-white/25 dark:border-white/10 ring-1 ring-white/10",
+            "bg-linear-to-b from-white/70 to-white/40 dark:from-gray-950/70 dark:to-gray-900/40",
+            "px-2 py-1 backdrop-blur-2xl supports-backdrop-filter:backdrop-blur-2xl",
+            "shadow-[0_24px_60px_-32px_rgba(15,23,42,0.55)] transition-all duration-500 ease-out",
+            // Subtle inner ring glow
+            "before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:ring-1 before:ring-white/5",
             isMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           )}
         >
-          {/* Learn Dropdown */}
-          {renderDropdown("Learn", GraduationCap, learnItems)}
+          {/* Learn Dropdown with nested Lessons */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={cn(
+                  "group relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out cursor-pointer",
+                  "text-gray-700 hover:text-blue-600 dark:text-gray-300",
+                  "hover:bg-white/60 dark:hover:bg-gray-800/70 hover:shadow-[0_8px_20px_-12px_rgba(37,99,235,0.45)] hover:-translate-y-0.5",
+                  learnItems.some((item) => isActive(item.href)) ||
+                    lessonsSubItems.some((item) => isActive(item.href))
+                    ? "text-blue-600 bg-white/70 dark:bg-gray-800/70 shadow-[0_8px_24px_-12px_rgba(37,99,235,0.55)]"
+                    : ""
+                )}
+              >
+                <GraduationCap className="h-4 w-4" />
+                <span>Learn</span>
+                <ChevronDown className="h-3 w-3" />
+                <span
+                  className={cn(
+                    "pointer-events-none absolute inset-x-2 -bottom-1 h-0.5 origin-left scale-x-0 rounded bg-blue-600 transition-transform duration-200",
+                    "group-hover:scale-x-100",
+                    learnItems.some((item) => isActive(item.href)) ||
+                      lessonsSubItems.some((item) => isActive(item.href))
+                      ? "scale-x-100"
+                      : ""
+                  )}
+                />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-56">
+              {/* Lessons Submenu */}
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <BookOpen className="h-4 w-4" />
+                  <span>Lessons</span>
+                </DropdownMenuSubTrigger>
+                <DropdownMenuSubContent className="w-56">
+                  {lessonsSubItems.map((item) => (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <Link
+                        href={item.href}
+                        className="flex items-center gap-2 cursor-pointer"
+                      >
+                        <item.Icon className="h-4 w-4" />
+                        <span>{item.label}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuSubContent>
+              </DropdownMenuSub>
+
+              {/* Other Learn items */}
+              {learnItems.map((item) => (
+                <DropdownMenuItem key={item.href} asChild>
+                  <Link
+                    href={item.href}
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    <item.Icon className="h-4 w-4" />
+                    <span>{item.label}</span>
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {/* Dashboard (auth-only) */}
           {isAuthenticated && renderNavLink(dashboardItem)}
@@ -328,7 +416,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                 </Button>
                 <Button
                   asChild
-                  className="bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
+                  className="bg-linear-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
                 >
                   <Link href="/signup">Sign Up</Link>
                 </Button>
@@ -351,7 +439,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
               className="w-72 border-r border-white/20 bg-white/80 p-0 backdrop-blur-2xl dark:border-white/10 dark:bg-gray-950/80"
             >
               <div className="mt-6 flex flex-col gap-2 px-4 pb-6">
-                {/* Learn Collapsible */}
+                {/* Learn Collapsible with nested Lessons */}
                 <Collapsible>
                   <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
                     <div className="flex items-center gap-3">
@@ -361,6 +449,24 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     <ChevronDown className="h-4 w-4 transition-transform duration-200" />
                   </CollapsibleTrigger>
                   <CollapsibleContent className="mt-1 space-y-1 pl-6">
+                    {/* Lessons */}
+                    {lessonsSubItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                          "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors cursor-pointer",
+                          isActive(item.href)
+                            ? "bg-blue-50/80 text-blue-700 shadow-[0_6px_20px_-12px_rgba(37,99,235,0.45)] dark:bg-blue-950/40 dark:text-blue-200"
+                            : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
+                        )}
+                      >
+                        <item.Icon className="h-4 w-4" />
+                        <span>{item.label}</span>
+                      </Link>
+                    ))}
+
+                    {/* Other Learn items */}
                     {learnItems.map((item) => (
                       <Link
                         key={item.href}
@@ -509,7 +615,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                       </Button>
                       <Button
                         asChild
-                        className="w-full rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
+                        className="w-full rounded-full bg-linear-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
                       >
                         <Link href="/signup">Sign Up</Link>
                       </Button>

@@ -117,7 +117,9 @@ export default function PricingPage() {
                 </div>
                 <div className="flex items-start gap-3">
                   <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">AI Tutors (4 subjects: Python, Math, Science, Arts)</span>
+                  <span className="text-sm">
+                    AI Tutors (4 subjects: Python, Math, Science, Arts)
+                  </span>
                 </div>
                 <div className="flex items-start gap-3">
                   <X className="h-5 w-5 text-gray-400 mt-0.5 flex-shrink-0" />
@@ -461,7 +463,9 @@ export default function PricingPage() {
 
                 <div className="mt-6 flex gap-3">
                   <Button asChild className="flex-1">
-                    <Link href="/lessons">View Free Lessons</Link>
+                    <Link href="/lessons?course=python-foundations">
+                      View Free Lessons
+                    </Link>
                   </Button>
                   <Button asChild variant="outline" className="flex-1">
                     <Link href="/dashboard">Go to Dashboard</Link>
@@ -549,10 +553,12 @@ export default function PricingPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  We have 4 specialized AI tutors available 24/7 to all registered users - completely free! 
-                  Choose from BrightByte (Python), MathBot (Math), ScienceOwl (Science), or ArtAI (Creative Arts). 
-                  Ask questions, get help with homework, learn new concepts, and practice—all through a 
-                  friendly chat interface.
+                  We have 4 specialized AI tutors available 24/7 to all
+                  registered users - completely free! Choose from BrightByte
+                  (Python), MathBot (Math), ScienceOwl (Science), or ArtAI
+                  (Creative Arts). Ask questions, get help with homework, learn
+                  new concepts, and practice—all through a friendly chat
+                  interface.
                 </p>
               </CardContent>
             </Card>
@@ -593,7 +599,9 @@ export default function PricingPage() {
                   Subscribe Now
                 </Button>
                 <Button asChild size="lg" variant="outline">
-                  <Link href="/lessons">View Lessons</Link>
+                  <Link href="/lessons?course=python-foundations">
+                    View Lessons
+                  </Link>
                 </Button>
               </>
             ) : (
@@ -606,7 +614,9 @@ export default function PricingPage() {
                   <Link href="/signup">Get Started Free</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
-                  <Link href="/lessons">View Sample Lessons</Link>
+                  <Link href="/lessons?course=python-foundations">
+                    View Sample Lessons
+                  </Link>
                 </Button>
               </>
             )}

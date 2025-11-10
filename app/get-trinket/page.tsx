@@ -17,8 +17,8 @@ const GetTrinketPage = () => {
               Get Started with Trinket.io
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto text-pretty">
-              Trinket is a free online platform where you can write and run Python
-              code right in your web browser. No downloads needed!
+              Trinket is a free online platform where you can write and run
+              Python code right in your web browser. No downloads needed!
             </p>
           </div>
 
@@ -30,9 +30,9 @@ const GetTrinketPage = () => {
                 <h2 className="text-2xl font-bold mb-3">What is Trinket.io?</h2>
                 <p className="text-gray-700 text-lg leading-relaxed mb-4">
                   Trinket.io is an amazing online tool that lets you code Python
-                  directly in your web browser! It's perfect for students because
-                  you can code from any computer with internet access - at school,
-                  home, or the library.
+                  directly in your web browser! It's perfect for students
+                  because you can code from any computer with internet access -
+                  at school, home, or the library.
                 </p>
                 <div className="grid md:grid-cols-3 gap-4 mt-6">
                   <div className="bg-white p-4 rounded-xl">
@@ -70,10 +70,13 @@ const GetTrinketPage = () => {
               <div className="flex gap-4 items-start">
                 <div className="text-3xl">✨</div>
                 <div>
-                  <h3 className="font-bold text-lg mb-2">Perfect for Beginners</h3>
+                  <h3 className="font-bold text-lg mb-2">
+                    Perfect for Beginners
+                  </h3>
                   <p className="text-gray-700">
-                    Some of our advanced lessons use special Python libraries for
-                    graphics and interactive projects that work best in Trinket.
+                    Some of our advanced lessons use special Python libraries
+                    for graphics and interactive projects that work best in
+                    Trinket.
                   </p>
                 </div>
               </div>
@@ -92,8 +95,8 @@ const GetTrinketPage = () => {
                 <div>
                   <h3 className="font-bold text-lg mb-2">Share Your Work</h3>
                   <p className="text-gray-700">
-                    Easily share your projects with friends, family, and teachers
-                    with a simple link.
+                    Easily share your projects with friends, family, and
+                    teachers with a simple link.
                   </p>
                 </div>
               </div>
@@ -123,10 +126,7 @@ const GetTrinketPage = () => {
                       trinket.io
                     </a>
                   </p>
-                  <Button
-                    asChild
-                    className="bg-green-600 hover:bg-green-700"
-                  >
+                  <Button asChild className="bg-green-600 hover:bg-green-700">
                     <a
                       href="https://trinket.io"
                       target="_blank"
@@ -159,9 +159,7 @@ const GetTrinketPage = () => {
                   <h3 className="font-bold text-lg mb-2">
                     Fill in Your Information
                   </h3>
-                  <p className="text-gray-700">
-                    You'll need to provide:
-                  </p>
+                  <p className="text-gray-700">You'll need to provide:</p>
                   <ul className="list-disc list-inside mt-2 text-gray-700 space-y-1 ml-4">
                     <li>A username (this can be anything you like!)</li>
                     <li>Your email address</li>
@@ -210,13 +208,13 @@ const GetTrinketPage = () => {
               <h2 className="text-2xl font-bold mb-3">Is Trinket Free?</h2>
               <p className="text-gray-700 mb-4 max-w-2xl mx-auto">
                 <strong>Yes!</strong> Trinket has a free account that works
-                perfectly for all our lessons. You can write and run Python code,
-                save your projects, and share them with others.
+                perfectly for all our lessons. You can write and run Python
+                code, save your projects, and share them with others.
               </p>
               <p className="text-gray-600 text-sm max-w-2xl mx-auto">
-                They also offer a paid version with extra features, but you don't
-                need it for our courses. The free account has everything you need
-                to learn and create!
+                They also offer a paid version with extra features, but you
+                don't need it for our courses. The free account has everything
+                you need to learn and create!
               </p>
             </div>
           </Card>
@@ -262,8 +260,8 @@ const GetTrinketPage = () => {
                 <div>
                   <h3 className="font-bold mb-1">Explore and Experiment</h3>
                   <p className="text-sm text-gray-600">
-                    Try changing the code to see what happens. That's the best way
-                    to learn!
+                    Try changing the code to see what happens. That's the best
+                    way to learn!
                   </p>
                 </div>
               </div>
@@ -278,8 +276,8 @@ const GetTrinketPage = () => {
               <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
                 If you're having trouble creating your Trinket account or using
                 the platform, don't worry! Ask a parent, teacher, or guardian to
-                help you. You can also check out Trinket's help center for guides
-                and tutorials.
+                help you. You can also check out Trinket's help center for
+                guides and tutorials.
               </p>
               <div className="flex gap-4 justify-center flex-wrap">
                 <Button variant="outline" asChild>
@@ -302,11 +300,13 @@ const GetTrinketPage = () => {
           <Card className="p-8 bg-gradient-to-br from-green-600 to-blue-600 text-white">
             <div className="text-center">
               <div className="text-4xl mb-4">🎉</div>
-              <h2 className="text-3xl font-bold mb-4">Ready to Start Coding?</h2>
+              <h2 className="text-3xl font-bold mb-4">
+                Ready to Start Coding?
+              </h2>
               <p className="text-lg mb-6 text-green-50 max-w-2xl mx-auto">
-                Now that you know how to set up your Trinket account, you're ready
-                to tackle our advanced Python lessons! Create games, draw amazing
-                graphics, and build interactive projects.
+                Now that you know how to set up your Trinket account, you're
+                ready to tackle our advanced Python lessons! Create games, draw
+                amazing graphics, and build interactive projects.
               </p>
               <div className="flex gap-4 justify-center flex-wrap">
                 <Button
@@ -314,7 +314,9 @@ const GetTrinketPage = () => {
                   size="lg"
                   className="bg-white text-green-600 hover:bg-green-50"
                 >
-                  <Link href="/lessons">Browse Lessons</Link>
+                  <Link href="/lessons?course=python-foundations">
+                    Browse Lessons
+                  </Link>
                 </Button>
                 <Button
                   asChild
@@ -334,4 +336,3 @@ const GetTrinketPage = () => {
 };
 
 export default GetTrinketPage;
-

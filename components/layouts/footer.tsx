@@ -29,7 +29,7 @@ export const Footer = () => {
             <ul className="space-y-3 text-background/70">
               <li>
                 <Link
-                  href="/lessons"
+                  href="/lessons?course=python-foundations"
                   className="hover:text-background transition-colors"
                 >
                   All Lessons
@@ -44,7 +44,10 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-background transition-colors">
+                <Link
+                  href="/blog"
+                  className="hover:text-background transition-colors"
+                >
                   Blog
                 </Link>
               </li>

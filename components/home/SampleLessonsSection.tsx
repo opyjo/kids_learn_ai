@@ -46,7 +46,9 @@ const SampleLessonsSection = () => {
                 ))}
               </div>
             </div>
-            <CardTitle className="text-2xl">Teach the Bot to Say Hi 🤖</CardTitle>
+            <CardTitle className="text-2xl">
+              Teach the Bot to Say Hi 🤖
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <CardDescription className="mb-6 text-base leading-relaxed">
@@ -55,7 +57,9 @@ const SampleLessonsSection = () => {
               time someone joins your project.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-primary/30 transition-colors">
-              <div className="text-foreground">cheers = ["You're awesome!", "Let's build! 💡"]</div>
+              <div className="text-foreground">
+                cheers = ["You're awesome!", "Let's build! 💡"]
+              </div>
               <div className="text-accent">print</div>
               <div className="text-foreground">(cheers[0])</div>
             </div>
@@ -93,11 +97,14 @@ const SampleLessonsSection = () => {
               sounds happy or needs a pep talk—no complex math required.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-accent/30 transition-colors">
-              <div className="text-foreground">words = ["yay", "amazing", "ugh"]</div>
+              <div className="text-foreground">
+                words = ["yay", "amazing", "ugh"]
+              </div>
               <div className="text-accent mt-2">for</div>
               <div className="text-foreground">word in words:</div>
               <div className="pl-4 text-foreground">
-                <span className="text-accent">print</span>(word, "→ happy" if word != "ugh" else "→ needs a boost")
+                <span className="text-accent">print</span>(word, "→ happy" if
+                word != "ugh" else "→ needs a boost")
               </div>
             </div>
             <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
@@ -131,10 +138,14 @@ const SampleLessonsSection = () => {
               co-authoring safe, uplifting adventures.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-primary/30 transition-colors">
-              <div className="text-foreground">prompt = "Tell a brave story about a kid inventor"</div>
+              <div className="text-foreground">
+                prompt = "Tell a brave story about a kid inventor"
+              </div>
               <div className="text-accent mt-2">print</div>
               <div className="text-foreground">("🤖 Story Idea:", prompt)</div>
-              <div className="text-muted-foreground mt-2"># Guide the AI to add safe, uplifting twists</div>
+              <div className="text-muted-foreground mt-2">
+                # Guide the AI to add safe, uplifting twists
+              </div>
             </div>
             <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="h-4 w-4 text-primary" />
@@ -145,7 +156,7 @@ const SampleLessonsSection = () => {
       </div>
 
       <div className="text-center mt-12">
-        <Link href="/lessons">
+        <Link href="/lessons?course=python-foundations">
           <Button
             size="lg"
             variant="outline"

@@ -16,10 +16,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Fetch lesson from Supabase by order_index
+  // Fetch lesson from Supabase by order_index with course info
   const { data: lesson, error } = await supabase
     .from("lessons")
-    .select("*")
+    .select("*, courses(slug, title)")
     .eq("order_index", Number.parseInt(params.id))
     .single();
 
@@ -62,5 +62,11 @@ export default async function LessonPage({ params }: LessonPageProps) {
     requires_trinket: lesson.requires_trinket || false,
   };
 
-  return <LessonViewer lesson={transformedLesson} userId={user?.id} />;
+  return (
+    <LessonViewer 
+      lesson={transformedLesson} 
+      userId={user?.id}
+      courseSlug={lesson.courses?.slug}
+    />
+  );
 }

@@ -396,7 +396,7 @@ export default async function DashboardPage() {
                 className="w-full justify-start rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
                 asChild
               >
-                <Link href="/lessons">
+                <Link href="/lessons?course=python-foundations">
                   <Code className="mr-2 h-4 w-4" />
                   Browse All Lessons
                 </Link>

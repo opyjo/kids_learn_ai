@@ -1,20 +1,25 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Clock, Play, Lock, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
-export default async function LessonsPage() {
+interface LessonsPageProps {
+  searchParams: Promise<{ course?: string }>;
+}
+
+export default async function LessonsPage({ searchParams }: LessonsPageProps) {
   const supabase = await getSupabaseServerClient();
+  const params = await searchParams;
+  const courseSlug = params.course;
+
+  // Redirect to default course if no course specified
+  if (!courseSlug) {
+    redirect("/lessons?course=python-foundations");
+  }
 
   // Check if user is authenticated (optional for testing)
   const {
@@ -29,15 +34,35 @@ export default async function LessonsPage() {
       .select("subscription_status")
       .eq("id", user.id)
       .single();
-    
+
     userSubscription = profile?.subscription_status || "free";
   }
 
-  // Fetch lessons from Supabase
-  const { data: lessonsData, error } = await supabase
-    .from("lessons")
+  // Fetch all courses for the selector
+  const { data: coursesData } = await supabase
+    .from("courses")
     .select("*")
     .order("order_index", { ascending: true });
+
+  // Get the course ID if a course slug is specified
+  let selectedCourseId = null;
+  if (courseSlug && coursesData) {
+    const selectedCourse = coursesData.find((c) => c.slug === courseSlug);
+    selectedCourseId = selectedCourse?.id;
+  }
+
+  // Fetch lessons from Supabase with course info
+  let lessonsQuery = supabase
+    .from("lessons")
+    .select("*, courses(id, title, slug, description)")
+    .order("order_index", { ascending: true });
+
+  // Filter by course_id if specified
+  if (selectedCourseId) {
+    lessonsQuery = lessonsQuery.eq("course_id", selectedCourseId);
+  }
+
+  const { data: lessonsData, error } = await lessonsQuery;
 
   if (error) {
     console.error("Error fetching lessons:", error);
@@ -50,7 +75,7 @@ export default async function LessonsPage() {
       .from("completed_lessons")
       .select("lesson_id")
       .eq("student_id", user.id);
-    
+
     completedData = data;
   }
 
@@ -80,31 +105,10 @@ export default async function LessonsPage() {
   });
 
   // Filter lessons based on subscription status - free users only see first 3
-  const visibleLessons = userSubscription === "free" 
-    ? lessons.filter(l => l.order_index <= 3)
-    : lessons;
-
-  const getStatusIcon = (status: string, progress: number) => {
-    if (status === "completed") {
-      return <CheckCircle className="h-5 w-5 text-green-600" />;
-    }
-    return <div className="h-5 w-5 rounded-full border-2 border-gray-300" />;
-  };
-
-  const getStatusBadge = (status: string) => {
-    if (status === "completed") {
-      return (
-        <Badge className="bg-green-100 text-green-800 rounded-full">
-          Completed
-        </Badge>
-      );
-    }
-    return (
-      <Badge variant="outline" className="rounded-full">
-        Not Started
-      </Badge>
-    );
-  };
+  const visibleLessons =
+    userSubscription === "free"
+      ? lessons.filter((l) => l.order_index <= 3)
+      : lessons;
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -119,8 +123,18 @@ export default async function LessonsPage() {
     }
   };
 
-  const completedCount = visibleLessons.filter((l) => l.status === "completed").length;
-  const overallProgress = visibleLessons.length > 0 ? (completedCount / visibleLessons.length) * 100 : 0;
+  const completedCount = visibleLessons.filter(
+    (l) => l.status === "completed"
+  ).length;
+  const overallProgress =
+    visibleLessons.length > 0
+      ? (completedCount / visibleLessons.length) * 100
+      : 0;
+
+  // Get current course info
+  const currentCourse = coursesData?.find((c) => c.slug === courseSlug);
+  const pageTitle = currentCourse?.title || "Lessons";
+  const pageDescription = currentCourse?.description || "";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary/5 dark:from-gray-900 dark:via-gray-900 dark:to-primary/10">
@@ -132,13 +146,11 @@ export default async function LessonsPage() {
           <div className="flex items-start justify-between mb-4">
             <div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
-                Python Lessons
+                {pageTitle}
               </h1>
-              <p className="text-sm text-muted-foreground">
-                Master Python programming step by step
-              </p>
+              <p className="text-sm text-muted-foreground">{pageDescription}</p>
             </div>
-            
+
             {/* Compact Progress Badge */}
             <div className="flex items-center gap-3 bg-card dark:bg-card rounded-full px-4 py-2 shadow-sm border border-border">
               <div className="flex items-center gap-2">
@@ -161,7 +173,9 @@ export default async function LessonsPage() {
                       strokeWidth="3"
                       fill="none"
                       strokeDasharray={`${2 * Math.PI * 16}`}
-                      strokeDashoffset={`${2 * Math.PI * 16 * (1 - overallProgress / 100)}`}
+                      strokeDashoffset={`${
+                        2 * Math.PI * 16 * (1 - overallProgress / 100)
+                      }`}
                       className="text-primary transition-all duration-500"
                       strokeLinecap="round"
                     />
@@ -172,7 +186,7 @@ export default async function LessonsPage() {
                     </span>
                   </div>
                 </div>
-                  <div className="text-left">
+                <div className="text-left">
                   <div className="text-xs font-medium text-foreground">
                     {completedCount}/{visibleLessons.length}
                   </div>
@@ -217,11 +231,13 @@ export default async function LessonsPage() {
                   }`}
                 >
                   {/* Gradient Accent Bar */}
-                  <div className={`absolute top-0 left-0 right-0 h-1 ${
-                    lesson.status === "completed"
-                      ? "bg-gradient-to-r from-green-500 to-emerald-500"
-                      : "bg-gradient-to-r from-primary to-accent"
-                  }`} />
+                  <div
+                    className={`absolute top-0 left-0 right-0 h-1 ${
+                      lesson.status === "completed"
+                        ? "bg-gradient-to-r from-green-500 to-emerald-500"
+                        : "bg-gradient-to-r from-primary to-accent"
+                    }`}
+                  />
 
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">
@@ -251,12 +267,17 @@ export default async function LessonsPage() {
                           <div className="flex items-center gap-1 flex-shrink-0">
                             <Badge
                               variant="outline"
-                              className={`text-xs px-1.5 py-0 ${getDifficultyColor(lesson.difficulty)}`}
+                              className={`text-xs px-1.5 py-0 ${getDifficultyColor(
+                                lesson.difficulty
+                              )}`}
                             >
                               {lesson.difficulty}
                             </Badge>
                             {lesson.is_premium && (
-                              <Badge variant="outline" className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500">
+                              <Badge
+                                variant="outline"
+                                className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500"
+                              >
                                 Pro
                               </Badge>
                             )}
@@ -282,7 +303,12 @@ export default async function LessonsPage() {
 
                           {/* Action Button */}
                           {isLocked && lesson.status === "not_started" ? (
-                            <Button variant="ghost" size="sm" disabled className="text-xs h-7">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              disabled
+                              className="text-xs h-7"
+                            >
                               <Lock className="h-3 w-3 mr-1" />
                               Locked
                             </Button>
@@ -297,7 +323,10 @@ export default async function LessonsPage() {
                               }`}
                             >
                               <Link href={`/lessons/${lesson.id}`}>
-                                {lesson.status === "completed" ? "Review" : "Start"} →
+                                {lesson.status === "completed"
+                                  ? "Review"
+                                  : "Start"}{" "}
+                                →
                               </Link>
                             </Button>
                           )}
@@ -325,11 +354,16 @@ export default async function LessonsPage() {
                       Unlock All {lessons.length - 3} Premium Lessons + AI Tutor
                     </h3>
                     <p className="text-xs text-muted-foreground">
-                      Get full access with teacher-led instruction for $79.99 CAD/month
+                      Get full access with teacher-led instruction for $79.99
+                      CAD/month
                     </p>
                   </div>
                 </div>
-                <Button asChild size="sm" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 rounded-full">
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-gradient-to-r from-primary to-accent hover:opacity-90 rounded-full"
+                >
                   <Link href="/pricing">Upgrade Now</Link>
                 </Button>
               </div>

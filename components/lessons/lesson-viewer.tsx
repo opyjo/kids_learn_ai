@@ -16,9 +16,17 @@ import { ArrowLeft, ArrowRight, CheckCircle, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { PythonEditor } from "@/components/code/python-editor";
 import { TrinketEditor } from "@/components/code/trinket-editor";
+import { AIPlayground } from "@/components/lessons/ai-playground";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Sparkles } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useToast } from "@/components/ui/use-toast";
@@ -49,9 +57,14 @@ interface Lesson {
 interface LessonViewerProps {
   lesson: Lesson;
   userId?: string;
+  courseSlug?: string;
 }
 
-export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
+export function LessonViewer({
+  lesson,
+  userId,
+  courseSlug,
+}: Readonly<LessonViewerProps>) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentCode, setCurrentCode] = useState(lesson.starter_code);
@@ -232,7 +245,14 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
               aria-label="Go back to all lessons"
               title="Back to lessons"
             >
-              <Link href="/lessons" aria-label="Back to lessons">
+              <Link
+                href={
+                  courseSlug
+                    ? `/lessons?course=${courseSlug}`
+                    : `/lessons?course=python-foundations`
+                }
+                aria-label="Back to lessons"
+              >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Link>
@@ -255,101 +275,60 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
         }
       />
 
-      <div className="container mx-auto px-4 py-6">
-        {/* Playful progress stepper with navigation */}
+      <div className="max-w-[1600px] mx-auto px-4 py-6">
         <div
-          className="mb-6 flex items-center justify-between gap-4 flex-wrap"
-          aria-label="Learning steps"
+          className={
+            courseSlug === "ai-ml"
+              ? "grid lg:grid-cols-[1fr,400px] gap-6 items-start"
+              : "grid lg:grid-cols-2 gap-8 items-start"
+          }
         >
-          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 ring-1 ring-blue-300/40 dark:ring-blue-700/40">
-              <span className="text-lg sm:text-xl" role="img" aria-label="Read">
-                📖
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 hidden sm:inline">
-                1. Read
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 sm:hidden">
-                1.
-              </span>
-            </div>
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 ring-1 ring-green-300/40 dark:ring-green-700/40">
-              <span className="text-lg sm:text-xl" role="img" aria-label="Code">
-                🧑‍💻
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-emerald-900 dark:text-emerald-200 hidden sm:inline">
-                2. Code
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-emerald-900 dark:text-emerald-200 sm:hidden">
-                2.
-              </span>
-            </div>
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-pink-100 to-fuchsia-100 dark:from-pink-900/30 dark:to-fuchsia-900/30 ring-1 ring-pink-300/40 dark:ring-pink-700/40">
-              <span
-                className="text-lg sm:text-xl"
-                role="img"
-                aria-label="Celebrate"
-              >
-                🎉
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-fuchsia-900 dark:text-fuchsia-200 hidden sm:inline">
-                3. Complete
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-fuchsia-900 dark:text-fuchsia-200 sm:hidden">
-                3.
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 w-full sm:w-auto sm:flex-shrink-0 mt-3 sm:mt-0">
-            <Link
-              href={`/lessons/${lesson.id - 1}`}
-              aria-label="Go to previous lesson"
-              data-slot="button"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all flex-1 sm:flex-none"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Previous Lesson</span>
-              <span className="sm:hidden">Previous</span>
-            </Link>
-            <Link
-              href={`/lessons/${lesson.id + 1}`}
-              aria-label="Go to next lesson"
-              data-slot="button"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all flex-1 sm:flex-none"
-            >
-              <span className="hidden sm:inline">Next Lesson 🚀</span>
-              <span className="sm:hidden">Next 🚀</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Lesson Content */}
           <Card className="flex flex-col rounded-2xl border-0 shadow-2xl ring-2 ring-primary/20 dark:ring-primary/30 max-h-[calc(100vh-140px)]">
-            <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 backdrop-blur-sm rounded-t-2xl border-b-2 border-border flex-shrink-0 py-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="flex items-center gap-2 text-lg">
+            <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 backdrop-blur-sm rounded-t-2xl border-b-2 border-border flex-shrink-0 py-3">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <CardTitle className="flex items-center gap-2 text-base">
                     <div
-                      className="p-1.5 bg-gradient-to-br from-primary to-accent rounded-xl"
+                      className="p-1 bg-gradient-to-br from-primary to-accent rounded-lg shrink-0"
                       aria-hidden="true"
                     >
-                      <BookOpen className="h-4 w-4 text-white" />
+                      <BookOpen className="h-3.5 w-3.5 text-white" />
                     </div>
                     <span className="tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
                       Lesson {lesson.order_index}: {lesson.title} ✨
                     </span>
                   </CardTitle>
-                  <CardDescription className="text-muted-foreground text-sm mt-2 ml-11">
+                  <CardDescription className="text-muted-foreground text-xs mt-1.5 ml-8">
                     {lesson.description}
                   </CardDescription>
                 </div>
-                {isCompleted && (
-                  <Badge className="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 dark:from-green-900/50 dark:to-emerald-900/50 dark:text-green-300 flex items-center gap-1.5 px-4 py-2 text-sm font-semibold">
-                    <CheckCircle className="h-4 w-4" />
-                    Completed
-                  </Badge>
-                )}
+                <div className="flex items-center gap-2 shrink-0">
+                  {isCompleted && (
+                    <Badge className="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 dark:from-green-900/50 dark:to-emerald-900/50 dark:text-green-300 flex items-center gap-1 px-2 py-1 text-xs font-semibold">
+                      <CheckCircle className="h-3 w-3" />
+                      Done
+                    </Badge>
+                  )}
+                  <div className="flex items-center gap-1">
+                    <Link
+                      href={`/lessons/${lesson.id - 1}`}
+                      aria-label="Go to previous lesson"
+                      className="inline-flex items-center justify-center rounded-lg p-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
+                      title="Previous Lesson"
+                    >
+                      <ArrowLeft className="h-3.5 w-3.5" />
+                    </Link>
+                    <Link
+                      href={`/lessons/${lesson.id + 1}`}
+                      aria-label="Go to next lesson"
+                      className="inline-flex items-center justify-center rounded-lg p-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
+                      title="Next Lesson"
+                    >
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
               </div>
             </CardHeader>
 
@@ -500,24 +479,147 @@ export function LessonViewer({ lesson, userId }: Readonly<LessonViewerProps>) {
                     : "Lesson not completed"}
                 </output>
               </div>
+
+              {/* Lesson Navigation */}
+              <div className="mt-6 pt-6 border-t-2 border-border flex items-center justify-center gap-3">
+                <Link
+                  href={`/lessons/${lesson.id - 1}`}
+                  aria-label="Go to previous lesson"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  <span>Previous</span>
+                </Link>
+                <Link
+                  href={`/lessons/${lesson.id + 1}`}
+                  aria-label="Go to next lesson"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all"
+                >
+                  <span>Next Lesson</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </CardContent>
           </Card>
 
-          <div className="sticky top-24 self-start w-full">
-            {lesson.requires_trinket ? (
-              <TrinketEditor
-                initialCode={lesson.starter_code}
-                className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
-              />
-            ) : (
-              <PythonEditor
-                initialCode={lesson.starter_code}
-                onCodeChange={handleCodeChange}
-                onRunComplete={handleRunComplete}
-                className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
-              />
-            )}
-          </div>
+          {courseSlug === "python-foundations" ? (
+            <div className="sticky top-24 self-start w-full">
+              {lesson.requires_trinket ? (
+                <TrinketEditor
+                  initialCode={lesson.starter_code}
+                  className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
+                />
+              ) : (
+                <PythonEditor
+                  initialCode={lesson.starter_code}
+                  onCodeChange={handleCodeChange}
+                  onRunComplete={handleRunComplete}
+                  className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
+                />
+              )}
+            </div>
+          ) : courseSlug === "ai-ml" ? (
+            <div className="w-full sticky top-24">
+              <Card className="rounded-xl shadow-2xl border-0 ring-1 ring-primary/20 dark:ring-primary/30 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/5 backdrop-blur-sm">
+                <Accordion
+                  type="single"
+                  collapsible
+                  defaultValue="activities"
+                  className="w-full"
+                >
+                  {/* Activities & Instructions Accordion Item */}
+                  <AccordionItem value="activities" className="border-b-0">
+                    <AccordionTrigger className="relative px-4 py-3 hover:bg-primary/5 hover:no-underline before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-l-md before:bg-transparent data-[state=open]:before:bg-primary">
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="h-4 w-4 text-primary" />
+                        <span className="text-base font-semibold tracking-tight">
+                          Activities & Instructions
+                        </span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-4">
+                      <div className="max-h-[400px] overflow-y-auto pb-2">
+                        <div
+                          className="space-y-2 text-foreground text-sm leading-relaxed"
+                          style={{
+                            whiteSpace: "pre-wrap",
+                            fontFamily: "inherit",
+                            lineHeight: "1.55",
+                          }}
+                        >
+                          {lesson.starter_code
+                            .replace(/^<!--[\s\S]*?-->/, "")
+                            .trim()
+                            .split("\n")
+                            .map((line, index) => {
+                              // Convert URLs to clickable links
+                              const urlRegex = /(https?:\/\/[^\s]+)/g;
+                              const parts = line.split(urlRegex);
+
+                              // Check if line is a heading
+                              const isHeading =
+                                line.trim().startsWith("🎮") ||
+                                line.trim().startsWith("📸") ||
+                                line.trim().startsWith("🎵") ||
+                                line.trim().startsWith("📊") ||
+                                line.trim().startsWith("🤔") ||
+                                line.trim().startsWith("✅") ||
+                                line.trim().startsWith("📝") ||
+                                line.trim().match(/^[A-Z\s]+:/);
+
+                              return (
+                                <div
+                                  key={index}
+                                  className={
+                                    isHeading
+                                      ? "font-bold text-base text-primary/90 mt-4 mb-1 tracking-tight"
+                                      : ""
+                                  }
+                                >
+                                  {parts.map((part, i) =>
+                                    urlRegex.test(part) ? (
+                                      <a
+                                        key={i}
+                                        href={part}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium text-blue-700 hover:bg-blue-50 dark:text-blue-300 dark:hover:bg-blue-900/30 underline underline-offset-2 cursor-pointer"
+                                      >
+                                        {part}
+                                      </a>
+                                    ) : (
+                                      <span key={i}>{part}</span>
+                                    )
+                                  )}
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  {/* AI Playgrounds Accordion Item */}
+                  <AccordionItem value="playgrounds" className="border-b-0">
+                    <AccordionTrigger className="relative px-4 py-3 hover:bg-primary/5 hover:no-underline before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-l-md before:bg-transparent data-[state=open]:before:bg-primary">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="h-4 w-4 text-primary" />
+                        <span className="text-base font-semibold tracking-tight">
+                          AI Playgrounds
+                        </span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-4 pb-2">
+                      <AIPlayground
+                        lessonOrderIndex={lesson.order_index}
+                        hideHeader
+                      />
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </Card>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
