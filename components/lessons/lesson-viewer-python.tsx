@@ -244,8 +244,8 @@ export function LessonViewer({
       >
         {courseSlug === "ai-ml" ? (
           <div className="space-y-6 max-w-7xl mx-auto">
-            {/* Tabs Navigation */}
-            <Card className="rounded-xl shadow-lg border-0 bg-card/95 backdrop-blur-sm overflow-hidden">
+            {/* Sticky Tabs Navigation */}
+            <Card className="sticky top-20 z-40 rounded-xl shadow-lg border-0 bg-card/95 backdrop-blur-sm overflow-hidden">
               <CardHeader className="pb-3 px-4 pt-4">
                 <Tabs defaultValue="content" className="w-full">
                   <TabsList className="grid w-full grid-cols-3 h-10 bg-muted/60">
@@ -912,6 +912,7 @@ export function LessonViewer({
                 </div>
               </CardContent>
             </Card>
+
 
             {courseSlug === "python-foundations" ? (
               <div className="sticky top-24 self-start w-full">

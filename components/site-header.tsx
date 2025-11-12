@@ -392,8 +392,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <GraduationCap className="h-4 w-4 mr-2" />
                   Learn
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-popover border border-border shadow-xl rounded-xl">
-                  <div className="w-[600px] p-6 grid grid-cols-2 gap-5 bg-muted/50">
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-border shadow-xl rounded-xl overflow-visible">
+                  <div className="w-[600px] p-6 pb-8 grid grid-cols-2 gap-5 rounded-lg">
                     <MegaMenuSection
                       title="Lessons"
                       icon={BookOpen}
@@ -428,8 +428,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     <Shield className="h-4 w-4 mr-2" />
                     Admin
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-popover border border-border shadow-xl rounded-xl">
-                    <div className="w-[400px] p-6 bg-muted/50">
+                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-border shadow-xl rounded-xl overflow-visible">
+                    <div className="w-[400px] p-6 pb-8 rounded-lg">
                       <div className="space-y-1">
                         {NAV_ITEMS.admin.map((item) => (
                           <MegaMenuItem
@@ -458,8 +458,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <Library className="h-4 w-4 mr-2" />
                   Resources
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-popover border border-border shadow-xl rounded-xl">
-                  <div className="w-[500px] p-6 grid grid-cols-2 gap-3 bg-muted/50">
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-border shadow-xl rounded-xl overflow-visible">
+                  <div className="w-[500px] p-6 pb-8 grid grid-cols-2 gap-3 rounded-lg">
                     {NAV_ITEMS.resources.map((item) => (
                       <MegaMenuItem
                         key={item.href}
