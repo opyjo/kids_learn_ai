@@ -38,6 +38,7 @@ interface TeacherNote {
 interface TeacherNotesViewerProps {
   lesson: Lesson;
   teacherNote: TeacherNote | null;
+  courseSlug?: string;
 }
 
 interface TableOfContentsItem {
@@ -49,6 +50,7 @@ interface TableOfContentsItem {
 export const TeacherNotesViewer = ({
   lesson,
   teacherNote,
+  courseSlug,
 }: Readonly<TeacherNotesViewerProps>) => {
   const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>(
     []
@@ -168,7 +170,7 @@ export const TeacherNotesViewer = ({
               <span className="sm:hidden">Back</span>
             </Link>
             <Link
-              href={`/lessons/${lesson.order_index}`}
+              href={`/lessons/${courseSlug || "python-foundations"}/${lesson.order_index}`}
               aria-label="View student lesson"
               data-slot="button"
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all flex-1 sm:flex-none"

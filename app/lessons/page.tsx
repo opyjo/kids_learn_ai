@@ -84,6 +84,11 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
     completedData?.map((c) => c.lesson_id) || []
   );
 
+  // Helper function to check if a lesson is free (first 3 lessons per course)
+  const isFreeLesson = (orderIndex: number): boolean => {
+    return orderIndex >= 1 && orderIndex <= 3;
+  };
+
   // Transform lessons data and merge with completion status
   const lessons = (lessonsData || []).map((lesson) => {
     const isCompleted = completedLessonIds.has(lesson.id);
@@ -101,13 +106,14 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
       estimated_time: estimatedTime,
       status: isCompleted ? "completed" : "not_started",
       progress: isCompleted ? 100 : 0,
+      course_slug: lesson.courses?.slug || courseSlug, // Include course slug for links
     };
   });
 
-  // Filter lessons based on subscription status - free users only see first 3
+  // Filter lessons based on subscription status - free users only see first 3 per course
   const visibleLessons =
     userSubscription === "free"
-      ? lessons.filter((l) => l.order_index <= 3)
+      ? lessons.filter((l) => isFreeLesson(l.order_index))
       : lessons;
 
   const getDifficultyColor = (difficulty: string) => {
@@ -135,6 +141,7 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
   const currentCourse = coursesData?.find((c) => c.slug === courseSlug);
   const pageTitle = currentCourse?.title || "Lessons";
   const pageDescription = currentCourse?.description || "";
+  const isComingSoon = currentCourse?.is_coming_soon || false;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary/5 dark:from-gray-900 dark:via-gray-900 dark:to-primary/10">
@@ -145,60 +152,98 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
         <div className="mb-6">
           <div className="flex items-start justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
-                {pageTitle}
-              </h1>
+              <div className="flex items-center gap-3 mb-1">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  {pageTitle}
+                </h1>
+                {isComingSoon && (
+                  <Badge className="bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500">
+                    Coming Soon
+                  </Badge>
+                )}
+              </div>
               <p className="text-sm text-muted-foreground">{pageDescription}</p>
             </div>
 
-            {/* Compact Progress Badge */}
-            <div className="flex items-center gap-3 bg-card dark:bg-card rounded-full px-4 py-2 shadow-sm border border-border">
-              <div className="flex items-center gap-2">
-                <div className="relative w-10 h-10">
-                  <svg className="transform -rotate-90 w-10 h-10">
-                    <circle
-                      cx="20"
-                      cy="20"
-                      r="16"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      fill="none"
-                      className="text-muted"
-                    />
-                    <circle
-                      cx="20"
-                      cy="20"
-                      r="16"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      fill="none"
-                      strokeDasharray={`${2 * Math.PI * 16}`}
-                      strokeDashoffset={`${
-                        2 * Math.PI * 16 * (1 - overallProgress / 100)
-                      }`}
-                      className="text-primary transition-all duration-500"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-xs font-bold text-primary">
-                      {Math.round(overallProgress)}%
-                    </span>
+            {/* Compact Progress Badge - Only show if not coming soon */}
+            {!isComingSoon && (
+              <div className="flex items-center gap-3 bg-card dark:bg-card rounded-full px-4 py-2 shadow-sm border border-border">
+                <div className="flex items-center gap-2">
+                  <div className="relative w-10 h-10">
+                    <svg className="transform -rotate-90 w-10 h-10">
+                      <circle
+                        cx="20"
+                        cy="20"
+                        r="16"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        fill="none"
+                        className="text-muted"
+                      />
+                      <circle
+                        cx="20"
+                        cy="20"
+                        r="16"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        fill="none"
+                        strokeDasharray={`${2 * Math.PI * 16}`}
+                        strokeDashoffset={`${
+                          2 * Math.PI * 16 * (1 - overallProgress / 100)
+                        }`}
+                        className="text-primary transition-all duration-500"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-xs font-bold text-primary">
+                        {Math.round(overallProgress)}%
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="text-left">
-                  <div className="text-xs font-medium text-foreground">
-                    {completedCount}/{visibleLessons.length}
+                  <div className="text-left">
+                    <div className="text-xs font-medium text-foreground">
+                      {completedCount}/{visibleLessons.length}
+                    </div>
+                    <div className="text-xs text-muted-foreground">Completed</div>
                   </div>
-                  <div className="text-xs text-muted-foreground">Completed</div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
-        {/* Lessons Grid - Compact Cards */}
-        {visibleLessons.length === 0 ? (
+        {/* Coming Soon Message */}
+        {isComingSoon ? (
+          <Card className="p-12 text-center border-2 border-dashed border-yellow-200 dark:border-yellow-800 bg-yellow-50/50 dark:bg-yellow-950/20">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-16 h-16 rounded-full bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center">
+                  <Clock className="h-8 w-8 text-yellow-600 dark:text-yellow-400" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">
+                    Coming Soon!
+                  </h3>
+                  <p className="text-muted-foreground max-w-md">
+                    We're working hard to bring you amazing web development lessons.
+                    Check back soon for exciting content on building websites and web
+                    applications!
+                  </p>
+                </div>
+                <div className="mt-4">
+                  <Button asChild variant="outline">
+                    <Link href="/lessons?course=python-foundations">
+                      Explore Other Courses
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          /* Lessons Grid - Compact Cards */
+          visibleLessons.length === 0 ? (
           <Card className="p-8 text-center">
             <CardContent className="pt-6">
               <h3 className="text-lg font-semibold text-foreground mb-2">
@@ -322,7 +367,7 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
                                   : "bg-gradient-to-r from-primary to-accent hover:opacity-90"
                               }`}
                             >
-                              <Link href={`/lessons/${lesson.id}`}>
+                              <Link href={`/lessons/${lesson.course_slug}/${lesson.id}`}>
                                 {lesson.status === "completed"
                                   ? "Review"
                                   : "Start"}{" "}
@@ -338,10 +383,11 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
               );
             })}
           </div>
+        )
         )}
 
         {/* Compact Upgrade CTA */}
-        {userSubscription === "free" && lessons.length > 3 && (
+        {!isComingSoon && userSubscription === "free" && lessons.length > 3 && (
           <Card className="mt-6 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">

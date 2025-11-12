@@ -306,7 +306,7 @@ export function LessonViewer({
                               )}
                               <div className="flex items-center gap-1.5">
                                 <Link
-                                  href={`/lessons/${lesson.id - 1}`}
+                                  href={`/lessons/${courseSlug}/${lesson.order_index - 1}`}
                                   aria-label="Go to previous lesson"
                                   className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
                                   title="Previous Lesson"
@@ -315,7 +315,7 @@ export function LessonViewer({
                                   <span className="hidden sm:inline">Previous</span>
                                 </Link>
                                 <Link
-                                  href={`/lessons/${lesson.id + 1}`}
+                                  href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
                                   aria-label="Go to next lesson"
                                   className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
                                   title="Next Lesson"
@@ -493,7 +493,7 @@ export function LessonViewer({
                           {/* Lesson Navigation */}
                           <div className="mt-6 pt-6 border-t-2 border-border flex items-center justify-center gap-3">
                             <Link
-                              href={`/lessons/${lesson.id - 1}`}
+                              href={`/lessons/${courseSlug}/${lesson.order_index - 1}`}
                               aria-label="Go to previous lesson"
                               className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
                             >
@@ -501,7 +501,7 @@ export function LessonViewer({
                               <span>Previous</span>
                             </Link>
                             <Link
-                              href={`/lessons/${lesson.id + 1}`}
+                              href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
                               aria-label="Go to next lesson"
                               className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all"
                             >
@@ -719,7 +719,7 @@ export function LessonViewer({
                     )}
                     <div className="flex items-center gap-1.5">
                       <Link
-                        href={`/lessons/${lesson.id - 1}`}
+                        href={`/lessons/${courseSlug}/${lesson.order_index - 1}`}
                         aria-label="Go to previous lesson"
                         className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
                         title="Previous Lesson"
@@ -728,7 +728,7 @@ export function LessonViewer({
                         <span className="hidden sm:inline">Previous</span>
                       </Link>
                       <Link
-                        href={`/lessons/${lesson.id + 1}`}
+                        href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
                         aria-label="Go to next lesson"
                         className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
                         title="Next Lesson"
@@ -894,7 +894,7 @@ export function LessonViewer({
                 {/* Lesson Navigation */}
                 <div className="mt-6 pt-6 border-t-2 border-border flex items-center justify-center gap-3">
                   <Link
-                    href={`/lessons/${lesson.id - 1}`}
+                    href={`/lessons/${courseSlug}/${lesson.order_index - 1}`}
                     aria-label="Go to previous lesson"
                     className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
                   >
@@ -902,7 +902,7 @@ export function LessonViewer({
                     <span>Previous</span>
                   </Link>
                   <Link
-                    href={`/lessons/${lesson.id + 1}`}
+                    href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
                     aria-label="Go to next lesson"
                     className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all"
                   >

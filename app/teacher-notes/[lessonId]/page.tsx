@@ -33,10 +33,10 @@ export default async function TeacherNotesPage({
     redirect("/");
   }
 
-  // Fetch lesson from Supabase by order_index
+  // Fetch lesson from Supabase by order_index with course info
   const { data: lesson, error: lessonError } = await supabase
     .from("lessons")
-    .select("*")
+    .select("*, courses(slug, title)")
     .eq("order_index", Number.parseInt(params.lessonId))
     .single();
 
@@ -62,7 +62,11 @@ export default async function TeacherNotesPage({
   };
 
   return (
-    <TeacherNotesViewer lesson={transformedLesson} teacherNote={teacherNote} />
+    <TeacherNotesViewer 
+      lesson={transformedLesson} 
+      teacherNote={teacherNote}
+      courseSlug={lesson.courses?.slug}
+    />
   );
 }
 

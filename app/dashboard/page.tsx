@@ -83,7 +83,8 @@ export default async function DashboardPage() {
           id,
           title,
           difficulty_level,
-          order_index
+          order_index,
+          courses (slug)
         )
       `
     )
@@ -107,7 +108,8 @@ export default async function DashboardPage() {
           id,
           title,
           difficulty_level,
-          order_index
+          order_index,
+          courses (slug)
         )
       `,
         { count: "exact" }
@@ -125,6 +127,7 @@ export default async function DashboardPage() {
       title: string;
       difficulty_level: string;
       order_index: number;
+      courses: { slug: string } | null;
     } | null;
   };
 
@@ -365,6 +368,8 @@ export default async function DashboardPage() {
                         >
                           <Link
                             href={`/lessons/${
+                              lessonActivity.lesson?.courses?.slug || "python-foundations"
+                            }/${
                               lessonActivity.lesson?.order_index ?? 1
                             }`}
                           >

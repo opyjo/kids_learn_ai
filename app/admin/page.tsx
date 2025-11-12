@@ -68,7 +68,8 @@ export default async function AdminDashboard() {
       title,
       difficulty_level,
       order_index,
-      completed_lessons(count)
+      completed_lessons(count),
+      courses(slug)
     `
     )
     .order("order_index", { ascending: true })
@@ -80,6 +81,7 @@ export default async function AdminDashboard() {
     completions: lesson.completed_lessons?.[0]?.count || 0,
     avgTime: 0, // No time tracking yet
     difficulty: lesson.difficulty_level,
+    courseSlug: lesson.courses?.slug || "python-foundations",
   }));
 
   const stats = {
@@ -302,7 +304,7 @@ export default async function AdminDashboard() {
                           </Link>
                         </Button>
                         <Button variant="outline" size="sm" asChild>
-                          <Link href={`/lessons/${lesson.id}`}>Preview</Link>
+                          <Link href={`/lessons/${lesson.courseSlug}/${lesson.id}`}>Preview</Link>
                         </Button>
                       </div>
                     </div>

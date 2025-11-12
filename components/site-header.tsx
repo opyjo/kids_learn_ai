@@ -39,6 +39,7 @@ import {
   MessageSquare,
   FileText,
   Brain,
+  Code,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
@@ -46,6 +47,7 @@ import { UserMenu } from "@/components/user/user-menu";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import type { Session } from "@supabase/supabase-js";
+import { Badge } from "@/components/ui/badge";
 
 type SiteHeaderProps = {
   leftExtras?: ReactNode;
@@ -56,6 +58,7 @@ type NavItem = {
   label: string;
   Icon: LucideIcon;
   description?: string;
+  comingSoon?: boolean;
 };
 
 // Navigation data
@@ -80,6 +83,13 @@ const NAV_ITEMS = {
       label: "AI & Machine Learning",
       Icon: Brain,
       description: "Explore AI and ML concepts",
+    },
+    {
+      href: "/lessons?course=web-development",
+      label: "Web Development",
+      Icon: Code,
+      description: "Build websites and web applications",
+      comingSoon: true,
     },
   ],
   learn: [
@@ -190,8 +200,18 @@ const MegaMenuItem = ({
         isActive && "bg-primary/10 border-primary/20"
       )}
     >
-      <div className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
-        {item.label}
+      <div className="flex items-center gap-2">
+        <div className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+          {item.label}
+        </div>
+        {item.comingSoon && (
+          <Badge
+            variant="outline"
+            className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500"
+          >
+            Coming Soon
+          </Badge>
+        )}
       </div>
       {item.description && (
         <div className="text-xs text-muted-foreground line-clamp-2">
@@ -259,7 +279,15 @@ const MobileNavLink = ({
     )}
   >
     <item.Icon className="h-4 w-4" />
-    <span>{item.label}</span>
+    <span className="flex-1">{item.label}</span>
+    {item.comingSoon && (
+      <Badge
+        variant="outline"
+        className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500"
+      >
+        Coming Soon
+      </Badge>
+    )}
   </Link>
 );
 

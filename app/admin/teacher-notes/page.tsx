@@ -39,7 +39,7 @@ export default async function TeacherNotesPage() {
   // Fetch all lessons
   const { data: lessons } = await supabase
     .from("lessons")
-    .select("id, title, description, difficulty_level, order_index, is_premium")
+    .select("id, title, description, difficulty_level, order_index, is_premium, courses(slug)")
     .order("order_index", { ascending: true });
 
   // Fetch all teacher notes
@@ -256,7 +256,7 @@ export default async function TeacherNotesPage() {
                               className="text-xs h-7 rounded-full"
                             >
                               <Link
-                                href={`/lessons/${lesson.order_index}`}
+                                href={`/lessons/${(lesson.courses as { slug: string } | null)?.slug || "python-foundations"}/${lesson.order_index}`}
                                 aria-label={`View student lesson for ${lesson.title}`}
                               >
                                 <BookOpen className="mr-1 h-3 w-3" />
@@ -346,7 +346,7 @@ export default async function TeacherNotesPage() {
                             className="text-xs h-7 rounded-full"
                           >
                             <Link
-                              href={`/lessons/${lesson.order_index}`}
+                              href={`/lessons/${(lesson.courses as { slug: string } | null)?.slug || "python-foundations"}/${lesson.order_index}`}
                               aria-label={`View student lesson for ${lesson.title}`}
                             >
                               <BookOpen className="mr-1 h-3 w-3" />
