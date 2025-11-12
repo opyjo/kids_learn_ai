@@ -23,7 +23,7 @@ export default async function DashboardPage() {
 
   if (!supabaseUrl || !supabaseAnonKey) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-orange-500/5 dark:from-purple-600/8 dark:via-pink-600/8 dark:to-orange-600/8 flex items-center justify-center p-6">
         <Card className="max-w-xl w-full">
           <CardHeader>
             <CardTitle>Supabase not configured</CardTitle>
@@ -215,7 +215,7 @@ export default async function DashboardPage() {
       : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+    <div className="min-h-screen bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-orange-500/5 dark:from-purple-600/8 dark:via-pink-600/8 dark:to-orange-600/8">
       <SiteHeader />
 
       <div className="mx-auto w-full max-w-6xl px-4 py-8">

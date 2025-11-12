@@ -92,7 +92,7 @@ export default async function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-600/5 via-purple-600/5 to-blue-600/5 dark:from-slate-700/8 dark:via-purple-700/8 dark:to-blue-700/8">
       <SiteHeader />
 
       <div className="container mx-auto px-4 py-8">

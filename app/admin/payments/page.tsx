@@ -218,7 +218,7 @@ export default function AdminPaymentsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-500/5 via-teal-500/5 to-cyan-500/5 dark:from-emerald-600/8 dark:via-teal-600/8 dark:to-cyan-600/8">
       <SiteHeader />
       
       <div className="max-w-7xl mx-auto p-6">

@@ -126,7 +126,7 @@ export default function AIPlaygroundsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary/5 via-background to-accent/5">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-purple-500/5 dark:from-cyan-600/8 dark:via-blue-600/8 dark:to-purple-600/8">
       <SiteHeader />
 
       <main className="max-w-6xl mx-auto px-4 py-12">

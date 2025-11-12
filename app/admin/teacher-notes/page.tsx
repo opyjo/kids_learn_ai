@@ -80,7 +80,7 @@ export default async function TeacherNotesPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary/5 dark:from-gray-900 dark:via-gray-900 dark:to-primary/10">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-500/5 via-blue-500/5 to-purple-500/5 dark:from-indigo-600/8 dark:via-blue-600/8 dark:to-purple-600/8">
       <SiteHeader />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

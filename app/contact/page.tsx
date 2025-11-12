@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-500/5 via-pink-500/5 to-purple-500/5 dark:from-orange-600/8 dark:via-pink-600/8 dark:to-purple-600/8">
       <SiteHeader />
       <main className="container mx-auto px-4 py-6 max-w-6xl">
         {/* Hero Section */}

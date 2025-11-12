@@ -6,7 +6,7 @@ import { MainLayout } from "@/components/layouts/main-layout";
 const GetThonnyPage = () => {
   return (
     <MainLayout>
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-orange-50">
+      <div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-sky-500/5 to-orange-500/5 dark:from-blue-600/8 dark:via-sky-600/8 dark:to-orange-600/8">
         <main className="container mx-auto px-4 py-12 max-w-5xl">
           {/* Hero Section */}
           <div className="text-center mb-16">

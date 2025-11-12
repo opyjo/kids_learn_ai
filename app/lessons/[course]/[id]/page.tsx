@@ -24,11 +24,22 @@ export default async function LessonPage({ params }: LessonPageProps) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Fetch lesson from Supabase by course slug and order_index
+  // First, get the course by slug
+  const { data: course } = await supabase
+    .from("courses")
+    .select("id, slug, title")
+    .eq("slug", courseSlug)
+    .single();
+
+  if (!course) {
+    notFound();
+  }
+
+  // Then fetch lesson from Supabase by course_id and order_index
   const { data: lesson, error } = await supabase
     .from("lessons")
     .select("*, courses(slug, title)")
-    .eq("courses.slug", courseSlug)
+    .eq("course_id", course.id)
     .eq("order_index", lessonOrderIndex)
     .single();
 

@@ -188,7 +188,7 @@ export function PythonEditor({
 
   return (
     <Card className={`flex flex-col ${className}`}>
-      <CardHeader className="bg-white/70 dark:bg-gray-900/60 backdrop-blur-sm border-b shrink-0">
+      <CardHeader className="bg-card border-b shrink-0">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-3 text-base">
             <div className="flex items-center gap-2">

@@ -247,7 +247,7 @@ export function LessonViewer({
         {courseSlug === "ai-ml" ? (
           <div className="space-y-6 max-w-7xl mx-auto">
             {/* Sticky Tabs Navigation */}
-            <Card className="sticky top-20 z-40 rounded-xl shadow-lg border-0 bg-card/95 backdrop-blur-sm overflow-hidden">
+            <Card className="sticky top-20 z-40 rounded-xl shadow-lg border overflow-hidden">
               <CardHeader className="pb-3 px-4 pt-4">
                 <Tabs defaultValue="content" className="w-full">
                   <TabsList className="grid w-full grid-cols-3 h-10 bg-muted/60">
@@ -280,8 +280,8 @@ export function LessonViewer({
                     className="mt-0 focus-visible:outline-none data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:slide-in-from-top-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=inactive]:slide-out-to-top-2 duration-200"
                   >
                     <div className="px-4 pb-4">
-                      <Card className="flex flex-col rounded-xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20">
-                        <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 backdrop-blur-sm rounded-t-xl border-b-2 border-border flex-shrink-0 py-3">
+                      <Card className="flex flex-col rounded-xl border shadow-lg">
+                        <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 rounded-t-xl border-b-2 border-border flex-shrink-0 py-3">
                           <div className="flex items-start justify-between gap-3">
                             <div className="flex-1 min-w-0">
                               <CardTitle className="flex items-center gap-2 text-base">
@@ -696,8 +696,8 @@ export function LessonViewer({
             }
           >
             {/* Lesson Content */}
-            <Card className="flex flex-col rounded-2xl border-0 shadow-2xl ring-2 ring-primary/20 dark:ring-primary/30 max-h-[calc(100vh-140px)]">
-              <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 backdrop-blur-sm rounded-t-2xl border-b-2 border-border flex-shrink-0 py-3">
+            <Card className="flex flex-col rounded-2xl border shadow-2xl max-h-[calc(100vh-140px)]">
+              <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 rounded-t-2xl border-b-2 border-border flex-shrink-0 py-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <CardTitle className="flex items-center gap-2 text-base">

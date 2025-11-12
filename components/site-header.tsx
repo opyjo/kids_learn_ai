@@ -191,15 +191,15 @@ const MegaMenuItem = ({
   isActive: boolean;
 }) => (
   <NavigationMenuLink asChild>
-    <Link
-      href={item.href}
-      className={cn(
-        "group relative flex flex-col gap-1 rounded-lg p-3 transition-all duration-150 cursor-pointer",
-        "hover:bg-primary/10",
-        "border border-transparent hover:border-primary/20",
-        isActive && "bg-primary/10 border-primary/20"
-      )}
-    >
+  <Link
+    href={item.href}
+    className={cn(
+      "group relative flex flex-col gap-1 rounded-lg p-3 transition-all duration-150 cursor-pointer",
+      "hover:bg-accent/10",
+      "border border-transparent hover:border-accent/30 hover:shadow-md",
+      isActive && "bg-accent/10 border-accent/30 shadow-md"
+    )}
+  >
       <div className="flex items-center gap-2">
         <div className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
           {item.label}
@@ -235,15 +235,15 @@ const MegaMenuSection = ({
   isActive: (href: string) => boolean;
   iconColor?: string;
 }) => (
-  <div className="space-y-2">
-    <div className="flex items-center gap-2 mb-2 px-1">
+  <div className="space-y-3 p-4 rounded-lg bg-card border border-border hover:bg-accent/5 transition-all duration-200">
+    <div className="flex items-center gap-2 px-1 pb-2 border-b border-border/60">
       <Icon
         className={cn(
-          "h-4 w-4",
+          "h-5 w-5",
           iconColor || "text-primary"
         )}
       />
-      <h3 className="font-semibold text-xs uppercase tracking-wide text-foreground">
+      <h3 className="font-semibold text-sm tracking-wide text-foreground">
         {title}
       </h3>
     </div>
@@ -406,7 +406,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
           </div>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden lg:flex bg-card px-3 py-2 rounded-full border border-border shadow-sm my-3 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
+          <NavigationMenu className="hidden lg:flex bg-background px-3 py-2 rounded-full border border-border shadow-lg my-3 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
             <NavigationMenuList className="gap-1">
               {/* Learn Mega Menu */}
               <NavigationMenuItem>
@@ -420,14 +420,15 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <GraduationCap className="h-4 w-4 mr-2" />
                   Learn
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-border shadow-xl rounded-xl overflow-visible">
-                  <div className="w-[600px] p-6 pb-8 grid grid-cols-2 gap-5 rounded-lg">
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background border border-border shadow-xl rounded-xl overflow-visible">
+                  <div className="w-[650px] p-5 grid grid-cols-2 gap-6 rounded-lg relative">
                     <MegaMenuSection
                       title="Lessons"
                       icon={BookOpen}
                       items={NAV_ITEMS.lessons}
                       isActive={isActive}
                     />
+                    <div className="absolute left-1/2 top-4 bottom-4 w-px bg-border/50 -translate-x-1/2" />
                     <MegaMenuSection
                       title="Tools & Activities"
                       icon={Sparkles}
@@ -456,16 +457,18 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     <Shield className="h-4 w-4 mr-2" />
                     Admin
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-border shadow-xl rounded-xl overflow-visible">
-                    <div className="w-[400px] p-6 pb-8 rounded-lg">
-                      <div className="space-y-1">
-                        {NAV_ITEMS.admin.map((item) => (
-                          <MegaMenuItem
-                            key={item.href}
-                            item={item}
-                            isActive={isActive(item.href)}
-                          />
-                        ))}
+                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background border border-border shadow-xl rounded-xl overflow-visible">
+                    <div className="w-[400px] p-5 rounded-lg">
+                      <div className="p-4 rounded-lg bg-card border border-border hover:bg-accent/5 transition-all duration-200">
+                        <div className="space-y-1">
+                          {NAV_ITEMS.admin.map((item) => (
+                            <MegaMenuItem
+                              key={item.href}
+                              item={item}
+                              isActive={isActive(item.href)}
+                            />
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </NavigationMenuContent>
@@ -486,15 +489,19 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <Library className="h-4 w-4 mr-2" />
                   Resources
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-border shadow-xl rounded-xl overflow-visible">
-                  <div className="w-[500px] p-6 pb-8 grid grid-cols-2 gap-3 rounded-lg">
-                    {NAV_ITEMS.resources.map((item) => (
-                      <MegaMenuItem
-                        key={item.href}
-                        item={item}
-                        isActive={isActive(item.href)}
-                      />
-                    ))}
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background border border-border shadow-xl rounded-xl overflow-visible">
+                  <div className="w-[550px] p-5 rounded-lg">
+                    <div className="p-4 rounded-lg bg-card border border-border hover:bg-accent/5 transition-all duration-200">
+                      <div className="grid grid-cols-2 gap-2">
+                        {NAV_ITEMS.resources.map((item) => (
+                          <MegaMenuItem
+                            key={item.href}
+                            item={item}
+                            isActive={isActive(item.href)}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>

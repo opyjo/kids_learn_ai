@@ -21,8 +21,8 @@ interface AIPlaygroundProps {
 
 const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
   const playgroundMap: Record<number, Playground[]> = {
-    // Lesson 12 - "What is AI?"
-    12: [
+    // Lesson 1 - "What is AI?"
+    1: [
       {
         name: "Quick, Draw!",
         url: "https://quickdraw.withgoogle.com/",
@@ -45,8 +45,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 13 - "How Machines Learn"
-    13: [
+    // Lesson 2 - "How Machines Learn"
+    2: [
       {
         name: "AI for Oceans",
         url: "https://code.org/oceans",
@@ -63,8 +63,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 14 - "Data is Everything"
-    14: [
+    // Lesson 3 - "Data is Everything"
+    3: [
       {
         name: "Teachable Machine",
         url: "https://teachablemachine.withgoogle.com/",
@@ -80,8 +80,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 15 - "Pattern Detective"
-    15: [
+    // Lesson 4 - "Pattern Detective"
+    4: [
       {
         name: "Semantris",
         url: "https://research.google.com/semantris/",
@@ -110,8 +110,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 16 - "Prediction Machine"
-    16: [
+    // Lesson 5 - "Prediction Machine"
+    5: [
       {
         name: "Akinator",
         url: "https://en.akinator.com/",
@@ -134,8 +134,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 17 - "Teaching Computers to Read"
-    17: [
+    // Lesson 6 - "Teaching Computers to Read"
+    6: [
       {
         name: "InferKit (GPT-2)",
         url: "https://app.inferkit.com/demo",
@@ -158,8 +158,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 18 - "Build Your Own Chatbot Friend"
-    18: [
+    // Lesson 7 - "Build Your Own Chatbot Friend"
+    7: [
       {
         name: "Character.AI",
         url: "https://character.ai/",
@@ -182,8 +182,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 19 - "Picture Detective"
-    19: [
+    // Lesson 8 - "Picture Detective"
+    8: [
       {
         name: "Quick, Draw!",
         url: "https://quickdraw.withgoogle.com/",
@@ -206,8 +206,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 20 - "Recommendation Robot"
-    20: [
+    // Lesson 9 - "Recommendation Robot"
+    9: [
       {
         name: "Netflix",
         url: "https://www.netflix.com/",
@@ -230,8 +230,8 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
       },
     ],
 
-    // Lesson 21 - "Your Big AI Project"
-    21: [
+    // Lesson 10 - "Your Big AI Project"
+    10: [
       {
         name: "AI Experiments",
         url: "https://experiments.withgoogle.com/collection/ai",

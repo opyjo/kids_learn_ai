@@ -28,7 +28,7 @@ export default async function SettingsPage() {
   if (!profile) {
     // If profile doesn't exist, show error message
     return (
-      <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+      <div className="min-h-screen bg-gradient-to-br from-rose-500/5 via-purple-500/5 to-blue-500/5 dark:from-rose-600/8 dark:via-purple-600/8 dark:to-blue-600/8">
         <SiteHeader />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
@@ -57,7 +57,7 @@ export default async function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+    <div className="min-h-screen bg-gradient-to-br from-rose-500/5 via-purple-500/5 to-blue-500/5 dark:from-rose-600/8 dark:via-purple-600/8 dark:to-blue-600/8">
       <SiteHeader />
 
       <div className="container mx-auto px-4 py-8">

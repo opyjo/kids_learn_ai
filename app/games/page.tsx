@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 
 export default function GamesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary/5 via-background to-accent/5">
+    <div className="min-h-screen bg-gradient-to-br from-green-500/5 via-cyan-500/5 to-blue-500/5 dark:from-green-600/8 dark:via-cyan-600/8 dark:to-blue-600/8">
       <SiteHeader />
       <main className="max-w-6xl mx-auto px-4 py-12">
         {/* Hero Section */}

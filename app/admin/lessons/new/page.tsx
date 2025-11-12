@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function NewLessonPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-violet-500/5 via-purple-500/5 to-fuchsia-500/5 dark:from-violet-600/8 dark:via-purple-600/8 dark:to-fuchsia-600/8">
       {/* Header */}
       <header className="bg-white dark:bg-gray-800 border-b">
         <div className="container mx-auto px-4 py-4">

@@ -6,7 +6,7 @@ import { MainLayout } from "@/components/layouts/main-layout";
 const GetTrinketPage = () => {
   return (
     <MainLayout>
-      <div className="min-h-screen bg-gradient-to-b from-green-50 via-white to-blue-50">
+      <div className="min-h-screen bg-gradient-to-br from-green-500/5 via-teal-500/5 to-blue-500/5 dark:from-green-600/8 dark:via-teal-600/8 dark:to-blue-600/8">
         <main className="container mx-auto px-4 py-12 max-w-5xl">
           {/* Hero Section */}
           <div className="text-center mb-16">

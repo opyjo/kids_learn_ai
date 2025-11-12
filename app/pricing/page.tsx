@@ -60,7 +60,7 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary/5 dark:from-gray-900 dark:via-gray-900 dark:to-primary/10">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 dark:from-indigo-600/8 dark:via-purple-600/8 dark:to-pink-600/8">
       <SiteHeader />
 
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
