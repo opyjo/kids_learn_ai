@@ -10,18 +10,16 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
-import { Badge } from "@/components/ui/badge";
+import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import { Separator } from "@/components/ui/separator";
 import {
   ArrowLeft,
   ArrowRight,
   CheckCircle,
-  BookOpen,
   Sparkles,
   FileText,
 } from "lucide-react";
 import Link from "next/link";
-import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import { PythonEditor } from "@/components/code/python-editor";
 import { TrinketEditor } from "@/components/code/trinket-editor";
 import { AIPlayground } from "@/components/lessons/ai-playground";

@@ -8,12 +8,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, BookOpen, FileText, List } from "lucide-react";
-import Link from "next/link";
+import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -83,56 +82,26 @@ export const TeacherNotesViewer = ({
     }
   };
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "beginner":
-        return "bg-gradient-to-r from-green-400 to-emerald-500 text-white shadow-lg";
-      case "intermediate":
-        return "bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-lg";
-      case "advanced":
-        return "bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-lg";
-      default:
-        return "bg-gradient-to-r from-gray-400 to-gray-600 text-white shadow-lg";
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-      <SiteHeader
-        leftExtras={
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              asChild
-              aria-label="Go back to admin dashboard"
-              title="Back to admin"
-            >
-              <Link href="/admin" aria-label="Back to admin">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Admin
-              </Link>
-            </Button>
-            <Badge
-              className={`${getDifficultyColor(
-                lesson.difficulty
-              )} font-semibold px-4 py-1 text-sm`}
-            >
-              {lesson.difficulty.charAt(0).toUpperCase() +
-                lesson.difficulty.slice(1)}{" "}
-              💡
-            </Badge>
-            {lesson.is_premium && (
-              <Badge className="bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 text-white font-semibold px-4 py-1 text-sm shadow-lg">
-                ⭐ Premium
-              </Badge>
-            )}
-            <Badge className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold px-4 py-1 text-sm shadow-lg">
-              👨‍🏫 Teacher Notes
-            </Badge>
-          </div>
-        }
-      />
+      <SiteHeader />
+      <div className="container mx-auto px-4 pt-3">
+        <LessonBreadcrumbs
+          courseSlug={undefined}
+          lessonTitle={lesson.title}
+          difficulty={lesson.difficulty}
+          isPremium={lesson.is_premium}
+          backHref="/admin"
+          backLabel="Admin"
+          additionalBadges={[
+            {
+              label: "👨‍🏫 Teacher Notes",
+              className:
+                "bg-gradient-to-r from-purple-500 to-indigo-600 text-white border-0",
+            },
+          ]}
+        />
+      </div>
 
       <div className="container mx-auto px-4 py-6">
         {/* Playful info badges with navigation */}

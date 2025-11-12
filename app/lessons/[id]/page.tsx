@@ -37,7 +37,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
         .select("subscription_status")
         .eq("id", user.id)
         .single();
-      
+
       userSubscription = profile?.subscription_status || "free";
     }
 
@@ -63,10 +63,11 @@ export default async function LessonPage({ params }: LessonPageProps) {
   };
 
   return (
-    <LessonViewer 
-      lesson={transformedLesson} 
+    <LessonViewer
+      lesson={transformedLesson}
       userId={user?.id}
       courseSlug={lesson.courses?.slug}
+      courseTitle={lesson.courses?.title}
     />
   );
 }
