@@ -1,30 +1,16 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   ExternalLink,
   Sparkles,
-  Paintbrush,
-  Music,
-  Fish,
-  Camera,
-  Brain,
-  FileSpreadsheet,
 } from "lucide-react";
-import Link from "next/link";
 
 interface Playground {
   name: string;
   url: string;
   description: string;
-  icon: React.ReactNode;
   featured?: boolean;
 }
 
@@ -42,7 +28,6 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
         url: "https://quickdraw.withgoogle.com/",
         description:
           "Play this AI-powered drawing game where the computer tries to guess what you're drawing in real-time!",
-        icon: <Paintbrush className="h-5 w-5" />,
         featured: true,
       },
       {
@@ -50,7 +35,6 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
         url: "https://www.autodraw.com/",
         description:
           "Draw something (even badly!) and watch AI suggest better versions to help you create great art.",
-        icon: <Sparkles className="h-5 w-5" />,
         featured: true,
       },
       {
@@ -58,7 +42,6 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
         url: "https://experiments.withgoogle.com/ai/giorgio-cam",
         description:
           "Point your camera at objects and AI will create music based on what it sees!",
-        icon: <Music className="h-5 w-5" />,
       },
     ],
 
@@ -68,8 +51,7 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
         name: "AI for Oceans",
         url: "https://code.org/oceans",
         description:
-          "Complete this guided tutorial where you'll train an AI to recognize different types of fish. Great introduction to machine learning!",
-        icon: <Fish className="h-5 w-5" />,
+          "Complete this guided tutorial where you'll train an AI to recognize different types of fish.",
         featured: true,
       },
       {
@@ -77,7 +59,6 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
         url: "https://experiments.withgoogle.com/thing-translator",
         description:
           "Point your camera at objects and AI will identify them and translate their names into different languages.",
-        icon: <Camera className="h-5 w-5" />,
         featured: true,
       },
     ],
@@ -89,15 +70,13 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
         url: "https://teachablemachine.withgoogle.com/",
         description:
           "Train your own AI models using your webcam or images! See how data quality affects AI performance.",
-        icon: <Brain className="h-5 w-5" />,
         featured: true,
       },
       {
         name: "Google Forms",
         url: "https://docs.google.com/forms/",
         description:
-          "Create surveys to collect data for your research projects. Perfect for the data collection activities!",
-        icon: <FileSpreadsheet className="h-5 w-5" />,
+          "Create surveys to collect data for your research projects.",
       },
     ],
   };
@@ -106,46 +85,36 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
 };
 
 const PlaygroundCard = ({ playground }: { playground: Playground }) => {
+  const handleLaunch = () => {
+    window.open(playground.url, "_blank", "noopener,noreferrer");
+  };
+
   return (
-    <Card
-      className={`rounded-lg border bg-card/70 backdrop-blur-sm transition hover:shadow-lg ${
-        playground.featured ? "border-primary/50" : ""
-      }`}
-    >
-      <CardHeader className="pb-2 pt-3 px-4">
-        <div className="flex items-center gap-2">
-          <div
-            className="rounded-full p-1.5 bg-primary/10 text-primary"
-          >
-            {playground.icon}
-          </div>
-          <div>
-            <CardTitle className="text-sm font-semibold">{playground.name}</CardTitle>
-            {playground.featured && (
-              <span className="text-xs text-primary font-medium">
-                ⭐ Main
-              </span>
-            )}
-          </div>
+    <div className="border-b border-gray-200 py-2 px-3 hover:bg-gray-50 transition-colors">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          <h3 className="text-sm font-bold shrink-0">{playground.name}</h3>
+          {playground.featured && (
+            <Badge variant="outline" className="shrink-0 text-xs">
+              ⭐ Main
+            </Badge>
+          )}
+          <p className="text-xs text-gray-600 truncate">
+            {playground.description}
+          </p>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-2 px-4 pb-3">
-        <CardDescription className="text-xs line-clamp-2">
-          {playground.description}
-        </CardDescription>
         <Button
-          asChild
+          variant="outline"
           size="sm"
-          className="w-full text-xs h-8"
-          variant={playground.featured ? "default" : "outline"}
+          onClick={handleLaunch}
+          className="shrink-0"
+          aria-label={`Launch ${playground.name}`}
         >
-          <Link href={playground.url} target="_blank" rel="noopener noreferrer">
-            Launch
-            <ExternalLink className="ml-1 h-3 w-3" />
-          </Link>
+          <ExternalLink className="w-3 h-3 mr-1.5" />
+          Launch
         </Button>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 
@@ -159,19 +128,14 @@ export const AIPlayground = ({ lessonOrderIndex, hideHeader = false }: AIPlaygro
   return (
     <div className="space-y-3">
       {!hideHeader && (
-        <>
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <h3 className="text-base font-bold text-foreground">
-              AI Playgrounds
-            </h3>
-          </div>
-          <p className="text-xs text-muted-foreground">
-            Click to explore interactive AI tools
-          </p>
-        </>
+        <div className="flex items-center gap-2 mb-2">
+          <Sparkles className="h-4 w-4 text-primary" />
+          <h3 className="text-base font-bold text-foreground">
+            AI Playgrounds
+          </h3>
+        </div>
       )}
-      <div className="space-y-2">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         {playgrounds.map((playground) => (
           <PlaygroundCard key={playground.name} playground={playground} />
         ))}
