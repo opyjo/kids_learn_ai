@@ -79,6 +79,180 @@ const getPlaygroundsForLesson = (orderIndex: number): Playground[] => {
           "Create surveys to collect data for your research projects.",
       },
     ],
+
+    // Lesson 15 - "Pattern Detective"
+    15: [
+      {
+        name: "Semantris",
+        url: "https://research.google.com/semantris/",
+        description:
+          "Play this AI word-association game! AI finds patterns in word meanings to match your clues.",
+        featured: true,
+      },
+      {
+        name: "AI Duet",
+        url: "https://experiments.withgoogle.com/ai-duet",
+        description:
+          "Play music and AI responds with matching patterns! See how AI recognizes musical patterns.",
+        featured: true,
+      },
+      {
+        name: "Infinite Drum Machine",
+        url: "https://experiments.withgoogle.com/drum-machine",
+        description:
+          "Explore sound patterns! AI matches similar sounds and creates rhythm patterns.",
+      },
+      {
+        name: "Quick, Draw! (Patterns)",
+        url: "https://quickdraw.withgoogle.com/",
+        description:
+          "Draw and watch AI recognize patterns in your drawings to guess what you're creating!",
+      },
+    ],
+
+    // Lesson 16 - "Prediction Machine"
+    16: [
+      {
+        name: "Akinator",
+        url: "https://en.akinator.com/",
+        description:
+          "The Web Genius! Think of a character and watch AI predict who you're thinking of using question patterns.",
+        featured: true,
+      },
+      {
+        name: "Google Trends",
+        url: "https://trends.google.com/trends/",
+        description:
+          "Explore search patterns over time and predict future trends using historical data!",
+        featured: true,
+      },
+      {
+        name: "Weather.com",
+        url: "https://weather.com/",
+        description:
+          "See how AI predicts weather patterns and learn about confidence levels in predictions.",
+      },
+    ],
+
+    // Lesson 17 - "Teaching Computers to Read"
+    17: [
+      {
+        name: "InferKit (GPT-2)",
+        url: "https://app.inferkit.com/demo",
+        description:
+          "Start writing and watch AI continue your story! See how AI understands text context.",
+        featured: true,
+      },
+      {
+        name: "Sentiment Analysis Demo",
+        url: "https://huggingface.co/spaces/mrm8488/roberta-sentiment-analysis",
+        description:
+          "Type sentences and watch AI detect emotions (happy, sad, angry) from your words!",
+        featured: true,
+      },
+      {
+        name: "WordArt",
+        url: "https://wordart.com/",
+        description:
+          "Create word clouds to visualize most common words in text - see pattern analysis!",
+      },
+    ],
+
+    // Lesson 18 - "Build Your Own Chatbot Friend"
+    18: [
+      {
+        name: "Character.AI",
+        url: "https://character.ai/",
+        description:
+          "Chat with AI characters! See how chatbots maintain personality and conversation context.",
+        featured: true,
+      },
+      {
+        name: "Cleverbot",
+        url: "https://www.cleverbot.com/",
+        description:
+          "Have conversations with AI! Notice how it learns from chats and responds contextually.",
+        featured: true,
+      },
+      {
+        name: "AI Dungeon",
+        url: "https://play.aidungeon.com/",
+        description:
+          "Play text adventure games where AI creates stories based on your choices!",
+      },
+    ],
+
+    // Lesson 19 - "Picture Detective"
+    19: [
+      {
+        name: "Quick, Draw!",
+        url: "https://quickdraw.withgoogle.com/",
+        description:
+          "Draw pictures and watch AI recognize them in real-time! See how AI sees images.",
+        featured: true,
+      },
+      {
+        name: "Google Lens",
+        url: "https://lens.google.com/",
+        description:
+          "Upload images and watch AI identify objects, text, and provide information!",
+        featured: true,
+      },
+      {
+        name: "AutoDraw",
+        url: "https://www.autodraw.com/",
+        description:
+          "Draw rough sketches and AI suggests what you're trying to create - pattern recognition!",
+      },
+    ],
+
+    // Lesson 20 - "Recommendation Robot"
+    20: [
+      {
+        name: "Netflix",
+        url: "https://www.netflix.com/",
+        description:
+          "Explore recommendation algorithms! Notice how Netflix suggests content based on your viewing.",
+        featured: true,
+      },
+      {
+        name: "Spotify",
+        url: "https://www.spotify.com/",
+        description:
+          "Check Discover Weekly! See how AI recommends music based on your listening patterns.",
+        featured: true,
+      },
+      {
+        name: "Amazon",
+        url: "https://www.amazon.com/",
+        description:
+          "Notice 'Customers who bought this also bought' - see recommendation systems in action!",
+      },
+    ],
+
+    // Lesson 21 - "Your Big AI Project"
+    21: [
+      {
+        name: "AI Experiments",
+        url: "https://experiments.withgoogle.com/collection/ai",
+        description:
+          "Explore 100+ AI projects for inspiration! Find ideas for your own AI creation.",
+        featured: true,
+      },
+      {
+        name: "Teachable Machine",
+        url: "https://teachablemachine.withgoogle.com/",
+        description:
+          "Train your own AI models without coding! Great for final project ideas.",
+        featured: true,
+      },
+      {
+        name: "AI for Oceans",
+        url: "https://code.org/oceans",
+        description:
+          "Review machine learning concepts while helping protect ocean life!",
+      },
+    ],
   };
 
   return playgroundMap[orderIndex] || [];

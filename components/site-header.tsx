@@ -359,7 +359,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
           : "bg-background border-border"
       )}
     >
-      <div className="container mx-auto px-4 lg:px-6">
+      <div className="container mx-auto px-4 lg:px-6 py-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3 shrink-0">
@@ -378,7 +378,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
           </div>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden lg:flex bg-card px-3 py-2 rounded-full border border-border shadow-sm **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
+          <NavigationMenu className="hidden lg:flex bg-card px-3 py-2 rounded-full border border-border shadow-sm my-3 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
             <NavigationMenuList className="gap-1">
               {/* Learn Mega Menu */}
               <NavigationMenuItem>
