@@ -355,8 +355,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
       className={cn(
         "sticky top-0 z-50 w-full border-b transition-all duration-200",
         isScrolled
-          ? "bg-white/95 dark:bg-gray-950/95 backdrop-blur-xl border-gray-200 dark:border-gray-800 shadow-lg"
-          : "bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-gray-200/50 dark:border-gray-800/50"
+          ? "bg-white dark:bg-gray-950 border-gray-200 dark:border-gray-800 shadow-lg"
+          : "bg-white dark:bg-gray-950 border-gray-200 dark:border-gray-800"
       )}
     >
       <div className="container mx-auto px-4 lg:px-6">
@@ -378,7 +378,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
           </div>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden lg:flex bg-white/40 dark:bg-gray-900/40 backdrop-blur-md px-3 py-2 rounded-full border border-gray-200/30 dark:border-gray-800/30 shadow-sm **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
+          <NavigationMenu className="hidden lg:flex bg-white dark:bg-gray-900 px-3 py-2 rounded-full border border-gray-200 dark:border-gray-800 shadow-sm **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
             <NavigationMenuList className="gap-1">
               {/* Learn Mega Menu */}
               <NavigationMenuItem>
@@ -394,8 +394,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <GraduationCap className="h-4 w-4 mr-2" />
                   Learn
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 shadow-xl rounded-xl">
-                  <div className="w-[600px] p-6 grid grid-cols-2 gap-5 bg-linear-to-br from-gray-50/30 to-gray-100/30 dark:from-gray-800/20 dark:to-gray-900/30">
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 shadow-xl rounded-xl">
+                  <div className="w-[600px] p-6 grid grid-cols-2 gap-5 bg-gray-50/50 dark:bg-gray-900/30">
                     <MegaMenuSection
                       title="Lessons"
                       icon={BookOpen}
@@ -430,8 +430,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     <Shield className="h-4 w-4 mr-2" />
                     Admin
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 shadow-xl rounded-xl">
-                    <div className="w-[400px] p-6 bg-linear-to-br from-gray-50/30 to-gray-100/30 dark:from-gray-800/20 dark:to-gray-900/30">
+                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 shadow-xl rounded-xl">
+                    <div className="w-[400px] p-6 bg-gray-50/50 dark:bg-gray-900/30">
                       <div className="space-y-1">
                         {NAV_ITEMS.admin.map((item) => (
                           <MegaMenuItem
@@ -460,8 +460,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <Library className="h-4 w-4 mr-2" />
                   Resources
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 shadow-xl rounded-xl">
-                  <div className="w-[500px] p-6 grid grid-cols-2 gap-3 bg-linear-to-br from-gray-50/30 to-gray-100/30 dark:from-gray-800/20 dark:to-gray-900/30">
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 shadow-xl rounded-xl">
+                  <div className="w-[500px] p-6 grid grid-cols-2 gap-3 bg-gray-50/50 dark:bg-gray-900/30">
                     {NAV_ITEMS.resources.map((item) => (
                       <MegaMenuItem
                         key={item.href}
