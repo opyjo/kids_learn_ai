@@ -5,14 +5,13 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
-} from "@/components/ui/dropdown-menu";
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import {
   Collapsible,
   CollapsibleContent,
@@ -51,74 +50,238 @@ type SiteHeaderProps = {
   leftExtras?: ReactNode;
 };
 
-type NavItem = { href: string; label: string; Icon: LucideIcon };
-
-// Standalone items
-const dashboardItem: NavItem = {
-  href: "/dashboard",
-  label: "Dashboard",
-  Icon: LayoutDashboard,
-};
-const aboutItem: NavItem = { href: "/about", label: "About", Icon: Info };
-const blogItem: NavItem = {
-  href: "/blog",
-  label: "Blog",
-  Icon: Newspaper,
-};
-const pricingItem: NavItem = {
-  href: "/pricing",
-  label: "Pricing",
-  Icon: DollarSign,
+type NavItem = {
+  href: string;
+  label: string;
+  Icon: LucideIcon;
+  description?: string;
 };
 
-// Lessons sub-items (nested under Lessons in Learn dropdown)
-const lessonsSubItems: NavItem[] = [
-  {
-    href: "/lessons?course=python-foundations",
-    label: "Python Foundations for AI",
-    Icon: BookOpen,
+// Navigation data
+const NAV_ITEMS = {
+  dashboard: {
+    href: "/dashboard",
+    label: "Dashboard",
+    Icon: LayoutDashboard,
   },
-  {
-    href: "/lessons?course=ai-ml",
-    label: "AI & Machine Learning",
-    Icon: Brain,
-  },
-];
+  about: { href: "/about", label: "About", Icon: Info },
+  blog: { href: "/blog", label: "Blog", Icon: Newspaper },
+  pricing: { href: "/pricing", label: "Pricing", Icon: DollarSign },
+  lessons: [
+    {
+      href: "/lessons?course=python-foundations",
+      label: "Python Foundations for AI",
+      Icon: BookOpen,
+      description: "Master Python basics for AI development",
+    },
+    {
+      href: "/lessons?course=ai-ml",
+      label: "AI & Machine Learning",
+      Icon: Brain,
+      description: "Explore AI and ML concepts",
+    },
+  ],
+  learn: [
+    {
+      href: "/tutor",
+      label: "AI Tutor",
+      Icon: Sparkles,
+      description: "Get personalized AI tutoring",
+    },
+    {
+      href: "/playground",
+      label: "Playground",
+      Icon: TerminalSquare,
+      description: "Experiment with code",
+    },
+    {
+      href: "/games",
+      label: "Games",
+      Icon: Gamepad2,
+      description: "Learn through interactive games",
+    },
+  ],
+  resources: [
+    {
+      href: "/ai-playgrounds",
+      label: "AI Playgrounds",
+      Icon: Sparkles,
+      description: "Interactive AI tools",
+    },
+    {
+      href: "/faq",
+      label: "FAQ",
+      Icon: HelpCircle,
+      description: "Frequently asked questions",
+    },
+    {
+      href: "/contact",
+      label: "Contact",
+      Icon: MessageSquare,
+      description: "Get in touch with us",
+    },
+    {
+      href: "/get-thonny",
+      label: "Get Thonny",
+      Icon: Download,
+      description: "Download Thonny IDE",
+    },
+    {
+      href: "/get-trinket",
+      label: "Get Trinket.io",
+      Icon: ExternalLink,
+      description: "Access Trinket online",
+    },
+  ],
+  admin: [
+    {
+      href: "/admin",
+      label: "Dashboard",
+      Icon: LayoutDashboard,
+      description: "Admin overview",
+    },
+    {
+      href: "/admin/teacher-notes",
+      label: "Teacher Notes",
+      Icon: FileText,
+      description: "Manage lesson notes",
+    },
+    {
+      href: "/admin/payments",
+      label: "Payments",
+      Icon: CreditCard,
+      description: "View payment records",
+    },
+  ],
+};
 
-// Learn dropdown items
-const learnItems: NavItem[] = [
-  { href: "/tutor", label: "AI Tutor", Icon: Sparkles },
-  { href: "/playground", label: "Playground", Icon: TerminalSquare },
-  { href: "/games", label: "Games", Icon: Gamepad2 },
-];
+// Components
+const NavLink = ({ item, isActive }: { item: NavItem; isActive: boolean }) => (
+  <Link
+    href={item.href}
+    className={cn(
+      "group relative inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-150 cursor-pointer rounded-lg",
+      "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400",
+      isActive
+        ? "text-blue-600 bg-blue-50 dark:bg-blue-950/30 dark:text-blue-400"
+        : "hover:bg-gray-100 dark:hover:bg-gray-800/50"
+    )}
+  >
+    <item.Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+    <span>{item.label}</span>
+  </Link>
+);
 
-// Resources dropdown items
-const resourceItems: NavItem[] = [
-  { href: "/ai-playgrounds", label: "AI Playgrounds", Icon: Sparkles },
-  { href: "/faq", label: "FAQ", Icon: HelpCircle },
-  { href: "/contact", label: "Contact", Icon: MessageSquare },
-  { href: "/get-thonny", label: "Get Thonny", Icon: Download },
-  { href: "/get-trinket", label: "Get Trinket.io", Icon: ExternalLink },
-];
+const MegaMenuItem = ({
+  item,
+  isActive,
+}: {
+  item: NavItem;
+  isActive: boolean;
+}) => (
+  <NavigationMenuLink asChild>
+    <Link
+      href={item.href}
+      className={cn(
+        "group relative flex flex-col gap-1 rounded-lg p-3 transition-all duration-150 cursor-pointer",
+        "hover:bg-blue-50 dark:hover:bg-blue-950/30",
+        "border border-transparent hover:border-blue-200 dark:hover:border-blue-800/50",
+        isActive &&
+          "bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800"
+      )}
+    >
+      <div className="font-semibold text-sm text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        {item.label}
+      </div>
+      {item.description && (
+        <div className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
+          {item.description}
+        </div>
+      )}
+    </Link>
+  </NavigationMenuLink>
+);
 
-// Admin dropdown items
-const adminItems: NavItem[] = [
-  { href: "/admin", label: "Dashboard", Icon: LayoutDashboard },
-  { href: "/admin/teacher-notes", label: "Teacher Notes", Icon: FileText },
-  { href: "/admin/payments", label: "Payments", Icon: CreditCard },
-];
+const MegaMenuSection = ({
+  title,
+  icon: Icon,
+  items,
+  isActive,
+  iconColor,
+}: {
+  title: string;
+  icon: LucideIcon;
+  items: NavItem[];
+  isActive: (href: string) => boolean;
+  iconColor?: string;
+}) => (
+  <div className="space-y-2">
+    <div className="flex items-center gap-2 mb-2 px-1">
+      <Icon
+        className={cn(
+          "h-4 w-4",
+          iconColor || "text-blue-600 dark:text-blue-400"
+        )}
+      />
+      <h3 className="font-semibold text-xs uppercase tracking-wide text-gray-700 dark:text-gray-300">
+        {title}
+      </h3>
+    </div>
+    <div className="space-y-1">
+      {items.map((item) => (
+        <MegaMenuItem
+          key={item.href}
+          item={item}
+          isActive={isActive(item.href)}
+        />
+      ))}
+    </div>
+  </div>
+);
 
-// Visual separator component for navigation zones
-const Separator = () => (
-  <div className="h-4 w-px bg-gray-300 dark:bg-gray-600 mx-1" />
+const MobileNavLink = ({
+  item,
+  isActive,
+  onClick,
+}: {
+  item: NavItem;
+  isActive: boolean;
+  onClick: () => void;
+}) => (
+  <Link
+    href={item.href}
+    onClick={onClick}
+    className={cn(
+      "flex items-center gap-3 px-4 py-2.5 text-sm rounded-lg transition-colors cursor-pointer",
+      isActive
+        ? "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400 font-medium"
+        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50"
+    )}
+  >
+    <item.Icon className="h-4 w-4" />
+    <span>{item.label}</span>
+  </Link>
 );
 
 export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
+
+  const isLearnActive =
+    NAV_ITEMS.learn.some((item) => isActive(item.href)) ||
+    NAV_ITEMS.lessons.some((item) => isActive(item.href));
+
+  const closeMobileMenu = () => {
+    const trigger = document.querySelector(
+      '[aria-label="Open menu"]'
+    ) as HTMLElement;
+    trigger?.click();
+  };
 
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
@@ -132,7 +295,6 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
     checkAuth();
 
-    // Subscribe to auth changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(
@@ -182,449 +344,364 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    setIsMounted(true);
-
-    const handleScroll = () => {
-      const shouldElevate = window.scrollY > 12;
-      setIsScrolled(shouldElevate);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 12);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + "/");
-
-  const renderNavLink = (item: NavItem) => {
-    const active = isActive(item.href);
-    return (
-      <Link
-        href={item.href}
-        aria-current={active ? "page" : undefined}
-        className={cn(
-          "group relative inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out cursor-pointer",
-          "text-gray-700 hover:text-blue-600 dark:text-gray-300",
-          "hover:bg-white/60 dark:hover:bg-gray-800/70 hover:shadow-[0_8px_20px_-12px_rgba(37,99,235,0.45)] hover:-translate-y-0.5",
-          active
-            ? "text-blue-600 bg-white/70 dark:bg-gray-800/70 shadow-[0_8px_24px_-12px_rgba(37,99,235,0.55)]"
-            : ""
-        )}
-      >
-        <item.Icon
-          className={cn(
-            "h-4 w-4 transition-transform duration-200",
-            "group-hover:-translate-y-0.5"
-          )}
-        />
-        <span>{item.label}</span>
-        <span
-          className={cn(
-            "pointer-events-none absolute inset-x-2 -bottom-1 h-0.5 origin-left scale-x-0 rounded bg-blue-600 transition-transform duration-200",
-            "group-hover:scale-x-100",
-            active ? "scale-x-100" : ""
-          )}
-        />
-      </Link>
-    );
-  };
-
-  const renderDropdown = (
-    label: string,
-    icon: LucideIcon,
-    items: NavItem[]
-  ) => {
-    const Icon = icon;
-    const isAnyActive = items.some((item) => isActive(item.href));
-
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button
-            className={cn(
-              "group relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out cursor-pointer",
-              "text-gray-700 hover:text-blue-600 dark:text-gray-300",
-              "hover:bg-white/60 dark:hover:bg-gray-800/70 hover:shadow-[0_8px_20px_-12px_rgba(37,99,235,0.45)] hover:-translate-y-0.5",
-              isAnyActive
-                ? "text-blue-600 bg-white/70 dark:bg-gray-800/70 shadow-[0_8px_24px_-12px_rgba(37,99,235,0.55)]"
-                : ""
-            )}
-          >
-            <Icon className="h-4 w-4" />
-            <span>{label}</span>
-            <ChevronDown className="h-3 w-3" />
-            <span
-              className={cn(
-                "pointer-events-none absolute inset-x-2 -bottom-1 h-0.5 origin-left scale-x-0 rounded bg-blue-600 transition-transform duration-200",
-                "group-hover:scale-x-100",
-                isAnyActive ? "scale-x-100" : ""
-              )}
-            />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="w-48">
-          {items.map((item) => (
-            <DropdownMenuItem key={item.href} asChild>
-              <Link
-                href={item.href}
-                className="flex items-center gap-2 cursor-pointer"
-              >
-                <item.Icon className="h-4 w-4" />
-                <span>{item.label}</span>
-              </Link>
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-  };
 
   return (
     <header
       className={cn(
-        "relative sticky top-0 z-50 border-b transition-all duration-300",
-        "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-b-[28px] before:bg-linear-to-r before:from-blue-500/5 before:via-transparent before:to-purple-500/5",
+        "sticky top-0 z-50 w-full border-b transition-all duration-200",
         isScrolled
-          ? "border-white/10 bg-white/80 dark:border-white/10 dark:bg-gray-950/80 backdrop-blur-xl shadow-[0_20px_45px_-24px_rgba(15,23,42,0.55)]"
-          : "border-white/5 bg-white/60 dark:border-white/5 dark:bg-gray-900/60 backdrop-blur-lg shadow-[0_8px_32px_rgba(15,23,42,0.12)]"
+          ? "bg-white/95 dark:bg-gray-950/95 backdrop-blur-xl border-gray-200 dark:border-gray-800 shadow-lg"
+          : "bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-gray-200/50 dark:border-gray-800/50"
       )}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 py-0.5">
-        <div className="flex items-center gap-3 shrink-0">
-          {leftExtras}
-          <Link
-            href="/"
-            className="flex items-center group cursor-pointer shrink-0"
-            aria-label="Go to homepage"
-          >
-            <img
-              src="/Logo.png"
-              alt="Kids Learn AI Logo"
-              className="h-16 w-auto shrink-0 object-contain"
-            />
-          </Link>
-        </div>
-
-        <nav
-          className={cn(
-            "relative hidden md:flex items-center gap-2 rounded-full",
-            // Glass container
-            "border border-white/25 dark:border-white/10 ring-1 ring-white/10",
-            "bg-linear-to-b from-white/70 to-white/40 dark:from-gray-950/70 dark:to-gray-900/40",
-            "px-2 py-1 backdrop-blur-2xl supports-backdrop-filter:backdrop-blur-2xl",
-            "shadow-[0_24px_60px_-32px_rgba(15,23,42,0.55)] transition-all duration-500 ease-out",
-            // Subtle inner ring glow
-            "before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:ring-1 before:ring-white/5",
-            isMounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-          )}
-        >
-          {/* Learn Dropdown with nested Lessons */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button
-                className={cn(
-                  "group relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out cursor-pointer",
-                  "text-gray-700 hover:text-blue-600 dark:text-gray-300",
-                  "hover:bg-white/60 dark:hover:bg-gray-800/70 hover:shadow-[0_8px_20px_-12px_rgba(37,99,235,0.45)] hover:-translate-y-0.5",
-                  learnItems.some((item) => isActive(item.href)) ||
-                    lessonsSubItems.some((item) => isActive(item.href))
-                    ? "text-blue-600 bg-white/70 dark:bg-gray-800/70 shadow-[0_8px_24px_-12px_rgba(37,99,235,0.55)]"
-                    : ""
-                )}
-              >
-                <GraduationCap className="h-4 w-4" />
-                <span>Learn</span>
-                <ChevronDown className="h-3 w-3" />
-                <span
-                  className={cn(
-                    "pointer-events-none absolute inset-x-2 -bottom-1 h-0.5 origin-left scale-x-0 rounded bg-blue-600 transition-transform duration-200",
-                    "group-hover:scale-x-100",
-                    learnItems.some((item) => isActive(item.href)) ||
-                      lessonsSubItems.some((item) => isActive(item.href))
-                      ? "scale-x-100"
-                      : ""
-                  )}
-                />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-56">
-              {/* Lessons Submenu */}
-              <DropdownMenuSub>
-                <DropdownMenuSubTrigger>
-                  <BookOpen className="h-4 w-4" />
-                  <span>Lessons</span>
-                </DropdownMenuSubTrigger>
-                <DropdownMenuSubContent className="w-56">
-                  {lessonsSubItems.map((item) => (
-                    <DropdownMenuItem key={item.href} asChild>
-                      <Link
-                        href={item.href}
-                        className="flex items-center gap-2 cursor-pointer"
-                      >
-                        <item.Icon className="h-4 w-4" />
-                        <span>{item.label}</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuSubContent>
-              </DropdownMenuSub>
-
-              {/* Other Learn items */}
-              {learnItems.map((item) => (
-                <DropdownMenuItem key={item.href} asChild>
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-2 cursor-pointer"
-                  >
-                    <item.Icon className="h-4 w-4" />
-                    <span>{item.label}</span>
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Dashboard (auth-only) */}
-          {isAuthenticated && renderNavLink(dashboardItem)}
-
-          {/* Admin Dropdown (admin-only) */}
-          {isAdmin && renderDropdown("Admin", Shield, adminItems)}
-
-          {/* Pricing */}
-          {renderNavLink(pricingItem)}
-
-          {/* Resources Dropdown */}
-          {renderDropdown("Resources", Library, resourceItems)}
-
-          {/* Blog */}
-          {renderNavLink(blogItem)}
-
-          {/* About */}
-          {renderNavLink(aboutItem)}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <div className="hidden md:flex items-center gap-3">
-            {isAuthenticated ? (
-              <UserMenu />
-            ) : (
-              <>
-                <Button variant="ghost" asChild>
-                  <Link href="/login">Sign In</Link>
-                </Button>
-                <Button
-                  asChild
-                  className="bg-linear-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
-                >
-                  <Link href="/signup">Sign Up</Link>
-                </Button>
-              </>
-            )}
-          </div>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Open menu"
-                className="md:hidden cursor-pointer rounded-full border border-white/40 bg-white/50 text-gray-700 shadow-[0_8px_24px_-18px_rgba(37,99,235,0.65)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/70 hover:text-gray-700 dark:border-white/10 dark:bg-gray-900/70 dark:text-gray-100 dark:hover:text-gray-100"
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="left"
-              className="w-72 border-r border-white/20 bg-white/80 p-0 backdrop-blur-2xl dark:border-white/10 dark:bg-gray-950/80"
+      <div className="container mx-auto px-4 lg:px-6">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-3 shrink-0">
+            {leftExtras}
+            <Link
+              href="/"
+              className="flex items-center cursor-pointer group"
+              aria-label="Go to homepage"
             >
-              <div className="mt-6 flex flex-col gap-2 px-4 pb-6">
-                {/* Learn Collapsible with nested Lessons */}
-                <Collapsible>
-                  <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <GraduationCap className="h-5 w-5" />
-                      <span className="font-medium">Learn</span>
-                    </div>
-                    <ChevronDown className="h-4 w-4 transition-transform duration-200" />
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="mt-1 space-y-1 pl-6">
-                    {/* Lessons */}
-                    {lessonsSubItems.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={cn(
-                          "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors cursor-pointer",
-                          isActive(item.href)
-                            ? "bg-blue-50/80 text-blue-700 shadow-[0_6px_20px_-12px_rgba(37,99,235,0.45)] dark:bg-blue-950/40 dark:text-blue-200"
-                            : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                        )}
-                      >
-                        <item.Icon className="h-4 w-4" />
-                        <span>{item.label}</span>
-                      </Link>
-                    ))}
+              <img
+                src="/Logo.png"
+                alt="Kids Learn AI Logo"
+                className="h-10 w-auto transition-transform duration-200 group-hover:scale-105"
+              />
+            </Link>
+          </div>
 
-                    {/* Other Learn items */}
-                    {learnItems.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={cn(
-                          "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors cursor-pointer",
-                          isActive(item.href)
-                            ? "bg-blue-50/80 text-blue-700 shadow-[0_6px_20px_-12px_rgba(37,99,235,0.45)] dark:bg-blue-950/40 dark:text-blue-200"
-                            : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                        )}
-                      >
-                        <item.Icon className="h-4 w-4" />
-                        <span>{item.label}</span>
-                      </Link>
-                    ))}
-                  </CollapsibleContent>
-                </Collapsible>
+          {/* Desktop Navigation */}
+          <NavigationMenu className="hidden lg:flex bg-white/40 dark:bg-gray-900/40 backdrop-blur-md px-3 py-2 rounded-full border border-gray-200/30 dark:border-gray-800/30 shadow-sm **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
+            <NavigationMenuList className="gap-1">
+              {/* Learn Mega Menu */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger
+                  className={cn(
+                    "h-auto px-4 py-2 text-sm font-medium transition-colors duration-150",
+                    "data-[state=open]:bg-blue-50 data-[state=open]:text-blue-600",
+                    "dark:data-[state=open]:bg-blue-950/30 dark:data-[state=open]:text-blue-400",
+                    isLearnActive &&
+                      "bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-400"
+                  )}
+                >
+                  <GraduationCap className="h-4 w-4 mr-2" />
+                  Learn
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 shadow-xl rounded-xl">
+                  <div className="w-[600px] p-6 grid grid-cols-2 gap-5 bg-linear-to-br from-gray-50/30 to-gray-100/30 dark:from-gray-800/20 dark:to-gray-900/30">
+                    <MegaMenuSection
+                      title="Lessons"
+                      icon={BookOpen}
+                      items={NAV_ITEMS.lessons}
+                      isActive={isActive}
+                    />
+                    <MegaMenuSection
+                      title="Tools & Activities"
+                      icon={Sparkles}
+                      items={NAV_ITEMS.learn}
+                      isActive={isActive}
+                      iconColor="text-purple-600 dark:text-purple-400"
+                    />
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
 
-                {/* Dashboard (auth-only) */}
-                {isAuthenticated && (
-                  <Link
-                    href={dashboardItem.href}
-                    className={cn(
-                      "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
-                      isActive(dashboardItem.href)
-                        ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
-                        : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                    )}
-                  >
-                    <dashboardItem.Icon className="h-5 w-5" />
-                    <span>{dashboardItem.label}</span>
-                  </Link>
-                )}
+              {/* Dashboard */}
+              {isAuthenticated && (
+                <NavigationMenuItem>
+                  <NavLink
+                    item={NAV_ITEMS.dashboard}
+                    isActive={isActive(NAV_ITEMS.dashboard.href)}
+                  />
+                </NavigationMenuItem>
+              )}
 
-                {/* Admin Collapsible (admin-only) */}
-                {isAdmin && (
-                  <Collapsible>
-                    <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
-                      <div className="flex items-center gap-3">
-                        <Shield className="h-5 w-5" />
-                        <span className="font-medium">Admin</span>
+              {/* Admin Mega Menu */}
+              {isAdmin && (
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium transition-colors duration-150">
+                    <Shield className="h-4 w-4 mr-2" />
+                    Admin
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 shadow-xl rounded-xl">
+                    <div className="w-[400px] p-6 bg-linear-to-br from-gray-50/30 to-gray-100/30 dark:from-gray-800/20 dark:to-gray-900/30">
+                      <div className="space-y-1">
+                        {NAV_ITEMS.admin.map((item) => (
+                          <MegaMenuItem
+                            key={item.href}
+                            item={item}
+                            isActive={isActive(item.href)}
+                          />
+                        ))}
                       </div>
-                      <ChevronDown className="h-4 w-4 transition-transform duration-200" />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-1 space-y-1 pl-6">
-                      {adminItems.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={cn(
-                            "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors cursor-pointer",
-                            isActive(item.href)
-                              ? "bg-blue-50/80 text-blue-700 shadow-[0_6px_20px_-12px_rgba(37,99,235,0.45)] dark:bg-blue-950/40 dark:text-blue-200"
-                              : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                          )}
-                        >
-                          <item.Icon className="h-4 w-4" />
-                          <span>{item.label}</span>
-                        </Link>
-                      ))}
-                    </CollapsibleContent>
-                  </Collapsible>
-                )}
-
-                {/* Pricing */}
-                <Link
-                  href={pricingItem.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
-                    isActive(pricingItem.href)
-                      ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
-                      : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                  )}
-                >
-                  <pricingItem.Icon className="h-5 w-5" />
-                  <span>{pricingItem.label}</span>
-                </Link>
-
-                {/* Resources Collapsible */}
-                <Collapsible>
-                  <CollapsibleTrigger className="flex w-full items-center justify-between rounded-full px-3.5 py-2 text-base transition-all duration-300 hover:bg-white/70 dark:hover:bg-gray-800/70 cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <Library className="h-5 w-5" />
-                      <span className="font-medium">Resources</span>
                     </div>
-                    <ChevronDown className="h-4 w-4 transition-transform duration-200" />
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="mt-1 space-y-1 pl-6">
-                    {resourceItems.map((item) => (
-                      <Link
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              )}
+
+              {/* Simple Links */}
+              <NavigationMenuItem>
+                <NavLink
+                  item={NAV_ITEMS.pricing}
+                  isActive={isActive(NAV_ITEMS.pricing.href)}
+                />
+              </NavigationMenuItem>
+
+              {/* Resources Mega Menu */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium transition-colors duration-150">
+                  <Library className="h-4 w-4 mr-2" />
+                  Resources
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 shadow-xl rounded-xl">
+                  <div className="w-[500px] p-6 grid grid-cols-2 gap-3 bg-linear-to-br from-gray-50/30 to-gray-100/30 dark:from-gray-800/20 dark:to-gray-900/30">
+                    {NAV_ITEMS.resources.map((item) => (
+                      <MegaMenuItem
                         key={item.href}
-                        href={item.href}
+                        item={item}
+                        isActive={isActive(item.href)}
+                      />
+                    ))}
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavLink
+                  item={NAV_ITEMS.blog}
+                  isActive={isActive(NAV_ITEMS.blog.href)}
+                />
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavLink
+                  item={NAV_ITEMS.about}
+                  isActive={isActive(NAV_ITEMS.about.href)}
+                />
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+
+          {/* Right side actions */}
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2">
+              {isAuthenticated ? (
+                <UserMenu />
+              ) : (
+                <>
+                  <Button variant="ghost" asChild className="text-sm">
+                    <Link href="/login">Sign In</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    className="bg-linear-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600 text-sm"
+                  >
+                    <Link href="/signup">Sign Up</Link>
+                  </Button>
+                </>
+              )}
+            </div>
+
+            {/* Mobile Menu */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Open menu"
+                  className="lg:hidden"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-80 p-0">
+                <div className="flex flex-col h-full">
+                  <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+                    <Link
+                      href="/"
+                      className="flex items-center cursor-pointer"
+                      onClick={closeMobileMenu}
+                    >
+                      <img
+                        src="/Logo.png"
+                        alt="Kids Learn AI Logo"
+                        className="h-10 w-auto"
+                      />
+                    </Link>
+                  </div>
+
+                  <div className="flex-1 overflow-y-auto p-4 space-y-1">
+                    {/* Learn Section */}
+                    <Collapsible>
+                      <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+                        <div className="flex items-center gap-3">
+                          <GraduationCap className="h-5 w-5" />
+                          <span>Learn</span>
+                        </div>
+                        <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="mt-1 space-y-1 pl-4">
+                        {[...NAV_ITEMS.lessons, ...NAV_ITEMS.learn].map(
+                          (navItem) => (
+                            <MobileNavLink
+                              key={navItem.href}
+                              item={navItem}
+                              isActive={isActive(navItem.href)}
+                              onClick={closeMobileMenu}
+                            />
+                          )
+                        )}
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* Dashboard */}
+                    {isAuthenticated && (
+                      <Link
+                        href={NAV_ITEMS.dashboard.href}
+                        onClick={closeMobileMenu}
                         className={cn(
-                          "flex items-center gap-3 rounded-full px-3 py-2 text-sm transition-colors cursor-pointer",
-                          isActive(item.href)
-                            ? "bg-blue-50/80 text-blue-700 shadow-[0_6px_20px_-12px_rgba(37,99,235,0.45)] dark:bg-blue-950/40 dark:text-blue-200"
-                            : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
+                          "flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
+                          isActive(NAV_ITEMS.dashboard.href)
+                            ? "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                         )}
                       >
-                        <item.Icon className="h-4 w-4" />
-                        <span>{item.label}</span>
+                        {(() => {
+                          const DashIcon = NAV_ITEMS.dashboard.Icon;
+                          return <DashIcon className="h-5 w-5" />;
+                        })()}
+                        <span>{NAV_ITEMS.dashboard.label}</span>
                       </Link>
-                    ))}
-                  </CollapsibleContent>
-                </Collapsible>
+                    )}
 
-                {/* Blog */}
-                <Link
-                  href={blogItem.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
-                    isActive(blogItem.href)
-                      ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
-                      : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                  )}
-                >
-                  <blogItem.Icon className="h-5 w-5" />
-                  <span>{blogItem.label}</span>
-                </Link>
+                    {/* Admin Section */}
+                    {isAdmin && (
+                      <Collapsible>
+                        <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+                          <div className="flex items-center gap-3">
+                            <Shield className="h-5 w-5" />
+                            <span>Admin</span>
+                          </div>
+                          <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="mt-1 space-y-1 pl-4">
+                          {NAV_ITEMS.admin.map((item) => (
+                            <MobileNavLink
+                              key={item.href}
+                              item={item}
+                              isActive={isActive(item.href)}
+                              onClick={closeMobileMenu}
+                            />
+                          ))}
+                        </CollapsibleContent>
+                      </Collapsible>
+                    )}
 
-                {/* About */}
-                <Link
-                  href={aboutItem.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-full px-3.5 py-2 text-base transition-all duration-300 cursor-pointer",
-                    isActive(aboutItem.href)
-                      ? "bg-blue-50/80 text-blue-700 shadow-[0_8px_24px_-16px_rgba(37,99,235,0.55)] dark:bg-blue-950/40 dark:text-blue-200"
-                      : "text-gray-700 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70"
-                  )}
-                >
-                  <aboutItem.Icon className="h-5 w-5" />
-                  <span>{aboutItem.label}</span>
-                </Link>
+                    {/* Other Links */}
+                    <Link
+                      href={NAV_ITEMS.pricing.href}
+                      onClick={closeMobileMenu}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
+                        isActive(NAV_ITEMS.pricing.href)
+                          ? "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      )}
+                    >
+                      {(() => {
+                        const PriceIcon = NAV_ITEMS.pricing.Icon;
+                        return <PriceIcon className="h-5 w-5" />;
+                      })()}
+                      <span>{NAV_ITEMS.pricing.label}</span>
+                    </Link>
 
-                <div className="mt-6 pt-4 border-t space-y-2">
-                  {isAuthenticated ? (
-                    <UserMenu />
-                  ) : (
-                    <>
-                      <Button
-                        variant="ghost"
-                        asChild
-                        className="w-full rounded-full border border-white/40 bg-white/70 text-gray-700 shadow-sm hover:bg-white/90 dark:border-white/10 dark:bg-gray-900/70 dark:text-gray-100"
-                      >
-                        <Link href="/login">Sign In</Link>
-                      </Button>
-                      <Button
-                        asChild
-                        className="w-full rounded-full bg-linear-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
-                      >
-                        <Link href="/signup">Sign Up</Link>
-                      </Button>
-                    </>
-                  )}
+                    {/* Resources Section */}
+                    <Collapsible>
+                      <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+                        <div className="flex items-center gap-3">
+                          <Library className="h-5 w-5" />
+                          <span>Resources</span>
+                        </div>
+                        <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="mt-1 space-y-1 pl-4">
+                        {NAV_ITEMS.resources.map((item) => (
+                          <MobileNavLink
+                            key={item.href}
+                            item={item}
+                            isActive={isActive(item.href)}
+                            onClick={closeMobileMenu}
+                          />
+                        ))}
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    <Link
+                      href={NAV_ITEMS.blog.href}
+                      onClick={closeMobileMenu}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
+                        isActive(NAV_ITEMS.blog.href)
+                          ? "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      )}
+                    >
+                      {(() => {
+                        const BlogIcon = NAV_ITEMS.blog.Icon;
+                        return <BlogIcon className="h-5 w-5" />;
+                      })()}
+                      <span>{NAV_ITEMS.blog.label}</span>
+                    </Link>
+
+                    <Link
+                      href={NAV_ITEMS.about.href}
+                      onClick={closeMobileMenu}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
+                        isActive(NAV_ITEMS.about.href)
+                          ? "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      )}
+                    >
+                      {(() => {
+                        const AboutIcon = NAV_ITEMS.about.Icon;
+                        return <AboutIcon className="h-5 w-5" />;
+                      })()}
+                      <span>{NAV_ITEMS.about.label}</span>
+                    </Link>
+                  </div>
+
+                  {/* Mobile Auth */}
+                  <div className="p-4 border-t border-gray-200 dark:border-gray-800 space-y-2">
+                    {isAuthenticated ? (
+                      <div className="px-4">
+                        <UserMenu />
+                      </div>
+                    ) : (
+                      <>
+                        <Button variant="outline" asChild className="w-full">
+                          <Link href="/login">Sign In</Link>
+                        </Button>
+                        <Button
+                          asChild
+                          className="w-full bg-linear-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
+                        >
+                          <Link href="/signup">Sign Up</Link>
+                        </Button>
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>

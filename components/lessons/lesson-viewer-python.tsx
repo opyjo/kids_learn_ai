@@ -518,8 +518,8 @@ export function LessonViewer({
                     className="mt-0 focus-visible:outline-none"
                   >
                     <div className="px-4 pb-4">
-                      <Card className="flex flex-col rounded-xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20 max-h-[calc(100vh-240px)] overflow-hidden">
-                        <CardHeader className="pb-3 px-4 pt-4 border-b border-border/50 flex-shrink-0">
+                      <Card className="flex flex-col rounded-2xl shadow-lg max-h-[calc(100vh-240px)] overflow-hidden">
+                        <CardHeader className="pb-3 px-3 pt-3 border-b border-border/50 flex-shrink-0">
                           <div className="flex items-center gap-2">
                             <BookOpen className="h-4 w-4 text-primary" />
                             <CardTitle className="text-base font-semibold">
@@ -527,8 +527,8 @@ export function LessonViewer({
                             </CardTitle>
                           </div>
                         </CardHeader>
-                        <CardContent className="flex-1 min-h-0 p-4 overflow-y-auto overflow-x-hidden">
-                          <div className="space-y-2.5 text-foreground text-sm">
+                        <CardContent className="flex-1 min-h-0 py-3 pl-3 pr-2 overflow-y-auto overflow-x-hidden">
+                          <div className="space-y-1.5 text-foreground text-sm pr-1">
                             {lesson.starter_code
                               .replace(/^<!--[\s\S]*?-->/, "")
                               .trim()
@@ -611,8 +611,8 @@ export function LessonViewer({
                     className="mt-0 focus-visible:outline-none"
                   >
                     <div className="px-4 pb-4">
-                      <Card className="flex flex-col rounded-xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20 max-h-[calc(100vh-240px)] overflow-hidden">
-                        <CardHeader className="pb-3 px-4 pt-4 border-b border-border/50 flex-shrink-0">
+                      <Card className="flex flex-col rounded-2xl shadow-lg max-h-[calc(100vh-240px)] overflow-hidden">
+                        <CardHeader className="pb-3 px-3 pt-3 border-b border-border/50 flex-shrink-0">
                           <div className="flex items-center gap-2">
                             <Sparkles className="h-4 w-4 text-primary" />
                             <CardTitle className="text-base font-semibold">
@@ -620,7 +620,7 @@ export function LessonViewer({
                             </CardTitle>
                           </div>
                         </CardHeader>
-                        <CardContent className="flex-1 min-h-0 p-4 overflow-y-auto overflow-x-hidden">
+                        <CardContent className="flex-1 min-h-0 py-3 pl-3 pr-2 overflow-y-auto overflow-x-hidden">
                           <AIPlayground
                             lessonOrderIndex={lesson.order_index}
                             hideHeader
