@@ -28,16 +28,16 @@ for color in colors:
 `;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       <SiteHeader />
 
       <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col min-h-[calc(100vh-200px)]">
         {/* Page Header */}
         <div className="mb-6">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h2 className="text-3xl font-bold text-foreground mb-2">
             Python Playground
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-muted-foreground">
             Experiment with Python code in a safe environment. Try new ideas and
             practice what you've learned!
           </p>
@@ -69,15 +69,15 @@ for color in colors:
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
                 <h4 className="font-medium mb-2">Keyboard Shortcuts:</h4>
-                <ul className="space-y-1 text-gray-600">
+                <ul className="space-y-1 text-muted-foreground">
                   <li>
-                    <kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">
+                    <kbd className="px-1 py-0.5 bg-muted rounded text-xs">
                       Ctrl+Enter
                     </kbd>{" "}
                     - Run code
                   </li>
                   <li>
-                    <kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">
+                    <kbd className="px-1 py-0.5 bg-muted rounded text-xs">
                       Tab
                     </kbd>{" "}
                     - Indent code
@@ -86,7 +86,7 @@ for color in colors:
               </div>
               <div>
                 <h4 className="font-medium mb-2">Try These Ideas:</h4>
-                <ul className="space-y-1 text-gray-600">
+                <ul className="space-y-1 text-muted-foreground">
                   <li>• Create fun math calculations</li>
                   <li>• Make lists of your favorite things</li>
                   <li>• Write loops to repeat actions</li>

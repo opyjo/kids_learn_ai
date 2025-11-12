@@ -44,7 +44,8 @@ const playgrounds: Playground[] = [
   {
     name: "AI Duet",
     url: "https://experiments.withgoogle.com/ai-duet",
-    description: "Play music on the piano and watch AI respond with its own melody in real-time.",
+    description:
+      "Play music on the piano and watch AI respond with its own melody in real-time.",
     category: "Google",
   },
   {
@@ -78,7 +79,8 @@ const playgrounds: Playground[] = [
   {
     name: "AI for Oceans",
     url: "https://code.org/oceans",
-    description: "Train an AI to help identify and protect ocean wildlife through fun coding activities.",
+    description:
+      "Train an AI to help identify and protect ocean wildlife through fun coding activities.",
     category: "Educational",
   },
   {
@@ -124,7 +126,7 @@ export default function AIPlaygroundsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-b from-primary/5 via-background to-accent/5">
       <SiteHeader />
 
       <main className="max-w-6xl mx-auto px-4 py-12">
@@ -137,31 +139,28 @@ export default function AIPlaygroundsPage() {
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             AI Playgrounds 🎨
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Explore fun AI-powered tools and experiments! Click Launch to try
             each one.
           </p>
         </div>
 
         {/* Playgrounds List */}
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-card rounded-lg border border-border overflow-hidden">
           {playgrounds.map((playground, index) => (
             <div
               key={index}
-              className="border-b border-gray-200 py-2 px-3 hover:bg-gray-50 transition-colors"
+              className="border-b border-border last:border-b-0 py-2 px-3 hover:bg-muted transition-colors"
             >
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 flex-1 min-w-0">
-                  <h3 className="text-sm font-bold shrink-0">
+                  <h3 className="text-sm font-bold shrink-0 text-foreground">
                     {playground.name}
                   </h3>
-                  <Badge
-                    variant="outline"
-                    className="shrink-0 text-xs"
-                  >
+                  <Badge variant="outline" className="shrink-0 text-xs">
                     {playground.category}
                   </Badge>
-                  <p className="text-xs text-gray-600 truncate">
+                  <p className="text-xs text-muted-foreground truncate">
                     {playground.description}
                   </p>
                 </div>
@@ -192,4 +191,3 @@ export default function AIPlaygroundsPage() {
     </div>
   );
 }
-

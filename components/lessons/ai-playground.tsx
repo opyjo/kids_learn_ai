@@ -90,16 +90,16 @@ const PlaygroundCard = ({ playground }: { playground: Playground }) => {
   };
 
   return (
-    <div className="border-b border-gray-200 py-2 px-3 hover:bg-gray-50 transition-colors">
+    <div className="border-b border-border last:border-b-0 py-2 px-3 hover:bg-muted transition-colors">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <h3 className="text-sm font-bold shrink-0">{playground.name}</h3>
+          <h3 className="text-sm font-bold shrink-0 text-foreground">{playground.name}</h3>
           {playground.featured && (
             <Badge variant="outline" className="shrink-0 text-xs">
               ⭐ Main
             </Badge>
           )}
-          <p className="text-xs text-gray-600 truncate">
+          <p className="text-xs text-muted-foreground truncate">
             {playground.description}
           </p>
         </div>
@@ -135,7 +135,7 @@ export const AIPlayground = ({ lessonOrderIndex, hideHeader = false }: AIPlaygro
           </h3>
         </div>
       )}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div className="bg-card rounded-lg border border-border overflow-hidden">
         {playgrounds.map((playground) => (
           <PlaygroundCard key={playground.name} playground={playground} />
         ))}

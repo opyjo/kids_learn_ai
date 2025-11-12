@@ -247,29 +247,29 @@ export function LessonViewer({
         {courseSlug === "ai-ml" ? (
           <div className="space-y-6 max-w-7xl mx-auto">
             {/* Tabs Navigation */}
-            <Card className="rounded-xl shadow-lg border border-border/50 bg-card/95 backdrop-blur-sm overflow-hidden">
+            <Card className="rounded-xl shadow-lg border-0 bg-card/95 backdrop-blur-sm overflow-hidden">
               <CardHeader className="pb-3 px-4 pt-4">
                 <Tabs defaultValue="content" className="w-full">
                   <TabsList className="grid w-full grid-cols-3 h-10 bg-muted/60">
                     <TabsTrigger
                       value="content"
-                      className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
+                      className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      <FileText className="h-4 w-4" />
+                      <FileText className="h-4 w-4 transition-transform duration-200 data-[state=active]:scale-110" />
                       <span>Lesson Content</span>
                     </TabsTrigger>
                     <TabsTrigger
                       value="activities"
-                      className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
+                      className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      <BookOpen className="h-4 w-4" />
+                      <BookOpen className="h-4 w-4 transition-transform duration-200 data-[state=active]:scale-110" />
                       <span>Activities</span>
                     </TabsTrigger>
                     <TabsTrigger
                       value="playgrounds"
-                      className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
+                      className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      <Sparkles className="h-4 w-4" />
+                      <Sparkles className="h-4 w-4 transition-transform duration-200 data-[state=active]:scale-110 data-[state=active]:animate-pulse" />
                       <span>Playgrounds</span>
                     </TabsTrigger>
                   </TabsList>
@@ -277,10 +277,10 @@ export function LessonViewer({
                   {/* Lesson Content Tab */}
                   <TabsContent
                     value="content"
-                    className="mt-0 focus-visible:outline-none"
+                    className="mt-0 focus-visible:outline-none data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:slide-in-from-top-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=inactive]:slide-out-to-top-2 duration-200"
                   >
                     <div className="px-4 pb-4">
-                      <Card className="flex flex-col rounded-xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20 max-h-[calc(100vh-240px)] overflow-hidden">
+                      <Card className="flex flex-col rounded-xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20">
                         <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 backdrop-blur-sm rounded-t-xl border-b-2 border-border flex-shrink-0 py-3">
                           <div className="flex items-start justify-between gap-3">
                             <div className="flex-1 min-w-0">
@@ -306,21 +306,23 @@ export function LessonViewer({
                                   Done
                                 </Badge>
                               )}
-                              <div className="flex items-center gap-1">
+                              <div className="flex items-center gap-1.5">
                                 <Link
                                   href={`/lessons/${lesson.id - 1}`}
                                   aria-label="Go to previous lesson"
-                                  className="inline-flex items-center justify-center rounded-lg p-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
+                                  className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
                                   title="Previous Lesson"
                                 >
                                   <ArrowLeft className="h-3.5 w-3.5" />
+                                  <span className="hidden sm:inline">Previous</span>
                                 </Link>
                                 <Link
                                   href={`/lessons/${lesson.id + 1}`}
                                   aria-label="Go to next lesson"
-                                  className="inline-flex items-center justify-center rounded-lg p-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
+                                  className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
                                   title="Next Lesson"
                                 >
+                                  <span className="hidden sm:inline">Next</span>
                                   <ArrowRight className="h-3.5 w-3.5" />
                                 </Link>
                               </div>
@@ -330,7 +332,7 @@ export function LessonViewer({
 
                         <Separator />
 
-                        <CardContent className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden p-4 relative">
+                        <CardContent className="flex-1 min-h-0 overflow-x-hidden p-4 relative">
                           {/* Confetti overlay */}
                           {showConfetti && (
                             <div className="pointer-events-none absolute inset-0 flex items-start justify-center z-10">
@@ -517,11 +519,11 @@ export function LessonViewer({
                   {/* Activities Tab */}
                   <TabsContent
                     value="activities"
-                    className="mt-0 focus-visible:outline-none"
+                    className="mt-0 focus-visible:outline-none data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:slide-in-from-top-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=inactive]:slide-out-to-top-2 duration-200"
                   >
-                    <div className="px-4 pb-4">
-                      <Card className="flex flex-col rounded-2xl shadow-lg max-h-[calc(100vh-240px)] overflow-hidden">
-                        <CardHeader className="pb-3 px-3 pt-3 border-b border-border/50 flex-shrink-0">
+                    <div className="px-2 pb-2">
+                      <Card className="flex flex-col rounded-2xl shadow-lg border-0">
+                        <CardHeader className="pb-2 px-4 pt-3 border-b border-border/50 flex-shrink-0">
                           <div className="flex items-center gap-2">
                             <BookOpen className="h-4 w-4 text-primary" />
                             <CardTitle className="text-base font-semibold">
@@ -529,8 +531,8 @@ export function LessonViewer({
                             </CardTitle>
                           </div>
                         </CardHeader>
-                        <CardContent className="flex-1 min-h-0 py-3 pl-3 pr-2 overflow-y-auto overflow-x-hidden">
-                          <div className="space-y-1.5 text-foreground text-sm pr-1">
+                        <CardContent className="flex-1 min-h-0 py-4 px-4 overflow-x-hidden">
+                          <div className="space-y-3 text-foreground text-sm">
                             {lesson.starter_code
                               .replace(/^<!--[\s\S]*?-->/, "")
                               .trim()
@@ -568,18 +570,65 @@ export function LessonViewer({
                                       prevLine.trim().startsWith(emoji)
                                     ));
 
+                                // Detect numbered list items
+                                const isNumberedItem = /^\d+\.\s/.test(line.trim());
+                                const isBulletItem = /^[-•]\s/.test(line.trim());
+
                                 const lineKey = `line-${index}-${line
                                   .substring(0, 20)
                                   .replace(/\s/g, "-")}`;
+                                
+                                if (isHeading) {
+                                  return (
+                                    <div
+                                      key={lineKey}
+                                      className="font-semibold text-base text-primary mt-4 mb-2 first:mt-0 flex items-center gap-2"
+                                    >
+                                      <span>{line.trim()}</span>
+                                    </div>
+                                  );
+                                }
+
+                                if (isNumberedItem || isBulletItem) {
+                                  return (
+                                    <div
+                                      key={lineKey}
+                                      className="flex items-start gap-2.5 text-foreground/90 leading-relaxed"
+                                    >
+                                      <span className="text-primary font-medium mt-0.5 shrink-0">
+                                        {isNumberedItem
+                                          ? line.match(/^\d+\./)?.[0]
+                                          : "•"}
+                                      </span>
+                                      <div className="flex-1">
+                                        {parts.map((part, i) => {
+                                          const partKey = `${lineKey}-part-${i}`;
+                                          return urlRegex.test(part) ? (
+                                            <a
+                                              key={partKey}
+                                              href={part}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="inline-flex items-center gap-1 rounded-md border border-primary/20 bg-primary/5 px-2 py-1 text-xs font-medium text-primary hover:bg-primary/10 hover:border-primary/30 transition-colors underline underline-offset-2"
+                                            >
+                                              {part}
+                                            </a>
+                                          ) : (
+                                            <span key={partKey}>{part.replace(/^\d+\.\s|^[-•]\s/, "")}</span>
+                                          );
+                                        })}
+                                      </div>
+                                    </div>
+                                  );
+                                }
+
                                 return (
                                   <div
                                     key={lineKey}
                                     className={
-                                      isHeading
-                                        ? "font-bold text-sm text-primary mt-2.5 mb-1 first:mt-0 tracking-tight"
-                                        : isAfterHeading
+                                      isAfterHeading
                                         ? "text-foreground/90 leading-relaxed"
-                                        : "text-foreground/75 leading-relaxed"
+                                        : "text-foreground/80 leading-relaxed"
                                     }
                                   >
                                     {parts.map((part, i) => {
@@ -610,10 +659,10 @@ export function LessonViewer({
                   {/* AI Playgrounds Tab */}
                   <TabsContent
                     value="playgrounds"
-                    className="mt-0 focus-visible:outline-none"
+                    className="mt-0 focus-visible:outline-none data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:slide-in-from-top-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=inactive]:slide-out-to-top-2 duration-200"
                   >
                     <div className="px-4 pb-4">
-                      <Card className="flex flex-col rounded-2xl shadow-lg max-h-[calc(100vh-240px)] overflow-hidden">
+                      <Card className="flex flex-col rounded-2xl shadow-lg">
                         <CardHeader className="pb-3 px-3 pt-3 border-b border-border/50 flex-shrink-0">
                           <div className="flex items-center gap-2">
                             <Sparkles className="h-4 w-4 text-primary" />
@@ -622,7 +671,7 @@ export function LessonViewer({
                             </CardTitle>
                           </div>
                         </CardHeader>
-                        <CardContent className="flex-1 min-h-0 py-3 pl-3 pr-2 overflow-y-auto overflow-x-hidden">
+                        <CardContent className="flex-1 min-h-0 py-3 pl-3 pr-2 overflow-x-hidden">
                           <AIPlayground
                             lessonOrderIndex={lesson.order_index}
                             hideHeader
@@ -670,21 +719,23 @@ export function LessonViewer({
                         Done
                       </Badge>
                     )}
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1.5">
                       <Link
                         href={`/lessons/${lesson.id - 1}`}
                         aria-label="Go to previous lesson"
-                        className="inline-flex items-center justify-center rounded-lg p-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
+                        className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
                         title="Previous Lesson"
                       >
                         <ArrowLeft className="h-3.5 w-3.5" />
+                        <span className="hidden sm:inline">Previous</span>
                       </Link>
                       <Link
                         href={`/lessons/${lesson.id + 1}`}
                         aria-label="Go to next lesson"
-                        className="inline-flex items-center justify-center rounded-lg p-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
+                        className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
                         title="Next Lesson"
                       >
+                        <span className="hidden sm:inline">Next</span>
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </div>

@@ -43,6 +43,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
 import { UserMenu } from "@/components/user/user-menu";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import type { Session } from "@supabase/supabase-js";
 
@@ -161,10 +162,10 @@ const NavLink = ({ item, isActive }: { item: NavItem; isActive: boolean }) => (
     href={item.href}
     className={cn(
       "group relative inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-150 cursor-pointer rounded-lg",
-      "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400",
+      "text-foreground hover:text-primary",
       isActive
-        ? "text-blue-600 bg-blue-50 dark:bg-blue-950/30 dark:text-blue-400"
-        : "hover:bg-gray-100 dark:hover:bg-gray-800/50"
+        ? "text-primary bg-primary/10"
+        : "hover:bg-muted"
     )}
   >
     <item.Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
@@ -184,17 +185,16 @@ const MegaMenuItem = ({
       href={item.href}
       className={cn(
         "group relative flex flex-col gap-1 rounded-lg p-3 transition-all duration-150 cursor-pointer",
-        "hover:bg-blue-50 dark:hover:bg-blue-950/30",
-        "border border-transparent hover:border-blue-200 dark:hover:border-blue-800/50",
-        isActive &&
-          "bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800"
+        "hover:bg-primary/10",
+        "border border-transparent hover:border-primary/20",
+        isActive && "bg-primary/10 border-primary/20"
       )}
     >
-      <div className="font-semibold text-sm text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+      <div className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
         {item.label}
       </div>
       {item.description && (
-        <div className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
+        <div className="text-xs text-muted-foreground line-clamp-2">
           {item.description}
         </div>
       )}
@@ -220,10 +220,10 @@ const MegaMenuSection = ({
       <Icon
         className={cn(
           "h-4 w-4",
-          iconColor || "text-blue-600 dark:text-blue-400"
+          iconColor || "text-primary"
         )}
       />
-      <h3 className="font-semibold text-xs uppercase tracking-wide text-gray-700 dark:text-gray-300">
+      <h3 className="font-semibold text-xs uppercase tracking-wide text-foreground">
         {title}
       </h3>
     </div>
@@ -252,10 +252,10 @@ const MobileNavLink = ({
     href={item.href}
     onClick={onClick}
     className={cn(
-      "flex items-center gap-3 px-4 py-2.5 text-sm rounded-lg transition-colors cursor-pointer",
-      isActive
-        ? "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400 font-medium"
-        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50"
+        "flex items-center gap-3 px-4 py-2.5 text-sm rounded-lg transition-colors cursor-pointer",
+        isActive
+          ? "bg-primary/10 text-primary font-medium"
+          : "text-foreground hover:bg-muted"
     )}
   >
     <item.Icon className="h-4 w-4" />
@@ -355,8 +355,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
       className={cn(
         "sticky top-0 z-50 w-full border-b transition-all duration-200",
         isScrolled
-          ? "bg-white dark:bg-gray-950 border-gray-200 dark:border-gray-800 shadow-lg"
-          : "bg-white dark:bg-gray-950 border-gray-200 dark:border-gray-800"
+          ? "bg-background border-border shadow-lg"
+          : "bg-background border-border"
       )}
     >
       <div className="container mx-auto px-4 lg:px-6">
@@ -378,24 +378,22 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
           </div>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden lg:flex bg-white dark:bg-gray-900 px-3 py-2 rounded-full border border-gray-200 dark:border-gray-800 shadow-sm **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
+          <NavigationMenu className="hidden lg:flex bg-card px-3 py-2 rounded-full border border-border shadow-sm **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
             <NavigationMenuList className="gap-1">
               {/* Learn Mega Menu */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(
                     "h-auto px-4 py-2 text-sm font-medium transition-colors duration-150",
-                    "data-[state=open]:bg-blue-50 data-[state=open]:text-blue-600",
-                    "dark:data-[state=open]:bg-blue-950/30 dark:data-[state=open]:text-blue-400",
-                    isLearnActive &&
-                      "bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-400"
+                    "data-[state=open]:bg-primary/10 data-[state=open]:text-primary",
+                    isLearnActive && "bg-primary/10 text-primary"
                   )}
                 >
                   <GraduationCap className="h-4 w-4 mr-2" />
                   Learn
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 shadow-xl rounded-xl">
-                  <div className="w-[600px] p-6 grid grid-cols-2 gap-5 bg-gray-50/50 dark:bg-gray-900/30">
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-popover border border-border shadow-xl rounded-xl">
+                  <div className="w-[600px] p-6 grid grid-cols-2 gap-5 bg-muted/50">
                     <MegaMenuSection
                       title="Lessons"
                       icon={BookOpen}
@@ -430,8 +428,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     <Shield className="h-4 w-4 mr-2" />
                     Admin
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 shadow-xl rounded-xl">
-                    <div className="w-[400px] p-6 bg-gray-50/50 dark:bg-gray-900/30">
+                  <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-popover border border-border shadow-xl rounded-xl">
+                    <div className="w-[400px] p-6 bg-muted/50">
                       <div className="space-y-1">
                         {NAV_ITEMS.admin.map((item) => (
                           <MegaMenuItem
@@ -460,8 +458,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <Library className="h-4 w-4 mr-2" />
                   Resources
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 shadow-xl rounded-xl">
-                  <div className="w-[500px] p-6 grid grid-cols-2 gap-3 bg-gray-50/50 dark:bg-gray-900/30">
+                <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-popover border border-border shadow-xl rounded-xl">
+                  <div className="w-[500px] p-6 grid grid-cols-2 gap-3 bg-muted/50">
                     {NAV_ITEMS.resources.map((item) => (
                       <MegaMenuItem
                         key={item.href}
@@ -491,6 +489,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
           {/* Right side actions */}
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <div className="hidden lg:flex items-center gap-2">
               {isAuthenticated ? (
                 <UserMenu />
@@ -523,7 +522,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
               </SheetTrigger>
               <SheetContent side="right" className="w-80 p-0">
                 <div className="flex flex-col h-full">
-                  <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+                  <div className="p-6 border-b border-border">
                     <Link
                       href="/"
                       className="flex items-center cursor-pointer"
@@ -540,7 +539,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   <div className="flex-1 overflow-y-auto p-4 space-y-1">
                     {/* Learn Section */}
                     <Collapsible>
-                      <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+                      <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
                         <div className="flex items-center gap-3">
                           <GraduationCap className="h-5 w-5" />
                           <span>Learn</span>
@@ -569,8 +568,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                         className={cn(
                           "flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
                           isActive(NAV_ITEMS.dashboard.href)
-                            ? "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            ? "bg-primary/10 text-primary"
+                            : "text-foreground hover:bg-muted"
                         )}
                       >
                         {(() => {
@@ -584,7 +583,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     {/* Admin Section */}
                     {isAdmin && (
                       <Collapsible>
-                        <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+                        <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
                           <div className="flex items-center gap-3">
                             <Shield className="h-5 w-5" />
                             <span>Admin</span>
@@ -624,7 +623,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
                     {/* Resources Section */}
                     <Collapsible>
-                      <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+                      <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
                         <div className="flex items-center gap-3">
                           <Library className="h-5 w-5" />
                           <span>Resources</span>
@@ -679,7 +678,11 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   </div>
 
                   {/* Mobile Auth */}
-                  <div className="p-4 border-t border-gray-200 dark:border-gray-800 space-y-2">
+                  <div className="p-4 border-t border-border space-y-2">
+                    <div className="flex items-center justify-between px-4 pb-2">
+                      <span className="text-sm font-medium text-foreground">Theme</span>
+                      <ThemeToggle />
+                    </div>
                     {isAuthenticated ? (
                       <div className="px-4">
                         <UserMenu />

@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 
 export default function GamesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-b from-primary/5 via-background to-accent/5">
       <SiteHeader />
       <main className="max-w-6xl mx-auto px-4 py-12">
         {/* Hero Section */}
@@ -19,11 +19,11 @@ export default function GamesPage() {
           <h1 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
             Create Your Own Python Games! 🎮
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto text-pretty">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
             Learn Python by building fun games! Each game includes complete
             code, explanations, and challenges to make it your own.
           </p>
-          <div className="flex items-center justify-center gap-8 mt-8 text-sm text-gray-600">
+          <div className="flex items-center justify-center gap-8 mt-8 text-sm text-muted-foreground">
             <div>
               <span className="font-bold text-2xl text-blue-600">
                 {games.length}

@@ -50,23 +50,23 @@ export const LessonBreadcrumbs = ({
       {/* Home */}
       <Link
         href="/"
-        className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 rounded-md px-2 py-1 -ml-2 hover:bg-muted/50"
+        className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 -ml-2 hover:bg-muted/50 hover:scale-105 active:scale-95"
         aria-label="Go to homepage"
       >
-        <Home className="h-4 w-4" />
-        <span className="hidden sm:inline">Home</span>
+        <Home className="h-4 w-4 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-[-5deg]" />
+        <span className="hidden sm:inline transition-all duration-200">Home</span>
       </Link>
 
       {/* Optional back crumb (e.g., Admin) */}
       {backHref && backLabel && (
         <>
-          <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
+          <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200" />
           <Link
             href={backHref}
-            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 rounded-md px-2 py-1 hover:bg-muted/50"
+            className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 hover:bg-muted/50 hover:scale-105 active:scale-95"
             aria-label={`Go to ${backLabel}`}
           >
-            <span>{backLabel}</span>
+            <span className="transition-all duration-200">{backLabel}</span>
           </Link>
         </>
       )}
@@ -74,31 +74,33 @@ export const LessonBreadcrumbs = ({
       {/* Course Name */}
       {courseSlug && (
         <>
-          <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
+          <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200" />
           <Link
             href={lessonsHref}
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 rounded-md px-2 py-1 hover:bg-muted/50 truncate max-w-[150px] sm:max-w-none"
+            className="group text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 hover:bg-muted/50 hover:scale-105 active:scale-95 truncate max-w-[150px] sm:max-w-none relative"
             aria-label={`View ${displayCourseTitle} course`}
           >
-            {displayCourseTitle}
+            <span className="relative z-10 transition-all duration-200">{displayCourseTitle}</span>
+            <span className="absolute inset-0 rounded-md bg-primary/10 scale-0 group-hover:scale-100 transition-transform duration-200 -z-0" />
           </Link>
         </>
       )}
 
       {/* Current Lesson Title */}
       <div className="flex items-center gap-2 flex-wrap">
-        <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
+        <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200" />
         <span
-          className="text-sm font-semibold text-foreground truncate max-w-[200px] sm:max-w-none"
+          className="text-sm font-semibold text-foreground truncate max-w-[200px] sm:max-w-none relative group"
           aria-current="page"
         >
-          {lessonTitle}
+          <span className="relative z-10">{lessonTitle}</span>
+          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
         </span>
 
         {/* Badges */}
         <div className="flex items-center gap-2 flex-shrink-0">
           {isPremium && (
-            <Badge className="bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 text-white font-semibold px-2.5 py-0.5 text-xs shadow-md border-0">
+            <Badge className="bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 text-white font-semibold px-2.5 py-0.5 text-xs shadow-md border-0 transition-all duration-200 hover:scale-110 hover:shadow-lg hover:rotate-[-2deg] cursor-default">
               ⭐ Premium
             </Badge>
           )}
@@ -106,7 +108,7 @@ export const LessonBreadcrumbs = ({
             <Badge
               key={index}
               className={cn(
-                "font-semibold px-2.5 py-0.5 text-xs shadow-md",
+                "font-semibold px-2.5 py-0.5 text-xs shadow-md transition-all duration-200 hover:scale-110",
                 badge.className
               )}
             >
