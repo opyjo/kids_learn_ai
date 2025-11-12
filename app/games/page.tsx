@@ -41,8 +41,8 @@ export default function GamesPage() {
           </div>
         </div>
 
-        {/* Games List */}
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        {/* Games Grid */}
+        <div className="grid gap-6">
           {games.map((game) => (
             <GameCard key={game.id} game={game} />
           ))}
