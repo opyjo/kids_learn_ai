@@ -475,14 +475,6 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                 </NavigationMenuItem>
               )}
 
-              {/* Simple Links */}
-              <NavigationMenuItem>
-                <NavLink
-                  item={NAV_ITEMS.pricing}
-                  isActive={isActive(NAV_ITEMS.pricing.href)}
-                />
-              </NavigationMenuItem>
-
               {/* Resources Mega Menu */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium transition-colors duration-150">
@@ -637,24 +629,6 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                         </CollapsibleContent>
                       </Collapsible>
                     )}
-
-                    {/* Other Links */}
-                    <Link
-                      href={NAV_ITEMS.pricing.href}
-                      onClick={closeMobileMenu}
-                      className={cn(
-                        "flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
-                        isActive(NAV_ITEMS.pricing.href)
-                          ? "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400"
-                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                      )}
-                    >
-                      {(() => {
-                        const PriceIcon = NAV_ITEMS.pricing.Icon;
-                        return <PriceIcon className="h-5 w-5" />;
-                      })()}
-                      <span>{NAV_ITEMS.pricing.label}</span>
-                    </Link>
 
                     {/* Resources Section */}
                     <Collapsible>

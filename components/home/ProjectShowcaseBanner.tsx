@@ -13,7 +13,7 @@ const ProjectShowcaseBanner = () => {
     {
       title: "Feelings Helper Bot",
       description:
-        "Use simple Python rules to help a friendly chatbot spot when a classmate might need a kind message.",
+        "Learn with your instructor to use simple Python rules for a friendly chatbot that helps classmates feel encouraged.",
       emoji: "🤖",
       color: "from-blue-500/20 to-purple-500/20",
       skills: ["Conditionals", "Empathy Prompts", "Kind Replies"],
@@ -21,7 +21,7 @@ const ProjectShowcaseBanner = () => {
     {
       title: "Idea Poster Maker",
       description:
-        "Write short Python instructions that guide an image tool to draw club posters, book covers, or pet badges.",
+        "Create together in live class—write Python instructions to guide an image tool for club posters, book covers, and more.",
       emoji: "🎨",
       color: "from-pink-500/20 to-orange-500/20",
       skills: ["Prompt Writing", "Creativity", "Safe Sharing"],
@@ -29,7 +29,7 @@ const ProjectShowcaseBanner = () => {
     {
       title: "Habit Tracker Buddy",
       description:
-        "Collect daily choices in a Python list and teach your mini AI to cheer on healthy habits like drinking water or reading.",
+        "Build alongside classmates—collect daily choices in Python lists and create mini AIs that celebrate healthy habits together.",
       emoji: "🌱",
       color: "from-green-500/20 to-teal-500/20",
       skills: ["Lists", "Positive Feedback", "Daily Streaks"],
@@ -37,7 +37,7 @@ const ProjectShowcaseBanner = () => {
     {
       title: "Homework Explain-It",
       description:
-        "Build a Python-powered study buddy that breaks down tough topics using kid-friendly language and fun examples.",
+        "Collaborate with peers to build Python-powered study buddies that break down tough topics with kid-friendly language.",
       emoji: "📚",
       color: "from-yellow-500/20 to-red-500/20",
       skills: ["Summaries", "Kid-Friendly Tips", "Responsible AI"],
@@ -53,11 +53,12 @@ const ProjectShowcaseBanner = () => {
             AI Project Show & Tell
           </Badge>
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 text-balance">
-            See What You Will Build
+            Build Real AI Projects in Live Classes
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Realistic, age-appropriate AI projects your child can build by
-            mastering Python basics first, then adding tiny intelligent boosts.
+            See what your child will create with expert guidance and peer
+            collaboration. Master Python basics together, then build
+            age-appropriate AI projects as a supportive learning community.
           </p>
         </div>
 

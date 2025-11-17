@@ -12,12 +12,13 @@ const CTASection = () => {
         <div className="relative z-10">
           <div className="text-6xl mb-6">🧠</div>
           <h2 className="text-4xl lg:text-5xl font-bold text-primary-foreground mb-6 text-balance">
-            Ready to Build Your First Friendly AI?
+            Ready to Join Our Live AI Classes?
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8 text-pretty leading-relaxed max-w-2xl mx-auto">
-            Join thousands of young makers discovering Python first—then using
-            that superpower to guide AI with creativity, kindness, and code.
-            Your mission control opens today!
+            Join a thriving community of young learners mastering Python with
+            expert instructors. Build confidence, real skills, and lifelong
+            friendships in live classes designed to prepare kids for an
+            AI-driven future. Start your journey today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/signup">
@@ -27,9 +28,9 @@ const CTASection = () => {
                 className="text-lg px-8 py-6 rounded-full shadow-xl hover:scale-105 transition-transform"
               >
                 <Rocket className="mr-2 h-5 w-5" />
-                Launch My Python AI Lab
-            </Button>
-          </Link>
+                Enroll in Live Classes
+              </Button>
+            </Link>
             <Link href="/playground">
               <Button
                 size="lg"
@@ -37,9 +38,9 @@ const CTASection = () => {
                 className="text-lg px-8 py-6 rounded-full border-2 border-primary-foreground/30 text-primary-foreground hover:bg-white/10 bg-transparent"
               >
                 <Play className="mr-2 h-5 w-5" />
-                Preview the Playground
-            </Button>
-          </Link>
+                Try Free Playground
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

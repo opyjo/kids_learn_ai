@@ -18,11 +18,12 @@ const SampleLessonsSection = () => {
           Try It Out
         </Badge>
         <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-          Start with These AI Adventures
+          Experience Our Live Curriculum
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-          Peek inside the Python lessons where kids learn coding basics first,
-          then teach computers to help, create, and imagine responsibly.
+          Preview the instructor-led lessons where kids learn Python basics
+          together in live classes, then explore how to guide AI responsibly
+          with expert support and peer collaboration.
         </p>
       </div>
 
@@ -52,9 +53,10 @@ const SampleLessonsSection = () => {
           </CardHeader>
           <CardContent>
             <CardDescription className="mb-6 text-base leading-relaxed">
-              Your first Python + AI mission! Discover variables and lists while
-              creating a friendly greeter that shares encouraging words every
-              time someone joins your project.
+              Your first Python + AI mission in live class! Learn variables and
+              lists with your instructor while creating a friendly greeter that
+              shares encouraging words. Build confidence through hands-on
+              practice.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-primary/30 transition-colors">
               <div className="text-foreground">
@@ -93,8 +95,9 @@ const SampleLessonsSection = () => {
           </CardHeader>
           <CardContent>
             <CardDescription className="mb-6 text-base leading-relaxed">
-              Use loops and conditionals to help your AI guess if a message
-              sounds happy or needs a pep talk—no complex math required.
+              Join your class to explore loops and conditionals, helping AI
+              understand if messages sound happy or need encouragement. Expert
+              instructors guide you through every step—no complex math required.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-accent/30 transition-colors">
               <div className="text-foreground">
@@ -134,8 +137,9 @@ const SampleLessonsSection = () => {
           </CardHeader>
           <CardContent>
             <CardDescription className="mb-6 text-base leading-relaxed">
-              Blend storytelling and Python prompts to guide a creative model in
-              co-authoring safe, uplifting adventures.
+              Collaborate with classmates to blend storytelling and Python
+              prompts, learning how to guide creative AI in co-authoring safe,
+              uplifting adventures with expert instruction.
             </CardDescription>
             <div className="bg-secondary/50 p-4 rounded-xl font-mono text-sm border-2 border-border group-hover:border-primary/30 transition-colors">
               <div className="text-foreground">

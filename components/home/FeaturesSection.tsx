@@ -16,12 +16,13 @@ const FeaturesSection = () => {
           Why Kids & Parents Love KidsLearn AI
         </Badge>
         <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-          AI Adventures That Feel Like Play
+          Live Learning That Builds Confidence
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-          We lead with Python fundamentals, then layer on age-appropriate AI
-          concepts so kids understand how intelligent tools work—and how to
-          guide them responsibly.
+          Expert instructors guide kids through Python fundamentals in live
+          classes, then layer on age-appropriate AI concepts. Learn together in
+          a supportive community where understanding how intelligent tools work
+          becomes second nature.
         </p>
       </div>
 
@@ -31,13 +32,16 @@ const FeaturesSection = () => {
             <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
               <BrainCircuit className="h-8 w-8 text-primary-foreground" />
             </div>
-            <CardTitle className="text-2xl">Build Mini AIs with Python</CardTitle>
+            <CardTitle className="text-2xl">
+              Learn Python from Expert Instructors
+            </CardTitle>
           </CardHeader>
           <CardContent className="text-center">
             <CardDescription className="text-base leading-relaxed">
-              Use core Python skills to train chatbots, create smart art, and
-              explore machine learning ideas—all inside a kid-friendly browser
-              editor.
+              Master Python fundamentals through live instruction with real-time
+              guidance. Expert educators break down complex concepts, answer
+              questions as you learn, and ensure every student builds genuine
+              coding skills.
             </CardDescription>
           </CardContent>
         </Card>
@@ -47,13 +51,16 @@ const FeaturesSection = () => {
             <div className="mx-auto w-16 h-16 bg-gradient-to-br from-accent to-accent/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
               <Sparkles className="h-8 w-8 text-accent-foreground" />
             </div>
-            <CardTitle className="text-2xl">Create Magical Moments</CardTitle>
+            <CardTitle className="text-2xl">
+              Build Together in a Safe Community
+            </CardTitle>
           </CardHeader>
           <CardContent className="text-center">
             <CardDescription className="text-base leading-relaxed">
-              Unlock badges for designing helpful assistants, storytelling with
-              AI images, and solving real-world puzzles—while seeing how Python
-              powers each win.
+              Learn alongside peers in a moderated environment where
+              collaboration thrives. Share projects, celebrate achievements
+              together, and build confidence through supportive peer
+              learning—all while having fun.
             </CardDescription>
           </CardContent>
         </Card>
@@ -63,13 +70,14 @@ const FeaturesSection = () => {
             <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary/80 to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
               <ShieldCheck className="h-8 w-8 text-primary-foreground" />
             </div>
-            <CardTitle className="text-2xl">Safe & Guided</CardTitle>
+            <CardTitle className="text-2xl">Expert-Led AI Education</CardTitle>
           </CardHeader>
           <CardContent className="text-center">
             <CardDescription className="text-base leading-relaxed">
-              Every mission includes ethical discussions, parent tips, and
-              educator-designed guardrails so Python practice stays safe,
-              positive, and age-appropriate.
+              Experienced instructors provide personalized guidance, ethical
+              discussions, and age-appropriate curriculum designed by educators.
+              Safe, positive learning with expert oversight ensures kids build
+              both skills and responsibility.
             </CardDescription>
           </CardContent>
         </Card>

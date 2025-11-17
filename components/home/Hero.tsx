@@ -10,18 +10,19 @@ const Hero = () => {
         <div className="text-center lg:text-left">
           <Badge className="mb-6 bg-accent/10 text-accent hover:bg-accent/20 border-accent/20 rounded-full px-4 py-2 text-sm font-medium">
             <Sparkles className="w-4 h-4 inline mr-2" />
-            Learn Python, Power Friendly AI
+            Live Classes with Expert Instructors
           </Badge>
           <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 text-balance leading-tight">
-            Learn Python.
+            AI Literacy Starts Here.
             <span className="text-primary block mt-2">
-              Understand AI. No Shortcuts.
+              Live Classes That Build Real Skills.
             </span>
           </h1>
           <p className="text-xl lg:text-2xl text-muted-foreground mb-8 text-pretty leading-relaxed">
-            We teach Python fundamentals the right way—real code, real concepts.
-            Then we explore how AI actually works with simple, honest examples.
-            For kids 8-16 who want to truly understand technology.
+            Join expert-led live classes where kids aged 9-13 learn Python
+            fundamentals together, then explore how AI actually works. Build
+            confidence, understanding, and real skills in a supportive
+            community—preparing for an AI-driven future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <Link href="/signup">
@@ -30,7 +31,7 @@ const Hero = () => {
                 className="text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
               >
                 <Rocket className="mr-2 h-5 w-5" />
-                Start Learning Python
+                Join Live Classes
               </Button>
             </Link>
             <Link href="/playground">
@@ -40,18 +41,18 @@ const Hero = () => {
                 className="text-lg px-8 py-6 rounded-full border-2 hover:bg-secondary bg-transparent"
               >
                 <Play className="mr-2 h-5 w-5" />
-                See Python in Action
+                Try Free Playground
               </Button>
             </Link>
           </div>
           <div className="mt-8 flex items-center gap-6 justify-center lg:justify-start text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-primary" />
-              <span>No credit card or prior coding needed</span>
+              <span>Live interactive classes with expert guidance</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-primary" />
-              <span>Python-first lessons that grow into AI projects</span>
+              <span>Learn alongside peers in a safe community</span>
             </div>
           </div>
         </div>

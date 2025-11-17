@@ -17,11 +17,12 @@ const WhatYoullCreateSection = () => {
             AI Journey Map
           </Badge>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-            What You'll Create with AI
+            Your AI Learning Journey
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            Each milestone blends Python skills with age-appropriate AI tools so
-            kids learn to invent, explain, and act responsibly.
+            Expert instructors guide you through each milestone, blending Python
+            skills with age-appropriate AI tools. Learn to invent, explain, and
+            act responsibly alongside peers in live classes.
           </p>
         </div>
 
@@ -40,8 +41,9 @@ const WhatYoullCreateSection = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Discover how computers learn, practice clear instructions, and
-                collect positive language for friendly bots.
+                Discover with your instructor how computers learn, practice
+                clear instructions together, and collect positive language for
+                friendly bots.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
                 {["python basics", "kind words", "ethics"].map((tag) => (
@@ -71,9 +73,9 @@ const WhatYoullCreateSection = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Use Python conditionals and prompt patterns to shape
-                personality, tone, and safe replies while building bots that
-                help classmates study or feel encouraged.
+                Learn from expert guidance to use Python conditionals and prompt
+                patterns, shaping personality and tone. Collaborate with peers
+                to build bots that help classmates study or feel encouraged.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
                 {["prompts", "if/else", "empathy"].map((tag) => (
@@ -103,9 +105,9 @@ const WhatYoullCreateSection = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Collect clues from numbers and text with Python, then teach
-                simple models to spot helpful patterns like mood or weather
-                trends.
+                Work with your class to collect clues from numbers and text
+                using Python, then teach simple models together to spot helpful
+                patterns like mood or weather trends.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
                 {["datasets", "loops", "predictions"].map((tag) => (
@@ -135,8 +137,9 @@ const WhatYoullCreateSection = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Explore how AI sees images—use Python to label pictures, design
-                safety overlays, and celebrate inclusive representations.
+                Explore together how AI sees images—your instructor guides you
+                through Python to label pictures, design safety overlays, and
+                celebrate inclusive representations.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
                 {["image prompts", "functions", "teamwork"].map((tag) => (
@@ -166,9 +169,9 @@ const WhatYoullCreateSection = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Mix Python automation with storytelling, sound, and art tools to
-                co-create experiences with AI while keeping human ideas in
-                control.
+                Collaborate with peers to mix Python automation with
+                storytelling, sound, and art tools. Co-create experiences with
+                AI in live sessions while keeping human ideas in control.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
                 {["generative art", "music", "story craft"].map((tag) => (
@@ -198,8 +201,9 @@ const WhatYoullCreateSection = () => {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed mb-4">
-                Present capstone creations, write AI safety pledges, and share
-                impact stories with family and friends.
+                Present capstone creations to your class, write AI safety
+                pledges together, and share impact stories with instructors,
+                peers, family and friends.
               </CardDescription>
               <div className="flex flex-wrap gap-2">
                 {["presentations", "guidelines", "portfolio"].map((tag) => (
