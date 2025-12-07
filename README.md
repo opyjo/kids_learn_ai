@@ -1,1 +1,0 @@
-# kids-learn-ai

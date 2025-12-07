@@ -62,7 +62,7 @@ const checkRateLimit = (identifier: string): boolean => {
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { messages, tutorId = DEFAULT_TUTOR_ID } = await req.json();
+    const { messages, tutorId = DEFAULT_TUTOR_ID, context } = await req.json();
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
@@ -167,10 +167,14 @@ export const POST = async (req: NextRequest) => {
     ];
 
     // Prepare messages for OpenAI with safety context
+    const contextSection = context 
+      ? `\n\nCURRENT LESSON CONTEXT:\n${context}`
+      : "";
+    
     const openAIMessages: ChatMessage[] = [
       {
         role: "system",
-        content: `${systemPrompt}
+        content: `${systemPrompt}${contextSection}
 
 CRITICAL SAFETY REMINDER:
 - You are chatting with a child (ages 8-16)

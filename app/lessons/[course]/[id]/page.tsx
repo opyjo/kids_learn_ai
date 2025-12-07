@@ -47,20 +47,23 @@ export default async function LessonPage({ params }: LessonPageProps) {
     notFound();
   }
 
+  // Fetch user profile for subscription and learning mode
+  let userSubscription = "free";
+  let learningMode: "self_paced" | "tutor_based" = "self_paced";
+  
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("subscription_status, learning_mode")
+      .eq("id", user.id)
+      .single();
+
+    userSubscription = profile?.subscription_status || "free";
+    learningMode = profile?.learning_mode || "self_paced";
+  }
+
   // Check access for premium lessons (order_index > 3)
   if (!isFreeLesson(lesson.order_index)) {
-    // Fetch user profile to check subscription status
-    let userSubscription = "free";
-    if (user) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("subscription_status")
-        .eq("id", user.id)
-        .single();
-
-      userSubscription = profile?.subscription_status || "free";
-    }
-
     // Redirect free users to pricing page
     if (userSubscription === "free") {
       redirect("/pricing");
@@ -88,6 +91,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
       userId={user?.id}
       courseSlug={lesson.courses?.slug}
       courseTitle={lesson.courses?.title}
+      learningMode={learningMode}
     />
   );
 }

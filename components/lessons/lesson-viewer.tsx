@@ -25,6 +25,9 @@ import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import { PythonEditor } from "@/components/code/python-editor";
 import { TrinketEditor } from "@/components/code/trinket-editor";
 import { AIPlayground } from "@/components/lessons/ai-playground";
+import { BookmarkButton } from "@/components/lessons/bookmark-button";
+import { NotesPanel } from "@/components/lessons/notes-panel";
+import { InlineTutor } from "@/components/lessons/inline-tutor";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -61,6 +64,7 @@ interface LessonViewerProps {
   userId?: string;
   courseSlug?: string;
   courseTitle?: string;
+  learningMode?: "self_paced" | "tutor_based";
 }
 
 export function LessonViewer({
@@ -68,6 +72,7 @@ export function LessonViewer({
   userId,
   courseSlug,
   courseTitle,
+  learningMode = "self_paced",
 }: Readonly<LessonViewerProps>) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -330,6 +335,41 @@ export function LessonViewer({
                               </div>
                             </div>
                           </div>
+
+                          {/* Learning Mode Tools (AI/ML Course) */}
+                          {userId && (
+                            <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border/50">
+                              {learningMode === "tutor_based" ? (
+                                <InlineTutor
+                                  lessonId={lesson.dbId}
+                                  lessonTitle={lesson.title}
+                                  lessonContent={lesson.content}
+                                  currentCode={currentCode}
+                                />
+                              ) : (
+                                <>
+                                  <BookmarkButton
+                                    lessonId={lesson.dbId}
+                                    variant="outline"
+                                    size="sm"
+                                    showText={true}
+                                  />
+                                  <NotesPanel
+                                    lessonId={lesson.dbId}
+                                    lessonTitle={lesson.title}
+                                  />
+                                </>
+                              )}
+                              {learningMode === "self_paced" && (
+                                <InlineTutor
+                                  lessonId={lesson.dbId}
+                                  lessonTitle={lesson.title}
+                                  lessonContent={lesson.content}
+                                  currentCode={currentCode}
+                                />
+                              )}
+                            </div>
+                          )}
                         </CardHeader>
 
                         <Separator />
@@ -744,6 +784,42 @@ export function LessonViewer({
                     </div>
                   </div>
                 </div>
+
+                {/* Learning Mode Tools */}
+                {userId && (
+                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border/50">
+                    {learningMode === "tutor_based" ? (
+                      <InlineTutor
+                        lessonId={lesson.dbId}
+                        lessonTitle={lesson.title}
+                        lessonContent={lesson.content}
+                        currentCode={currentCode}
+                      />
+                    ) : (
+                      <>
+                        <BookmarkButton
+                          lessonId={lesson.dbId}
+                          variant="outline"
+                          size="sm"
+                          showText={true}
+                        />
+                        <NotesPanel
+                          lessonId={lesson.dbId}
+                          lessonTitle={lesson.title}
+                        />
+                      </>
+                    )}
+                    {/* Always show Ask Tutor in self-paced mode too, just less prominent */}
+                    {learningMode === "self_paced" && (
+                      <InlineTutor
+                        lessonId={lesson.dbId}
+                        lessonTitle={lesson.title}
+                        lessonContent={lesson.content}
+                        currentCode={currentCode}
+                      />
+                    )}
+                  </div>
+                )}
               </CardHeader>
 
               <Separator />

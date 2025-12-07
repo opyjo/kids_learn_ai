@@ -71,32 +71,12 @@ export default async function DashboardPage() {
     .eq("id", authUser.id)
     .single();
 
-  // Fetch user progress with lesson metadata
-  const { data: progressRecords } = await supabase
-    .from("student_progress")
-    .select(
-      `
-        lesson_id,
-        status,
-        updated_at,
-        lessons (
-          id,
-          title,
-          difficulty_level,
-          order_index,
-          courses (slug)
-        )
-      `
-    )
-    .eq("student_id", authUser.id)
-    .order("updated_at", { ascending: false });
-
   // Fetch total lessons count
   const { count: totalLessons } = await supabase
     .from("lessons")
     .select("*", { count: "exact" });
 
-  // Fetch completed lessons with lesson metadata for accurate counts
+  // Fetch completed lessons with lesson metadata
   const { data: completedLessonRecords, count: completedLessonsCount } =
     await supabase
       .from("completed_lessons")
@@ -131,49 +111,6 @@ export default async function DashboardPage() {
     } | null;
   };
 
-  const progressActivities: LessonActivity[] =
-    progressRecords?.map((record: any) => ({
-      lessonId: record.lesson_id,
-      status: record.status,
-      updatedAt: record.updated_at ?? null,
-      lesson: record.lessons ?? null,
-    })) ?? [];
-
-  const completedActivities: LessonActivity[] =
-    completedLessonRecords?.map((record: any) => ({
-      lessonId: record.lesson_id,
-      status: "completed",
-      updatedAt: record.completed_at ?? null,
-      lesson: record.lessons ?? null,
-    })) ?? [];
-
-  const activityMap = new Map<string, LessonActivity>();
-
-  progressActivities.forEach((activity) => {
-    activityMap.set(activity.lessonId, activity);
-  });
-
-  completedActivities.forEach((activity) => {
-    const existing = activityMap.get(activity.lessonId);
-    const existingTimestamp = existing?.updatedAt
-      ? Date.parse(existing.updatedAt)
-      : 0;
-    const activityTimestamp = activity.updatedAt
-      ? Date.parse(activity.updatedAt)
-      : 0;
-
-    if (!existing || activityTimestamp > existingTimestamp) {
-      activityMap.set(activity.lessonId, {
-        ...(existing ?? {}),
-        ...activity,
-        status: "completed",
-      });
-    }
-  });
-
-  const getActivityTimestamp = (activity: LessonActivity) =>
-    activity.updatedAt ? Date.parse(activity.updatedAt) : 0;
-
   const formatActivityDate = (timestamp: string | null) => {
     if (!timestamp) {
       return "No recent activity";
@@ -187,9 +124,14 @@ export default async function DashboardPage() {
     });
   };
 
-  const recentLessonsToDisplay = Array.from(activityMap.values())
-    .sort((a, b) => getActivityTimestamp(b) - getActivityTimestamp(a))
-    .slice(0, 4);
+  // Map completed lessons to activity format
+  const recentLessonsToDisplay: LessonActivity[] =
+    completedLessonRecords?.map((record: any) => ({
+      lessonId: record.lesson_id,
+      status: "completed",
+      updatedAt: record.completed_at ?? null,
+      lesson: record.lessons ?? null,
+    })).slice(0, 4) ?? [];
 
   const metadata = authUser.user_metadata as { full_name?: string } | null;
   const userName =
