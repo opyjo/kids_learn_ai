@@ -45,7 +45,7 @@ export const CodeBlock = memo(({ code, language }: CodeBlockProps) => {
         <button
           onClick={handleCopy}
           aria-label={copied ? "Copied to clipboard" : "Copy code"}
-          className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-md bg-background/50 hover:bg-background border border-border/50 transition-all hover:scale-105"
+          className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-md bg-background/50 hover:bg-background border border-border/50 transition-all hover:scale-105 cursor-pointer"
         >
           {copied ? (
             <>

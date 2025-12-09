@@ -169,7 +169,7 @@ const WhatYoullCreateSection = () => {
             const IconComponent = card.icon;
             return (
               <StaggerItem key={card.title}>
-                <Card className="rounded-2xl border-2 hover:shadow-xl transition-all h-full">
+                <Card className="rounded-2xl border-2 hover:shadow-xl transition-all h-full cursor-pointer">
                   <CardHeader>
                     <div className="flex items-center gap-3 mb-2">
                       <div

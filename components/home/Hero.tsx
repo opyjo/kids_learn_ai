@@ -16,15 +16,15 @@ const Hero = () => {
         {/* Text Content */}
         <div className="text-center lg:text-left z-10">
           <FadeIn>
-            <Badge className="mb-6 bg-accent/10 text-accent hover:bg-accent/20 border-accent/20 rounded-full px-4 py-2 text-sm font-medium">
+            <Badge className="mb-6 bg-accent/10 text-accent hover:bg-accent/20 border-accent/20 rounded-full px-4 py-2 text-sm font-medium cursor-pointer">
               <Sparkles className="w-4 h-4 inline mr-2" />
               Live Classes with Expert Instructors
             </Badge>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 text-balance leading-tight">
-              AI Literacy Starts Here.
-              <span className="text-primary block mt-2">
+            <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-[1.1]">
+              AI Literacy Starts Here.{" "}
+              <span className="text-primary">
                 Live Classes That Build Real Skills.
               </span>
             </h1>

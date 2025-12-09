@@ -81,7 +81,7 @@ const FeaturesSection = () => {
         {/* Feature Cards */}
         <StaggerContainer className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <StaggerItem>
-            <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full">
+            <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
                   <BrainCircuit className="h-8 w-8 text-primary-foreground" />
@@ -102,7 +102,7 @@ const FeaturesSection = () => {
           </StaggerItem>
 
           <StaggerItem>
-            <Card className="border-2 hover:border-accent/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full">
+            <Card className="border-2 hover:border-accent/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto w-16 h-16 bg-gradient-to-br from-accent to-accent/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
                   <Sparkles className="h-8 w-8 text-accent-foreground" />
@@ -123,7 +123,7 @@ const FeaturesSection = () => {
           </StaggerItem>
 
           <StaggerItem>
-            <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full">
+            <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
               <CardHeader className="text-center pb-4">
                 <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary/80 to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
                   <ShieldCheck className="h-8 w-8 text-primary-foreground" />

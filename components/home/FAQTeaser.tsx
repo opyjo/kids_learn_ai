@@ -6,7 +6,7 @@ const FAQTeaser = () => {
       <div className="max-w-3xl mx-auto text-center py-8">
         <p className="text-muted-foreground">
           Have questions? Check out our
-          <Link href="/faq" className="text-primary hover:underline ml-1">
+          <Link href="/faq" className="text-primary hover:underline ml-1 cursor-pointer">
             FAQ
           </Link>
           .

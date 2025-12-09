@@ -78,7 +78,7 @@ const SampleLessonsSection = () => {
       {/* Lesson Cards */}
       <StaggerContainer className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <StaggerItem>
-          <Card className="hover:shadow-2xl transition-all duration-300 rounded-2xl border-2 hover:border-primary/50 overflow-hidden group h-full">
+          <Card className="hover:shadow-2xl transition-all duration-300 rounded-2xl border-2 hover:border-primary/50 overflow-hidden group h-full cursor-pointer">
             <div className="h-2 bg-gradient-to-r from-primary to-primary/60" />
             <CardHeader>
               <div className="flex items-center justify-between mb-3">
@@ -124,7 +124,7 @@ const SampleLessonsSection = () => {
         </StaggerItem>
 
         <StaggerItem>
-          <Card className="hover:shadow-2xl transition-all duration-300 rounded-2xl border-2 hover:border-accent/50 overflow-hidden group h-full">
+          <Card className="hover:shadow-2xl transition-all duration-300 rounded-2xl border-2 hover:border-accent/50 overflow-hidden group h-full cursor-pointer">
             <div className="h-2 bg-gradient-to-r from-accent to-accent/60" />
             <CardHeader>
               <div className="flex items-center justify-between mb-3">
@@ -172,7 +172,7 @@ const SampleLessonsSection = () => {
         </StaggerItem>
 
         <StaggerItem>
-          <Card className="hover:shadow-2xl transition-all duration-300 rounded-2xl border-2 hover:border-primary/50 overflow-hidden group relative h-full">
+          <Card className="hover:shadow-2xl transition-all duration-300 rounded-2xl border-2 hover:border-primary/50 overflow-hidden group relative h-full cursor-pointer">
             <div className="h-2 bg-gradient-to-r from-primary via-accent to-primary" />
             <CardHeader>
               <div className="flex items-center justify-between mb-3">

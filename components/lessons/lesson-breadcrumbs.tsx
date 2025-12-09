@@ -50,7 +50,7 @@ export const LessonBreadcrumbs = ({
       {/* Home */}
       <Link
         href="/"
-        className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 -ml-2 hover:bg-muted/50 hover:scale-105 active:scale-95"
+        className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 -ml-2 hover:bg-muted/50 hover:scale-105 active:scale-95 cursor-pointer"
         aria-label="Go to homepage"
       >
         <Home className="h-4 w-4 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-[-5deg]" />
@@ -63,7 +63,7 @@ export const LessonBreadcrumbs = ({
           <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200" />
           <Link
             href={backHref}
-            className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 hover:bg-muted/50 hover:scale-105 active:scale-95"
+            className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 hover:bg-muted/50 hover:scale-105 active:scale-95 cursor-pointer"
             aria-label={`Go to ${backLabel}`}
           >
             <span className="transition-all duration-200">{backLabel}</span>
@@ -77,7 +77,7 @@ export const LessonBreadcrumbs = ({
           <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200" />
           <Link
             href={lessonsHref}
-            className="group text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 hover:bg-muted/50 hover:scale-105 active:scale-95 truncate max-w-[150px] sm:max-w-none relative"
+            className="group text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 hover:bg-muted/50 hover:scale-105 active:scale-95 truncate max-w-[150px] sm:max-w-none relative cursor-pointer"
             aria-label={`View ${displayCourseTitle} course`}
           >
             <span className="relative z-10 transition-all duration-200">{displayCourseTitle}</span>

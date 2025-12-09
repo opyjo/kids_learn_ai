@@ -30,7 +30,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/lessons?course=python-foundations"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   All Lessons
                 </Link>
@@ -38,7 +38,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/playground"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Code Playground
                 </Link>
@@ -46,7 +46,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/blog"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Blog
                 </Link>
@@ -54,7 +54,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   About Us
                 </Link>
@@ -68,7 +68,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/signup"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Sign Up Free
                 </Link>
@@ -76,7 +76,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/login"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Sign In
                 </Link>
@@ -84,7 +84,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/dashboard"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   My Dashboard
                 </Link>
@@ -92,7 +92,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/profile"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   My Profile
                 </Link>
@@ -106,7 +106,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/help"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Help Center
                 </Link>
@@ -114,7 +114,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/contact"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Contact Us
                 </Link>
@@ -122,7 +122,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/privacy"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Privacy Policy
                 </Link>
@@ -130,7 +130,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/terms"
-                  className="hover:text-foreground transition-colors"
+                  className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   Terms of Service
                 </Link>
