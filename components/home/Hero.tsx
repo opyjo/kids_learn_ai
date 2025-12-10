@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Play, Rocket, CheckCircle } from "lucide-react";
+import { Sparkles, CheckCircle } from "lucide-react";
 import { FadeIn, SlideInRight } from "@/components/ui/motion";
 
 const Hero = () => {
@@ -38,37 +38,30 @@ const Hero = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.3}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link href="/signup">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+              <Link href="/inquiry">
                 <Button
                   size="lg"
                   className="text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
                 >
-                  <Rocket className="mr-2 h-5 w-5" />
-                  Join Live Classes
+                  <Sparkles className="mr-2 h-5 w-5" />
+                  Book a FREE Trial Class
                 </Button>
               </Link>
-              <Link href="/playground">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="text-lg px-8 py-6 rounded-full border-2 hover:bg-secondary bg-transparent"
-                >
-                  <Play className="mr-2 h-5 w-5" />
-                  Try Free Playground
-                </Button>
-              </Link>
+              <span className="text-sm text-muted-foreground">
+                No commitment required
+              </span>
             </div>
           </FadeIn>
           <FadeIn delay={0.4}>
             <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center lg:justify-start text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Live interactive classes with expert guidance</span>
+                <CheckCircle className="h-5 w-5 text-green-600" />
+                <span>First class FREE - try before you commit</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Learn alongside peers in a safe community</span>
+                <span>Ages 9-10 (Tue) & 11-13 (Thu)</span>
               </div>
             </div>
           </FadeIn>

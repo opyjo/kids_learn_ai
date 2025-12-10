@@ -41,7 +41,6 @@ import {
   Brain,
   Code,
   X,
-  Rocket,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
@@ -187,24 +186,34 @@ const AnnouncementBar = ({
           transition={{ duration: 0.3 }}
           className="bg-gradient-to-r from-primary via-accent to-primary text-primary-foreground overflow-hidden"
         >
-          <div className="container mx-auto px-4 py-2 flex items-center justify-center gap-4 relative">
-            <div className="flex items-center gap-2 text-sm font-medium">
-              <Sparkles className="h-4 w-4 animate-pulse" />
-              <span>New: AI & Machine Learning Course Now Available!</span>
-              <Link
-                href="/lessons?course=ai-ml"
-                className="underline underline-offset-2 hover:no-underline font-semibold"
+          <div className="container mx-auto px-4 py-2 sm:py-2.5">
+            <div className="flex items-center justify-between gap-2 sm:gap-4">
+              {/* Content - stacks on mobile */}
+              <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium min-w-0">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-pulse shrink-0" />
+                  <span className="truncate sm:truncate-none">
+                    Try your first class FREE!
+                  </span>
+                </div>
+                <Link
+                  href="/inquiry"
+                  className="inline-flex items-center gap-1 bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-full text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap"
+                >
+                  Book Now
+                  <span className="hidden sm:inline">→</span>
+                </Link>
+              </div>
+
+              {/* Dismiss button */}
+              <button
+                onClick={onDismiss}
+                className="p-1.5 hover:bg-white/20 rounded-full transition-colors shrink-0 cursor-pointer"
+                aria-label="Dismiss announcement"
               >
-                Start Learning →
-              </Link>
+                <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              </button>
             </div>
-            <button
-              onClick={onDismiss}
-              className="absolute right-4 p-1 hover:bg-white/20 rounded-full transition-colors"
-              aria-label="Dismiss announcement"
-            >
-              <X className="h-4 w-4" />
-            </button>
           </div>
         </motion.div>
       )}
@@ -451,7 +460,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
       // Calculate scroll progress
       const scrollHeight =
         document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+      const progress =
+        scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
       setScrollProgress(progress);
     };
 
@@ -621,9 +631,9 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                       asChild
                       className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-sm shadow-lg shadow-primary/25"
                     >
-                      <Link href="/signup" className="flex items-center gap-2">
-                        <Rocket className="h-4 w-4" />
-                        Get Started
+                      <Link href="/inquiry" className="flex items-center gap-2">
+                        <Sparkles className="h-4 w-4" />
+                        Free Trial
                       </Link>
                     </Button>
                   </>
@@ -803,11 +813,11 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                             className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
                           >
                             <Link
-                              href="/signup"
+                              href="/inquiry"
                               className="flex items-center gap-2 justify-center"
                             >
-                              <Rocket className="h-4 w-4" />
-                              Get Started
+                              <Sparkles className="h-4 w-4" />
+                              Free Trial
                             </Link>
                           </Button>
                         </>

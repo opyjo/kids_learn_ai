@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, Rocket, User } from "lucide-react";
+import { Sparkles, User } from "lucide-react";
 import { ScaleIn, FadeIn } from "@/components/ui/motion";
 
 const CTASection = () => {
@@ -48,39 +48,33 @@ const CTASection = () => {
               </FadeIn>
               <FadeIn delay={0.1}>
                 <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-foreground mb-6 text-balance">
-                  Ready to Join Our Live AI Classes?
+                  Try Your First Class FREE
                 </h2>
               </FadeIn>
               <FadeIn delay={0.2}>
                 <p className="text-lg lg:text-xl text-primary-foreground/90 mb-8 text-pretty leading-relaxed">
                   Join a thriving community of young learners mastering Python
-                  with expert instructors. Build confidence, real skills, and
-                  lifelong friendships in live classes designed to prepare kids
-                  for an AI-driven future. Start your journey today!
+                  with expert instructors. See if our live classes are the right
+                  fit for your child - no commitment required. Ages 9-10 on
+                  Tuesdays, Ages 11-13 on Thursdays.
                 </p>
               </FadeIn>
               <FadeIn delay={0.3}>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/signup">
+                <div className="flex flex-col sm:flex-row gap-4 items-center">
+                  <Link href="/inquiry">
                     <Button
                       size="lg"
                       variant="secondary"
                       className="text-lg px-8 py-6 rounded-full shadow-xl hover:scale-105 transition-transform w-full sm:w-auto"
                     >
-                      <Rocket className="mr-2 h-5 w-5" />
-                      Enroll in Live Classes
+                      <Sparkles className="mr-2 h-5 w-5" />
+                      Book Free Trial Class
                     </Button>
                   </Link>
-                  <Link href="/playground">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="text-lg px-8 py-6 rounded-full border-2 border-primary-foreground/30 text-primary-foreground hover:bg-white/10 bg-transparent w-full sm:w-auto"
-                    >
-                      <Play className="mr-2 h-5 w-5" />
-                      Try Free Playground
-                    </Button>
-                  </Link>
+                  <span className="text-primary-foreground/80 text-sm">
+                    <span className="line-through opacity-70">$249</span>{" "}
+                    <span className="font-semibold">$159.99</span> Founding Rate
+                  </span>
                 </div>
               </FadeIn>
             </div>

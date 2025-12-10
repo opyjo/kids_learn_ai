@@ -24,10 +24,11 @@ import {
   Users,
   Code,
   Gamepad2,
-  MessageSquare,
-  Zap,
+  Calendar,
   Check,
   X,
+  GraduationCap,
+  Shield,
 } from "lucide-react";
 import Link from "next/link";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -52,7 +53,7 @@ export default function PricingPage() {
     checkAuth();
   }, []);
 
-  const handleGetStarted = () => {
+  const handleScrollToPayment = () => {
     const paymentSection = document.getElementById("payment-instructions");
     if (paymentSection) {
       paymentSection.scrollIntoView({ behavior: "smooth" });
@@ -66,149 +67,123 @@ export default function PricingPage() {
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-            Simple, Transparent Pricing
+          <Badge className="mb-4 bg-green-100 text-green-700 border-green-300 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700 rounded-full px-4 py-2">
+            <Sparkles className="w-4 h-4 inline mr-2" />
+            First Class FREE - No Commitment
           </Badge>
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            Start Learning AI & Python Today
+            Live Python & AI Classes for Kids
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Choose the plan that fits your learning journey. No hidden fees,
-            cancel anytime.
+            Expert-led 8-10 week program. Try your first class free, then
+            decide if it's right for your child.
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
-          {/* Free Plan */}
-          <Card className="relative border-2">
-            <CardHeader>
-              <Badge className="w-fit mb-2 bg-gray-100 text-gray-700 border-gray-300">
-                Free Forever
-              </Badge>
-              <CardTitle className="text-3xl">Free Plan</CardTitle>
-              <CardDescription>Perfect for getting started</CardDescription>
-              <div className="mt-4">
-                <span className="text-4xl font-bold">$0</span>
-                <span className="text-muted-foreground">/month</span>
+        {/* Schedule Cards */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+          <Card className="border-2 border-primary/20">
+            <CardContent className="p-6 text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="h-8 w-8 text-primary" />
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">
-                    Access to introductory lessons
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">
-                    Python basics and fundamentals
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">Interactive code playground</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">Practice games and challenges</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">
-                    AI Tutors (4 subjects: Python, Math, Science, Arts)
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <X className="h-5 w-5 text-gray-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-muted-foreground">
-                    Advanced lessons
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <X className="h-5 w-5 text-gray-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-muted-foreground">
-                    Live teacher-led sessions
-                  </span>
-                </div>
-              </div>
-
-              <Button asChild variant="outline" className="w-full">
-                <Link href="/signup">Start Free</Link>
-              </Button>
+              <h3 className="text-2xl font-bold mb-2">Ages 9-10</h3>
+              <p className="text-3xl font-bold text-primary mb-2">Tuesdays</p>
+              <p className="text-muted-foreground">Weekly live classes</p>
             </CardContent>
           </Card>
-
-          {/* Premium Plan */}
-          <Card className="relative border-2 border-primary shadow-xl">
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-              <Badge className="bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white border-0 rounded-full px-4 py-1">
-                Most Popular
-              </Badge>
-            </div>
-            <CardHeader>
-              <Badge className="w-fit mb-2 bg-primary/10 text-primary border-primary/20">
-                Premium Access
-              </Badge>
-              <CardTitle className="text-3xl">Premium Plan</CardTitle>
-              <CardDescription>Complete learning experience</CardDescription>
-              <div className="mt-4">
-                <span className="text-4xl font-bold">$79.99</span>
-                <span className="text-muted-foreground">/month</span>
+          <Card className="border-2 border-accent/20">
+            <CardContent className="p-6 text-center">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="h-8 w-8 text-accent" />
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm font-medium">
-                    Everything in Free, plus:
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">
-                    All advanced Python & AI lessons
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">
-                    Live weekly teacher-led sessions
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">Personalized code feedback</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">
-                    Project-based learning modules
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm">Certificate of completion</span>
-                </div>
-              </div>
-
-              <Button
-                onClick={handleGetStarted}
-                className="w-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
-              >
-                Get Started
-              </Button>
+              <h3 className="text-2xl font-bold mb-2">Ages 11-13</h3>
+              <p className="text-3xl font-bold text-accent mb-2">Thursdays</p>
+              <p className="text-muted-foreground">Weekly live classes</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Feature Comparison Section */}
-        <div className="max-w-5xl mx-auto mb-16">
+        {/* Main Pricing Card */}
+        <div className="max-w-3xl mx-auto mb-16">
+          <Card className="relative border-2 border-primary shadow-2xl overflow-hidden">
+            <div className="absolute top-0 right-0 bg-green-500 text-white px-4 py-1 text-sm font-semibold rounded-bl-lg">
+              First Class FREE
+            </div>
+            <CardHeader className="text-center pt-10">
+              <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <GraduationCap className="h-10 w-10 text-white" />
+              </div>
+              <CardTitle className="text-3xl">8-10 Week Program</CardTitle>
+              <CardDescription className="text-lg">
+                Complete Python & AI curriculum with live instruction
+              </CardDescription>
+              <div className="mt-6">
+                <Badge className="mb-3 bg-amber-100 text-amber-700 border-amber-300 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-700">
+                  🎉 Founding Student Rate
+                </Badge>
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-2xl text-muted-foreground line-through">$249</span>
+                  <span className="text-5xl font-bold text-primary">$159.99</span>
+                  <span className="text-muted-foreground text-lg">CAD</span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-2">
+                  One-time payment for the full program
+                </p>
+                <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">
+                  Limited time offer for early students
+                </p>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6 pb-8">
+              {/* What's Included */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { icon: BookOpen, text: "8-10 weekly live classes" },
+                  { icon: Users, text: "Small class sizes" },
+                  { icon: Code, text: "Hands-on coding projects" },
+                  { icon: Sparkles, text: "AI concepts & ethics" },
+                  { icon: Shield, text: "Safe, moderated environment" },
+                  { icon: CheckCircle2, text: "Certificate of completion" },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                      <item.icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <span className="text-sm">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button asChild size="lg" className="flex-1">
+                  <Link href="/inquiry">
+                    <Sparkles className="mr-2 h-5 w-5" />
+                    Book Free Trial Class
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="flex-1"
+                  onClick={handleScrollToPayment}
+                >
+                  Already tried? Pay Now
+                </Button>
+              </div>
+
+              <p className="text-center text-sm text-muted-foreground">
+                Try your first class free. Only pay if you decide to continue.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Free vs Paid Comparison */}
+        <div className="max-w-4xl mx-auto mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">
-            What's Included in Each Plan?
+            Free Trial vs Full Program
           </h2>
           <Card>
             <CardContent className="p-0">
@@ -217,9 +192,11 @@ export default function PricingPage() {
                   <thead>
                     <tr className="border-b">
                       <th className="text-left p-4 font-semibold">Feature</th>
-                      <th className="text-center p-4 font-semibold">Free</th>
+                      <th className="text-center p-4 font-semibold">
+                        Free Trial
+                      </th>
                       <th className="text-center p-4 font-semibold bg-primary/5">
-                        Premium
+                        Full Program (<span className="line-through text-muted-foreground">$249</span> $159.99)
                       </th>
                     </tr>
                   </thead>
@@ -227,19 +204,17 @@ export default function PricingPage() {
                     <tr>
                       <td className="p-4 flex items-center gap-2">
                         <BookOpen className="h-4 w-4 text-primary" />
-                        <span>Introductory Python Lessons</span>
+                        <span>Live Classes</span>
                       </td>
-                      <td className="text-center p-4">
-                        <Check className="h-5 w-5 text-green-600 mx-auto" />
-                      </td>
-                      <td className="text-center p-4 bg-primary/5">
-                        <Check className="h-5 w-5 text-green-600 mx-auto" />
+                      <td className="text-center p-4">1 class</td>
+                      <td className="text-center p-4 bg-primary/5 font-semibold">
+                        8-10 classes
                       </td>
                     </tr>
                     <tr>
                       <td className="p-4 flex items-center gap-2">
                         <Code className="h-4 w-4 text-primary" />
-                        <span>Interactive Code Playground</span>
+                        <span>Code Playground Access</span>
                       </td>
                       <td className="text-center p-4">
                         <Check className="h-5 w-5 text-green-600 mx-auto" />
@@ -251,22 +226,10 @@ export default function PricingPage() {
                     <tr>
                       <td className="p-4 flex items-center gap-2">
                         <Gamepad2 className="h-4 w-4 text-primary" />
-                        <span>Practice Games & Challenges</span>
+                        <span>Practice Games</span>
                       </td>
                       <td className="text-center p-4">
                         <Check className="h-5 w-5 text-green-600 mx-auto" />
-                      </td>
-                      <td className="text-center p-4 bg-primary/5">
-                        <Check className="h-5 w-5 text-green-600 mx-auto" />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="p-4 flex items-center gap-2">
-                        <Zap className="h-4 w-4 text-primary" />
-                        <span>Advanced Python & AI Lessons</span>
-                      </td>
-                      <td className="text-center p-4">
-                        <X className="h-5 w-5 text-gray-400 mx-auto" />
                       </td>
                       <td className="text-center p-4 bg-primary/5">
                         <Check className="h-5 w-5 text-green-600 mx-auto" />
@@ -275,7 +238,7 @@ export default function PricingPage() {
                     <tr>
                       <td className="p-4 flex items-center gap-2">
                         <Sparkles className="h-4 w-4 text-primary" />
-                        <span>AI Tutors (Python, Math, Science, Arts)</span>
+                        <span>AI Tutors (24/7)</span>
                       </td>
                       <td className="text-center p-4">
                         <Check className="h-5 w-5 text-green-600 mx-auto" />
@@ -287,7 +250,7 @@ export default function PricingPage() {
                     <tr>
                       <td className="p-4 flex items-center gap-2">
                         <Users className="h-4 w-4 text-primary" />
-                        <span>Live Weekly Teacher-Led Sessions</span>
+                        <span>Full Python Curriculum</span>
                       </td>
                       <td className="text-center p-4">
                         <X className="h-5 w-5 text-gray-400 mx-auto" />
@@ -298,8 +261,8 @@ export default function PricingPage() {
                     </tr>
                     <tr>
                       <td className="p-4 flex items-center gap-2">
-                        <MessageSquare className="h-4 w-4 text-primary" />
-                        <span>Personalized Code Feedback</span>
+                        <Sparkles className="h-4 w-4 text-primary" />
+                        <span>AI & Ethics Modules</span>
                       </td>
                       <td className="text-center p-4">
                         <X className="h-5 w-5 text-gray-400 mx-auto" />
@@ -326,173 +289,130 @@ export default function PricingPage() {
             </CardContent>
           </Card>
         </div>
+
         {/* Payment Instructions */}
         <div
           id="payment-instructions"
           className="max-w-3xl mx-auto scroll-mt-20 mb-16"
         >
           <div className="text-center mb-8">
-            <Badge className="mb-4 bg-green-50 text-green-700 border-green-300 rounded-full px-4 py-2">
-              Ready to Get Premium?
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
+              Already Tried Your Free Class?
             </Badge>
-            <h2 className="text-3xl font-bold mb-2">How to Subscribe</h2>
+            <h2 className="text-3xl font-bold mb-2">How to Pay</h2>
             <p className="text-muted-foreground">
-              Follow these simple steps to activate your premium access
+              Continue your child's learning journey with the full program
             </p>
           </div>
 
-          <div className="space-y-6">
-            {/* Payment Instructions Card */}
-            <Card className="border-2 border-primary/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <DollarSign className="h-5 w-5 text-primary" />
-                  How to Pay via e-Transfer
-                </CardTitle>
-                <CardDescription>
-                  Send your monthly payment using Interac e-Transfer
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-4 bg-primary/5 rounded-lg space-y-3">
-                  <div className="flex items-start gap-3">
-                    <Mail className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">
-                        Send to:
-                      </p>
-                      <p className="text-lg font-mono text-primary break-all">
-                        payment@kidslearnai.ca
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">
-                        Amount:
-                      </p>
-                      <p className="text-lg font-semibold">$79.99 CAD</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <FileText className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">
-                        Message:
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        Include your email:{" "}
-                        <span className="font-mono text-foreground">
-                          {userEmail}
-                        </span>
-                      </p>
-                    </div>
+          <Card className="border-2 border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-primary" />
+                Pay via e-Transfer
+              </CardTitle>
+              <CardDescription>
+                Send your one-time payment using Interac e-Transfer
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="p-4 bg-primary/5 rounded-lg space-y-3">
+                <div className="flex items-start gap-3">
+                  <Mail className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      Send to:
+                    </p>
+                    <p className="text-lg font-mono text-primary break-all">
+                      payment@kidslearnai.ca
+                    </p>
                   </div>
                 </div>
 
-                <Alert>
-                  <CheckCircle2 className="h-4 w-4" />
-                  <AlertDescription>
-                    <strong>Important:</strong> Include your email ({userEmail})
-                    in the e-Transfer message so we can match your payment to
-                    your account.
-                  </AlertDescription>
-                </Alert>
-
-                <div className="text-sm text-muted-foreground space-y-2">
-                  <p className="font-semibold text-foreground">
-                    Step-by-step instructions:
-                  </p>
-                  <ol className="list-decimal list-inside space-y-1 ml-2">
-                    <li>Log into your online banking</li>
-                    <li>Navigate to Interac e-Transfer</li>
-                    <li>Add recipient: payment@kidslearnai.ca</li>
-                    <li>Enter amount: $79.99 CAD</li>
-                    <li>Include your email in the message: {userEmail}</li>
-                    <li>Send the transfer</li>
-                  </ol>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* What Happens Next Card */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-primary" />
-                  What Happens Next?
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">We'll verify your payment</p>
-                      <p className="text-muted-foreground">
-                        Our team will check for your e-Transfer within 24-48
-                        hours (usually much faster)
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">
-                        Access automatically unlocked
-                      </p>
-                      <p className="text-muted-foreground">
-                        Once verified, all premium lessons and the AI tutor will
-                        be available immediately
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">Start learning right away</p>
-                      <p className="text-muted-foreground">
-                        While waiting, continue practicing with the free lessons
-                      </p>
-                    </div>
+                <div className="flex items-start gap-3">
+                  <DollarSign className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      Amount (Founding Student Rate):
+                    </p>
+                    <p className="text-lg font-semibold">
+                      <span className="line-through text-muted-foreground mr-2">$249</span>
+                      $159.99 CAD
+                    </p>
                   </div>
                 </div>
 
-                <div className="mt-6 flex gap-3">
-                  <Button asChild className="flex-1">
-                    <Link href="/lessons?course=python-foundations">
-                      View Free Lessons
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="flex-1">
-                    <Link href="/dashboard">Go to Dashboard</Link>
-                  </Button>
+                <div className="flex items-start gap-3">
+                  <FileText className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      Message:
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Include your child's name and your email
+                      {userEmail && (
+                        <>
+                          :{" "}
+                          <span className="font-mono text-foreground">
+                            {userEmail}
+                          </span>
+                        </>
+                      )}
+                    </p>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
 
-            {/* Help Card */}
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Need Help?</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  If you have any questions or issues with your payment, please
-                  contact us:
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild variant="outline">
-                    <a href="mailto:support@kidslearnai.ca">Email Support</a>
-                  </Button>
-                  <Button asChild variant="outline">
-                    <Link href="/faq">View FAQ</Link>
-                  </Button>
+              <Alert>
+                <CheckCircle2 className="h-4 w-4" />
+                <AlertDescription>
+                  <strong>Important:</strong> Include your child's name and your
+                  email in the e-Transfer message so we can match your payment.
+                </AlertDescription>
+              </Alert>
+            </CardContent>
+          </Card>
+
+          {/* What Happens Next */}
+          <Card className="mt-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-primary" />
+                What Happens Next?
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-medium">Payment verified within 24-48 hours</p>
+                    <p className="text-muted-foreground">
+                      Usually much faster - we'll confirm by email
+                    </p>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-medium">Full program access unlocked</p>
+                    <p className="text-muted-foreground">
+                      Your child joins their age group's weekly class
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="font-medium">8-10 weeks of live instruction</p>
+                    <p className="text-muted-foreground">
+                      Expert-led classes every week until program completion
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* FAQ Section */}
@@ -504,28 +424,15 @@ export default function PricingPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  How does the payment work?
+                  How does the free trial work?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  We accept payments via e-Transfer. See payment instructions
-                  above. Once verified (within 24-48 hours), your account will
-                  be upgraded to premium.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Can I cancel anytime?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Yes! Your subscription is month-to-month with no long-term
-                  commitment. Simply stop sending monthly payments if you wish
-                  to cancel. The program is designed as a 12-week course (3
-                  months).
+                  Your child attends their first class completely free with no
+                  commitment. This lets you both experience the program before
+                  deciding. If you love it, pay $159.99 to continue with the
+                  remaining 7-9 classes.
                 </p>
               </CardContent>
             </Card>
@@ -533,14 +440,14 @@ export default function PricingPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  What's included in the teacher-led sessions?
+                  What if my child misses a class?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Premium members get access to live weekly sessions where our
-                  experienced teachers guide you through lessons, answer
-                  questions, and provide personalized feedback on your code.
+                  Life happens! We provide recordings and materials for any
+                  missed sessions. Our instructors are also available to help
+                  your child catch up during the next class.
                 </p>
               </CardContent>
             </Card>
@@ -548,17 +455,14 @@ export default function PricingPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  How do the AI tutors work?
+                  What equipment does my child need?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  We have 4 specialized AI tutors available 24/7 to all
-                  registered users - completely free! Choose from BrightByte
-                  (Python), MathBot (Math), ScienceOwl (Science), or ArtAI
-                  (Creative Arts). Ask questions, get help with homework, learn
-                  new concepts, and practice—all through a friendly chat
-                  interface.
+                  Just a computer (Windows, Mac, or Chromebook) with internet
+                  access and a webcam/microphone for live classes. All software
+                  we use is free - we'll help you set everything up.
                 </p>
               </CardContent>
             </Card>
@@ -566,61 +470,34 @@ export default function PricingPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  Is this suitable for my child's age?
+                  Can I get a refund if it's not a good fit?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Our program is designed for kids aged 8-16. The content is
-                  age-appropriate, safe, and includes parent guidance notes.
-                  Start with free lessons to see if it's a good fit!
+                  That's why we offer the free trial! Try before you pay. If
+                  after paying you have concerns within the first 2 weeks,
+                  contact us and we'll work with you to find a solution.
                 </p>
               </CardContent>
             </Card>
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16 mb-12 p-8 bg-gradient-to-r from-primary/10 to-accent/10 rounded-3xl">
+        {/* Bottom CTA */}
+        <div className="text-center mt-16 mb-12 p-8 bg-gradient-to-r from-primary/10 to-accent/10 rounded-3xl max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-4">
-            Ready to Start Your Coding Journey?
+            Ready to Get Started?
           </h2>
           <p className="text-xl text-muted-foreground mb-6">
-            Join hundreds of students learning Python and AI fundamentals
+            Book your child's free trial class today
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {isAuthenticated ? (
-              <>
-                <Button
-                  onClick={handleGetStarted}
-                  size="lg"
-                  className="bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
-                >
-                  Subscribe Now
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link href="/lessons?course=python-foundations">
-                    View Lessons
-                  </Link>
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
-                >
-                  <Link href="/signup">Get Started Free</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link href="/lessons?course=python-foundations">
-                    View Sample Lessons
-                  </Link>
-                </Button>
-              </>
-            )}
-          </div>
+          <Button asChild size="lg">
+            <Link href="/inquiry">
+              <Sparkles className="mr-2 h-5 w-5" />
+              Book Free Trial Class
+            </Link>
+          </Button>
         </div>
       </div>
       <Footer />
