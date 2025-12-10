@@ -145,6 +145,12 @@ const NAV_ITEMS = {
       Icon: ExternalLink,
       description: "Access Trinket online",
     },
+    {
+      href: "/careers",
+      label: "Become an Instructor",
+      Icon: GraduationCap,
+      description: "Join our teaching team",
+    },
   ],
   admin: [
     {

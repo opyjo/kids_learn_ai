@@ -121,6 +121,14 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
+                  href="/careers"
+                  className="hover:text-foreground transition-colors cursor-pointer"
+                >
+                  Become an Instructor
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/privacy"
                   className="hover:text-foreground transition-colors cursor-pointer"
                 >
