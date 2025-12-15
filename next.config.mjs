@@ -1,14 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
   images: {
     unoptimized: true,
   },
+  // Empty turbopack config to silence the warning
+  turbopack: {},
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Ignore Node.js modules when building for the client
