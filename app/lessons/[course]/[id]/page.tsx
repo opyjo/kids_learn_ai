@@ -3,10 +3,10 @@ import { notFound, redirect } from "next/navigation";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface LessonPageProps {
-  params: {
+  params: Promise<{
     course: string;
     id: string;
-  };
+  }>;
 }
 
 // Helper function to check if a lesson is free (first 3 lessons per course)
@@ -16,8 +16,8 @@ const isFreeLesson = (orderIndex: number): boolean => {
 
 export default async function LessonPage({ params }: LessonPageProps) {
   const supabase = await getSupabaseServerClient();
-  const courseSlug = params.course;
-  const lessonOrderIndex = Number.parseInt(params.id);
+  const { course: courseSlug, id } = await params;
+  const lessonOrderIndex = Number.parseInt(id);
 
   // Check if user is authenticated
   const {
@@ -47,19 +47,17 @@ export default async function LessonPage({ params }: LessonPageProps) {
     notFound();
   }
 
-  // Fetch user profile for subscription and learning mode
+  // Fetch user profile for subscription status
   let userSubscription = "free";
-  let learningMode: "self_paced" | "tutor_based" = "self_paced";
-  
+
   if (user) {
     const { data: profile } = await supabase
       .from("profiles")
-      .select("subscription_status, learning_mode")
+      .select("subscription_status")
       .eq("id", user.id)
       .single();
 
     userSubscription = profile?.subscription_status || "free";
-    learningMode = profile?.learning_mode || "self_paced";
   }
 
   // Check access for premium lessons (order_index > 3)
@@ -91,8 +89,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
       userId={user?.id}
       courseSlug={lesson.courses?.slug}
       courseTitle={lesson.courses?.title}
-      learningMode={learningMode}
     />
   );
 }
-

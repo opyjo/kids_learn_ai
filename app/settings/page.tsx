@@ -10,7 +10,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SettingsForm } from "@/components/user/settings-form";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { requireAuth } from "@/lib/auth-helpers";
-import { Settings, User, Lock, GraduationCap } from "lucide-react";
+import { Settings, User, Lock } from "lucide-react";
 
 export default async function SettingsPage() {
   // Protect the route - redirects to /login if not authenticated
@@ -54,7 +54,6 @@ export default async function SettingsPage() {
     avatar_url: profile.avatar_url,
     role: profile.role,
     subscription_status: profile.subscription_status,
-    learning_mode: profile.learning_mode || "self_paced",
   };
 
   return (
@@ -82,14 +81,10 @@ export default async function SettingsPage() {
 
           {/* Settings Tabs */}
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsList className="grid w-full grid-cols-2 mb-8">
               <TabsTrigger value="profile" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
                 <span className="hidden sm:inline">Profile</span>
-              </TabsTrigger>
-              <TabsTrigger value="learning" className="flex items-center gap-2">
-                <GraduationCap className="h-4 w-4" />
-                <span className="hidden sm:inline">Learning</span>
               </TabsTrigger>
               <TabsTrigger value="password" className="flex items-center gap-2">
                 <Lock className="h-4 w-4" />
@@ -99,10 +94,6 @@ export default async function SettingsPage() {
 
             <TabsContent value="profile">
               <SettingsForm user={user} section="profile" />
-            </TabsContent>
-
-            <TabsContent value="learning">
-              <SettingsForm user={user} section="learning" />
             </TabsContent>
 
             <TabsContent value="password">

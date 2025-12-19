@@ -13,6 +13,30 @@ const posts = [
     date: "February 2025",
   },
   {
+    slug: "python-best-first-language",
+    title: "Why Python is the Best First Language for Young Learners",
+    description:
+      "Explore how Python's readable syntax and versatile libraries make it the perfect entry point for kids entering the world of computer science.",
+    readingTime: "6 minute read",
+    date: "March 2025",
+  },
+  {
+    slug: "teaching-ai-ethics-to-kids",
+    title: "Teaching AI Ethics: How to Talk to Kids About Bias and Fairness",
+    description:
+      "Practical strategies for helping children understand the social impact of AI, from data bias to responsible creation and use.",
+    readingTime: "10 minute read",
+    date: "March 2025",
+  },
+  {
+    slug: "future-of-ai-in-education",
+    title: "The Future of AI in Education: Beyond the Homework Bot",
+    description:
+      "How AI is transforming from a simple tool into a personalized learning coach, and what this means for the students of tomorrow.",
+    readingTime: "7 minute read",
+    date: "March 2025",
+  },
+  {
     slug: "black-youth-stem-canada",
     title: "Closing the Gap: Supporting Black Youth in Canadian STEM",
     description:

@@ -4,20 +4,12 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    const { full_name, learning_mode } = body;
+    const { full_name } = body;
 
-    // Validate at least one field is provided
-    if (!full_name && !learning_mode) {
+    // Validate full_name is provided
+    if (!full_name) {
       return NextResponse.json(
-        { error: "At least one field (full_name or learning_mode) is required" },
-        { status: 400 }
-      );
-    }
-
-    // Validate learning_mode if provided
-    if (learning_mode && !["self_paced", "tutor_based"].includes(learning_mode)) {
-      return NextResponse.json(
-        { error: "Invalid learning mode. Must be 'self_paced' or 'tutor_based'" },
+        { error: "full_name is required" },
         { status: 400 }
       );
     }
@@ -36,23 +28,13 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // Build update object with only provided fields
-    const updateData: Record<string, string> = {
-      updated_at: new Date().toISOString(),
-    };
-
-    if (full_name && typeof full_name === "string") {
-      updateData.full_name = full_name;
-    }
-
-    if (learning_mode) {
-      updateData.learning_mode = learning_mode;
-    }
-
     // Update user profile
     const { data: profile, error } = await supabase
       .from("profiles")
-      .update(updateData)
+      .update({
+        full_name,
+        updated_at: new Date().toISOString(),
+      })
       .eq("id", authUser.id)
       .select()
       .single();

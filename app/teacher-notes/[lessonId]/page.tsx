@@ -3,15 +3,16 @@ import { notFound, redirect } from "next/navigation";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface TeacherNotesPageProps {
-  params: {
+  params: Promise<{
     lessonId: string;
-  };
+  }>;
 }
 
 export default async function TeacherNotesPage({
   params,
 }: TeacherNotesPageProps) {
   const supabase = await getSupabaseServerClient();
+  const { lessonId } = await params;
 
   // Check if user is authenticated
   const {
@@ -37,7 +38,7 @@ export default async function TeacherNotesPage({
   const { data: lesson, error: lessonError } = await supabase
     .from("lessons")
     .select("*, courses(slug, title)")
-    .eq("order_index", Number.parseInt(params.lessonId))
+    .eq("order_index", Number.parseInt(lessonId))
     .single();
 
   if (lessonError || !lesson) {
