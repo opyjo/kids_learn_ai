@@ -37,10 +37,26 @@ interface InlineTutorProps {
 }
 
 const QUICK_PROMPTS = [
-  { icon: HelpCircle, label: "Explain this concept", prompt: "Can you explain the main concept in this lesson in simple terms?" },
-  { icon: Lightbulb, label: "Give me a hint", prompt: "I'm stuck. Can you give me a hint without giving the answer?" },
-  { icon: Code, label: "Check my code", prompt: "Can you review my code and tell me if I'm on the right track?" },
-  { icon: Sparkles, label: "What's next?", prompt: "What should I focus on learning next after this lesson?" },
+  {
+    icon: HelpCircle,
+    label: "Explain this concept",
+    prompt: "Can you explain the main concept in this lesson in simple terms?",
+  },
+  {
+    icon: Lightbulb,
+    label: "Give me a hint",
+    prompt: "I'm stuck. Can you give me a hint without giving the answer?",
+  },
+  {
+    icon: Code,
+    label: "Check my code",
+    prompt: "Can you review my code and tell me if I'm on the right track?",
+  },
+  {
+    icon: Sparkles,
+    label: "What's next?",
+    prompt: "What should I focus on learning next after this lesson?",
+  },
 ];
 
 export const InlineTutor = ({
@@ -90,7 +106,9 @@ export const InlineTutor = ({
       }
 
       if (currentCode) {
-        contextParts.push(`The student's current code:\n\`\`\`python\n${currentCode}\n\`\`\``);
+        contextParts.push(
+          `The student's current code:\n\`\`\`python\n${currentCode}\n\`\`\``
+        );
       }
 
       const systemContext = contextParts.join("\n\n");
@@ -99,10 +117,7 @@ export const InlineTutor = ({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: [
-            ...messages,
-            userMessage,
-          ],
+          messages: [...messages, userMessage],
           tutorId: "brightbyte", // Use BrightByte tutor
           context: systemContext,
         }),
@@ -116,7 +131,9 @@ export const InlineTutor = ({
 
       const assistantMessage: Message = {
         role: "assistant",
-        content: data.message || "I'm sorry, I couldn't process that. Please try again!",
+        content:
+          data.message ||
+          "I'm sorry, I couldn't process that. Please try again!",
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
@@ -126,7 +143,8 @@ export const InlineTutor = ({
         ...prev,
         {
           role: "assistant",
-          content: "Oops! Something went wrong. Please try again in a moment. 🤖",
+          content:
+            "Oops! Something went wrong. Please try again in a moment. 🤖",
         },
       ]);
     } finally {
@@ -199,7 +217,7 @@ export const InlineTutor = ({
                   Hi! I&apos;m here to help! 👋
                 </h3>
                 <p className="text-sm text-muted-foreground max-w-xs mx-auto">
-                  Ask me anything about <strong>{lessonTitle}</strong>. 
+                  Ask me anything about <strong>{lessonTitle}</strong>.
                   I&apos;ll guide you without giving away the answers!
                 </p>
               </div>
@@ -243,7 +261,10 @@ export const InlineTutor = ({
                   >
                     {message.role === "assistant" ? (
                       <div className="prose prose-sm dark:prose-invert max-w-none">
-                        <MarkdownRenderer content={message.content} />
+                        <MarkdownRenderer
+                          text={message.content}
+                          keyPrefix={`msg-${index}`}
+                        />
                       </div>
                     ) : (
                       <p className="text-sm">{message.content}</p>
@@ -300,4 +321,3 @@ export const InlineTutor = ({
     </Sheet>
   );
 };
-
