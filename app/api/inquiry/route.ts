@@ -112,7 +112,7 @@ export const POST = async (request: NextRequest) => {
 
     // Send email via Resend
     const emailResult = await resend.emails.send({
-      from: "Kids Learn AI <onboarding@resend.dev>",
+      from: "Kids Learn AI <hello@kidslearnai.ca>",
       to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
       replyTo: validatedData.parentEmail,
       subject: `🎓 New Free Trial Inquiry: ${validatedData.childName} (${ageGroupDetails.label})`,
@@ -234,7 +234,9 @@ export const POST = async (request: NextRequest) => {
                 <div class="field">
                   <div class="label">Email</div>
                   <div class="value">
-                    <a href="mailto:${validatedData.parentEmail}">${validatedData.parentEmail}</a>
+                    <a href="mailto:${validatedData.parentEmail}">${
+        validatedData.parentEmail
+      }</a>
                   </div>
                 </div>
               </div>
@@ -244,7 +246,9 @@ export const POST = async (request: NextRequest) => {
                 <div class="section-title">👦 Child Information</div>
                 <div class="field">
                   <div class="label">Child's Name</div>
-                  <div class="value" style="font-size: 20px; font-weight: 600;">${validatedData.childName}</div>
+                  <div class="value" style="font-size: 20px; font-weight: 600;">${
+                    validatedData.childName
+                  }</div>
                 </div>
                 <div class="field">
                   <div class="label">Age Group</div>
@@ -260,7 +264,9 @@ export const POST = async (request: NextRequest) => {
               <div class="schedule-box">
                 <div style="font-size: 14px; color: #166534; margin-bottom: 5px;">📅 Recommended Class Day</div>
                 <div class="schedule-day">${ageGroupDetails.day}</div>
-                <div style="font-size: 12px; color: #166534; margin-top: 5px;">${ageGroupDetails.label} classes</div>
+                <div style="font-size: 12px; color: #166534; margin-top: 5px;">${
+                  ageGroupDetails.label
+                } classes</div>
               </div>
 
               ${
@@ -289,14 +295,22 @@ export const POST = async (request: NextRequest) => {
 
               <!-- Action -->
               <div style="text-align: center; margin-top: 20px;">
-                <a href="mailto:${validatedData.parentEmail}?subject=Your Free Trial Class at Kids Learn AI&body=Hi ${validatedData.parentName},%0D%0A%0D%0AThank you for your interest in our Python %26 AI classes for ${validatedData.childName}!%0D%0A%0D%0A" class="action-btn">
+                <a href="mailto:${
+                  validatedData.parentEmail
+                }?subject=Your Free Trial Class at Kids Learn AI&body=Hi ${
+        validatedData.parentName
+      },%0D%0A%0D%0AThank you for your interest in our Python %26 AI classes for ${
+        validatedData.childName
+      }!%0D%0A%0D%0A" class="action-btn">
                   Reply to ${validatedData.parentName}
                 </a>
               </div>
 
               <div class="footer">
                 <p>This inquiry was submitted via the Kids Learn AI website.</p>
-                <p>Submitted at: ${new Date().toLocaleString("en-CA", { timeZone: "America/Toronto" })}</p>
+                <p>Submitted at: ${new Date().toLocaleString("en-CA", {
+                  timeZone: "America/Toronto",
+                })}</p>
               </div>
             </div>
           </body>
@@ -346,4 +360,3 @@ export const POST = async (request: NextRequest) => {
     );
   }
 };
-
