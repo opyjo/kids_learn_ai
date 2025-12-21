@@ -152,7 +152,7 @@ export const POST = async (request: NextRequest) => {
 
     // Send email via Resend
     const emailResult = await resend.emails.send({
-      from: "Kids Learn AI <onboarding@resend.dev>",
+      from: "Kids Learn AI <hello@kidslearnai.ca>",
       to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
       replyTo: validatedData.email,
       subject: `👨‍🏫 Instructor Application: ${validatedData.fullName} (${validatedData.university})`,
