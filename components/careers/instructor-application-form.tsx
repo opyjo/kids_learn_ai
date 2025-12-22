@@ -7,7 +7,14 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -70,14 +77,7 @@ export const InstructorApplicationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    setValue,
-    watch,
-  } = useForm<ApplicationFormData>({
+  const form = useForm<ApplicationFormData>({
     resolver: zodResolver(applicationFormSchema),
     mode: "onSubmit",
     reValidateMode: "onChange",
@@ -93,9 +93,6 @@ export const InstructorApplicationForm = () => {
       linkedinUrl: "",
     },
   });
-
-  const availableTuesday = watch("availableTuesday");
-  const availableThursday = watch("availableThursday");
 
   const onSubmit = async (data: ApplicationFormData) => {
     if (!data.availableTuesday && !data.availableThursday) {
@@ -123,6 +120,9 @@ export const InstructorApplicationForm = () => {
         } else if (result.details) {
           result.details.forEach(
             (detail: { field: string; message: string }) => {
+              form.setError(detail.field as keyof ApplicationFormData, {
+                message: detail.message,
+              });
               toast.error(`${detail.field}: ${detail.message}`);
             }
           );
@@ -136,7 +136,7 @@ export const InstructorApplicationForm = () => {
 
       setIsSuccess(true);
       toast.success("Application submitted! We'll be in touch soon.");
-      reset();
+      form.reset();
 
       setTimeout(() => {
         setIsSuccess(false);
@@ -150,280 +150,320 @@ export const InstructorApplicationForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
-      {/* Full Name */}
-      <div className="space-y-2">
-        <Label htmlFor="fullName" className="text-sm font-medium">
-          Full Name <span className="text-red-500">*</span>
-        </Label>
-        <Input
-          id="fullName"
-          type="text"
-          placeholder="Your full name"
-          {...register("fullName")}
-          className={errors.fullName ? "border-red-500" : ""}
-          disabled={isSubmitting}
-        />
-        {errors.fullName && (
-          <p className="text-sm text-red-500">{errors.fullName.message}</p>
-        )}
-      </div>
-
-      {/* Email */}
-      <div className="space-y-2">
-        <Label htmlFor="email" className="text-sm font-medium">
-          Email <span className="text-red-500">*</span>
-        </Label>
-        <Input
-          id="email"
-          type="email"
-          placeholder="your@email.com"
-          {...register("email")}
-          className={errors.email ? "border-red-500" : ""}
-          disabled={isSubmitting}
-        />
-        {errors.email && (
-          <p className="text-sm text-red-500">{errors.email.message}</p>
-        )}
-      </div>
-
-      {/* University */}
-      <div className="space-y-2">
-        <Label htmlFor="university" className="text-sm font-medium">
-          University <span className="text-red-500">*</span>
-        </Label>
-        <Input
-          id="university"
-          type="text"
-          placeholder="e.g., University of Toronto"
-          {...register("university")}
-          className={errors.university ? "border-red-500" : ""}
-          disabled={isSubmitting}
-        />
-        {errors.university && (
-          <p className="text-sm text-red-500">{errors.university.message}</p>
-        )}
-      </div>
-
-      {/* Program/Major */}
-      <div className="space-y-2">
-        <Label htmlFor="program" className="text-sm font-medium">
-          Program / Major <span className="text-red-500">*</span>
-        </Label>
-        <Input
-          id="program"
-          type="text"
-          placeholder="e.g., Computer Science"
-          {...register("program")}
-          className={errors.program ? "border-red-500" : ""}
-          disabled={isSubmitting}
-        />
-        {errors.program && (
-          <p className="text-sm text-red-500">{errors.program.message}</p>
-        )}
-      </div>
-
-      {/* Year of Study */}
-      <div className="space-y-2">
-        <Label htmlFor="yearOfStudy" className="text-sm font-medium">
-          Year of Study <span className="text-red-500">*</span>
-        </Label>
-        <Select
-          onValueChange={(value) =>
-            setValue(
-              "yearOfStudy",
-              value as "1" | "2" | "3" | "4" | "5+" | "graduate"
-            )
-          }
-          disabled={isSubmitting}
-        >
-          <SelectTrigger className={errors.yearOfStudy ? "border-red-500" : ""}>
-            <SelectValue placeholder="Select year" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1">1st Year</SelectItem>
-            <SelectItem value="2">2nd Year</SelectItem>
-            <SelectItem value="3">3rd Year</SelectItem>
-            <SelectItem value="4">4th Year</SelectItem>
-            <SelectItem value="5+">5+ Year</SelectItem>
-            <SelectItem value="graduate">Graduate Student</SelectItem>
-          </SelectContent>
-        </Select>
-        {errors.yearOfStudy && (
-          <p className="text-sm text-red-500">{errors.yearOfStudy.message}</p>
-        )}
-      </div>
-
-      {/* Python Experience */}
-      <div className="space-y-2">
-        <Label htmlFor="pythonExperience" className="text-sm font-medium">
-          Python Experience <span className="text-red-500">*</span>
-        </Label>
-        <Select
-          onValueChange={(value) =>
-            setValue(
-              "pythonExperience",
-              value as "beginner" | "intermediate" | "advanced" | "expert"
-            )
-          }
-          disabled={isSubmitting}
-        >
-          <SelectTrigger
-            className={errors.pythonExperience ? "border-red-500" : ""}
-          >
-            <SelectValue placeholder="Select experience level" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="beginner">Beginner (learning)</SelectItem>
-            <SelectItem value="intermediate">
-              Intermediate (coursework)
-            </SelectItem>
-            <SelectItem value="advanced">Advanced (projects/work)</SelectItem>
-            <SelectItem value="expert">Expert (professional)</SelectItem>
-          </SelectContent>
-        </Select>
-        {errors.pythonExperience && (
-          <p className="text-sm text-red-500">
-            {errors.pythonExperience.message}
-          </p>
-        )}
-      </div>
-
-      {/* Availability */}
-      <div className="space-y-3">
-        <Label className="text-sm font-medium">
-          Availability <span className="text-red-500">*</span>
-        </Label>
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="availableTuesday"
-              checked={availableTuesday}
-              onCheckedChange={(checked) =>
-                setValue("availableTuesday", checked === true)
-              }
-              disabled={isSubmitting}
-            />
-            <label
-              htmlFor="availableTuesday"
-              className="text-sm cursor-pointer"
-            >
-              Tuesdays (Ages 9-10 class)
-            </label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="availableThursday"
-              checked={availableThursday}
-              onCheckedChange={(checked) =>
-                setValue("availableThursday", checked === true)
-              }
-              disabled={isSubmitting}
-            />
-            <label
-              htmlFor="availableThursday"
-              className="text-sm cursor-pointer"
-            >
-              Thursdays (Ages 11-13 class)
-            </label>
-          </div>
-        </div>
-        <p className="text-xs text-muted-foreground">
-          Select at least one day you're available
-        </p>
-      </div>
-
-      {/* Teaching Experience */}
-      <div className="space-y-2">
-        <Label htmlFor="teachingExperience" className="text-sm font-medium">
-          Teaching/Tutoring Experience{" "}
-          <span className="text-muted-foreground">(optional)</span>
-        </Label>
-        <Textarea
-          id="teachingExperience"
-          placeholder="Any previous experience teaching, tutoring, or working with kids..."
-          rows={2}
-          maxLength={500}
-          {...register("teachingExperience")}
-          disabled={isSubmitting}
-        />
-      </div>
-
-      {/* Why Interested */}
-      <div className="space-y-2">
-        <Label htmlFor="whyInterested" className="text-sm font-medium">
-          Why do you want to teach kids to code?{" "}
-          <span className="text-red-500">*</span>
-        </Label>
-        <Textarea
-          id="whyInterested"
-          placeholder="Tell us what motivates you to help kids learn programming..."
-          rows={3}
-          maxLength={1000}
-          {...register("whyInterested")}
-          className={errors.whyInterested ? "border-red-500" : ""}
-          disabled={isSubmitting}
-        />
-        {errors.whyInterested && (
-          <p className="text-sm text-red-500">{errors.whyInterested.message}</p>
-        )}
-      </div>
-
-      {/* LinkedIn URL */}
-      <div className="space-y-2">
-        <Label htmlFor="linkedinUrl" className="text-sm font-medium">
-          LinkedIn Profile{" "}
-          <span className="text-muted-foreground">(optional)</span>
-        </Label>
-        <Input
-          id="linkedinUrl"
-          type="url"
-          placeholder="https://linkedin.com/in/yourprofile"
-          {...register("linkedinUrl")}
-          className={errors.linkedinUrl ? "border-red-500" : ""}
-          disabled={isSubmitting}
-        />
-        {errors.linkedinUrl && (
-          <p className="text-sm text-red-500">{errors.linkedinUrl.message}</p>
-        )}
-      </div>
-
-      {/* Submit Button */}
-      <Button
-        type="submit"
-        disabled={isSubmitting || isSuccess}
-        className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all duration-300"
-        size="lg"
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        noValidate
+        className="space-y-6"
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-            Submitting...
-          </>
-        ) : isSuccess ? (
-          <>
-            <CheckCircle2 className="mr-2 h-5 w-5" />
-            Application Sent!
-          </>
-        ) : (
-          <>
-            <Send className="mr-2 h-5 w-5" />
-            Submit Application
-          </>
-        )}
-      </Button>
+        {/* Full Name */}
+        <FormField
+          control={form.control}
+          name="fullName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Full Name <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Your full name"
+                  disabled={isSubmitting}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      {/* Success Message */}
-      {isSuccess && (
-        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 rounded-lg p-4 text-sm">
-          <p className="font-medium">Application received!</p>
-          <p className="mt-1">
-            Thank you for your interest in joining our team. We'll review your
-            application and get back to you within a few days.
+        {/* Email */}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Email <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="your@email.com"
+                  disabled={isSubmitting}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* University */}
+        <FormField
+          control={form.control}
+          name="university"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                University/College <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="e.g., University of Toronto"
+                  disabled={isSubmitting}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Program/Major */}
+        <FormField
+          control={form.control}
+          name="program"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Program / Major <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="e.g., Computer Science"
+                  disabled={isSubmitting}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Year of Study */}
+        <FormField
+          control={form.control}
+          name="yearOfStudy"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Year of Study <span className="text-red-500">*</span>
+              </FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isSubmitting}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select year" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="1">1st Year</SelectItem>
+                  <SelectItem value="2">2nd Year</SelectItem>
+                  <SelectItem value="3">3rd Year</SelectItem>
+                  <SelectItem value="4">4th Year</SelectItem>
+                  <SelectItem value="5+">5+ Year</SelectItem>
+                  <SelectItem value="graduate">Graduate Student</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Python Experience */}
+        <FormField
+          control={form.control}
+          name="pythonExperience"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Python Experience <span className="text-red-500">*</span>
+              </FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isSubmitting}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select experience level" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="beginner">Beginner (learning)</SelectItem>
+                  <SelectItem value="intermediate">
+                    Intermediate (coursework)
+                  </SelectItem>
+                  <SelectItem value="advanced">
+                    Advanced (projects/work)
+                  </SelectItem>
+                  <SelectItem value="expert">Expert (professional)</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Availability */}
+        <div className="space-y-3">
+          <div className="text-sm font-medium">
+            Availability <span className="text-red-500">*</span>
+          </div>
+          <div className="space-y-2">
+            <FormField
+              control={form.control}
+              name="availableTuesday"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>Tuesdays (Ages 9-10 class)</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="availableThursday"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>Thursdays (Ages 11-13 class)</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Select at least one day you're available
           </p>
         </div>
-      )}
-    </form>
+
+        {/* Teaching Experience */}
+        <FormField
+          control={form.control}
+          name="teachingExperience"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Teaching/Tutoring Experience{" "}
+                <span className="text-muted-foreground">(optional)</span>
+              </FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Any previous experience teaching, tutoring, or working with kids..."
+                  rows={2}
+                  maxLength={500}
+                  disabled={isSubmitting}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Why Interested */}
+        <FormField
+          control={form.control}
+          name="whyInterested"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Why do you want to teach kids to code?{" "}
+                <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Tell us what motivates you to help kids learn programming..."
+                  rows={3}
+                  maxLength={1000}
+                  disabled={isSubmitting}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* LinkedIn URL */}
+        <FormField
+          control={form.control}
+          name="linkedinUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                LinkedIn Profile{" "}
+                <span className="text-muted-foreground">(optional)</span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  type="url"
+                  placeholder="https://linkedin.com/in/yourprofile"
+                  disabled={isSubmitting}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Submit Button */}
+        <Button
+          type="submit"
+          disabled={isSubmitting || isSuccess}
+          className="w-full bg-linear-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all duration-300"
+          size="lg"
+        >
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              Submitting...
+            </>
+          ) : isSuccess ? (
+            <>
+              <CheckCircle2 className="mr-2 h-5 w-5" />
+              Application Sent!
+            </>
+          ) : (
+            <>
+              <Send className="mr-2 h-5 w-5" />
+              Submit Application
+            </>
+          )}
+        </Button>
+
+        {/* Success Message */}
+        {isSuccess && (
+          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 rounded-lg p-4 text-sm">
+            <p className="font-medium">Application received!</p>
+            <p className="mt-1">
+              Thank you for your interest in joining our team. We'll review your
+              application and get back to you within a few days.
+            </p>
+          </div>
+        )}
+      </form>
+    </Form>
   );
 };
-
