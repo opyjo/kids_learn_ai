@@ -81,6 +81,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
     starter_code: lesson.starter_code || "",
     solution_code: lesson.solution_code || "",
     requires_trinket: lesson.requires_trinket || false,
+    class_activities: lesson.class_activities || "",
+    take_home_assignment: lesson.take_home_assignment || "",
   };
 
   return (

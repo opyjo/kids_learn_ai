@@ -55,6 +55,8 @@ interface Lesson {
   starter_code: string;
   solution_code: string;
   requires_trinket?: boolean;
+  class_activities?: string;
+  take_home_assignment?: string;
 }
 
 interface LessonViewerProps {
@@ -310,17 +312,23 @@ export function LessonViewer({
                               <div className="flex items-center gap-1.5">
                                 {lesson.order_index > 1 && (
                                   <Link
-                                    href={`/lessons/${courseSlug}/${lesson.order_index - 1}`}
+                                    href={`/lessons/${courseSlug}/${
+                                      lesson.order_index - 1
+                                    }`}
                                     aria-label="Go to previous lesson"
                                     className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
                                     title="Previous Lesson"
                                   >
                                     <ArrowLeft className="h-3.5 w-3.5" />
-                                    <span className="hidden sm:inline">Previous</span>
+                                    <span className="hidden sm:inline">
+                                      Previous
+                                    </span>
                                   </Link>
                                 )}
                                 <Link
-                                  href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
+                                  href={`/lessons/${courseSlug}/${
+                                    lesson.order_index + 1
+                                  }`}
                                   aria-label="Go to next lesson"
                                   className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
                                   title="Next Lesson"
@@ -510,7 +518,9 @@ export function LessonViewer({
                           {/* Lesson Navigation */}
                           <div className="mt-6 pt-6 border-t-2 border-border flex items-center justify-center gap-3">
                             <Link
-                              href={`/lessons/${courseSlug}/${lesson.order_index - 1}`}
+                              href={`/lessons/${courseSlug}/${
+                                lesson.order_index - 1
+                              }`}
                               aria-label="Go to previous lesson"
                               className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
                             >
@@ -518,7 +528,9 @@ export function LessonViewer({
                               <span>Previous</span>
                             </Link>
                             <Link
-                              href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
+                              href={`/lessons/${courseSlug}/${
+                                lesson.order_index + 1
+                              }`}
                               aria-label="Go to next lesson"
                               className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all"
                             >
@@ -586,13 +598,17 @@ export function LessonViewer({
                                     ));
 
                                 // Detect numbered list items
-                                const isNumberedItem = /^\d+\.\s/.test(line.trim());
-                                const isBulletItem = /^[-•]\s/.test(line.trim());
+                                const isNumberedItem = /^\d+\.\s/.test(
+                                  line.trim()
+                                );
+                                const isBulletItem = /^[-•]\s/.test(
+                                  line.trim()
+                                );
 
                                 const lineKey = `line-${index}-${line
                                   .substring(0, 20)
                                   .replace(/\s/g, "-")}`;
-                                
+
                                 if (isHeading) {
                                   return (
                                     <div
@@ -629,7 +645,12 @@ export function LessonViewer({
                                               {part}
                                             </a>
                                           ) : (
-                                            <span key={partKey}>{part.replace(/^\d+\.\s|^[-•]\s/, "")}</span>
+                                            <span key={partKey}>
+                                              {part.replace(
+                                                /^\d+\.\s|^[-•]\s/,
+                                                ""
+                                              )}
+                                            </span>
                                           );
                                         })}
                                       </div>
@@ -698,17 +719,11 @@ export function LessonViewer({
                 </Tabs>
               </CardHeader>
             </Card>
-
           </div>
-        ) : (
-          <div
-            className={
-              courseSlug === "python-foundations"
-                ? "grid lg:grid-cols-2 gap-8 items-start"
-                : ""
-            }
-          >
-            {/* Lesson Content */}
+        ) : courseSlug?.startsWith("level-") ? (
+          // Level courses with tabbed layout
+          <div className="grid lg:grid-cols-2 gap-6 items-start">
+            {/* Left Column: Lesson Content with Tabs */}
             <Card className="flex flex-col rounded-2xl border shadow-2xl max-h-[calc(100vh-140px)]">
               <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 rounded-t-2xl border-b-2 border-border flex-shrink-0 py-3">
                 <div className="flex items-start justify-between gap-3">
@@ -736,17 +751,23 @@ export function LessonViewer({
                       </Badge>
                     )}
                     <div className="flex items-center gap-1.5">
+                      {lesson.order_index > 1 && (
+                        <Link
+                          href={`/lessons/${courseSlug}/${
+                            lesson.order_index - 1
+                          }`}
+                          aria-label="Go to previous lesson"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
+                          title="Previous Lesson"
+                        >
+                          <ArrowLeft className="h-3.5 w-3.5" />
+                          <span className="hidden sm:inline">Previous</span>
+                        </Link>
+                      )}
                       <Link
-                        href={`/lessons/${courseSlug}/${lesson.order_index - 1}`}
-                        aria-label="Go to previous lesson"
-                        className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-gray-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
-                        title="Previous Lesson"
-                      >
-                        <ArrowLeft className="h-3.5 w-3.5" />
-                        <span className="hidden sm:inline">Previous</span>
-                      </Link>
-                      <Link
-                        href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
+                        href={`/lessons/${courseSlug}/${
+                          lesson.order_index + 1
+                        }`}
                         aria-label="Go to next lesson"
                         className="inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all"
                         title="Next Lesson"
@@ -771,196 +792,425 @@ export function LessonViewer({
                 )}
               </CardHeader>
 
-              <Separator />
+              <Tabs
+                defaultValue="lesson"
+                className="flex-1 flex flex-col min-h-0"
+              >
+                <div className="px-4 pt-3 border-b border-border/50">
+                  <TabsList className="grid w-full grid-cols-3 h-9 bg-muted/60">
+                    <TabsTrigger
+                      value="lesson"
+                      className="flex items-center gap-1.5 text-xs font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
+                    >
+                      <FileText className="h-3.5 w-3.5" />
+                      <span>Lesson</span>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="activity"
+                      className="flex items-center gap-1.5 text-xs font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
+                      disabled={!lesson.class_activities}
+                    >
+                      <Sparkles className="h-3.5 w-3.5" />
+                      <span>Activity</span>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="homework"
+                      className="flex items-center gap-1.5 text-xs font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
+                      disabled={!lesson.take_home_assignment}
+                    >
+                      <BookOpen className="h-3.5 w-3.5" />
+                      <span>Homework</span>
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
 
-              <CardContent className="flex-1 overflow-auto p-4 relative">
-                {/* Confetti overlay */}
-                {showConfetti && (
-                  <div className="pointer-events-none absolute inset-0 flex items-start justify-center z-10">
-                    <div className="mt-4 grid grid-cols-6 gap-3 text-2xl">
-                      <span className="animate-bounce">🎉</span>
-                      <span className="animate-bounce [animation-delay:100ms]">
-                        🎈
-                      </span>
-                      <span className="animate-bounce [animation-delay:200ms]">
-                        🌟
-                      </span>
-                      <span className="animate-bounce [animation-delay:300ms]">
-                        🎊
-                      </span>
-                      <span className="animate-bounce [animation-delay:400ms]">
-                        ⭐
-                      </span>
-                      <span className="animate-bounce [animation-delay:500ms]">
-                        ✨
-                      </span>
+                {/* Lesson Content Tab */}
+                <TabsContent
+                  value="lesson"
+                  className="flex-1 overflow-auto p-4 mt-0 relative"
+                >
+                  {/* Confetti overlay */}
+                  {showConfetti && (
+                    <div className="pointer-events-none absolute inset-0 flex items-start justify-center z-10">
+                      <div className="mt-4 grid grid-cols-6 gap-3 text-2xl">
+                        <span className="animate-bounce">🎉</span>
+                        <span className="animate-bounce [animation-delay:100ms]">
+                          🎈
+                        </span>
+                        <span className="animate-bounce [animation-delay:200ms]">
+                          🌟
+                        </span>
+                        <span className="animate-bounce [animation-delay:300ms]">
+                          🎊
+                        </span>
+                        <span className="animate-bounce [animation-delay:400ms]">
+                          ⭐
+                        </span>
+                        <span className="animate-bounce [animation-delay:500ms]">
+                          ✨
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  <div
+                    className="lesson-content prose max-w-none dark:prose-invert
+                    prose-headings:font-bold prose-headings:tracking-tight
+                    prose-h1:text-xl prose-h1:text-primary prose-h1:mt-1 prose-h1:mb-3 prose-h1:leading-tight prose-h1:first:mt-0
+                    prose-h2:text-lg prose-h2:text-accent prose-h2:mt-2 prose-h2:mb-3 prose-h2:leading-snug prose-h2:first:mt-0
+                    prose-h3:text-base prose-h3:text-primary/90 prose-h3:mt-2 prose-h3:mb-3 prose-h3:leading-snug prose-h3:first:mt-0
+                    prose-h4:text-sm prose-h4:text-primary/80 prose-h4:mt-4 prose-h4:mb-2 prose-h4:leading-snug prose-h4:first:mt-0
+                    prose-p:text-foreground prose-p:leading-[1.7] prose-p:mb-3 prose-p:text-sm prose-p:first:mt-0
+                    prose-strong:text-primary prose-strong:font-bold prose-strong:text-[1.02em]
+                    prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:text-xs prose-code:before:content-none prose-code:after:content-none prose-code:font-semibold
+                    prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:my-4 prose-blockquote:italic
+                    prose-img:rounded-xl prose-img:shadow-2xl prose-img:ring-2 prose-img:ring-border prose-img:my-4
+                    prose-a:text-primary dark:prose-a:text-primary hover:prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors
+                    prose-hr:my-4 prose-hr:border-t-2 prose-hr:border-border"
+                  >
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        code(props) {
+                          const { children, className } = props;
+                          const match = /language-(\w+)/.exec(className || "");
+                          const codeString = String(children).replace(
+                            /\n$/,
+                            ""
+                          );
+
+                          return match ? (
+                            <div className="relative my-3">
+                              <SyntaxHighlighter
+                                PreTag="div"
+                                language={match[1]}
+                                style={vscDarkPlus as any}
+                                className="rounded-lg shadow-lg !mt-3 !mb-3 ring-2 ring-border"
+                                customStyle={{
+                                  padding: "1rem",
+                                  fontSize: "0.875rem",
+                                  lineHeight: "1.6",
+                                }}
+                              >
+                                {codeString}
+                              </SyntaxHighlighter>
+                            </div>
+                          ) : (
+                            <code className={className}>{children}</code>
+                          );
+                        },
+                      }}
+                    >
+                      {lesson.content}
+                    </ReactMarkdown>
+                  </div>
+
+                  {/* Mark as Complete Button */}
+                  <div className="mt-10 pt-6 border-t-2 border-border flex flex-col items-center gap-3">
+                    <Button
+                      onClick={
+                        isCompleted ? handleUnmarkRequest : handleMarkClick
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          if (isCompleted) {
+                            handleUnmarkRequest();
+                          } else {
+                            handleMarkClick();
+                          }
+                        }
+                      }}
+                      aria-pressed={isCompleted}
+                      aria-label={
+                        isCompleted
+                          ? "Unmark lesson as complete"
+                          : "Mark lesson as complete"
+                      }
+                      disabled={isLoading}
+                      className={`w-auto px-6 rounded-xl text-sm font-bold py-4 transition-all shadow-lg hover:shadow-xl transform hover:scale-[1.02] ${
+                        isCompleted
+                          ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
+                          : "bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white"
+                      }`}
+                    >
+                      {isLoading ? (
+                        "Updating..."
+                      ) : isCompleted ? (
+                        <>
+                          <CheckCircle className="h-4 w-4 mr-2" />
+                          🎉 Completed
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle className="h-4 w-4 mr-2" />
+                          Mark as Complete
+                        </>
+                      )}
+                    </Button>
+                    {!userId && (
+                      <p className="text-xs text-muted-foreground text-center font-medium">
+                        Sign in to track your progress
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Lesson Navigation */}
+                  <div className="mt-4 pt-4 border-t border-border/50 flex items-center justify-center gap-2">
+                    {lesson.order_index > 1 && (
+                      <Link
+                        href={`/lessons/${courseSlug}/${
+                          lesson.order_index - 1
+                        }`}
+                        aria-label="Go to previous lesson"
+                        className="inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold bg-white dark:bg-gray-900 border border-gray-200 hover:border-purple-400 dark:border-gray-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
+                      >
+                        <ArrowLeft className="h-3.5 w-3.5" />
+                        <span>Previous</span>
+                      </Link>
+                    )}
+                    <Link
+                      href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
+                      aria-label="Go to next lesson"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all"
+                    >
+                      <span>Next Lesson</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </TabsContent>
+
+                {/* Activity Tab */}
+                <TabsContent
+                  value="activity"
+                  className="flex-1 overflow-auto p-4 mt-0"
+                >
+                  <div className="bg-linear-to-br from-purple-50 via-pink-50 to-fuchsia-50 dark:from-purple-950/40 dark:via-pink-950/30 dark:to-fuchsia-950/40 rounded-xl p-5 border border-purple-200/50 dark:border-purple-800/50">
+                    <div className="flex items-center gap-2.5 mb-4">
+                      <div className="p-2 bg-linear-to-br from-purple-500 to-pink-500 rounded-lg shadow-md">
+                        <Sparkles className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-purple-800 dark:text-purple-200">
+                          🎮 In-Class Activity
+                        </h3>
+                        <p className="text-xs text-purple-600 dark:text-purple-400 mt-0.5">
+                          Fun hands-on learning exercise
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-sm leading-relaxed space-y-2.5 text-purple-900 dark:text-purple-100">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          p: ({ children }) => (
+                            <p className="mb-2.5 leading-relaxed">{children}</p>
+                          ),
+                          strong: ({ children }) => (
+                            <strong className="font-semibold text-purple-800 dark:text-purple-200">
+                              {children}
+                            </strong>
+                          ),
+                          ul: ({ children }) => (
+                            <ul className="list-disc list-inside space-y-1.5 my-2.5 ml-2 marker:text-purple-500 dark:marker:text-purple-400">
+                              {children}
+                            </ul>
+                          ),
+                          ol: ({ children }) => (
+                            <ol className="list-decimal list-inside space-y-1.5 my-2.5 ml-2 marker:text-purple-500 dark:marker:text-purple-400">
+                              {children}
+                            </ol>
+                          ),
+                          li: ({ children }) => (
+                            <li className="leading-relaxed pl-1">{children}</li>
+                          ),
+                          h1: ({ children }) => (
+                            <h1 className="text-base font-bold text-purple-800 dark:text-purple-200 mt-3 mb-2 first:mt-0">
+                              {children}
+                            </h1>
+                          ),
+                          h2: ({ children }) => (
+                            <h2 className="text-base font-bold text-purple-800 dark:text-purple-200 mt-3 mb-2 first:mt-0">
+                              {children}
+                            </h2>
+                          ),
+                          h3: ({ children }) => (
+                            <h3 className="text-sm font-semibold text-purple-700 dark:text-purple-300 mt-2.5 mb-1.5 first:mt-0">
+                              {children}
+                            </h3>
+                          ),
+                        }}
+                      >
+                        {lesson.class_activities || ""}
+                      </ReactMarkdown>
                     </div>
                   </div>
-                )}
-                <div
-                  className="lesson-content prose max-w-none dark:prose-invert
-                  prose-headings:font-bold prose-headings:tracking-tight
-                  prose-h1:text-xl prose-h1:text-primary prose-h1:mt-1 prose-h1:mb-3 prose-h1:leading-tight prose-h1:first:mt-0
-                  prose-h2:text-lg prose-h2:text-accent prose-h2:mt-2 prose-h2:mb-3 prose-h2:leading-snug prose-h2:first:mt-0
-                  prose-h3:text-base prose-h3:text-primary/90 prose-h3:mt-2 prose-h3:mb-3 prose-h3:leading-snug prose-h3:first:mt-0
-                  prose-h4:text-sm prose-h4:text-primary/80 prose-h4:mt-4 prose-h4:mb-2 prose-h4:leading-snug prose-h4:first:mt-0
-                  prose-p:text-foreground prose-p:leading-[1.7] prose-p:mb-3 prose-p:text-sm prose-p:first:mt-0
-                  prose-strong:text-primary prose-strong:font-bold prose-strong:text-[1.02em]
-                  prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:text-xs prose-code:before:content-none prose-code:after:content-none prose-code:font-semibold
-                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:my-4 prose-blockquote:italic
-                  prose-img:rounded-xl prose-img:shadow-2xl prose-img:ring-2 prose-img:ring-border prose-img:my-4
-                  prose-a:text-primary dark:prose-a:text-primary hover:prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors
-                  prose-hr:my-4 prose-hr:border-t-2 prose-hr:border-border"
+                </TabsContent>
+
+                {/* Homework Tab */}
+                <TabsContent
+                  value="homework"
+                  className="flex-1 overflow-auto p-4 mt-0"
                 >
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      code(props) {
-                        const { children, className } = props;
-                        const match = /language-(\w+)/.exec(className || "");
-                        const codeString = String(children).replace(/\n$/, "");
+                  <div className="bg-linear-to-br from-blue-50 via-cyan-50 to-sky-50 dark:from-blue-950/40 dark:via-cyan-950/30 dark:to-sky-950/40 rounded-xl p-5 border border-blue-200/50 dark:border-blue-800/50">
+                    <div className="flex items-center gap-2.5 mb-4">
+                      <div className="p-2 bg-linear-to-br from-blue-500 to-cyan-500 rounded-lg shadow-md">
+                        <BookOpen className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-blue-800 dark:text-blue-200">
+                          📚 Take-Home Assignment
+                        </h3>
+                        <p className="text-xs text-blue-600 dark:text-blue-400 mt-0.5">
+                          Practice what you learned at home
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-sm leading-relaxed space-y-2.5 text-blue-900 dark:text-blue-100">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          p: ({ children }) => (
+                            <p className="mb-2.5 leading-relaxed">{children}</p>
+                          ),
+                          strong: ({ children }) => (
+                            <strong className="font-semibold text-blue-800 dark:text-blue-200">
+                              {children}
+                            </strong>
+                          ),
+                          ul: ({ children }) => (
+                            <ul className="list-disc list-inside space-y-1.5 my-2.5 ml-2 marker:text-blue-500 dark:marker:text-blue-400">
+                              {children}
+                            </ul>
+                          ),
+                          ol: ({ children }) => (
+                            <ol className="list-decimal list-inside space-y-1.5 my-2.5 ml-2 marker:text-blue-500 dark:marker:text-blue-400">
+                              {children}
+                            </ol>
+                          ),
+                          li: ({ children }) => (
+                            <li className="leading-relaxed pl-1">{children}</li>
+                          ),
+                          h1: ({ children }) => (
+                            <h1 className="text-base font-bold text-blue-800 dark:text-blue-200 mt-3 mb-2 first:mt-0">
+                              {children}
+                            </h1>
+                          ),
+                          h2: ({ children }) => (
+                            <h2 className="text-base font-bold text-blue-800 dark:text-blue-200 mt-3 mb-2 first:mt-0">
+                              {children}
+                            </h2>
+                          ),
+                          h3: ({ children }) => (
+                            <h3 className="text-sm font-semibold text-blue-700 dark:text-blue-300 mt-2.5 mb-1.5 first:mt-0">
+                              {children}
+                            </h3>
+                          ),
+                        }}
+                      >
+                        {lesson.take_home_assignment || ""}
+                      </ReactMarkdown>
+                    </div>
+                  </div>
+                </TabsContent>
+              </Tabs>
 
-                        return match ? (
-                          <div className="relative my-3">
-                            <SyntaxHighlighter
-                              PreTag="div"
-                              language={match[1]}
-                              style={vscDarkPlus as any}
-                              className="rounded-none shadow-lg !mt-3 !mb-3 ring-2 ring-border"
-                              customStyle={{
-                                padding: "1rem",
-                                fontSize: "0.875rem",
-                                lineHeight: "1.6",
-                              }}
-                            >
-                              {codeString}
-                            </SyntaxHighlighter>
-                          </div>
-                        ) : (
-                          <code className={className}>{children}</code>
-                        );
-                      },
-                    }}
-                  >
-                    {lesson.content}
-                  </ReactMarkdown>
-                </div>
-
-                {/* Mark as Complete Button */}
-                <div className="mt-12 pt-8 border-t-2 border-border flex flex-col items-center gap-4">
-                  <Button
-                    onClick={
-                      isCompleted ? handleUnmarkRequest : handleMarkClick
-                    }
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        if (isCompleted) {
-                          handleUnmarkRequest();
-                        } else {
-                          handleMarkClick();
-                        }
-                      }
-                    }}
-                    aria-pressed={isCompleted}
-                    aria-label={
-                      isCompleted
-                        ? "Unmark lesson as complete"
-                        : "Mark lesson as complete"
-                    }
-                    disabled={isLoading}
-                    className={`w-auto px-8 rounded-2xl text-base font-bold py-5 transition-all shadow-xl hover:shadow-2xl transform hover:scale-[1.02] ${
-                      isCompleted
-                        ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
-                        : "bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white"
-                    }`}
-                  >
-                    {isLoading ? (
-                      "Updating..."
-                    ) : isCompleted ? (
-                      <>
-                        <CheckCircle className="h-5 w-5 mr-2" />
-                        🎉 Completed
-                      </>
-                    ) : (
-                      <>
-                        <CheckCircle className="h-5 w-5 mr-2" />
-                        Mark as Complete
-                      </>
-                    )}
-                  </Button>
-                  {!userId && (
-                    <p className="text-sm text-muted-foreground text-center font-medium">
-                      Sign in to track your progress
-                    </p>
-                  )}
-                  <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-                    <AlertDialogContent className="rounded-2xl">
-                      <AlertDialogHeader>
-                        <AlertDialogTitle className="text-base">
-                          Unmark this lesson as complete?
-                        </AlertDialogTitle>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel className="rounded-full">
-                          Cancel
-                        </AlertDialogCancel>
-                        <AlertDialogAction
-                          onClick={handleConfirmUnmark}
-                          className="rounded-full"
-                        >
-                          Yes, Unmark
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                  <output className="sr-only" aria-live="polite">
-                    {isCompleted
-                      ? "Lesson marked as complete"
-                      : "Lesson not completed"}
-                  </output>
-                </div>
-
-                {/* Lesson Navigation */}
-                <div className="mt-6 pt-6 border-t-2 border-border flex items-center justify-center gap-3">
-                  <Link
-                    href={`/lessons/${courseSlug}/${lesson.order_index - 1}`}
-                    aria-label="Go to previous lesson"
-                    className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all"
-                  >
-                    <ArrowLeft className="h-4 w-4" />
-                    <span>Previous</span>
-                  </Link>
-                  <Link
-                    href={`/lessons/${courseSlug}/${lesson.order_index + 1}`}
-                    aria-label="Go to next lesson"
-                    className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all"
-                  >
-                    <span>Next Lesson</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </CardContent>
+              <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+                <AlertDialogContent className="rounded-2xl">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle className="text-base">
+                      Unmark this lesson as complete?
+                    </AlertDialogTitle>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel className="rounded-full">
+                      Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={handleConfirmUnmark}
+                      className="rounded-full"
+                    >
+                      Yes, Unmark
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+              <output className="sr-only" aria-live="polite">
+                {isCompleted
+                  ? "Lesson marked as complete"
+                  : "Lesson not completed"}
+              </output>
             </Card>
 
-            {courseSlug === "python-foundations" ? (
-              <div className="sticky top-24 self-start w-full">
-                {lesson.requires_trinket ? (
-                  <TrinketEditor
-                    initialCode={lesson.starter_code}
-                    className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
-                  />
-                ) : (
-                  <PythonEditor
-                    initialCode={lesson.starter_code}
-                    onCodeChange={handleCodeChange}
-                    onRunComplete={handleRunComplete}
-                    className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
-                  />
-                )}
-              </div>
-            ) : null}
+            {/* Right Column: Code Editor */}
+            <div className="sticky top-24 self-start w-full">
+              {lesson.requires_trinket ? (
+                <TrinketEditor
+                  initialCode={lesson.starter_code}
+                  className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
+                />
+              ) : (
+                <PythonEditor
+                  initialCode={lesson.starter_code}
+                  onCodeChange={handleCodeChange}
+                  onRunComplete={handleRunComplete}
+                  className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
+                />
+              )}
+            </div>
           </div>
+        ) : (
+          // Non-level courses (legacy layout)
+          <Card className="flex flex-col rounded-2xl border shadow-2xl max-h-[calc(100vh-140px)]">
+            <CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 rounded-t-2xl border-b-2 border-border flex-shrink-0 py-3">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <div
+                      className="p-1 bg-gradient-to-br from-primary to-accent rounded-lg shrink-0"
+                      aria-hidden="true"
+                    >
+                      <BookOpen className="h-3.5 w-3.5 text-white" />
+                    </div>
+                    <span className="tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
+                      Lesson {lesson.order_index}: {lesson.title} ✨
+                    </span>
+                  </CardTitle>
+                  <CardDescription className="text-muted-foreground text-xs mt-1.5 ml-8">
+                    {lesson.description}
+                  </CardDescription>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  {isCompleted && (
+                    <Badge className="bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 dark:from-green-900/50 dark:to-emerald-900/50 dark:text-green-300 flex items-center gap-1 px-2 py-1 text-xs font-semibold">
+                      <CheckCircle className="h-3 w-3" />
+                      Done
+                    </Badge>
+                  )}
+                </div>
+              </div>
+            </CardHeader>
+
+            <Separator />
+
+            <CardContent className="flex-1 overflow-auto p-4 relative">
+              <div
+                className="lesson-content prose max-w-none dark:prose-invert
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h1:text-xl prose-h1:text-primary prose-h1:mt-1 prose-h1:mb-3 prose-h1:leading-tight prose-h1:first:mt-0
+                prose-h2:text-lg prose-h2:text-accent prose-h2:mt-2 prose-h2:mb-3 prose-h2:leading-snug prose-h2:first:mt-0
+                prose-h3:text-base prose-h3:text-primary/90 prose-h3:mt-2 prose-h3:mb-3 prose-h3:leading-snug prose-h3:first:mt-0
+                prose-p:text-foreground prose-p:leading-[1.7] prose-p:mb-3 prose-p:text-sm prose-p:first:mt-0
+                prose-strong:text-primary prose-strong:font-bold
+                prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:text-xs
+                prose-a:text-primary hover:prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+                prose-hr:my-4 prose-hr:border-t-2 prose-hr:border-border"
+              >
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {lesson.content}
+                </ReactMarkdown>
+              </div>
+            </CardContent>
+          </Card>
         )}
       </div>
     </div>

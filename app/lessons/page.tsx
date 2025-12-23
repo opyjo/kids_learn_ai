@@ -18,7 +18,7 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
 
   // Redirect to default course if no course specified
   if (!courseSlug) {
-    redirect("/lessons?course=python-foundations");
+    redirect("/lessons?course=level-1-python-foundations-1");
   }
 
   // Check if user is authenticated (optional for testing)
@@ -43,6 +43,18 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
     .from("courses")
     .select("*")
     .order("order_index", { ascending: true });
+
+  // Group courses by year_group
+  const coursesByYear: Record<string, typeof coursesData> = {};
+  if (coursesData) {
+    coursesData.forEach((course) => {
+      const year = course.year_group || "Other Courses";
+      if (!coursesByYear[year]) {
+        coursesByYear[year] = [];
+      }
+      coursesByYear[year].push(course);
+    });
+  }
 
   // Get the course ID if a course slug is specified
   let selectedCourseId = null;
@@ -233,7 +245,7 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
                 </div>
                 <div className="mt-4">
                   <Button asChild variant="outline">
-                    <Link href="/lessons?course=python-foundations">
+                    <Link href="/lessons?course=level-1-python-foundations-1">
                       Explore Other Courses
                     </Link>
                   </Button>

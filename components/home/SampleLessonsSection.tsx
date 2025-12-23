@@ -216,7 +216,7 @@ const SampleLessonsSection = () => {
       </StaggerContainer>
 
       <FadeIn delay={0.3} className="text-center mt-12">
-        <Link href="/lessons?course=python-foundations">
+        <Link href="/lessons?course=level-1-python-foundations-1">
           <Button
             size="lg"
             variant="outline"

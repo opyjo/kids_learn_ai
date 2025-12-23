@@ -29,7 +29,7 @@ export const Footer = () => {
             <ul className="space-y-3 text-muted-foreground">
               <li>
                 <Link
-                  href="/lessons?course=python-foundations"
+                  href="/lessons?course=level-1-python-foundations-1"
                   className="hover:text-foreground transition-colors cursor-pointer"
                 >
                   All Lessons
