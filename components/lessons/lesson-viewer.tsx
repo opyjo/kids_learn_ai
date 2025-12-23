@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Card,
   CardContent,
@@ -19,6 +19,11 @@ import {
   BookOpen,
   Sparkles,
   FileText,
+  Upload,
+  MessageSquare,
+  Award,
+  Clock,
+  Eye,
 } from "lucide-react";
 import Link from "next/link";
 import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
@@ -26,6 +31,8 @@ import { PythonEditor } from "@/components/code/python-editor";
 import { TrinketEditor } from "@/components/code/trinket-editor";
 import { AIPlayground } from "@/components/lessons/ai-playground";
 import { InlineTutor } from "@/components/lessons/inline-tutor";
+import { TrinketSubmissionForm } from "@/components/dashboard/trinket-submission-form";
+import { TrinketPreview } from "@/components/dashboard/trinket-preview";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -80,6 +87,16 @@ export function LessonViewer({
   const { toast } = useToast();
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  // Homework submission state
+  const [submission, setSubmission] = useState<{
+    id: string;
+    trinketUrl: string;
+    status: "submitted" | "reviewed" | "graded";
+    feedback: string | null;
+    grade: string | null;
+  } | null>(null);
+  const [showSubmissionPreview, setShowSubmissionPreview] = useState(false);
+
   // Fetch completion status on mount (use client auth user to avoid RLS mismatches)
   useEffect(() => {
     const checkCompletionStatus = async () => {
@@ -111,6 +128,47 @@ export function LessonViewer({
 
     checkCompletionStatus();
   }, [lesson.dbId, supabase]);
+
+  // Fetch homework submission status
+  const fetchSubmission = useCallback(async () => {
+    if (!lesson.dbId) return;
+
+    try {
+      const {
+        data: { user: authUser },
+      } = await supabase.auth.getUser();
+
+      if (!authUser) {
+        setSubmission(null);
+        return;
+      }
+
+      const { data } = await supabase
+        .from("trinket_submissions")
+        .select("id, trinket_url, status, feedback, grade")
+        .eq("student_id", authUser.id)
+        .eq("lesson_id", lesson.dbId)
+        .maybeSingle();
+
+      if (data) {
+        setSubmission({
+          id: data.id,
+          trinketUrl: data.trinket_url,
+          status: data.status as "submitted" | "reviewed" | "graded",
+          feedback: data.feedback,
+          grade: data.grade,
+        });
+      } else {
+        setSubmission(null);
+      }
+    } catch (_error) {
+      setSubmission(null);
+    }
+  }, [lesson.dbId, supabase]);
+
+  useEffect(() => {
+    fetchSubmission();
+  }, [fetchSubmission]);
 
   // Toggle lesson completion
   const toggleCompletion = async (action?: "complete" | "uncomplete") => {
@@ -1110,6 +1168,118 @@ export function LessonViewer({
                         {lesson.take_home_assignment || ""}
                       </ReactMarkdown>
                     </div>
+
+                    {/* Homework Submission Section */}
+                    {userId && (
+                      <div className="mt-6 pt-5 border-t border-blue-200/50 dark:border-blue-800/50">
+                        <div className="flex items-center gap-2 mb-4">
+                          <Upload className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                          <h4 className="text-sm font-semibold text-blue-800 dark:text-blue-200">
+                            Submit Your Work
+                          </h4>
+                        </div>
+
+                        {!submission ? (
+                          // No submission yet - show submit button
+                          <div className="flex flex-col items-start gap-3">
+                            <p className="text-xs text-blue-600 dark:text-blue-400">
+                              Complete your assignment on Trinket, then submit
+                              your work here.
+                            </p>
+                            <TrinketSubmissionForm
+                              lessonId={lesson.dbId}
+                              lessonTitle={lesson.title}
+                              onSubmitSuccess={fetchSubmission}
+                            />
+                          </div>
+                        ) : (
+                          // Has submission - show status
+                          <div className="space-y-4">
+                            <div className="flex items-center justify-between flex-wrap gap-3">
+                              <div className="flex items-center gap-2">
+                                {submission.status === "graded" ? (
+                                  <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 gap-1">
+                                    <Award className="h-3 w-3" />
+                                    Graded
+                                    {submission.grade &&
+                                      `: ${submission.grade}`}
+                                  </Badge>
+                                ) : submission.status === "reviewed" ? (
+                                  <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100 gap-1">
+                                    <MessageSquare className="h-3 w-3" />
+                                    Reviewed
+                                  </Badge>
+                                ) : (
+                                  <Badge variant="secondary" className="gap-1">
+                                    <Clock className="h-3 w-3" />
+                                    Pending Review
+                                  </Badge>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() =>
+                                    setShowSubmissionPreview(
+                                      !showSubmissionPreview
+                                    )
+                                  }
+                                  className="gap-1.5 text-xs h-8"
+                                >
+                                  <Eye className="h-3 w-3" />
+                                  {showSubmissionPreview ? "Hide" : "View"}{" "}
+                                  Submission
+                                </Button>
+                                {submission.status === "submitted" && (
+                                  <TrinketSubmissionForm
+                                    lessonId={lesson.dbId}
+                                    lessonTitle={lesson.title}
+                                    existingUrl={submission.trinketUrl}
+                                    onSubmitSuccess={fetchSubmission}
+                                  />
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Feedback display */}
+                            {submission.feedback && (
+                              <div className="bg-white/60 dark:bg-gray-900/60 rounded-lg p-4 border border-blue-200/50 dark:border-blue-800/50">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <MessageSquare className="h-4 w-4 text-blue-600" />
+                                  <span className="text-sm font-semibold text-blue-800 dark:text-blue-200">
+                                    Teacher Feedback
+                                  </span>
+                                </div>
+                                <p className="text-sm text-blue-900 dark:text-blue-100 whitespace-pre-wrap">
+                                  {submission.feedback}
+                                </p>
+                              </div>
+                            )}
+
+                            {/* Submission preview */}
+                            {showSubmissionPreview && (
+                              <div className="mt-3">
+                                <TrinketPreview
+                                  trinketUrl={submission.trinketUrl}
+                                  title="Your Submission"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Not logged in message */}
+                    {!userId && (
+                      <div className="mt-6 pt-5 border-t border-blue-200/50 dark:border-blue-800/50">
+                        <p className="text-xs text-blue-600 dark:text-blue-400 text-center">
+                          Sign in to submit your homework and receive feedback
+                          from your teacher.
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </TabsContent>
               </Tabs>

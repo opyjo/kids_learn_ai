@@ -13,14 +13,20 @@ import {
   BookOpen,
   TrendingUp,
   Plus,
-  BarChart3,
-  Settings,
+  FileCode,
 } from "lucide-react";
 import Link from "next/link";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { SiteHeader } from "@/components/site-header";
+import { SubmissionsTab } from "@/components/admin/submissions-tab";
 
-export default async function AdminDashboard() {
+export default async function AdminDashboard({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
+  const params = await searchParams;
+  const activeTab = params.tab || "overview";
   const supabase = await getSupabaseServerClient();
 
   // Fetch total students
@@ -165,17 +171,21 @@ export default async function AdminDashboard() {
         </div>
 
         {/* Main Content Tabs */}
-        <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+        <Tabs defaultValue={activeTab} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="lessons">Lessons</TabsTrigger>
+            <TabsTrigger value="submissions" className="gap-1">
+              <FileCode className="h-4 w-4" />
+              Submissions
+            </TabsTrigger>
             <TabsTrigger value="students">Students</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
-            <div className="grid lg:grid-cols-2 gap-6">
+            <div className="grid gap-6">
               {/* Recent Students */}
               <Card>
                 <CardHeader>
@@ -217,48 +227,6 @@ export default async function AdminDashboard() {
                 </CardContent>
               </Card>
 
-              {/* Quick Actions */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quick Actions</CardTitle>
-                  <CardDescription>Common administrative tasks</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <Button className="w-full justify-start" asChild>
-                    <Link href="/admin/lessons/new">
-                      <Plus className="mr-2 h-4 w-4" />
-                      Create New Lesson
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start bg-transparent"
-                    asChild
-                  >
-                    <Link href="/admin/students">
-                      <Users className="mr-2 h-4 w-4" />
-                      Manage Students
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start bg-transparent"
-                    asChild
-                  >
-                    <Link href="/admin/analytics">
-                      <BarChart3 className="mr-2 h-4 w-4" />
-                      View Analytics
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start bg-transparent"
-                  >
-                    <Settings className="mr-2 h-4 w-4" />
-                    Platform Settings
-                  </Button>
-                </CardContent>
-              </Card>
             </div>
           </TabsContent>
 
@@ -312,6 +280,11 @@ export default async function AdminDashboard() {
                 </div>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          {/* Submissions Tab */}
+          <TabsContent value="submissions" className="space-y-6">
+            <SubmissionsTab />
           </TabsContent>
 
           {/* Students Tab */}

@@ -13,6 +13,7 @@ import { Code, Trophy, Play } from "lucide-react";
 import Link from "next/link";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { requireAuth } from "@/lib/auth-helpers";
+import { MyAssignmentsSection } from "@/components/dashboard/my-assignments-section";
 
 export default async function DashboardPage() {
   // Protect the route - redirects to /login if not authenticated
@@ -76,62 +77,51 @@ export default async function DashboardPage() {
     .from("lessons")
     .select("*", { count: "exact" });
 
-  // Fetch completed lessons with lesson metadata
-  const { data: completedLessonRecords, count: completedLessonsCount } =
-    await supabase
-      .from("completed_lessons")
-      .select(
-        `
-        lesson_id,
-        completed_at,
-        lessons (
-          id,
-          title,
-          difficulty_level,
-          order_index,
-          courses (slug)
-        )
-      `,
-        { count: "exact" }
+  // Fetch completed lessons count
+  const { count: completedLessonsCount } = await supabase
+    .from("completed_lessons")
+    .select("*", { count: "exact" })
+    .eq("student_id", authUser.id);
+
+
+  // Fetch student's trinket submissions
+  const { data: submissionsData } = await supabase
+    .from("trinket_submissions")
+    .select(
+      `
+      id,
+      lesson_id,
+      trinket_url,
+      status,
+      feedback,
+      grade,
+      reviewed_at,
+      submitted_at,
+      lessons (
+        id,
+        title,
+        order_index,
+        courses (slug)
       )
-      .eq("student_id", authUser.id)
-      .order("completed_at", { ascending: false })
-      .limit(10);
+    `
+    )
+    .eq("student_id", authUser.id)
+    .order("submitted_at", { ascending: false });
 
-  type LessonActivity = {
-    lessonId: string;
-    status: string;
-    updatedAt: string | null;
-    lesson: {
-      id: string;
-      title: string;
-      difficulty_level: string;
-      order_index: number;
-      courses: { slug: string } | null;
-    } | null;
-  };
-
-  const formatActivityDate = (timestamp: string | null) => {
-    if (!timestamp) {
-      return "No recent activity";
-    }
-    const date = new Date(timestamp);
-    return date.toLocaleDateString(undefined, {
-      month: "short",
-      day: "numeric",
-      year:
-        date.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
-    });
-  };
-
-  // Map completed lessons to activity format
-  const recentLessonsToDisplay: LessonActivity[] =
-    completedLessonRecords?.map((record: any) => ({
-      lessonId: record.lesson_id,
-      status: "completed",
-      updatedAt: record.completed_at ?? null,
-      lesson: record.lessons ?? null,
-    })).slice(0, 4) ?? [];
+  // Transform submissions data for the component
+  const submissions = (submissionsData || []).map((sub: any) => ({
+    id: sub.id,
+    lessonId: sub.lesson_id,
+    lessonTitle: sub.lessons?.title || "Unknown Lesson",
+    lessonOrderIndex: sub.lessons?.order_index || 0,
+    courseSlug: sub.lessons?.courses?.slug || "level-1-python-foundations-1",
+    trinketUrl: sub.trinket_url,
+    status: sub.status as "submitted" | "reviewed" | "graded",
+    feedback: sub.feedback,
+    grade: sub.grade,
+    reviewedAt: sub.reviewed_at,
+    submittedAt: sub.submitted_at,
+  }));
 
   const metadata = authUser.user_metadata as { full_name?: string } | null;
   const userName =
@@ -260,106 +250,40 @@ export default async function DashboardPage() {
           </Card>
         </div>
 
-        {/* Recent Lessons */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
-            <CardHeader>
-              <CardTitle>Continue Learning</CardTitle>
-              <CardDescription>Pick up where you left off</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {recentLessonsToDisplay.length > 0 ? (
-                recentLessonsToDisplay.map((lessonActivity) => (
-                  <div
-                    key={lessonActivity.lessonId}
-                    className="flex items-center justify-between p-4 border rounded-xl hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex-1">
-                      <h4 className="font-medium">
-                        {lessonActivity.lesson?.title || "Lesson"}
-                      </h4>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge variant="outline" className="text-xs">
-                          {lessonActivity.lesson?.difficulty_level ||
-                            "beginner"}
-                        </Badge>
-                        <span className="text-sm text-gray-500">
-                          {lessonActivity.status === "completed"
-                            ? `Completed ${formatActivityDate(
-                                lessonActivity.updatedAt
-                              )}`
-                            : `Updated ${formatActivityDate(
-                                lessonActivity.updatedAt
-                              )}`}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {lessonActivity.status === "completed" ? (
-                        <Badge
-                          variant="default"
-                          className="bg-green-100 text-green-800 rounded-full"
-                        >
-                          ✓ Done
-                        </Badge>
-                      ) : (
-                        <Button
-                          size="sm"
-                          asChild
-                          className="rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
-                        >
-                          <Link
-                            href={`/lessons/${
-                              lessonActivity.lesson?.courses?.slug || "level-1-python-foundations-1"
-                            }/${
-                              lessonActivity.lesson?.order_index ?? 1
-                            }`}
-                          >
-                            <Play className="h-4 w-4 mr-1" />
-                            Continue
-                          </Link>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-gray-500 text-center py-4">
-                  No lessons started yet. Start your first lesson!
-                </p>
-              )}
-            </CardContent>
-          </Card>
+        {/* Quick Actions */}
+        <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>
+              What would you like to do today?
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-4">
+            <Button
+              className="justify-start rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
+              asChild
+            >
+              <Link href="/lessons?course=level-1-python-foundations-1">
+                <Code className="mr-2 h-4 w-4" />
+                Browse All Lessons
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              className="justify-start bg-transparent rounded-full"
+              asChild
+            >
+              <Link href="/playground">
+                <Play className="mr-2 h-4 w-4" />
+                Python Playground
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
 
-          <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
-            <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-              <CardDescription>
-                What would you like to do today?
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Button
-                className="w-full justify-start rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
-                asChild
-              >
-                <Link href="/lessons?course=level-1-python-foundations-1">
-                  <Code className="mr-2 h-4 w-4" />
-                  Browse All Lessons
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start bg-transparent rounded-full"
-                asChild
-              >
-                <Link href="/playground">
-                  <Play className="mr-2 h-4 w-4" />
-                  Python Playground
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
+        {/* My Assignments Section */}
+        <div className="mt-8">
+          <MyAssignmentsSection initialSubmissions={submissions} />
         </div>
       </div>
     </div>
