@@ -314,7 +314,7 @@ const GetTrinketPage = () => {
                   size="lg"
                   className="bg-white text-green-600 hover:bg-green-50"
                 >
-                  <Link href="/lessons?course=python-foundations">
+                  <Link href="/lessons?course=level-1-python-foundations-1">
                     Browse Lessons
                   </Link>
                 </Button>
