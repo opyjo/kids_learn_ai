@@ -72,6 +72,16 @@ const FeaturesSection = () => {
               {/* Decorative overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
             </div>
+            {/* Brightbyte raising hand - bottom right */}
+            <div className="absolute -bottom-6 -right-6 z-10 animate-float hidden md:block">
+              <Image
+                src="/brightbyte/raisedhand.png"
+                alt="Brightbyte raising hand"
+                width={100}
+                height={100}
+                className="object-contain drop-shadow-xl"
+              />
+            </div>
             {/* Floating accent */}
             <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-accent/20 rounded-full blur-2xl" />
             <div className="absolute -top-4 -right-4 w-32 h-32 bg-primary/20 rounded-full blur-2xl" />

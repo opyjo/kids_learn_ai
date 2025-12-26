@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sparkles, CheckCircle } from "lucide-react";
@@ -14,9 +16,9 @@ const Hero = () => {
 
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
         {/* Text Content */}
-        <div className="text-center lg:text-left z-10">
+        <div className="text-center lg:text-left z-10 relative">
           <FadeIn>
-            <Badge className="mb-6 bg-accent/10 text-accent hover:bg-accent/20 border-accent/20 rounded-full px-4 py-2 text-sm font-medium cursor-pointer">
+            <Badge className="mb-6 bg-accent/10 text-accent hover:bg-accent/20 border-accent/20 rounded-full px-4 py-2 text-sm font-medium cursor-pointer relative z-10">
               <Sparkles className="w-4 h-4 inline mr-2" />
               Live Classes with Expert Instructors
             </Badge>
@@ -39,6 +41,26 @@ const Hero = () => {
           </FadeIn>
           <FadeIn delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+              {/* Brightbyte pointing toward the CTA button */}
+              <motion.div
+                animate={{
+                  x: [0, 8, 12, 8, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative"
+              >
+                <Image
+                  src="/brightbyte/pointing.png"
+                  alt="Brightbyte pointing to the Book a FREE Trial Class button"
+                  width={72}
+                  height={72}
+                  className="object-contain drop-shadow-lg"
+                />
+              </motion.div>
               <Link href="/inquiry">
                 <Button
                   size="lg"
@@ -54,7 +76,7 @@ const Hero = () => {
             </div>
           </FadeIn>
           <FadeIn delay={0.4}>
-            <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center lg:justify-start text-sm text-muted-foreground">
+            <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center lg:justify-start text-sm text-muted-foreground relative">
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-green-600" />
                 <span>First class FREE - try before you commit</span>

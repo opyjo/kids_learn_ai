@@ -294,3 +294,23 @@
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* Nudge animation - points toward something on the right */
+@keyframes nudge-right {
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(8px) translateY(-4px) rotate(5deg);
+  }
+  50% {
+    transform: translateX(12px) translateY(-2px) rotate(8deg);
+  }
+  75% {
+    transform: translateX(8px) translateY(-4px) rotate(5deg);
+  }
+}
+
+.animate-nudge-right {
+  animation: nudge-right 2s ease-in-out infinite;
+}

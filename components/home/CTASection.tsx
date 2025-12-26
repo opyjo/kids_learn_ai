@@ -44,7 +44,15 @@ const CTASection = () => {
 
             <div className="relative z-10">
               <FadeIn>
-                <div className="text-6xl mb-6">🧠</div>
+                <div className="mb-6 animate-float">
+                  <Image
+                    src="/brightbyte/celebrating.png"
+                    alt="Brightbyte celebrating"
+                    width={80}
+                    height={80}
+                    className="object-contain drop-shadow-lg"
+                  />
+                </div>
               </FadeIn>
               <FadeIn delay={0.1}>
                 <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-foreground mb-6 text-balance">
