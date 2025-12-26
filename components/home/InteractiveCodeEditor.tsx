@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -187,10 +188,22 @@ const InteractiveCodeEditor = () => {
                     </Badge>
                   )}
                 </div>
-                <div className="h-48 p-4 bg-card border-2 border-border rounded-xl font-mono text-sm overflow-auto">
+                <div className="h-48 p-4 bg-card border-2 border-border rounded-xl font-mono text-sm overflow-auto relative">
                   {output ? (
-                    <div className="text-foreground whitespace-pre-wrap">
-                      {output}
+                    <div className="flex items-start gap-3">
+                      {/* Brightbyte celebrating on success */}
+                      <div className="flex-shrink-0 animate-bounce">
+                        <Image
+                          src="/brightbyte/celebrating.png"
+                          alt="Brightbyte celebrating your success"
+                          width={40}
+                          height={40}
+                          className="object-contain"
+                        />
+                      </div>
+                      <div className="text-foreground whitespace-pre-wrap">
+                        {output}
+                      </div>
                     </div>
                   ) : (
                     <div className="text-muted-foreground italic">

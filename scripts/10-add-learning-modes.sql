@@ -232,3 +232,4 @@ CREATE POLICY "Admins can view all challenge attempts" ON challenge_attempts
 COMMENT ON TABLE coding_challenges IS 'Practice coding challenges linked to lessons';
 COMMENT ON TABLE challenge_attempts IS 'User attempts at coding challenges';
 
+

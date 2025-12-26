@@ -487,6 +487,36 @@ export function LessonViewer({
                                     </code>
                                   );
                                 },
+                                table: ({ children }) => (
+                                  <div className="my-4 overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+                                    <table className="w-full text-sm">{children}</table>
+                                  </div>
+                                ),
+                                thead: ({ children }) => (
+                                  <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                                    {children}
+                                  </thead>
+                                ),
+                                tbody: ({ children }) => (
+                                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                    {children}
+                                  </tbody>
+                                ),
+                                tr: ({ children }) => (
+                                  <tr className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                    {children}
+                                  </tr>
+                                ),
+                                th: ({ children }) => (
+                                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                                    {children}
+                                  </th>
+                                ),
+                                td: ({ children }) => (
+                                  <td className="px-4 py-3 text-gray-700 dark:text-gray-300">
+                                    {children}
+                                  </td>
+                                ),
                               }}
                             >
                               {lesson.content}
@@ -956,6 +986,36 @@ export function LessonViewer({
                             <code className={className}>{children}</code>
                           );
                         },
+                        table: ({ children }) => (
+                          <div className="my-4 overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+                            <table className="w-full text-sm">{children}</table>
+                          </div>
+                        ),
+                        thead: ({ children }) => (
+                          <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                            {children}
+                          </thead>
+                        ),
+                        tbody: ({ children }) => (
+                          <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                            {children}
+                          </tbody>
+                        ),
+                        tr: ({ children }) => (
+                          <tr className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                            {children}
+                          </tr>
+                        ),
+                        th: ({ children }) => (
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                            {children}
+                          </th>
+                        ),
+                        td: ({ children }) => (
+                          <td className="px-4 py-3 text-gray-700 dark:text-gray-300">
+                            {children}
+                          </td>
+                        ),
                       }}
                     >
                       {lesson.content}

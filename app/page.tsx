@@ -3,6 +3,7 @@
 import React from "react";
 import { MainLayout } from "@/components/layouts/main-layout";
 import Hero from "@/components/home/Hero";
+import PromotionalVideoSection from "@/components/home/PromotionalVideoSection";
 import ProjectShowcaseBanner from "@/components/home/ProjectShowcaseBanner";
 import StatsSection from "@/components/home/StatsSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
@@ -23,6 +24,7 @@ const HomePage = () => {
       <WhatYoullCreateSection />
       <SampleLessonsSection />
       <FAQTeaser />
+      <PromotionalVideoSection />
       <CTASection />
     </MainLayout>
   );
