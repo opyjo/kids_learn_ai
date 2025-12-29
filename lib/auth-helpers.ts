@@ -57,3 +57,51 @@ export async function requireAdmin(): Promise<User> {
 
   return user;
 }
+
+/**
+ * Check if a user is enrolled in a specific level (course).
+ * @param userId - The user's ID
+ * @param courseId - The course/level ID
+ * @returns True if enrolled, false otherwise
+ */
+export async function checkLevelEnrollment(
+  userId: string,
+  courseId: string
+): Promise<boolean> {
+  const supabase = await getSupabaseServerClient();
+
+  const { data, error } = await supabase
+    .from("level_enrollments")
+    .select("id")
+    .eq("student_id", userId)
+    .eq("course_id", courseId)
+    .single();
+
+  if (error || !data) {
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Get all enrolled level IDs for a user.
+ * @param userId - The user's ID
+ * @returns Array of course IDs the user is enrolled in
+ */
+export async function getUserEnrollments(
+  userId: string
+): Promise<string[]> {
+  const supabase = await getSupabaseServerClient();
+
+  const { data, error } = await supabase
+    .from("level_enrollments")
+    .select("course_id")
+    .eq("student_id", userId);
+
+  if (error || !data) {
+    return [];
+  }
+
+  return data.map((enrollment) => enrollment.course_id);
+}

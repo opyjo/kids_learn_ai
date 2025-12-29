@@ -233,3 +233,4 @@ COMMENT ON TABLE coding_challenges IS 'Practice coding challenges linked to less
 COMMENT ON TABLE challenge_attempts IS 'User attempts at coding challenges';
 
 
+

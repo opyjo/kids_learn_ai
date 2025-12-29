@@ -1,6 +1,7 @@
 import { LessonViewer } from "@/components/lessons/lesson-viewer";
 import { notFound, redirect } from "next/navigation";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { checkLevelEnrollment } from "@/lib/auth-helpers";
 
 interface LessonPageProps {
   params: Promise<{
@@ -8,11 +9,6 @@ interface LessonPageProps {
     id: string;
   }>;
 }
-
-// Helper function to check if a lesson is free (first 3 lessons per course)
-const isFreeLesson = (orderIndex: number): boolean => {
-  return orderIndex >= 1 && orderIndex <= 3;
-};
 
 export default async function LessonPage({ params }: LessonPageProps) {
   const supabase = await getSupabaseServerClient();
@@ -47,25 +43,15 @@ export default async function LessonPage({ params }: LessonPageProps) {
     notFound();
   }
 
-  // Fetch user profile for subscription status
-  let userSubscription = "free";
-
+  // Check if user is enrolled in this level
+  let isEnrolled = false;
   if (user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("subscription_status")
-      .eq("id", user.id)
-      .single();
-
-    userSubscription = profile?.subscription_status || "free";
+    isEnrolled = await checkLevelEnrollment(user.id, course.id);
   }
 
-  // Check access for premium lessons (order_index > 3)
-  if (!isFreeLesson(lesson.order_index)) {
-    // Redirect free users to pricing page
-    if (userSubscription === "free") {
-      redirect("/pricing");
-    }
+  // Redirect to the course page if not enrolled
+  if (!isEnrolled) {
+    redirect(`/lessons/${courseSlug}`);
   }
 
   // Transform the lesson data to match the expected format

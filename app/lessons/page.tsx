@@ -2,53 +2,74 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Play, Lock, CheckCircle } from "lucide-react";
+import {
+  Clock,
+  Play,
+  Lock,
+  CheckCircle,
+  BookOpen,
+  GraduationCap,
+  ChevronRight,
+} from "lucide-react";
 import Link from "next/link";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
+import { getUserEnrollments } from "@/lib/auth-helpers";
 
-interface LessonsPageProps {
-  searchParams: Promise<{ course?: string }>;
-}
-
-export default async function LessonsPage({ searchParams }: LessonsPageProps) {
+export default async function LessonsPage() {
   const supabase = await getSupabaseServerClient();
-  const params = await searchParams;
-  const courseSlug = params.course;
 
-  // Redirect to default course if no course specified
-  if (!courseSlug) {
-    redirect("/lessons?course=level-1-python-foundations-1");
-  }
-
-  // Check if user is authenticated (optional for testing)
+  // Check if user is authenticated
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Fetch user profile if authenticated
-  let userSubscription = "free";
-  if (user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("subscription_status")
-      .eq("id", user.id)
-      .single();
-
-    userSubscription = profile?.subscription_status || "free";
-  }
-
-  // Fetch all courses for the selector
+  // Fetch all courses (levels)
   const { data: coursesData } = await supabase
     .from("courses")
     .select("*")
     .order("order_index", { ascending: true });
 
+  // Get user's enrolled levels if authenticated
+  let enrolledLevelIds: string[] = [];
+  if (user) {
+    enrolledLevelIds = await getUserEnrollments(user.id);
+  }
+
+  // Fetch lesson counts per course
+  const { data: lessonCounts } = await supabase
+    .from("lessons")
+    .select("course_id");
+
+  // Count lessons per course
+  const lessonCountMap: Record<string, number> = {};
+  (lessonCounts || []).forEach((lesson: { course_id: string | null }) => {
+    if (lesson.course_id) {
+      lessonCountMap[lesson.course_id] =
+        (lessonCountMap[lesson.course_id] || 0) + 1;
+    }
+  });
+
+  // Fetch completed lessons count per course for this user
+  let completedCountMap: Record<string, number> = {};
+  if (user) {
+    const { data: completedData } = await supabase
+      .from("completed_lessons")
+      .select("lesson_id, lessons!inner(course_id)")
+      .eq("student_id", user.id);
+
+    (completedData || []).forEach((item: any) => {
+      const courseId = item.lessons?.course_id;
+      if (courseId) {
+        completedCountMap[courseId] = (completedCountMap[courseId] || 0) + 1;
+      }
+    });
+  }
+
   // Group courses by year_group
   const coursesByYear: Record<string, typeof coursesData> = {};
   if (coursesData) {
     coursesData.forEach((course) => {
-      const year = course.year_group || "Other Courses";
+      const year = course.year_group || "All Courses";
       if (!coursesByYear[year]) {
         coursesByYear[year] = [];
       }
@@ -56,373 +77,262 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
     });
   }
 
-  // Get the course ID if a course slug is specified
-  let selectedCourseId = null;
-  if (courseSlug && coursesData) {
-    const selectedCourse = coursesData.find((c) => c.slug === courseSlug);
-    selectedCourseId = selectedCourse?.id;
-  }
-
-  // Fetch lessons from Supabase with course info
-  let lessonsQuery = supabase
-    .from("lessons")
-    .select("*, courses(id, title, slug, description)")
-    .order("order_index", { ascending: true });
-
-  // Filter by course_id if specified
-  if (selectedCourseId) {
-    lessonsQuery = lessonsQuery.eq("course_id", selectedCourseId);
-  }
-
-  const { data: lessonsData, error } = await lessonsQuery;
-
-  if (error) {
-    console.error("Error fetching lessons:", error);
-  }
-
-  // Fetch completed lessons for this user if authenticated
-  let completedData: { lesson_id: string }[] | null = null;
-  if (user) {
-    const { data } = await supabase
-      .from("completed_lessons")
-      .select("lesson_id")
-      .eq("student_id", user.id);
-
-    completedData = data;
-  }
-
-  // Create a Set of completed lesson IDs for fast lookup
-  const completedLessonIds = new Set(
-    completedData?.map((c) => c.lesson_id) || []
-  );
-
-  // Helper function to check if a lesson is free (first 3 lessons per course)
-  const isFreeLesson = (orderIndex: number): boolean => {
-    return orderIndex >= 1 && orderIndex <= 3;
-  };
-
-  // Transform lessons data and merge with completion status
-  const lessons = (lessonsData || []).map((lesson) => {
-    const isCompleted = completedLessonIds.has(lesson.id);
-
-    // Estimate reading time based on content length (rough calculation)
-    const estimatedTime = Math.max(10, Math.ceil(lesson.content.length / 100));
-
-    return {
-      id: lesson.order_index, // Use order_index for URL routing
-      title: lesson.title,
-      description: lesson.description,
-      difficulty: lesson.difficulty_level,
-      order_index: lesson.order_index,
-      is_premium: lesson.is_premium,
-      estimated_time: estimatedTime,
-      status: isCompleted ? "completed" : "not_started",
-      progress: isCompleted ? 100 : 0,
-      course_slug: lesson.courses?.slug || courseSlug, // Include course slug for links
-    };
-  });
-
-  // Filter lessons based on subscription status - free users only see first 3 per course
-  const visibleLessons =
-    userSubscription === "free"
-      ? lessons.filter((l) => isFreeLesson(l.order_index))
-      : lessons;
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "beginner":
-        return "bg-green-100 text-green-800";
-      case "intermediate":
-        return "bg-yellow-100 text-yellow-800";
-      case "advanced":
-        return "bg-red-100 text-red-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
-  const completedCount = visibleLessons.filter(
-    (l) => l.status === "completed"
-  ).length;
-  const overallProgress =
-    visibleLessons.length > 0
-      ? (completedCount / visibleLessons.length) * 100
-      : 0;
-
-  // Get current course info
-  const currentCourse = coursesData?.find((c) => c.slug === courseSlug);
-  const pageTitle = currentCourse?.title || "Lessons";
-  const pageDescription = currentCourse?.description || "";
-  const isComingSoon = currentCourse?.is_coming_soon || false;
+  // Calculate overall stats
+  const totalEnrolled = enrolledLevelIds.length;
+  const totalLevels = coursesData?.length || 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 dark:from-blue-600/8 dark:via-purple-600/8 dark:to-pink-600/8">
       <SiteHeader />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Compact Header with Progress */}
-        <div className="mb-6">
+        {/* Header */}
+        <div className="mb-8">
           <div className="flex items-start justify-between mb-4">
             <div>
-              <div className="flex items-center gap-3 mb-1">
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  {pageTitle}
-                </h1>
-                {isComingSoon && (
-                  <Badge className="bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500">
-                    Coming Soon
-                  </Badge>
-                )}
-              </div>
-              <p className="text-sm text-muted-foreground">{pageDescription}</p>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+                Your Learning Journey
+              </h1>
+              <p className="text-muted-foreground">
+                {user
+                  ? `You have access to ${totalEnrolled} of ${totalLevels} levels`
+                  : "Sign in to track your progress"}
+              </p>
             </div>
 
-            {/* Compact Progress Badge - Only show if not coming soon */}
-            {!isComingSoon && (
-              <div className="flex items-center gap-3 bg-card dark:bg-card rounded-full px-4 py-2 shadow-sm border border-border">
-                <div className="flex items-center gap-2">
-                  <div className="relative w-10 h-10">
-                    <svg className="transform -rotate-90 w-10 h-10">
-                      <circle
-                        cx="20"
-                        cy="20"
-                        r="16"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        fill="none"
-                        className="text-muted"
-                      />
-                      <circle
-                        cx="20"
-                        cy="20"
-                        r="16"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        fill="none"
-                        strokeDasharray={`${2 * Math.PI * 16}`}
-                        strokeDashoffset={`${
-                          2 * Math.PI * 16 * (1 - overallProgress / 100)
-                        }`}
-                        className="text-primary transition-all duration-500"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-xs font-bold text-primary">
-                        {Math.round(overallProgress)}%
-                      </span>
-                    </div>
-                  </div>
-                  <div className="text-left">
-                    <div className="text-xs font-medium text-foreground">
-                      {completedCount}/{visibleLessons.length}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Completed</div>
-                  </div>
-                </div>
+            {/* Enrollment Status Badge */}
+            {user && totalEnrolled > 0 && (
+              <div className="flex items-center gap-2 bg-card rounded-full px-4 py-2 shadow-sm border border-border">
+                <GraduationCap className="h-5 w-5 text-primary" />
+                <span className="text-sm font-medium">
+                  {totalEnrolled} Level{totalEnrolled !== 1 ? "s" : ""} Enrolled
+                </span>
               </div>
             )}
           </div>
         </div>
 
-        {/* Coming Soon Message */}
-        {isComingSoon ? (
-          <Card className="p-12 text-center border-2 border-dashed border-yellow-200 dark:border-yellow-800 bg-yellow-50/50 dark:bg-yellow-950/20">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center">
-                  <Clock className="h-8 w-8 text-yellow-600 dark:text-yellow-400" />
+        {/* No Enrollments Message for Logged-in Users */}
+        {user && totalEnrolled === 0 && (
+          <Card className="mb-8 border-2 border-dashed border-primary/30 bg-primary/5">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <GraduationCap className="h-6 w-6 text-primary" />
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">
-                    Coming Soon!
+                <div className="flex-1">
+                  <h3 className="font-semibold text-foreground mb-1">
+                    Ready to Start Learning?
                   </h3>
-                  <p className="text-muted-foreground max-w-md">
-                    We're working hard to bring you amazing web development lessons.
-                    Check back soon for exciting content on building websites and web
-                    applications!
+                  <p className="text-sm text-muted-foreground">
+                    You haven't enrolled in any levels yet. Book a free trial
+                    class to get started on your coding journey!
                   </p>
                 </div>
-                <div className="mt-4">
-                  <Button asChild variant="outline">
-                    <Link href="/lessons?course=level-1-python-foundations-1">
-                      Explore Other Courses
-                    </Link>
-                  </Button>
-                </div>
+                <Button asChild className="rounded-full">
+                  <Link href="/inquiry">Book Free Trial →</Link>
+                </Button>
               </div>
             </CardContent>
           </Card>
-        ) : (
-          /* Lessons Grid - Compact Cards */
-          visibleLessons.length === 0 ? (
-          <Card className="p-8 text-center">
-            <CardContent className="pt-6">
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                No Lessons Available
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                No lessons found. Please check back later or contact support.
-              </p>
-              {error && (
-                <p className="text-destructive text-sm mt-2">
-                  Error: {error.message}
-                </p>
-              )}
-            </CardContent>
-          </Card>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {visibleLessons.map((lesson) => {
-              const isLocked = false; // No locked lessons shown for free users
+        )}
 
-              return (
-                <Card
-                  key={lesson.id}
-                  className={`group relative overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02] ${
-                    isLocked ? "opacity-60" : ""
-                  } ${
-                    lesson.status === "completed"
-                      ? "border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-950/20"
-                      : "bg-card"
-                  }`}
-                >
-                  {/* Gradient Accent Bar */}
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-1 ${
-                      lesson.status === "completed"
-                        ? "bg-gradient-to-r from-green-500 to-emerald-500"
-                        : "bg-gradient-to-r from-primary to-accent"
-                    }`}
-                  />
+        {/* Levels by Year */}
+        {Object.entries(coursesByYear).map(([yearGroup, courses]) => (
+          <div key={yearGroup} className="mb-10">
+            <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <BookOpen className="h-5 w-5 text-primary" />
+              {yearGroup}
+            </h2>
 
-                  <CardContent className="p-4">
-                    <div className="flex items-start gap-3">
-                      {/* Status Icon */}
-                      <div className="flex-shrink-0 mt-0.5">
-                        {isLocked && lesson.status === "not_started" ? (
-                          <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                            <Lock className="h-4 w-4 text-muted-foreground" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {courses?.map((course) => {
+                const isEnrolled = enrolledLevelIds.includes(course.id);
+                const lessonCount = lessonCountMap[course.id] || 0;
+                const completedCount = completedCountMap[course.id] || 0;
+                const progress =
+                  lessonCount > 0
+                    ? Math.round((completedCount / lessonCount) * 100)
+                    : 0;
+                const isComingSoon = course.is_coming_soon;
+
+                return (
+                  <Card
+                    key={course.id}
+                    className={`group relative overflow-hidden transition-all hover:shadow-lg ${
+                      isEnrolled
+                        ? "border-green-200 dark:border-green-800 hover:scale-[1.02]"
+                        : "hover:scale-[1.01]"
+                    } ${isComingSoon ? "opacity-70" : ""}`}
+                  >
+                    {/* Status Bar */}
+                    <div
+                      className={`absolute top-0 left-0 right-0 h-1 ${
+                        isEnrolled
+                          ? "bg-gradient-to-r from-green-500 to-emerald-500"
+                          : isComingSoon
+                          ? "bg-gradient-to-r from-yellow-400 to-orange-400"
+                          : "bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700"
+                      }`}
+                    />
+
+                    <CardContent className="p-5">
+                      <div className="flex items-start gap-4">
+                        {/* Status Icon */}
+                        <div className="flex-shrink-0">
+                          {isComingSoon ? (
+                            <div className="w-12 h-12 rounded-xl bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
+                              <Clock className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
+                            </div>
+                          ) : isEnrolled ? (
+                            <div className="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                              <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
+                            </div>
+                          ) : (
+                            <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
+                              <Lock className="h-6 w-6 text-muted-foreground" />
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-2 mb-2">
+                            <h3 className="font-semibold text-foreground leading-tight">
+                              {course.title}
+                            </h3>
+                            {isEnrolled && (
+                              <Badge className="bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300 text-xs">
+                                Enrolled
+                              </Badge>
+                            )}
+                            {isComingSoon && (
+                              <Badge
+                                variant="outline"
+                                className="text-yellow-600 border-yellow-300 text-xs"
+                              >
+                                Coming Soon
+                              </Badge>
+                            )}
                           </div>
-                        ) : lesson.status === "completed" ? (
-                          <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
-                            <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
+
+                          <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                            {course.description}
+                          </p>
+
+                          {/* Progress or Info */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                              {lessonCount > 0 && (
+                                <span>{lessonCount} lessons</span>
+                              )}
+                              {course.age_range && (
+                                <span>Ages {course.age_range}</span>
+                              )}
+                            </div>
+
+                            {/* Progress Bar for Enrolled */}
+                            {isEnrolled && lessonCount > 0 && (
+                              <div className="flex items-center gap-2">
+                                <div className="w-16 h-1.5 bg-muted rounded-full overflow-hidden">
+                                  <div
+                                    className="h-full bg-green-500 rounded-full transition-all"
+                                    style={{ width: `${progress}%` }}
+                                  />
+                                </div>
+                                <span className="text-xs text-muted-foreground">
+                                  {progress}%
+                                </span>
+                              </div>
+                            )}
                           </div>
+                        </div>
+                      </div>
+
+                      {/* Action */}
+                      <div className="mt-4 pt-4 border-t border-border">
+                        {isComingSoon ? (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            disabled
+                            className="w-full"
+                          >
+                            <Clock className="h-4 w-4 mr-2" />
+                            Coming Soon
+                          </Button>
+                        ) : isEnrolled ? (
+                          <Button asChild size="sm" className="w-full">
+                            <Link href={`/lessons/${course.slug}`}>
+                              <Play className="h-4 w-4 mr-2" />
+                              Continue Learning
+                              <ChevronRight className="h-4 w-4 ml-auto" />
+                            </Link>
+                          </Button>
                         ) : (
-                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                            <Play className="h-4 w-4 text-primary" />
+                          <div className="flex gap-2">
+                            <Button
+                              asChild
+                              variant="outline"
+                              size="sm"
+                              className="flex-1"
+                            >
+                              <Link href={`/lessons/${course.slug}`}>
+                                Preview
+                              </Link>
+                            </Button>
+                            <Button asChild size="sm" className="flex-1">
+                              <Link href="/inquiry">
+                                <Lock className="h-4 w-4 mr-2" />
+                                Get Access
+                              </Link>
+                            </Button>
                           </div>
                         )}
                       </div>
-
-                      {/* Lesson Content */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-2 mb-1.5">
-                          <h3 className="text-base font-semibold text-foreground leading-tight">
-                            {lesson.order_index}. {lesson.title}
-                          </h3>
-                          <div className="flex items-center gap-1 flex-shrink-0">
-                            <Badge
-                              variant="outline"
-                              className={`text-xs px-1.5 py-0 ${getDifficultyColor(
-                                lesson.difficulty
-                              )}`}
-                            >
-                              {lesson.difficulty}
-                            </Badge>
-                            {lesson.is_premium && (
-                              <Badge
-                                variant="outline"
-                                className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500"
-                              >
-                                Pro
-                              </Badge>
-                            )}
-                          </div>
-                        </div>
-
-                        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                          {lesson.description}
-                        </p>
-
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                              <Clock className="h-3.5 w-3.5" />
-                              {lesson.estimated_time} min
-                            </div>
-                            {lesson.status === "completed" && (
-                              <Badge className="text-xs px-2 py-0 bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300">
-                                ✓ Done
-                              </Badge>
-                            )}
-                          </div>
-
-                          {/* Action Button */}
-                          {isLocked && lesson.status === "not_started" ? (
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              disabled
-                              className="text-xs h-7"
-                            >
-                              <Lock className="h-3 w-3 mr-1" />
-                              Locked
-                            </Button>
-                          ) : (
-                            <Button
-                              asChild
-                              size="sm"
-                              className={`text-xs h-7 rounded-full transition-all ${
-                                lesson.status === "completed"
-                                  ? "bg-green-600 hover:bg-green-700 text-white"
-                                  : "bg-gradient-to-r from-primary to-accent hover:opacity-90"
-                              }`}
-                            >
-                              <Link href={`/lessons/${lesson.course_slug}/${lesson.id}`}>
-                                {lesson.status === "completed"
-                                  ? "Review"
-                                  : "Start"}{" "}
-                                →
-                              </Link>
-                            </Button>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
-        )
+        ))}
+
+        {/* CTA for non-enrolled users */}
+        {user && totalEnrolled === 0 && (
+          <Card className="mt-8 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
+            <CardContent className="p-6 text-center">
+              <h3 className="text-lg font-bold text-foreground mb-2">
+                Start Your Coding Journey Today!
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Book a free trial class and discover the joy of learning to
+                code.
+              </p>
+              <Button asChild size="lg" className="rounded-full">
+                <Link href="/inquiry">Book Free Trial Class →</Link>
+              </Button>
+            </CardContent>
+          </Card>
         )}
 
-        {/* Compact Upgrade CTA */}
-        {!isComingSoon && userSubscription === "free" && lessons.length > 3 && (
-          <Card className="mt-6 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
-                    <Lock className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-foreground">
-                      Unlock All {lessons.length - 3} Premium Lessons + AI Tutor
-                    </h3>
-                    <p className="text-xs text-muted-foreground">
-                      Get full access with teacher-led instruction for $79.99
-                      CAD/month
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  asChild
-                  size="sm"
-                  className="bg-gradient-to-r from-primary to-accent hover:opacity-90 rounded-full"
-                >
-                  <Link href="/pricing">Upgrade Now</Link>
+        {/* Sign in prompt for guests */}
+        {!user && (
+          <Card className="mt-8 border-primary/30 bg-gradient-to-r from-primary/5 to-accent/5">
+            <CardContent className="p-6 text-center">
+              <h3 className="text-lg font-bold text-foreground mb-2">
+                Track Your Progress
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Sign in to track your learning progress and access your enrolled
+                levels.
+              </p>
+              <div className="flex gap-3 justify-center">
+                <Button asChild variant="outline">
+                  <Link href="/login">Sign In</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/inquiry">Book Free Trial</Link>
                 </Button>
               </div>
             </CardContent>
