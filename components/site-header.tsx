@@ -35,11 +35,8 @@ import {
   ExternalLink,
   Shield,
   DollarSign,
-  CreditCard,
   MessageSquare,
-  FileText,
   Brain,
-  Code,
   X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -73,42 +70,88 @@ const NAV_ITEMS = {
   about: { href: "/about", label: "About", Icon: Info },
   blog: { href: "/blog", label: "Blog", Icon: Newspaper },
   pricing: { href: "/pricing", label: "Pricing", Icon: DollarSign },
-  lessons: [
+  // Year 1: Foundations (Levels 1-6)
+  year1Lessons: [
     {
-      href: "/lessons?course=level-1-python-foundations-1",
+      href: "/lessons/level-1-python-foundations-1",
       label: "Level 1: Python Foundations I",
       Icon: BookOpen,
       description: "Getting Started with Python basics",
     },
     {
-      href: "/lessons?course=level-2-python-foundations-2",
+      href: "/lessons/level-2-python-foundations-2",
       label: "Level 2: Python Foundations II",
       Icon: BookOpen,
       description: "Control Flow: Loops and Logic",
     },
     {
-      href: "/lessons?course=level-3-python-foundations-3",
+      href: "/lessons/level-3-python-foundations-3",
       label: "Level 3: Python Foundations III",
       Icon: BookOpen,
       description: "Functions, Data Structures, and Organization",
     },
     {
-      href: "/lessons?course=level-4-intro-to-ai",
+      href: "/lessons/level-4-intro-to-ai",
       label: "Level 4: Introduction to AI",
       Icon: Brain,
       description: "Meet Your Robot Brain: Concepts and Ethics",
     },
     {
-      href: "/lessons?course=level-5-data-science",
+      href: "/lessons/level-5-data-science",
       label: "Level 5: Data Science",
       Icon: Brain,
       description: "The AI Fuel: Collection and Analysis",
     },
     {
-      href: "/lessons?course=level-6-ml-basics",
+      href: "/lessons/level-6-ml-basics",
       label: "Level 6: Machine Learning Basics",
       Icon: Brain,
       description: "Teaching Computers to Learn",
+    },
+  ],
+  // Year 2: Applied AI (Levels 7-12)
+  year2Lessons: [
+    {
+      href: "/lessons/level-7-nlp",
+      label: "Level 7: Natural Language Processing",
+      Icon: Brain,
+      description: "Word Detective: Chatbots and Text",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/level-8-computer-vision",
+      label: "Level 8: Computer Vision",
+      Icon: Brain,
+      description: "Teaching AI to See",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/level-9-recommendations",
+      label: "Level 9: Recommendation Systems",
+      Icon: Brain,
+      description: "The Netflix Brain",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/level-10-game-ai",
+      label: "Level 10: Game AI",
+      Icon: Brain,
+      description: "Smart Opponents and Strategy",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/level-11-advanced-projects",
+      label: "Level 11: Advanced Projects",
+      Icon: Brain,
+      description: "Putting It All Together",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/level-12-capstone",
+      label: "Level 12: Capstone & Portfolio",
+      Icon: GraduationCap,
+      description: "Launch Your Future",
+      comingSoon: true,
     },
   ],
   learn: [
@@ -169,26 +212,11 @@ const NAV_ITEMS = {
       description: "Join our teaching team",
     },
   ],
-  admin: [
-    {
-      href: "/admin",
-      label: "Dashboard",
-      Icon: LayoutDashboard,
-      description: "Admin overview",
-    },
-    {
-      href: "/admin/teacher-notes",
-      label: "Teacher Notes",
-      Icon: FileText,
-      description: "Manage lesson notes",
-    },
-    {
-      href: "/admin/payments",
-      label: "Payments",
-      Icon: CreditCard,
-      description: "View payment records",
-    },
-  ],
+  admin: {
+    href: "/admin",
+    label: "Admin",
+    Icon: Shield,
+  },
 };
 
 // Announcement Bar Component
@@ -393,7 +421,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
   const isLearnActive =
     NAV_ITEMS.learn.some((item) => isActive(item.href)) ||
-    NAV_ITEMS.lessons.some((item) => isActive(item.href));
+    NAV_ITEMS.year1Lessons.some((item) => isActive(item.href)) ||
+    NAV_ITEMS.year2Lessons.some((item) => isActive(item.href));
 
   const closeMobileMenu = () => {
     const trigger = document.querySelector(
@@ -546,20 +575,26 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     Learn
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background/95 backdrop-blur-xl border border-border shadow-xl rounded-xl overflow-visible">
-                    <div className="w-[650px] p-5 grid grid-cols-2 gap-6 rounded-lg relative">
+                    <div className="w-[850px] p-5 grid grid-cols-3 gap-4 rounded-lg relative">
                       <MegaMenuSection
-                        title="Lessons"
+                        title="Year 1: Foundations"
                         icon={BookOpen}
-                        items={NAV_ITEMS.lessons}
+                        items={NAV_ITEMS.year1Lessons}
                         isActive={isActive}
                       />
-                      <div className="absolute left-1/2 top-4 bottom-4 w-px bg-border/50 -translate-x-1/2" />
+                      <MegaMenuSection
+                        title="Year 2: Applied AI"
+                        icon={Brain}
+                        items={NAV_ITEMS.year2Lessons}
+                        isActive={isActive}
+                        iconColor="text-purple-600 dark:text-purple-400"
+                      />
                       <MegaMenuSection
                         title="Tools & Activities"
                         icon={Sparkles}
                         items={NAV_ITEMS.learn}
                         isActive={isActive}
-                        iconColor="text-purple-600 dark:text-purple-400"
+                        iconColor="text-amber-600 dark:text-amber-400"
                       />
                     </div>
                   </NavigationMenuContent>
@@ -575,28 +610,13 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                   </NavigationMenuItem>
                 )}
 
-                {/* Admin Mega Menu */}
+                {/* Admin Link */}
                 {isAdmin && (
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium transition-colors duration-150">
-                      <Shield className="h-4 w-4 mr-2" />
-                      Admin
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background/95 backdrop-blur-xl border border-border shadow-xl rounded-xl overflow-visible">
-                      <div className="w-[400px] p-5 rounded-lg">
-                        <div className="p-4 rounded-lg bg-card border border-border hover:bg-accent/5 transition-all duration-200">
-                          <div className="space-y-1">
-                            {NAV_ITEMS.admin.map((item) => (
-                              <MegaMenuItem
-                                key={item.href}
-                                item={item}
-                                isActive={isActive(item.href)}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </NavigationMenuContent>
+                    <NavLink
+                      item={NAV_ITEMS.admin}
+                      isActive={isActive(NAV_ITEMS.admin.href)}
+                    />
                   </NavigationMenuItem>
                 )}
 
@@ -702,16 +722,39 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                           <ChevronDown className="h-4 w-4 transition-transform duration-200" />
                         </CollapsibleTrigger>
                         <CollapsibleContent className="mt-1 space-y-1 pl-4">
-                          {[...NAV_ITEMS.lessons, ...NAV_ITEMS.learn].map(
-                            (navItem) => (
-                              <MobileNavLink
-                                key={navItem.href}
-                                item={navItem}
-                                isActive={isActive(navItem.href)}
-                                onClick={closeMobileMenu}
-                              />
-                            )
-                          )}
+                          <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                            Year 1: Foundations
+                          </div>
+                          {NAV_ITEMS.year1Lessons.map((navItem) => (
+                            <MobileNavLink
+                              key={navItem.href}
+                              item={navItem}
+                              isActive={isActive(navItem.href)}
+                              onClick={closeMobileMenu}
+                            />
+                          ))}
+                          <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                            Year 2: Applied AI
+                          </div>
+                          {NAV_ITEMS.year2Lessons.map((navItem) => (
+                            <MobileNavLink
+                              key={navItem.href}
+                              item={navItem}
+                              isActive={isActive(navItem.href)}
+                              onClick={closeMobileMenu}
+                            />
+                          ))}
+                          <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                            Tools & Activities
+                          </div>
+                          {NAV_ITEMS.learn.map((navItem) => (
+                            <MobileNavLink
+                              key={navItem.href}
+                              item={navItem}
+                              isActive={isActive(navItem.href)}
+                              onClick={closeMobileMenu}
+                            />
+                          ))}
                         </CollapsibleContent>
                       </Collapsible>
 
@@ -735,27 +778,21 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                         </Link>
                       )}
 
-                      {/* Admin Section */}
+                      {/* Admin Link */}
                       {isAdmin && (
-                        <Collapsible>
-                          <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
-                            <div className="flex items-center gap-3">
-                              <Shield className="h-5 w-5" />
-                              <span>Admin</span>
-                            </div>
-                            <ChevronDown className="h-4 w-4 transition-transform duration-200" />
-                          </CollapsibleTrigger>
-                          <CollapsibleContent className="mt-1 space-y-1 pl-4">
-                            {NAV_ITEMS.admin.map((item) => (
-                              <MobileNavLink
-                                key={item.href}
-                                item={item}
-                                isActive={isActive(item.href)}
-                                onClick={closeMobileMenu}
-                              />
-                            ))}
-                          </CollapsibleContent>
-                        </Collapsible>
+                        <Link
+                          href={NAV_ITEMS.admin.href}
+                          onClick={closeMobileMenu}
+                          className={cn(
+                            "flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
+                            isActive(NAV_ITEMS.admin.href)
+                              ? "bg-primary/10 text-primary"
+                              : "text-foreground hover:bg-muted"
+                          )}
+                        >
+                          <Shield className="h-5 w-5" />
+                          <span>{NAV_ITEMS.admin.label}</span>
+                        </Link>
                       )}
 
                       {/* Resources Section */}
@@ -856,3 +893,4 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
     </>
   );
 };
+

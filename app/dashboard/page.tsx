@@ -9,10 +9,18 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteHeader } from "@/components/site-header";
 import { Progress } from "@/components/ui/progress";
-import { Code, Trophy, Play } from "lucide-react";
+import {
+  Code,
+  Trophy,
+  Play,
+  GraduationCap,
+  BookOpen,
+  ChevronRight,
+  Lock,
+} from "lucide-react";
 import Link from "next/link";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { requireAuth } from "@/lib/auth-helpers";
+import { requireAuth, getUserEnrollments } from "@/lib/auth-helpers";
 import { MyAssignmentsSection } from "@/components/dashboard/my-assignments-section";
 
 export default async function DashboardPage() {
@@ -65,24 +73,61 @@ export default async function DashboardPage() {
 
   const supabase = await getSupabaseServerClient();
 
-  // Fetch user profile (automatically created by database trigger)
+  // Fetch user profile
   const { data: profile } = await supabase
     .from("profiles")
     .select("*")
     .eq("id", authUser.id)
     .single();
 
-  // Fetch total lessons count
-  const { count: totalLessons } = await supabase
-    .from("lessons")
-    .select("*", { count: "exact" });
+  // Get user's enrolled levels
+  const enrolledLevelIds = await getUserEnrollments(authUser.id);
 
-  // Fetch completed lessons count
-  const { count: completedLessonsCount } = await supabase
+  // Fetch enrolled courses with details
+  const { data: enrolledCourses } = await supabase
+    .from("courses")
+    .select("id, title, slug, description, order_index")
+    .in("id", enrolledLevelIds.length > 0 ? enrolledLevelIds : ["none"])
+    .order("order_index", { ascending: true });
+
+  // Fetch total lessons count for enrolled levels only
+  const { data: enrolledLessons } = await supabase
+    .from("lessons")
+    .select("id, course_id")
+    .in("course_id", enrolledLevelIds.length > 0 ? enrolledLevelIds : ["none"]);
+
+  const totalLessonsInEnrolledLevels = enrolledLessons?.length || 0;
+
+  // Fetch completed lessons count (only for enrolled levels)
+  const { data: completedLessonsData } = await supabase
     .from("completed_lessons")
-    .select("*", { count: "exact" })
+    .select("lesson_id, lessons!inner(course_id)")
     .eq("student_id", authUser.id);
 
+  // Filter to only count completions in enrolled levels
+  const completedLessonsCount =
+    completedLessonsData?.filter((item: any) =>
+      enrolledLevelIds.includes(item.lessons?.course_id)
+    ).length || 0;
+
+  // Calculate completions per course
+  const completionsPerCourse: Record<string, number> = {};
+  const lessonsPerCourse: Record<string, number> = {};
+
+  (enrolledLessons || []).forEach((lesson: { course_id: string | null }) => {
+    if (lesson.course_id) {
+      lessonsPerCourse[lesson.course_id] =
+        (lessonsPerCourse[lesson.course_id] || 0) + 1;
+    }
+  });
+
+  (completedLessonsData || []).forEach((item: any) => {
+    const courseId = item.lessons?.course_id;
+    if (courseId && enrolledLevelIds.includes(courseId)) {
+      completionsPerCourse[courseId] =
+        (completionsPerCourse[courseId] || 0) + 1;
+    }
+  });
 
   // Fetch student's trinket submissions
   const { data: submissionsData } = await supabase
@@ -131,19 +176,10 @@ export default async function DashboardPage() {
     "Student";
 
   const userEmail = profile?.email || authUser.email || "Not provided";
-  const userSubscription = profile?.subscription_status || "free";
-
-  const user = {
-    full_name: userName,
-    email: userEmail,
-    subscription_status: userSubscription,
-    completedLessons: completedLessonsCount || 0,
-    totalLessons: totalLessons || 15,
-  };
 
   const progressPercentage =
-    user.totalLessons > 0
-      ? (user.completedLessons / user.totalLessons) * 100
+    totalLessonsInEnrolledLevels > 0
+      ? (completedLessonsCount / totalLessonsInEnrolledLevels) * 100
       : 0;
 
   return (
@@ -154,28 +190,45 @@ export default async function DashboardPage() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Welcome back, {user.full_name}! 👋
+            Welcome back, {userName}! 👋
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Ready to continue your Python programming journey?
+            {enrolledLevelIds.length > 0
+              ? "Ready to continue your coding journey?"
+              : "Get started on your coding journey today!"}
           </p>
-          {user.subscription_status === "premium" && (
-            <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <p className="text-yellow-800 text-sm">
-                🎉 You have premium access! Enjoy all advanced lessons and
-                features.
-              </p>
-            </div>
-          )}
         </div>
+
+        {/* No Enrollments Message */}
+        {enrolledLevelIds.length === 0 && (
+          <Card className="mb-8 border-2 border-dashed border-primary/30 bg-primary/5 rounded-2xl">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <GraduationCap className="h-7 w-7 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-foreground text-lg mb-1">
+                    You Haven't Enrolled Yet
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Book a free trial class to start learning Python and AI with
+                    us!
+                  </p>
+                </div>
+                <Button asChild size="lg" className="rounded-full">
+                  <Link href="/inquiry">Book Free Trial →</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
             <CardHeader className="space-y-2">
-              <CardTitle className="text-sm font-medium">
-                Your Profile
-              </CardTitle>
+              <CardTitle className="text-sm font-medium">Your Profile</CardTitle>
               <CardDescription>Quick snapshot of your account</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
@@ -184,7 +237,7 @@ export default async function DashboardPage() {
                   Name
                 </p>
                 <p className="font-medium text-gray-900 dark:text-gray-100">
-                  {user.full_name}
+                  {userName}
                 </p>
               </div>
               <div>
@@ -192,19 +245,31 @@ export default async function DashboardPage() {
                   Email
                 </p>
                 <p className="font-medium text-gray-900 dark:text-gray-100 break-all">
-                  {user.email}
+                  {userEmail}
                 </p>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground uppercase tracking-wide">
-                  Membership
+                  Enrolled Levels
                 </p>
-                <Badge
-                  variant="outline"
-                  className="rounded-full bg-indigo-50 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-200"
-                >
-                  {user.subscription_status === "premium" ? "Premium" : "Free"}
-                </Badge>
+                {enrolledLevelIds.length > 0 ? (
+                  <Badge
+                    variant="outline"
+                    className="rounded-full bg-green-50 text-green-700 dark:bg-green-500/20 dark:text-green-200"
+                  >
+                    <GraduationCap className="h-3 w-3 mr-1" />
+                    {enrolledLevelIds.length} Level
+                    {enrolledLevelIds.length !== 1 ? "s" : ""}
+                  </Badge>
+                ) : (
+                  <Badge
+                    variant="outline"
+                    className="rounded-full bg-gray-50 text-gray-500"
+                  >
+                    <Lock className="h-3 w-3 mr-1" />
+                    No Enrollments
+                  </Badge>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -220,10 +285,12 @@ export default async function DashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                {user.completedLessons}
+                {completedLessonsCount}
               </div>
               <p className="text-xs text-muted-foreground mt-1">
-                out of {user.totalLessons} total lessons
+                {totalLessonsInEnrolledLevels > 0
+                  ? `out of ${totalLessonsInEnrolledLevels} lessons in enrolled levels`
+                  : "Enroll in a level to start learning!"}
               </p>
             </CardContent>
           </Card>
@@ -244,28 +311,95 @@ export default async function DashboardPage() {
                 className="mt-2 h-3 rounded-full transition-all duration-500"
               />
               <p className="text-xs text-muted-foreground mt-2">
-                Keep going! You're doing great! 🎉
+                {progressPercentage > 0
+                  ? "Keep going! You're doing great! 🎉"
+                  : "Start a lesson to track your progress!"}
               </p>
             </CardContent>
           </Card>
         </div>
 
+        {/* Enrolled Levels */}
+        {enrolledCourses && enrolledCourses.length > 0 && (
+          <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10 mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <GraduationCap className="h-5 w-5 text-primary" />
+                My Enrolled Levels
+              </CardTitle>
+              <CardDescription>
+                Continue learning from where you left off
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-4">
+                {enrolledCourses.map((course) => {
+                  const lessonsCount = lessonsPerCourse[course.id] || 0;
+                  const completed = completionsPerCourse[course.id] || 0;
+                  const progress =
+                    lessonsCount > 0
+                      ? Math.round((completed / lessonsCount) * 100)
+                      : 0;
+
+                  return (
+                    <Link
+                      key={course.id}
+                      href={`/lessons/${course.slug}`}
+                      className="group"
+                    >
+                      <Card className="h-full transition-all hover:shadow-md hover:scale-[1.02] border-green-100 dark:border-green-900/50">
+                        <CardContent className="p-4">
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+                                <BookOpen className="h-4 w-4 text-green-600 dark:text-green-400" />
+                              </div>
+                              <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                                {course.title}
+                              </h4>
+                            </div>
+                            <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-3 line-clamp-1">
+                            {course.description}
+                          </p>
+                          <div className="flex items-center gap-3">
+                            <div className="flex-1">
+                              <div className="h-2 bg-muted rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-green-500 rounded-full transition-all"
+                                  style={{ width: `${progress}%` }}
+                                />
+                              </div>
+                            </div>
+                            <span className="text-xs text-muted-foreground">
+                              {completed}/{lessonsCount} lessons
+                            </span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Quick Actions */}
         <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>
-              What would you like to do today?
-            </CardDescription>
+            <CardDescription>What would you like to do today?</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-4">
             <Button
               className="justify-start rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
               asChild
             >
-              <Link href="/lessons?course=level-1-python-foundations-1">
-                <Code className="mr-2 h-4 w-4" />
-                Browse All Lessons
+              <Link href="/lessons">
+                <BookOpen className="mr-2 h-4 w-4" />
+                Browse All Levels
               </Link>
             </Button>
             <Button
@@ -278,6 +412,18 @@ export default async function DashboardPage() {
                 Python Playground
               </Link>
             </Button>
+            {enrolledLevelIds.length === 0 && (
+              <Button
+                variant="outline"
+                className="justify-start rounded-full border-primary text-primary hover:bg-primary hover:text-white"
+                asChild
+              >
+                <Link href="/inquiry">
+                  <GraduationCap className="mr-2 h-4 w-4" />
+                  Book Free Trial
+                </Link>
+              </Button>
+            )}
           </CardContent>
         </Card>
 
