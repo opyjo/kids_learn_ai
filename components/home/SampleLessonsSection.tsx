@@ -201,7 +201,9 @@ const SampleLessonsSection = () => {
                   prompt = "Tell a brave story about a kid inventor"
                 </div>
                 <div className="text-accent mt-2">print</div>
-                <div className="text-foreground">("🤖 Story Idea:", prompt)</div>
+                <div className="text-foreground">
+                  ("🤖 Story Idea:", prompt)
+                </div>
                 <div className="text-muted-foreground mt-2">
                   # Guide the AI to add safe, uplifting twists
                 </div>
@@ -216,7 +218,7 @@ const SampleLessonsSection = () => {
       </StaggerContainer>
 
       <FadeIn delay={0.3} className="text-center mt-12">
-        <Link href="/lessons?course=level-1-python-foundations-1">
+        <Link href="/lessons">
           <Button
             size="lg"
             variant="outline"

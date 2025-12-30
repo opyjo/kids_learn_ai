@@ -18,3 +18,5 @@ WHERE slug IN ('python-foundations', 'ai-ml', 'web-development');
 -- Run: SELECT title, slug, year_group, order_index FROM courses ORDER BY order_index;
 -- Expected: Levels 1-12 under "Year 1: Foundations" and "Year 2: Applied AI"
 
+
+

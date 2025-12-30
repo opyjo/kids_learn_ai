@@ -70,90 +70,66 @@ const NAV_ITEMS = {
   about: { href: "/about", label: "About", Icon: Info },
   blog: { href: "/blog", label: "Blog", Icon: Newspaper },
   pricing: { href: "/pricing", label: "Pricing", Icon: DollarSign },
-  // Year 1: Foundations (Levels 1-6)
+  // Year 1: Python Foundations (Terms 1-8)
   year1Lessons: [
     {
-      href: "/lessons/level-1-python-foundations-1",
-      label: "Level 1: Python Foundations I",
+      href: "/lessons/term-1-hello-python",
+      label: "Term 1: Hello Python!",
       Icon: BookOpen,
-      description: "Getting Started with Python basics",
+      description: "Your first conversation with a computer",
     },
     {
-      href: "/lessons/level-2-python-foundations-2",
-      label: "Level 2: Python Foundations II",
+      href: "/lessons/term-2-math-wizard",
+      label: "Term 2: Math Wizard",
       Icon: BookOpen,
-      description: "Control Flow: Loops and Logic",
+      description: "Turn Python into your personal calculator",
+      comingSoon: true,
     },
     {
-      href: "/lessons/level-3-python-foundations-3",
-      label: "Level 3: Python Foundations III",
+      href: "/lessons/term-3-decision-maker",
+      label: "Term 3: Decision Maker",
       Icon: BookOpen,
-      description: "Functions, Data Structures, and Organization",
-    },
-    {
-      href: "/lessons/level-4-intro-to-ai",
-      label: "Level 4: Introduction to AI",
-      Icon: Brain,
-      description: "Meet Your Robot Brain: Concepts and Ethics",
-    },
-    {
-      href: "/lessons/level-5-data-science",
-      label: "Level 5: Data Science",
-      Icon: Brain,
-      description: "The AI Fuel: Collection and Analysis",
-    },
-    {
-      href: "/lessons/level-6-ml-basics",
-      label: "Level 6: Machine Learning Basics",
-      Icon: Brain,
-      description: "Teaching Computers to Learn",
-    },
-  ],
-  // Year 2: Applied AI (Levels 7-12)
-  year2Lessons: [
-    {
-      href: "/lessons/level-7-nlp",
-      label: "Level 7: Natural Language Processing",
-      Icon: Brain,
-      description: "Word Detective: Chatbots and Text",
+      description: "Teach your program to think",
       comingSoon: true,
     },
     {
-      href: "/lessons/level-8-computer-vision",
-      label: "Level 8: Computer Vision",
-      Icon: Brain,
-      description: "Teaching AI to See",
+      href: "/lessons/term-4-more-choices",
+      label: "Term 4: More Choices",
+      Icon: BookOpen,
+      description: "Handle any situation with decision-making",
       comingSoon: true,
     },
     {
-      href: "/lessons/level-9-recommendations",
-      label: "Level 9: Recommendation Systems",
+      href: "/lessons/term-5-ai-sneak-peek",
+      label: "Term 5: AI Sneak Peek",
       Icon: Brain,
-      description: "The Netflix Brain",
+      description: "Discover the world of Artificial Intelligence",
       comingSoon: true,
     },
     {
-      href: "/lessons/level-10-game-ai",
-      label: "Level 10: Game AI",
-      Icon: Brain,
-      description: "Smart Opponents and Strategy",
+      href: "/lessons/term-6-loop-magic",
+      label: "Term 6: Loop Magic",
+      Icon: BookOpen,
+      description: "Do things over and over without getting tired",
       comingSoon: true,
     },
     {
-      href: "/lessons/level-11-advanced-projects",
-      label: "Level 11: Advanced Projects",
-      Icon: Brain,
-      description: "Putting It All Together",
+      href: "/lessons/term-7-game-builder",
+      label: "Term 7: Game Builder",
+      Icon: BookOpen,
+      description: "Create games that keep going",
       comingSoon: true,
     },
     {
-      href: "/lessons/level-12-capstone",
-      label: "Level 12: Capstone & Portfolio",
-      Icon: GraduationCap,
-      description: "Launch Your Future",
+      href: "/lessons/term-8-ai-explorer",
+      label: "Term 8: AI Explorer",
+      Icon: Brain,
+      description: "Combine everything and explore AI deeper",
       comingSoon: true,
     },
   ],
+  // Year 2: Applied AI (Coming soon)
+  year2Lessons: [] as NavItem[],
   learn: [
     {
       href: "/tutor",
@@ -582,13 +558,15 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                         items={NAV_ITEMS.year1Lessons}
                         isActive={isActive}
                       />
-                      <MegaMenuSection
-                        title="Year 2: Applied AI"
-                        icon={Brain}
-                        items={NAV_ITEMS.year2Lessons}
-                        isActive={isActive}
-                        iconColor="text-purple-600 dark:text-purple-400"
-                      />
+                      {NAV_ITEMS.year2Lessons.length > 0 && (
+                        <MegaMenuSection
+                          title="Year 2: Applied AI"
+                          icon={Brain}
+                          items={NAV_ITEMS.year2Lessons}
+                          isActive={isActive}
+                          iconColor="text-purple-600 dark:text-purple-400"
+                        />
+                      )}
                       <MegaMenuSection
                         title="Tools & Activities"
                         icon={Sparkles}
@@ -733,17 +711,21 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                               onClick={closeMobileMenu}
                             />
                           ))}
-                          <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
-                            Year 2: Applied AI
-                          </div>
-                          {NAV_ITEMS.year2Lessons.map((navItem) => (
-                            <MobileNavLink
-                              key={navItem.href}
-                              item={navItem}
-                              isActive={isActive(navItem.href)}
-                              onClick={closeMobileMenu}
-                            />
-                          ))}
+                          {NAV_ITEMS.year2Lessons.length > 0 && (
+                            <>
+                              <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                                Year 2: Applied AI
+                              </div>
+                              {NAV_ITEMS.year2Lessons.map((navItem) => (
+                                <MobileNavLink
+                                  key={navItem.href}
+                                  item={navItem}
+                                  isActive={isActive(navItem.href)}
+                                  onClick={closeMobileMenu}
+                                />
+                              ))}
+                            </>
+                          )}
                           <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
                             Tools & Activities
                           </div>
@@ -893,4 +875,3 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
     </>
   );
 };
-

@@ -159,7 +159,7 @@ export default async function DashboardPage() {
     lessonId: sub.lesson_id,
     lessonTitle: sub.lessons?.title || "Unknown Lesson",
     lessonOrderIndex: sub.lessons?.order_index || 0,
-    courseSlug: sub.lessons?.courses?.slug || "level-1-python-foundations-1",
+    courseSlug: sub.lessons?.courses?.slug || "term-1-hello-python",
     trinketUrl: sub.trinket_url,
     status: sub.status as "submitted" | "reviewed" | "graded",
     feedback: sub.feedback,
@@ -228,7 +228,9 @@ export default async function DashboardPage() {
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
             <CardHeader className="space-y-2">
-              <CardTitle className="text-sm font-medium">Your Profile</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Your Profile
+              </CardTitle>
               <CardDescription>Quick snapshot of your account</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">

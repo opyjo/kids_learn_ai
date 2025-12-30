@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -8,10 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, BookOpen, FileText, List } from "lucide-react";
+import { BookOpen, FileText } from "lucide-react";
 import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -41,48 +43,12 @@ interface TeacherNotesViewerProps {
   courseSlug?: string;
 }
 
-interface TableOfContentsItem {
-  id: string;
-  text: string;
-  level: number;
-}
 
 export const TeacherNotesViewer = ({
   lesson,
   teacherNote,
   courseSlug,
 }: Readonly<TeacherNotesViewerProps>) => {
-  const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>(
-    []
-  );
-  const [showToc, setShowToc] = useState(false);
-
-  // Extract H1 headers from markdown content for table of contents
-  useEffect(() => {
-    if (teacherNote?.content) {
-      const lines = teacherNote.content.split("\n");
-      const headers: TableOfContentsItem[] = [];
-
-      lines.forEach((line) => {
-        const h1Match = line.match(/^#\s+(.+)$/);
-        if (h1Match) {
-          const text = h1Match[1].trim();
-          const id = text.toLowerCase().replace(/[^\w]+/g, "-");
-          headers.push({ id, text, level: 1 });
-        }
-      });
-
-      setTableOfContents(headers);
-    }
-  }, [teacherNote]);
-
-  const handleScrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setShowToc(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
@@ -95,6 +61,8 @@ export const TeacherNotesViewer = ({
           isPremium={lesson.is_premium}
           backHref="/admin"
           backLabel="Admin"
+          rootHref="/admin/teacher-notes"
+          rootLabel="Teacher Notes"
           additionalBadges={[
             {
               label: "👨‍🏫 Teacher Notes",
@@ -106,131 +74,20 @@ export const TeacherNotesViewer = ({
       </div>
 
       <div className="container mx-auto px-4 py-6">
-        {/* Playful info badges with navigation */}
-        <div
-          className="mb-6 flex items-center justify-between gap-4 flex-wrap"
-          aria-label="Teacher notes navigation"
-        >
-          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30 ring-1 ring-purple-300/40 dark:ring-purple-700/40">
-              <span
-                className="text-lg sm:text-xl"
-                role="img"
-                aria-label="Teacher"
-              >
-                👨‍🏫
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-purple-900 dark:text-purple-200 hidden sm:inline">
-                Teacher Guide
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-purple-900 dark:text-purple-200 sm:hidden">
-                Guide
-              </span>
-            </div>
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 ring-1 ring-blue-300/40 dark:ring-blue-700/40">
-              <span
-                className="text-lg sm:text-xl"
-                role="img"
-                aria-label="Lesson"
-              >
-                📚
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 hidden sm:inline">
-                Lesson {lesson.order_index}
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 sm:hidden">
-                L{lesson.order_index}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 ring-1 ring-green-300/40 dark:ring-green-700/40">
-              <span
-                className="text-lg sm:text-xl"
-                role="img"
-                aria-label="Resources"
-              >
-                📖
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-emerald-900 dark:text-emerald-200 hidden sm:inline">
-                Full Resources
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-emerald-900 dark:text-emerald-200 sm:hidden">
-                Resources
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 w-full sm:w-auto sm:flex-shrink-0 mt-3 sm:mt-0">
-            <Link
-              href={`/admin/teacher-notes`}
-              aria-label="Go back to teacher notes list"
-              data-slot="button"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all flex-1 sm:flex-none"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">All Notes</span>
-              <span className="sm:hidden">Back</span>
-            </Link>
-            <Link
-              href={`/lessons/${courseSlug || "python-foundations"}/${lesson.order_index}`}
-              aria-label="View student lesson"
-              data-slot="button"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all flex-1 sm:flex-none"
-            >
-              <span className="hidden sm:inline">Student View 🎓</span>
-              <span className="sm:hidden">Student 🎓</span>
-            </Link>
-          </div>
+        {/* Navigation */}
+        <div className="mb-6 flex items-center justify-end">
+          <Link
+            href={`/lessons/${courseSlug || "python-foundations"}/${lesson.order_index}`}
+            aria-label="View student lesson"
+            data-slot="button"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all"
+          >
+            <span className="hidden sm:inline">Student View 🎓</span>
+            <span className="sm:hidden">Student 🎓</span>
+          </Link>
         </div>
 
-        {/* Table of Contents */}
-        {teacherNote && tableOfContents.length > 0 && (
-          <Card className="mb-6 rounded-2xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20">
-            <CardHeader
-              className="cursor-pointer hover:bg-muted/50 transition-colors rounded-t-2xl"
-              onClick={() => setShowToc(!showToc)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setShowToc(!showToc);
-                }
-              }}
-              tabIndex={0}
-              role="button"
-              aria-expanded={showToc}
-              aria-label="Toggle table of contents"
-            >
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2 text-base">
-                  <List className="h-4 w-4 text-primary" />
-                  <span>Quick Navigation</span>
-                </CardTitle>
-                <Badge variant="outline" className="text-xs">
-                  {showToc ? "Hide" : "Show"} ({tableOfContents.length}{" "}
-                  sections)
-                </Badge>
-              </div>
-            </CardHeader>
-            {showToc && (
-              <>
-                <Separator />
-                <CardContent className="pt-4">
-                  <nav className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {tableOfContents.map((item) => (
-                      <Button
-                        key={item.id}
-                        variant="ghost"
-                        className="justify-start h-auto py-2 px-3 text-left"
-                        onClick={() => handleScrollToSection(item.id)}
-                        aria-label={`Jump to ${item.text}`}
-                      >
-                        <span className="text-sm truncate">{item.text}</span>
-                      </Button>
-                    ))}
-                  </nav>
-                </CardContent>
-              </>
-            )}
-          </Card>
-        )}
+        {/* Table of Contents removed */}
 
         {/* Main Content */}
         <div className="max-w-6xl mx-auto">
@@ -261,63 +118,121 @@ export const TeacherNotesViewer = ({
 
             <CardContent className="p-6">
               {teacherNote ? (
-                <div
-                  className="teacher-notes-content prose max-w-none dark:prose-invert
-                    prose-headings:font-bold prose-headings:tracking-tight
-                    prose-h1:text-2xl prose-h1:text-primary prose-h1:mt-6 prose-h1:mb-4 prose-h1:leading-tight prose-h1:first:mt-0
-                    prose-h2:text-xl prose-h2:text-accent prose-h2:mt-8 prose-h2:mb-4 prose-h2:leading-snug prose-h2:first:mt-0
-                    prose-h3:text-lg prose-h3:text-primary/90 prose-h3:mt-6 prose-h3:mb-3 prose-h3:leading-snug prose-h3:first:mt-0
-                    prose-h4:text-base prose-h4:text-primary/80 prose-h4:mt-5 prose-h4:mb-2 prose-h4:leading-snug prose-h4:first:mt-0
-                    prose-p:text-foreground prose-p:leading-relaxed prose-p:mb-4 prose-p:text-base prose-p:first:mt-0
-                    prose-strong:text-primary prose-strong:font-bold prose-strong:text-[1.02em]
-                    prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none prose-code:font-semibold
-                    prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:my-6 prose-blockquote:italic
-                    prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6
-                    prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6
-                    prose-li:my-2 prose-li:text-base
-                    prose-img:rounded-xl prose-img:shadow-2xl prose-img:ring-2 prose-img:ring-border prose-img:my-6
-                    prose-a:text-primary dark:prose-a:text-primary hover:prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors
-                    prose-hr:my-8 prose-hr:border-t-2 prose-hr:border-border
-                    prose-table:w-full prose-table:border-collapse prose-table:my-6
-                    prose-th:border prose-th:border-border prose-th:bg-muted prose-th:p-3 prose-th:text-left prose-th:font-semibold
-                    prose-td:border prose-td:border-border prose-td:p-3"
-                >
+                <div className="teacher-notes-content max-w-none">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
-                      h1(props) {
-                        const { children } = props;
+                      h1: ({ children }) => {
                         const text = String(children);
                         const id = text.toLowerCase().replace(/[^\w]+/g, "-");
                         return (
-                          <h1 id={id} className="scroll-mt-24">
+                          <h1
+                            id={id}
+                            className="scroll-mt-24 text-3xl font-extrabold tracking-tight text-primary mt-8 mb-4 border-b pb-2"
+                          >
                             {children}
                           </h1>
                         );
                       },
+                      h2: ({ children }) => {
+                        const text = String(children);
+                        const id = text.toLowerCase().replace(/[^\w]+/g, "-");
+                        return (
+                          <h2
+                            id={id}
+                            className="scroll-mt-24 text-2xl font-bold tracking-tight text-foreground mt-8 mb-4"
+                          >
+                            {children}
+                          </h2>
+                        );
+                      },
+                      h3: ({ children }) => (
+                        <h3 className="text-xl font-semibold tracking-tight text-foreground mt-6 mb-3">
+                          {children}
+                        </h3>
+                      ),
+                      p: ({ children }) => (
+                        <p className="leading-7 [&:not(:first-child)]:mt-4 text-muted-foreground">
+                          {children}
+                        </p>
+                      ),
+                      ul: ({ children }) => (
+                        <ul className="my-4 ml-6 list-disc [&>li]:mt-2 marker:text-primary">
+                          {children}
+                        </ul>
+                      ),
+                      ol: ({ children }) => (
+                        <ol className="my-4 ml-6 list-decimal [&>li]:mt-2 marker:text-primary font-medium">
+                          {children}
+                        </ol>
+                      ),
+                      li: ({ children }) => (
+                        <li className="text-muted-foreground pl-2">{children}</li>
+                      ),
+                      blockquote: ({ children }) => (
+                        <blockquote className="mt-6 border-l-4 border-primary bg-primary/5 pl-6 py-4 italic rounded-r-lg text-muted-foreground">
+                          {children}
+                        </blockquote>
+                      ),
+                      table: ({ children }) => (
+                        <div className="my-6 w-full overflow-y-auto rounded-lg border shadow-sm">
+                          <table className="w-full text-sm text-left">
+                            {children}
+                          </table>
+                        </div>
+                      ),
+                      thead: ({ children }) => (
+                        <thead className="bg-muted/50 border-b [&_tr]:border-b-0">
+                          {children}
+                        </thead>
+                      ),
+                      tbody: ({ children }) => (
+                        <tbody className="[&_tr:last-child]:border-0">
+                          {children}
+                        </tbody>
+                      ),
+                      tr: ({ children }) => (
+                        <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                          {children}
+                        </tr>
+                      ),
+                      th: ({ children }) => (
+                        <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
+                          {children}
+                        </th>
+                      ),
+                      td: ({ children }) => (
+                        <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0 text-foreground">
+                          {children}
+                        </td>
+                      ),
+                      hr: () => <hr className="my-8 border-border" />,
                       code(props) {
                         const { children, className } = props;
                         const match = /language-(\w+)/.exec(className || "");
                         const codeString = String(children).replace(/\n$/, "");
 
                         return match ? (
-                          <div className="relative my-4">
+                          <div className="relative my-6 rounded-lg overflow-hidden border bg-zinc-950 shadow-md">
                             <SyntaxHighlighter
                               PreTag="div"
                               language={match[1]}
                               style={vscDarkPlus as any}
-                              className="rounded-xl shadow-lg !mt-4 !mb-4 ring-2 ring-border"
+                              className="!m-0 !p-4 !bg-transparent"
                               customStyle={{
-                                padding: "1.25rem",
-                                fontSize: "0.9375rem",
-                                lineHeight: "1.6",
+                                margin: 0,
+                                padding: "1rem",
+                                fontSize: "0.9rem",
+                                lineHeight: "1.5",
                               }}
                             >
                               {codeString}
                             </SyntaxHighlighter>
                           </div>
                         ) : (
-                          <code className={className}>{children}</code>
+                          <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground">
+                            {children}
+                          </code>
                         );
                       },
                     }}

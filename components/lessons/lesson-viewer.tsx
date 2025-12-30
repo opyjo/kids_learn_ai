@@ -808,8 +808,8 @@ export function LessonViewer({
               </CardHeader>
             </Card>
           </div>
-        ) : courseSlug?.startsWith("level-") ? (
-          // Level courses with tabbed layout
+        ) : courseSlug?.startsWith("level-") || courseSlug?.startsWith("term-") ? (
+          // Level/Term courses with tabbed layout
           <div className="grid lg:grid-cols-2 gap-6 items-start">
             {/* Left Column: Lesson Content with Tabs */}
             <Card className="flex flex-col rounded-2xl border shadow-2xl max-h-[calc(100vh-140px)]">

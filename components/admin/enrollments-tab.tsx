@@ -41,10 +41,10 @@ interface Student {
   email: string;
   full_name: string | null;
   created_at: string;
-  enrolledLevels: EnrolledLevel[];
+  enrolledTerms: EnrolledTerm[];
 }
 
-interface EnrolledLevel {
+interface EnrolledTerm {
   id: string;
   course_id: string;
   course_title: string;
@@ -78,7 +78,7 @@ export const EnrollmentsTab = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [isEnrollDialogOpen, setIsEnrollDialogOpen] = useState(false);
-  const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
+  const [selectedTerms, setSelectedTerms] = useState<string[]>([]);
   const [enrollmentNotes, setEnrollmentNotes] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
@@ -129,7 +129,7 @@ export const EnrollmentsTab = () => {
       setCourses(coursesData || []);
 
       // Map enrollments to students
-      const enrollmentsByStudent: Record<string, EnrolledLevel[]> = {};
+      const enrollmentsByStudent: Record<string, EnrolledTerm[]> = {};
       (enrollmentsData || []).forEach((enrollment: any) => {
         const studentId = enrollment.student_id;
         if (!enrollmentsByStudent[studentId]) {
@@ -153,7 +153,7 @@ export const EnrollmentsTab = () => {
           email: student.email,
           full_name: student.full_name,
           created_at: student.created_at,
-          enrolledLevels: (enrollmentsByStudent[student.id] || []).sort(
+          enrolledTerms: (enrollmentsByStudent[student.id] || []).sort(
             (a, b) => a.course_order - b.course_order
           ),
         })
@@ -173,13 +173,13 @@ export const EnrollmentsTab = () => {
 
   const handleOpenEnrollDialog = (student: Student) => {
     setSelectedStudent(student);
-    setSelectedLevels(student.enrolledLevels.map((e) => e.course_id));
+    setSelectedTerms(student.enrolledTerms.map((e) => e.course_id));
     setEnrollmentNotes("");
     setIsEnrollDialogOpen(true);
   };
 
-  const handleToggleLevel = (courseId: string) => {
-    setSelectedLevels((prev) =>
+  const handleToggleTerm = (courseId: string) => {
+    setSelectedTerms((prev) =>
       prev.includes(courseId)
         ? prev.filter((id) => id !== courseId)
         : [...prev, courseId]
@@ -199,16 +199,16 @@ export const EnrollmentsTab = () => {
       if (!user) throw new Error("Not authenticated");
 
       // Get current enrollments
-      const currentEnrollments = selectedStudent.enrolledLevels.map(
+      const currentEnrollments = selectedStudent.enrolledTerms.map(
         (e) => e.course_id
       );
 
       // Determine what to add and remove
-      const toAdd = selectedLevels.filter(
+      const toAdd = selectedTerms.filter(
         (id) => !currentEnrollments.includes(id)
       );
       const toRemove = currentEnrollments.filter(
-        (id) => !selectedLevels.includes(id)
+        (id) => !selectedTerms.includes(id)
       );
 
       // Remove enrollments
@@ -300,14 +300,14 @@ export const EnrollmentsTab = () => {
 
   // Stats
   const totalEnrollments = students.reduce(
-    (sum, s) => sum + s.enrolledLevels.length,
+    (sum, s) => sum + s.enrolledTerms.length,
     0
   );
   const studentsWithEnrollments = students.filter(
-    (s) => s.enrolledLevels.length > 0
+    (s) => s.enrolledTerms.length > 0
   ).length;
   const studentsWithoutEnrollments = students.filter(
-    (s) => s.enrolledLevels.length === 0
+    (s) => s.enrolledTerms.length === 0
   ).length;
 
   if (isLoading) {
@@ -414,14 +414,14 @@ export const EnrollmentsTab = () => {
                         <h4 className="font-medium">
                           {student.full_name || "Unknown User"}
                         </h4>
-                        {student.enrolledLevels.length === 0 ? (
+                        {student.enrolledTerms.length === 0 ? (
                           <Badge variant="secondary" className="text-xs">
                             No Access
                           </Badge>
                         ) : (
                           <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 text-xs">
-                            {student.enrolledLevels.length} Level
-                            {student.enrolledLevels.length !== 1 ? "s" : ""}
+                            {student.enrolledTerms.length} Term
+                            {student.enrolledTerms.length !== 1 ? "s" : ""}
                           </Badge>
                         )}
                       </div>
@@ -443,18 +443,18 @@ export const EnrollmentsTab = () => {
                     </Button>
                   </div>
 
-                  {/* Enrolled Levels */}
-                  {student.enrolledLevels.length > 0 && (
+                  {/* Enrolled Terms */}
+                  {student.enrolledTerms.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {student.enrolledLevels.map((level) => (
+                      {student.enrolledTerms.map((term) => (
                         <div
-                          key={level.id}
+                          key={term.id}
                           className="flex items-center gap-1 px-2 py-1 bg-primary/10 rounded-md text-xs"
                         >
                           <BookOpen className="h-3 w-3" />
-                          <span>{level.course_title}</span>
+                          <span>{term.course_title}</span>
                           <button
-                            onClick={() => handleQuickRevoke(level.id)}
+                            onClick={() => handleQuickRevoke(term.id)}
                             className="ml-1 text-red-500 hover:text-red-700"
                             title="Revoke access"
                           >
@@ -475,7 +475,7 @@ export const EnrollmentsTab = () => {
       <Dialog open={isEnrollDialogOpen} onOpenChange={setIsEnrollDialogOpen}>
         <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Manage Level Access</DialogTitle>
+            <DialogTitle>Manage Term Access</DialogTitle>
             <DialogDescription>
               {selectedStudent?.full_name || selectedStudent?.email}
             </DialogDescription>
@@ -493,12 +493,12 @@ export const EnrollmentsTab = () => {
                 </p>
               </div>
 
-              {/* Level Selection */}
+              {/* Term Selection */}
               <div className="space-y-3">
-                <Label>Select Levels to Grant Access</Label>
+                <Label>Select Terms to Grant Access</Label>
 
                 {/* Group by year */}
-                {["Year 1: Foundations", "Year 2: Applied AI"].map(
+                {["Year 1: Python Foundations", "Year 2: Advanced AI"].map(
                   (yearGroup) => {
                     const yearCourses = courses.filter(
                       (c) => c.year_group === yearGroup
@@ -517,8 +517,8 @@ export const EnrollmentsTab = () => {
                           >
                             <Checkbox
                               id={course.id}
-                              checked={selectedLevels.includes(course.id)}
-                              onCheckedChange={() => handleToggleLevel(course.id)}
+                              checked={selectedTerms.includes(course.id)}
+                              onCheckedChange={() => handleToggleTerm(course.id)}
                             />
                             <label
                               htmlFor={course.id}

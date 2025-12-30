@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Home, ChevronRight } from "lucide-react";
+import { Home, ChevronRight, BookOpen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +14,8 @@ interface LessonBreadcrumbsProps {
   isPremium?: boolean;
   backHref?: string;
   backLabel?: string;
+  rootHref?: string;
+  rootLabel?: string;
   additionalBadges?: Array<{ label: string; className?: string }>;
   className?: string;
 }
@@ -26,12 +28,13 @@ export const LessonBreadcrumbs = ({
   isPremium,
   backHref,
   backLabel,
+  rootHref,
+  rootLabel,
   additionalBadges,
   className,
 }: LessonBreadcrumbsProps) => {
-  const lessonsHref = courseSlug
-    ? `/lessons?course=${courseSlug}`
-    : `/lessons?course=python-foundations`;
+  // Link to the specific course page (e.g., /lessons/level-1)
+  const courseHref = courseSlug ? `/lessons/${courseSlug}` : "/lessons";
 
   const displayCourseTitle =
     courseTitle ||
@@ -71,12 +74,25 @@ export const LessonBreadcrumbs = ({
         </>
       )}
 
+      {/* Lessons Link (or custom root) */}
+      <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200" />
+      <Link
+        href={rootHref || "/lessons"}
+        className="group flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 hover:bg-muted/50 hover:scale-105 active:scale-95 cursor-pointer"
+        aria-label={`View ${rootLabel || "all lessons"}`}
+      >
+        <BookOpen className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
+        <span className="hidden sm:inline transition-all duration-200">
+          {rootLabel || "Lessons"}
+        </span>
+      </Link>
+
       {/* Course Name */}
       {courseSlug && (
         <>
           <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200" />
           <Link
-            href={lessonsHref}
+            href={courseHref}
             className="group text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 rounded-md px-2 py-1 hover:bg-muted/50 hover:scale-105 active:scale-95 truncate max-w-[150px] sm:max-w-none relative cursor-pointer"
             aria-label={`View ${displayCourseTitle} course`}
           >

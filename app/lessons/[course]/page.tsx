@@ -89,7 +89,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
   const completedCount = lessons.filter((l) => l.status === "completed").length;
   const overallProgress =
-    lessons.length > 0 ? Math.round((completedCount / lessons.length) * 100) : 0;
+    lessons.length > 0
+      ? Math.round((completedCount / lessons.length) * 100)
+      : 0;
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -181,7 +183,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
                     <div className="text-xs font-medium text-foreground">
                       {completedCount}/{lessons.length}
                     </div>
-                    <div className="text-xs text-muted-foreground">Completed</div>
+                    <div className="text-xs text-muted-foreground">
+                      Completed
+                    </div>
                   </div>
                 </div>
               </div>
@@ -353,4 +357,3 @@ export default async function CoursePage({ params }: CoursePageProps) {
     </div>
   );
 }
-

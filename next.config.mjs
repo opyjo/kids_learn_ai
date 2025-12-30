@@ -8,6 +8,9 @@ const nextConfig = {
   },
   // Empty turbopack config to silence the warning
   turbopack: {},
+  // Disable source map loading for node_modules to reduce console noise
+  productionBrowserSourceMaps: false,
+  devIndicators: false,
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // Ignore Node.js modules when building for the client
