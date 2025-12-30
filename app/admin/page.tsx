@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { SyncLessonsButton } from "@/components/admin/sync-lessons-button";
 
 export default async function AdminOverviewPage() {
   const supabase = await getSupabaseServerClient();
@@ -93,13 +94,16 @@ export default async function AdminOverviewPage() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          Dashboard Overview
-        </h1>
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Welcome back! Here&apos;s what&apos;s happening on your platform.
-        </p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+            Dashboard Overview
+          </h1>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            Welcome back! Here&apos;s what&apos;s happening on your platform.
+          </p>
+        </div>
+        <SyncLessonsButton />
       </div>
 
       {/* Stats Grid */}

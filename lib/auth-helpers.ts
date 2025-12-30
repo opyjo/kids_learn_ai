@@ -60,9 +60,10 @@ export async function requireAdmin(): Promise<User> {
 
 /**
  * Check if a user is enrolled in a specific level (course).
+ * Admins automatically have access to all levels.
  * @param userId - The user's ID
  * @param courseId - The course/level ID
- * @returns True if enrolled, false otherwise
+ * @returns True if enrolled or admin, false otherwise
  */
 export async function checkLevelEnrollment(
   userId: string,
@@ -70,6 +71,18 @@ export async function checkLevelEnrollment(
 ): Promise<boolean> {
   const supabase = await getSupabaseServerClient();
 
+  // First, check if user is an admin (admins have access to everything)
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", userId)
+    .single();
+
+  if (profile?.role === "admin") {
+    return true;
+  }
+
+  // Otherwise, check for specific enrollment
   const { data, error } = await supabase
     .from("level_enrollments")
     .select("id")
