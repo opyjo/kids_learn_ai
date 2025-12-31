@@ -8,6 +8,10 @@ interface SyncResult {
   synced: string[];
   errors: string[];
   skipped: string[];
+  teacherNotes: {
+    synced: string[];
+    errors: string[];
+  };
 }
 
 export async function POST(request: NextRequest) {
@@ -34,7 +38,12 @@ export async function POST(request: NextRequest) {
 
   try {
     const lessonsDir = path.join(process.cwd(), "docs/Lesson_content");
-    const results: SyncResult = { synced: [], errors: [], skipped: [] };
+    const results: SyncResult = { 
+      synced: [], 
+      errors: [], 
+      skipped: [],
+      teacherNotes: { synced: [], errors: [] }
+    };
 
     // Check if lessons directory exists
     if (!fs.existsSync(lessonsDir)) {
@@ -120,6 +129,8 @@ export async function POST(request: NextRequest) {
             updated_at: new Date().toISOString(),
           };
 
+          let lessonId: string | null = null;
+
           if (existingLesson) {
             // Update existing lesson
             const { error } = await supabase
@@ -133,13 +144,18 @@ export async function POST(request: NextRequest) {
               );
             } else {
               results.synced.push(`${courseFolder}/${lessonFolder} (updated)`);
+              lessonId = existingLesson.id;
             }
           } else {
             // Insert new lesson
-            const { error } = await supabase.from("lessons").insert({
-              ...lessonData,
-              created_by: user.id,
-            });
+            const { data: newLesson, error } = await supabase
+              .from("lessons")
+              .insert({
+                ...lessonData,
+                created_by: user.id,
+              })
+              .select("id")
+              .single();
 
             if (error) {
               results.errors.push(
@@ -147,6 +163,69 @@ export async function POST(request: NextRequest) {
               );
             } else {
               results.synced.push(`${courseFolder}/${lessonFolder} (created)`);
+              lessonId = newLesson?.id || null;
+            }
+          }
+
+          // Sync teacher notes if lesson was successfully synced
+          if (lessonId) {
+            const teacherNotesFile = path.join(coursePath, lessonFolder, "teacher-notes.md");
+            
+            if (fs.existsSync(teacherNotesFile)) {
+              try {
+                const notesContent = fs.readFileSync(teacherNotesFile, "utf-8");
+                
+                // Check if teacher notes already exist for this lesson
+                const { data: existingNotes } = await supabase
+                  .from("teacher_notes")
+                  .select("id")
+                  .eq("lesson_id", lessonId)
+                  .maybeSingle();
+
+                if (existingNotes) {
+                  // Update existing notes
+                  const { error: notesError } = await supabase
+                    .from("teacher_notes")
+                    .update({
+                      content: notesContent,
+                      updated_at: new Date().toISOString(),
+                    })
+                    .eq("id", existingNotes.id);
+
+                  if (notesError) {
+                    results.teacherNotes.errors.push(
+                      `${courseFolder}/${lessonFolder}: ${notesError.message}`
+                    );
+                  } else {
+                    results.teacherNotes.synced.push(
+                      `${courseFolder}/${lessonFolder} (updated)`
+                    );
+                  }
+                } else {
+                  // Insert new notes
+                  const { error: notesError } = await supabase
+                    .from("teacher_notes")
+                    .insert({
+                      lesson_id: lessonId,
+                      content: notesContent,
+                    });
+
+                  if (notesError) {
+                    results.teacherNotes.errors.push(
+                      `${courseFolder}/${lessonFolder}: ${notesError.message}`
+                    );
+                  } else {
+                    results.teacherNotes.synced.push(
+                      `${courseFolder}/${lessonFolder} (created)`
+                    );
+                  }
+                }
+              } catch (notesErr: unknown) {
+                const notesErrorMessage = notesErr instanceof Error ? notesErr.message : "Unknown error";
+                results.teacherNotes.errors.push(
+                  `${courseFolder}/${lessonFolder}: ${notesErrorMessage}`
+                );
+              }
             }
           }
         } catch (err: unknown) {
@@ -158,7 +237,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Synced ${results.synced.length} lessons`,
+      message: `Synced ${results.synced.length} lessons and ${results.teacherNotes.synced.length} teacher notes`,
       ...results,
     });
   } catch (error: unknown) {

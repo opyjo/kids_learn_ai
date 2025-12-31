@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -8,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -57,7 +59,7 @@ export const TeacherNotesViewer = ({
   );
   const [showToc, setShowToc] = useState(false);
 
-  // Extract H1 headers from markdown content for table of contents
+  // Extract H1 and H2 headers from markdown content for table of contents
   useEffect(() => {
     if (teacherNote?.content) {
       const lines = teacherNote.content.split("\n");
@@ -65,10 +67,16 @@ export const TeacherNotesViewer = ({
 
       lines.forEach((line) => {
         const h1Match = line.match(/^#\s+(.+)$/);
+        const h2Match = line.match(/^##\s+(.+)$/);
+        
         if (h1Match) {
           const text = h1Match[1].trim();
           const id = text.toLowerCase().replace(/[^\w]+/g, "-");
           headers.push({ id, text, level: 1 });
+        } else if (h2Match) {
+          const text = h2Match[1].trim();
+          const id = text.toLowerCase().replace(/[^\w]+/g, "-");
+          headers.push({ id, text, level: 2 });
         }
       });
 
@@ -213,16 +221,23 @@ export const TeacherNotesViewer = ({
               <>
                 <Separator />
                 <CardContent className="pt-4">
-                  <nav className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <nav className="grid grid-cols-1 md:grid-cols-2 gap-1">
                     {tableOfContents.map((item) => (
                       <Button
                         key={item.id}
                         variant="ghost"
-                        className="justify-start h-auto py-2 px-3 text-left"
+                        className={`justify-start h-auto py-2 text-left transition-colors ${
+                          item.level === 1 
+                            ? "px-3 font-semibold text-primary" 
+                            : "px-5 text-muted-foreground hover:text-foreground"
+                        }`}
                         onClick={() => handleScrollToSection(item.id)}
                         aria-label={`Jump to ${item.text}`}
                       >
-                        <span className="text-sm truncate">{item.text}</span>
+                        <span className={`truncate ${item.level === 1 ? "text-sm" : "text-xs"}`}>
+                          {item.level === 2 && "→ "}
+                          {item.text}
+                        </span>
                       </Button>
                     ))}
                   </nav>
@@ -274,13 +289,10 @@ export const TeacherNotesViewer = ({
                     prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:my-6 prose-blockquote:italic
                     prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6
                     prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6
-                    prose-li:my-2 prose-li:text-base
+                    prose-li:my-2 prose-li:text-base prose-li:leading-relaxed
                     prose-img:rounded-xl prose-img:shadow-2xl prose-img:ring-2 prose-img:ring-border prose-img:my-6
                     prose-a:text-primary dark:prose-a:text-primary hover:prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-semibold prose-a:transition-colors
-                    prose-hr:my-8 prose-hr:border-t-2 prose-hr:border-border
-                    prose-table:w-full prose-table:border-collapse prose-table:my-6
-                    prose-th:border prose-th:border-border prose-th:bg-muted prose-th:p-3 prose-th:text-left prose-th:font-semibold
-                    prose-td:border prose-td:border-border prose-td:p-3"
+                    prose-hr:my-8 prose-hr:border-t-2 prose-hr:border-border"
                 >
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
@@ -293,6 +305,26 @@ export const TeacherNotesViewer = ({
                           <h1 id={id} className="scroll-mt-24">
                             {children}
                           </h1>
+                        );
+                      },
+                      h2(props) {
+                        const { children } = props;
+                        const text = String(children);
+                        const id = text.toLowerCase().replace(/[^\w]+/g, "-");
+                        return (
+                          <h2 id={id} className="scroll-mt-24">
+                            {children}
+                          </h2>
+                        );
+                      },
+                      h3(props) {
+                        const { children } = props;
+                        const text = String(children);
+                        const id = text.toLowerCase().replace(/[^\w]+/g, "-");
+                        return (
+                          <h3 id={id} className="scroll-mt-24">
+                            {children}
+                          </h3>
                         );
                       },
                       code(props) {
@@ -320,6 +352,82 @@ export const TeacherNotesViewer = ({
                           <code className={className}>{children}</code>
                         );
                       },
+                      table: ({ children }) => (
+                        <div className="my-6 overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                          <table className="w-full text-sm">{children}</table>
+                        </div>
+                      ),
+                      thead: ({ children }) => (
+                        <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                          {children}
+                        </thead>
+                      ),
+                      tbody: ({ children }) => (
+                        <tbody className="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-900">
+                          {children}
+                        </tbody>
+                      ),
+                      tr: ({ children }) => (
+                        <tr className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                          {children}
+                        </tr>
+                      ),
+                      th: ({ children }) => (
+                        <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                          {children}
+                        </th>
+                      ),
+                      td: ({ children }) => (
+                        <td className="px-4 py-3 text-gray-700 dark:text-gray-300">
+                          {children}
+                        </td>
+                      ),
+                      ul: ({ children }) => (
+                        <ul className="my-4 space-y-2 list-disc pl-6 marker:text-primary">
+                          {children}
+                        </ul>
+                      ),
+                      ol: ({ children }) => (
+                        <ol className="my-4 space-y-2 list-decimal pl-6 marker:text-primary marker:font-semibold">
+                          {children}
+                        </ol>
+                      ),
+                      li: ({ children }) => (
+                        <li className="text-base leading-relaxed text-foreground pl-1">
+                          {children}
+                        </li>
+                      ),
+                      blockquote: ({ children }) => (
+                        <blockquote className="my-6 border-l-4 border-primary bg-primary/5 py-4 px-6 rounded-r-lg italic text-foreground/90">
+                          {children}
+                        </blockquote>
+                      ),
+                      p: ({ children }) => (
+                        <p className="mb-4 leading-relaxed text-base text-foreground">
+                          {children}
+                        </p>
+                      ),
+                      strong: ({ children }) => (
+                        <strong className="font-bold text-primary">
+                          {children}
+                        </strong>
+                      ),
+                      em: ({ children }) => (
+                        <em className="italic text-foreground/90">{children}</em>
+                      ),
+                      a: ({ href, children }) => (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:text-accent font-semibold underline underline-offset-2 transition-colors"
+                        >
+                          {children}
+                        </a>
+                      ),
+                      hr: () => (
+                        <hr className="my-8 border-t-2 border-border" />
+                      ),
                     }}
                   >
                     {teacherNote.content}

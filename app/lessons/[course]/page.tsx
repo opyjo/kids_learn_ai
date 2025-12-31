@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import {
-  Clock,
   Play,
   Lock,
   CheckCircle,
@@ -74,15 +73,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
   // Transform lessons data
   const lessons = (lessonsData || []).map((lesson) => {
     const isCompleted = completedLessonIds.has(lesson.id);
-    const estimatedTime = Math.max(10, Math.ceil(lesson.content.length / 100));
 
     return {
       id: lesson.id,
       order_index: lesson.order_index,
       title: lesson.title,
       description: lesson.description,
-      difficulty: lesson.difficulty_level,
-      estimated_time: estimatedTime,
       status: isCompleted ? "completed" : "not_started",
     };
   });
@@ -90,19 +86,6 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const completedCount = lessons.filter((l) => l.status === "completed").length;
   const overallProgress =
     lessons.length > 0 ? Math.round((completedCount / lessons.length) * 100) : 0;
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "beginner":
-        return "bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300";
-      case "intermediate":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300";
-      case "advanced":
-        return "bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 dark:from-blue-600/8 dark:via-purple-600/8 dark:to-pink-600/8">
@@ -283,21 +266,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
                       </p>
                     </div>
 
-                    {/* Meta & Action */}
+                    {/* Action */}
                     <div className="flex items-center gap-3">
-                      <Badge
-                        variant="outline"
-                        className={`text-xs ${getDifficultyColor(
-                          lesson.difficulty
-                        )}`}
-                      >
-                        {lesson.difficulty}
-                      </Badge>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Clock className="h-3.5 w-3.5" />
-                        {lesson.estimated_time} min
-                      </div>
-
                       {isEnrolled ? (
                         <Button asChild size="sm" className="rounded-full">
                           <Link

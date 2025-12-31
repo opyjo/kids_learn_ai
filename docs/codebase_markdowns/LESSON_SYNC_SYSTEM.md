@@ -1,24 +1,24 @@
-# Lesson File Sync System
+# Lesson & Teacher Notes File Sync System
 
 > **Last Updated:** December 2024
 
-This document describes the lesson synchronization system that allows you to manage lesson content in markdown files and sync them to the database with a single click.
+This document describes the synchronization system that allows you to manage lesson content and teacher notes in markdown files and sync them to the database with a single click.
 
 ---
 
 ## Overview
 
-Instead of running SQL migrations every time you need to update lesson content, you can now:
+Instead of running SQL migrations every time you need to update lesson content or teacher notes, you can now:
 
 1. Edit markdown files in VS Code (with full syntax highlighting and preview)
 2. Click "Sync Lessons" in the admin panel
-3. Database is instantly updated
+3. Both lessons AND teacher notes are instantly updated in the database
 
 ```
-┌─────────────────┐      ┌──────────────────┐      ┌─────────────────┐
-│  Edit lesson.md │ ──▶  │  Click "Sync"    │ ──▶  │  Database       │
-│  in VS Code     │      │  in Admin Panel  │      │  Updated!       │
-└─────────────────┘      └──────────────────┘      └─────────────────┘
+┌─────────────────────────┐      ┌──────────────────┐      ┌─────────────────┐
+│  Edit lesson.md         │ ──▶  │  Click "Sync"    │ ──▶  │  Database       │
+│  Edit teacher-notes.md  │      │  in Admin Panel  │      │  Updated!       │
+└─────────────────────────┘      └──────────────────┘      └─────────────────┘
 ```
 
 ---
@@ -38,23 +38,26 @@ Instead of running SQL migrations every time you need to update lesson content, 
 
 ## How It Works
 
-### 1. Lesson File Structure
+### 1. File Structure
 
-Lessons are stored as markdown files with YAML frontmatter:
+Lessons and teacher notes are stored as markdown files:
 
 ```
 docs/Lesson_content/
 ├── Term1-HelloPython/
 │   ├── Week1-WelcomeToCoding/
-│   │   ├── lesson.md          ← Main lesson content
-│   │   └── teacher-notes.md   ← Teacher notes (optional)
+│   │   ├── lesson.md          ← Main lesson content (requires frontmatter)
+│   │   └── teacher-notes.md   ← Teacher notes (plain markdown, synced automatically)
 │   ├── Week2-PrintIsYourVoice/
-│   │   └── lesson.md
+│   │   ├── lesson.md
+│   │   └── teacher-notes.md
 │   └── ...
 ├── PythonFoundationsI/
 │   └── ...
 └── ...
 ```
+
+**Important:** Teacher notes are synced automatically when they exist alongside a `lesson.md` file. They don't require frontmatter - just plain markdown content.
 
 ### 2. Frontmatter Format
 
@@ -173,6 +176,51 @@ Since lessons are markdown files, you can use VS Code's find/replace across file
 3. Replace as needed
 4. Click "Sync Lessons" to update the database
 
+### Adding/Updating Teacher Notes
+
+Teacher notes are synced automatically alongside lessons:
+
+1. **Create/edit `teacher-notes.md`** in the same folder as the lesson:
+   ```
+   docs/Lesson_content/Term1-HelloPython/Week1-WelcomeToCoding/
+   ├── lesson.md          ← Must exist first
+   └── teacher-notes.md   ← Create this file
+   ```
+
+2. **Add your teacher notes content** (plain markdown, no frontmatter needed):
+   ```markdown
+   # Level 1, Lesson 1: Welcome to Python! 🐍
+
+   ## Teacher's Guide
+
+   **Course:** Python Foundations I - Getting Started  
+   **Age Group:** 9-13 years old  
+   **Duration:** 60 minutes
+
+   ---
+
+   ## 📋 Lesson Overview
+
+   ### Purpose
+   This is the foundational lesson for the entire curriculum...
+
+   ### Learning Objectives
+   By the end of this lesson, students will be able to:
+   1. Explain what Python is in their own words
+   2. Navigate the coding environment
+   3. Write and execute a simple Python program
+
+   [... more content ...]
+   ```
+
+3. **Click "Sync Lessons from Files"** - teacher notes sync automatically with lessons
+
+**Key Points:**
+- Teacher notes are linked to lessons via `lesson_id` in the database
+- The lesson must be synced successfully before teacher notes can be added
+- Teacher notes don't require frontmatter - they're stored as plain markdown
+- If a `teacher-notes.md` file doesn't exist, nothing is synced for that lesson
+
 ---
 
 ## Technical Details
@@ -195,7 +243,7 @@ Since lessons are markdown files, you can use VS Code's find/replace across file
 ```json
 {
   "success": true,
-  "message": "Synced 3 lessons",
+  "message": "Synced 3 lessons and 2 teacher notes",
   "synced": [
     "Term1-HelloPython/Week1-WelcomeToCoding (updated)",
     "Term1-HelloPython/Week2-PrintIsYourVoice (created)"
@@ -203,19 +251,37 @@ Since lessons are markdown files, you can use VS Code's find/replace across file
   "errors": [],
   "skipped": [
     "PythonFoundationsI/WelcomeToPython: Missing required frontmatter"
-  ]
+  ],
+  "teacherNotes": {
+    "synced": [
+      "Term1-HelloPython/Week1-WelcomeToCoding (updated)",
+      "Term1-HelloPython/Week2-PrintIsYourVoice (created)"
+    ],
+    "errors": []
+  }
 }
 ```
 
 ### Database
 
 The sync uses an **upsert** strategy:
+
+**For Lessons:**
 - If a lesson with the same `course_id` and `order_index` exists → **UPDATE**
 - If no matching lesson exists → **INSERT**
 
 This is enabled by a unique constraint:
 ```sql
 UNIQUE (course_id, order_index)
+```
+
+**For Teacher Notes:**
+- If teacher notes for the `lesson_id` exist → **UPDATE** content
+- If no teacher notes exist → **INSERT** new record
+
+The `teacher_notes` table has a unique constraint on `lesson_id` ensuring one-to-one relationship:
+```sql
+-- teacher_notes.lesson_id is UNIQUE
 ```
 
 ### Dependencies
@@ -325,7 +391,7 @@ Potential enhancements for the sync system:
 - [ ] Automatic sync on Git push (via webhook)
 - [ ] Preview mode before syncing
 - [ ] Diff view showing what will change
-- [ ] Sync teacher notes separately
+- [x] ~~Sync teacher notes separately~~ ✅ Implemented!
 - [ ] Import/export lessons as JSON
 - [ ] Version history in the admin panel
 

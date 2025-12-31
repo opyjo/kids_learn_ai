@@ -30,7 +30,6 @@ import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import { PythonEditor } from "@/components/code/python-editor";
 import { TrinketEditor } from "@/components/code/trinket-editor";
 import { AIPlayground } from "@/components/lessons/ai-playground";
-import { InlineTutor } from "@/components/lessons/inline-tutor";
 import { TrinketSubmissionForm } from "@/components/dashboard/trinket-submission-form";
 import { TrinketPreview } from "@/components/dashboard/trinket-preview";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -397,18 +396,6 @@ export function LessonViewer({
                               </div>
                             </div>
                           </div>
-
-                          {/* Ask Tutor Button */}
-                          {userId && (
-                            <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border/50">
-                              <InlineTutor
-                                lessonId={lesson.dbId}
-                                lessonTitle={lesson.title}
-                                lessonContent={lesson.content}
-                                currentCode={currentCode}
-                              />
-                            </div>
-                          )}
                         </CardHeader>
 
                         <Separator />
@@ -808,8 +795,8 @@ export function LessonViewer({
               </CardHeader>
             </Card>
           </div>
-        ) : courseSlug?.startsWith("level-") ? (
-          // Level courses with tabbed layout
+        ) : courseSlug?.startsWith("level-") || courseSlug?.startsWith("term-") || courseSlug?.startsWith("year2-term-") ? (
+          // Level/Term courses with tabbed layout and code editor
           <div className="grid lg:grid-cols-2 gap-6 items-start">
             {/* Left Column: Lesson Content with Tabs */}
             <Card className="flex flex-col rounded-2xl border shadow-2xl max-h-[calc(100vh-140px)]">
@@ -866,18 +853,6 @@ export function LessonViewer({
                     </div>
                   </div>
                 </div>
-
-                {/* Ask Tutor Button */}
-                {userId && (
-                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border/50">
-                    <InlineTutor
-                      lessonId={lesson.dbId}
-                      lessonTitle={lesson.title}
-                      lessonContent={lesson.content}
-                      currentCode={currentCode}
-                    />
-                  </div>
-                )}
               </CardHeader>
 
               <Tabs

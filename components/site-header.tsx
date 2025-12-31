@@ -70,87 +70,119 @@ const NAV_ITEMS = {
   about: { href: "/about", label: "About", Icon: Info },
   blog: { href: "/blog", label: "Blog", Icon: Newspaper },
   pricing: { href: "/pricing", label: "Pricing", Icon: DollarSign },
-  // Year 1: Foundations (Levels 1-6)
-  year1Lessons: [
+  // Year 1 (Ages 9-10): Terms 1-4
+  year1Terms1to4: [
     {
-      href: "/lessons/level-1-python-foundations-1",
-      label: "Level 1: Python Foundations I",
+      href: "/lessons/term-1-hello-python",
+      label: "Term 1: Hello Python!",
       Icon: BookOpen,
-      description: "Getting Started with Python basics",
+      description: "Your first steps into coding",
     },
     {
-      href: "/lessons/level-2-python-foundations-2",
-      label: "Level 2: Python Foundations II",
+      href: "/lessons/term-2-math-wizard",
+      label: "Term 2: Math Wizard",
       Icon: BookOpen,
-      description: "Control Flow: Loops and Logic",
+      description: "Math magic with Python",
     },
     {
-      href: "/lessons/level-3-python-foundations-3",
-      label: "Level 3: Python Foundations III",
+      href: "/lessons/term-3-decision-maker",
+      label: "Term 3: Decision Maker",
       Icon: BookOpen,
-      description: "Functions, Data Structures, and Organization",
+      description: "Teaching your code to think",
     },
     {
-      href: "/lessons/level-4-intro-to-ai",
-      label: "Level 4: Introduction to AI",
-      Icon: Brain,
-      description: "Meet Your Robot Brain: Concepts and Ethics",
-    },
-    {
-      href: "/lessons/level-5-data-science",
-      label: "Level 5: Data Science",
-      Icon: Brain,
-      description: "The AI Fuel: Collection and Analysis",
-    },
-    {
-      href: "/lessons/level-6-ml-basics",
-      label: "Level 6: Machine Learning Basics",
-      Icon: Brain,
-      description: "Teaching Computers to Learn",
+      href: "/lessons/term-4-more-choices",
+      label: "Term 4: More Choices",
+      Icon: BookOpen,
+      description: "Advanced decision making",
     },
   ],
-  // Year 2: Applied AI (Levels 7-12)
-  year2Lessons: [
+  // Year 1 (Ages 9-10): Terms 5-8
+  year1Terms5to8: [
     {
-      href: "/lessons/level-7-nlp",
-      label: "Level 7: Natural Language Processing",
+      href: "/lessons/term-5-ai-sneak-peek",
+      label: "Term 5: AI Sneak Peek",
       Icon: Brain,
-      description: "Word Detective: Chatbots and Text",
-      comingSoon: true,
+      description: "Introduction to Artificial Intelligence",
     },
     {
-      href: "/lessons/level-8-computer-vision",
-      label: "Level 8: Computer Vision",
+      href: "/lessons/term-6-loop-magic",
+      label: "Term 6: Loop Magic",
       Icon: Brain,
-      description: "Teaching AI to See",
-      comingSoon: true,
+      description: "Repeating code with loops",
     },
     {
-      href: "/lessons/level-9-recommendations",
-      label: "Level 9: Recommendation Systems",
-      Icon: Brain,
-      description: "The Netflix Brain",
-      comingSoon: true,
+      href: "/lessons/term-7-game-builder",
+      label: "Term 7: Game Builder",
+      Icon: Gamepad2,
+      description: "Create your own games",
     },
     {
-      href: "/lessons/level-10-game-ai",
-      label: "Level 10: Game AI",
-      Icon: Brain,
-      description: "Smart Opponents and Strategy",
-      comingSoon: true,
-    },
-    {
-      href: "/lessons/level-11-advanced-projects",
-      label: "Level 11: Advanced Projects",
-      Icon: Brain,
-      description: "Putting It All Together",
-      comingSoon: true,
-    },
-    {
-      href: "/lessons/level-12-capstone",
-      label: "Level 12: Capstone & Portfolio",
+      href: "/lessons/term-8-ai-explorer",
+      label: "Term 8: AI Explorer",
       Icon: GraduationCap,
-      description: "Launch Your Future",
+      description: "Capstone projects and portfolio",
+    },
+  ],
+  // Year 2 (Ages 11-13): Terms 1-4
+  year2Terms1to4: [
+    {
+      href: "/lessons/year2-term-1-python-accelerated",
+      label: "Term 1: Python Accelerated",
+      Icon: BookOpen,
+      description: "Fast-track your Python skills",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/year2-term-2-loops-mastery",
+      label: "Term 2: Loops & Logic",
+      Icon: BookOpen,
+      description: "Master loops and debugging",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/year2-term-3-functions",
+      label: "Term 3: Functions",
+      Icon: BookOpen,
+      description: "Write reusable code",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/year2-term-4-data-structures",
+      label: "Term 4: Data Structures",
+      Icon: BookOpen,
+      description: "Lists and dictionaries",
+      comingSoon: true,
+    },
+  ],
+  // Year 2 (Ages 11-13): Terms 5-8
+  year2Terms5to8: [
+    {
+      href: "/lessons/year2-term-5-ai-deep-dive",
+      label: "Term 5: AI Deep Dive",
+      Icon: Brain,
+      description: "How AI really works",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/year2-term-6-apis",
+      label: "Term 6: Working with APIs",
+      Icon: Brain,
+      description: "Connect to AI services",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/year2-term-7-data-visualization",
+      label: "Term 7: Data & Visualization",
+      Icon: Brain,
+      description: "Turn numbers into stories",
+      comingSoon: true,
+    },
+    {
+      href: "/lessons/year2-term-8-capstone",
+      label: "Term 8: Capstone",
+      Icon: GraduationCap,
+      description: "Build your portfolio",
       comingSoon: true,
     },
   ],
@@ -408,6 +440,8 @@ const MobileNavLink = ({
   </Link>
 );
 
+type YearTab = "year1" | "year2";
+
 export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -415,14 +449,17 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showAnnouncement, setShowAnnouncement] = useState(true);
+  const [activeYearTab, setActiveYearTab] = useState<YearTab>("year1");
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(href + "/");
 
   const isLearnActive =
     NAV_ITEMS.learn.some((item) => isActive(item.href)) ||
-    NAV_ITEMS.year1Lessons.some((item) => isActive(item.href)) ||
-    NAV_ITEMS.year2Lessons.some((item) => isActive(item.href));
+    NAV_ITEMS.year1Terms1to4.some((item) => isActive(item.href)) ||
+    NAV_ITEMS.year1Terms5to8.some((item) => isActive(item.href)) ||
+    NAV_ITEMS.year2Terms1to4.some((item) => isActive(item.href)) ||
+    NAV_ITEMS.year2Terms5to8.some((item) => isActive(item.href));
 
   const closeMobileMenu = () => {
     const trigger = document.querySelector(
@@ -575,27 +612,101 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                     Learn
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background/95 backdrop-blur-xl border border-border shadow-xl rounded-xl overflow-visible">
-                    <div className="w-[850px] p-5 grid grid-cols-3 gap-4 rounded-lg relative">
-                      <MegaMenuSection
-                        title="Year 1: Foundations"
-                        icon={BookOpen}
-                        items={NAV_ITEMS.year1Lessons}
-                        isActive={isActive}
-                      />
-                      <MegaMenuSection
-                        title="Year 2: Applied AI"
-                        icon={Brain}
-                        items={NAV_ITEMS.year2Lessons}
-                        isActive={isActive}
-                        iconColor="text-purple-600 dark:text-purple-400"
-                      />
-                      <MegaMenuSection
-                        title="Tools & Activities"
-                        icon={Sparkles}
-                        items={NAV_ITEMS.learn}
-                        isActive={isActive}
-                        iconColor="text-amber-600 dark:text-amber-400"
-                      />
+                    <div className="w-[850px] rounded-lg relative">
+                      {/* Year Tabs */}
+                      <div className="flex border-b border-border px-5 pt-4">
+                        <button
+                          onClick={() => setActiveYearTab("year1")}
+                          className={cn(
+                            "px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all cursor-pointer",
+                            "border-b-2 -mb-px",
+                            activeYearTab === "year1"
+                              ? "border-primary text-primary bg-primary/5"
+                              : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                          )}
+                          aria-label="View Year 1 courses for ages 9-10"
+                          tabIndex={0}
+                        >
+                          <span className="flex items-center gap-2">
+                            <BookOpen className="h-4 w-4" />
+                            Year 1
+                            <Badge
+                              variant="secondary"
+                              className="text-xs px-1.5 py-0 font-normal"
+                            >
+                              Ages 9-10
+                            </Badge>
+                          </span>
+                        </button>
+                        <button
+                          onClick={() => setActiveYearTab("year2")}
+                          className={cn(
+                            "px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all cursor-pointer",
+                            "border-b-2 -mb-px",
+                            activeYearTab === "year2"
+                              ? "border-purple-600 text-purple-600 dark:border-purple-400 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/30"
+                              : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                          )}
+                          aria-label="View Year 2 courses for ages 11-13"
+                          tabIndex={0}
+                        >
+                          <span className="flex items-center gap-2">
+                            <Brain className="h-4 w-4" />
+                            Year 2
+                            <Badge
+                              variant="secondary"
+                              className="text-xs px-1.5 py-0 font-normal"
+                            >
+                              Ages 11-13
+                            </Badge>
+                          </span>
+                        </button>
+                      </div>
+
+                      {/* Tab Content */}
+                      <div className="p-5 grid grid-cols-3 gap-4">
+                        {activeYearTab === "year1" ? (
+                          <>
+                            <MegaMenuSection
+                              title="Terms 1-4: Foundations"
+                              icon={BookOpen}
+                              items={NAV_ITEMS.year1Terms1to4}
+                              isActive={isActive}
+                            />
+                            <MegaMenuSection
+                              title="Terms 5-8: AI & Games"
+                              icon={Brain}
+                              items={NAV_ITEMS.year1Terms5to8}
+                              isActive={isActive}
+                              iconColor="text-purple-600 dark:text-purple-400"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <MegaMenuSection
+                              title="Terms 1-4: Python Mastery"
+                              icon={BookOpen}
+                              items={NAV_ITEMS.year2Terms1to4}
+                              isActive={isActive}
+                              iconColor="text-purple-600 dark:text-purple-400"
+                            />
+                            <MegaMenuSection
+                              title="Terms 5-8: AI & Data"
+                              icon={Brain}
+                              items={NAV_ITEMS.year2Terms5to8}
+                              isActive={isActive}
+                              iconColor="text-purple-600 dark:text-purple-400"
+                            />
+                          </>
+                        )}
+                        <MegaMenuSection
+                          title="Tools & Activities"
+                          icon={Sparkles}
+                          items={NAV_ITEMS.learn}
+                          isActive={isActive}
+                          iconColor="text-amber-600 dark:text-amber-400"
+                        />
+                      </div>
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -722,10 +833,15 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                           <ChevronDown className="h-4 w-4 transition-transform duration-200" />
                         </CollapsibleTrigger>
                         <CollapsibleContent className="mt-1 space-y-1 pl-4">
-                          <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                            Year 1: Foundations
+                          {/* Year 1 Section */}
+                          <div className="px-4 py-2 text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-2 mt-2">
+                            <BookOpen className="h-3.5 w-3.5" />
+                            Year 1 (Ages 9-10)
                           </div>
-                          {NAV_ITEMS.year1Lessons.map((navItem) => (
+                          <div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                            Terms 1-4: Foundations
+                          </div>
+                          {NAV_ITEMS.year1Terms1to4.map((navItem) => (
                             <MobileNavLink
                               key={navItem.href}
                               item={navItem}
@@ -733,10 +849,10 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                               onClick={closeMobileMenu}
                             />
                           ))}
-                          <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
-                            Year 2: Applied AI
+                          <div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                            Terms 5-8: AI & Games
                           </div>
-                          {NAV_ITEMS.year2Lessons.map((navItem) => (
+                          {NAV_ITEMS.year1Terms5to8.map((navItem) => (
                             <MobileNavLink
                               key={navItem.href}
                               item={navItem}
@@ -744,7 +860,37 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
                               onClick={closeMobileMenu}
                             />
                           ))}
-                          <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+
+                          {/* Year 2 Section */}
+                          <div className="px-4 py-2 text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-2 mt-4 border-t border-border pt-4">
+                            <Brain className="h-3.5 w-3.5" />
+                            Year 2 (Ages 11-13)
+                          </div>
+                          <div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                            Terms 1-4: Python Mastery
+                          </div>
+                          {NAV_ITEMS.year2Terms1to4.map((navItem) => (
+                            <MobileNavLink
+                              key={navItem.href}
+                              item={navItem}
+                              isActive={isActive(navItem.href)}
+                              onClick={closeMobileMenu}
+                            />
+                          ))}
+                          <div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+                            Terms 5-8: AI & Data
+                          </div>
+                          {NAV_ITEMS.year2Terms5to8.map((navItem) => (
+                            <MobileNavLink
+                              key={navItem.href}
+                              item={navItem}
+                              isActive={isActive(navItem.href)}
+                              onClick={closeMobileMenu}
+                            />
+                          ))}
+
+                          {/* Tools Section */}
+                          <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-4 border-t border-border pt-4">
                             Tools & Activities
                           </div>
                           {NAV_ITEMS.learn.map((navItem) => (
@@ -893,4 +1039,3 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
     </>
   );
 };
-

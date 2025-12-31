@@ -1,0 +1,874 @@
+# KidsLearnAI Year 2 Curriculum
+
+## 8-Term AI-Ready Program for Ages 11-13
+
+_Empowering the Next Generation with AI Education_
+
+---
+
+## Curriculum Philosophy
+
+### Designed for 11-13 Year Olds
+
+This curriculum recognizes that 11-13 year olds are ready for more abstract thinking and complex projects. They can handle:
+
+- **Faster pacing** — concepts can be covered more quickly with less repetition
+- **Abstract concepts** — functions with parameters/returns, data structures
+- **Longer projects** — multi-feature applications that span multiple sessions
+- **Independent problem-solving** — less hand-holding, more exploration
+- **Real-world applications** — projects that feel "useful" and professional
+
+### What This Curriculum Includes
+
+| Concept | Why It Works for 11-13 |
+|---------|------------------------|
+| Functions with parameters/returns | They can understand "input → process → output" |
+| Dictionaries | Key-value pairs make sense with real examples |
+| File I/O (reading/writing) | Straightforward with good scaffolding |
+| API calls | Using pre-built AI tools is accessible and impressive |
+| Data visualization | Creating charts from data is achievable |
+| AI concepts (deep understanding) | Conceptual understanding + practical application |
+
+### What We DON'T Include (Still Too Advanced)
+
+| Concept | Why We Skip It |
+|---------|----------------|
+| Pandas (full library) | Complex syntax, confusing error messages |
+| Building ML models from scratch | Even with scikit-learn, abstraction is too high |
+| Neural networks | Way beyond this age group |
+| Computer vision libraries (OpenCV) | Adult developer tools |
+| NLP libraries (NLTK, spaCy) | Steep learning curves |
+
+### The "AI-Ready" Philosophy
+
+Instead of pretending 11-13 year olds can build production AI systems, we focus on:
+
+1. **Strong Python skills** that ARE prerequisites for future AI work
+2. **Deep AI literacy** — understanding how AI actually works
+3. **Using AI tools** — interacting with AI APIs rather than building models
+4. **Data thinking** — understanding how data drives AI decisions
+5. **Ethical awareness** — understanding bias, privacy, and responsible AI use
+
+---
+
+## Program Structure
+
+- **Total Duration:** 8 terms (approximately 12-14 months)
+- **Term Length:** 8 weeks per term
+- **Session Duration:** 60 minutes live instruction
+- **Class Size:** Maximum 12-15 students
+- **Pacing:** 1-2 major concepts per term (faster than ages 9-10)
+- **Prerequisites:** None (includes accelerated Python review) OR completion of Year 1
+
+---
+
+## Year 2 Overview
+
+| Term | Theme | Core Skills | Major Project |
+|------|-------|-------------|---------------|
+| 1 | Python Accelerated | Variables, math, conditionals, loops (fast pace) | Smart Calculator |
+| 2 | Loops & Logic Mastery | For/while loops, nested logic, debugging | Arcade Game Collection |
+| 3 | Functions | Parameters, returns, modular code | Text Adventure Engine |
+| 4 | Data Structures | Lists, dictionaries, nested data | Contact Manager |
+| 5 | AI Concepts Deep Dive | How ML works, training data, bias, ethics | AI Investigation Report |
+| 6 | Working with APIs | HTTP requests, JSON, AI APIs | AI-Powered Assistant |
+| 7 | Data & Visualization | File reading, data analysis, charts | Data Story Project |
+| 8 | Capstone & Portfolio | Student-designed project, presentation | Portfolio Showcase |
+
+---
+
+## Certificates & Celebrations
+
+| Milestone | Award |
+|-----------|-------|
+| Term 2 Complete | "Python Pro" Badge |
+| Term 4 Complete | "Data Architect" Badge |
+| Term 5 Complete | "AI Scholar" Badge |
+| Term 6 Complete | "API Master" Badge |
+| Term 8 Complete | **Year 2 Certificate: AI-Ready Developer** |
+
+---
+
+## Term 1: Python Accelerated
+
+_"Fast-track your Python skills"_
+
+### What Students Learn
+
+An accelerated introduction (or refresher) covering Python fundamentals. Students who completed Year 1 will find this a quick review; new students will learn the essentials at a pace appropriate for their age.
+
+### Weekly Breakdown
+
+| Week | Topic | What We Do |
+|------|-------|------------|
+| 1 | Welcome & Setup | Introduction to the course, set up coding environment, first program |
+| 2 | Variables & Data Types | Strings, integers, floats, type conversion, meaningful variable names |
+| 3 | Math & Operators | Arithmetic, comparison, assignment operators, order of operations |
+| 4 | User Input | Getting input, converting types, building interactive programs |
+| 5 | Conditionals I | If/else statements, comparison operators, boolean logic |
+| 6 | Conditionals II | Elif, nested conditions, combining with and/or |
+| 7 | Project: Smart Calculator | Build a multi-function calculator with menu system |
+| 8 | Showcase & Review | Present calculators, review concepts, prepare for Term 2 |
+
+### Term 1 Project: Smart Calculator
+
+A program that:
+- Displays a menu of calculator options
+- Handles multiple operation types (basic math, percentage, temperature conversion, etc.)
+- Uses conditionals to route to the correct calculation
+- Handles invalid input gracefully
+- Allows the user to perform multiple calculations
+
+**Example Output:**
+```
+╔════════════════════════════════╗
+║      SMART CALCULATOR          ║
+╠════════════════════════════════╣
+║  1. Basic Math (+, -, ×, ÷)    ║
+║  2. Percentage Calculator      ║
+║  3. Temperature Converter      ║
+║  4. Tip Calculator             ║
+║  5. Exit                       ║
+╚════════════════════════════════╝
+
+Enter your choice: 3
+
+TEMPERATURE CONVERTER
+Enter temperature: 100
+Convert from (C/F): C
+
+100°C = 212°F
+
+Would you like to do another calculation? (yes/no): yes
+```
+
+---
+
+## Term 2: Loops & Logic Mastery
+
+_"Repeat, iterate, dominate"_
+
+### What Students Learn
+
+Students master loops and develop strong debugging skills. They learn to think algorithmically and build programs that can handle repetitive tasks efficiently.
+
+### Weekly Breakdown
+
+| Week | Topic | What We Do |
+|------|-------|------------|
+| 1 | For Loops Fundamentals | Range(), iterating sequences, loop variables |
+| 2 | For Loop Patterns | Counting, accumulating, searching, filtering |
+| 3 | While Loops | Condition-based loops, sentinel values, input validation |
+| 4 | Loop Control | Break, continue, nested loops (simple cases) |
+| 5 | Debugging Strategies | Reading error messages, print debugging, common mistakes |
+| 6 | Algorithm Thinking | Breaking problems into steps, pseudocode, planning |
+| 7 | Project: Arcade Games | Build 2-3 mini-games using loops |
+| 8 | Game Tournament + Badge! | Play each other's games, earn "Python Pro" badge |
+
+### Term 2 Project: Arcade Game Collection
+
+A collection of 2-3 mini-games including:
+
+**Game 1: Number Guessing Game (Enhanced)**
+- Random number generation
+- Higher/lower hints
+- Difficulty levels (easy: 1-10, medium: 1-50, hard: 1-100)
+- Best score tracking across rounds
+
+**Game 2: Word Guessing Game**
+- Simple hangman-style game
+- Word bank stored in code
+- Track wrong guesses
+- Display progress
+
+**Game 3: Rock Paper Scissors Tournament**
+- Best of 3 or best of 5
+- Track wins/losses/ties
+- Computer makes random choices
+
+**Example Output (Game 1):**
+```
+╔═══════════════════════════════╗
+║     NUMBER GUESSING GAME      ║
+╚═══════════════════════════════╝
+
+Choose difficulty:
+1. Easy (1-10)
+2. Medium (1-50)
+3. Hard (1-100)
+
+Your choice: 2
+
+I'm thinking of a number between 1 and 50...
+
+Guess #1: 25
+Too high! Try lower.
+
+Guess #2: 12
+Too low! Try higher.
+
+Guess #3: 18
+🎉 CORRECT! You got it in 3 guesses!
+
+Your best score on Medium: 3 guesses
+Play again? (yes/no): 
+```
+
+🏆 **Milestone: "Python Pro" Badge**
+
+---
+
+## Term 3: Functions
+
+_"Write code once, use it everywhere"_
+
+### What Students Learn
+
+Students learn to organize code into reusable functions. This is a critical skill that separates beginners from intermediate programmers and is essential for building larger projects.
+
+### Weekly Breakdown
+
+| Week | Topic | What We Do |
+|------|-------|------------|
+| 1 | Why Functions? | DRY principle, code organization, readability |
+| 2 | Defining Functions | def keyword, function names, docstrings |
+| 3 | Parameters | Passing information into functions, multiple parameters |
+| 4 | Return Values | Getting information back, using returned values |
+| 5 | Scope | Local vs global variables, avoiding common mistakes |
+| 6 | Function Design | Planning functions, single responsibility, testing |
+| 7 | Project: Text Adventure Engine | Build a modular adventure game using functions |
+| 8 | Showcase & Code Review | Present games, peer code review, discuss design |
+
+### Term 3 Project: Text Adventure Engine
+
+A text-based adventure game with:
+- Separate functions for each room/location
+- A main game loop function
+- Helper functions for common actions (display_status, get_choice, etc.)
+- At least 5 different locations
+- Inventory system (simplified)
+- Multiple endings
+
+**Code Structure Example:**
+```python
+def show_intro():
+    """Display the game introduction."""
+    print("Welcome to THE LOST TEMPLE...")
+    print("You are an explorer seeking ancient treasure.")
+
+def room_entrance():
+    """The temple entrance - first room."""
+    print("\nYou stand at the entrance of an ancient temple.")
+    print("Torches flicker on either side of a large door.")
+    choice = input("Do you (enter) the temple or (examine) the door? ")
+    return choice
+
+def room_main_hall(inventory):
+    """The main hall with multiple paths."""
+    print("\nYou enter a grand hall with three passages.")
+    # ... game logic
+    return next_room, inventory
+
+def play_game():
+    """Main game loop."""
+    show_intro()
+    current_room = "entrance"
+    inventory = []
+    
+    while current_room != "exit":
+        if current_room == "entrance":
+            current_room = room_entrance()
+        elif current_room == "main_hall":
+            current_room, inventory = room_main_hall(inventory)
+        # ... more rooms
+    
+    show_ending(inventory)
+
+# Start the game
+play_game()
+```
+
+---
+
+## Term 4: Data Structures
+
+_"Organize information like a pro"_
+
+### What Students Learn
+
+Students learn to work with lists and dictionaries—the fundamental data structures that power real applications. These skills are essential for understanding how AI systems store and process information.
+
+### Weekly Breakdown
+
+| Week | Topic | What We Do |
+|------|-------|------------|
+| 1 | Lists Deep Dive | Creating, accessing, modifying lists |
+| 2 | List Operations | Append, remove, sort, search, slicing |
+| 3 | Lists + Loops | Iterating through lists, list comprehensions (basic) |
+| 4 | Dictionaries Intro | Key-value pairs, creating and accessing |
+| 5 | Dictionary Operations | Adding, updating, removing, checking keys |
+| 6 | Combining Structures | Lists of dictionaries, dictionaries with lists |
+| 7 | Project: Contact Manager | Build a full contact management system |
+| 8 | Showcase + Badge! | Present projects, earn "Data Architect" badge |
+
+### Term 4 Project: Contact Manager
+
+A complete contact management application with:
+- Add new contacts (name, phone, email)
+- View all contacts
+- Search for a contact by name
+- Update contact information
+- Delete contacts
+- Contacts stored in a list of dictionaries
+
+**Example Output:**
+```
+╔════════════════════════════════╗
+║       CONTACT MANAGER          ║
+╠════════════════════════════════╣
+║  1. Add Contact                ║
+║  2. View All Contacts          ║
+║  3. Search Contact             ║
+║  4. Update Contact             ║
+║  5. Delete Contact             ║
+║  6. Exit                       ║
+╚════════════════════════════════╝
+
+Enter choice: 1
+
+--- ADD NEW CONTACT ---
+Name: Sarah Johnson
+Phone: 555-1234
+Email: sarah@email.com
+
+✓ Contact added successfully!
+
+Enter choice: 2
+
+--- ALL CONTACTS ---
+┌────────────────┬─────────────┬──────────────────────┐
+│ Name           │ Phone       │ Email                │
+├────────────────┼─────────────┼──────────────────────┤
+│ Sarah Johnson  │ 555-1234    │ sarah@email.com      │
+│ Mike Chen      │ 555-5678    │ mike.c@email.com     │
+│ Emma Wilson    │ 555-9999    │ emma.w@email.com     │
+└────────────────┴─────────────┴──────────────────────┘
+
+Total contacts: 3
+```
+
+🏆 **Milestone: "Data Architect" Badge**
+
+---
+
+## Term 5: AI Concepts Deep Dive
+
+_"Understand how artificial intelligence really works"_
+
+### What Students Learn
+
+A comprehensive exploration of AI concepts—not just "what is AI" but how it actually works. Students develop genuine understanding of machine learning, training data, bias, and ethics. This term is more conceptual but includes hands-on activities and demonstrations.
+
+### Weekly Breakdown
+
+| Week | Topic | What We Do |
+|------|-------|------------|
+| 1 | What IS Artificial Intelligence? | Defining AI, narrow vs general AI, AI timeline |
+| 2 | How Machines Learn | Supervised learning explained, training vs testing |
+| 3 | The Power of Data | Training data, datasets, why data quality matters |
+| 4 | Pattern Recognition | How AI finds patterns, decision boundaries, classification |
+| 5 | AI Bias & Fairness | Where bias comes from, real-world examples, consequences |
+| 6 | AI Ethics & Society | Privacy, job displacement, deepfakes, responsible AI |
+| 7 | Project: AI Investigation | Research and present on an AI topic |
+| 8 | Presentations + Badge! | Present investigations, earn "AI Scholar" badge |
+
+### Key Concepts Covered
+
+**Week 2: How Machines Learn**
+- Analogy: Learning to recognize cats vs dogs
+- Training: Showing the AI thousands of examples
+- Features: What the AI looks for (patterns, shapes, colors)
+- Testing: Checking if it learned correctly
+- Interactive demo: Play with Teachable Machine (teachablemachine.withgoogle.com)
+
+**Week 3: The Power of Data**
+- "Garbage in, garbage out" principle
+- Why more data often = better AI
+- Data labeling and annotation
+- Discussion: Where does training data come from?
+
+**Week 4: Pattern Recognition**
+- How AI "sees" patterns differently than humans
+- Simple classification examples
+- Interactive: Spot the pattern games
+- Demo: Quick Draw (quickdraw.withgoogle.com)
+
+**Week 5: AI Bias & Fairness**
+- Historical examples of biased AI
+- How bias enters training data
+- Consequences of biased AI (hiring, lending, criminal justice)
+- Discussion: How can we make AI more fair?
+
+**Week 6: AI Ethics & Society**
+- Privacy concerns with AI
+- Deepfakes and misinformation
+- AI and job automation
+- The importance of human oversight
+
+### Term 5 Project: AI Investigation Report
+
+Students choose ONE topic to research and present:
+
+**Topic Options:**
+1. **AI in Healthcare** — How AI is helping doctors diagnose diseases
+2. **Self-Driving Cars** — How autonomous vehicles make decisions
+3. **AI in Gaming** — How video game AI creates intelligent opponents
+4. **Voice Assistants** — How Siri/Alexa understand human speech
+5. **AI Art Generators** — How AI creates images from text prompts
+6. **Recommendation Systems** — How Netflix/YouTube know what you'll like
+7. **AI and the Environment** — How AI is being used to fight climate change
+8. **AI Bias Case Study** — A deep dive into a specific case of AI bias
+
+**Report Requirements:**
+- 3-5 minute presentation
+- Explain HOW the AI works (what data, what patterns)
+- One cool fact that surprised you
+- One concern or ethical consideration
+- One question you still have
+
+🏆 **Milestone: "AI Scholar" Badge**
+
+---
+
+## Term 6: Working with APIs
+
+_"Connect your code to the world"_
+
+### What Students Learn
+
+Students learn what APIs are and how to use them. The highlight of this term is using AI APIs to build programs that leverage real AI capabilities—making their programs feel "intelligent" without needing to build AI from scratch.
+
+### Weekly Breakdown
+
+| Week | Topic | What We Do |
+|------|-------|------------|
+| 1 | What Are APIs? | API concept, real-world analogies, why they matter |
+| 2 | JSON Data Format | Understanding JSON, parsing JSON in Python |
+| 3 | Making API Requests | Using requests library, GET requests, response handling |
+| 4 | Working with Free APIs | Weather, fun facts, random data APIs |
+| 5 | AI APIs Introduction | Overview of AI APIs, setting up access |
+| 6 | Building with AI APIs | Using AI APIs in projects (text generation, etc.) |
+| 7 | Project: AI-Powered Assistant | Build an app that uses AI APIs |
+| 8 | Demo Day + Badge! | Showcase assistants, earn "API Master" badge |
+
+### Understanding APIs (Week 1)
+
+**The Restaurant Analogy:**
+- You (your code) = the customer
+- The menu = the API documentation
+- Your order = the API request
+- The kitchen = the server/service
+- Your food = the API response
+
+You don't need to know how to cook—you just need to know how to order!
+
+### Term 6 Project: AI-Powered Assistant
+
+A Python application that uses APIs to provide useful functionality:
+
+**Core Features (pick 2-3):**
+- **AI Chat** — Send questions, get AI-generated responses
+- **Weather Info** — Get current weather for any city
+- **Fun Facts** — Generate random facts on demand
+- **Joke Generator** — Get jokes from a joke API
+- **Translation** — Translate text between languages
+
+**Example Output:**
+```
+╔════════════════════════════════════════╗
+║        AI-POWERED ASSISTANT            ║
+║         "Your Smart Helper"            ║
+╠════════════════════════════════════════╣
+║  1. Ask AI a Question                  ║
+║  2. Get Weather                        ║
+║  3. Random Fun Fact                    ║
+║  4. Tell Me a Joke                     ║
+║  5. Exit                               ║
+╚════════════════════════════════════════╝
+
+Enter choice: 1
+
+--- ASK AI ---
+Your question: What are three interesting facts about octopuses?
+
+AI Response:
+Here are three fascinating facts about octopuses:
+
+1. Octopuses have three hearts - two pump blood to the gills, 
+   and one pumps it to the rest of the body.
+
+2. They have blue blood because it contains copper-based 
+   hemocyanin instead of iron-based hemoglobin.
+
+3. Octopuses can change both their color AND texture in 
+   milliseconds to camouflage with their surroundings.
+
+Would you like to ask another question? (yes/no):
+```
+
+**Code Structure Example:**
+```python
+import requests
+
+def ask_ai(question):
+    """Send a question to the AI API and return the response."""
+    # API call logic here
+    response = requests.post(API_URL, json={"prompt": question}, headers=headers)
+    return response.json()["answer"]
+
+def get_weather(city):
+    """Get current weather for a city."""
+    url = f"https://api.weatherapi.com/v1/current.json?key={API_KEY}&q={city}"
+    response = requests.get(url)
+    data = response.json()
+    return f"{data['current']['temp_c']}°C, {data['current']['condition']['text']}"
+
+def get_random_fact():
+    """Get a random fun fact."""
+    response = requests.get("https://uselessfacts.jsph.pl/random.json?language=en")
+    return response.json()["text"]
+
+def main():
+    """Main program loop."""
+    while True:
+        show_menu()
+        choice = input("Enter choice: ")
+        
+        if choice == "1":
+            question = input("Your question: ")
+            print(f"\nAI Response:\n{ask_ai(question)}")
+        elif choice == "2":
+            city = input("Enter city: ")
+            print(f"\nWeather: {get_weather(city)}")
+        # ... more options
+        elif choice == "5":
+            print("Goodbye!")
+            break
+
+main()
+```
+
+🏆 **Milestone: "API Master" Badge**
+
+---
+
+## Term 7: Data & Visualization
+
+_"Turn numbers into stories"_
+
+### What Students Learn
+
+Students learn to read data from files, analyze it, and create visualizations. This is the foundation of data science and helps students understand how AI systems process and learn from data.
+
+### Weekly Breakdown
+
+| Week | Topic | What We Do |
+|------|-------|------------|
+| 1 | Reading Files | Opening files, reading text, handling errors |
+| 2 | Working with CSV | CSV format, reading CSV files, parsing data |
+| 3 | Data Processing | Cleaning data, calculating statistics, finding patterns |
+| 4 | Introduction to Charts | Matplotlib basics, line charts, bar charts |
+| 5 | More Visualizations | Pie charts, customizing charts, multiple charts |
+| 6 | Telling Stories with Data | Choosing the right chart, annotations, insights |
+| 7 | Project: Data Story | Analyze a dataset and create a visual report |
+| 8 | Presentation & Gallery | Present data stories, celebrate achievements |
+
+### Key Concepts Covered
+
+**Reading CSV Files (Week 2):**
+```python
+import csv
+
+# Read a CSV file
+with open('students.csv', 'r') as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(f"{row['name']} scored {row['score']}")
+```
+
+**Basic Statistics (Week 3):**
+```python
+scores = [85, 92, 78, 95, 88, 72, 90]
+
+average = sum(scores) / len(scores)
+highest = max(scores)
+lowest = min(scores)
+
+print(f"Average: {average:.1f}")
+print(f"Highest: {highest}")
+print(f"Lowest: {lowest}")
+```
+
+**Creating Charts (Week 4-5):**
+```python
+import matplotlib.pyplot as plt
+
+# Simple bar chart
+categories = ['Python', 'AI', 'Data', 'APIs']
+skills = [90, 75, 80, 85]
+
+plt.bar(categories, skills, color='steelblue')
+plt.title('My Tech Skills')
+plt.xlabel('Category')
+plt.ylabel('Skill Level')
+plt.savefig('my_skills.png')
+plt.show()
+```
+
+### Term 7 Project: Data Story
+
+Students choose a dataset and create a visual data story:
+
+**Dataset Options:**
+1. **Class Survey Data** — Survey classmates, analyze responses
+2. **Sports Statistics** — Analyze player/team performance data
+3. **Weather Data** — Compare temperatures across cities/months
+4. **Video Game Sales** — Which games/consoles are most popular
+5. **Movie Ratings** — Analyze ratings by genre, year, etc.
+
+**Project Requirements:**
+- Read data from a CSV file
+- Calculate at least 3 statistics (average, max, min, count, etc.)
+- Create at least 2 different types of charts
+- Write a brief "data story" explaining what the data shows
+- Present findings to the class
+
+**Example Output:**
+```
+╔════════════════════════════════════════════════════════╗
+║          DATA STORY: Video Game Sales Analysis          ║
+╚════════════════════════════════════════════════════════╝
+
+Dataset: Top 100 Best-Selling Video Games
+
+KEY FINDINGS:
+─────────────
+• Total games analyzed: 100
+• Highest-selling game: Minecraft (238 million copies)
+• Average sales: 42.3 million copies
+• Most common genre: Action (34 games)
+
+CHARTS CREATED:
+───────────────
+1. Bar chart: Top 10 best-selling games
+2. Pie chart: Sales by genre
+3. Line chart: Sales trends by year
+
+INSIGHT:
+────────
+Action and adventure games dominate the top 100, 
+but puzzle games (like Tetris) have surprisingly 
+high individual sales numbers.
+```
+
+---
+
+## Term 8: Capstone & Portfolio
+
+_"Show the world what you can do"_
+
+### What Students Learn
+
+The grand finale! Students design and build their own project, combining everything they've learned. They also create a professional portfolio and learn presentation skills.
+
+### Weekly Breakdown
+
+| Week | Topic | What We Do |
+|------|-------|------------|
+| 1 | Project Brainstorming | Explore ideas, assess feasibility, choose project |
+| 2 | Project Planning | Break down into tasks, create timeline, define features |
+| 3 | Development Week 1 | Build core functionality, regular check-ins |
+| 4 | Development Week 2 | Add features, test, fix bugs |
+| 5 | Development Week 3 | Polish, add finishing touches, prepare demo |
+| 6 | Portfolio Building | Document all projects, create portfolio presentation |
+| 7 | Presentation Skills | Practice presenting, give and receive feedback |
+| 8 | GRADUATION! | Final presentations, receive Year 2 Certificate! |
+
+### Capstone Project Ideas
+
+Students choose a project that combines multiple skills:
+
+**Option 1: Personal Dashboard**
+- Uses APIs for weather, news, quotes
+- Displays data in organized format
+- Includes user preferences (stored in file)
+
+**Option 2: Quiz Game Deluxe**
+- Multiple categories with questions stored in files
+- Score tracking and leaderboards
+- Different difficulty levels
+- Visual feedback with charts
+
+**Option 3: AI Chatbot Character**
+- Uses AI API for responses
+- Has a consistent personality
+- Remembers conversation context
+- Can do specific tasks (tell jokes, give advice, etc.)
+
+**Option 4: Data Explorer Tool**
+- Reads CSV files
+- Automatically calculates statistics
+- Generates charts based on data type
+- Exports results to a report
+
+**Option 5: Adventure Game 2.0**
+- Complex branching storyline
+- Inventory system with items affecting outcomes
+- Save/load game progress to file
+- Multiple endings tracked
+
+**Option 6: Student's Own Idea**
+- Must be approved by instructor
+- Must use at least 3 major concepts from the year
+- Must be achievable in 3 weeks
+
+### Portfolio Requirements
+
+Students create a portfolio including:
+
+1. **Introduction** — Who they are, their coding journey
+2. **Skills Summary** — Python, APIs, data analysis, etc.
+3. **Project Showcase** — 3-5 best projects with descriptions
+4. **Code Samples** — Clean, commented code examples
+5. **What's Next** — Future learning goals
+
+### Graduation Ceremony
+
+**Presentation Format:**
+- 5-7 minutes per student
+- Live demo of capstone project
+- Brief portfolio overview
+- Q&A from classmates and parents
+
+**Awards:**
+- Year 2 Certificate: "AI-Ready Developer"
+- Special recognition awards (Most Creative, Best Code, etc.)
+- Portfolio access for future reference
+
+🏆 **Milestone: Year 2 Certificate — "AI-Ready Developer"**
+
+---
+
+## Year 2 Complete Skills Summary
+
+By the end of Year 2, students can:
+
+| Skill | Confidence Level |
+|-------|------------------|
+| Write structured Python programs | ⭐⭐⭐⭐⭐ |
+| Use variables, operators, and data types | ⭐⭐⭐⭐⭐ |
+| Create complex conditionals | ⭐⭐⭐⭐⭐ |
+| Build for and while loops | ⭐⭐⭐⭐⭐ |
+| Define and use functions | ⭐⭐⭐⭐⭐ |
+| Work with lists and dictionaries | ⭐⭐⭐⭐⭐ |
+| Read and write files | ⭐⭐⭐⭐ |
+| Make API requests | ⭐⭐⭐⭐ |
+| Use AI APIs in projects | ⭐⭐⭐⭐ |
+| Create data visualizations | ⭐⭐⭐⭐ |
+| Debug complex programs | ⭐⭐⭐⭐⭐ |
+| Plan and execute projects | ⭐⭐⭐⭐ |
+| Explain how AI/ML works | ⭐⭐⭐⭐⭐ |
+| Discuss AI ethics and bias | ⭐⭐⭐⭐⭐ |
+| Present technical work | ⭐⭐⭐⭐ |
+
+---
+
+## Comparison: Year 1 (Ages 9-10) vs Year 2 (Ages 11-13)
+
+| Aspect | Year 1 (Ages 9-10) | Year 2 (Ages 11-13) |
+|--------|-------------------|---------------------|
+| **Pacing** | Slow, lots of repetition | Faster, less repetition |
+| **Concepts/term** | 1 concept | 1-2 concepts |
+| **Functions** | Not covered | Full coverage with returns |
+| **Data structures** | Lists only (basic) | Lists + dictionaries (advanced) |
+| **File I/O** | Not covered | Full coverage |
+| **APIs** | Not covered | Full coverage |
+| **AI content** | Conceptual ("What is AI?") | Deep + practical (APIs) |
+| **Projects** | Simple, fun outputs | Complex, functional apps |
+| **Independence** | Heavy scaffolding | More self-directed |
+| **Debugging** | Teacher-assisted | Self-debugging expected |
+
+---
+
+## Entry Options for New Students
+
+### Option A: Complete Beginner (Ages 11-13)
+
+Students with no coding experience start at Term 1. The accelerated pace is appropriate for their age—they'll cover Year 1 concepts more quickly in Terms 1-2 before moving to advanced material.
+
+### Option B: Year 1 Graduate
+
+Students who completed the Ages 9-10 curriculum can:
+- **Fast track:** Take a placement test and potentially skip to Term 3 or 4
+- **Standard path:** Start at Term 1 for reinforcement and quickly advance
+
+### Option C: Some Experience
+
+Students with prior coding experience take a placement assessment to determine the best starting point.
+
+---
+
+## Technical Requirements
+
+### Software
+- Python 3.x (via Trinket, Replit, or local installation)
+- Access to free API services (weather, facts, etc.)
+- Matplotlib for data visualization
+- Text editor or IDE
+
+### Hardware
+- Computer with reliable internet
+- Webcam and microphone for live classes
+- Recommended: Second monitor or tablet for following along
+
+---
+
+## For Marketing
+
+You can honestly say:
+- "AI-focused curriculum" ✓ (deep AI understanding + practical API use)
+- "Build apps that use real AI" ✓ (AI APIs)
+- "Python programming mastery" ✓ (functions, data structures, files, APIs)
+- "Prepares for future CS studies" ✓ (real skills)
+- "Data science foundations" ✓ (file I/O, visualization)
+- "Age-appropriate challenge" ✓ (designed for 11-13)
+
+### For Parents
+
+Kids will:
+- Build 8+ impressive projects they can demonstrate
+- Deeply understand how AI works (not just surface level)
+- Create programs that use real AI capabilities
+- Have genuine, marketable Python skills
+- Be prepared for high school CS courses
+- Have a portfolio to show colleges and future employers
+
+---
+
+## What's Next: Advanced Tracks (Year 3+)
+
+Students who complete Year 2 can continue with specialty tracks:
+
+| Track | Focus | What They Build |
+|-------|-------|-----------------|
+| **Web Development** | HTML, CSS, JavaScript, Flask | Personal websites, web apps |
+| **Data Science** | Pandas, advanced visualization, statistics | Data analysis projects |
+| **Game Development** | Pygame, game design | 2D games |
+| **Robotics** | Raspberry Pi, sensors, motors | Physical computing projects |
+| **AI Exploration** | ML concepts, simple models (with scaffolding) | AI experiments |
+
+---
+
+**www.kidslearnai.ca**
+
+_Empowering the Next Generation with AI Education_
