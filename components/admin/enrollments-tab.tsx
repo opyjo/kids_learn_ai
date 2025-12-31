@@ -497,48 +497,98 @@ export const EnrollmentsTab = () => {
               <div className="space-y-3">
                 <Label>Select Levels to Grant Access</Label>
 
-                {/* Group by year */}
-                {["Year 1: Foundations", "Year 2: Applied AI"].map(
-                  (yearGroup) => {
-                    const yearCourses = courses.filter(
-                      (c) => c.year_group === yearGroup
-                    );
-                    if (yearCourses.length === 0) return null;
+                {courses.length === 0 ? (
+                  <p className="text-sm text-muted-foreground py-4 text-center">
+                    No courses available. Please create courses first.
+                  </p>
+                ) : (
+                  <>
+                    {/* Group by year */}
+                    {["Year 1: Foundations", "Year 2: Applied AI"].map(
+                      (yearGroup) => {
+                        const yearCourses = courses.filter(
+                          (c) => c.year_group === yearGroup
+                        );
+                        if (yearCourses.length === 0) return null;
 
-                    return (
-                      <div key={yearGroup} className="space-y-2">
-                        <p className="text-sm font-medium text-muted-foreground">
-                          {yearGroup}
-                        </p>
-                        {yearCourses.map((course) => (
-                          <div
-                            key={course.id}
-                            className="flex items-center space-x-3 p-2 rounded-md hover:bg-muted"
-                          >
-                            <Checkbox
-                              id={course.id}
-                              checked={selectedLevels.includes(course.id)}
-                              onCheckedChange={() => handleToggleLevel(course.id)}
-                            />
-                            <label
-                              htmlFor={course.id}
-                              className="flex-1 text-sm cursor-pointer"
-                            >
-                              {course.title}
-                              {course.is_coming_soon && (
-                                <Badge
-                                  variant="outline"
-                                  className="ml-2 text-xs"
+                        return (
+                          <div key={yearGroup} className="space-y-2">
+                            <p className="text-sm font-medium text-muted-foreground">
+                              {yearGroup}
+                            </p>
+                            {yearCourses.map((course) => (
+                              <div
+                                key={course.id}
+                                className="flex items-center space-x-3 p-2 rounded-md hover:bg-muted"
+                              >
+                                <Checkbox
+                                  id={course.id}
+                                  checked={selectedLevels.includes(course.id)}
+                                  onCheckedChange={() => handleToggleLevel(course.id)}
+                                />
+                                <label
+                                  htmlFor={course.id}
+                                  className="flex-1 text-sm cursor-pointer"
                                 >
-                                  Coming Soon
-                                </Badge>
-                              )}
-                            </label>
+                                  {course.title}
+                                  {course.is_coming_soon && (
+                                    <Badge
+                                      variant="outline"
+                                      className="ml-2 text-xs"
+                                    >
+                                      Coming Soon
+                                    </Badge>
+                                  )}
+                                </label>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    );
-                  }
+                        );
+                      }
+                    )}
+
+                    {/* Fallback for courses without year_group */}
+                    {(() => {
+                      const ungroupedCourses = courses.filter(
+                        (c) => !c.year_group || !["Year 1: Foundations", "Year 2: Applied AI"].includes(c.year_group)
+                      );
+                      if (ungroupedCourses.length === 0) return null;
+
+                      return (
+                        <div className="space-y-2">
+                          <p className="text-sm font-medium text-muted-foreground">
+                            Other Courses
+                          </p>
+                          {ungroupedCourses.map((course) => (
+                            <div
+                              key={course.id}
+                              className="flex items-center space-x-3 p-2 rounded-md hover:bg-muted"
+                            >
+                              <Checkbox
+                                id={course.id}
+                                checked={selectedLevels.includes(course.id)}
+                                onCheckedChange={() => handleToggleLevel(course.id)}
+                              />
+                              <label
+                                htmlFor={course.id}
+                                className="flex-1 text-sm cursor-pointer"
+                              >
+                                {course.title}
+                                {course.is_coming_soon && (
+                                  <Badge
+                                    variant="outline"
+                                    className="ml-2 text-xs"
+                                  >
+                                    Coming Soon
+                                  </Badge>
+                                )}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })()}
+                  </>
                 )}
               </div>
 
