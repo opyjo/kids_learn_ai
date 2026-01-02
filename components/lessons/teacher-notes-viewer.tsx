@@ -13,8 +13,7 @@ import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, BookOpen, FileText, List } from "lucide-react";
-import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
+import { ArrowLeft, FileText, List } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -95,99 +94,8 @@ export const TeacherNotesViewer = ({
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       <SiteHeader />
-      <div className="container mx-auto px-4 pt-3">
-        <LessonBreadcrumbs
-          courseSlug={undefined}
-          lessonTitle={lesson.title}
-          difficulty={lesson.difficulty}
-          isPremium={lesson.is_premium}
-          backHref="/admin"
-          backLabel="Admin"
-          additionalBadges={[
-            {
-              label: "👨‍🏫 Teacher Notes",
-              className:
-                "bg-gradient-to-r from-purple-500 to-indigo-600 text-white border-0",
-            },
-          ]}
-        />
-      </div>
 
       <div className="container mx-auto px-4 py-6">
-        {/* Playful info badges with navigation */}
-        <div
-          className="mb-6 flex items-center justify-between gap-4 flex-wrap"
-          aria-label="Teacher notes navigation"
-        >
-          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30 ring-1 ring-purple-300/40 dark:ring-purple-700/40">
-              <span
-                className="text-lg sm:text-xl"
-                role="img"
-                aria-label="Teacher"
-              >
-                👨‍🏫
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-purple-900 dark:text-purple-200 hidden sm:inline">
-                Teacher Guide
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-purple-900 dark:text-purple-200 sm:hidden">
-                Guide
-              </span>
-            </div>
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 ring-1 ring-blue-300/40 dark:ring-blue-700/40">
-              <span
-                className="text-lg sm:text-xl"
-                role="img"
-                aria-label="Lesson"
-              >
-                📚
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 hidden sm:inline">
-                Lesson {lesson.order_index}
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-blue-900 dark:text-blue-200 sm:hidden">
-                L{lesson.order_index}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 ring-1 ring-green-300/40 dark:ring-green-700/40">
-              <span
-                className="text-lg sm:text-xl"
-                role="img"
-                aria-label="Resources"
-              >
-                📖
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-emerald-900 dark:text-emerald-200 hidden sm:inline">
-                Full Resources
-              </span>
-              <span className="text-xs sm:text-sm font-semibold text-emerald-900 dark:text-emerald-200 sm:hidden">
-                Resources
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 w-full sm:w-auto sm:flex-shrink-0 mt-3 sm:mt-0">
-            <Link
-              href={`/admin/teacher-notes`}
-              aria-label="Go back to teacher notes list"
-              data-slot="button"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold bg-white dark:bg-gray-900 border-2 border-purple-300 hover:border-purple-500 dark:border-purple-700 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950/30 transition-all flex-1 sm:flex-none"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">All Notes</span>
-              <span className="sm:hidden">Back</span>
-            </Link>
-            <Link
-              href={`/lessons/${courseSlug || "python-foundations"}/${lesson.order_index}`}
-              aria-label="View student lesson"
-              data-slot="button"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 rounded-2xl px-3 py-2 sm:px-4 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all flex-1 sm:flex-none"
-            >
-              <span className="hidden sm:inline">Student View 🎓</span>
-              <span className="sm:hidden">Student 🎓</span>
-            </Link>
-          </div>
-        </div>
 
         {/* Table of Contents */}
         {teacherNote && tableOfContents.length > 0 && (

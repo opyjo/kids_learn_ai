@@ -1,16 +1,12 @@
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, BookOpen, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { SiteHeader } from "@/components/site-header";
 import { redirect } from "next/navigation";
 
 export default async function TeacherNotesPage() {
@@ -80,10 +76,7 @@ export default async function TeacherNotesPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500/5 via-blue-500/5 to-purple-500/5 dark:from-indigo-600/8 dark:via-blue-600/8 dark:to-purple-600/8">
-      <SiteHeader />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="space-y-6">
         {/* Page Header */}
         <div className="mb-6">
           <div className="flex items-start justify-between mb-4">
@@ -363,20 +356,19 @@ export default async function TeacherNotesPage() {
           </>
         )}
 
-        {/* Empty State */}
-        {(!lessonsWithNotesData || lessonsWithNotesData.length === 0) && (
-          <Card>
-            <CardContent className="flex flex-col items-center justify-center py-12">
-              <BookOpen className="h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No Lessons Found</h3>
-              <p className="text-muted-foreground text-center max-w-md">
-                There are no lessons in the system yet. Lessons need to be added
-                through the backend.
-              </p>
-            </CardContent>
-          </Card>
-        )}
-      </div>
+      {/* Empty State */}
+      {(!lessonsWithNotesData || lessonsWithNotesData.length === 0) && (
+        <Card>
+          <CardContent className="flex flex-col items-center justify-center py-12">
+            <BookOpen className="h-12 w-12 text-muted-foreground mb-4" />
+            <h3 className="text-xl font-semibold mb-2">No Lessons Found</h3>
+            <p className="text-muted-foreground text-center max-w-md">
+              There are no lessons in the system yet. Lessons need to be added
+              through the backend.
+            </p>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
