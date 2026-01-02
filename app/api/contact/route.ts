@@ -1,41 +1,41 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
-import { contactFormSchema } from "@/lib/schemas/contact";
 import { contactRateLimiter } from "@/lib/rate-limit";
+import { contactFormSchema } from "@/lib/schemas/contact";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const POST = async (request: NextRequest) => {
-  try {
-    // Get IP address for rate limiting
-    const ip =
-      request.headers.get("x-forwarded-for") ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
+	try {
+		// Get IP address for rate limiting
+		const ip =
+			request.headers.get("x-forwarded-for") ||
+			request.headers.get("x-real-ip") ||
+			"unknown";
 
-    // Check rate limit
-    if (!contactRateLimiter.checkRateLimit(ip)) {
-      return NextResponse.json(
-        {
-          error: "Too many requests. Please try again later.",
-        },
-        { status: 429 }
-      );
-    }
+		// Check rate limit
+		if (!contactRateLimiter.checkRateLimit(ip)) {
+			return NextResponse.json(
+				{
+					error: "Too many requests. Please try again later.",
+				},
+				{ status: 429 },
+			);
+		}
 
-    // Parse and validate request body
-    const body = await request.json();
-    const validatedData = contactFormSchema.parse(body);
+		// Parse and validate request body
+		const body = await request.json();
+		const validatedData = contactFormSchema.parse(body);
 
-    // Send email via Resend
-    const emailResult = await resend.emails.send({
-      from: "Kids Learn AI <hello@kidslearnai.ca>",
-      to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
-      replyTo: validatedData.email,
-      subject: `Contact Form: ${validatedData.subject}`,
-      html: `
+		// Send email via Resend
+		const emailResult = await resend.emails.send({
+			from: "Kids Learn AI <hello@kidslearnai.ca>",
+			to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
+			replyTo: validatedData.email,
+			subject: `Contact Form: ${validatedData.subject}`,
+			html: `
         <!DOCTYPE html>
         <html>
           <head>
@@ -105,8 +105,8 @@ export const POST = async (request: NextRequest) => {
               <div class="field">
                 <span class="label">Email:</span>
                 <div class="value"><a href="mailto:${validatedData.email}">${
-        validatedData.email
-      }</a></div>
+									validatedData.email
+								}</a></div>
               </div>
               <div class="field">
                 <span class="label">Subject:</span>
@@ -124,47 +124,47 @@ export const POST = async (request: NextRequest) => {
           </body>
         </html>
       `,
-    });
+		});
 
-    if (!emailResult.data) {
-      console.error("Email error:", emailResult.error);
-      return NextResponse.json(
-        {
-          error: "Failed to send email. Please try again later.",
-        },
-        { status: 500 }
-      );
-    }
+		if (!emailResult.data) {
+			console.error("Email error:", emailResult.error);
+			return NextResponse.json(
+				{
+					error: "Failed to send email. Please try again later.",
+				},
+				{ status: 500 },
+			);
+		}
 
-    console.log("Email sent successfully:", emailResult.data);
+		console.log("Email sent successfully:", emailResult.data);
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Your message has been sent successfully!",
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          error: "Validation failed",
-          details: error.errors.map((err) => ({
-            field: err.path.join("."),
-            message: err.message,
-          })),
-        },
-        { status: 400 }
-      );
-    }
+		return NextResponse.json(
+			{
+				success: true,
+				message: "Your message has been sent successfully!",
+			},
+			{ status: 200 },
+		);
+	} catch (error) {
+		if (error instanceof z.ZodError) {
+			return NextResponse.json(
+				{
+					error: "Validation failed",
+					details: error.errors.map((err) => ({
+						field: err.path.join("."),
+						message: err.message,
+					})),
+				},
+				{ status: 400 },
+			);
+		}
 
-    console.error("Contact form error:", error);
-    return NextResponse.json(
-      {
-        error: "An unexpected error occurred. Please try again later.",
-      },
-      { status: 500 }
-    );
-  }
+		console.error("Contact form error:", error);
+		return NextResponse.json(
+			{
+				error: "An unexpected error occurred. Please try again later.",
+			},
+			{ status: 500 },
+		);
+	}
 };

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 
@@ -7,39 +7,39 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Validation schema
 const applicationSchema = z.object({
-  fullName: z
-    .string()
-    .trim()
-    .min(1, "Full name is required")
-    .min(2, "Name must be at least 2 characters")
-    .max(100, "Name must not exceed 100 characters"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email is required")
-    .email("Please enter a valid email address"),
-  university: z
-    .string()
-    .trim()
-    .min(1, "University is required")
-    .max(200, "University name must not exceed 200 characters"),
-  program: z
-    .string()
-    .trim()
-    .min(1, "Program/Major is required")
-    .max(200, "Program name must not exceed 200 characters"),
-  yearOfStudy: z.enum(["1", "2", "3", "4", "5+", "graduate"]),
-  pythonExperience: z.enum(["beginner", "intermediate", "advanced", "expert"]),
-  teachingExperience: z.string().trim().max(500).optional(),
-  whyInterested: z
-    .string()
-    .trim()
-    .min(1, "Please tell us why you're interested")
-    .min(20, "Please provide a bit more detail")
-    .max(1000, "Response must not exceed 1000 characters"),
-  availableTuesday: z.boolean().default(false),
-  availableThursday: z.boolean().default(false),
-  linkedinUrl: z.string().trim().url().optional().or(z.literal("")),
+	fullName: z
+		.string()
+		.trim()
+		.min(1, "Full name is required")
+		.min(2, "Name must be at least 2 characters")
+		.max(100, "Name must not exceed 100 characters"),
+	email: z
+		.string()
+		.trim()
+		.min(1, "Email is required")
+		.email("Please enter a valid email address"),
+	university: z
+		.string()
+		.trim()
+		.min(1, "University is required")
+		.max(200, "University name must not exceed 200 characters"),
+	program: z
+		.string()
+		.trim()
+		.min(1, "Program/Major is required")
+		.max(200, "Program name must not exceed 200 characters"),
+	yearOfStudy: z.enum(["1", "2", "3", "4", "5+", "graduate"]),
+	pythonExperience: z.enum(["beginner", "intermediate", "advanced", "expert"]),
+	teachingExperience: z.string().trim().max(500).optional(),
+	whyInterested: z
+		.string()
+		.trim()
+		.min(1, "Please tell us why you're interested")
+		.min(20, "Please provide a bit more detail")
+		.max(1000, "Response must not exceed 1000 characters"),
+	availableTuesday: z.boolean().default(false),
+	availableThursday: z.boolean().default(false),
+	linkedinUrl: z.string().trim().url().optional().or(z.literal("")),
 });
 
 // Rate limiting map
@@ -48,115 +48,112 @@ const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
 const MAX_REQUESTS_PER_WINDOW = 3;
 
 const checkRateLimit = (identifier: string): boolean => {
-  const now = Date.now();
-  const userLimit = rateLimitMap.get(identifier);
+	const now = Date.now();
+	const userLimit = rateLimitMap.get(identifier);
 
-  if (!userLimit || now > userLimit.resetTime) {
-    rateLimitMap.set(identifier, {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW,
-    });
-    return true;
-  }
+	if (!userLimit || now > userLimit.resetTime) {
+		rateLimitMap.set(identifier, {
+			count: 1,
+			resetTime: now + RATE_LIMIT_WINDOW,
+		});
+		return true;
+	}
 
-  if (userLimit.count >= MAX_REQUESTS_PER_WINDOW) {
-    return false;
-  }
+	if (userLimit.count >= MAX_REQUESTS_PER_WINDOW) {
+		return false;
+	}
 
-  userLimit.count++;
-  return true;
+	userLimit.count++;
+	return true;
 };
 
 const getYearLabel = (year: string): string => {
-  switch (year) {
-    case "1":
-      return "1st Year";
-    case "2":
-      return "2nd Year";
-    case "3":
-      return "3rd Year";
-    case "4":
-      return "4th Year";
-    case "5+":
-      return "5+ Year";
-    case "graduate":
-      return "Graduate Student";
-    default:
-      return year;
-  }
+	switch (year) {
+		case "1":
+			return "1st Year";
+		case "2":
+			return "2nd Year";
+		case "3":
+			return "3rd Year";
+		case "4":
+			return "4th Year";
+		case "5+":
+			return "5+ Year";
+		case "graduate":
+			return "Graduate Student";
+		default:
+			return year;
+	}
 };
 
 const getExperienceLabel = (experience: string): string => {
-  switch (experience) {
-    case "beginner":
-      return "Beginner (learning)";
-    case "intermediate":
-      return "Intermediate (coursework)";
-    case "advanced":
-      return "Advanced (projects/work)";
-    case "expert":
-      return "Expert (professional)";
-    default:
-      return experience;
-  }
+	switch (experience) {
+		case "beginner":
+			return "Beginner (learning)";
+		case "intermediate":
+			return "Intermediate (coursework)";
+		case "advanced":
+			return "Advanced (projects/work)";
+		case "expert":
+			return "Expert (professional)";
+		default:
+			return experience;
+	}
 };
 
-const getAvailabilityText = (
-  tuesday: boolean,
-  thursday: boolean
-): string => {
-  if (tuesday && thursday) return "Both Tuesdays & Thursdays";
-  if (tuesday) return "Tuesdays only (Ages 9-10)";
-  if (thursday) return "Thursdays only (Ages 11-13)";
-  return "Not specified";
+const getAvailabilityText = (tuesday: boolean, thursday: boolean): string => {
+	if (tuesday && thursday) return "Both Tuesdays & Thursdays";
+	if (tuesday) return "Tuesdays only (Ages 9-10)";
+	if (thursday) return "Thursdays only (Ages 11-13)";
+	return "Not specified";
 };
 
 export const POST = async (request: NextRequest) => {
-  try {
-    // Get IP address for rate limiting
-    const ip =
-      request.headers.get("x-forwarded-for") ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
+	try {
+		// Get IP address for rate limiting
+		const ip =
+			request.headers.get("x-forwarded-for") ||
+			request.headers.get("x-real-ip") ||
+			"unknown";
 
-    // Check rate limit
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        {
-          error: "Too many requests. Please try again later.",
-        },
-        { status: 429 }
-      );
-    }
+		// Check rate limit
+		if (!checkRateLimit(ip)) {
+			return NextResponse.json(
+				{
+					error: "Too many requests. Please try again later.",
+				},
+				{ status: 429 },
+			);
+		}
 
-    // Parse and validate request body
-    const body = await request.json();
-    const validatedData = applicationSchema.parse(body);
+		// Parse and validate request body
+		const body = await request.json();
+		const validatedData = applicationSchema.parse(body);
 
-    // Validate at least one day selected
-    if (!validatedData.availableTuesday && !validatedData.availableThursday) {
-      return NextResponse.json(
-        {
-          error: "Please select at least one day you're available to teach",
-        },
-        { status: 400 }
-      );
-    }
+		// Validate at least one day selected
+		if (!validatedData.availableTuesday && !validatedData.availableThursday) {
+			return NextResponse.json(
+				{
+					error: "Please select at least one day you're available to teach",
+				},
+				{ status: 400 },
+			);
+		}
 
-    const yearLabel = getYearLabel(validatedData.yearOfStudy);
-    const experienceLabel = getExperienceLabel(validatedData.pythonExperience);
-    const availabilityText = getAvailabilityText(
-      validatedData.availableTuesday,
-      validatedData.availableThursday
-    );
+		const yearLabel = getYearLabel(validatedData.yearOfStudy);
+		const experienceLabel = getExperienceLabel(validatedData.pythonExperience);
+		const availabilityText = getAvailabilityText(
+			validatedData.availableTuesday,
+			validatedData.availableThursday,
+		);
 
-    // Send email via Resend
-    const emailResult = await resend.emails.send({
-      from: "Kids Learn AI <hello@kidslearnai.ca>",
-      to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
-      replyTo: validatedData.email,
-      subject: `👨‍🏫 Instructor Application: ${validatedData.fullName} (${validatedData.university})`,
-      html: `
+		// Send email via Resend
+		const emailResult = await resend.emails.send({
+			from: "Kids Learn AI <hello@kidslearnai.ca>",
+			to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
+			replyTo: validatedData.email,
+			subject: `👨‍🏫 Instructor Application: ${validatedData.fullName} (${validatedData.university})`,
+			html: `
         <!DOCTYPE html>
         <html>
           <head>
@@ -275,8 +272,8 @@ export const POST = async (request: NextRequest) => {
                   </div>
                 </div>
                 ${
-                  validatedData.linkedinUrl
-                    ? `
+									validatedData.linkedinUrl
+										? `
                 <div class="field">
                   <div class="label">LinkedIn</div>
                   <div class="value">
@@ -284,8 +281,8 @@ export const POST = async (request: NextRequest) => {
                   </div>
                 </div>
                 `
-                    : ""
-                }
+										: ""
+								}
               </div>
 
               <!-- Education -->
@@ -315,15 +312,15 @@ export const POST = async (request: NextRequest) => {
                   </div>
                 </div>
                 ${
-                  validatedData.teachingExperience
-                    ? `
+									validatedData.teachingExperience
+										? `
                 <div class="field">
                   <div class="label">Teaching/Tutoring Experience</div>
                   <div class="value" style="white-space: pre-wrap;">${validatedData.teachingExperience}</div>
                 </div>
                 `
-                    : ""
-                }
+										: ""
+								}
               </div>
 
               <!-- Availability -->
@@ -353,48 +350,47 @@ export const POST = async (request: NextRequest) => {
           </body>
         </html>
       `,
-    });
+		});
 
-    if (!emailResult.data) {
-      console.error("Email error:", emailResult.error);
-      return NextResponse.json(
-        {
-          error: "Failed to submit application. Please try again later.",
-        },
-        { status: 500 }
-      );
-    }
+		if (!emailResult.data) {
+			console.error("Email error:", emailResult.error);
+			return NextResponse.json(
+				{
+					error: "Failed to submit application. Please try again later.",
+				},
+				{ status: 500 },
+			);
+		}
 
-    console.log("Application email sent successfully:", emailResult.data);
+		console.log("Application email sent successfully:", emailResult.data);
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Your application has been submitted successfully!",
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          error: "Validation failed",
-          details: error.errors.map((err) => ({
-            field: err.path.join("."),
-            message: err.message,
-          })),
-        },
-        { status: 400 }
-      );
-    }
+		return NextResponse.json(
+			{
+				success: true,
+				message: "Your application has been submitted successfully!",
+			},
+			{ status: 200 },
+		);
+	} catch (error) {
+		if (error instanceof z.ZodError) {
+			return NextResponse.json(
+				{
+					error: "Validation failed",
+					details: error.errors.map((err) => ({
+						field: err.path.join("."),
+						message: err.message,
+					})),
+				},
+				{ status: 400 },
+			);
+		}
 
-    console.error("Application form error:", error);
-    return NextResponse.json(
-      {
-        error: "An unexpected error occurred. Please try again later.",
-      },
-      { status: 500 }
-    );
-  }
+		console.error("Application form error:", error);
+		return NextResponse.json(
+			{
+				error: "An unexpected error occurred. Please try again later.",
+			},
+			{ status: 500 },
+		);
+	}
 };
-

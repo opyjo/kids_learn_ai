@@ -1,17 +1,17 @@
 "use client";
 
 import { PythonEditor } from "@/components/code/python-editor";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { SiteHeader } from "@/components/site-header";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 
 export default function PlaygroundPage() {
-  const starterCode = `# Welcome to the Python Playground!
+	const starterCode = `# Welcome to the Python Playground!
 # Try writing some Python code here
 
 print("Hello, Python Playground!")
@@ -27,76 +27,76 @@ for color in colors:
     print(f"- {color}")
 `;
 
-  return (
-    <div className="min-h-screen">
-      <SiteHeader />
+	return (
+		<div className="min-h-screen">
+			<SiteHeader />
 
-      <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col min-h-[calc(100vh-200px)]">
-        {/* Page Header */}
-        <div className="mb-6">
-          <h2 className="text-3xl font-bold text-foreground mb-2">
-            Python Playground
-          </h2>
-          <p className="text-muted-foreground">
-            Experiment with Python code in a safe environment. Try new ideas and
-            practice what you've learned!
-          </p>
-        </div>
+			<div className="max-w-6xl mx-auto px-4 py-6 flex flex-col min-h-[calc(100vh-200px)]">
+				{/* Page Header */}
+				<div className="mb-6">
+					<h2 className="text-3xl font-bold text-foreground mb-2">
+						Python Playground
+					</h2>
+					<p className="text-muted-foreground">
+						Experiment with Python code in a safe environment. Try new ideas and
+						practice what you've learned!
+					</p>
+				</div>
 
-        {/* Python Editor */}
-        <div className="flex-1 mb-6">
-          <PythonEditor
-            initialCode={starterCode}
-            onCodeChange={(code) => {
-              // Save code to localStorage for persistence
-              localStorage.setItem("playground-code", code);
-            }}
-            onRunComplete={(output, isSuccess) => {
-              console.log("[v0] Playground execution:", { output, isSuccess });
-            }}
-          />
-        </div>
+				{/* Python Editor */}
+				<div className="flex-1 mb-6">
+					<PythonEditor
+						initialCode={starterCode}
+						onCodeChange={(code) => {
+							// Save code to localStorage for persistence
+							localStorage.setItem("playground-code", code);
+						}}
+						onRunComplete={(output, isSuccess) => {
+							console.log("[v0] Playground execution:", { output, isSuccess });
+						}}
+					/>
+				</div>
 
-        {/* Tips Card */}
-        <Card className="mt-auto">
-          <CardHeader>
-            <CardTitle className="text-lg">💡 Playground Tips</CardTitle>
-            <CardDescription>
-              Make the most of your coding practice
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-4 text-sm">
-              <div>
-                <h4 className="font-medium mb-2">Keyboard Shortcuts:</h4>
-                <ul className="space-y-1 text-muted-foreground">
-                  <li>
-                    <kbd className="px-1 py-0.5 bg-muted rounded text-xs">
-                      Ctrl+Enter
-                    </kbd>{" "}
-                    - Run code
-                  </li>
-                  <li>
-                    <kbd className="px-1 py-0.5 bg-muted rounded text-xs">
-                      Tab
-                    </kbd>{" "}
-                    - Indent code
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-medium mb-2">Try These Ideas:</h4>
-                <ul className="space-y-1 text-muted-foreground">
-                  <li>• Create fun math calculations</li>
-                  <li>• Make lists of your favorite things</li>
-                  <li>• Write loops to repeat actions</li>
-                  <li>• Practice with variables and functions</li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
+				{/* Tips Card */}
+				<Card className="mt-auto">
+					<CardHeader>
+						<CardTitle className="text-lg">💡 Playground Tips</CardTitle>
+						<CardDescription>
+							Make the most of your coding practice
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<div className="grid md:grid-cols-2 gap-4 text-sm">
+							<div>
+								<h4 className="font-medium mb-2">Keyboard Shortcuts:</h4>
+								<ul className="space-y-1 text-muted-foreground">
+									<li>
+										<kbd className="px-1 py-0.5 bg-muted rounded text-xs">
+											Ctrl+Enter
+										</kbd>{" "}
+										- Run code
+									</li>
+									<li>
+										<kbd className="px-1 py-0.5 bg-muted rounded text-xs">
+											Tab
+										</kbd>{" "}
+										- Indent code
+									</li>
+								</ul>
+							</div>
+							<div>
+								<h4 className="font-medium mb-2">Try These Ideas:</h4>
+								<ul className="space-y-1 text-muted-foreground">
+									<li>• Create fun math calculations</li>
+									<li>• Make lists of your favorite things</li>
+									<li>• Write loops to repeat actions</li>
+									<li>• Practice with variables and functions</li>
+								</ul>
+							</div>
+						</div>
+					</CardContent>
+				</Card>
+			</div>
+		</div>
+	);
 }
