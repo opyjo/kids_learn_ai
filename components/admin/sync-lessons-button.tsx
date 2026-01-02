@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, Check, AlertCircle, FileText, BookOpen } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
@@ -30,7 +30,6 @@ export const SyncLessonsButton = () => {
   const [isSyncing, setIsSyncing] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [syncResult, setSyncResult] = useState<SyncResult | null>(null);
-  const { toast } = useToast();
 
   const handleSync = async () => {
     setIsSyncing(true);
@@ -46,23 +45,18 @@ export const SyncLessonsButton = () => {
         setSyncResult(data);
         setShowResults(true);
         const notesCount = data.teacherNotes?.synced?.length || 0;
-        toast({
-          title: "Sync Complete! ✅",
+        toast.success("Sync Complete! ✅", {
           description: `${data.synced.length} lesson${data.synced.length !== 1 ? "s" : ""} and ${notesCount} teacher note${notesCount !== 1 ? "s" : ""} synced.`,
         });
       } else {
-        toast({
-          title: "Sync Failed",
+        toast.error("Sync Failed", {
           description: data.message || "An error occurred during sync",
-          variant: "destructive",
         });
       }
     } catch (error) {
       console.error("Sync error:", error);
-      toast({
-        title: "Sync Error",
+      toast.error("Sync Error", {
         description: "Failed to connect to sync endpoint",
-        variant: "destructive",
       });
     } finally {
       setIsSyncing(false);

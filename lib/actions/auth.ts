@@ -111,11 +111,7 @@ export async function signupAction(
       return { error: "Failed to create user" };
     }
 
-    // Profile should be created automatically by database trigger
-    // Wait a moment for the trigger to complete
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    // Update profile with full name if not set by trigger
+    // Update profile with full name (profile created by database trigger)
     const { error: profileError } = await supabase
       .from("profiles")
       .update({ full_name: fullName })

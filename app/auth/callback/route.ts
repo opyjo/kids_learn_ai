@@ -10,10 +10,8 @@ export async function GET(request: Request) {
     const supabase = await getSupabaseServerClient();
 
     // Exchange the code for a session
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.exchangeCodeForSession(code);
+    const { data: sessionData, error } =
+      await supabase.auth.exchangeCodeForSession(code);
 
     if (error) {
       console.error("Auth callback error:", error);
@@ -22,10 +20,21 @@ export async function GET(request: Request) {
       );
     }
 
-    // Profile is automatically created by database trigger
-    // No need to manually create profile here
+    // Check user role and redirect accordingly
+    if (sessionData.user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", sessionData.user.id)
+        .single();
+
+      // Redirect admin users to admin dashboard
+      if (profile?.role === "admin") {
+        return NextResponse.redirect(`${origin}/admin`);
+      }
+    }
   }
 
-  // Redirect to home page
+  // Redirect regular users to home page
   return NextResponse.redirect(`${origin}/`);
 }

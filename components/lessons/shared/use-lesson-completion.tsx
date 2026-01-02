@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 interface UseLessonCompletionProps {
   lessonDbId: string;
@@ -17,7 +17,6 @@ export const useLessonCompletion = ({
   const [isLoading, setIsLoading] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const supabase = getSupabaseBrowserClient();
-  const { toast } = useToast();
 
   // Fetch completion status on mount
   useEffect(() => {
@@ -127,21 +126,15 @@ export const useLessonCompletion = ({
   const handleMarkClick = async () => {
     if (isCompleted) return;
     setIsCompleted(true);
-    toast({
-      title: "Marked complete",
+    toast.success("Marked complete", {
       description: "Lesson marked as complete.",
-      action: (
-        <button
-          className="ml-3 rounded-md bg-white/10 px-2 py-1 text-xs"
-          onClick={() => {
-            setIsCompleted(false);
-            void toggleCompletion("uncomplete");
-          }}
-          aria-label="Undo mark as complete"
-        >
-          Undo
-        </button>
-      ),
+      action: {
+        label: "Undo",
+        onClick: () => {
+          setIsCompleted(false);
+          void toggleCompletion("uncomplete");
+        },
+      },
     });
     await toggleCompletion("complete");
   };
