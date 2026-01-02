@@ -29,7 +29,7 @@ import remarkGfm from "remark-gfm";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -72,7 +72,6 @@ export function LessonViewer({
   const [currentCode, setCurrentCode] = useState(lesson.starter_code);
   const [showConfetti, setShowConfetti] = useState(false);
   const supabase = getSupabaseBrowserClient();
-  const { toast } = useToast();
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   // Fetch completion status on mount (use client auth user to avoid RLS mismatches)
@@ -187,21 +186,15 @@ export function LessonViewer({
   const handleMarkClick = async () => {
     if (isCompleted) return;
     setIsCompleted(true);
-    toast({
-      title: "Marked complete",
+    toast.success("Marked complete", {
       description: "Lesson marked as complete.",
-      action: (
-        <button
-          className="ml-3 rounded-md bg-white/10 px-2 py-1 text-xs"
-          onClick={() => {
-            setIsCompleted(false);
-            void toggleCompletion("uncomplete");
-          }}
-          aria-label="Undo mark as complete"
-        >
-          Undo
-        </button>
-      ),
+      action: {
+        label: "Undo",
+        onClick: () => {
+          setIsCompleted(false);
+          void toggleCompletion("uncomplete");
+        },
+      },
     });
     await toggleCompletion("complete");
   };

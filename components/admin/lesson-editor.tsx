@@ -63,7 +63,6 @@ export function LessonEditor() {
 
       console.log("[v0] Saving lesson:", lesson);
 
-      // TODO: Replace with actual API call to save lesson
       const response = await fetch("/api/admin/lessons", {
         method: "POST",
         headers: {
