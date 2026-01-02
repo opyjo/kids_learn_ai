@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,35 +16,7 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner";
 import { Loader2, Send, CheckCircle2 } from "lucide-react";
-
-// Validation schema matching the API
-const contactFormSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, "Name is required")
-    .min(2, "Name must be at least 2 characters")
-    .max(100, "Name must not exceed 100 characters"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email is required")
-    .email("Please enter a valid email address"),
-  subject: z
-    .string()
-    .trim()
-    .min(1, "Subject is required")
-    .min(5, "Subject must be at least 5 characters")
-    .max(200, "Subject must not exceed 200 characters"),
-  message: z
-    .string()
-    .trim()
-    .min(1, "Message is required")
-    .min(10, "Message must be at least 10 characters")
-    .max(1000, "Message must not exceed 1000 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactFormSchema>;
+import { contactFormSchema, type ContactFormData } from "@/lib/schemas/contact";
 
 export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

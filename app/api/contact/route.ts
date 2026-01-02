@@ -1,61 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import { contactFormSchema } from "@/lib/schemas/contact";
+import { contactRateLimiter } from "@/lib/rate-limit";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Validation schema
-const contactSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(1, "Name is required")
-    .min(2, "Name must be at least 2 characters")
-    .max(100, "Name must not exceed 100 characters"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email is required")
-    .email("Please enter a valid email address"),
-  subject: z
-    .string()
-    .trim()
-    .min(1, "Subject is required")
-    .min(5, "Subject must be at least 5 characters")
-    .max(200, "Subject must not exceed 200 characters"),
-  message: z
-    .string()
-    .trim()
-    .min(1, "Message is required")
-    .min(10, "Message must be at least 10 characters")
-    .max(1000, "Message must not exceed 1000 characters"),
-});
-
-// Rate limiting map (in production, use Redis or similar)
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
-const MAX_REQUESTS_PER_WINDOW = 3;
-
-const checkRateLimit = (identifier: string): boolean => {
-  const now = Date.now();
-  const userLimit = rateLimitMap.get(identifier);
-
-  if (!userLimit || now > userLimit.resetTime) {
-    rateLimitMap.set(identifier, {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW,
-    });
-    return true;
-  }
-
-  if (userLimit.count >= MAX_REQUESTS_PER_WINDOW) {
-    return false;
-  }
-
-  userLimit.count++;
-  return true;
-};
 
 export const POST = async (request: NextRequest) => {
   try {
@@ -66,7 +16,7 @@ export const POST = async (request: NextRequest) => {
       "unknown";
 
     // Check rate limit
-    if (!checkRateLimit(ip)) {
+    if (!contactRateLimiter.checkRateLimit(ip)) {
       return NextResponse.json(
         {
           error: "Too many requests. Please try again later.",
@@ -77,7 +27,7 @@ export const POST = async (request: NextRequest) => {
 
     // Parse and validate request body
     const body = await request.json();
-    const validatedData = contactSchema.parse(body);
+    const validatedData = contactFormSchema.parse(body);
 
     // Send email via Resend
     const emailResult = await resend.emails.send({
