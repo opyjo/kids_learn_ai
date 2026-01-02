@@ -1,73 +1,72 @@
-import { TeacherNotesViewer } from "@/components/lessons/teacher-notes-viewer";
 import { notFound, redirect } from "next/navigation";
+import { TeacherNotesViewer } from "@/components/lessons/teacher-notes-viewer";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface TeacherNotesPageProps {
-  params: Promise<{
-    lessonId: string;
-  }>;
+	params: Promise<{
+		lessonId: string;
+	}>;
 }
 
 export default async function TeacherNotesPage({
-  params,
+	params,
 }: TeacherNotesPageProps) {
-  const supabase = await getSupabaseServerClient();
-  const { lessonId } = await params;
+	const supabase = await getSupabaseServerClient();
+	const { lessonId } = await params;
 
-  // Check if user is authenticated
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+	// Check if user is authenticated
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect("/login");
-  }
+	if (!user) {
+		redirect("/login");
+	}
 
-  // Check if user is an admin
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
+	// Check if user is an admin
+	const { data: profile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user.id)
+		.single();
 
-  if (!profile || profile.role !== "admin") {
-    redirect("/");
-  }
+	if (!profile || profile.role !== "admin") {
+		redirect("/");
+	}
 
-  // Fetch lesson from Supabase by order_index with course info
-  const { data: lesson, error: lessonError } = await supabase
-    .from("lessons")
-    .select("*, courses(slug, title)")
-    .eq("order_index", Number.parseInt(lessonId))
-    .single();
+	// Fetch lesson from Supabase by order_index with course info
+	const { data: lesson, error: lessonError } = await supabase
+		.from("lessons")
+		.select("*, courses(slug, title)")
+		.eq("order_index", Number.parseInt(lessonId, 10))
+		.single();
 
-  if (lessonError || !lesson) {
-    notFound();
-  }
+	if (lessonError || !lesson) {
+		notFound();
+	}
 
-  // Fetch teacher notes for this lesson
-  const { data: teacherNote } = await supabase
-    .from("teacher_notes")
-    .select("*")
-    .eq("lesson_id", lesson.id)
-    .maybeSingle();
+	// Fetch teacher notes for this lesson
+	const { data: teacherNote } = await supabase
+		.from("teacher_notes")
+		.select("*")
+		.eq("lesson_id", lesson.id)
+		.maybeSingle();
 
-  // Transform the lesson data to match the expected format
-  const transformedLesson = {
-    id: lesson.order_index,
-    title: lesson.title,
-    description: lesson.description,
-    difficulty: lesson.difficulty_level,
-    order_index: lesson.order_index,
-    is_premium: lesson.is_premium,
-  };
+	// Transform the lesson data to match the expected format
+	const transformedLesson = {
+		id: lesson.order_index,
+		title: lesson.title,
+		description: lesson.description,
+		difficulty: lesson.difficulty_level,
+		order_index: lesson.order_index,
+		is_premium: lesson.is_premium,
+	};
 
-  return (
-    <TeacherNotesViewer 
-      lesson={transformedLesson} 
-      teacherNote={teacherNote}
-      courseSlug={lesson.courses?.slug}
-    />
-  );
+	return (
+		<TeacherNotesViewer
+			lesson={transformedLesson}
+			teacherNote={teacherNote}
+			courseSlug={lesson.courses?.slug}
+		/>
+	);
 }
-

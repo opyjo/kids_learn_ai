@@ -333,29 +333,29 @@ export const ARTAI_SYSTEM_PROMPT = `You are ArtAI, an imaginative and expressive
 You're nurturing young creators who will bring beauty, stories, and ideas into the world. Help them believe in their creative power and find joy in expression! 🌈`;
 
 export const FALLBACK_RESPONSES = {
-  offTopic:
-    "I only help with Python programming! What Python question can I help you with?",
+	offTopic:
+		"I only help with Python programming! What Python question can I help you with?",
 
-  tooAdvanced:
-    "That's some advanced Python! Let's make sure we have the basics down first. What have you learned about [related basic topic] so far?",
+	tooAdvanced:
+		"That's some advanced Python! Let's make sure we have the basics down first. What have you learned about [related basic topic] so far?",
 
-  needsMoreInfo:
-    "I'd love to help! Can you show me your code or tell me more about what you're trying to do?",
+	needsMoreInfo:
+		"I'd love to help! Can you show me your code or tell me more about what you're trying to do?",
 
-  completeSolution:
-    "I can't write it for you, but I can help you learn! Show me what you've tried so far, and tell me where you're stuck.",
+	completeSolution:
+		"I can't write it for you, but I can help you learn! Show me what you've tried so far, and tell me where you're stuck.",
 
-  technicalIssue:
-    "Hmm, I'm having trouble understanding that. Can you rephrase your Python question?",
+	technicalIssue:
+		"Hmm, I'm having trouble understanding that. Can you rephrase your Python question?",
 
-  encouragement:
-    "You're working hard on this! Remember, every programmer gets stuck sometimes. That's how we learn. What's the first small step we can try?",
+	encouragement:
+		"You're working hard on this! Remember, every programmer gets stuck sometimes. That's how we learn. What's the first small step we can try?",
 
-  referToInstructor:
-    "That's a great question for your instructor! They can give you more detailed help with that one.",
+	referToInstructor:
+		"That's a great question for your instructor! They can give you more detailed help with that one.",
 
-  breakTime:
-    "It sounds like you might need a quick break. Step away for a few minutes, then come back fresh. Your brain will thank you! 🧠",
+	breakTime:
+		"It sounds like you might need a quick break. Step away for a few minutes, then come back fresh. Your brain will thank you! 🧠",
 } as const;
 
 export const SAFETY_CHECK_PROMPT = `Analyze this message and determine if it's:
@@ -376,24 +376,24 @@ Respond in JSON format:
 export type MessageRole = "user" | "assistant" | "system";
 
 export interface ChatMessage {
-  role: MessageRole;
-  content: string;
-  timestamp?: Date;
+	role: MessageRole;
+	content: string;
+	timestamp?: Date;
 }
 
 export interface SafetyCheckResult {
-  isPythonQuestion: boolean;
-  isSafe: boolean;
-  requestType: "solution" | "help" | "concept" | "debug";
-  action: "allow" | "redirect" | "block";
+	isPythonQuestion: boolean;
+	isSafe: boolean;
+	requestType: "solution" | "help" | "concept" | "debug";
+	action: "allow" | "redirect" | "block";
 }
 
 // Helper to get system prompt by tutor ID
 export const TUTOR_PROMPTS = {
-  brightbyte: BRIGHTBYTE_SYSTEM_PROMPT,
-  mathbot: MATHBOT_SYSTEM_PROMPT,
-  scienceowl: SCIENCEOWL_SYSTEM_PROMPT,
-  artai: ARTAI_SYSTEM_PROMPT,
+	brightbyte: BRIGHTBYTE_SYSTEM_PROMPT,
+	mathbot: MATHBOT_SYSTEM_PROMPT,
+	scienceowl: SCIENCEOWL_SYSTEM_PROMPT,
+	artai: ARTAI_SYSTEM_PROMPT,
 } as const;
 
 export type TutorPromptId = keyof typeof TUTOR_PROMPTS;

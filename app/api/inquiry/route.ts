@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 
@@ -7,31 +7,31 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Validation schema
 const inquirySchema = z.object({
-  parentName: z
-    .string()
-    .trim()
-    .min(1, "Parent name is required")
-    .min(2, "Name must be at least 2 characters")
-    .max(100, "Name must not exceed 100 characters"),
-  parentEmail: z
-    .string()
-    .trim()
-    .min(1, "Email is required")
-    .email("Please enter a valid email address"),
-  childName: z
-    .string()
-    .trim()
-    .min(1, "Child's name is required")
-    .min(2, "Name must be at least 2 characters")
-    .max(100, "Name must not exceed 100 characters"),
-  ageGroup: z.enum(["9-10", "11-13"], {
-    required_error: "Please select an age group",
-  }),
-  experience: z.enum(["none", "some", "comfortable"], {
-    required_error: "Please select experience level",
-  }),
-  howHeard: z.string().trim().max(200).optional(),
-  questions: z.string().trim().max(1000).optional(),
+	parentName: z
+		.string()
+		.trim()
+		.min(1, "Parent name is required")
+		.min(2, "Name must be at least 2 characters")
+		.max(100, "Name must not exceed 100 characters"),
+	parentEmail: z
+		.string()
+		.trim()
+		.min(1, "Email is required")
+		.email("Please enter a valid email address"),
+	childName: z
+		.string()
+		.trim()
+		.min(1, "Child's name is required")
+		.min(2, "Name must be at least 2 characters")
+		.max(100, "Name must not exceed 100 characters"),
+	ageGroup: z.enum(["9-10", "11-13"], {
+		required_error: "Please select an age group",
+	}),
+	experience: z.enum(["none", "some", "comfortable"], {
+		required_error: "Please select experience level",
+	}),
+	howHeard: z.string().trim().max(200).optional(),
+	questions: z.string().trim().max(1000).optional(),
 });
 
 // Rate limiting map
@@ -40,83 +40,83 @@ const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
 const MAX_REQUESTS_PER_WINDOW = 5;
 
 const checkRateLimit = (identifier: string): boolean => {
-  const now = Date.now();
-  const userLimit = rateLimitMap.get(identifier);
+	const now = Date.now();
+	const userLimit = rateLimitMap.get(identifier);
 
-  if (!userLimit || now > userLimit.resetTime) {
-    rateLimitMap.set(identifier, {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW,
-    });
-    return true;
-  }
+	if (!userLimit || now > userLimit.resetTime) {
+		rateLimitMap.set(identifier, {
+			count: 1,
+			resetTime: now + RATE_LIMIT_WINDOW,
+		});
+		return true;
+	}
 
-  if (userLimit.count >= MAX_REQUESTS_PER_WINDOW) {
-    return false;
-  }
+	if (userLimit.count >= MAX_REQUESTS_PER_WINDOW) {
+		return false;
+	}
 
-  userLimit.count++;
-  return true;
+	userLimit.count++;
+	return true;
 };
 
 const getExperienceLabel = (experience: string): string => {
-  switch (experience) {
-    case "none":
-      return "No prior experience";
-    case "some":
-      return "Some experience (Scratch, etc.)";
-    case "comfortable":
-      return "Comfortable with basics";
-    default:
-      return experience;
-  }
+	switch (experience) {
+		case "none":
+			return "No prior experience";
+		case "some":
+			return "Some experience (Scratch, etc.)";
+		case "comfortable":
+			return "Comfortable with basics";
+		default:
+			return experience;
+	}
 };
 
 const getAgeGroupDetails = (
-  ageGroup: string
+	ageGroup: string,
 ): { label: string; day: string } => {
-  switch (ageGroup) {
-    case "9-10":
-      return { label: "Ages 9-10", day: "Tuesdays" };
-    case "11-13":
-      return { label: "Ages 11-13", day: "Thursdays" };
-    default:
-      return { label: ageGroup, day: "TBD" };
-  }
+	switch (ageGroup) {
+		case "9-10":
+			return { label: "Ages 9-10", day: "Tuesdays" };
+		case "11-13":
+			return { label: "Ages 11-13", day: "Thursdays" };
+		default:
+			return { label: ageGroup, day: "TBD" };
+	}
 };
 
 export const POST = async (request: NextRequest) => {
-  try {
-    // Get IP address for rate limiting
-    const ip =
-      request.headers.get("x-forwarded-for") ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
+	try {
+		// Get IP address for rate limiting
+		const ip =
+			request.headers.get("x-forwarded-for") ||
+			request.headers.get("x-real-ip") ||
+			"unknown";
 
-    // Check rate limit
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        {
-          error: "Too many requests. Please try again later.",
-        },
-        { status: 429 }
-      );
-    }
+		// Check rate limit
+		if (!checkRateLimit(ip)) {
+			return NextResponse.json(
+				{
+					error: "Too many requests. Please try again later.",
+				},
+				{ status: 429 },
+			);
+		}
 
-    // Parse and validate request body
-    const body = await request.json();
-    const validatedData = inquirySchema.parse(body);
+		// Parse and validate request body
+		const body = await request.json();
+		const validatedData = inquirySchema.parse(body);
 
-    const ageGroupDetails = getAgeGroupDetails(validatedData.ageGroup);
-    const experienceLabel = getExperienceLabel(validatedData.experience);
+		const ageGroupDetails = getAgeGroupDetails(validatedData.ageGroup);
+		const experienceLabel = getExperienceLabel(validatedData.experience);
 
-    // Send email via Resend
-    const emailResult = await resend.emails.send({
-      from: "Kids Learn AI <hello@kidslearnai.ca>",
-      to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
-      replyTo: validatedData.parentEmail,
-      subject: `🎓 New Free Trial Inquiry: ${validatedData.childName} (${ageGroupDetails.label})`,
-      html: `
+		// Send email via Resend
+		const emailResult = await resend.emails.send({
+			from: "Kids Learn AI <hello@kidslearnai.ca>",
+			to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
+			replyTo: validatedData.parentEmail,
+			subject: `🎓 New Free Trial Inquiry: ${validatedData.childName} (${ageGroupDetails.label})`,
+			html: `
         <!DOCTYPE html>
         <html>
           <head>
@@ -235,8 +235,8 @@ export const POST = async (request: NextRequest) => {
                   <div class="label">Email</div>
                   <div class="value">
                     <a href="mailto:${validatedData.parentEmail}">${
-        validatedData.parentEmail
-      }</a>
+											validatedData.parentEmail
+										}</a>
                   </div>
                 </div>
               </div>
@@ -247,8 +247,8 @@ export const POST = async (request: NextRequest) => {
                 <div class="field">
                   <div class="label">Child's Name</div>
                   <div class="value" style="font-size: 20px; font-weight: 600;">${
-                    validatedData.childName
-                  }</div>
+										validatedData.childName
+									}</div>
                 </div>
                 <div class="field">
                   <div class="label">Age Group</div>
@@ -265,43 +265,43 @@ export const POST = async (request: NextRequest) => {
                 <div style="font-size: 14px; color: #166534; margin-bottom: 5px;">📅 Recommended Class Day</div>
                 <div class="schedule-day">${ageGroupDetails.day}</div>
                 <div style="font-size: 12px; color: #166534; margin-top: 5px;">${
-                  ageGroupDetails.label
-                } classes</div>
+									ageGroupDetails.label
+								} classes</div>
               </div>
 
               ${
-                validatedData.howHeard
-                  ? `
+								validatedData.howHeard
+									? `
               <!-- How They Heard -->
               <div class="section">
                 <div class="section-title">📣 How They Found Us</div>
                 <div class="value">${validatedData.howHeard}</div>
               </div>
               `
-                  : ""
-              }
+									: ""
+							}
 
               ${
-                validatedData.questions
-                  ? `
+								validatedData.questions
+									? `
               <!-- Questions -->
               <div class="section">
                 <div class="section-title">❓ Questions / Comments</div>
                 <div class="value" style="white-space: pre-wrap;">${validatedData.questions}</div>
               </div>
               `
-                  : ""
-              }
+									: ""
+							}
 
               <!-- Action -->
               <div style="text-align: center; margin-top: 20px;">
                 <a href="mailto:${
-                  validatedData.parentEmail
-                }?subject=Your Free Trial Class at Kids Learn AI&body=Hi ${
-        validatedData.parentName
-      },%0D%0A%0D%0AThank you for your interest in our Python %26 AI classes for ${
-        validatedData.childName
-      }!%0D%0A%0D%0A" class="action-btn">
+									validatedData.parentEmail
+								}?subject=Your Free Trial Class at Kids Learn AI&body=Hi ${
+									validatedData.parentName
+								},%0D%0A%0D%0AThank you for your interest in our Python %26 AI classes for ${
+									validatedData.childName
+								}!%0D%0A%0D%0A" class="action-btn">
                   Reply to ${validatedData.parentName}
                 </a>
               </div>
@@ -309,54 +309,54 @@ export const POST = async (request: NextRequest) => {
               <div class="footer">
                 <p>This inquiry was submitted via the Kids Learn AI website.</p>
                 <p>Submitted at: ${new Date().toLocaleString("en-CA", {
-                  timeZone: "America/Toronto",
-                })}</p>
+									timeZone: "America/Toronto",
+								})}</p>
               </div>
             </div>
           </body>
         </html>
       `,
-    });
+		});
 
-    if (!emailResult.data) {
-      console.error("Email error:", emailResult.error);
-      return NextResponse.json(
-        {
-          error: "Failed to send inquiry. Please try again later.",
-        },
-        { status: 500 }
-      );
-    }
+		if (!emailResult.data) {
+			console.error("Email error:", emailResult.error);
+			return NextResponse.json(
+				{
+					error: "Failed to send inquiry. Please try again later.",
+				},
+				{ status: 500 },
+			);
+		}
 
-    console.log("Inquiry email sent successfully:", emailResult.data);
+		console.log("Inquiry email sent successfully:", emailResult.data);
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Your inquiry has been submitted successfully!",
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          error: "Validation failed",
-          details: error.errors.map((err) => ({
-            field: err.path.join("."),
-            message: err.message,
-          })),
-        },
-        { status: 400 }
-      );
-    }
+		return NextResponse.json(
+			{
+				success: true,
+				message: "Your inquiry has been submitted successfully!",
+			},
+			{ status: 200 },
+		);
+	} catch (error) {
+		if (error instanceof z.ZodError) {
+			return NextResponse.json(
+				{
+					error: "Validation failed",
+					details: error.errors.map((err) => ({
+						field: err.path.join("."),
+						message: err.message,
+					})),
+				},
+				{ status: 400 },
+			);
+		}
 
-    console.error("Inquiry form error:", error);
-    return NextResponse.json(
-      {
-        error: "An unexpected error occurred. Please try again later.",
-      },
-      { status: 500 }
-    );
-  }
+		console.error("Inquiry form error:", error);
+		return NextResponse.json(
+			{
+				error: "An unexpected error occurred. Please try again later.",
+			},
+			{ status: 500 },
+		);
+	}
 };

@@ -1,31 +1,31 @@
 export interface Game {
-  id: string;
-  title: string;
-  emoji: string;
-  description: string;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
-  time: string;
-  skills: string[];
-  preview: string;
-  code: string;
-  howItWorks: string[];
-  challenges: string[];
-  trinketLink?: string;
+	id: string;
+	title: string;
+	emoji: string;
+	description: string;
+	difficulty: "Beginner" | "Intermediate" | "Advanced";
+	time: string;
+	skills: string[];
+	preview: string;
+	code: string;
+	howItWorks: string[];
+	challenges: string[];
+	trinketLink?: string;
 }
 
 export const games: Game[] = [
-  {
-    id: "number-guess",
-    title: "Number Guessing Game",
-    emoji: "🎯",
-    description:
-      "Try to guess the secret number between 1 and 100. The computer will tell you if your guess is too high or too low!",
-    difficulty: "Beginner",
-    time: "20 min",
-    skills: ["Variables", "Loops", "Conditionals", "Input/Output"],
-    preview:
-      "A fun text-based game where you guess a random number. Perfect for learning the basics!",
-    code: `import random
+	{
+		id: "number-guess",
+		title: "Number Guessing Game",
+		emoji: "🎯",
+		description:
+			"Try to guess the secret number between 1 and 100. The computer will tell you if your guess is too high or too low!",
+		difficulty: "Beginner",
+		time: "20 min",
+		skills: ["Variables", "Loops", "Conditionals", "Input/Output"],
+		preview:
+			"A fun text-based game where you guess a random number. Perfect for learning the basics!",
+		code: `import random
 
 # Generate a random number between 1 and 100
 secret_number = random.randint(1, 100)
@@ -57,32 +57,32 @@ while attempts < max_attempts:
         print("Attempts remaining: " + str(remaining) + "\\n")
     else:
         print("😢 Game Over! The number was " + str(secret_number))`,
-    howItWorks: [
-      "We use random.randint() to generate a secret number between 1 and 100",
-      "A while loop keeps the game running until the player guesses correctly or runs out of attempts",
-      "We compare the guess with the secret number using if/elif/else statements",
-      "The attempts counter tracks how many guesses the player has made",
-    ],
-    challenges: [
-      "Add difficulty levels (Easy: 1-50, Medium: 1-100, Hard: 1-500)",
-      "Keep track of the best score (fewest attempts)",
-      "Add hints after 5 wrong guesses",
-      "Create a two-player mode where players take turns",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "rock-paper-scissors",
-    title: "Rock Paper Scissors",
-    emoji: "✊",
-    description:
-      "Play the classic game against the computer. Best of 5 rounds wins!",
-    difficulty: "Beginner",
-    time: "25 min",
-    skills: ["Functions", "Lists", "Random", "String Comparison"],
-    preview:
-      "Challenge the computer to a classic game of Rock, Paper, Scissors!",
-    code: `import random
+		howItWorks: [
+			"We use random.randint() to generate a secret number between 1 and 100",
+			"A while loop keeps the game running until the player guesses correctly or runs out of attempts",
+			"We compare the guess with the secret number using if/elif/else statements",
+			"The attempts counter tracks how many guesses the player has made",
+		],
+		challenges: [
+			"Add difficulty levels (Easy: 1-50, Medium: 1-100, Hard: 1-500)",
+			"Keep track of the best score (fewest attempts)",
+			"Add hints after 5 wrong guesses",
+			"Create a two-player mode where players take turns",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "rock-paper-scissors",
+		title: "Rock Paper Scissors",
+		emoji: "✊",
+		description:
+			"Play the classic game against the computer. Best of 5 rounds wins!",
+		difficulty: "Beginner",
+		time: "25 min",
+		skills: ["Functions", "Lists", "Random", "String Comparison"],
+		preview:
+			"Challenge the computer to a classic game of Rock, Paper, Scissors!",
+		code: `import random
 
 def get_computer_choice():
     """Computer randomly chooses rock, paper, or scissors"""
@@ -159,32 +159,32 @@ elif computer_score > player_score:
     print("🤖 Computer wins the game!")
 else:
     print("🤝 It's a tie game!")`,
-    howItWorks: [
-      "Functions organize the code: get_computer_choice(), determine_winner(), and display_choice()",
-      "The computer uses random.choice() to pick from a list of options",
-      "We use logical operators (and/or) to check all winning combinations",
-      "A while loop runs the game for 5 rounds, keeping track of scores",
-    ],
-    challenges: [
-      'Add "Rock Paper Scissors Lizard Spock" with 5 choices',
-      "Create a tournament mode with multiple opponents",
-      "Add sound effects or ASCII art for each choice",
-      "Track win/loss statistics across multiple games",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "hangman",
-    title: "Hangman",
-    emoji: "📝",
-    description:
-      "Guess the hidden word one letter at a time before you run out of tries!",
-    difficulty: "Beginner",
-    time: "30 min",
-    skills: ["Strings", "Lists", "Loops", "String Methods"],
-    preview:
-      "Classic word guessing game. Can you figure out the word before running out of guesses?",
-    code: `import random
+		howItWorks: [
+			"Functions organize the code: get_computer_choice(), determine_winner(), and display_choice()",
+			"The computer uses random.choice() to pick from a list of options",
+			"We use logical operators (and/or) to check all winning combinations",
+			"A while loop runs the game for 5 rounds, keeping track of scores",
+		],
+		challenges: [
+			'Add "Rock Paper Scissors Lizard Spock" with 5 choices',
+			"Create a tournament mode with multiple opponents",
+			"Add sound effects or ASCII art for each choice",
+			"Track win/loss statistics across multiple games",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "hangman",
+		title: "Hangman",
+		emoji: "📝",
+		description:
+			"Guess the hidden word one letter at a time before you run out of tries!",
+		difficulty: "Beginner",
+		time: "30 min",
+		skills: ["Strings", "Lists", "Loops", "String Methods"],
+		preview:
+			"Classic word guessing game. Can you figure out the word before running out of guesses?",
+		code: `import random
 
 def get_random_word():
     """Choose a random word from the list"""
@@ -314,32 +314,32 @@ while tries_left > 0:
 if tries_left == 0:
     print(display_hangman(0))
     print(f"😢 Game Over! The word was: {word}")`,
-    howItWorks: [
-      "We use a set to store guessed letters (sets automatically prevent duplicates)",
-      "The display_word() function shows underscores for unguessed letters",
-      "String methods like .upper() and .isalpha() help validate input",
-      "The all() function checks if every letter in the word has been guessed",
-    ],
-    challenges: [
-      "Add categories (animals, countries, foods) for word selection",
-      "Create a hint system that reveals a random letter",
-      "Add a two-player mode where one player enters the word",
-      "Keep track of wins and losses with a score counter",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "dice-roller",
-    title: "Dice Rolling Simulator",
-    emoji: "🎲",
-    description:
-      "Roll virtual dice and see the results! Perfect for board games or just for fun.",
-    difficulty: "Beginner",
-    time: "15 min",
-    skills: ["Random", "Loops", "Input/Output", "Basic Math"],
-    preview:
-      "Simulate rolling dice with different numbers of sides. Great introduction to random numbers!",
-    code: `import random
+		howItWorks: [
+			"We use a set to store guessed letters (sets automatically prevent duplicates)",
+			"The display_word() function shows underscores for unguessed letters",
+			"String methods like .upper() and .isalpha() help validate input",
+			"The all() function checks if every letter in the word has been guessed",
+		],
+		challenges: [
+			"Add categories (animals, countries, foods) for word selection",
+			"Create a hint system that reveals a random letter",
+			"Add a two-player mode where one player enters the word",
+			"Keep track of wins and losses with a score counter",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "dice-roller",
+		title: "Dice Rolling Simulator",
+		emoji: "🎲",
+		description:
+			"Roll virtual dice and see the results! Perfect for board games or just for fun.",
+		difficulty: "Beginner",
+		time: "15 min",
+		skills: ["Random", "Loops", "Input/Output", "Basic Math"],
+		preview:
+			"Simulate rolling dice with different numbers of sides. Great introduction to random numbers!",
+		code: `import random
 
 def roll_dice(sides, num_dice):
     """Roll dice and return results"""
@@ -451,32 +451,32 @@ while True:
         print("Thanks for playing! 🎲")
         break
     print()`,
-    howItWorks: [
-      "The random.randint() function generates random numbers between 1 and the number of sides",
-      "We use a loop to roll multiple dice and store results in a list",
-      "ASCII art dictionary displays visual dice for standard 6-sided dice",
-      "The sum() function adds up all dice results to show the total",
-    ],
-    challenges: [
-      "Add statistics tracking (highest roll, lowest roll, average)",
-      "Create preset options (2d6 for board games, 1d20 for RPGs)",
-      "Add colored output for different dice results",
-      "Create a probability calculator showing chances of rolling certain numbers",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "mad-libs",
-    title: "Mad Libs Generator",
-    emoji: "📖",
-    description:
-      "Create hilarious stories by filling in the blanks with random words!",
-    difficulty: "Beginner",
-    time: "20 min",
-    skills: ["Strings", "Input/Output", "String Formatting", "Lists"],
-    preview:
-      "Fill in words to create funny stories. Learn about string manipulation and user input!",
-    code: `print("📖 Welcome to Mad Libs!")
+		howItWorks: [
+			"The random.randint() function generates random numbers between 1 and the number of sides",
+			"We use a loop to roll multiple dice and store results in a list",
+			"ASCII art dictionary displays visual dice for standard 6-sided dice",
+			"The sum() function adds up all dice results to show the total",
+		],
+		challenges: [
+			"Add statistics tracking (highest roll, lowest roll, average)",
+			"Create preset options (2d6 for board games, 1d20 for RPGs)",
+			"Add colored output for different dice results",
+			"Create a probability calculator showing chances of rolling certain numbers",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "mad-libs",
+		title: "Mad Libs Generator",
+		emoji: "📖",
+		description:
+			"Create hilarious stories by filling in the blanks with random words!",
+		difficulty: "Beginner",
+		time: "20 min",
+		skills: ["Strings", "Input/Output", "String Formatting", "Lists"],
+		preview:
+			"Fill in words to create funny stories. Learn about string manipulation and user input!",
+		code: `print("📖 Welcome to Mad Libs!")
 print("Fill in the words to create a funny story!\\n")
 
 # Story templates
@@ -565,31 +565,31 @@ if play_again in ['yes', 'y']:
     print("\\nGreat! Run the program again to play!")
 else:
     print("Thanks for playing! 📖")`,
-    howItWorks: [
-      "Stories are stored as dictionaries with prompts and templates",
-      "We use a list to store multiple story options for variety",
-      "The .format() method fills in placeholders in the template with user words",
-      "Input validation ensures users choose valid story numbers",
-    ],
-    challenges: [
-      "Add 5 more story templates with different themes",
-      "Save completed stories to a text file",
-      "Add a random story mode that picks a story automatically",
-      "Create themed story packs (holiday, space, underwater)",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "quiz-game",
-    title: "Simple Quiz Game",
-    emoji: "❓",
-    description: "Test your knowledge with a fun multiple-choice quiz!",
-    difficulty: "Beginner",
-    time: "25 min",
-    skills: ["Lists", "Dictionaries", "Conditionals", "Score Tracking"],
-    preview:
-      "Answer questions and track your score. Perfect for learning about data structures!",
-    code: `print("❓ Welcome to the Quiz Game!")
+		howItWorks: [
+			"Stories are stored as dictionaries with prompts and templates",
+			"We use a list to store multiple story options for variety",
+			"The .format() method fills in placeholders in the template with user words",
+			"Input validation ensures users choose valid story numbers",
+		],
+		challenges: [
+			"Add 5 more story templates with different themes",
+			"Save completed stories to a text file",
+			"Add a random story mode that picks a story automatically",
+			"Create themed story packs (holiday, space, underwater)",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "quiz-game",
+		title: "Simple Quiz Game",
+		emoji: "❓",
+		description: "Test your knowledge with a fun multiple-choice quiz!",
+		difficulty: "Beginner",
+		time: "25 min",
+		skills: ["Lists", "Dictionaries", "Conditionals", "Score Tracking"],
+		preview:
+			"Answer questions and track your score. Perfect for learning about data structures!",
+		code: `print("❓ Welcome to the Quiz Game!")
 print("Answer these questions and see how many you get right!\\n")
 
 # Quiz questions
@@ -690,32 +690,32 @@ elif percentage >= 40:
     print("\\n📚 Not bad! Study a bit more and try again!")
 else:
     print("\\n💪 Keep practicing! You'll do better next time!")`,
-    howItWorks: [
-      "Questions are stored as dictionaries inside a list for easy organization",
-      "We use enumerate() to track question numbers while looping",
-      "Conditionals check if the user's answer matches the correct answer",
-      "Score tracking uses a simple counter that increments for correct answers",
-    ],
-    challenges: [
-      "Add different quiz categories (Math, Science, History)",
-      "Create a timer for each question",
-      "Add a hint system that costs points",
-      "Save high scores to a file and display leaderboard",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "fortune-teller",
-    title: "Fortune Teller",
-    emoji: "🔮",
-    description:
-      "Ask a question and receive a mystical answer from the fortune teller!",
-    difficulty: "Beginner",
-    time: "15 min",
-    skills: ["Random", "Lists", "Input/Output", "String Formatting"],
-    preview:
-      "A fun magic 8-ball style game that gives random fortunes. Great for learning random selection!",
-    code: `import random
+		howItWorks: [
+			"Questions are stored as dictionaries inside a list for easy organization",
+			"We use enumerate() to track question numbers while looping",
+			"Conditionals check if the user's answer matches the correct answer",
+			"Score tracking uses a simple counter that increments for correct answers",
+		],
+		challenges: [
+			"Add different quiz categories (Math, Science, History)",
+			"Create a timer for each question",
+			"Add a hint system that costs points",
+			"Save high scores to a file and display leaderboard",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "fortune-teller",
+		title: "Fortune Teller",
+		emoji: "🔮",
+		description:
+			"Ask a question and receive a mystical answer from the fortune teller!",
+		difficulty: "Beginner",
+		time: "15 min",
+		skills: ["Random", "Lists", "Input/Output", "String Formatting"],
+		preview:
+			"A fun magic 8-ball style game that gives random fortunes. Great for learning random selection!",
+		code: `import random
 import time
 
 print("🔮 Welcome to the Mystical Fortune Teller! 🔮")
@@ -803,37 +803,37 @@ while True:
     print(f"🔮 {fortune} 🔮\\n")
     print("-" * 50)
     print()`,
-    howItWorks: [
-      "A list stores all possible fortune responses for random selection",
-      "The random.choice() function picks a random fortune from the list",
-      "A dictionary stores special responses for specific questions",
-      "The time.sleep() function creates a dramatic pause before revealing the fortune",
-    ],
-    challenges: [
-      "Add fortune categories (love, career, friendship)",
-      "Create a fortune history that shows past questions and answers",
-      "Add ASCII art of a crystal ball or mystical symbols",
-      "Make fortunes more specific based on keywords in the question",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "snake",
-    title: "Snake Game",
-    emoji: "🐍",
-    description:
-      "Control the snake to eat food and grow longer. Don't hit the walls or yourself!",
-    difficulty: "Intermediate",
-    time: "45 min",
-    skills: [
-      "Turtle Graphics",
-      "Classes",
-      "Key Bindings",
-      "Collision Detection",
-    ],
-    preview:
-      "Classic arcade game using turtle graphics. Eat food, grow longer, and avoid crashing!",
-    code: `import turtle
+		howItWorks: [
+			"A list stores all possible fortune responses for random selection",
+			"The random.choice() function picks a random fortune from the list",
+			"A dictionary stores special responses for specific questions",
+			"The time.sleep() function creates a dramatic pause before revealing the fortune",
+		],
+		challenges: [
+			"Add fortune categories (love, career, friendship)",
+			"Create a fortune history that shows past questions and answers",
+			"Add ASCII art of a crystal ball or mystical symbols",
+			"Make fortunes more specific based on keywords in the question",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "snake",
+		title: "Snake Game",
+		emoji: "🐍",
+		description:
+			"Control the snake to eat food and grow longer. Don't hit the walls or yourself!",
+		difficulty: "Intermediate",
+		time: "45 min",
+		skills: [
+			"Turtle Graphics",
+			"Classes",
+			"Key Bindings",
+			"Collision Detection",
+		],
+		preview:
+			"Classic arcade game using turtle graphics. Eat food, grow longer, and avoid crashing!",
+		code: `import turtle
 import random
 import time
 
@@ -992,38 +992,38 @@ while True:
     time.sleep(0.1)
 
 screen.mainloop()`,
-    howItWorks: [
-      "Turtle graphics creates the game window and all visual elements",
-      "The snake is made of turtle objects - one for the head and one for each body segment",
-      "Key bindings (screen.onkey) connect arrow keys to movement functions",
-      "Collision detection uses the distance() method to check if objects are touching",
-      "The game loop updates positions, checks collisions, and redraws the screen",
-    ],
-    challenges: [
-      "Add different difficulty levels (change speed)",
-      "Create obstacles or walls in the middle of the screen",
-      "Add special food that gives bonus points",
-      "Make the snake change colors as it grows",
-      "Add a pause feature with the spacebar",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "pong",
-    title: "Pong Game",
-    emoji: "🏓",
-    description: "Classic two-player paddle game. First to 5 points wins!",
-    difficulty: "Intermediate",
-    time: "50 min",
-    skills: [
-      "Turtle Graphics",
-      "Game Loop",
-      "Collision Detection",
-      "Score Tracking",
-    ],
-    preview:
-      "Recreate the classic Pong game with two paddles and a bouncing ball!",
-    code: `import turtle
+		howItWorks: [
+			"Turtle graphics creates the game window and all visual elements",
+			"The snake is made of turtle objects - one for the head and one for each body segment",
+			"Key bindings (screen.onkey) connect arrow keys to movement functions",
+			"Collision detection uses the distance() method to check if objects are touching",
+			"The game loop updates positions, checks collisions, and redraws the screen",
+		],
+		challenges: [
+			"Add different difficulty levels (change speed)",
+			"Create obstacles or walls in the middle of the screen",
+			"Add special food that gives bonus points",
+			"Make the snake change colors as it grows",
+			"Add a pause feature with the spacebar",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "pong",
+		title: "Pong Game",
+		emoji: "🏓",
+		description: "Classic two-player paddle game. First to 5 points wins!",
+		difficulty: "Intermediate",
+		time: "50 min",
+		skills: [
+			"Turtle Graphics",
+			"Game Loop",
+			"Collision Detection",
+			"Score Tracking",
+		],
+		preview:
+			"Recreate the classic Pong game with two paddles and a bouncing ball!",
+		code: `import turtle
 
 # Screen setup
 screen = turtle.Screen()
@@ -1159,34 +1159,34 @@ while True:
         break
 
 screen.mainloop()`,
-    howItWorks: [
-      "Two paddles are created using turtle objects with stretched square shapes",
-      "The ball moves continuously by updating its x and y coordinates (dx and dy)",
-      "When the ball hits a wall or paddle, we reverse its direction by multiplying dx or dy by -1",
-      "Collision detection checks if the ball's position overlaps with paddle positions",
-      "Scores update when the ball goes past a paddle off the screen",
-    ],
-    challenges: [
-      "Add a single-player mode with AI opponent",
-      "Increase ball speed after each paddle hit",
-      "Add sound effects for collisions and scoring",
-      'Create a "first to 10" mode or custom win conditions',
-      "Add a center line and make the ball flash when scored",
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
-  {
-    id: "tic-tac-toe",
-    title: "Tic-Tac-Toe",
-    emoji: "⭕",
-    description:
-      "Play Tic-Tac-Toe with a graphical interface. Can you beat the computer?",
-    difficulty: "Intermediate",
-    time: "40 min",
-    skills: ["Turtle Graphics", "Lists", "Functions", "Game Logic"],
-    preview:
-      "Classic Tic-Tac-Toe game with a nice graphical interface using turtle!",
-    code: `import turtle
+		howItWorks: [
+			"Two paddles are created using turtle objects with stretched square shapes",
+			"The ball moves continuously by updating its x and y coordinates (dx and dy)",
+			"When the ball hits a wall or paddle, we reverse its direction by multiplying dx or dy by -1",
+			"Collision detection checks if the ball's position overlaps with paddle positions",
+			"Scores update when the ball goes past a paddle off the screen",
+		],
+		challenges: [
+			"Add a single-player mode with AI opponent",
+			"Increase ball speed after each paddle hit",
+			"Add sound effects for collisions and scoring",
+			'Create a "first to 10" mode or custom win conditions',
+			"Add a center line and make the ball flash when scored",
+		],
+		trinketLink: "https://trinket.io/python",
+	},
+	{
+		id: "tic-tac-toe",
+		title: "Tic-Tac-Toe",
+		emoji: "⭕",
+		description:
+			"Play Tic-Tac-Toe with a graphical interface. Can you beat the computer?",
+		difficulty: "Intermediate",
+		time: "40 min",
+		skills: ["Turtle Graphics", "Lists", "Functions", "Game Logic"],
+		preview:
+			"Classic Tic-Tac-Toe game with a nice graphical interface using turtle!",
+		code: `import turtle
 
 # Screen setup
 screen = turtle.Screen()
@@ -1356,20 +1356,20 @@ screen.update()
 screen.onclick(click_handler)
 
 screen.mainloop()`,
-    howItWorks: [
-      "The board is represented as a list of 9 spaces (indices 0-8)",
-      "Mouse clicks are converted to board positions using coordinate math",
-      "The check_winner() function tests all possible winning combinations",
-      "Turtle graphics draws X's and O's at calculated positions on the grid",
-      "The game alternates between players and checks for a winner after each move",
-    ],
-    challenges: [
-      "Add an AI opponent that makes random moves",
-      'Create a "smart" AI that tries to win or block',
-      "Add a score counter for multiple games",
-      "Highlight the winning combination when someone wins",
-      'Add a "Play Again" button to reset the game',
-    ],
-    trinketLink: "https://trinket.io/python",
-  },
+		howItWorks: [
+			"The board is represented as a list of 9 spaces (indices 0-8)",
+			"Mouse clicks are converted to board positions using coordinate math",
+			"The check_winner() function tests all possible winning combinations",
+			"Turtle graphics draws X's and O's at calculated positions on the grid",
+			"The game alternates between players and checks for a winner after each move",
+		],
+		challenges: [
+			"Add an AI opponent that makes random moves",
+			'Create a "smart" AI that tries to win or block',
+			"Add a score counter for multiple games",
+			"Highlight the winning combination when someone wins",
+			'Add a "Play Again" button to reset the game',
+		],
+		trinketLink: "https://trinket.io/python",
+	},
 ];

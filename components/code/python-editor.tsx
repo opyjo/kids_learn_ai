@@ -1,334 +1,333 @@
 "use client";
 
+import {
+	AlertCircle,
+	CheckCircle,
+	Loader2,
+	MessageSquare,
+	Play,
+	RotateCcw,
+	Trash2,
+} from "lucide-react";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import {
-  Play,
-  RotateCcw,
-  CheckCircle,
-  AlertCircle,
-  Loader2,
-  MessageSquare,
-  Trash2,
-} from "lucide-react";
 
 interface PythonEditorProps {
-  initialCode?: string;
-  onCodeChange?: (code: string) => void;
-  onRunComplete?: (output: string, isSuccess: boolean) => void;
-  onAskAboutCode?: () => void;
-  className?: string;
+	initialCode?: string;
+	onCodeChange?: (code: string) => void;
+	onRunComplete?: (output: string, isSuccess: boolean) => void;
+	onAskAboutCode?: () => void;
+	className?: string;
 }
 
 export function PythonEditor({
-  initialCode = "",
-  onCodeChange,
-  onRunComplete,
-  onAskAboutCode,
-  className,
+	initialCode = "",
+	onCodeChange,
+	onRunComplete,
+	onAskAboutCode,
+	className,
 }: PythonEditorProps) {
-  const [code, setCode] = useState(initialCode);
-  const [output, setOutput] = useState("");
-  const [isRunning, setIsRunning] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [pyodideReady, setPyodideReady] = useState(false);
-  const [error, setError] = useState("");
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const pyodideRef = useRef<any>(null);
+	const [code, setCode] = useState(initialCode);
+	const [output, setOutput] = useState("");
+	const [isRunning, setIsRunning] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [pyodideReady, setPyodideReady] = useState(false);
+	const [error, setError] = useState("");
+	const textareaRef = useRef<HTMLTextAreaElement>(null);
+	const pyodideRef = useRef<any>(null);
 
-  useEffect(() => {
-    let mounted = true;
+	useEffect(() => {
+		let mounted = true;
 
-    const initPyodide = async () => {
-      try {
-        // Use dynamic import with a script tag approach to avoid build-time issues
-        const script = document.createElement("script");
-        script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js";
-        script.async = true;
+		const initPyodide = async () => {
+			try {
+				// Use dynamic import with a script tag approach to avoid build-time issues
+				const script = document.createElement("script");
+				script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js";
+				script.async = true;
 
-        script.onload = async () => {
-          if (!mounted) return;
+				script.onload = async () => {
+					if (!mounted) return;
 
-          try {
-            // @ts-ignore - Pyodide will be available globally after script load
-            const { loadPyodide } = window as any;
+					try {
+						// @ts-expect-error - Pyodide will be available globally after script load
+						const { loadPyodide } = window as any;
 
-            const pyodide = await loadPyodide({
-              indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
-            });
+						const pyodide = await loadPyodide({
+							indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
+						});
 
-            if (!mounted) return;
+						if (!mounted) return;
 
-            pyodideRef.current = pyodide;
-            setPyodideReady(true);
-          } catch (err) {
-            if (!mounted) return;
-            setError("Failed to initialize Python environment");
-            console.error("[v0] Pyodide initialization error:", err);
-          }
-        };
+						pyodideRef.current = pyodide;
+						setPyodideReady(true);
+					} catch (err) {
+						if (!mounted) return;
+						setError("Failed to initialize Python environment");
+						console.error("[v0] Pyodide initialization error:", err);
+					}
+				};
 
-        script.onerror = () => {
-          if (!mounted) return;
-          setError("Failed to load Python environment");
-        };
+				script.onerror = () => {
+					if (!mounted) return;
+					setError("Failed to load Python environment");
+				};
 
-        document.head.appendChild(script);
-      } catch (err) {
-        if (!mounted) return;
-        setError("Failed to initialize Python environment");
-        console.error("[v0] Pyodide initialization error:", err);
-      }
-    };
+				document.head.appendChild(script);
+			} catch (err) {
+				if (!mounted) return;
+				setError("Failed to initialize Python environment");
+				console.error("[v0] Pyodide initialization error:", err);
+			}
+		};
 
-    initPyodide();
+		initPyodide();
 
-    return () => {
-      mounted = false;
-    };
-  }, []);
+		return () => {
+			mounted = false;
+		};
+	}, []);
 
-  // Auto-resize textarea
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height =
-        textareaRef.current.scrollHeight + "px";
-    }
-  }, [code]);
+	// Auto-resize textarea
+	useEffect(() => {
+		if (textareaRef.current) {
+			textareaRef.current.style.height = "auto";
+			textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+		}
+	}, []);
 
-  const handleCodeChange = (newCode: string) => {
-    setCode(newCode);
-    onCodeChange?.(newCode);
-  };
+	const handleCodeChange = (newCode: string) => {
+		setCode(newCode);
+		onCodeChange?.(newCode);
+	};
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Tab") {
-      e.preventDefault();
-      const start = e.currentTarget.selectionStart;
-      const end = e.currentTarget.selectionEnd;
-      const newValue = code.substring(0, start) + "    " + code.substring(end);
-      handleCodeChange(newValue);
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.key === "Tab") {
+			e.preventDefault();
+			const start = e.currentTarget.selectionStart;
+			const end = e.currentTarget.selectionEnd;
+			const newValue = `${code.substring(0, start)}    ${code.substring(end)}`;
+			handleCodeChange(newValue);
 
-      setTimeout(() => {
-        if (textareaRef.current) {
-          textareaRef.current.selectionStart =
-            textareaRef.current.selectionEnd = start + 4;
-        }
-      }, 0);
-    }
+			setTimeout(() => {
+				if (textareaRef.current) {
+					textareaRef.current.selectionStart =
+						textareaRef.current.selectionEnd = start + 4;
+				}
+			}, 0);
+		}
 
-    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-      e.preventDefault();
-      handleRunCode();
-    }
-  };
+		if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+			e.preventDefault();
+			handleRunCode();
+		}
+	};
 
-  const handleRunCode = async () => {
-    if (!pyodideReady || !pyodideRef.current) {
-      setOutput("Python environment is still loading...");
-      return;
-    }
+	const handleRunCode = async () => {
+		if (!pyodideReady || !pyodideRef.current) {
+			setOutput("Python environment is still loading...");
+			return;
+		}
 
-    setIsRunning(true);
-    setOutput("");
-    setError("");
-    setIsSuccess(false);
+		setIsRunning(true);
+		setOutput("");
+		setError("");
+		setIsSuccess(false);
 
-    try {
-      // Capture stdout
-      pyodideRef.current.runPython(`
+		try {
+			// Capture stdout
+			pyodideRef.current.runPython(`
         import sys
         from io import StringIO
         sys.stdout = StringIO()
       `);
 
-      // Run the user's code
-      pyodideRef.current.runPython(code);
+			// Run the user's code
+			pyodideRef.current.runPython(code);
 
-      // Get the output
-      const stdout = pyodideRef.current.runPython("sys.stdout.getvalue()");
+			// Get the output
+			const stdout = pyodideRef.current.runPython("sys.stdout.getvalue()");
 
-      setOutput(stdout || "Code executed successfully (no output)");
-      setIsSuccess(true);
-      onRunComplete?.(stdout, true);
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Unknown error occurred";
-      setOutput(`Error: ${errorMessage}`);
-      setError(errorMessage);
-      setIsSuccess(false);
-      onRunComplete?.(errorMessage, false);
-    } finally {
-      setIsRunning(false);
-    }
-  };
+			setOutput(stdout || "Code executed successfully (no output)");
+			setIsSuccess(true);
+			onRunComplete?.(stdout, true);
+		} catch (err) {
+			const errorMessage =
+				err instanceof Error ? err.message : "Unknown error occurred";
+			setOutput(`Error: ${errorMessage}`);
+			setError(errorMessage);
+			setIsSuccess(false);
+			onRunComplete?.(errorMessage, false);
+		} finally {
+			setIsRunning(false);
+		}
+	};
 
-  const handleReset = () => {
-    setCode(initialCode);
-    setOutput("");
-    setError("");
-    setIsSuccess(false);
-    onCodeChange?.(initialCode);
-  };
+	const handleReset = () => {
+		setCode(initialCode);
+		setOutput("");
+		setError("");
+		setIsSuccess(false);
+		onCodeChange?.(initialCode);
+	};
 
-  const handleClear = () => {
-    setCode("");
-    setOutput("");
-    setError("");
-    setIsSuccess(false);
-    onCodeChange?.("");
-  };
+	const handleClear = () => {
+		setCode("");
+		setOutput("");
+		setError("");
+		setIsSuccess(false);
+		onCodeChange?.("");
+	};
 
-  const lineCount = code.split("\n").length;
-  const lineNumberWidth = lineCount.toString().length * 8 + 16;
+	const lineCount = code.split("\n").length;
+	const lineNumberWidth = lineCount.toString().length * 8 + 16;
 
-  return (
-    <Card className={`flex flex-col ${className}`}>
-      <CardHeader className="bg-card border-b shrink-0">
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-3 text-base">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="font-semibold tracking-tight">
-                Python Code Editor
-              </span>
-            </div>
-          </CardTitle>
-          <div className="flex items-center gap-2">
-            {onAskAboutCode && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={onAskAboutCode}
-                className="rounded-full border-primary/40 hover:bg-primary/10 hover:border-primary"
-                disabled={!code.trim()}
-              >
-                <MessageSquare className="h-4 w-4 mr-2" />
-                Ask BrightByte
-              </Button>
-            )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              className="rounded-full"
-              aria-label="Reset code"
-            >
-              <RotateCcw className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleClear}
-              className="rounded-full"
-              aria-label="Clear code"
-              disabled={!code.trim()}
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
-            <Button
-              onClick={handleRunCode}
-              disabled={isRunning || !pyodideReady}
-              className="rounded-full bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600"
-              aria-label={isRunning ? "Running code" : "Run code"}
-            >
-              {isRunning ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Play className="h-4 w-4" />
-              )}
-            </Button>
-          </div>
-        </div>
-        <div className="text-sm text-gray-500">
-          Press{" "}
-          <kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">
-            Ctrl+Enter
-          </kbd>{" "}
-          to run code
-        </div>
-      </CardHeader>
+	return (
+		<Card className={`flex flex-col ${className}`}>
+			<CardHeader className="bg-card border-b shrink-0">
+				<div className="flex items-center justify-between">
+					<CardTitle className="flex items-center gap-3 text-base">
+						<div className="flex items-center gap-2">
+							<div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+							<span className="font-semibold tracking-tight">
+								Python Code Editor
+							</span>
+						</div>
+					</CardTitle>
+					<div className="flex items-center gap-2">
+						{onAskAboutCode && (
+							<Button
+								variant="outline"
+								size="sm"
+								onClick={onAskAboutCode}
+								className="rounded-full border-primary/40 hover:bg-primary/10 hover:border-primary"
+								disabled={!code.trim()}
+							>
+								<MessageSquare className="h-4 w-4 mr-2" />
+								Ask BrightByte
+							</Button>
+						)}
+						<Button
+							variant="outline"
+							size="sm"
+							onClick={handleReset}
+							className="rounded-full"
+							aria-label="Reset code"
+						>
+							<RotateCcw className="h-4 w-4" />
+						</Button>
+						<Button
+							variant="outline"
+							size="sm"
+							onClick={handleClear}
+							className="rounded-full"
+							aria-label="Clear code"
+							disabled={!code.trim()}
+						>
+							<Trash2 className="h-4 w-4" />
+						</Button>
+						<Button
+							onClick={handleRunCode}
+							disabled={isRunning || !pyodideReady}
+							className="rounded-full bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600"
+							aria-label={isRunning ? "Running code" : "Run code"}
+						>
+							{isRunning ? (
+								<Loader2 className="h-4 w-4 animate-spin" />
+							) : (
+								<Play className="h-4 w-4" />
+							)}
+						</Button>
+					</div>
+				</div>
+				<div className="text-sm text-gray-500">
+					Press{" "}
+					<kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">
+						Ctrl+Enter
+					</kbd>{" "}
+					to run code
+				</div>
+			</CardHeader>
 
-      <CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
-        {/* Code Editor */}
-        <div className="relative bg-gray-900 text-gray-100 flex-1 overflow-hidden">
-          {/* Line numbers */}
-          <div
-            className="absolute left-0 top-0 p-4 text-gray-500 font-mono text-sm pointer-events-none select-none border-r border-gray-700"
-            style={{ width: lineNumberWidth }}
-          >
-            {code.split("\n").map((_, index) => (
-              <div key={index} style={{ lineHeight: "1.5", height: "21px" }}>
-                {index + 1}
-              </div>
-            ))}
-          </div>
+			<CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
+				{/* Code Editor */}
+				<div className="relative bg-gray-900 text-gray-100 flex-1 overflow-hidden">
+					{/* Line numbers */}
+					<div
+						className="absolute left-0 top-0 p-4 text-gray-500 font-mono text-sm pointer-events-none select-none border-r border-gray-700"
+						style={{ width: lineNumberWidth }}
+					>
+						{code.split("\n").map((_, index) => (
+							<div key={index} style={{ lineHeight: "1.5", height: "21px" }}>
+								{index + 1}
+							</div>
+						))}
+					</div>
 
-          {/* Code textarea */}
-          <textarea
-            ref={textareaRef}
-            value={code}
-            onChange={(e) => handleCodeChange(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="w-full h-full bg-transparent text-gray-100 font-mono text-sm resize-none border-0 outline-none focus:ring-0"
-            placeholder="Write your Python code here..."
-            spellCheck={false}
-            style={{
-              minHeight: "250px",
-              lineHeight: "1.5",
-              tabSize: 4,
-              paddingLeft: lineNumberWidth + 16,
-              paddingRight: "16px",
-              paddingTop: "16px",
-              paddingBottom: "16px",
-            }}
-          />
-        </div>
+					{/* Code textarea */}
+					<textarea
+						ref={textareaRef}
+						value={code}
+						onChange={(e) => handleCodeChange(e.target.value)}
+						onKeyDown={handleKeyDown}
+						className="w-full h-full bg-transparent text-gray-100 font-mono text-sm resize-none border-0 outline-none focus:ring-0"
+						placeholder="Write your Python code here..."
+						spellCheck={false}
+						style={{
+							minHeight: "250px",
+							lineHeight: "1.5",
+							tabSize: 4,
+							paddingLeft: lineNumberWidth + 16,
+							paddingRight: "16px",
+							paddingTop: "16px",
+							paddingBottom: "16px",
+						}}
+					/>
+				</div>
 
-        <Separator />
+				<Separator />
 
-        {/* Output */}
-        <div className="bg-gray-950 text-green-400 font-mono text-sm flex-shrink-0">
-          <div className="flex items-center justify-between p-3 border-b border-gray-800">
-            <div className="flex items-center gap-2">
-              <span className="text-gray-400">Output:</span>
-              {isSuccess && <CheckCircle className="h-4 w-4 text-green-400" />}
-              {error && <AlertCircle className="h-4 w-4 text-red-400" />}
-            </div>
-            {output && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setOutput("")}
-                className="text-gray-400 hover:text-white h-6 px-2 rounded-full"
-              >
-                Clear
-              </Button>
-            )}
-          </div>
-          <div className="p-4 min-h-[100px] max-h-[200px] overflow-auto">
-            {output ? (
-              <pre className="whitespace-pre-wrap text-sm">
-                {error ? (
-                  <span className="text-red-400">{output}</span>
-                ) : (
-                  <span className="text-green-400">{output}</span>
-                )}
-              </pre>
-            ) : (
-              <span className="text-gray-500 italic">
-                {pyodideReady
-                  ? "Click 'Run Code' to see the output here..."
-                  : "Loading Python environment..."}
-              </span>
-            )}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
+				{/* Output */}
+				<div className="bg-gray-950 text-green-400 font-mono text-sm flex-shrink-0">
+					<div className="flex items-center justify-between p-3 border-b border-gray-800">
+						<div className="flex items-center gap-2">
+							<span className="text-gray-400">Output:</span>
+							{isSuccess && <CheckCircle className="h-4 w-4 text-green-400" />}
+							{error && <AlertCircle className="h-4 w-4 text-red-400" />}
+						</div>
+						{output && (
+							<Button
+								variant="ghost"
+								size="sm"
+								onClick={() => setOutput("")}
+								className="text-gray-400 hover:text-white h-6 px-2 rounded-full"
+							>
+								Clear
+							</Button>
+						)}
+					</div>
+					<div className="p-4 min-h-[100px] max-h-[200px] overflow-auto">
+						{output ? (
+							<pre className="whitespace-pre-wrap text-sm">
+								{error ? (
+									<span className="text-red-400">{output}</span>
+								) : (
+									<span className="text-green-400">{output}</span>
+								)}
+							</pre>
+						) : (
+							<span className="text-gray-500 italic">
+								{pyodideReady
+									? "Click 'Run Code' to see the output here..."
+									: "Loading Python environment..."}
+							</span>
+						)}
+					</div>
+				</div>
+			</CardContent>
+		</Card>
+	);
 }

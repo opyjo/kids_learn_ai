@@ -1,155 +1,149 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 interface UseLessonCompletionProps {
-  lessonDbId: string;
-  userId?: string;
+	lessonDbId: string;
+	userId?: string;
 }
 
 export const useLessonCompletion = ({
-  lessonDbId,
-  userId,
+	lessonDbId,
+	userId,
 }: UseLessonCompletionProps) => {
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const supabase = getSupabaseBrowserClient();
+	const [isCompleted, setIsCompleted] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [showConfetti, setShowConfetti] = useState(false);
+	const supabase = getSupabaseBrowserClient();
 
-  // Fetch completion status on mount
-  useEffect(() => {
-    const checkCompletionStatus = async () => {
-      if (!lessonDbId) return;
+	// Fetch completion status on mount
+	useEffect(() => {
+		const checkCompletionStatus = async () => {
+			if (!lessonDbId) return;
 
-      try {
-        const {
-          data: { user: authUser },
-        } = await supabase.auth.getUser();
+			try {
+				const {
+					data: { user: authUser },
+				} = await supabase.auth.getUser();
 
-        if (!authUser) {
-          setIsCompleted(false);
-          return;
-        }
+				if (!authUser) {
+					setIsCompleted(false);
+					return;
+				}
 
-        const { data } = await supabase
-          .from("completed_lessons")
-          .select("id")
-          .eq("student_id", authUser.id)
-          .eq("lesson_id", lessonDbId)
-          .maybeSingle();
+				const { data } = await supabase
+					.from("completed_lessons")
+					.select("id")
+					.eq("student_id", authUser.id)
+					.eq("lesson_id", lessonDbId)
+					.maybeSingle();
 
-        setIsCompleted(!!data);
-      } catch (_error) {
-        setIsCompleted(false);
-      }
-    };
+				setIsCompleted(!!data);
+			} catch (_error) {
+				setIsCompleted(false);
+			}
+		};
 
-    checkCompletionStatus();
-  }, [lessonDbId, supabase]);
+		checkCompletionStatus();
+	}, [lessonDbId, supabase]);
 
-  // Toggle lesson completion
-  const toggleCompletion = async (action?: "complete" | "uncomplete") => {
-    if (!userId || !lessonDbId) {
-      alert("Please sign in to track your progress");
-      return;
-    }
+	// Toggle lesson completion
+	const toggleCompletion = async (action?: "complete" | "uncomplete") => {
+		if (!userId || !lessonDbId) {
+			alert("Please sign in to track your progress");
+			return;
+		}
 
-    const {
-      data: { session },
-      error: sessionError,
-    } = await supabase.auth.getSession();
+		const {
+			data: { session },
+			error: sessionError,
+		} = await supabase.auth.getSession();
 
-    if (sessionError) {
-      console.error("Session fetch error:", sessionError);
-    }
-    if (!session) {
-      alert("Your session expired. Please sign in again.");
-      return;
-    }
+		if (sessionError) {
+			console.error("Session fetch error:", sessionError);
+		}
+		if (!session) {
+			alert("Your session expired. Please sign in again.");
+			return;
+		}
 
-    const {
-      data: { user: authUser },
-    } = await supabase.auth.getUser();
-    if (!authUser) {
-      alert("Your session expired. Please sign in again.");
-      return;
-    }
+		const {
+			data: { user: authUser },
+		} = await supabase.auth.getUser();
+		if (!authUser) {
+			alert("Your session expired. Please sign in again.");
+			return;
+		}
 
-    setIsLoading(true);
+		setIsLoading(true);
 
-    try {
-      const shouldUnmark = action ? action === "uncomplete" : isCompleted;
-      if (shouldUnmark) {
-        const { error } = await supabase
-          .from("completed_lessons")
-          .delete()
-          .eq("student_id", authUser.id)
-          .eq("lesson_id", lessonDbId);
+		try {
+			const shouldUnmark = action ? action === "uncomplete" : isCompleted;
+			if (shouldUnmark) {
+				const { error } = await supabase
+					.from("completed_lessons")
+					.delete()
+					.eq("student_id", authUser.id)
+					.eq("lesson_id", lessonDbId);
 
-        if (error) {
-          console.error("Error unmarking lesson:", error);
-          alert(error.message ?? "Failed to update completion status");
-          return;
-        }
+				if (error) {
+					console.error("Error unmarking lesson:", error);
+					alert(error.message ?? "Failed to update completion status");
+					return;
+				}
 
-        setIsCompleted(false);
-        console.log("✅ Lesson unmarked as complete");
-        return;
-      }
+				setIsCompleted(false);
+				console.log("✅ Lesson unmarked as complete");
+				return;
+			}
 
-      const { error } = await supabase.from("completed_lessons").insert({
-        student_id: authUser.id,
-        lesson_id: lessonDbId,
-      });
+			const { error } = await supabase.from("completed_lessons").insert({
+				student_id: authUser.id,
+				lesson_id: lessonDbId,
+			});
 
-      if (error) {
-        console.error("Error marking lesson complete:", error);
-        alert(error.message ?? "Failed to mark lesson as complete");
-        return;
-      }
+			if (error) {
+				console.error("Error marking lesson complete:", error);
+				alert(error.message ?? "Failed to mark lesson as complete");
+				return;
+			}
 
-      setIsCompleted(true);
-      console.log("✅ Lesson marked as complete!");
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 2200);
-    } catch (error: any) {
-      console.error("Error toggling completion:", error);
-      alert(error?.message ?? "An error occurred");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+			setIsCompleted(true);
+			console.log("✅ Lesson marked as complete!");
+			setShowConfetti(true);
+			setTimeout(() => setShowConfetti(false), 2200);
+		} catch (error: any) {
+			console.error("Error toggling completion:", error);
+			alert(error?.message ?? "An error occurred");
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-  // Optimistic mark complete with Undo toast
-  const handleMarkClick = async () => {
-    if (isCompleted) return;
-    setIsCompleted(true);
-    toast.success("Marked complete", {
-      description: "Lesson marked as complete.",
-      action: {
-        label: "Undo",
-        onClick: () => {
-          setIsCompleted(false);
-          void toggleCompletion("uncomplete");
-        },
-      },
-    });
-    await toggleCompletion("complete");
-  };
+	// Optimistic mark complete with Undo toast
+	const handleMarkClick = async () => {
+		if (isCompleted) return;
+		setIsCompleted(true);
+		toast.success("Marked complete", {
+			description: "Lesson marked as complete.",
+			action: {
+				label: "Undo",
+				onClick: () => {
+					setIsCompleted(false);
+					void toggleCompletion("uncomplete");
+				},
+			},
+		});
+		await toggleCompletion("complete");
+	};
 
-  return {
-    isCompleted,
-    isLoading,
-    showConfetti,
-    toggleCompletion,
-    handleMarkClick,
-  };
+	return {
+		isCompleted,
+		isLoading,
+		showConfetti,
+		toggleCompletion,
+		handleMarkClick,
+	};
 };
-
-
-
-
-
-
