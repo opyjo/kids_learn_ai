@@ -1185,8 +1185,8 @@ export function LessonViewer({
 											>
 												{lesson.ai_activities || ""}
 											</ReactMarkdown>
+										</div>
 									</div>
-								</div>
 								</TabsContent>
 
 								{/* Homework Tab */}

@@ -1,12 +1,6 @@
 "use client";
 
-import {
-	ArrowLeft,
-	ArrowRight,
-	CheckCircle,
-	FileText,
-	Sparkles,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, FileText } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";

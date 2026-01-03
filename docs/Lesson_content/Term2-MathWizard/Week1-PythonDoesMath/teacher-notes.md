@@ -19,11 +19,11 @@ This lesson introduces students to Python's mathematical capabilities. Coming fr
 
 By the end of this lesson, students will be able to:
 
-1. Use the four basic math operators (+, -, *, /)
+1. Use the four basic math operators (+, -, \*, /)
 2. Perform calculations with Python and display results
 3. Store numbers in variables and use them in calculations
 4. Combine math expressions with print() statements
-5. Understand that * is used for multiplication (not x)
+5. Understand that \* is used for multiplication (not x)
 
 ### Materials Needed
 
@@ -47,16 +47,16 @@ By the end of this lesson, students will be able to:
 
 ### Minute-by-Minute Breakdown
 
-| Time  | Duration | Activity                       | Details                              |
-| ----- | -------- | ------------------------------ | ------------------------------------ |
-| 0:00  | 5 min    | Welcome to Term 2!             | Celebrate, recap Term 1              |
-| 0:05  | 5 min    | The Calculator Challenge       | Hook: Python vs calculator race      |
-| 0:10  | 10 min   | The Four Operators             | Teach +, -, *, /                     |
-| 0:20  | 10 min   | Hands-On Practice              | Students try each operator           |
-| 0:30  | 10 min   | Math with Variables            | Combine variables and math           |
-| 0:40  | 10 min   | Creative Challenges            | Story-based math problems            |
-| 0:50  | 7 min    | Wrap-up & Homework             | Summary and assignment               |
-| 0:57  | 3 min    | Q&A Buffer                     | Questions and preview                |
+| Time | Duration | Activity                 | Details                         |
+| ---- | -------- | ------------------------ | ------------------------------- |
+| 0:00 | 5 min    | Welcome to Term 2!       | Celebrate, recap Term 1         |
+| 0:05 | 5 min    | The Calculator Challenge | Hook: Python vs calculator race |
+| 0:10 | 10 min   | The Four Operators       | Teach +, -, \*, /               |
+| 0:20 | 10 min   | Hands-On Practice        | Students try each operator      |
+| 0:30 | 10 min   | Math with Variables      | Combine variables and math      |
+| 0:40 | 10 min   | Creative Challenges      | Story-based math problems       |
+| 0:50 | 7 min    | Wrap-up & Homework       | Summary and assignment          |
+| 0:57 | 3 min    | Q&A Buffer               | Questions and preview           |
 
 ---
 
@@ -107,11 +107,13 @@ Wait for: variables
 > "I'm going to give you a challenge. I'll say a math problem, and you race to solve it. Ready?"
 
 **Round 1 (Easy):**
+
 > "What's 7 plus 3?"
 
 Let students answer (10).
 
 **Round 2 (Harder):**
+
 > "What's 25 times 47?"
 
 Let students struggle briefly.
@@ -119,6 +121,7 @@ Let students struggle briefly.
 > "Hmm, that's tricky. Let me ask Python..."
 
 **Live Demo:**
+
 ```python
 print(25 * 47)
 ```
@@ -138,12 +141,13 @@ print(25 * 47)
 #### Goals
 
 - Teach all four basic math operators
-- Emphasize * for multiplication (common mistake)
+- Emphasize \* for multiplication (common mistake)
 - Show that / gives decimal results
 
 #### Live Coding Demonstration
 
 **Addition:**
+
 ```python
 print(5 + 3)
 ```
@@ -151,6 +155,7 @@ print(5 + 3)
 > "Addition uses plus, just like in regular math. Easy!"
 
 **Subtraction:**
+
 ```python
 print(10 - 4)
 ```
@@ -163,7 +168,7 @@ print(10 - 4)
 
 Wait for: x or ×
 
-> "Right! But in Python, we use the ASTERISK—this star symbol: *. Can everyone find it on their keyboard? It's usually Shift + 8."
+> "Right! But in Python, we use the ASTERISK—this star symbol: \*. Can everyone find it on their keyboard? It's usually Shift + 8."
 
 Have students locate and press the key.
 
@@ -174,6 +179,7 @@ print(6 * 7)
 > "See? 6 times 7 equals 42. Remember: STAR for multiplication, not X!"
 
 **Division:**
+
 ```python
 print(20 / 5)
 ```
@@ -182,11 +188,11 @@ print(20 / 5)
 
 #### Common Mistakes to Address
 
-| Mistake                   | Why It Happens              | How to Fix                                |
-| ------------------------- | --------------------------- | ----------------------------------------- |
-| Using `x` for multiply    | School habit                | "Remember: STAR for multiplication!"      |
-| Confused by 4.0           | Expecting 4                 | "Division gives decimals—it's normal"     |
-| Missing operator          | Writing `5 3` not `5 + 3`   | "Always put the symbol between numbers"   |
+| Mistake                | Why It Happens            | How to Fix                              |
+| ---------------------- | ------------------------- | --------------------------------------- |
+| Using `x` for multiply | School habit              | "Remember: STAR for multiplication!"    |
+| Confused by 4.0        | Expecting 4               | "Division gives decimals—it's normal"   |
+| Missing operator       | Writing `5 3` not `5 + 3` | "Always put the symbol between numbers" |
 
 ---
 
@@ -203,21 +209,25 @@ print(20 / 5)
 > "Now it's YOUR turn! Open Trinket and let's practice each operator."
 
 **Exercise 1: Addition**
+
 > "Type: print(100 + 250) and run it. What do you get?"
 
 Wait for: 350
 
 **Exercise 2: Subtraction**
+
 > "Type: print(1000 - 750) and run it."
 
 Wait for: 250
 
 **Exercise 3: Multiplication**
-> "Remember—use the STAR! Type: print(12 * 5)"
+
+> "Remember—use the STAR! Type: print(12 \* 5)"
 
 Wait for: 60
 
 **Exercise 4: Division**
+
 > "Type: print(45 / 9)"
 
 Wait for: 5.0
@@ -225,8 +235,9 @@ Wait for: 5.0
 #### Teacher Circulation
 
 During this time:
+
 - Check screens for common mistakes
-- Help students who can't find *
+- Help students who can't find \*
 - Encourage fast finishers to try bigger numbers
 
 ---
@@ -270,6 +281,7 @@ print("Total score:", total_score)
 ```
 
 Encourage them to:
+
 - Change the level values
 - Add more levels
 - Try multiplication (points × multiplier)
@@ -287,6 +299,7 @@ Encourage them to:
 #### Challenge Options
 
 **Challenge 1: The Pizza Party**
+
 > "You're having a pizza party! Write code to figure out total slices."
 
 ```python
@@ -297,6 +310,7 @@ print("Total pizza slices:", total_slices)
 ```
 
 **Challenge 2: Sharing Fairly**
+
 > "You have 48 stickers and 6 friends. How many does each get?"
 
 ```python
@@ -307,6 +321,7 @@ print("Each friend gets:", each_gets)
 ```
 
 **Challenge 3: Open Creative**
+
 > "Create your own math story! Maybe it's about a candy store, a sports game, or a treasure hunt."
 
 Allow 5 minutes for creative exploration. Walk around and celebrate interesting solutions.
@@ -320,6 +335,7 @@ Allow 5 minutes for creative exploration. Walk around and celebrate interesting 
 > "What a great first lesson of Term 2! Let's review..."
 
 Quick-fire review:
+
 1. "What symbol for addition?" → `+`
 2. "What symbol for subtraction?" → `-`
 3. "What symbol for multiplication?" → `*` (STAR!)
@@ -331,7 +347,8 @@ Quick-fire review:
 > "For homework, you're going to create a 'Math Story' program. It should use ALL FOUR operators and tell a fun story—like counting treats at a birthday party or scoring points in a game."
 
 **Requirements:**
-- Use +, -, *, / at least once each
+
+- Use +, -, \*, / at least once each
 - At least 8 print statements with math
 - Comments explaining each calculation
 - A fun theme/story
@@ -345,6 +362,7 @@ Quick-fire review:
 ### Part 8: Q&A Buffer (3 minutes)
 
 Use this time for:
+
 - Student questions
 - Helping anyone who fell behind
 - Extra challenges for fast finishers
@@ -357,20 +375,21 @@ Use this time for:
 ### Formative Assessment
 
 **During class, observe:**
+
 - [ ] Can student use all four operators?
-- [ ] Does student remember to use * for multiplication?
+- [ ] Does student remember to use \* for multiplication?
 - [ ] Can student combine variables with math?
 - [ ] Is student engaged and experimenting?
 
 ### Homework Assessment: "My Math Story"
 
-| Criteria                | Exceeds (3)                      | Meets (2)              | Developing (1)        |
-| ----------------------- | -------------------------------- | ---------------------- | --------------------- |
-| **Uses all operators**  | Uses all 4 creatively            | Uses all 4 operators   | Missing operators     |
-| **Print statements**    | 10+ with clear output            | 8+ statements          | Fewer than 8          |
-| **Variables**           | Uses variables effectively       | Some variable use      | No variables          |
-| **Story/Theme**         | Creative, cohesive theme         | Clear theme            | No clear theme        |
-| **Code runs**           | No errors, well-formatted        | Minor issues, runs     | Major errors          |
+| Criteria               | Exceeds (3)                | Meets (2)            | Developing (1)    |
+| ---------------------- | -------------------------- | -------------------- | ----------------- |
+| **Uses all operators** | Uses all 4 creatively      | Uses all 4 operators | Missing operators |
+| **Print statements**   | 10+ with clear output      | 8+ statements        | Fewer than 8      |
+| **Variables**          | Uses variables effectively | Some variable use    | No variables      |
+| **Story/Theme**        | Creative, cohesive theme   | Clear theme          | No clear theme    |
+| **Code runs**          | No errors, well-formatted  | Minor issues, runs   | Major errors      |
 
 ### Differentiation Strategies
 
@@ -387,7 +406,7 @@ Use this time for:
 - Introduce parentheses for order of operations
 - Challenge with larger numbers
 - Ask them to calculate something "real" (like how many hours in a year)
-- Preview the ** (exponent) operator
+- Preview the \*\* (exponent) operator
 - Have them help peers
 
 ---
@@ -396,19 +415,19 @@ Use this time for:
 
 ### Technical Issues
 
-| Problem                     | Prevention                          | Solution                                      |
-| --------------------------- | ----------------------------------- | --------------------------------------------- |
-| Student uses `x` for ×      | Emphasize early and often           | "Find the star key—Shift + 8"                 |
-| Confused by `.0` in answers | Explain before it happens           | "That's normal for division—don't worry"      |
-| Syntax errors               | Type slowly during demos            | Check for missing operators or typos          |
+| Problem                     | Prevention                | Solution                                 |
+| --------------------------- | ------------------------- | ---------------------------------------- |
+| Student uses `x` for ×      | Emphasize early and often | "Find the star key—Shift + 8"            |
+| Confused by `.0` in answers | Explain before it happens | "That's normal for division—don't worry" |
+| Syntax errors               | Type slowly during demos  | Check for missing operators or typos     |
 
 ### Conceptual Issues
 
-| Problem                     | Signs                               | Solution                                      |
-| --------------------------- | ----------------------------------- | --------------------------------------------- |
-| Can't find operators        | Looking at wrong key                | Show keyboard layout, have them practice      |
-| Forgets to run code         | Changes code, expects new answer    | "Click Run to see the update!"                |
-| Variables confusion         | Mixes up = and ==                   | "One = means 'store this value'"              |
+| Problem              | Signs                            | Solution                                 |
+| -------------------- | -------------------------------- | ---------------------------------------- |
+| Can't find operators | Looking at wrong key             | Show keyboard layout, have them practice |
+| Forgets to run code  | Changes code, expects new answer | "Click Run to see the update!"           |
+| Variables confusion  | Mixes up = and ==                | "One = means 'store this value'"         |
 
 ---
 
@@ -417,14 +436,17 @@ Use this time for:
 ### After Each Class, Note:
 
 1. **What went well?**
+
    - Did the calculator challenge hook them?
-   - Did they remember * for multiplication?
+   - Did they remember \* for multiplication?
 
 2. **What needs improvement?**
+
    - Any concepts that took longer than expected?
    - Common mistakes to address next week?
 
 3. **Individual student notes:**
+
    - Who excelled at combining variables with math?
    - Who needs extra support?
 
@@ -441,10 +463,10 @@ Students Present: ____________
 Engagement Level (1-5): ____
 
 Calculator Challenge Response:
-- 
+-
 
 Key Mistakes Observed:
-- 
+-
 
 Students Excelling:
 -
@@ -521,7 +543,7 @@ KidsLearnAI
 - [ ] Celebrated Term 2 start
 - [ ] Calculator challenge created excitement
 - [ ] All four operators demonstrated
-- [ ] Emphasized * for multiplication
+- [ ] Emphasized \* for multiplication
 - [ ] Students practiced each operator
 - [ ] Variables combined with math
 - [ ] Creative challenges completed
@@ -544,4 +566,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This lesson sets the foundation for all the math we'll do this term. Make sure students are comfortable with the basics before moving on. Enthusiasm about Python's calculating power is contagious—share your excitement!_ 🧮
-
