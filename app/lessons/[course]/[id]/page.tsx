@@ -69,6 +69,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
 		requires_trinket: lesson.requires_trinket || false,
 		class_activities: lesson.class_activities || "",
 		take_home_assignment: lesson.take_home_assignment || "",
+		ai_activities: lesson.ai_activities || "",
 	};
 
 	return (

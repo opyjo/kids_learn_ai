@@ -89,6 +89,12 @@ take_home_assignment: |
   - Use string methods for effects
 
   **Submit:** Share your Trinket link. Be ready to present at the Week 8 Showcase Party!
+ai_activities: |
+  ## 🤖 Did You Know? AI Connection
+
+  Chatbots and AI assistants store jokes and responses in variables, just like your Joke Machine! When you ask Alexa to tell a joke, she picks from stored jokes - same idea as your program.
+
+  You built something that works like real AI!
 ---
 
 # Term 1, Week 7: Project - Joke Machine! 🎭

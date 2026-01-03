@@ -43,6 +43,12 @@ take_home_assignment: |
   6. Add a decorative border using what you learned in Lesson 2
 
   **Submit:** Share your Trinket link with your instructor.
+ai_activities: |
+  ## 🤖 Did You Know? AI Connection
+
+  When Siri says "Good morning, Alex!" she's using a variable to remember your name - just like `name = "Alex"` in your code! Netflix uses variables to remember what shows you like.
+
+  Variables are how AI remembers things about you!
 ---
 
 # Term 1, Week 3: Variables are Boxes! 📦

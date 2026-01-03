@@ -20,12 +20,14 @@ class_activities: |
   ## 🎮 Class Activity: Story Builder!
 
   1. Write a 4-line mini story using print()
-  2. Add at least one emoji to your story
+  2. Add at least one emoji to your story (or use symbols like *, !, @, or # if emojis don't work on your device)
   3. Use print("") to add blank lines between paragraphs
   4. Use string multiplication (*) to create a decorative border
   5. Share your story with a partner!
 
   **Bonus Challenge:** Create a text box around your story title using + and *
+  
+  **Note:** If you can't type emojis, that's okay! Use symbols like *, !, @, #, or create patterns with text instead.
 take_home_assignment: |
   ## 📚 Homework: My Mini Poem
 
@@ -35,11 +37,22 @@ take_home_assignment: |
   1. Include a title with a decorative border (use * or - multiplication)
   2. Write at least 6 print() statements total
   3. Include at least 4 lines of actual poem text
-  4. Use at least 2 emojis somewhere in your poem
+  4. Use at least 2 emojis somewhere in your poem (or use symbols/ASCII art if emojis don't work on your device)
   5. Use print("") for blank lines to separate sections
   6. Code must run without errors
 
   **Submit:** Share your Trinket link with your instructor.
+  
+  **Note:** If you can't type emojis on your device, you can use:
+  - Symbols: *, !, @, #, $, %, ^, &, ~
+  - ASCII art: ^_^, :), <3, or create patterns with text
+  - The important part is being creative with your output!
+ai_activities: |
+  ## 🤖 Did You Know? AI Connection
+
+  When Alexa says "Playing your favorite song" or ChatGPT writes you an answer, that's output - exactly like your `print()` statements! Without output, AI couldn't talk to us at all.
+
+  You're learning the same skill that makes AI communicate!
 ---
 
 # Term 1, Week 2: Print is Your Voice! 📢
@@ -191,9 +204,11 @@ Look at that—it looks like a real program with a header and everything!
 
 One of the coolest things about `print()` is that you can put ANYTHING inside those quotation marks. Let's explore!
 
-### Emojis Work! 🎉
+### Emojis Work! (But Symbols Work Too!)
 
-Yes, you can use emojis in Python! They work just like regular text.
+Yes, you can use emojis in Python! They work just like regular text. **But don't worry if you can't type emojis on your device** — symbols work just as well and are just as fun!
+
+**Examples with emojis (if your device supports them):**
 
 ```python
 print("I love coding! 💻")
@@ -203,23 +218,35 @@ print("Feeling happy! 😊")
 print("Pizza time! 🍕")
 ```
 
-**Output:**
+**Examples with symbols (works on ALL devices):**
 
-```
-I love coding! 💻
-Python is amazing! 🐍
-Let's blast off! 🚀
-Feeling happy! 😊
-Pizza time! 🍕
+```python
+print("I love coding! <3")
+print("Python is amazing! *")
+print("Let's blast off! ^")
+print("Feeling happy! :)")
+print("Pizza time! @")
 ```
 
-**How to add emojis:**
+**Both work great!** Use whatever is easiest for you.
+
+**How to add emojis (if your device supports them):**
 
 - **Windows:** Press `Windows key + .` (period) to open emoji picker
 - **Mac:** Press `Cmd + Control + Space` to open emoji picker
 - **Chromebook:** Press `Search/Launcher + Shift + Space`
 
-> _BrightByte says: "I LOVE emojis! They make code so much more fun to read. My favorite is 🤖 of course! What's yours?"_
+**Can't type emojis? No problem!** Use symbols instead:
+- `*` for stars
+- `!` for excitement
+- `@` for fun
+- `#` for hashtags
+- `^` for arrows
+- `:)` or `^_^` for faces
+- `<3` for hearts
+- Or any other symbol you like!
+
+> _BrightByte says: "I LOVE emojis when I can use them, but symbols are awesome too! My favorite symbol is * because it looks like a star! What's your favorite symbol?"_
 
 ### Numbers as Text
 
@@ -239,6 +266,8 @@ print("2 + 2 = 4")
 
 The best part? You can print ANYTHING your imagination comes up with!
 
+**Examples with emojis (if available):**
+
 ```python
 print("The purple elephant danced on the moon! 🌙")
 print("My homework was eaten by a ninja robot! 🤖")
@@ -247,7 +276,17 @@ print("The pizza ordered a human for delivery! 🍕")
 print("My goldfish learned to play piano! 🐟🎹")
 ```
 
-Being silly with code is a GREAT way to practice and have fun!
+**Examples with symbols (works everywhere!):**
+
+```python
+print("The purple elephant danced on the moon! *")
+print("My homework was eaten by a ninja robot! @")
+print("A penguin wearing a top hat sang opera! ^_^")
+print("The pizza ordered a human for delivery! #")
+print("My goldfish learned to play piano! <3")
+```
+
+Being silly with code is a GREAT way to practice and have fun! **Remember: emojis are fun, but symbols are just as creative!**
 
 ### Punctuation and Special Characters
 
@@ -309,7 +348,7 @@ print("Ha" * 3)
 print("Ho" * 5)
 print("-" * 20)
 print("=" * 30)
-print("🎉" * 10)
+print("*" * 10)  # Stars work great! (or use "🎉" * 10 if emojis work on your device)
 ```
 
 **Output:**
@@ -319,14 +358,17 @@ HaHaHa
 HoHoHoHoHo
 --------------------
 ==============================
-🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉
+**********
 ```
 
 **How it works:**
 
 - `"Ha" * 3` means "repeat 'Ha' three times"
 - `"-" * 20` means "repeat the dash twenty times"
+- `"*" * 10` means "repeat the star ten times"
 - The number tells Python HOW MANY times to repeat!
+
+**Tip:** You can use any symbol or emoji with multiplication! Try `"!" * 5` or `"@" * 8` or `"^" * 15` — they all work great!
 
 **Try these:**
 
@@ -417,41 +459,56 @@ print("        CHAPTER 1: THE BEGINNING        ")
 print("=" * 40)
 ```
 
-**A Decorative Header:**
+**A Decorative Header (with symbols - works everywhere!):**
 
+```python
+print("*" * 15)
+print("   Welcome to My Program!   ")
+print("*" * 15)
+```
+
+Or with emojis (if your device supports them):
 ```python
 print("✨" * 15)
 print("   Welcome to My Program!   ")
 print("✨" * 15)
 ```
 
-**A Warning Box:**
+**A Warning Box (with symbols):**
 
+```python
+print("!" * 10)
+print("  WARNING: Awesome code ahead!  ")
+print("!" * 10)
+```
+
+Or with emojis:
 ```python
 print("⚠️" * 10)
 print("  WARNING: Awesome code ahead!  ")
 print("⚠️" * 10)
 ```
 
-**Growing Stars:**
+**Growing Stars (with symbols - works everywhere!):**
 
 ```python
-print("⭐")
-print("⭐⭐")
-print("⭐⭐⭐")
-print("⭐⭐⭐⭐")
-print("⭐⭐⭐⭐⭐")
+print("*")
+print("**")
+print("***")
+print("****")
+print("*****")
 ```
 
 Or using multiplication:
-
 ```python
-print("⭐" * 1)
-print("⭐" * 2)
-print("⭐" * 3)
-print("⭐" * 4)
-print("⭐" * 5)
+print("*" * 1)
+print("*" * 2)
+print("*" * 3)
+print("*" * 4)
+print("*" * 5)
 ```
+
+**Note:** You can use `*` for stars, `!` for excitement, `@` for fun, or any symbol you like! Emojis are optional and fun, but symbols work just as well!
 
 ---
 
@@ -520,9 +577,19 @@ Let's put everything together with some fun challenges!
 
 ### Challenge 1: Three Facts About Me
 
-Print 3 interesting facts about yourself. Use emojis!
+Print 3 interesting facts about yourself. Use emojis or symbols!
 
-**Example:**
+**Example with symbols (works everywhere!):**
+
+```python
+print("=== Three Facts About Me ===")
+print("")
+print("1. My name is Alex :)")
+print("2. I love pizza more than anything @")
+print("3. My dog's name is Max <3")
+```
+
+**Example with emojis (if your device supports them):**
 
 ```python
 print("=== Three Facts About Me ===")
@@ -532,11 +599,29 @@ print("2. I love pizza more than anything 🍕")
 print("3. My dog's name is Max 🐕")
 ```
 
-**Your turn:** Change the facts to be about YOU!
+**Your turn:** Change the facts to be about YOU! Use emojis if you can, or symbols if you can't — both are great!
 
 ### Challenge 2: Favorite Things List
 
-Create a list of your 5 favorite things with emojis and decorations:
+Create a list of your 5 favorite things with emojis/symbols and decorations:
+
+**With symbols (works everywhere!):**
+
+```python
+print("*" * 20)
+print("   MY FAVORITE THINGS   ")
+print("*" * 20)
+print("")
+print("1. Video games @")
+print("2. Ice cream #")
+print("3. My best friend <3")
+print("4. Swimming ^")
+print("5. Reading comics !")
+print("")
+print("*" * 20)
+```
+
+**With emojis (if your device supports them):**
 
 ```python
 print("⭐" * 20)
@@ -556,6 +641,24 @@ print("⭐" * 20)
 
 Write a 6-line silly story. The sillier, the better!
 
+**With symbols (works everywhere!):**
+
+```python
+print("=" * 30)
+print("THE ADVENTURE OF CAPTAIN PIZZA")
+print("=" * 30)
+print("")
+print("Once upon a time, a pizza learned to fly. @ ^")
+print("It soared over the mountains of cheese. *")
+print("A hungry dragon spotted it in the sky! #")
+print("'Come back here!' roared the dragon.")
+print("But the pizza was too fast. Zoom! ~")
+print("The End. *")
+print("")
+```
+
+**With emojis (if your device supports them):**
+
 ```python
 print("=" * 30)
 print("THE ADVENTURE OF CAPTAIN PIZZA")
@@ -568,6 +671,7 @@ print("'Come back here!' roared the dragon.")
 print("But the pizza was too fast. Zoom! 💨")
 print("The End. 🎬")
 print("")
+```
 print("=" * 30)
 ```
 
@@ -707,7 +811,7 @@ print("Hello World")
 | Empty line      | `print("")`              | Creates blank line     |
 | Repeat text     | `"Ha" * 3`               | Shows "HaHaHa"         |
 | Join text       | `"Hi" + "There"`         | Shows "HiThere"        |
-| Emojis          | `print("🎉")`            | Works great!           |
+| Symbols/Emojis  | `print("*")` or `print("🎉")` | Both work great!       |
 | Single quotes   | `print('Hi')`            | Same as double         |
 | Double quotes   | `print("Hi")`            | Same as single         |
 
@@ -726,7 +830,7 @@ print("")
 
 # Repeat text
 print("-" * 20)        # Twenty dashes
-print("🎉" * 5)        # Five party emojis
+print("*" * 5)         # Five stars (or use "🎉" * 5 if emojis work)
 
 # Join text
 print("Hello " + "World")  # Hello World

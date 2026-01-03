@@ -208,12 +208,6 @@ const NAV_ITEMS = {
 	],
 	resources: [
 		{
-			href: "/ai-playgrounds",
-			label: "AI Playgrounds",
-			Icon: Sparkles,
-			description: "Interactive AI tools",
-		},
-		{
 			href: "/faq",
 			label: "FAQ",
 			Icon: HelpCircle,

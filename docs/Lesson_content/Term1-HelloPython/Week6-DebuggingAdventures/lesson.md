@@ -67,6 +67,12 @@ take_home_assignment: |
   3. Add a comment above each fix explaining what the bug was
 
   **Submit:** Share your fixed code on Trinket with your instructor.
+ai_activities: |
+  ## 🤖 Did You Know? AI Connection
+
+  Even AI makes mistakes! When Siri mishears you or autocorrect changes "duck" to something silly, those are bugs. AI programmers spend lots of time debugging too.
+
+  You're learning a skill every programmer needs!
 ---
 
 # Term 1, Week 6: Debugging Adventures! 🔍
