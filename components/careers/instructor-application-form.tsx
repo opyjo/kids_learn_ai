@@ -123,7 +123,9 @@ export const InstructorApplicationForm = () => {
 
 		// Validate file type
 		if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
-			setResumeError("Please upload a PDF or Word document (.pdf, .doc, .docx)");
+			setResumeError(
+				"Please upload a PDF or Word document (.pdf, .doc, .docx)",
+			);
 			setResumeFile(null);
 			form.setValue("resume", undefined);
 			if (fileInputRef.current) {
@@ -523,12 +525,12 @@ export const InstructorApplicationForm = () => {
 					</FormLabel>
 					<div className="relative">
 						{!resumeFile ? (
-							<label
-								htmlFor="resume-upload"
+							<div
 								className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-border rounded-lg cursor-pointer bg-muted/30 hover:bg-muted/50 transition-colors"
 								tabIndex={0}
 								role="button"
 								aria-label="Upload resume"
+								onClick={() => fileInputRef.current?.click()}
 								onKeyDown={(e) => {
 									if (e.key === "Enter" || e.key === " ") {
 										e.preventDefault();
@@ -536,15 +538,21 @@ export const InstructorApplicationForm = () => {
 									}
 								}}
 							>
-								<div className="flex flex-col items-center justify-center pt-5 pb-6">
+								<label
+									htmlFor="resume-upload"
+									className="flex flex-col items-center justify-center pt-5 pb-6 cursor-pointer"
+								>
 									<Upload className="w-8 h-8 mb-2 text-muted-foreground" />
 									<p className="mb-1 text-sm text-muted-foreground">
-										<span className="font-semibold text-foreground">Click to upload</span> or drag and drop
+										<span className="font-semibold text-foreground">
+											Click to upload
+										</span>{" "}
+										or drag and drop
 									</p>
 									<p className="text-xs text-muted-foreground">
 										PDF, DOC, DOCX (max 5MB)
 									</p>
-								</div>
+								</label>
 								<input
 									ref={fileInputRef}
 									id="resume-upload"
@@ -555,7 +563,7 @@ export const InstructorApplicationForm = () => {
 									disabled={isSubmitting}
 									aria-describedby="resume-description"
 								/>
-							</label>
+							</div>
 						) : (
 							<div className="flex items-center justify-between p-4 border border-border rounded-lg bg-muted/30">
 								<div className="flex items-center gap-3">
@@ -586,7 +594,9 @@ export const InstructorApplicationForm = () => {
 						)}
 					</div>
 					{resumeError && (
-						<p className="text-sm font-medium text-destructive">{resumeError}</p>
+						<p className="text-sm font-medium text-destructive">
+							{resumeError}
+						</p>
 					)}
 					<FormDescription id="resume-description">
 						PDF, DOC, or DOCX format required (max 5MB)

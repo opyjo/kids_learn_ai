@@ -358,8 +358,8 @@ export const POST = async (request: NextRequest) => {
               </div>
 
               ${
-									validatedData.resume
-										? `
+								validatedData.resume
+									? `
               <!-- Resume Attached -->
               <div class="section" style="background: #fef3c7; border-color: #f59e0b;">
                 <div style="display: flex; align-items: center; gap: 10px;">
@@ -371,8 +371,8 @@ export const POST = async (request: NextRequest) => {
                 </div>
               </div>
               `
-										: ""
-								}
+									: ""
+							}
 
               <!-- Action -->
               <div style="text-align: center; margin-top: 20px;">
