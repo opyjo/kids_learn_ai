@@ -107,12 +107,12 @@ export default function CareersPage() {
 							</h3>
 							<div className="grid sm:grid-cols-2 gap-4">
 								<div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
-									<p className="font-semibold text-lg">Tuesdays</p>
+									<p className="font-semibold text-lg">Mondays</p>
 									<p className="text-muted-foreground">Ages 9-10 class</p>
 									<p className="text-sm text-primary mt-2">Weekly session</p>
 								</div>
 								<div className="bg-accent/5 rounded-xl p-4 border border-accent/20">
-									<p className="font-semibold text-lg">Thursdays</p>
+									<p className="font-semibold text-lg">Wednesdays</p>
 									<p className="text-muted-foreground">Ages 11-13 class</p>
 									<p className="text-sm text-accent mt-2">Weekly session</p>
 								</div>

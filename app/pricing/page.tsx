@@ -88,7 +88,7 @@ export default function PricingPage() {
 								<Calendar className="h-8 w-8 text-primary" />
 							</div>
 							<h3 className="text-2xl font-bold mb-2">Ages 9-10</h3>
-							<p className="text-3xl font-bold text-primary mb-2">Tuesdays</p>
+							<p className="text-3xl font-bold text-primary mb-2">Mondays</p>
 							<p className="text-muted-foreground">Weekly live classes</p>
 						</CardContent>
 					</Card>
@@ -98,7 +98,7 @@ export default function PricingPage() {
 								<Calendar className="h-8 w-8 text-accent" />
 							</div>
 							<h3 className="text-2xl font-bold mb-2">Ages 11-13</h3>
-							<p className="text-3xl font-bold text-accent mb-2">Thursdays</p>
+							<p className="text-3xl font-bold text-accent mb-2">Wednesdays</p>
 							<p className="text-muted-foreground">Weekly live classes</p>
 						</CardContent>
 					</Card>
@@ -124,7 +124,7 @@ export default function PricingPage() {
 								</Badge>
 								<div className="flex items-center justify-center gap-3">
 									<span className="text-2xl text-muted-foreground line-through">
-										$249
+										$199.99
 									</span>
 									<span className="text-5xl font-bold text-primary">
 										$159.99
@@ -202,7 +202,7 @@ export default function PricingPage() {
 											<th className="text-center p-4 font-semibold bg-primary/5">
 												Full Program (
 												<span className="line-through text-muted-foreground">
-													$249
+													$199.99
 												</span>{" "}
 												$159.99)
 											</th>
@@ -345,7 +345,7 @@ export default function PricingPage() {
 										</p>
 										<p className="text-lg font-semibold">
 											<span className="line-through text-muted-foreground mr-2">
-												$249
+												$199.99
 											</span>
 											$159.99 CAD
 										</p>

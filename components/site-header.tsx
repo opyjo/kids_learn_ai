@@ -486,10 +486,25 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 		const supabase = getSupabaseBrowserClient();
 
 		const checkAuth = async () => {
-			const {
-				data: { session },
-			} = await supabase.auth.getSession();
-			setIsAuthenticated(!!session);
+			try {
+				const {
+					data: { session },
+					error,
+				} = await supabase.auth.getSession();
+
+				// If there's a refresh token error, sign out to clear stale session data
+				if (error) {
+					console.warn("Session error, clearing stale session:", error.message);
+					await supabase.auth.signOut();
+					setIsAuthenticated(false);
+					return;
+				}
+
+				setIsAuthenticated(!!session);
+			} catch (err) {
+				console.warn("Error checking auth session:", err);
+				setIsAuthenticated(false);
+			}
 		};
 
 		checkAuth();
@@ -497,7 +512,11 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 		const {
 			data: { subscription },
 		} = supabase.auth.onAuthStateChange(
-			(_event: string, session: Session | null) => {
+			async (_event: string, session: Session | null) => {
+				// Handle TOKEN_REFRESHED errors by signing out
+				if (_event === "TOKEN_REFRESHED" && !session) {
+					await supabase.auth.signOut();
+				}
 				setIsAuthenticated(!!session);
 			},
 		);

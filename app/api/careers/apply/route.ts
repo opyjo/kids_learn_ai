@@ -6,6 +6,16 @@ import { z } from "zod";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Validation schema
+const resumeSchema = z.object({
+	name: z.string().max(255),
+	type: z.enum([
+		"application/pdf",
+		"application/msword",
+		"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+	]),
+	content: z.string().max(10 * 1024 * 1024), // Max 10MB base64 (roughly 7.5MB file)
+});
+
 const applicationSchema = z.object({
 	fullName: z
 		.string()
@@ -37,9 +47,10 @@ const applicationSchema = z.object({
 		.min(1, "Please tell us why you're interested")
 		.min(20, "Please provide a bit more detail")
 		.max(1000, "Response must not exceed 1000 characters"),
-	availableTuesday: z.boolean().default(false),
-	availableThursday: z.boolean().default(false),
+	availableMonday: z.boolean().default(false),
+	availableWednesday: z.boolean().default(false),
 	linkedinUrl: z.string().trim().url().optional().or(z.literal("")),
+	resume: resumeSchema,
 });
 
 // Rate limiting map
@@ -101,10 +112,10 @@ const getExperienceLabel = (experience: string): string => {
 	}
 };
 
-const getAvailabilityText = (tuesday: boolean, thursday: boolean): string => {
-	if (tuesday && thursday) return "Both Tuesdays & Thursdays";
-	if (tuesday) return "Tuesdays only (Ages 9-10)";
-	if (thursday) return "Thursdays only (Ages 11-13)";
+const getAvailabilityText = (monday: boolean, wednesday: boolean): string => {
+	if (monday && wednesday) return "Both Mondays & Wednesdays";
+	if (monday) return "Mondays only (Ages 9-10)";
+	if (wednesday) return "Wednesdays only (Ages 11-13)";
 	return "Not specified";
 };
 
@@ -131,7 +142,7 @@ export const POST = async (request: NextRequest) => {
 		const validatedData = applicationSchema.parse(body);
 
 		// Validate at least one day selected
-		if (!validatedData.availableTuesday && !validatedData.availableThursday) {
+		if (!validatedData.availableMonday && !validatedData.availableWednesday) {
 			return NextResponse.json(
 				{
 					error: "Please select at least one day you're available to teach",
@@ -143,9 +154,19 @@ export const POST = async (request: NextRequest) => {
 		const yearLabel = getYearLabel(validatedData.yearOfStudy);
 		const experienceLabel = getExperienceLabel(validatedData.pythonExperience);
 		const availabilityText = getAvailabilityText(
-			validatedData.availableTuesday,
-			validatedData.availableThursday,
+			validatedData.availableMonday,
+			validatedData.availableWednesday,
 		);
+
+		// Prepare attachments if resume is provided
+		const attachments = validatedData.resume
+			? [
+					{
+						filename: validatedData.resume.name,
+						content: validatedData.resume.content,
+					},
+				]
+			: undefined;
 
 		// Send email via Resend
 		const emailResult = await resend.emails.send({
@@ -153,6 +174,7 @@ export const POST = async (request: NextRequest) => {
 			to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
 			replyTo: validatedData.email,
 			subject: `👨‍🏫 Instructor Application: ${validatedData.fullName} (${validatedData.university})`,
+			attachments,
 			html: `
         <!DOCTYPE html>
         <html>
@@ -334,6 +356,23 @@ export const POST = async (request: NextRequest) => {
                 <div class="section-title">💭 Why They Want to Teach Kids</div>
                 <div class="value" style="white-space: pre-wrap;">${validatedData.whyInterested}</div>
               </div>
+
+              ${
+									validatedData.resume
+										? `
+              <!-- Resume Attached -->
+              <div class="section" style="background: #fef3c7; border-color: #f59e0b;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 24px;">📎</span>
+                  <div>
+                    <div style="font-weight: 600; color: #92400e;">Resume Attached</div>
+                    <div style="font-size: 14px; color: #b45309;">${validatedData.resume.name}</div>
+                  </div>
+                </div>
+              </div>
+              `
+										: ""
+								}
 
               <!-- Action -->
               <div style="text-align: center; margin-top: 20px;">

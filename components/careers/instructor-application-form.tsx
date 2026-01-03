@@ -1,8 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, Loader2, Send } from "lucide-react";
-import { useState } from "react";
+import { CheckCircle2, FileText, Loader2, Send, Upload, X } from "lucide-react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Form,
 	FormControl,
+	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -25,6 +26,13 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const ACCEPTED_FILE_TYPES = [
+	"application/pdf",
+	"application/msword",
+	"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
 
 const applicationFormSchema = z.object({
 	fullName: z
@@ -61,14 +69,19 @@ const applicationFormSchema = z.object({
 		.min(1, "Please tell us why you're interested")
 		.min(20, "Please provide a bit more detail (at least 20 characters)")
 		.max(1000, "Response must not exceed 1000 characters"),
-	availableTuesday: z.boolean().default(false),
-	availableThursday: z.boolean().default(false),
+	availableMonday: z.boolean().default(false),
+	availableWednesday: z.boolean().default(false),
 	linkedinUrl: z
 		.string()
 		.trim()
 		.url("Please enter a valid URL")
 		.optional()
 		.or(z.literal("")),
+	resume: z.object({
+		name: z.string(),
+		type: z.string(),
+		content: z.string(),
+	}),
 });
 
 type ApplicationFormData = z.infer<typeof applicationFormSchema>;
@@ -76,6 +89,9 @@ type ApplicationFormData = z.infer<typeof applicationFormSchema>;
 export const InstructorApplicationForm = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
+	const [resumeFile, setResumeFile] = useState<File | null>(null);
+	const [resumeError, setResumeError] = useState<string | null>(null);
+	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const form = useForm<ApplicationFormData>({
 		resolver: zodResolver(applicationFormSchema),
@@ -88,15 +104,83 @@ export const InstructorApplicationForm = () => {
 			program: "",
 			teachingExperience: "",
 			whyInterested: "",
-			availableTuesday: false,
-			availableThursday: false,
+			availableMonday: false,
+			availableWednesday: false,
 			linkedinUrl: "",
+			resume: undefined,
 		},
 	});
 
+	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		setResumeError(null);
+
+		if (!file) {
+			setResumeFile(null);
+			form.setValue("resume", undefined);
+			return;
+		}
+
+		// Validate file type
+		if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
+			setResumeError("Please upload a PDF or Word document (.pdf, .doc, .docx)");
+			setResumeFile(null);
+			form.setValue("resume", undefined);
+			if (fileInputRef.current) {
+				fileInputRef.current.value = "";
+			}
+			return;
+		}
+
+		// Validate file size
+		if (file.size > MAX_FILE_SIZE) {
+			setResumeError("File size must be less than 5MB");
+			setResumeFile(null);
+			form.setValue("resume", undefined);
+			if (fileInputRef.current) {
+				fileInputRef.current.value = "";
+			}
+			return;
+		}
+
+		setResumeFile(file);
+
+		// Convert file to base64
+		const reader = new FileReader();
+		reader.onload = () => {
+			const base64Content = (reader.result as string).split(",")[1];
+			form.setValue("resume", {
+				name: file.name,
+				type: file.type,
+				content: base64Content,
+			});
+		};
+		reader.onerror = () => {
+			setResumeError("Failed to read file. Please try again.");
+			setResumeFile(null);
+			form.setValue("resume", undefined);
+		};
+		reader.readAsDataURL(file);
+	};
+
+	const handleRemoveResume = () => {
+		setResumeFile(null);
+		setResumeError(null);
+		form.setValue("resume", undefined);
+		if (fileInputRef.current) {
+			fileInputRef.current.value = "";
+		}
+	};
+
 	const onSubmit = async (data: ApplicationFormData) => {
-		if (!data.availableTuesday && !data.availableThursday) {
+		if (!data.availableMonday && !data.availableWednesday) {
 			toast.error("Please select at least one day you're available to teach");
+			return;
+		}
+
+		if (!data.resume) {
+			setResumeError("Please upload your resume");
+			toast.error("Please upload your resume");
 			return;
 		}
 
@@ -137,6 +221,10 @@ export const InstructorApplicationForm = () => {
 			setIsSuccess(true);
 			toast.success("Application submitted! We'll be in touch soon.");
 			form.reset();
+			setResumeFile(null);
+			if (fileInputRef.current) {
+				fileInputRef.current.value = "";
+			}
 
 			setTimeout(() => {
 				setIsSuccess(false);
@@ -317,7 +405,7 @@ export const InstructorApplicationForm = () => {
 					<div className="space-y-2">
 						<FormField
 							control={form.control}
-							name="availableTuesday"
+							name="availableMonday"
 							render={({ field }) => (
 								<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
 									<FormControl>
@@ -328,14 +416,14 @@ export const InstructorApplicationForm = () => {
 										/>
 									</FormControl>
 									<div className="space-y-1 leading-none">
-										<FormLabel>Tuesdays (Ages 9-10 class)</FormLabel>
+										<FormLabel>Mondays (Ages 9-10 class)</FormLabel>
 									</div>
 								</FormItem>
 							)}
 						/>
 						<FormField
 							control={form.control}
-							name="availableThursday"
+							name="availableWednesday"
 							render={({ field }) => (
 								<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
 									<FormControl>
@@ -346,7 +434,7 @@ export const InstructorApplicationForm = () => {
 										/>
 									</FormControl>
 									<div className="space-y-1 leading-none">
-										<FormLabel>Thursdays (Ages 11-13 class)</FormLabel>
+										<FormLabel>Wednesdays (Ages 11-13 class)</FormLabel>
 									</div>
 								</FormItem>
 							)}
@@ -427,6 +515,83 @@ export const InstructorApplicationForm = () => {
 						</FormItem>
 					)}
 				/>
+
+				{/* Resume Upload */}
+				<div className="space-y-2">
+					<FormLabel>
+						Resume / CV <span className="text-red-500">*</span>
+					</FormLabel>
+					<div className="relative">
+						{!resumeFile ? (
+							<label
+								htmlFor="resume-upload"
+								className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-border rounded-lg cursor-pointer bg-muted/30 hover:bg-muted/50 transition-colors"
+								tabIndex={0}
+								role="button"
+								aria-label="Upload resume"
+								onKeyDown={(e) => {
+									if (e.key === "Enter" || e.key === " ") {
+										e.preventDefault();
+										fileInputRef.current?.click();
+									}
+								}}
+							>
+								<div className="flex flex-col items-center justify-center pt-5 pb-6">
+									<Upload className="w-8 h-8 mb-2 text-muted-foreground" />
+									<p className="mb-1 text-sm text-muted-foreground">
+										<span className="font-semibold text-foreground">Click to upload</span> or drag and drop
+									</p>
+									<p className="text-xs text-muted-foreground">
+										PDF, DOC, DOCX (max 5MB)
+									</p>
+								</div>
+								<input
+									ref={fileInputRef}
+									id="resume-upload"
+									type="file"
+									className="hidden"
+									accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+									onChange={handleFileChange}
+									disabled={isSubmitting}
+									aria-describedby="resume-description"
+								/>
+							</label>
+						) : (
+							<div className="flex items-center justify-between p-4 border border-border rounded-lg bg-muted/30">
+								<div className="flex items-center gap-3">
+									<div className="p-2 bg-primary/10 rounded-lg">
+										<FileText className="w-5 h-5 text-primary" />
+									</div>
+									<div>
+										<p className="text-sm font-medium text-foreground truncate max-w-[200px] sm:max-w-[300px]">
+											{resumeFile.name}
+										</p>
+										<p className="text-xs text-muted-foreground">
+											{(resumeFile.size / 1024 / 1024).toFixed(2)} MB
+										</p>
+									</div>
+								</div>
+								<Button
+									type="button"
+									variant="ghost"
+									size="icon"
+									onClick={handleRemoveResume}
+									disabled={isSubmitting}
+									aria-label="Remove resume"
+									className="text-muted-foreground hover:text-destructive"
+								>
+									<X className="w-4 h-4" />
+								</Button>
+							</div>
+						)}
+					</div>
+					{resumeError && (
+						<p className="text-sm font-medium text-destructive">{resumeError}</p>
+					)}
+					<FormDescription id="resume-description">
+						PDF, DOC, or DOCX format required (max 5MB)
+					</FormDescription>
+				</div>
 
 				{/* Submit Button */}
 				<Button

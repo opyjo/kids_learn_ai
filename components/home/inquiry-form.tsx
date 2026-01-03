@@ -220,7 +220,7 @@ export const CourseInquiryForm = () => {
 										<span className="flex items-center gap-2">
 											<span>Ages 9-10</span>
 											<span className="text-muted-foreground text-xs">
-												(Tuesdays)
+												(Mondays)
 											</span>
 										</span>
 									</SelectItem>
@@ -228,7 +228,7 @@ export const CourseInquiryForm = () => {
 										<span className="flex items-center gap-2">
 											<span>Ages 11-13</span>
 											<span className="text-muted-foreground text-xs">
-												(Thursdays)
+												(Wednesdays)
 											</span>
 										</span>
 									</SelectItem>
@@ -237,8 +237,8 @@ export const CourseInquiryForm = () => {
 							{selectedAgeGroup && (
 								<FormDescription>
 									{selectedAgeGroup === "9-10"
-										? "📅 Classes are on Tuesdays"
-										: "📅 Classes are on Thursdays"}
+										? "📅 Classes are on Mondays"
+										: "📅 Classes are on Wednesdays"}
 								</FormDescription>
 							)}
 							<FormMessage />

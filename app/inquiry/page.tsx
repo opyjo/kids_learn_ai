@@ -68,7 +68,7 @@ export default function InquiryPage() {
 											<Calendar className="h-4 w-4 text-primary" />
 											<span className="font-semibold text-sm">Ages 9-10</span>
 										</div>
-										<p className="text-2xl font-bold text-primary">Tuesdays</p>
+										<p className="text-2xl font-bold text-primary">Mondays</p>
 										<p className="text-sm text-muted-foreground">
 											Weekly classes
 										</p>
@@ -78,7 +78,7 @@ export default function InquiryPage() {
 											<Calendar className="h-4 w-4 text-accent" />
 											<span className="font-semibold text-sm">Ages 11-13</span>
 										</div>
-										<p className="text-2xl font-bold text-accent">Thursdays</p>
+										<p className="text-2xl font-bold text-accent">Wednesdays</p>
 										<p className="text-sm text-muted-foreground">
 											Weekly classes
 										</p>
@@ -110,7 +110,7 @@ export default function InquiryPage() {
 									</Badge>
 									<div className="flex items-baseline gap-2 mb-2">
 										<span className="text-xl text-muted-foreground line-through">
-											$249
+											$199.99
 										</span>
 										<span className="text-4xl font-bold text-primary">
 											$159.99
