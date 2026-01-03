@@ -78,9 +78,9 @@ You'll always know how your child is progressing:
 | Founding Student Rate      | Regular Rate          |
 | -------------------------- | --------------------- |
 | **(Limited Availability)** | **(Starting Term 3)** |
-| **$159.99**                | **$249**              |
+| **$159.99**                | **$199.99**           |
 | per 8-week term            | per 8-week term       |
-| (just $20/class)           | (just $31/class)      |
+| (just $20/class)           | (just $25/class)      |
 
 ### What's Included in Every Term
 
@@ -100,7 +100,7 @@ You'll always know how your child is progressing:
 | Code.org / Scratch | Free                  | No (self-paced)   |
 | **KidsLearnAI**    | **$159.99/8 weeks\*** | **Yes (group)**   |
 
-_\*Founding Student Rate. Regular rate: $249/term._
+_\*Founding Student Rate. Regular rate: $199.99/term._
 
 ---
 

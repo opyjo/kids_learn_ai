@@ -77,9 +77,9 @@ const getAgeGroupDetails = (
 ): { label: string; day: string } => {
 	switch (ageGroup) {
 		case "9-10":
-			return { label: "Ages 9-10", day: "Tuesdays" };
+			return { label: "Ages 9-10", day: "Mondays" };
 		case "11-13":
-			return { label: "Ages 11-13", day: "Thursdays" };
+			return { label: "Ages 11-13", day: "Wednesdays" };
 		default:
 			return { label: ageGroup, day: "TBD" };
 	}

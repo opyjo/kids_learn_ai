@@ -64,7 +64,7 @@ const CTASection = () => {
 									Join a thriving community of young learners mastering Python
 									with expert instructors. See if our live classes are the right
 									fit for your child - no commitment required. Ages 9-10 on
-									Tuesdays, Ages 11-13 on Thursdays.
+									Mondays, Ages 11-13 on Wednesdays.
 								</p>
 							</FadeIn>
 							<FadeIn delay={0.3}>
@@ -80,7 +80,7 @@ const CTASection = () => {
 										</Button>
 									</Link>
 									<span className="text-primary-foreground/80 text-sm">
-										<span className="line-through opacity-70">$249</span>{" "}
+										<span className="line-through opacity-70">$199.99</span>{" "}
 										<span className="font-semibold">$159.99</span> Founding Rate
 									</span>
 								</div>

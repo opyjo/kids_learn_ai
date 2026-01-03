@@ -83,7 +83,7 @@ const Hero = () => {
 							</div>
 							<div className="flex items-center gap-2">
 								<CheckCircle className="h-5 w-5 text-primary" />
-								<span>Ages 9-10 (Tue) & 11-13 (Thu)</span>
+								<span>Ages 9-10 (Mon) & 11-13 (Wed)</span>
 							</div>
 						</div>
 					</FadeIn>
