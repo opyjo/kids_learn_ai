@@ -35,6 +35,12 @@ take_home_assignment: |
   5. Be creative and have fun!
 
   **Submit:** Save your Trinket and share the link with your teacher.
+ai_activities: |
+  ## 🤖 Did You Know? AI Connection
+
+  Siri, Alexa, and ChatGPT all started with programmers writing their first instructions - just like your `print("Hello!")` today! Every AI begins with simple code.
+
+  You just took your first step toward understanding how AI works!
 ---
 
 # Level 1, Lesson 1: Welcome to Python! 🐍

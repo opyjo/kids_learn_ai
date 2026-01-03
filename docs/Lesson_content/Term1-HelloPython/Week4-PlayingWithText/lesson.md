@@ -51,6 +51,12 @@ take_home_assignment: |
   6. Code must run without errors
 
   **Submit:** Share your Trinket link with your instructor.
+ai_activities: |
+  ## 🤖 Did You Know? AI Connection
+
+  When you search Google, it uses tricks like `.lower()` so "PIZZA" and "pizza" find the same results! Spell checkers use string methods to fix your typing.
+
+  You're learning the same text skills that power Google and ChatGPT!
 ---
 
 # Term 1, Week 4: Playing with Text! 🔤

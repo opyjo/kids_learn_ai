@@ -74,6 +74,12 @@ take_home_assignment: |
   - Building even bigger projects!
 
   See you in Term 2! 🐍
+ai_activities: |
+  ## 🤖 Did You Know? AI Connection
+
+  You've learned `print()` for output, variables for memory, and string methods for text - the same building blocks inside Siri, Alexa, and ChatGPT! You're not just learning Python, you're learning how AI thinks.
+
+  Keep going - you're on your way to being an AI creator!
 ---
 
 # Term 1, Week 8: Showcase Party! 🎉

@@ -5,6 +5,7 @@ import {
 	ArrowRight,
 	Award,
 	BookOpen,
+	BrainCircuit,
 	CheckCircle,
 	Clock,
 	Eye,
@@ -24,7 +25,6 @@ import { PythonEditor } from "@/components/code/python-editor";
 import { TrinketEditor } from "@/components/code/trinket-editor";
 import { TrinketPreview } from "@/components/dashboard/trinket-preview";
 import { TrinketSubmissionForm } from "@/components/dashboard/trinket-submission-form";
-import { AIPlayground } from "@/components/lessons/ai-playground";
 import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -63,6 +63,7 @@ interface Lesson {
 	requires_trinket?: boolean;
 	class_activities?: string;
 	take_home_assignment?: string;
+	ai_activities?: string;
 }
 
 interface LessonViewerProps {
@@ -303,7 +304,7 @@ export function LessonViewer({
 						<Card className="sticky top-20 z-40 rounded-xl shadow-lg border overflow-hidden">
 							<CardHeader className="pb-3 px-4 pt-4">
 								<Tabs defaultValue="content" className="w-full">
-									<TabsList className="grid w-full grid-cols-3 h-10 bg-muted/60">
+									<TabsList className="grid w-full grid-cols-2 h-10 bg-muted/60">
 										<TabsTrigger
 											value="content"
 											className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
@@ -317,13 +318,6 @@ export function LessonViewer({
 										>
 											<BookOpen className="h-4 w-4 transition-transform duration-200 data-[state=active]:scale-110" />
 											<span>Activities</span>
-										</TabsTrigger>
-										<TabsTrigger
-											value="playgrounds"
-											className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-										>
-											<Sparkles className="h-4 w-4 transition-transform duration-200 data-[state=active]:scale-110 data-[state=active]:animate-pulse" />
-											<span>Playgrounds</span>
 										</TabsTrigger>
 									</TabsList>
 
@@ -761,31 +755,6 @@ export function LessonViewer({
 											</Card>
 										</div>
 									</TabsContent>
-
-									{/* AI Playgrounds Tab */}
-									<TabsContent
-										value="playgrounds"
-										className="mt-0 focus-visible:outline-none data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:slide-in-from-top-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=inactive]:slide-out-to-top-2 duration-200"
-									>
-										<div className="px-4 pb-4">
-											<Card className="flex flex-col rounded-2xl shadow-lg">
-												<CardHeader className="pb-3 px-3 pt-3 border-b border-border/50 flex-shrink-0">
-													<div className="flex items-center gap-2">
-														<Sparkles className="h-4 w-4 text-primary" />
-														<CardTitle className="text-base font-semibold">
-															AI Playgrounds
-														</CardTitle>
-													</div>
-												</CardHeader>
-												<CardContent className="flex-1 min-h-0 py-3 pl-3 pr-2 overflow-x-hidden">
-													<AIPlayground
-														lessonOrderIndex={lesson.order_index}
-														hideHeader
-													/>
-												</CardContent>
-											</Card>
-										</div>
-									</TabsContent>
 								</Tabs>
 							</CardHeader>
 						</Card>
@@ -857,7 +826,7 @@ export function LessonViewer({
 								className="flex-1 flex flex-col min-h-0"
 							>
 								<div className="px-4 pt-3 border-b border-border/50">
-									<TabsList className="grid w-full grid-cols-3 h-9 bg-muted/60">
+									<TabsList className="grid w-full grid-cols-4 h-9 bg-muted/60">
 										<TabsTrigger
 											value="lesson"
 											className="flex items-center gap-1.5 text-xs font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
@@ -872,6 +841,14 @@ export function LessonViewer({
 										>
 											<Sparkles className="h-3.5 w-3.5" />
 											<span>Activity</span>
+										</TabsTrigger>
+										<TabsTrigger
+											value="ai-activities"
+											className="flex items-center gap-1.5 text-xs font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
+											disabled={!lesson.ai_activities}
+										>
+											<BrainCircuit className="h-3.5 w-3.5" />
+											<span>AI Lab</span>
 										</TabsTrigger>
 										<TabsTrigger
 											value="homework"
@@ -1133,6 +1110,83 @@ export function LessonViewer({
 											</ReactMarkdown>
 										</div>
 									</div>
+								</TabsContent>
+
+								{/* AI Activities Tab */}
+								<TabsContent
+									value="ai-activities"
+									className="flex-1 overflow-auto p-4 mt-0"
+								>
+									<div className="bg-linear-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/40 dark:via-teal-950/30 dark:to-cyan-950/40 rounded-xl p-5 border border-emerald-200/50 dark:border-emerald-800/50">
+										<div className="flex items-center gap-2.5 mb-4">
+											<div className="p-2 bg-linear-to-br from-emerald-500 to-teal-500 rounded-lg shadow-md">
+												<BrainCircuit className="h-4 w-4 text-white" />
+											</div>
+											<div>
+												<h3 className="text-base font-bold text-emerald-800 dark:text-emerald-200">
+													🤖 AI Connection Lab
+												</h3>
+												<p className="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5">
+													Discover how this lesson connects to AI
+												</p>
+											</div>
+										</div>
+										<div className="text-sm leading-relaxed space-y-2.5 text-emerald-900 dark:text-emerald-100">
+											<ReactMarkdown
+												remarkPlugins={[remarkGfm]}
+												components={{
+													p: ({ children }) => (
+														<p className="mb-2.5 leading-relaxed">{children}</p>
+													),
+													strong: ({ children }) => (
+														<strong className="font-semibold text-emerald-800 dark:text-emerald-200">
+															{children}
+														</strong>
+													),
+													ul: ({ children }) => (
+														<ul className="list-disc list-inside space-y-1.5 my-2.5 ml-2 marker:text-emerald-500 dark:marker:text-emerald-400">
+															{children}
+														</ul>
+													),
+													ol: ({ children }) => (
+														<ol className="list-decimal list-inside space-y-1.5 my-2.5 ml-2 marker:text-emerald-500 dark:marker:text-emerald-400">
+															{children}
+														</ol>
+													),
+													li: ({ children }) => (
+														<li className="leading-relaxed pl-1">{children}</li>
+													),
+													h1: ({ children }) => (
+														<h1 className="text-base font-bold text-emerald-800 dark:text-emerald-200 mt-3 mb-2 first:mt-0">
+															{children}
+														</h1>
+													),
+													h2: ({ children }) => (
+														<h2 className="text-base font-bold text-emerald-800 dark:text-emerald-200 mt-3 mb-2 first:mt-0">
+															{children}
+														</h2>
+													),
+													h3: ({ children }) => (
+														<h3 className="text-sm font-semibold text-emerald-700 dark:text-emerald-300 mt-2.5 mb-1.5 first:mt-0">
+															{children}
+														</h3>
+													),
+													a: ({ href, children }) => (
+														<a
+															href={href}
+															target="_blank"
+															rel="noopener noreferrer"
+															className="text-emerald-600 dark:text-emerald-400 underline hover:text-emerald-700 dark:hover:text-emerald-300 font-medium"
+														>
+															{children}
+														</a>
+													),
+												}}
+											>
+												{lesson.ai_activities || ""}
+											</ReactMarkdown>
+									</div>
+								</div>
 								</TabsContent>
 
 								{/* Homework Tab */}

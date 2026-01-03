@@ -127,6 +127,7 @@ export async function POST(_request: NextRequest) {
 						solution_code: frontmatter.solution_code || "",
 						class_activities: frontmatter.class_activities || "",
 						take_home_assignment: frontmatter.take_home_assignment || "",
+						ai_activities: frontmatter.ai_activities || "",
 						course_id: courseId,
 						updated_at: new Date().toISOString(),
 					};

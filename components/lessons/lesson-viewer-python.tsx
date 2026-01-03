@@ -16,7 +16,6 @@ import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 import { PythonEditor } from "@/components/code/python-editor";
 import { TrinketEditor } from "@/components/code/trinket-editor";
-import { AIPlayground } from "@/components/lessons/ai-playground";
 import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -241,7 +240,7 @@ export function LessonViewer({
 						<Card className="sticky top-20 z-40 rounded-xl shadow-lg border overflow-hidden">
 							<CardHeader className="pb-3 px-4 pt-4">
 								<Tabs defaultValue="content" className="w-full">
-									<TabsList className="grid w-full grid-cols-3 h-10 bg-muted/60">
+									<TabsList className="grid w-full grid-cols-2 h-10 bg-muted/60">
 										<TabsTrigger
 											value="content"
 											className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
@@ -255,13 +254,6 @@ export function LessonViewer({
 										>
 											<BookOpen className="h-4 w-4 transition-transform duration-200 data-[state=active]:scale-110" />
 											<span>Activities</span>
-										</TabsTrigger>
-										<TabsTrigger
-											value="playgrounds"
-											className="flex items-center gap-2 text-sm font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-										>
-											<Sparkles className="h-4 w-4 transition-transform duration-200 data-[state=active]:scale-110 data-[state=active]:animate-pulse" />
-											<span>Playgrounds</span>
 										</TabsTrigger>
 									</TabsList>
 
@@ -653,31 +645,6 @@ export function LessonViewer({
 																);
 															})}
 													</div>
-												</CardContent>
-											</Card>
-										</div>
-									</TabsContent>
-
-									{/* AI Playgrounds Tab */}
-									<TabsContent
-										value="playgrounds"
-										className="mt-0 focus-visible:outline-none data-[state=active]:animate-in data-[state=active]:fade-in-0 data-[state=active]:slide-in-from-top-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=inactive]:slide-out-to-top-2 duration-200"
-									>
-										<div className="px-4 pb-4">
-											<Card className="flex flex-col rounded-2xl shadow-lg">
-												<CardHeader className="pb-3 px-3 pt-3 border-b border-border/50 flex-shrink-0">
-													<div className="flex items-center gap-2">
-														<Sparkles className="h-4 w-4 text-primary" />
-														<CardTitle className="text-base font-semibold">
-															AI Playgrounds
-														</CardTitle>
-													</div>
-												</CardHeader>
-												<CardContent className="flex-1 min-h-0 py-3 pl-3 pr-2 overflow-x-hidden">
-													<AIPlayground
-														lessonOrderIndex={lesson.order_index}
-														hideHeader
-													/>
 												</CardContent>
 											</Card>
 										</div>

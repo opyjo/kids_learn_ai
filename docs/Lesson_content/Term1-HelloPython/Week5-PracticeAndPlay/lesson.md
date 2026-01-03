@@ -75,6 +75,12 @@ take_home_assignment: |
   - Present in a formatted display
 
   **Submit:** Share your Trinket link with your instructor.
+ai_activities: |
+  ## 🤖 Did You Know? AI Connection
+
+  Real AI programmers practice every day - that's how ChatGPT got so smart! The more you practice coding, the better you get.
+
+  Today you're training your brain just like programmers train AI!
 ---
 
 # Term 1, Week 5: Practice & Play! 🎮
