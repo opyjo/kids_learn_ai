@@ -188,12 +188,6 @@ const NAV_ITEMS = {
 	],
 	learn: [
 		{
-			href: "/tutor",
-			label: "AI Tutor",
-			Icon: Sparkles,
-			description: "Get personalized AI tutoring",
-		},
-		{
 			href: "/playground",
 			label: "Playground",
 			Icon: TerminalSquare,
@@ -733,6 +727,18 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 										/>
 									</NavigationMenuItem>
 								)}
+
+								{/* Ask BrightByte - Top-level navigation */}
+								<NavigationMenuItem>
+									<NavLink
+										item={{
+											href: "/tutor",
+											label: "Ask BrightByte",
+											Icon: Sparkles,
+										}}
+										isActive={isActive("/tutor")}
+									/>
+								</NavigationMenuItem>
 
 								{/* Admin Link */}
 								{isAdmin && (

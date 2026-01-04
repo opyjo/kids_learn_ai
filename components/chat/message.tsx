@@ -1,6 +1,7 @@
 "use client";
 
-import { Bot, User } from "lucide-react";
+import { User } from "lucide-react";
+import Image from "next/image";
 import { memo } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import type { TutorCharacter } from "@/lib/constants/tutor-characters";
@@ -30,15 +31,21 @@ export const Message = memo(
 			>
 				<Avatar
 					className={cn(
-						"h-9 w-9 shrink-0 shadow-sm",
+						"h-9 w-9 shrink-0 shadow-sm overflow-visible",
 						isAssistant
-							? "bg-gradient-to-br from-primary to-primary/80 ring-2 ring-primary/20"
+							? "bg-transparent ring-2 ring-primary/20"
 							: "bg-gradient-to-br from-accent to-accent/80 ring-2 ring-accent/20",
 					)}
 				>
 					<AvatarFallback className="bg-transparent">
 						{isAssistant ? (
-							<Bot className="h-5 w-5 text-primary-foreground" />
+							<Image
+								src="/brightbyte/gesture.png"
+								alt="BrightByte"
+								width={36}
+								height={36}
+								className="object-contain"
+							/>
 						) : (
 							<User className="h-5 w-5 text-accent-foreground" />
 						)}

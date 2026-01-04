@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, Send, Sparkles, Trash2 } from "lucide-react";
+import { Lightbulb, Loader2, Send, Sparkles, Trash2 } from "lucide-react";
 import {
 	forwardRef,
 	useCallback,
@@ -22,40 +22,33 @@ import {
 import { AnimatedTutor } from "./animated-tutor";
 import { Message } from "./message";
 
+// Thinking phrases that rotate during loading
+const THINKING_PHRASES = [
+	"Hmm, let me think... 🤔",
+	"Great question! Thinking... 💭",
+	"Processing your code... ⚡",
+	"Let me figure this out... 🧠",
+	"Analyzing... almost there! ✨",
+	"Cooking up an answer... 🍳",
+];
+
 interface ChatMessage {
 	id: string;
 	role: "user" | "assistant";
 	content: string;
 	timestamp: number;
+	suggestions?: string[];
 }
 
-// Starter prompts by tutor
-const STARTER_PROMPTS: Record<TutorId, string[]> = {
-	brightbyte: [
-		"What is a variable in Python?",
-		"How do I make a loop?",
-		"Can you help me debug my code?",
-		"What's the difference between a list and a tuple?",
-	],
-	mathbot: [
-		"Can you help me with fractions?",
-		"How do I solve this word problem?",
-		"What is algebra?",
-		"Can you explain multiplication?",
-	],
-	scienceowl: [
-		"How does photosynthesis work?",
-		"What makes the sky blue?",
-		"Can you explain gravity?",
-		"What is the water cycle?",
-	],
-	artai: [
-		"How can I start writing a story?",
-		"What colors go well together?",
-		"Can you help me draw something?",
-		"How do I make my art more creative?",
-	],
-};
+// Starter prompts for BrightByte - Mix of Python and AI questions
+const STARTER_PROMPTS: string[] = [
+	"What is a variable in Python?",
+	"How does AI use loops?",
+	"Can you help me debug my code?",
+	"What's the difference between a list and a tuple?",
+	"How do Python skills connect to AI?",
+	"Can AI help me learn Python?",
+];
 
 // Generate initial message based on tutor
 const getInitialMessage = (tutor: TutorCharacter): ChatMessage => ({
@@ -84,14 +77,19 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 		const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
 		const [input, setInput] = useState("");
 		const [isLoading, setIsLoading] = useState(false);
+		const [remainingMessages, setRemainingMessages] = useState<number | null>(
+			null,
+		);
+		const [dailyLimit, setDailyLimit] = useState<number | null>(null);
+		const [isInitialized, setIsInitialized] = useState(false);
+		const [thinkingPhrase, setThinkingPhrase] = useState(THINKING_PHRASES[0]);
 		const scrollAreaRef = useRef<HTMLDivElement>(null);
 		const textareaRef = useRef<HTMLTextAreaElement>(null);
 		const abortControllerRef = useRef<AbortController | null>(null);
 		const hasMountedRef = useRef(false);
 
-		// Load and save messages per tutor to localStorage
+		// Load messages from localStorage on mount/tutor change
 		useEffect(() => {
-			// Load saved messages for this tutor
 			const savedMessagesKey = `tutor-messages-${tutorId}`;
 			const savedMessages = localStorage.getItem(savedMessagesKey);
 			const currentTutor = getTutorById(tutorId);
@@ -99,7 +97,12 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 			if (savedMessages) {
 				try {
 					const parsed = JSON.parse(savedMessages);
-					setMessages(parsed);
+					if (Array.isArray(parsed) && parsed.length > 0) {
+						setMessages(parsed);
+					} else {
+						const newInitialMessage = getInitialMessage(currentTutor);
+						setMessages([newInitialMessage]);
+					}
 				} catch (error) {
 					console.error("Error loading saved messages:", error);
 					const newInitialMessage = getInitialMessage(currentTutor);
@@ -112,6 +115,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 
 			setInput("");
 			setIsLoading(false);
+			setIsInitialized(true);
 
 			// Abort any pending requests
 			if (abortControllerRef.current) {
@@ -130,32 +134,50 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 			}
 		}, [tutorId]);
 
-		// Save messages to localStorage whenever they change
+		// Save messages to localStorage whenever they change (only after initialization)
 		useEffect(() => {
-			if (messages.length > 0) {
+			if (isInitialized && messages.length > 0) {
 				const savedMessagesKey = `tutor-messages-${tutorId}`;
 				localStorage.setItem(savedMessagesKey, JSON.stringify(messages));
 			}
-		}, [messages, tutorId]);
+		}, [messages, tutorId, isInitialized]);
 
-		// Auto-scroll inside the ScrollArea when new messages arrive (skip initial mount)
+		// Auto-scroll inside the ScrollArea when new messages arrive or loading state changes
 		useEffect(() => {
-			if (!hasMountedRef.current) {
-				hasMountedRef.current = true;
-				return;
-			}
+			// Small delay to ensure DOM has updated
+			const timeoutId = setTimeout(() => {
+				const viewport = scrollAreaRef.current?.querySelector(
+					"[data-radix-scroll-area-viewport]",
+				) as HTMLElement | null;
+				if (!viewport) return;
+				viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
+			}, 100);
 
-			const viewport = scrollAreaRef.current?.querySelector(
-				"[data-radix-scroll-area-viewport]",
-			) as HTMLElement | null;
-			if (!viewport) return;
-			viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
-		}, []);
+			return () => clearTimeout(timeoutId);
+		}, [messages, isLoading]);
 
 		// Auto-focus textarea on mount
 		useEffect(() => {
 			textareaRef.current?.focus();
 		}, []);
+
+		// Rotate thinking phrases while loading
+		useEffect(() => {
+			if (!isLoading) return;
+
+			// Set initial random phrase
+			setThinkingPhrase(
+				THINKING_PHRASES[Math.floor(Math.random() * THINKING_PHRASES.length)],
+			);
+
+			const interval = setInterval(() => {
+				setThinkingPhrase(
+					THINKING_PHRASES[Math.floor(Math.random() * THINKING_PHRASES.length)],
+				);
+			}, 2000);
+
+			return () => clearInterval(interval);
+		}, [isLoading]);
 
 		// Expose sendMessage method via ref
 		useImperativeHandle(ref, () => ({
@@ -204,7 +226,29 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 						signal: abortControllerRef.current.signal,
 					});
 
+					// Extract usage headers
+					const remainingHeader = response.headers.get("X-Remaining-Messages");
+					const limitHeader = response.headers.get("X-Daily-Limit");
+					if (remainingHeader !== null) {
+						setRemainingMessages(parseInt(remainingHeader, 10));
+					}
+					if (limitHeader !== null) {
+						setDailyLimit(parseInt(limitHeader, 10));
+					}
+
 					if (!response.ok) {
+						// Handle daily limit exceeded (429)
+						if (response.status === 429) {
+							const data = await response.json();
+							const errorMessage: ChatMessage = {
+								id: crypto.randomUUID(),
+								role: "assistant",
+								content: data.content || data.error || "Daily limit reached",
+								timestamp: Date.now(),
+							};
+							setMessages((prev) => [...prev, errorMessage]);
+							return;
+						}
 						throw new Error("Failed to get response");
 					}
 
@@ -215,6 +259,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 						role: "assistant",
 						content: data.content,
 						timestamp: Date.now(),
+						suggestions: data.suggestions,
 					};
 
 					setMessages((prev) => [...prev, assistantMessage]);
@@ -309,15 +354,28 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 						background: `linear-gradient(to right, ${tutor.color.primary}10, ${tutor.color.primary}05, ${tutor.color.secondary}10)`,
 					}}
 				>
-					<div className="flex items-center gap-3">
+					<div className="flex items-center gap-3 flex-1">
 						<AnimatedTutor tutor={tutor} animationState="idle" size="medium" />
-						<div>
+						<div className="flex-1">
 							<h2 className="text-lg font-bold text-foreground flex items-center gap-2">
 								{tutor.name} <span className="text-xl">{tutor.emoji}</span>
 							</h2>
-							<p className="text-xs text-muted-foreground font-medium">
-								Your {tutor.subject} Tutor
-							</p>
+							<div className="flex items-center gap-3 flex-wrap">
+								<p className="text-xs text-muted-foreground font-medium">
+									Your {tutor.subject} Tutor
+								</p>
+								{remainingMessages !== null && dailyLimit !== null && (
+									<span
+										className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+											remainingMessages <= 3
+												? "bg-destructive/10 text-destructive"
+												: "bg-muted text-muted-foreground"
+										}`}
+									>
+										{remainingMessages} / {dailyLimit} messages today
+									</span>
+								)}
+							</div>
 						</div>
 					</div>
 					{messages.length > 1 && (
@@ -370,15 +428,80 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 									<p className="text-sm font-bold text-foreground">
 										{tutor.emoji} {tutor.name}
 									</p>
-									<p className="text-sm text-muted-foreground flex items-center gap-1">
-										<span className="animate-pulse">●</span>
-										<span className="animate-pulse delay-100">●</span>
-										<span className="animate-pulse delay-200">●</span>
-										<span className="ml-1">Thinking...</span>
-									</p>
+									<div className="flex items-center gap-2">
+										<p className="text-sm text-muted-foreground animate-pulse">
+											{thinkingPhrase}
+										</p>
+										<div className="flex gap-1">
+											<span
+												className="w-2 h-2 rounded-full animate-bounce"
+												style={{
+													backgroundColor: tutor.color.primary,
+													animationDelay: "0ms",
+												}}
+											/>
+											<span
+												className="w-2 h-2 rounded-full animate-bounce"
+												style={{
+													backgroundColor: tutor.color.primary,
+													animationDelay: "150ms",
+												}}
+											/>
+											<span
+												className="w-2 h-2 rounded-full animate-bounce"
+												style={{
+													backgroundColor: tutor.color.primary,
+													animationDelay: "300ms",
+												}}
+											/>
+										</div>
+									</div>
 								</div>
 							</div>
 						)}
+						{/* Follow-up Suggestions - Show after last assistant message */}
+						{!isLoading &&
+							messages.length > 1 &&
+							messages[messages.length - 1]?.role === "assistant" &&
+							messages[messages.length - 1]?.suggestions &&
+							messages[messages.length - 1].suggestions!.length > 0 && (
+								<div className="mt-4 space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
+									<p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+										<Lightbulb
+											className="h-4 w-4"
+											style={{ color: tutor.color.primary }}
+										/>
+										Want to know more? Try asking:
+									</p>
+									<div className="flex flex-wrap gap-2">
+										{messages[messages.length - 1].suggestions!.map(
+											(suggestion) => (
+												<button
+													key={suggestion}
+													onClick={() => handleStarterPrompt(suggestion)}
+													tabIndex={0}
+													aria-label={`Ask: ${suggestion}`}
+													className="px-3 py-1.5 rounded-full border text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2"
+													style={{
+														borderColor: `${tutor.color.primary}40`,
+														background: `linear-gradient(to right, ${tutor.color.primary}05, transparent)`,
+													}}
+													onMouseEnter={(e) => {
+														e.currentTarget.style.borderColor = `${tutor.color.primary}60`;
+														e.currentTarget.style.background = `linear-gradient(to right, ${tutor.color.primary}15, ${tutor.color.primary}05)`;
+													}}
+													onMouseLeave={(e) => {
+														e.currentTarget.style.borderColor = `${tutor.color.primary}40`;
+														e.currentTarget.style.background = `linear-gradient(to right, ${tutor.color.primary}05, transparent)`;
+													}}
+												>
+													{suggestion}
+												</button>
+											),
+										)}
+									</div>
+								</div>
+							)}
 					</div>
 
 					{/* Starter Prompts - Show only when no user messages yet */}
@@ -392,7 +515,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 								Try asking:
 							</p>
 							<div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-								{STARTER_PROMPTS[tutorId].map((prompt) => (
+								{STARTER_PROMPTS.map((prompt) => (
 									<button
 										key={prompt}
 										onClick={() => handleStarterPrompt(prompt)}

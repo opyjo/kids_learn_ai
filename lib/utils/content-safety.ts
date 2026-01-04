@@ -119,10 +119,12 @@ export const checkContentSafety = (message: string): SafetyCheckResult => {
 };
 
 /**
- * Check if message is about Python programming
+ * Check if message is about Python programming or AI learning
+ * BrightByte helps with both Python and AI concepts for kids
  */
 export const isPythonRelated = (message: string): boolean => {
-	const pythonKeywords = [
+	const allowedKeywords = [
+		// Python keywords
 		"python",
 		"code",
 		"program",
@@ -145,12 +147,24 @@ export const isPythonRelated = (message: string): boolean => {
 		"bug",
 		"debug",
 		"syntax",
+		// AI-related keywords (part of curriculum)
+		"ai",
+		"artificial intelligence",
+		"machine learning",
+		"algorithm",
+		"data",
+		"pattern",
+		"learn",
+		"smart",
+		"robot",
+		"chatbot",
+		"computer",
 	];
 
 	const lowerMessage = message.toLowerCase();
 
-	// Check if any Python keywords are present
-	const hasPythonKeyword = pythonKeywords.some((keyword) =>
+	// Check if any allowed keywords are present
+	const hasAllowedKeyword = allowedKeywords.some((keyword) =>
 		lowerMessage.includes(keyword),
 	);
 
@@ -159,8 +173,8 @@ export const isPythonRelated = (message: string): boolean => {
 		pattern.test(message),
 	);
 
-	// If it has Python keywords and is not off-topic, it's likely Python-related
-	if (hasPythonKeyword && !isOffTopic) {
+	// If it has allowed keywords and is not off-topic, it's on-topic
+	if (hasAllowedKeyword && !isOffTopic) {
 		return true;
 	}
 
@@ -173,179 +187,15 @@ export const isPythonRelated = (message: string): boolean => {
 };
 
 /**
- * Check if message is about mathematics
- */
-export const isMathRelated = (message: string): boolean => {
-	const mathKeywords = [
-		"math",
-		"number",
-		"add",
-		"subtract",
-		"multiply",
-		"divide",
-		"fraction",
-		"decimal",
-		"equation",
-		"algebra",
-		"geometry",
-		"calculate",
-		"solve",
-		"problem",
-		"plus",
-		"minus",
-		"times",
-		"equal",
-		"percent",
-		"measurement",
-		"shape",
-		"angle",
-		"area",
-		"volume",
-		"perimeter",
-	];
-
-	const lowerMessage = message.toLowerCase();
-
-	// Check if any math keywords are present
-	const hasMathKeyword = mathKeywords.some((keyword) =>
-		lowerMessage.includes(keyword),
-	);
-
-	// If it has math keywords, it's math-related
-	if (hasMathKeyword) {
-		return true;
-	}
-
-	// Short messages might be greetings or follow-ups
-	if (message.length < 50) {
-		return true;
-	}
-
-	return false;
-};
-
-/**
- * Check if message is about science
- */
-export const isScienceRelated = (message: string): boolean => {
-	const scienceKeywords = [
-		"science",
-		"experiment",
-		"biology",
-		"chemistry",
-		"physics",
-		"nature",
-		"animal",
-		"plant",
-		"cell",
-		"energy",
-		"force",
-		"gravity",
-		"light",
-		"sound",
-		"water",
-		"earth",
-		"space",
-		"planet",
-		"star",
-		"weather",
-		"climate",
-		"ecosystem",
-		"photosynthesis",
-		"molecule",
-		"atom",
-	];
-
-	const lowerMessage = message.toLowerCase();
-
-	// Check if any science keywords are present
-	const hasScienceKeyword = scienceKeywords.some((keyword) =>
-		lowerMessage.includes(keyword),
-	);
-
-	// If it has science keywords, it's science-related
-	if (hasScienceKeyword) {
-		return true;
-	}
-
-	// Short messages might be greetings or follow-ups
-	if (message.length < 50) {
-		return true;
-	}
-
-	return false;
-};
-
-/**
- * Check if message is about creative arts
- */
-export const isCreativeArtsRelated = (message: string): boolean => {
-	const artsKeywords = [
-		"art",
-		"draw",
-		"paint",
-		"color",
-		"creative",
-		"create",
-		"design",
-		"write",
-		"story",
-		"poem",
-		"music",
-		"song",
-		"dance",
-		"craft",
-		"make",
-		"imagine",
-		"idea",
-		"sketch",
-		"illustrate",
-		"character",
-		"scene",
-		"composition",
-		"style",
-		"technique",
-	];
-
-	const lowerMessage = message.toLowerCase();
-
-	// Check if any arts keywords are present
-	const hasArtsKeyword = artsKeywords.some((keyword) =>
-		lowerMessage.includes(keyword),
-	);
-
-	// If it has arts keywords, it's arts-related
-	if (hasArtsKeyword) {
-		return true;
-	}
-
-	// Short messages might be greetings or follow-ups
-	if (message.length < 50) {
-		return true;
-	}
-
-	return false;
-};
-
-/**
  * Check if message is on-topic for the given tutor
+ * Since we only have BrightByte now, always check for Python-related content
  */
 export const isOnTopicForTutor = (
 	message: string,
 	tutorId: string,
 ): boolean => {
-	switch (tutorId) {
-		case "brightbyte":
-			return isPythonRelated(message);
-		case "mathbot":
-			return isMathRelated(message);
-		case "scienceowl":
-			return isScienceRelated(message);
-		case "artai":
-			return isCreativeArtsRelated(message);
-		default:
-			return isPythonRelated(message); // Default to Python
-	}
+	// Only BrightByte exists, so always use Python-related check
+	return isPythonRelated(message);
 };
 
 /**

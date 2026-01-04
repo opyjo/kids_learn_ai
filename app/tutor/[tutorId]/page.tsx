@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Code2, GripVertical } from "lucide-react";
+import { Code2, GripVertical } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
@@ -10,7 +10,6 @@ import { MainLayout } from "@/components/layouts/main-layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-	getAllTutors,
 	getTutorById,
 	type TutorId,
 } from "@/lib/constants/tutor-characters";
@@ -50,10 +49,9 @@ const TutorChatPage = () => {
 		checkAuth();
 	}, [router]);
 
-	// Validate tutorId
+	// Validate tutorId - only brightbyte is valid
 	useEffect(() => {
-		const validTutorIds = getAllTutors().map((t) => t.id);
-		if (!validTutorIds.includes(tutorId)) {
+		if (tutorId !== "brightbyte") {
 			router.push("/tutor");
 		}
 	}, [tutorId, router]);
@@ -115,19 +113,6 @@ print(f"Happy coding, {name}!")
 	return (
 		<MainLayout>
 			<div className="mx-auto w-full min-h-[calc(100vh-5rem)] px-4 py-3 sm:px-6 lg:px-8">
-				{/* Back Button */}
-				<div className="max-w-5xl mx-auto mb-4">
-					<Button
-						variant="ghost"
-						size="sm"
-						onClick={() => router.push("/tutor")}
-						className="gap-2"
-						aria-label="Back to tutor selection"
-					>
-						<ArrowLeft className="h-4 w-4" />
-						Change Tutor
-					</Button>
-				</div>
 
 				{/* Layout - Without Editor (Mobile) */}
 				{!showEditor && (
