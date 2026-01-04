@@ -221,6 +221,49 @@ Call each student up and award certificate:
 
 ---
 
+## 🤖 AI Activity: My AI Future (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You've completed Year 1! You've learned the fundamentals of programming and AI. Now let's think about your AI future!"
+
+2. **Future Visioning Activity** (4-5 min)
+   - Ask: "How will you use AI in your dream job?"
+   - Brainstorm: "What will you create with AI?"
+   - Discuss: "What problems will you solve with AI?"
+   - Share: Have students share their AI future visions
+
+3. **Discussion** (2-3 min)
+   - "How will you use AI in your future?"
+   - "What will you create with AI?"
+   - "What problems will you solve?"
+
+4. **Connection** (1 min)
+   > "You've learned the foundation of AI! Now you can imagine your AI future - how you'll use AI in your dream job, what you'll create, and what problems you'll solve. The future is yours to build!"
+
+### Discussion Questions
+
+- "How will you use AI in your dream job?"
+- "What will you create with AI?"
+- "What problems will you solve with AI?"
+
+### Teaching Tips
+
+- Make it inspiring and positive - this is about their future!
+- Encourage creativity - "What's your wildest AI idea?"
+- Connect to their learning: "You've learned the foundation - now imagine the possibilities!"
+- If students are stuck, give examples: "AI doctor, AI game designer, AI artist"
+- Emphasize their potential: "You can build anything with AI!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who can share one way they'll use AI in the future?"
+- Connect: "You've learned the foundation - now imagine the possibilities!"
+- Emphasize: "The future is yours to build!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

@@ -103,7 +103,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI uses similar guessing strategies! When AI learns, it makes guesses, gets feedback (too high/too low), and adjusts. When AI plays games, it uses the same pattern: try, get feedback, adjust, try again. Your guessing game uses the same learning pattern that AI uses!
+  AI uses similar guessing strategies! When AI learns, it makes guesses, gets feedback (too high/too low), and adjusts. When AI plays games, it uses the same pattern: try, get feedback, adjust, try again. Your guessing game uses the same learning pattern that AI uses! AI uses a smart strategy called "binary search" - it always guesses the middle number, which is the fastest way to find the answer, just like you might do in your guessing game!
 
   You're building a game that works like AI learning!
 ---

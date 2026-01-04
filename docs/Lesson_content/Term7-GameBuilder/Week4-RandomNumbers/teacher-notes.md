@@ -250,6 +250,49 @@ Use this time for questions and clarifications.
 
 ---
 
+## 🤖 AI Activity: AI Randomness (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned about random numbers. But here's a question: Is AI truly random?"
+
+2. **Randomness Discussion** (4-5 min)
+   - Ask: "What does 'random' mean to you?"
+   - Explain: "Actually, AI uses 'pseudo-random' numbers - they look random but follow a pattern!"
+   - Demonstrate: "Python's random module uses a formula - it's not truly random, but it looks random"
+   - Connect: "AI uses pseudo-randomness too - it looks random but follows patterns!"
+
+3. **Discussion** (2-3 min)
+   - "What's the difference between truly random and pseudo-random?"
+   - "Why do you think AI uses pseudo-random instead of truly random?"
+   - "How is this similar to your random numbers?"
+
+4. **Connection** (1 min)
+   > "AI uses pseudo-random numbers - they look random but follow a pattern, just like Python's random module! This makes AI creative and unpredictable, but still follows rules. You're learning the same randomness that powers AI!"
+
+### Discussion Questions
+
+- "What's the difference between truly random and pseudo-random?"
+- "Why do you think computers can't be truly random?"
+- "How is this similar to your random numbers?"
+
+### Teaching Tips
+
+- Keep it simple - focus on "looks random but follows pattern"
+- Use examples: "Like shuffling cards - looks random but follows rules"
+- Connect to their code: "Your random numbers work the same way!"
+- If students ask technical questions, simplify: "Computers use formulas to make random-looking numbers"
+- Emphasize they're learning real AI concepts: "This is how AI randomness works!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who thinks computers can be truly random?"
+- Connect: "AI uses pseudo-random - looks random but follows patterns!"
+- Emphasize: "You're learning the same randomness that powers AI!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

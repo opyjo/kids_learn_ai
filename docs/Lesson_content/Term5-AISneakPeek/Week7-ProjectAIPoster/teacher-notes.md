@@ -216,6 +216,50 @@ By the end of this lesson, students will have:
 
 ---
 
+## 🤖 AI Activity: AI Impact Interview (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You're creating an AI poster. But how does AI affect people's jobs? Let's find out by interviewing someone!"
+
+2. **Interview Activity** (4-5 min)
+   - Have students think of someone to interview (parent, family member, teacher)
+   - Create simple interview questions: "How does AI affect your job?", "Do you use AI at work?", "What AI tools do you use?"
+   - Students can interview during class (if family member available) or as homework
+   - Share findings: "What did you learn about AI in jobs?"
+
+3. **Discussion** (2-3 min)
+   - "What did you learn about AI in jobs?"
+   - "Were you surprised by what you found?"
+   - "How can you use this in your poster?"
+
+4. **Connection** (1 min)
+   > "By interviewing people about AI, you're discovering AI in places you might not expect! This helps you understand how AI affects real people's lives - perfect for your poster project!"
+
+### Discussion Questions
+
+- "What did you learn about AI in jobs?"
+- "Were you surprised by what you found?"
+- "How can you use this in your poster?"
+
+### Teaching Tips
+
+- Make it optional - some students may not have someone to interview
+- Provide sample questions if needed
+- Encourage students to share findings
+- Connect to poster project: "This is great content for your poster!"
+- If no one to interview, discuss as a class: "How do you think AI affects jobs?"
+
+### Alternative Activity (If No Interviews Available)
+
+- Class discussion: "How do you think AI affects different jobs?"
+- Brainstorm: "What jobs use AI? What jobs might AI change?"
+- Connect: "This is great content for your poster!"
+- Emphasize: "Understanding AI's impact is important!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

@@ -268,6 +268,51 @@ Quick review:
 
 ---
 
+## 🤖 AI Activity: Train Your Classmate (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "AI learns from examples - just like you do! Let's see how that works by training each other!"
+
+2. **Training Activity** (4-5 min)
+   - Pair students up
+   - One student is the "trainer", one is the "AI"
+   - Trainer shows the "AI" different shapes (circle, square, triangle) and says what each is
+   - After showing 5-10 examples, test: show a new shape and see if "AI" can identify it
+   - Switch roles
+   - Explain: "This is exactly how AI learns - from examples! The more examples, the better it gets!"
+
+3. **Discussion** (2-3 min)
+   - "How many examples did you need to learn the shapes?"
+   - "What happened when you saw a new shape?"
+   - "How is this similar to how AI learns?"
+
+4. **Connection** (1 min)
+   > "You just trained your classmate the same way AI learns - from examples! AI looks at thousands of examples to learn patterns, just like you learned shapes from examples. You're experiencing how AI training works!"
+
+### Discussion Questions
+
+- "How many examples did you need to learn?"
+- "What happened when you saw something new?"
+- "How is this similar to how AI learns?"
+
+### Teaching Tips
+
+- Make it fun and interactive
+- Use simple examples: shapes, colors, animals
+- Emphasize the learning process: "More examples = better learning"
+- Connect to AI: "AI learns the same way - from lots of examples!"
+- If time allows, try with more complex examples
+
+### Alternative Activity (If Short on Time)
+
+- Quick demonstration: Teacher trains one student
+- Connect: "This is how AI learns - from examples!"
+- Emphasize: "AI needs thousands of examples to learn well!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

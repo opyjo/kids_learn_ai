@@ -52,7 +52,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI uses patterns to recognize images! When AI looks at a photo, it processes patterns of pixels (tiny dots). When AI generates art, it creates patterns of colors and shapes. Pattern recognition is one of AI's most important skills!
+  AI uses patterns to recognize images! When AI looks at a photo, it processes patterns of pixels (tiny dots). When AI generates art, it creates patterns of colors and shapes. Pattern recognition is one of AI's most important skills! When you create patterns with loops, you're doing exactly what AI does - recognizing and creating patterns! AI is really good at finding patterns in data, just like you're finding patterns in your code!
 
   You're learning to create patterns—the same skill AI uses to understand the world!
 ---

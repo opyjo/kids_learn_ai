@@ -92,7 +92,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Chatbots and AI assistants store jokes and responses in variables, just like your Joke Machine! When you ask Alexa to tell a joke, she picks from stored jokes - same idea as your program.
+  Chatbots and AI assistants store jokes and responses in variables, just like your Joke Machine! When you ask Alexa to tell a joke, she picks from stored jokes - same idea as your program. AI learns which jokes are funny by seeing how people rate them - if you rated jokes as "funny" or "not funny," that's exactly how AI training data works!
 
   You built something that works like real AI!
 ---

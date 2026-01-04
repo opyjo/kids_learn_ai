@@ -353,6 +353,49 @@ Use for questions and help.
 
 ---
 
+## 🤖 AI Activity: Classification Challenge (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned elif - handling multiple choices. Did you know AI uses elif to classify things - sorting them into categories?"
+
+2. **Classification Activity** (4-5 min)
+   - Give students a list of animals: cat, dog, bird, fish, snake
+   - Ask: "How would you sort these into groups?"
+   - Have students create a simple program using elif: "if it's a cat, elif it's a dog, elif it's a bird, else it's something else"
+   - Explain: "This is classification - sorting things into categories! AI does this with millions of things!"
+
+3. **Discussion** (2-3 min)
+   - "How did you decide which category each animal belongs to?"
+   - "What if you had 100 animals instead of 5?"
+   - "How do you think AI classifies things?"
+
+4. **Connection** (1 min)
+   > "When you use elif to sort things into categories, you're doing classification - exactly what AI does! AI uses elif to classify images, text, and data into categories. You're learning the same classification logic that powers AI!"
+
+### Discussion Questions
+
+- "How do you decide which category something belongs to?"
+- "What makes classification easy or hard?"
+- "How do you think AI classifies millions of things?"
+
+### Teaching Tips
+
+- Use concrete examples: animals, colors, shapes
+- Keep it simple - focus on "elif = sorting into categories"
+- Connect to their code: "Your elif statements classify things!"
+- If students ask technical questions, simplify: "AI uses elif to sort things into groups"
+- Emphasize they're learning real AI concepts: "Classification is a core AI skill!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has sorted things into groups? That's classification!"
+- Connect: "Your elif statements sort things into categories!"
+- Emphasize: "AI uses elif to classify millions of things!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

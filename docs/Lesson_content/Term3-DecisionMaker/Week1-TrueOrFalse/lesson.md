@@ -51,7 +51,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Every decision an AI makes is based on True/False questions! When a self-driving car asks "Is there a stop sign?" or a chatbot asks "Did the user say hello?", those are Boolean questions - the answer is either True or False!
+  Every decision an AI makes is based on True/False questions! When a self-driving car asks "Is there a stop sign?" or a chatbot asks "Did the user say hello?", those are Boolean questions - the answer is either True or False! Games like Akinator use True/False questions to guess what you're thinking - it asks yes/no questions and narrows down the answer, just like you're learning to do with if statements!
 
   You're learning the same True/False logic that powers every AI decision!
 ---

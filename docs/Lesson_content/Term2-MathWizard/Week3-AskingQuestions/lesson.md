@@ -51,7 +51,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Every time you talk to Siri, Alexa, or a chatbot, they're using input() just like you're learning! AI systems ask questions, get your answers, and respond based on what you say.
+  Every time you talk to Siri, Alexa, or a chatbot, they're using input() just like you're learning! AI systems ask questions, get your answers, and respond based on what you say. When you collect answers from classmates using input(), you're creating a dataset - the same kind of data that AI uses to learn! AI learns from millions of answers just like you're collecting answers today.
 
   You're learning the same interaction pattern that powers every AI conversation in the world!
 ---

@@ -68,7 +68,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI combines all these features too! When AI plays games, it uses loops to keep playing, random moves to explore, and tracks its progress to learn. When AI learns, it combines loops (repetition), decisions (what to do), randomness (exploration), and tracking (learning from results). You're using the same combination that makes AI smart!
+  AI combines all these features too! When AI plays games, it uses loops to keep playing, random moves to explore, and tracks its progress to learn. When AI learns, it combines loops (repetition), decisions (what to do), randomness (exploration), and tracking (learning from results). You're using the same combination that makes AI smart! Game AIs use all these features to create challenging opponents - they loop through possible moves, use randomness to explore, and track what works to get better!
 
   You're building games the same way AI builds intelligence!
 ---

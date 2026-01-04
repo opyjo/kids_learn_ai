@@ -65,7 +65,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  You've completed Year 1! You've learned the fundamentals of programming and AI. Everything you've learned—variables, loops, lists, decisions—is the foundation of how AI works. You're not just a coder anymore—you're an AI explorer who understands how technology works!
+  You've completed Year 1! You've learned the fundamentals of programming and AI. Everything you've learned—variables, loops, lists, decisions—is the foundation of how AI works. You're not just a coder anymore—you're an AI explorer who understands how technology works! As you graduate, think about your AI future: How will you use AI in your dream job? What will you create with AI? The future is yours to build!
 
   You're ready to continue your journey into Year 2!
 ---

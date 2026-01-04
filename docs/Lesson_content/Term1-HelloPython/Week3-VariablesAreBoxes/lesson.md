@@ -46,7 +46,9 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  When Siri says "Good morning, Alex!" she's using a variable to remember your name - just like `name = "Alex"` in your code! Netflix uses variables to remember what shows you like.
+  When Siri says "Good morning, Alex!" she's using a variable to remember your name - just like `name = "Alex"` in your code! AI systems use thousands of variables to store information, just like your program stores data in boxes. Netflix uses variables to remember what shows you like, and ChatGPT uses variables to remember what you're talking about.
+
+  You're learning the same memory system that powers AI!
 
   Variables are how AI remembers things about you!
 ---

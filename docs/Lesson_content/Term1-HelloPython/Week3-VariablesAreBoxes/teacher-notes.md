@@ -557,6 +557,49 @@ print(len(name))       # 4
 
 ---
 
+## 🤖 AI Activity: AI Memory (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "We just learned about variables - boxes that store information. Did you know AI uses the same idea, but with THOUSANDS of variables?"
+
+2. **Demonstration** (3-4 min)
+   - Show students: "When Siri says 'Good morning, Alex!' - how does it know your name?"
+   - Explain: "It's stored in a variable, just like `name = "Alex"` in your code!"
+   - Show another example: "Netflix remembers what shows you like - that's stored in variables too!"
+   - Draw a simple diagram: "Your program has 3-5 variables. AI has millions!"
+
+3. **Interactive Discussion** (2-3 min)
+   - "What else do you think AI remembers about you?"
+   - "How many variables do you think ChatGPT uses?"
+   - "What's the same between your variables and AI's variables?"
+
+4. **Connection** (1 min)
+   > "You're learning the same memory system that powers AI! Every time you create a variable, you're using the same concept that helps AI remember things."
+
+### Discussion Questions
+
+- "How does Siri remember your name?"
+- "What information do you think Netflix stores about you?"
+- "What's the difference between your 5 variables and AI's millions of variables?"
+
+### Teaching Tips
+
+- Use concrete examples students know: Siri, Netflix, YouTube recommendations
+- Draw a simple comparison: "Your program: 5 boxes. AI: millions of boxes!"
+- Emphasize the concept is the same, just scale is different
+- If students ask technical questions, keep it simple: "AI uses the same idea, just way more of them!"
+- Connect back to their code: "Every variable you create works the same way!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has talked to Siri? How does it know your name?"
+- Connect: "It's using a variable, just like `name = "Alex"` in your code!"
+- Emphasize: "You're learning the same system that powers AI!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

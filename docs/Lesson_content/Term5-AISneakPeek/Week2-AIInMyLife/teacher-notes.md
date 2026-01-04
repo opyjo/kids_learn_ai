@@ -249,6 +249,49 @@ Quick review:
 
 ---
 
+## 🤖 AI Activity: AI Diary (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You use AI every day, but do you notice it? Let's keep track of every time you interact with AI!"
+
+2. **AI Diary Activity** (4-5 min)
+   - Have students create a simple "AI Diary" - a list where they write down every AI interaction
+   - Examples: "Used Siri", "Watched YouTube recommendations", "Played a game with AI"
+   - Share: "Who interacted with AI the most today?"
+   - Discuss: "Were you surprised how often you use AI?"
+
+3. **Discussion** (2-3 min)
+   - "How many times did you interact with AI today?"
+   - "What AI did you use that you didn't realize was AI?"
+   - "Why do you think AI is so common?"
+
+4. **Connection** (1 min)
+   > "By tracking your AI interactions, you're becoming AI-aware - noticing AI everywhere in your life! This helps you understand how much AI is part of your daily routine!"
+
+### Discussion Questions
+
+- "How many times did you interact with AI today?"
+- "What AI did you use that you didn't realize was AI?"
+- "Why do you think AI is so common?"
+
+### Teaching Tips
+
+- Make it a challenge - "Who can find the most AI interactions?"
+- Encourage students to track for homework too
+- Use examples: "Did you use voice search? That's AI!"
+- Emphasize AI awareness: "You're becoming AI-aware!"
+- Connect to their learning: "You're learning how all this AI works!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who can name 5 times they used AI today?"
+- Connect: "AI is everywhere - you just learned to notice it!"
+- Emphasize: "Being AI-aware helps you understand how AI works!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

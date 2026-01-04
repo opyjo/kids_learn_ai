@@ -49,7 +49,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Every decision an AI makes uses if statements! When a self-driving car asks "If there's a stop sign, then stop", or a chatbot asks "If the user said hello, then greet them", those are if statements - exactly like you're learning!
+  Every decision an AI makes uses if statements! When a self-driving car asks "If there's a stop sign, then stop", or a chatbot asks "If the user said hello, then greet them", those are if statements - exactly like you're learning! AI systems use decision trees - a series of if statements that branch out like a tree, making choices at each step. When you write if statements, you're building the same kind of decision tree that AI uses!
 
   You're learning the same decision-making logic that powers every AI system!
 ---

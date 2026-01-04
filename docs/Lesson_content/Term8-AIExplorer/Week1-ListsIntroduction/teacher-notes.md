@@ -278,6 +278,49 @@ Use this time for questions and clarifications.
 
 ---
 
+## 🤖 AI Activity: Datasets Are Lists (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned about lists. Did you know that datasets - the huge collections of data that AI learns from - are really just big lists?"
+
+2. **Dataset Activity** (4-5 min)
+   - Show: "Your list of 5 items is like a tiny dataset!"
+   - Explain: "AI learns from datasets with millions of items - but they're still lists!"
+   - Demonstrate: "A dataset of cat pictures is a list of images. A dataset of words is a list of text"
+   - Connect: "When you create a list, you're creating a tiny dataset - the same structure AI uses!"
+
+3. **Discussion** (2-3 min)
+   - "How is your list similar to a dataset?"
+   - "What if you had a list with 1 million items?"
+   - "How do you think AI uses datasets to learn?"
+
+4. **Connection** (1 min)
+   > "Datasets are really just big lists! Your list of 5 items is like a tiny dataset that AI uses. When you create lists, you're using the same data structure that AI uses to organize and learn from information!"
+
+### Discussion Questions
+
+- "How is your list similar to a dataset?"
+- "What if you had a list with 1 million items?"
+- "How do you think AI uses datasets to learn?"
+
+### Teaching Tips
+
+- Use concrete examples: "A list of 5 names is like a tiny dataset"
+- Keep it simple - focus on "lists = datasets"
+- Connect to their code: "Your lists are like tiny datasets!"
+- If students ask technical questions, simplify: "AI uses big lists of data to learn"
+- Emphasize they're learning real AI concepts: "This is how AI organizes data!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who can name a list? That's like a tiny dataset!"
+- Connect: "AI uses big lists of data to learn!"
+- Emphasize: "You're learning the same data structure that AI uses!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

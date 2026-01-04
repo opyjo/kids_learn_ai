@@ -38,7 +38,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Siri, Alexa, and ChatGPT all started with programmers writing their first instructions - just like your `print("Hello!")` today! Every AI begins with simple code.
+  Siri, Alexa, and ChatGPT all started with programmers writing their first instructions - just like your `print("Hello!")` today! Every AI begins with simple code. When you talk to a chatbot, it's using code similar to what you're learning to understand and respond to you.
 
   You just took your first step toward understanding how AI works!
 ---

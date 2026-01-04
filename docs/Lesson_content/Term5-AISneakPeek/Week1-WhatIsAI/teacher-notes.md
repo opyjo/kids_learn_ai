@@ -364,6 +364,49 @@ Use this time for:
 
 ---
 
+## 🤖 AI Activity: AI Scavenger Hunt (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You've learned what AI is. Now let's find it! AI is everywhere - let's see how many things we can find that use AI!"
+
+2. **Scavenger Hunt Activity** (4-5 min)
+   - Give students 5 minutes to look around (home or classroom)
+   - Have them list things that use AI: phones, computers, apps, games, etc.
+   - Share findings: "Who found the most AI?"
+   - Discuss: "What surprised you? Where did you find AI you didn't expect?"
+
+3. **Discussion** (2-3 min)
+   - "How many things did you find that use AI?"
+   - "Where was AI in places you didn't expect?"
+   - "Why do you think AI is everywhere?"
+
+4. **Connection** (1 min)
+   > "AI is everywhere! By finding AI in your daily life, you're becoming AI-aware - understanding where AI lives and how it helps you. This is the first step to becoming an AI expert!"
+
+### Discussion Questions
+
+- "How many things did you find that use AI?"
+- "Where was AI in places you didn't expect?"
+- "Why do you think AI is everywhere?"
+
+### Teaching Tips
+
+- Make it fun and competitive - "Who can find the most AI?"
+- Encourage creative thinking - "What about your toothbrush? Your watch?"
+- If in classroom, allow students to look around the room
+- If virtual, have them look around their home
+- Emphasize AI awareness: "You're becoming AI-aware!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who can name 5 things that use AI?"
+- Connect: "AI is everywhere - you just learned to see it!"
+- Emphasize: "Being AI-aware is the first step to becoming an AI expert!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

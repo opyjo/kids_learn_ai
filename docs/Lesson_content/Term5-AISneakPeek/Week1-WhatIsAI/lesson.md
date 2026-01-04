@@ -55,7 +55,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Everything you've learned in Python—print(), variables, math, if/else—is what AI is built on! When Siri understands your voice, when Netflix recommends a show, when a game character reacts to you, they're all using the same Python skills you've been learning!
+  Everything you've learned in Python—print(), variables, math, if/else—is what AI is built on! When Siri understands your voice, when Netflix recommends a show, when a game character reacts to you, they're all using the same Python skills you've been learning! Try an AI Scavenger Hunt: look around your home or classroom and find 10 things that use AI - you'll be surprised how many there are!
 
   You're not just learning Python—you're learning the foundation of AI!
 ---

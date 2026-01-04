@@ -49,7 +49,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Everything you're learning connects to AI! When AI processes a sentence, it uses lists of words. When AI recognizes faces, it uses lists of features. When AI recommends videos, it uses lists of data. The loops and lists you're learning are the exact tools AI uses to understand the world!
+  Everything you're learning connects to AI! When AI processes a sentence, it uses lists of words. When AI recognizes faces, it uses lists of features. When AI recommends videos, it uses lists of data. The loops and lists you're learning are the exact tools AI uses to understand the world! You can actually build your own simple AI using tools like Google's Teachable Machine - it uses the same concepts you're learning: lists of data, loops to process it, and decisions to classify it!
 
   You're learning the foundation of how AI works!
 ---

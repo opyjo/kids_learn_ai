@@ -276,6 +276,49 @@ Quick review:
 
 ---
 
+## 🤖 AI Activity: How AI Knows Right Answers (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just built a quiz that checks answers. But how does AI know what the right answers are?"
+
+2. **Training Data Discussion** (4-5 min)
+   - Ask: "How does your quiz know the right answers?"
+   - Explain: "You programmed them in your code! But AI learns from training data - millions of questions with correct answers"
+   - Show: "Your quiz has 5 questions with answers. AI learns from millions of questions!"
+   - Discuss: "How do you think AI gets all those questions and answers?"
+
+3. **Discussion** (2-3 min)
+   - "How does your quiz know the right answers?"
+   - "How do you think AI learns the right answers?"
+   - "What's the difference between your quiz and an AI quiz?"
+
+4. **Connection** (1 min)
+   > "Your quiz has correct answers stored in your code - that's programming! AI learns correct answers from training data - millions of questions with answers. You're learning the same concept that powers AI learning systems!"
+
+### Discussion Questions
+
+- "How does your quiz know the right answers?"
+- "How do you think AI learns the right answers?"
+- "What's the difference between your quiz and an AI quiz?"
+
+### Teaching Tips
+
+- Keep it simple - focus on "training data = questions with answers"
+- Use concrete examples: "Your quiz has 5 questions, AI learns from millions!"
+- Connect to their code: "Your quiz stores answers in code - AI learns from data!"
+- If students ask technical questions, simplify: "AI learns from lots of examples"
+- Emphasize they're learning real AI concepts: "This is how AI learns!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "How does your quiz know the right answers?"
+- Connect: "AI learns from training data - millions of questions with answers!"
+- Emphasize: "You're learning the same concept that powers AI!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

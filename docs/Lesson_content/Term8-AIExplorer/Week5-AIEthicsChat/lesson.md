@@ -51,7 +51,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI ethics is SUPER important! The same AI that helps doctors diagnose diseases can also make mistakes. The same AI that recommends videos can also show unfair content. Understanding ethics helps us use AI responsibly and make sure it helps everyone fairly!
+  AI ethics is SUPER important! The same AI that helps doctors diagnose diseases can also make mistakes. The same AI that recommends videos can also show unfair content. Understanding ethics helps us use AI responsibly and make sure it helps everyone fairly! Try this: Have an "AI Court Case" - role-play whether AI should be allowed to make important decisions like driving cars or diagnosing diseases. These are real questions people are debating right now!
 
   You're learning to be a responsible AI user and creator!
 ---

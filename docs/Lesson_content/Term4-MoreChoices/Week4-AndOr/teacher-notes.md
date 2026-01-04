@@ -311,6 +311,49 @@ Quick review:
 
 ---
 
+## 🤖 AI Activity: AI Spam Filters (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned 'and' and 'or' to combine conditions. Did you know spam filters use 'and' and 'or' to decide if an email is spam?"
+
+2. **Spam Filter Activity** (4-5 min)
+   - Show examples of email subjects: "FREE PRIZE!", "Meeting tomorrow", "CLICK HERE NOW!"
+   - Ask: "Which ones look like spam? Why?"
+   - Explain: "Spam filters check: if email contains 'FREE' AND 'CLICK HERE', then it's spam. Or if it contains 'winner' OR 'prize', then check more carefully"
+   - Have students write a simple spam filter using 'and' and 'or'
+
+3. **Discussion** (2-3 min)
+   - "How does a spam filter decide if an email is spam?"
+   - "What's similar between this and your 'and'/'or' code?"
+   - "How do you think AI uses 'and' and 'or' to filter spam?"
+
+4. **Connection** (1 min)
+   > "Spam filters use 'and' and 'or' to check emails - exactly like you're learning! When you combine conditions with 'and' and 'or', you're using the same logic that powers AI spam filters!"
+
+### Discussion Questions
+
+- "How does a spam filter decide if an email is spam?"
+- "What makes an email look like spam?"
+- "How do you think AI uses 'and' and 'or' to filter millions of emails?"
+
+### Teaching Tips
+
+- Use age-appropriate examples (avoid showing actual spam)
+- Keep it simple - focus on "and/or = checking multiple conditions"
+- Connect to their code: "Your 'and'/'or' statements work the same way!"
+- If students ask technical questions, simplify: "AI checks multiple conditions with 'and'/'or'"
+- Emphasize they're learning real AI concepts: "This is how spam filters work!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has seen spam emails? How do you know they're spam?"
+- Connect: "Spam filters use 'and'/'or' to check emails!"
+- Emphasize: "You're learning the same logic that powers spam filters!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

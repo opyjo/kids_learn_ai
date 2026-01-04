@@ -52,7 +52,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Every security system, every game, every app uses if/else to make decisions! When your phone unlocks "if password is correct, else deny access", or a game checks "if score is high, else game over", those are if/else statements!
+  Every security system, every game, every app uses if/else to make decisions! When your phone unlocks "if password is correct, else deny access", or a game checks "if score is high, else game over", those are if/else statements! Tools like Google's Teachable Machine use if/else logic to make decisions - you can train it to recognize images and it uses if statements like "if this is a cat, then show 'cat', else check for dog"!
 
   You're building the same decision-making logic that powers every interactive program!
 ---

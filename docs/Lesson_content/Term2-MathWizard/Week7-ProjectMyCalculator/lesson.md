@@ -91,7 +91,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Every calculator app on your phone uses the same concepts you're learning! When you type numbers and press operations, the app uses input(), converts to numbers, and performs calculations - just like your program!
+  Every calculator app on your phone uses the same concepts you're learning! When you type numbers and press operations, the app uses input(), converts to numbers, and performs calculations - just like your program! But what if your calculator could LEARN your favorite calculations? AI-powered calculators can remember patterns, suggest shortcuts, and even predict what you'll calculate next - all by learning from how you use them!
 
   You're building something that works like real-world applications!
 ---

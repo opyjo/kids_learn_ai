@@ -53,7 +53,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI uses lists ALL THE TIME! When AI processes a sentence, it stores each word in a list. When AI recognizes faces in a photo, it stores each face in a list. When AI recommends videos, it uses lists of videos. Lists are how AI organizes and processes information!
+  AI uses lists ALL THE TIME! When AI processes a sentence, it stores each word in a list. When AI recognizes faces in a photo, it stores each face in a list. When AI recommends videos, it uses lists of videos. Lists are how AI organizes and processes information! In fact, datasets - the huge collections of data that AI learns from - are really just big lists! Your list of 5 items is like a tiny dataset that AI uses!
 
   You're learning the same data structure that AI uses to understand the world!
 ---

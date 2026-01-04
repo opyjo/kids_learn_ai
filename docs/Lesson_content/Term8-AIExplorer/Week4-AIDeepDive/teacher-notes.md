@@ -257,6 +257,50 @@ Use this time for questions and clarifications.
 
 ---
 
+## 🤖 AI Activity: Teachable Machine Project (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You've learned lists, loops, and decisions. Did you know you can actually build your own simple AI using these concepts?"
+
+2. **Teachable Machine Demo** (4-5 min)
+   - Navigate to: teachablemachine.withgoogle.com
+   - Explain: "This tool lets you build AI using the concepts you've learned!"
+   - Show: "It uses lists of data (images), loops to process them, and decisions to classify them"
+   - Demonstrate: Build a simple image classifier (cat vs dog, or similar)
+   - Connect: "See? It uses lists, loops, and decisions - exactly what you've learned!"
+
+3. **Discussion** (2-3 min)
+   - "How does Teachable Machine use lists, loops, and decisions?"
+   - "What's similar between this and your code?"
+   - "How do you think AI learns from data?"
+
+4. **Connection** (1 min)
+   > "Teachable Machine uses lists of data, loops to process them, and decisions to classify them - exactly what you've learned! You can actually build your own AI using the same concepts you've been learning all year!"
+
+### Discussion Questions
+
+- "How does Teachable Machine use lists, loops, and decisions?"
+- "What's similar between this and your code?"
+- "How do you think AI learns from data?"
+
+### Teaching Tips
+
+- If internet is unavailable, show a pre-recorded video
+- Keep it exciting - "You can build your own AI!"
+- Connect to their learning: "It uses everything you've learned!"
+- If students want to try it, suggest they explore at home (with parent permission)
+- Emphasize they're learning real AI concepts: "This is how AI works!"
+
+### Alternative Activity (If No Internet)
+
+- Discuss: "Who has used apps that recognize images or sounds?"
+- Connect: "Those use lists, loops, and decisions - just like you've learned!"
+- Emphasize: "You're learning the same concepts that power AI!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

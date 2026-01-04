@@ -531,6 +531,50 @@ Use this time for:
 
 ---
 
+## 🤖 AI Activity: Meet an AI (5-10 minutes)
+
+### What to Do
+
+1. **Introduce the Activity** (1 min)
+   > "Before we finish, let's meet an AI! Have any of you talked to Siri, Alexa, or a chatbot before?"
+
+2. **Interactive Demo** (3-4 min)
+   - Open a simple chatbot (like ChatGPT, or a kid-friendly one)
+   - Ask it a simple question: "What is Python?"
+   - Show students how it responds
+   - Ask another question: "Tell me a fun fact about coding"
+   - Point out: "See how it responds? It's using code similar to what you're learning!"
+
+3. **Student Discussion** (2-3 min)
+   - "What did you notice about how the AI responded?"
+   - "How do you think it knows what to say?"
+   - "What's similar between the AI and your `print()` code?"
+
+4. **Connection** (1 min)
+   > "Just like you wrote `print("Hello!")` today, programmers wrote code to make this AI work. Every AI starts with simple instructions - just like yours!"
+
+### Discussion Questions
+
+- "Have you ever talked to Siri, Alexa, or a chatbot? What did you ask?"
+- "How do you think the AI knows what to say?"
+- "What's the same between your code and AI code?"
+
+### Teaching Tips
+
+- Use a kid-friendly chatbot if available, or demonstrate with ChatGPT in a controlled way
+- Keep it brief - this is an introduction, not a deep dive
+- If internet is unavailable, show a pre-recorded video of a chatbot interaction
+- Emphasize that students are learning the same building blocks that power AI
+- If students seem overwhelmed, reassure them: "You don't need to understand everything yet - we're just seeing what AI can do!"
+
+### Alternative Activity (If No Internet)
+
+- Show a pre-recorded video of a chatbot conversation
+- Or discuss: "Who has talked to Siri or Alexa? What did you ask? How did it respond?"
+- Connect: "That AI is using code - just like you're learning!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

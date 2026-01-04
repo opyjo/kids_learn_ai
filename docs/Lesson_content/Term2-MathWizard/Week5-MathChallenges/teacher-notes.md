@@ -268,6 +268,51 @@ Use this time for:
 
 ---
 
+## 🤖 AI Activity: Pattern Detective (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You've been solving math challenges and finding patterns. Did you know that finding patterns is exactly what AI does best?"
+
+2. **Pattern Recognition Activity** (4-5 min)
+   - Show students a number sequence: 2, 4, 6, 8, ?
+   - Ask: "What comes next? How did you know?"
+   - Show another: 5, 10, 15, 20, ?
+   - Explain: "When you find the pattern, you're doing what AI does - recognizing patterns in data!"
+   - Show a more complex one: 1, 4, 9, 16, ? (squares)
+   - Discuss: "AI finds patterns in millions of numbers - you're learning the same skill!"
+
+3. **Discussion** (2-3 min)
+   - "How did you figure out the pattern?"
+   - "What if you had 100 numbers instead of 4 - would it be easier or harder?"
+   - "How do you think AI finds patterns in data?"
+
+4. **Connection** (1 min)
+   > "When you solve math challenges and find patterns, you're doing exactly what AI does - recognizing patterns! AI is really good at finding patterns in data, just like you're finding patterns in math problems. You're learning the same skill that powers AI!"
+
+### Discussion Questions
+
+- "How do you recognize patterns in numbers?"
+- "What makes a pattern easy or hard to find?"
+- "How do you think AI finds patterns in millions of pieces of data?"
+
+### Teaching Tips
+
+- Start with simple patterns and build up
+- Use visual aids if helpful (draw the sequence)
+- Connect to their math work: "You're finding patterns in your calculations!"
+- If students ask technical questions, simplify: "AI finds patterns in data, just like you do in math"
+- Emphasize they're learning real AI skills: "Pattern recognition is a core AI skill!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick pattern game: "What comes next: 3, 6, 9, ?"
+- Connect: "Finding patterns is what AI does best!"
+- Emphasize: "You're learning the same pattern recognition skills that AI uses!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

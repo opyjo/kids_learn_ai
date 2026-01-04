@@ -57,7 +57,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  When AI learns to recognize cats in photos, it looks at thousands of cat pictures—just like you did when you learned what a cat looks like! When AI learns to play a game, it practices thousands of times—just like you practice to get better! AI learns the same way you do: from examples and practice!
+  When AI learns to recognize cats in photos, it looks at thousands of cat pictures—just like you did when you learned what a cat looks like! When AI learns to play a game, it practices thousands of times—just like you practice to get better! AI learns the same way you do: from examples and practice! Try this: "Train Your Classmate" - one person teaches another to recognize shapes by showing examples, just like AI learns from training data!
 
   You and AI learn the same way—from examples and patterns!
 ---
