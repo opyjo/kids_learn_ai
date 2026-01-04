@@ -44,7 +44,9 @@ export const AnimatedTutor = ({
 	const animationClass = ANIMATION_CLASSES[animationState];
 
 	return (
-		<div className={`${sizeClasses[size]} ${className} relative flex items-center justify-center`}>
+		<div
+			className={`${sizeClasses[size]} ${className} relative flex items-center justify-center`}
+		>
 			<Image
 				src={imageSrc}
 				alt={`${tutor.name} - ${animationState}`}

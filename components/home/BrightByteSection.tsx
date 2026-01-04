@@ -155,4 +155,3 @@ const BrightByteSection = () => {
 };
 
 export default BrightByteSection;
-

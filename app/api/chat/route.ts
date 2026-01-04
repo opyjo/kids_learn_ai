@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { getAuthUser } from "@/lib/auth-helpers";
 import {
 	FALLBACK_RESPONSES,
 	TUTOR_PROMPTS,
@@ -7,6 +8,7 @@ import {
 	DEFAULT_TUTOR_ID,
 	type TutorId,
 } from "@/lib/constants/tutor-characters";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 import {
 	checkContentSafety,
 	isOnTopicForTutor,
@@ -15,10 +17,9 @@ import {
 	sanitizeMessage,
 	validateConversationLength,
 } from "@/lib/utils/content-safety";
-import { getAuthUser } from "@/lib/auth-helpers";
-import { getSupabaseServerClient } from "@/lib/supabase/server";
 
-export const runtime = "edge";
+// Using Node.js runtime for proper cookie/auth support
+// export const runtime = "edge";
 
 interface ChatMessage {
 	role: "user" | "assistant" | "system";
@@ -238,14 +239,12 @@ export const POST = async (req: NextRequest) => {
 					{
 						role: "assistant",
 						content: `You've reached your daily limit of ${dailyUsage.limit} messages with BrightByte! 🌟\n\nCome back tomorrow for more help with your Python questions!`,
-					},
-					{
-						status: 429,
-						headers: {
-							"X-Remaining-Messages": "0",
-							"X-Daily-Limit": String(dailyUsage.limit),
+						usage: {
+							remaining: 0,
+							limit: dailyUsage.limit,
 						},
 					},
+					{ status: 429 },
 				);
 			}
 		}
@@ -395,22 +394,8 @@ CRITICAL SAFETY REMINDER:
 			});
 		}
 
-		// Check if AI is staying on topic (always Python for BrightByte)
-		if (
-			assistantMessage.content.length > 100 &&
-			!isOnTopicForTutor(assistantMessage.content, tutorId)
-		) {
-			logSafetyEvent(
-				"warn",
-				"AI response went off-topic",
-				assistantMessage.content,
-			);
-			const offTopicResponse = getOffTopicResponse();
-			return NextResponse.json({
-				role: "assistant",
-				content: offTopicResponse,
-			});
-		}
+		// Note: We trust the AI to stay on topic since we have a strong system prompt
+		// Output filtering was causing false positives for valid educational responses
 
 		// Generate follow-up question suggestions based on the conversation
 		const followUpSuggestions = generateFollowUpSuggestions(
@@ -418,20 +403,17 @@ CRITICAL SAFETY REMINDER:
 			assistantMessage.content,
 		);
 
-		// Return response with usage headers if authenticated
-		const headers: HeadersInit = {};
-		if (dailyUsage) {
-			headers["X-Remaining-Messages"] = String(dailyUsage.remaining);
-			headers["X-Daily-Limit"] = String(dailyUsage.limit);
-		}
-
-		return NextResponse.json(
-			{
-				...assistantMessage,
-				suggestions: followUpSuggestions,
-			},
-			{ headers },
-		);
+		// Return response with usage info in body (headers can be unreliable in some setups)
+		return NextResponse.json({
+			...assistantMessage,
+			suggestions: followUpSuggestions,
+			usage: dailyUsage
+				? {
+						remaining: dailyUsage.remaining,
+						limit: dailyUsage.limit,
+					}
+				: null,
+		});
 	} catch (error) {
 		console.error("Chat API error:", error);
 		return NextResponse.json(

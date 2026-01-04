@@ -143,6 +143,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 		}, [messages, tutorId, isInitialized]);
 
 		// Auto-scroll inside the ScrollArea when new messages arrive or loading state changes
+		// biome-ignore lint/correctness/useExhaustiveDependencies: Intentionally re-run scroll on messages/loading changes
 		useEffect(() => {
 			// Small delay to ensure DOM has updated
 			const timeoutId = setTimeout(() => {
@@ -154,7 +155,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 			}, 100);
 
 			return () => clearTimeout(timeoutId);
-		}, [messages, isLoading]);
+		}, [messages.length, isLoading]);
 
 		// Auto-focus textarea on mount
 		useEffect(() => {
@@ -226,20 +227,15 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 						signal: abortControllerRef.current.signal,
 					});
 
-					// Extract usage headers
-					const remainingHeader = response.headers.get("X-Remaining-Messages");
-					const limitHeader = response.headers.get("X-Daily-Limit");
-					if (remainingHeader !== null) {
-						setRemainingMessages(parseInt(remainingHeader, 10));
-					}
-					if (limitHeader !== null) {
-						setDailyLimit(parseInt(limitHeader, 10));
-					}
-
 					if (!response.ok) {
 						// Handle daily limit exceeded (429)
 						if (response.status === 429) {
 							const data = await response.json();
+							// Update usage from response body
+							if (data.usage) {
+								setRemainingMessages(data.usage.remaining);
+								setDailyLimit(data.usage.limit);
+							}
 							const errorMessage: ChatMessage = {
 								id: crypto.randomUUID(),
 								role: "assistant",
@@ -253,6 +249,12 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 					}
 
 					const data = await response.json();
+
+					// Update usage from response body
+					if (data.usage) {
+						setRemainingMessages(data.usage.remaining);
+						setDailyLimit(data.usage.limit);
+					}
 
 					const assistantMessage: ChatMessage = {
 						id: crypto.randomUUID(),
@@ -464,7 +466,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 							messages.length > 1 &&
 							messages[messages.length - 1]?.role === "assistant" &&
 							messages[messages.length - 1]?.suggestions &&
-							messages[messages.length - 1].suggestions!.length > 0 && (
+							messages[messages.length - 1].suggestions?.length > 0 && (
 								<div className="mt-4 space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
 									<p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
 										<Lightbulb
@@ -474,7 +476,7 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 										Want to know more? Try asking:
 									</p>
 									<div className="flex flex-wrap gap-2">
-										{messages[messages.length - 1].suggestions!.map(
+										{messages[messages.length - 1].suggestions?.map(
 											(suggestion) => (
 												<button
 													key={suggestion}

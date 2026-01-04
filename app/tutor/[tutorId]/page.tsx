@@ -9,10 +9,7 @@ import { PythonEditor } from "@/components/code/python-editor";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-	getTutorById,
-	type TutorId,
-} from "@/lib/constants/tutor-characters";
+import { getTutorById, type TutorId } from "@/lib/constants/tutor-characters";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 const TutorChatPage = () => {
@@ -113,7 +110,6 @@ print(f"Happy coding, {name}!")
 	return (
 		<MainLayout>
 			<div className="mx-auto w-full min-h-[calc(100vh-5rem)] px-4 py-3 sm:px-6 lg:px-8">
-
 				{/* Layout - Without Editor (Mobile) */}
 				{!showEditor && (
 					<div className="lg:hidden max-w-4xl mx-auto">
