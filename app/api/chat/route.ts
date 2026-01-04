@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { getAuthUser } from "@/lib/auth-helpers";
 import {
 	FALLBACK_RESPONSES,
 	TUTOR_PROMPTS,
@@ -7,6 +8,7 @@ import {
 	DEFAULT_TUTOR_ID,
 	type TutorId,
 } from "@/lib/constants/tutor-characters";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 import {
 	checkContentSafety,
 	isOnTopicForTutor,
@@ -16,30 +18,95 @@ import {
 	validateConversationLength,
 } from "@/lib/utils/content-safety";
 
-export const runtime = "edge";
+// Using Node.js runtime for proper cookie/auth support
+// export const runtime = "edge";
 
 interface ChatMessage {
 	role: "user" | "assistant" | "system";
 	content: string;
 }
 
+// Configuration - Daily limit for free service
+const DAILY_MESSAGE_LIMIT = 10;
+const MINUTE_RATE_LIMIT = 3; // Reduced from 10 to prevent spam
+
 // Rate limiting map (in production, use Redis or similar)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
-// Helper function to get tutor-specific off-topic response
-const getOffTopicResponse = (tutorId: TutorId): string => {
-	switch (tutorId) {
-		case "brightbyte":
-			return "I only help with Python programming! What Python question can I help you with?";
-		case "mathbot":
-			return "I only help with mathematics! What math question can I help you with?";
-		case "scienceowl":
-			return "Hoot hoot! I only help with science questions! What would you like to explore today?";
-		case "artai":
-			return "I only help with creative projects! What would you like to create today?";
-		default:
-			return "I only help with Python programming! What Python question can I help you with?";
+// Helper function to get off-topic response (always BrightByte's response)
+const getOffTopicResponse = (): string => {
+	return "I help with Python programming and AI concepts! What coding or AI question can I help you with?";
+};
+
+// Follow-up suggestions based on topic keywords
+const FOLLOW_UP_SUGGESTIONS: Record<string, string[]> = {
+	variable: [
+		"How do I change a variable's value?",
+		"What types of data can variables hold?",
+		"Can you show me a variable example?",
+	],
+	loop: [
+		"What's the difference between for and while loops?",
+		"How do I stop a loop early?",
+		"Can you show me a loop example?",
+	],
+	function: [
+		"How do I create my own function?",
+		"What are parameters in a function?",
+		"When should I use a function?",
+	],
+	list: [
+		"How do I add items to a list?",
+		"How do I loop through a list?",
+		"What's the difference between a list and tuple?",
+	],
+	if: [
+		"How do I use elif?",
+		"Can I have multiple conditions?",
+		"What are comparison operators?",
+	],
+	error: [
+		"What does this error mean?",
+		"How do I fix syntax errors?",
+		"Can you help me debug this?",
+	],
+	print: [
+		"How do I print multiple things?",
+		"What are f-strings?",
+		"How do I format my output?",
+	],
+	ai: [
+		"How does AI learn from data?",
+		"What can AI do?",
+		"How is Python used in AI?",
+	],
+	default: [
+		"Can you give me an example?",
+		"How does this work step by step?",
+		"What should I try next?",
+	],
+};
+
+// Generate contextual follow-up suggestions
+const generateFollowUpSuggestions = (
+	userMessage: string,
+	assistantResponse: string,
+): string[] => {
+	const combinedText = `${userMessage} ${assistantResponse}`.toLowerCase();
+
+	// Check for topic keywords and return relevant suggestions
+	const topics = Object.keys(FOLLOW_UP_SUGGESTIONS).filter(
+		(topic) => topic !== "default",
+	);
+
+	for (const topic of topics) {
+		if (combinedText.includes(topic)) {
+			return FOLLOW_UP_SUGGESTIONS[topic];
+		}
 	}
+
+	// Return default suggestions if no specific topic found
+	return FOLLOW_UP_SUGGESTIONS.default;
 };
 
 const checkRateLimit = (identifier: string): boolean => {
@@ -47,7 +114,7 @@ const checkRateLimit = (identifier: string): boolean => {
 	const limit = rateLimitMap.get(identifier);
 
 	if (!limit || now > limit.resetTime) {
-		// Reset or create new limit (10 messages per minute)
+		// Reset or create new limit (3 messages per minute)
 		rateLimitMap.set(identifier, {
 			count: 1,
 			resetTime: now + 60000, // 1 minute
@@ -55,13 +122,72 @@ const checkRateLimit = (identifier: string): boolean => {
 		return true;
 	}
 
-	if (limit.count >= 10) {
+	if (limit.count >= MINUTE_RATE_LIMIT) {
 		return false; // Rate limit exceeded
 	}
 
 	limit.count++;
 	return true;
 };
+
+// Check and increment daily usage for authenticated users
+async function checkAndIncrementDailyUsage(
+	userId: string,
+): Promise<{ allowed: boolean; remaining: number; limit: number }> {
+	try {
+		const supabase = await getSupabaseServerClient();
+		const today = new Date().toISOString().split("T")[0];
+
+		// Get today's usage record
+		const { data: existing } = await supabase
+			.from("chat_usage")
+			.select("message_count")
+			.eq("user_id", userId)
+			.eq("date", today)
+			.maybeSingle();
+
+		const currentCount = existing?.message_count || 0;
+
+		if (currentCount >= DAILY_MESSAGE_LIMIT) {
+			return {
+				allowed: false,
+				remaining: 0,
+				limit: DAILY_MESSAGE_LIMIT,
+			};
+		}
+
+		// Increment usage (upsert)
+		const { error } = await supabase.from("chat_usage").upsert(
+			{
+				user_id: userId,
+				date: today,
+				message_count: currentCount + 1,
+			},
+			{
+				onConflict: "user_id,date",
+			},
+		);
+
+		if (error) {
+			console.error("Error tracking usage:", error);
+			// Don't block the request if tracking fails
+		}
+
+		return {
+			allowed: true,
+			remaining: DAILY_MESSAGE_LIMIT - (currentCount + 1),
+			limit: DAILY_MESSAGE_LIMIT,
+		};
+	} catch (error) {
+		console.error("Error checking daily usage:", error);
+		// On error, allow the request (fail open)
+		return {
+			allowed: true,
+			remaining: DAILY_MESSAGE_LIMIT,
+			limit: DAILY_MESSAGE_LIMIT,
+		};
+	}
+}
 
 export const POST = async (req: NextRequest) => {
 	try {
@@ -96,10 +222,31 @@ export const POST = async (req: NextRequest) => {
 				{
 					role: "assistant",
 					content:
-						"Whoa, slow down! 🐌 Let's take a moment to think about each question. I'm here to help you learn, not rush through!",
+						"Take your time! 😊 You can send up to 3 messages per minute. Think about your question, then try again!",
 				},
 				{ status: 429 },
 			);
+		}
+
+		// Check daily usage limit for authenticated users
+		const user = await getAuthUser();
+		let dailyUsage = null;
+		if (user) {
+			dailyUsage = await checkAndIncrementDailyUsage(user.id);
+			if (!dailyUsage.allowed) {
+				logSafetyEvent("block", "Daily limit exceeded", user.id);
+				return NextResponse.json(
+					{
+						role: "assistant",
+						content: `You've reached your daily limit of ${dailyUsage.limit} messages with BrightByte! 🌟\n\nCome back tomorrow for more help with your Python questions!`,
+						usage: {
+							remaining: 0,
+							limit: dailyUsage.limit,
+						},
+					},
+					{ status: 429 },
+				);
+			}
 		}
 
 		// Validate conversation length
@@ -143,12 +290,12 @@ export const POST = async (req: NextRequest) => {
 			});
 		}
 
-		// Check if message is on-topic for the tutor
+		// Check if message is on-topic (always Python for BrightByte)
 		if (!isOnTopicForTutor(sanitizedContent, tutorId)) {
 			logSafetyEvent("warn", "Off-topic question", sanitizedContent);
 
-			// Get tutor-specific off-topic response
-			const offTopicResponse = getOffTopicResponse(tutorId);
+			// Get off-topic response
+			const offTopicResponse = getOffTopicResponse();
 			return NextResponse.json({
 				role: "assistant",
 				content: offTopicResponse,
@@ -247,24 +394,26 @@ CRITICAL SAFETY REMINDER:
 			});
 		}
 
-		// Check if AI is staying on topic for the tutor
-		if (
-			assistantMessage.content.length > 100 &&
-			!isOnTopicForTutor(assistantMessage.content, tutorId)
-		) {
-			logSafetyEvent(
-				"warn",
-				"AI response went off-topic",
-				assistantMessage.content,
-			);
-			const offTopicResponse = getOffTopicResponse(tutorId);
-			return NextResponse.json({
-				role: "assistant",
-				content: offTopicResponse,
-			});
-		}
+		// Note: We trust the AI to stay on topic since we have a strong system prompt
+		// Output filtering was causing false positives for valid educational responses
 
-		return NextResponse.json(assistantMessage);
+		// Generate follow-up question suggestions based on the conversation
+		const followUpSuggestions = generateFollowUpSuggestions(
+			sanitizedContent,
+			assistantMessage.content,
+		);
+
+		// Return response with usage info in body (headers can be unreliable in some setups)
+		return NextResponse.json({
+			...assistantMessage,
+			suggestions: followUpSuggestions,
+			usage: dailyUsage
+				? {
+						remaining: dailyUsage.remaining,
+						limit: dailyUsage.limit,
+					}
+				: null,
+		});
 	} catch (error) {
 		console.error("Chat API error:", error);
 		return NextResponse.json(

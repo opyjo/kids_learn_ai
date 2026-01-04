@@ -1,5 +1,6 @@
 "use client";
 
+import BrightByteSection from "@/components/home/BrightByteSection";
 import CTASection from "@/components/home/CTASection";
 import FAQTeaser from "@/components/home/FAQTeaser";
 import FeaturesSection from "@/components/home/FeaturesSection";
@@ -19,6 +20,7 @@ const HomePage = () => {
 			<ProjectShowcaseBanner />
 			<StatsSection />
 			<FeaturesSection />
+			<BrightByteSection />
 			<InteractiveCodeEditor />
 			<WhatYoullCreateSection />
 			<SampleLessonsSection />

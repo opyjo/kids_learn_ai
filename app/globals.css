@@ -314,3 +314,41 @@
 .animate-nudge-right {
   animation: nudge-right 2s ease-in-out infinite;
 }
+
+/* BrightByte Mascot Animations */
+@keyframes brightbyte-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes brightbyte-thinking {
+  0%, 100% { 
+    filter: drop-shadow(0 0 8px oklch(0.50 0.15 250 / 0.4)); /* primary blue */
+  }
+  50% { 
+    filter: drop-shadow(0 0 16px oklch(0.70 0.10 280 / 0.6)); /* secondary purple */
+  }
+}
+
+@keyframes brightbyte-success {
+  0%, 100% { 
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px oklch(0.65 0.12 40 / 0.5)); /* accent orange */
+  }
+  50% { 
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 16px oklch(0.65 0.12 40 / 0.8)); /* accent orange */
+  }
+}
+
+.animate-brightbyte-float {
+  animation: brightbyte-float 3s ease-in-out infinite;
+}
+
+.animate-brightbyte-thinking {
+  animation: brightbyte-thinking 1.5s ease-in-out infinite;
+}
+
+.animate-brightbyte-success {
+  animation: brightbyte-success 0.6s ease-in-out;
+}
