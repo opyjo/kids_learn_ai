@@ -55,7 +55,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  The AI you use every day—YouTube recommendations, Siri, game characters—all use the same programming concepts you've learned! Variables store your preferences, math calculates recommendations, and if/else makes decisions. You're already interacting with AI built on Python skills!
+  The AI you use every day—YouTube recommendations, Siri, game characters—all use the same programming concepts you've learned! Variables store your preferences, math calculates recommendations, and if/else makes decisions. You're already interacting with AI built on Python skills! Try keeping an AI Diary for one day - write down every time you interact with AI. You'll be amazed how often you use it!
 
   You're not just using AI—you're learning how it works!
 ---

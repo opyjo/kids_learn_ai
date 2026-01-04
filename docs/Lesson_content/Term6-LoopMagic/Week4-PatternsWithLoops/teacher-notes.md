@@ -352,6 +352,49 @@ Use this time for questions and clarifications.
 
 ---
 
+## 🤖 AI Activity: Pattern Recognition (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just created patterns with loops. Did you know that recognizing patterns is one of AI's most important skills?"
+
+2. **Pattern Recognition Activity** (4-5 min)
+   - Show students different patterns: stripes, polka dots, zigzags
+   - Ask: "What patterns do you see? How did you recognize them?"
+   - Explain: "When you recognize a pattern, you're doing what AI does! AI looks for patterns in images, sounds, and data"
+   - Connect: "Your loops create patterns - AI uses loops to find patterns!"
+
+3. **Discussion** (2-3 min)
+   - "How do you recognize patterns?"
+   - "What makes a pattern easy or hard to recognize?"
+   - "How do you think AI finds patterns in data?"
+
+4. **Connection** (1 min)
+   > "When you create patterns with loops, you're doing exactly what AI does - recognizing and creating patterns! AI is really good at finding patterns in data, just like you're finding patterns in your code. Pattern recognition is a core AI skill!"
+
+### Discussion Questions
+
+- "How do you recognize patterns?"
+- "What makes a pattern easy or hard to recognize?"
+- "How do you think AI finds patterns in millions of pieces of data?"
+
+### Teaching Tips
+
+- Use visual examples: show different patterns
+- Keep it simple - focus on "patterns = recognition"
+- Connect to their code: "Your loops create patterns - AI finds patterns!"
+- If students ask technical questions, simplify: "AI finds patterns in data, just like you do!"
+- Emphasize they're learning real AI skills: "Pattern recognition is a core AI skill!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who can find patterns in this room?"
+- Connect: "Finding patterns is what AI does best!"
+- Emphasize: "You're learning the same pattern recognition skills that AI uses!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

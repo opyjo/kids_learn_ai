@@ -222,6 +222,50 @@ Have students test with:
 
 ---
 
+## 🤖 AI Activity: AI Storyteller Demo (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just built an adventure game that uses if/else to choose what happens next. Did you know AI story generators use the same if/else logic to create stories?"
+
+2. **AI Storyteller Demo** (4-5 min)
+   - Show a simple AI story generator (like ChatGPT or a kid-friendly one)
+   - Ask it to continue a story: "Once upon a time, a brave coder..."
+   - Show how it chooses what happens next
+   - Explain: "It uses if/else logic - 'if the story needs action, then add action, else add dialogue'"
+   - Point out: "It makes decisions about what happens next, just like your adventure game!"
+
+3. **Discussion** (2-3 min)
+   - "How does the AI decide what happens next in the story?"
+   - "What's similar between this and your adventure game?"
+   - "How do you think AI chooses different story paths?"
+
+4. **Connection** (1 min)
+   > "AI story generators use if/else logic to choose what happens next - exactly like your adventure game! When you write if/else statements for your story choices, you're using the same decision-making structure that powers AI storytelling!"
+
+### Discussion Questions
+
+- "How does AI decide what happens next in a story?"
+- "What's similar between AI storytelling and your adventure game?"
+- "How do you think AI chooses different story paths?"
+
+### Teaching Tips
+
+- Use a kid-friendly AI tool if available, or demonstrate with ChatGPT in a controlled way
+- Keep it simple - focus on "if/else = choosing what happens next"
+- Connect to their project: "Your adventure game uses if/else the same way!"
+- If students ask technical questions, simplify: "AI uses if/else to make story decisions"
+- Emphasize they're learning real AI concepts: "This is how AI creates interactive stories!"
+
+### Alternative Activity (If No Internet)
+
+- Discuss: "Who has used apps that create stories?"
+- Connect: "Those apps use if/else logic to choose what happens next!"
+- Emphasize: "Your adventure game uses the same decision-making structure!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Project Assessment: "My Mini Adventure"

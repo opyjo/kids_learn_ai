@@ -63,7 +63,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  You've learned the same programming concepts that power AI! AI uses loops to process millions of pieces of information and makes decisions about each one—exactly like you did in your ASCII Art Generator!
+  You've learned the same programming concepts that power AI! AI uses loops to process millions of pieces of information and makes decisions about each one—exactly like you did in your ASCII Art Generator! Today you're showcasing your art - but what about AI art? Is AI art as good as human art? Can you tell the difference? These are questions people are asking right now!
 
   You're not just learning to code—you're learning how AI thinks!
 ---

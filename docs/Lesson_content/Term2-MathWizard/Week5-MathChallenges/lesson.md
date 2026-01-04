@@ -51,7 +51,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Every calculator app on your phone, every shopping cart total, every fitness tracker - they all use the same math operations you're learning! AI systems use these calculations millions of times per second to solve problems.
+  Every calculator app on your phone, every shopping cart total, every fitness tracker - they all use the same math operations you're learning! AI systems use these calculations millions of times per second to solve problems. When you solve math challenges and find patterns in numbers, you're doing exactly what AI does - recognizing patterns! AI is really good at finding patterns in data, just like you're finding patterns in math problems.
 
   You're building the same type of programs that power real-world applications!
 ---

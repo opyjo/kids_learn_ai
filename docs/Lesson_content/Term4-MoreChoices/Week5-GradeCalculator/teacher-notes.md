@@ -318,6 +318,49 @@ Quick review:
 
 ---
 
+## 🤖 AI Activity: AI Fairness Discussion (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just built a grade calculator. But here's an important question: What if AI graded your work? Would it be fair?"
+
+2. **Fairness Discussion** (4-5 min)
+   - Ask: "What if AI graded your homework and gave you a bad grade - but you think it's wrong?"
+   - Discuss: "What if AI makes mistakes? Is that fair?"
+   - Brainstorm: "What makes grading fair or unfair?"
+   - Explain: "AI programmers think about fairness all the time - it's called AI ethics!"
+
+3. **Discussion** (2-3 min)
+   - "Is it fair if AI grades your work?"
+   - "What if AI makes mistakes?"
+   - "How can we make sure AI is fair?"
+
+4. **Connection** (1 min)
+   > "When you build programs that make decisions, it's important to think about fairness - just like AI programmers do! Your grade calculator follows exact rules, but AI can make mistakes. Thinking about fairness is part of being a responsible programmer!"
+
+### Discussion Questions
+
+- "Is it fair if AI grades your work?"
+- "What if AI makes mistakes - is that fair?"
+- "How can we make sure AI is fair to everyone?"
+
+### Teaching Tips
+
+- Keep it age-appropriate - focus on fairness, not complex ethics
+- Encourage all opinions - there's no "right" answer
+- Use concrete examples: "What if AI gave you a bad grade by mistake?"
+- Connect to their code: "Your calculator follows rules - but what if the rules are unfair?"
+- Emphasize thinking about fairness: "This is what AI programmers think about!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who thinks it's fair if AI grades your work?"
+- Connect: "AI programmers think about fairness all the time!"
+- Emphasize: "Thinking about fairness is part of being a good programmer!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

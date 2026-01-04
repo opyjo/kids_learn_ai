@@ -78,7 +78,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Creating this poster helps you understand how much AI is part of your daily life! By identifying and explaining AI, you're becoming AI-literate—understanding what AI is, where it is, and how it helps you. This is the first step to becoming an AI expert!
+  Creating this poster helps you understand how much AI is part of your daily life! By identifying and explaining AI, you're becoming AI-literate—understanding what AI is, where it is, and how it helps you. This is the first step to becoming an AI expert! For your poster project, try interviewing a family member about how AI affects their job - you might discover AI in places you never expected!
 
   You're not just making a poster—you're becoming AI-aware!
 ---

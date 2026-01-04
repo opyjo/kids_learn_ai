@@ -87,7 +87,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Interactive games and stories use if/else statements to respond to player choices! When you play a video game and choose different paths, the game uses if/else to show you different outcomes - exactly like your adventure game!
+  Interactive games and stories use if/else statements to respond to player choices! When you play a video game and choose different paths, the game uses if/else to show you different outcomes - exactly like your adventure game! AI story generators like ChatGPT use if/else logic to choose what happens next in stories - they check conditions and decide which path the story should take, just like your adventure game does!
 
   You're building the same interactive logic that powers games and interactive fiction!
 ---

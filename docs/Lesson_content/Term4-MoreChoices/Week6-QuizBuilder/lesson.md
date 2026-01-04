@@ -74,7 +74,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI-powered learning platforms use quiz systems just like you're building! When you take an online quiz and it checks your answers, gives you a score, and provides feedback—that's using the same if/else logic you're learning! AI tutors use this to help students learn and track progress!
+  AI-powered learning platforms use quiz systems just like you're building! When you take an online quiz and it checks your answers, gives you a score, and provides feedback—that's using the same if/else logic you're learning! AI tutors use this to help students learn and track progress! But how does AI know what the right answers are? AI learns from training data - millions of questions with correct answers, just like your quiz has correct answers stored in your code!
 
   You're building the same quiz logic that powers AI learning systems!
 ---

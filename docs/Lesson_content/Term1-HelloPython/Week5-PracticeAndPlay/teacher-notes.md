@@ -292,6 +292,51 @@ Use this to identify topics needing Week 6+ review.
 
 ---
 
+## 🤖 AI Activity: Quick, Draw! - AI Recognition Game (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "Today you're practicing your coding skills. Did you know AI also practices? Let's see AI in action with a fun game!"
+
+2. **Play Quick, Draw!** (4-5 min)
+   - Navigate to: quickdraw.withgoogle.com
+   - Explain: "This is a game where AI tries to guess what you're drawing!"
+   - Have students take turns drawing (or teacher demonstrates)
+   - Watch as AI recognizes the drawings in real-time
+   - Point out: "See how the AI is learning? It's practicing, just like you!"
+
+3. **Discussion** (2-3 min)
+   - "How do you think the AI knows what you're drawing?"
+   - "What happens when it gets it wrong?"
+   - "How is this similar to you practicing coding today?"
+
+4. **Connection** (1 min)
+   > "The more you practice coding, the better you get - just like AI gets better at recognizing drawings the more it practices! Today you're training your brain just like programmers train AI."
+
+### Discussion Questions
+
+- "What did you notice about how the AI recognized your drawings?"
+- "What happens when the AI makes a mistake?"
+- "How is practicing coding similar to how AI practices?"
+
+### Teaching Tips
+
+- If internet is unavailable, show a pre-recorded video of Quick, Draw!
+- Keep it fun and engaging - this is a light activity during a practice day
+- Emphasize the practice connection: "You're both practicing to get better!"
+- If students want to play more, suggest they try it at home
+- Connect back to their coding: "Every time you code, you're getting better - just like AI!"
+
+### Alternative Activity (If No Internet)
+
+- Discuss: "Who has played games where AI recognizes what you draw or say?"
+- Show examples: voice recognition, image recognition apps
+- Connect: "AI practices every day to get better - just like you're practicing coding today!"
+- Emphasize: "The more you practice, the better you get - same for AI!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Informal Assessment Checklist

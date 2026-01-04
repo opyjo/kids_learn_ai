@@ -229,6 +229,49 @@ Have students test with:
 
 ---
 
+## 🤖 AI Activity: Smart Calculator Ideas (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just built a calculator that follows exact rules. But what if your calculator could LEARN from how you use it? That's what AI-powered calculators do!"
+
+2. **Brainstorming Activity** (4-5 min)
+   - Ask: "What if your calculator could remember your favorite calculations?"
+   - Brainstorm: "What if it suggested shortcuts based on what you calculate most?"
+   - Discuss: "What if it could predict what you'll calculate next?"
+   - Explain: "AI calculators can learn patterns and adapt - they use the same math you're learning, but they can get smarter!"
+
+3. **Discussion** (2-3 min)
+   - "What would make a calculator 'smart' or 'AI-powered'?"
+   - "How would a calculator learn your patterns?"
+   - "What's the difference between your calculator and an AI calculator?"
+
+4. **Connection** (1 min)
+   > "Your calculator follows exact rules - that's programming! AI calculators use the same math operations, but they can learn and adapt. You're learning the foundation that powers both regular and AI-powered calculators!"
+
+### Discussion Questions
+
+- "What would make a calculator 'smart'?"
+- "How could a calculator learn your favorite calculations?"
+- "What's the difference between a regular calculator and an AI calculator?"
+
+### Teaching Tips
+
+- Keep it creative and fun - this is brainstorming, not technical
+- Use examples: "What if it remembered you always calculate tips?"
+- Connect to their project: "Your calculator follows rules - AI can learn new rules!"
+- If students ask technical questions, simplify: "AI can learn patterns, regular calculators can't"
+- Emphasize they're learning the foundation: "Both use the same math you're learning!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has used a calculator app that suggests shortcuts?"
+- Connect: "That's AI learning your patterns!"
+- Emphasize: "Your calculator follows exact rules - that's how programming works!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Project Assessment: "My Calculator"

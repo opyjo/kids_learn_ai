@@ -248,6 +248,49 @@ Use this time for questions and clarifications.
 
 ---
 
+## 🤖 AI Activity: AlphaGo Story (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned about keeping score. Did you know there's an AI that learned to play a game by tracking its score millions of times?"
+
+2. **AlphaGo Story** (4-5 min)
+   - Tell the story: "AlphaGo is an AI that learned to play Go (an ancient board game)"
+   - Explain: "It played millions of games, tracked its score each time, and learned what worked"
+   - Share: "In 2016, it beat the world champion - the first time AI beat a human at Go!"
+   - Connect: "It learned by tracking its progress, just like you're learning to track scores!"
+
+3. **Discussion** (2-3 min)
+   - "How do you think AlphaGo got better?"
+   - "What's similar between AlphaGo learning and you tracking scores?"
+   - "How do you think AI learns from tracking progress?"
+
+4. **Connection** (1 min)
+   > "AlphaGo learned to play Go by playing millions of games and tracking its score - exactly like you're learning to track scores! When you track progress, you're using the same system that helps AI learn!"
+
+### Discussion Questions
+
+- "How do you think AlphaGo got better at playing Go?"
+- "What's similar between AlphaGo learning and you tracking scores?"
+- "How do you think AI learns from tracking progress?"
+
+### Teaching Tips
+
+- Make it exciting - this is a real AI success story!
+- Keep it simple - focus on "tracking progress = learning"
+- Connect to their code: "Your score tracking works the same way!"
+- If students ask technical questions, simplify: "AI learns by playing lots of games and tracking what works"
+- Emphasize they're learning real AI concepts: "This is how AI learns!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick story: "There's an AI called AlphaGo that learned to play Go by tracking its score!"
+- Connect: "You're learning to track scores - just like AlphaGo!"
+- Emphasize: "Tracking progress helps both you and AI learn!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

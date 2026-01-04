@@ -280,6 +280,49 @@ Let a few students share (if time allows).
 
 ---
 
+## 🤖 AI Activity: AI vs Human Art (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "Today you're showcasing your art! But here's a question: Can you tell the difference between human art and AI art?"
+
+2. **Art Comparison Activity** (4-5 min)
+   - Show examples of human art and AI art (if available, or discuss)
+   - Ask: "Can you tell which is which? What's the difference?"
+   - Discuss: "What makes art 'human'? What makes it 'AI'?"
+   - Brainstorm: "Is one better than the other? Why or why not?"
+
+3. **Discussion** (2-3 min)
+   - "Can you tell the difference between human art and AI art?"
+   - "What makes art 'human'?"
+   - "Is one better than the other?"
+
+4. **Connection** (1 min)
+   > "You're showcasing your art today - art you created with code! But these are questions people are asking right now: Is AI art as good as human art? Can you tell the difference? You're part of this important conversation!"
+
+### Discussion Questions
+
+- "Can you tell the difference between human art and AI art?"
+- "What makes art 'human'?"
+- "Is one better than the other? Why or why not?"
+
+### Teaching Tips
+
+- Encourage all opinions - there's no "right" answer
+- Keep it respectful - art is subjective
+- Use examples if available, or discuss conceptually
+- Connect to their showcase: "You're showcasing your art - just like AI creates art!"
+- Emphasize critical thinking: "These are important questions to think about!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who can tell the difference between human and AI art?"
+- Connect: "You're showcasing your art - just like AI creates art!"
+- Emphasize: "These are questions people are discussing right now!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

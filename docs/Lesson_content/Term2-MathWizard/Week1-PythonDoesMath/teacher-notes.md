@@ -370,6 +370,52 @@ Use this time for:
 
 ---
 
+## 🤖 AI Activity: AI Calculator vs Your Calculator (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+
+   > "You just learned how to do math with Python. Did you know there are two types of calculators - regular ones and AI-powered ones?"
+
+2. **Comparison Activity** (4-5 min)
+
+   - Show a regular calculator: "This follows exact rules - 2 + 2 always equals 4"
+   - Explain: "Your Python calculator works the same way - it follows the rules you program"
+   - Show an AI calculator example (if available) or explain: "AI calculators can also learn patterns and estimate"
+   - Demonstrate: "Regular calculator: exact answer. AI calculator: can learn your favorite calculations and suggest shortcuts!"
+
+3. **Discussion** (2-3 min)
+
+   - "What's the difference between a regular calculator and an AI calculator?"
+   - "When would you want exact answers? When might estimates be okay?"
+   - "How is your Python calculator similar to both?"
+
+4. **Connection** (1 min)
+   > "Both types use the same math operations you're learning! The difference is that AI can learn and adapt, while regular calculators always follow the same rules. You're learning the foundation that powers both!"
+
+### Discussion Questions
+
+- "What's the difference between a calculator that always gives the same answer and one that learns?"
+- "When do you need exact answers? When might estimates be okay?"
+- "How is your Python calculator similar to calculators on your phone?"
+
+### Teaching Tips
+
+- Use a physical calculator for comparison if available
+- Keep it simple - focus on "exact rules" vs "can learn"
+- Connect to their code: "Your calculator follows exact rules - that's programming!"
+- If students ask technical questions, simplify: "AI can learn patterns, regular calculators can't"
+- Emphasize they're learning the foundation: "Both use the same math you're learning!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has used a calculator app? Some can learn your patterns!"
+- Connect: "Your Python calculator follows exact rules - that's how programming works!"
+- Emphasize: "You're learning the same math that powers all calculators!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

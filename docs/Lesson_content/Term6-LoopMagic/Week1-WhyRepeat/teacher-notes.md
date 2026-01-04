@@ -364,6 +364,49 @@ Use this time for:
 
 ---
 
+## 🤖 AI Activity: AI Training Epochs (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned why we repeat things - to get better! Did you know AI does the same thing? It looks at the same data over and over to learn!"
+
+2. **Training Epochs Activity** (4-5 min)
+   - Explain: "When you study flashcards, you look at them multiple times - that's like AI training!"
+   - Show: "AI looks at the same data many times - each time through is called an 'epoch'"
+   - Demonstrate: "First time through data = epoch 1, second time = epoch 2, etc."
+   - Connect: "Just like you get better at flashcards the more you study them, AI gets better the more epochs it goes through!"
+
+3. **Discussion** (2-3 min)
+   - "How many times do you study flashcards to learn them?"
+   - "How do you think AI gets better with practice?"
+   - "What's similar between you studying and AI training?"
+
+4. **Connection** (1 min)
+   > "AI uses loops to train - it looks at the same data over and over (epochs), just like you study flashcards repeatedly! The more times AI loops through the data, the better it gets - exactly like you get better with practice!"
+
+### Discussion Questions
+
+- "How many times do you study to learn something?"
+- "How do you think AI gets better with practice?"
+- "What's similar between you studying and AI training?"
+
+### Teaching Tips
+
+- Use the flashcards analogy - students understand this
+- Keep it simple - focus on "repetition = learning"
+- Connect to their code: "Your loops repeat - AI loops repeat to learn!"
+- If students ask technical questions, simplify: "AI learns by repeating, just like you!"
+- Emphasize they're learning real AI concepts: "This is how AI training works!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has studied flashcards? That's like AI training!"
+- Connect: "AI repeats the same data to learn - just like you study!"
+- Emphasize: "Repetition helps both you and AI learn!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

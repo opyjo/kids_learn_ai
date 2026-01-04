@@ -284,6 +284,50 @@ Use this time for:
 
 ---
 
+## 🤖 AI Activity: Akinator - 20 Questions with AI (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned about True/False questions. Did you know there's a game where AI uses True/False questions to guess what you're thinking?"
+
+2. **Play Akinator** (4-5 min)
+   - Navigate to: akinator.com (or show a demo)
+   - Explain: "This AI asks yes/no questions to guess what character you're thinking of!"
+   - Have a student think of a character (or teacher demonstrates)
+   - Watch as Akinator asks True/False questions
+   - Point out: "See how it narrows down the answer with each yes/no question? That's exactly what if statements do!"
+
+3. **Discussion** (2-3 min)
+   - "How does Akinator know what to ask?"
+   - "What happens when you answer True vs False?"
+   - "How is this similar to the True/False logic you're learning?"
+
+4. **Connection** (1 min)
+   > "Akinator uses True/False questions to make decisions - just like you're learning! Every yes/no answer helps it narrow down the possibilities, using the same Boolean logic you're learning today!"
+
+### Discussion Questions
+
+- "How does Akinator know what questions to ask?"
+- "What happens when you answer 'yes' vs 'no'?"
+- "How is this similar to True/False in programming?"
+
+### Teaching Tips
+
+- If internet is unavailable, show a pre-recorded video of Akinator
+- Keep it fun and engaging - this is a game, not a deep technical dive
+- Emphasize the True/False connection: "Every question is True or False!"
+- If students want to play more, suggest they try it at home
+- Connect back to their code: "Your if statements use True/False the same way!"
+
+### Alternative Activity (If No Internet)
+
+- Play 20 Questions as a class: "I'm thinking of something..."
+- Connect: "Each yes/no question narrows it down - that's True/False logic!"
+- Emphasize: "AI uses the same True/False questions to make decisions!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

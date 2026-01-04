@@ -51,7 +51,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI uses randomness to learn and make decisions! When AI plays games, it uses random moves to explore different strategies. When AI generates art, it uses randomness to create unique designs. Randomness makes AI creative and unpredictable—just like your games!
+  AI uses randomness to learn and make decisions! When AI plays games, it uses random moves to explore different strategies. When AI generates art, it uses randomness to create unique designs. Randomness makes AI creative and unpredictable—just like your games! But here's a question: Is AI truly random? Actually, AI uses "pseudo-random" numbers - they look random but follow a pattern, just like Python's random module!
 
   You're using the same randomness that makes AI exciting!
 ---

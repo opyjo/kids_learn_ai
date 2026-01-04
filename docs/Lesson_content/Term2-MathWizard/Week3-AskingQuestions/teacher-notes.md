@@ -327,6 +327,49 @@ Use this time for:
 
 ---
 
+## 🤖 AI Activity: Training Data Collection (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned how to collect answers using input(). Did you know that when you collect answers from classmates, you're creating a dataset - the same kind of data that AI uses to learn?"
+
+2. **Data Collection Activity** (4-5 min)
+   - Have students create a simple program that asks: "What's your favorite number?"
+   - Have 5-10 students run the program and enter their favorite numbers
+   - Collect all the answers (write them on the board or screen)
+   - Explain: "This list of answers is called a dataset! AI learns from datasets with millions of answers!"
+
+3. **Discussion** (2-3 min)
+   - "What patterns do you notice in the favorite numbers?"
+   - "If you had 1,000 answers instead of 10, what could you learn?"
+   - "How do you think AI uses datasets like this?"
+
+4. **Connection** (1 min)
+   > "When you collect answers using input(), you're doing exactly what AI programmers do - gathering data! AI learns from millions of answers, just like you collected answers today. You're learning the same process that trains AI!"
+
+### Discussion Questions
+
+- "What patterns do you see in the data we collected?"
+- "How many answers would you need to find a pattern?"
+- "How do you think AI uses datasets to learn?"
+
+### Teaching Tips
+
+- Keep it simple - focus on "collecting data = dataset"
+- Use concrete examples: "Netflix collects data about what shows people like"
+- Connect to their code: "Your input() program collects data - that's a dataset!"
+- If students ask technical questions, simplify: "AI learns from lots of data, just like we collected today"
+- Emphasize they're learning real AI concepts: "This is exactly how AI training works!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has filled out a survey? That's collecting data!"
+- Connect: "When you use input() to collect answers, you're creating a dataset!"
+- Emphasize: "AI learns from datasets with millions of answers - you're learning the same process!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

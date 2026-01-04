@@ -383,6 +383,49 @@ Encourage collaboration but ensure each student writes their own code.
 
 ---
 
+## 🤖 AI Activity: AI Joke Rating - Training Data Concept (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just built a Joke Machine that stores jokes in variables. Did you know AI learns which jokes are funny the same way?"
+
+2. **Interactive Activity** (4-5 min)
+   - Show students 3-4 jokes (on screen or read aloud)
+   - Have students rate each joke: "Funny" 👍 or "Not Funny" 👎
+   - Collect the votes (count hands or use a simple poll)
+   - Explain: "When you rate jokes, you're creating training data - exactly how AI learns!"
+
+3. **Connection Discussion** (2-3 min)
+   - "How do you think AI knows which jokes are funny?"
+   - "What if everyone rated a joke as 'not funny' - what would AI learn?"
+   - "How is your Joke Machine similar to how AI stores jokes?"
+
+4. **Key Concept** (1 min)
+   > "AI learns from millions of people rating things - just like we did today! When you rate jokes, movies, or songs, you're helping train AI. Your Joke Machine stores jokes in variables - AI does the same, but learns which ones people like!"
+
+### Discussion Questions
+
+- "How do you think Netflix knows which shows you'll like?"
+- "What happens when lots of people rate something as 'funny' or 'not funny'?"
+- "How is your Joke Machine similar to how AI works?"
+
+### Teaching Tips
+
+- Keep it simple - focus on the concept of "rating = training data"
+- Use concrete examples: Netflix ratings, YouTube likes, app store reviews
+- Connect to their project: "Your jokes are stored in variables - AI does the same!"
+- If students ask technical questions, simplify: "AI learns from what people like, just like we did today!"
+- Emphasize they're learning real AI concepts: "This is exactly how AI training works!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has rated a movie or show? That's training data!"
+- Connect: "When you rate jokes, you're teaching AI what's funny!"
+- Emphasize: "Your Joke Machine works the same way - storing jokes in variables!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment (During Build Time)

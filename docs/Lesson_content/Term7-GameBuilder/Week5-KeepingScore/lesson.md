@@ -53,7 +53,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI tracks progress too! When AI learns, it tracks how many times it tried, how many times it succeeded, and improves based on that data. When AI plays games, it tracks its score to learn what works. You're using the same tracking systems that help AI learn!
+  AI tracks progress too! When AI learns, it tracks how many times it tried, how many times it succeeded, and improves based on that data. When AI plays games, it tracks its score to learn what works. You're using the same tracking systems that help AI learn! Did you know there's an AI called AlphaGo that learned to play the game Go by playing millions of games and tracking its score? It eventually beat the world champion!
 
   You're learning the same progress tracking that powers AI learning!
 ---

@@ -181,6 +181,50 @@ During this time:
 
 ---
 
+## 🤖 AI Activity: Teachable Machine Demo (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You've been practicing if/else statements to make decisions. Did you know you can train AI to make decisions using the same if/else logic?"
+
+2. **Teachable Machine Demo** (4-5 min)
+   - Navigate to: teachablemachine.withgoogle.com
+   - Explain: "This tool lets you train AI to recognize images using if/else logic!"
+   - Show a simple example: Train it to recognize "cat" vs "dog"
+   - Demonstrate: "If this is a cat, then show 'cat', else check for dog"
+   - Point out: "It uses if/else statements just like you're learning!"
+
+3. **Discussion** (2-3 min)
+   - "How does Teachable Machine make decisions?"
+   - "What's similar between this and your if/else code?"
+   - "How do you think AI learns to recognize things?"
+
+4. **Connection** (1 min)
+   > "Teachable Machine uses if/else logic to make decisions - exactly like you're learning! When you write if/else statements, you're using the same decision-making structure that powers AI!"
+
+### Discussion Questions
+
+- "How does Teachable Machine decide if something is a cat or dog?"
+- "What's similar between this and your if/else code?"
+- "How do you think AI learns to recognize different things?"
+
+### Teaching Tips
+
+- If internet is unavailable, show a pre-recorded video of Teachable Machine
+- Keep it simple - focus on "if/else = decision making"
+- Connect to their code: "Your if/else statements work the same way!"
+- If students want to try it, suggest they explore at home (with parent permission)
+- Emphasize they're learning real AI concepts: "This is how AI makes decisions!"
+
+### Alternative Activity (If No Internet)
+
+- Discuss: "Who has used apps that recognize images or sounds?"
+- Connect: "Those apps use if/else logic - 'if this is a cat, then...'"
+- Emphasize: "You're learning the same decision-making structure that powers AI!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

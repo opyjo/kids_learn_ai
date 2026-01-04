@@ -56,7 +56,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI systems use elif (else if) constantly! When a voice assistant asks "What do you want to do?" and you say "play music", it checks: "If music, then play music. Elif weather, then check weather. Elif timer, then set timer. Else, ask for clarification." Every AI assistant uses elif to handle multiple user requests!
+  AI systems use elif (else if) constantly! When a voice assistant asks "What do you want to do?" and you say "play music", it checks: "If music, then play music. Elif weather, then check weather. Elif timer, then set timer. Else, ask for clarification." Every AI assistant uses elif to handle multiple user requests! AI also uses elif for classification - sorting things into categories like "if it's a cat, elif it's a dog, elif it's a bird, else it's something else" - exactly like you're learning with elif!
 
   You're learning the same multi-choice logic that powers every AI assistant!
 ---

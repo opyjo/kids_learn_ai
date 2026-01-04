@@ -106,7 +106,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI art generators use similar concepts! They loop through pixels, make decisions about colors and shapes, and create patterns. Your ASCII Art Generator uses the same fundamental programming concepts that power AI art creation!
+  AI art generators use similar concepts! They loop through pixels, make decisions about colors and shapes, and create patterns. Your ASCII Art Generator uses the same fundamental programming concepts that power AI art creation! But here's a big question: Is AI art "real" art? Can AI be creative? These are questions people are discussing right now - and you're creating art with code, just like AI does!
 
   You're building something that works like real-world art generation tools!
 ---

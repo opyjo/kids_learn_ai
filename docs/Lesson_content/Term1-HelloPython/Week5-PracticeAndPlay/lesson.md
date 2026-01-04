@@ -78,7 +78,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Real AI programmers practice every day - that's how ChatGPT got so smart! The more you practice coding, the better you get.
+  Real AI programmers practice every day - that's how ChatGPT got so smart! When you play games like Quick, Draw! by Google, the AI is practicing recognizing your drawings - just like you're practicing your coding skills today. The more you practice, the better both you and AI get!
 
   Today you're training your brain just like programmers train AI!
 ---

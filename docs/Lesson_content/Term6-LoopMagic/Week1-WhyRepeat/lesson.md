@@ -50,6 +50,8 @@ ai_activities: |
   - Read every word in a message to understand meaning
   - Test thousands of possibilities to make the best decision
 
+  AI also uses loops to train - it looks at the same data over and over again (called "epochs"), just like you study flashcards repeatedly! The more times AI loops through the data, the better it gets - exactly like you get better with practice!
+
   Without loops, AI would be impossible! You're learning the same concept that powers every AI in the world!
 ---
 

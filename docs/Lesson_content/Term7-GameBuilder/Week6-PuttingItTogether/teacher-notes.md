@@ -237,6 +237,49 @@ Use this time for questions and clarifications.
 
 ---
 
+## 🤖 AI Activity: AI Game Opponents (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just combined loops, randomness, and score tracking. Did you know game AIs use all these features to create challenging opponents?"
+
+2. **AI Opponents Discussion** (4-5 min)
+   - Ask: "Have you played games with AI opponents? How do they work?"
+   - Explain: "Game AIs use loops to keep playing, randomness to explore different moves, and track what works to get better"
+   - Discuss: "How do you think game AIs decide what moves to make?"
+   - Connect: "They combine all the features you're learning - loops, randomness, tracking!"
+
+3. **Discussion** (2-3 min)
+   - "How do game AIs create challenging opponents?"
+   - "What's similar between game AIs and your game?"
+   - "How do you think AIs learn to play games better?"
+
+4. **Connection** (1 min)
+   > "Game AIs use loops to keep playing, randomness to explore, and track progress to learn - exactly like you're combining these features! When you build games with these features, you're using the same tools that power AI game opponents!"
+
+### Discussion Questions
+
+- "How do game AIs create challenging opponents?"
+- "What's similar between game AIs and your game?"
+- "How do you think AIs learn to play games better?"
+
+### Teaching Tips
+
+- Use examples from games students know
+- Keep it simple - focus on "combining features = smart AI"
+- Connect to their code: "Your game combines features - just like AI!"
+- If students ask technical questions, simplify: "AI combines loops, randomness, and tracking to learn"
+- Emphasize they're learning real AI concepts: "This is how game AIs work!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has played games with AI opponents?"
+- Connect: "They use loops, randomness, and tracking - just like you!"
+- Emphasize: "You're learning the same tools that power game AIs!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

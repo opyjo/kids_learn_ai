@@ -237,6 +237,49 @@ Use this time for questions and clarifications.
 
 ---
 
+## 🤖 AI Activity: AI Court Case Role-Play (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You've learned about AI ethics. But what if we had to decide: Should AI be allowed to make important decisions?"
+
+2. **Court Case Role-Play** (4-5 min)
+   - Set up: "We're having a court case - should AI be allowed to [drive cars / diagnose diseases / grade tests]?"
+   - Divide students: Some are "for AI", some are "against AI"
+   - Have each side present arguments: "Why should/shouldn't AI do this?"
+   - Discuss: "What are the risks? What are the benefits?"
+
+3. **Discussion** (2-3 min)
+   - "What did you learn from the court case?"
+   - "What are the risks of AI making decisions?"
+   - "What are the benefits?"
+
+4. **Connection** (1 min)
+   > "These are real questions people are debating right now! Should AI drive cars? Should AI diagnose diseases? By thinking about these questions, you're learning to be a responsible AI user and creator!"
+
+### Discussion Questions
+
+- "Should AI be allowed to make important decisions?"
+- "What are the risks? What are the benefits?"
+- "How can we make sure AI is used responsibly?"
+
+### Teaching Tips
+
+- Make it fun and engaging - this is role-play!
+- Encourage all opinions - there's no "right" answer
+- Keep it age-appropriate - focus on fairness and safety
+- Use concrete examples: "Should AI drive cars? Why or why not?"
+- Emphasize critical thinking: "These are real questions people are asking!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Should AI be allowed to [drive cars / diagnose diseases]?"
+- Connect: "These are real questions people are debating!"
+- Emphasize: "Thinking about ethics is part of being a responsible programmer!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

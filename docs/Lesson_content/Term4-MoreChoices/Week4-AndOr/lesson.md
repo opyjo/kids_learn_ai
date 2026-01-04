@@ -60,7 +60,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI systems constantly combine conditions! When a security system checks "If face recognized AND password correct, then allow access", or a recommendation system checks "If user likes action OR adventure, then show action-adventure movies", those are using 'and' and 'or'! Every AI decision uses combined conditions!
+  AI systems constantly combine conditions! When a security system checks "If face recognized AND password correct, then allow access", or a recommendation system checks "If user likes action OR adventure, then show action-adventure movies", those are using 'and' and 'or'! Every AI decision uses combined conditions! Spam filters use 'and' and 'or' to check emails - "if contains 'FREE' AND 'CLICK HERE', then it's spam, else if contains 'winner' OR 'prize', then check more carefully" - exactly like you're learning!
 
   You're learning the same logic that powers every AI security and recommendation system!
 ---

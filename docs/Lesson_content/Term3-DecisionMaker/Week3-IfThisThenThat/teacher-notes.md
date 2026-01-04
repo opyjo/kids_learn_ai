@@ -272,6 +272,49 @@ Quick-fire review:
 
 ---
 
+## 🤖 AI Activity: Decision Trees (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just learned if statements - making decisions in code. Did you know AI uses the same idea, but with thousands of if statements connected together? That's called a decision tree!"
+
+2. **Draw a Decision Tree** (4-5 min)
+   - Draw a simple decision tree on the board/screen
+   - Example: "Is it raining?" → Yes: "Bring umbrella" / No: "Is it sunny?" → Yes: "Wear sunglasses" / No: "Wear jacket"
+   - Explain: "Each question is an if statement! AI uses decision trees with millions of if statements!"
+   - Show how it branches: "Each if statement creates a branch - like a tree!"
+
+3. **Discussion** (2-3 min)
+   - "How is this decision tree similar to your if statements?"
+   - "What if you had 100 if statements - what would the tree look like?"
+   - "How do you think AI uses decision trees?"
+
+4. **Connection** (1 min)
+   > "When you write if statements, you're building a decision tree - just like AI does! AI systems use decision trees with millions of if statements to make complex decisions. You're learning the same structure that powers AI!"
+
+### Discussion Questions
+
+- "How is a decision tree like your if statements?"
+- "What happens when you add more if statements?"
+- "How do you think AI uses decision trees to make decisions?"
+
+### Teaching Tips
+
+- Use visual aids - draw the tree on board/screen
+- Keep it simple - focus on "if statements = branches"
+- Connect to their code: "Your if statement is one branch of a tree!"
+- If students ask technical questions, simplify: "AI uses lots of if statements connected together"
+- Emphasize they're learning real AI concepts: "Decision trees are a core AI structure!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has used a flowchart? That's like a decision tree!"
+- Connect: "Your if statements create branches - that's a decision tree!"
+- Emphasize: "AI uses decision trees with millions of branches!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

@@ -247,6 +247,49 @@ Give students time to test and fix issues. Help with any remaining problems.
 
 ---
 
+## 🤖 AI Activity: AI Art Discussion (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just created art with code - ASCII art! But here's a big question: What about AI art? Is it 'real' art?"
+
+2. **Art Discussion** (4-5 min)
+   - Ask: "What is art? Can AI be creative?"
+   - Show examples: "AI can create images, music, stories - is that art?"
+   - Discuss: "What's the difference between human art and AI art?"
+   - Brainstorm: "Can you tell the difference? Should AI art be treated the same as human art?"
+
+3. **Discussion** (2-3 min)
+   - "Is AI art 'real' art?"
+   - "Can AI be creative?"
+   - "What's the difference between your ASCII art and AI art?"
+
+4. **Connection** (1 min)
+   > "You're creating art with code, just like AI does! But these are important questions people are discussing right now: Is AI art real art? Can AI be creative? You're part of this conversation!"
+
+### Discussion Questions
+
+- "Is AI art 'real' art?"
+- "Can AI be creative?"
+- "What's the difference between human art and AI art?"
+
+### Teaching Tips
+
+- Encourage all opinions - there's no "right" answer
+- Keep it age-appropriate - focus on creativity and expression
+- Use examples: show AI-generated images if appropriate
+- Connect to their project: "You're creating art with code - just like AI!"
+- Emphasize thinking critically: "These are questions people are asking right now!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who thinks AI can create art?"
+- Connect: "You're creating art with code - just like AI!"
+- Emphasize: "These are important questions people are discussing!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

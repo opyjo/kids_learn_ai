@@ -233,6 +233,49 @@ Give students time to test and fix. Help with any remaining problems.
 
 ---
 
+## 🤖 AI Activity: Binary Search - Smart Guessing (5-10 minutes)
+
+### What to Do
+
+1. **Introduction** (1 min)
+   > "You just built a guessing game. But did you know there's a super smart way to guess numbers?"
+
+2. **Binary Search Activity** (4-5 min)
+   - Explain: "Binary search is a smart guessing strategy - always guess the middle number!"
+   - Demonstrate: "If the range is 1-100, guess 50. Too high? Next guess is 25. Too low? Next guess is 37..."
+   - Show: "This is the fastest way to find the answer - AI uses this strategy!"
+   - Connect: "Your guessing game could use this strategy too - always guess the middle!"
+
+3. **Discussion** (2-3 min)
+   - "Why is guessing the middle number smart?"
+   - "How many guesses would you need to find a number between 1-100?"
+   - "How do you think AI uses this strategy?"
+
+4. **Connection** (1 min)
+   > "Binary search is a smart guessing strategy that AI uses - always guess the middle number! This is the fastest way to find answers. Your guessing game uses the same learning pattern - try, get feedback, adjust - that AI uses!"
+
+### Discussion Questions
+
+- "Why is guessing the middle number smart?"
+- "How many guesses would you need to find a number between 1-100?"
+- "How do you think AI uses this strategy?"
+
+### Teaching Tips
+
+- Use visual aids - draw the number line and show middle guesses
+- Keep it simple - focus on "middle = fastest"
+- Connect to their game: "Your game could use this strategy!"
+- If students want to try it, let them experiment
+- Emphasize they're learning real AI strategies: "This is how AI searches efficiently!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick demonstration: "Guess a number between 1-100 - I'll use binary search!"
+- Connect: "AI uses this smart strategy to find answers fast!"
+- Emphasize: "You're learning the same strategies that AI uses!"
+
+---
+
 ## 🎯 Assessment & Differentiation
 
 ### Formative Assessment

@@ -48,7 +48,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Every time Siri calculates a tip, or Google Maps figures out your travel time, or a video game adds up your score - that's math just like you're learning! AI uses addition, subtraction, multiplication, and division millions of times per second.
+  Every time Siri calculates a tip, or Google Maps figures out your travel time, or a video game adds up your score - that's math just like you're learning! Regular calculators follow exact rules you program, but AI calculators can also learn patterns and estimate answers - they use the same math operations, but can get smarter over time!
 
   You're learning the same math operations that power every AI in the world!
 ---

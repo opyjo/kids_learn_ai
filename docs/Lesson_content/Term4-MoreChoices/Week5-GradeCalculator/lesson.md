@@ -73,7 +73,7 @@ take_home_assignment: |
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  AI-powered learning systems use grade calculators all the time! When online learning platforms automatically calculate your grade, or when AI tutors give you feedback based on your scores, they're using the same if/elif/else logic you're learning! AI systems process thousands of grades per second using these same decision-making patterns!
+  AI-powered learning systems use grade calculators all the time! When online learning platforms automatically calculate your grade, or when AI tutors give you feedback based on your scores, they're using the same if/elif/else logic you're learning! AI systems process thousands of grades per second using these same decision-making patterns! But here's an important question: Is it fair if AI grades your work? What if it makes mistakes? These are questions about AI fairness - something AI programmers think about all the time!
 
   You're building the same grade calculation logic that powers AI learning platforms!
 ---
