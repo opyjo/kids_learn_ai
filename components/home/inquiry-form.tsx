@@ -38,12 +38,24 @@ const inquiryFormSchema = z.object({
 		.trim()
 		.min(1, "Email is required")
 		.email("Please enter a valid email address"),
-	childName: z
+	parentPhone: z
 		.string()
 		.trim()
-		.min(1, "Child's name is required")
-		.min(2, "Name must be at least 2 characters")
-		.max(100, "Name must not exceed 100 characters"),
+		.min(10, "Please enter a valid phone number")
+		.max(20, "Phone number must not exceed 20 characters")
+		.optional(),
+	childFirstName: z
+		.string()
+		.trim()
+		.min(1, "Child's first name is required")
+		.min(2, "First name must be at least 2 characters")
+		.max(100, "First name must not exceed 100 characters"),
+	childLastName: z
+		.string()
+		.trim()
+		.min(1, "Child's last name is required")
+		.min(2, "Last name must be at least 2 characters")
+		.max(100, "Last name must not exceed 100 characters"),
 	ageGroup: z.enum(["9-10", "11-13"], {
 		required_error: "Please select an age group",
 	}),
@@ -67,7 +79,9 @@ export const CourseInquiryForm = () => {
 		defaultValues: {
 			parentName: "",
 			parentEmail: "",
-			childName: "",
+			parentPhone: "",
+			childFirstName: "",
+			childLastName: "",
 			howHeard: "",
 			questions: "",
 		},
@@ -175,18 +189,62 @@ export const CourseInquiryForm = () => {
 					)}
 				/>
 
-				{/* Child Name */}
+				{/* Parent Phone */}
 				<FormField
 					control={form.control}
-					name="childName"
+					name="parentPhone"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>
-								Child's Name <span className="text-red-500">*</span>
+								Your Phone Number{" "}
+								<span className="text-muted-foreground">(optional)</span>
 							</FormLabel>
 							<FormControl>
 								<Input
-									placeholder="Your child's first name"
+									type="tel"
+									placeholder="(555) 123-4567"
+									disabled={isSubmitting}
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+
+				{/* Child First Name */}
+				<FormField
+					control={form.control}
+					name="childFirstName"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>
+								Child's First Name <span className="text-red-500">*</span>
+							</FormLabel>
+							<FormControl>
+								<Input
+									placeholder="First name"
+									disabled={isSubmitting}
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+
+				{/* Child Last Name */}
+				<FormField
+					control={form.control}
+					name="childLastName"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>
+								Child's Last Name <span className="text-red-500">*</span>
+							</FormLabel>
+							<FormControl>
+								<Input
+									placeholder="Last name"
 									disabled={isSubmitting}
 									{...field}
 								/>

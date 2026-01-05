@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -18,12 +19,24 @@ const inquirySchema = z.object({
 		.trim()
 		.min(1, "Email is required")
 		.email("Please enter a valid email address"),
-	childName: z
+	parentPhone: z
 		.string()
 		.trim()
-		.min(1, "Child's name is required")
-		.min(2, "Name must be at least 2 characters")
-		.max(100, "Name must not exceed 100 characters"),
+		.min(10, "Please enter a valid phone number")
+		.max(20, "Phone number must not exceed 20 characters")
+		.optional(),
+	childFirstName: z
+		.string()
+		.trim()
+		.min(1, "Child's first name is required")
+		.min(2, "First name must be at least 2 characters")
+		.max(100, "First name must not exceed 100 characters"),
+	childLastName: z
+		.string()
+		.trim()
+		.min(1, "Child's last name is required")
+		.min(2, "Last name must be at least 2 characters")
+		.max(100, "Last name must not exceed 100 characters"),
 	ageGroup: z.enum(["9-10", "11-13"], {
 		required_error: "Please select an age group",
 	}),
@@ -110,12 +123,31 @@ export const POST = async (request: NextRequest) => {
 		const ageGroupDetails = getAgeGroupDetails(validatedData.ageGroup);
 		const experienceLabel = getExperienceLabel(validatedData.experience);
 
+		// Save inquiry to database
+		const supabase = await getSupabaseServerClient();
+		const { error: dbError } = await supabase.from("inquiries").insert({
+			parent_name: validatedData.parentName,
+			parent_email: validatedData.parentEmail,
+			parent_phone: validatedData.parentPhone || null,
+			child_first_name: validatedData.childFirstName,
+			child_last_name: validatedData.childLastName,
+			age_group: validatedData.ageGroup,
+			experience: validatedData.experience,
+			how_heard: validatedData.howHeard || null,
+			questions: validatedData.questions || null,
+		});
+
+		if (dbError) {
+			console.error("Database error saving inquiry:", dbError);
+			// Continue to send email even if DB save fails
+		}
+
 		// Send email via Resend
 		const emailResult = await resend.emails.send({
 			from: "Kids Learn AI <hello@kidslearnai.ca>",
 			to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
 			replyTo: validatedData.parentEmail,
-			subject: `🎓 New Free Trial Inquiry: ${validatedData.childName} (${ageGroupDetails.label})`,
+			subject: `🎓 New Free Trial Inquiry: ${validatedData.childFirstName} ${validatedData.childLastName} (${ageGroupDetails.label})`,
 			html: `
         <!DOCTYPE html>
         <html>
@@ -239,6 +271,18 @@ export const POST = async (request: NextRequest) => {
 										}</a>
                   </div>
                 </div>
+                ${
+									validatedData.parentPhone
+										? `
+                <div class="field">
+                  <div class="label">Phone</div>
+                  <div class="value">
+                    <a href="tel:${validatedData.parentPhone}">${validatedData.parentPhone}</a>
+                  </div>
+                </div>
+                `
+										: ""
+								}
               </div>
 
               <!-- Child Info -->
@@ -247,8 +291,8 @@ export const POST = async (request: NextRequest) => {
                 <div class="field">
                   <div class="label">Child's Name</div>
                   <div class="value" style="font-size: 20px; font-weight: 600;">${
-										validatedData.childName
-									}</div>
+										validatedData.childFirstName
+									} ${validatedData.childLastName}</div>
                 </div>
                 <div class="field">
                   <div class="label">Age Group</div>
@@ -300,8 +344,8 @@ export const POST = async (request: NextRequest) => {
 								}?subject=Your Free Trial Class at Kids Learn AI&body=Hi ${
 									validatedData.parentName
 								},%0D%0A%0D%0AThank you for your interest in our Python %26 AI classes for ${
-									validatedData.childName
-								}!%0D%0A%0D%0A" class="action-btn">
+									validatedData.childFirstName
+								} ${validatedData.childLastName}!%0D%0A%0D%0A" class="action-btn">
                   Reply to ${validatedData.parentName}
                 </a>
               </div>
