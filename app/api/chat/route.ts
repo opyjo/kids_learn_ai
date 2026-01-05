@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { getAuthUser } from "@/lib/auth-helpers";
+import { getAuthUser, getUserEnrollments } from "@/lib/auth-helpers";
 import {
 	FALLBACK_RESPONSES,
 	TUTOR_PROMPTS,
@@ -133,10 +133,14 @@ const checkRateLimit = (identifier: string): boolean => {
 // Check and increment daily usage for authenticated users
 async function checkAndIncrementDailyUsage(
 	userId: string,
+	timezone?: string,
 ): Promise<{ allowed: boolean; remaining: number; limit: number }> {
 	try {
 		const supabase = await getSupabaseServerClient();
-		const today = new Date().toISOString().split("T")[0];
+		// Use user's timezone if provided, otherwise fall back to UTC
+		const today = timezone
+			? new Date().toLocaleDateString("en-CA", { timeZone: timezone })
+			: new Date().toISOString().split("T")[0];
 
 		// Get today's usage record
 		const { data: existing } = await supabase
@@ -191,7 +195,12 @@ async function checkAndIncrementDailyUsage(
 
 export const POST = async (req: NextRequest) => {
 	try {
-		const { messages, tutorId = DEFAULT_TUTOR_ID, context } = await req.json();
+		const {
+			messages,
+			tutorId = DEFAULT_TUTOR_ID,
+			context,
+			timezone,
+		} = await req.json();
 
 		if (!messages || !Array.isArray(messages)) {
 			return NextResponse.json(
@@ -228,25 +237,62 @@ export const POST = async (req: NextRequest) => {
 			);
 		}
 
-		// Check daily usage limit for authenticated users
+		// Check authentication and enrollment
 		const user = await getAuthUser();
-		let dailyUsage = null;
-		if (user) {
-			dailyUsage = await checkAndIncrementDailyUsage(user.id);
-			if (!dailyUsage.allowed) {
-				logSafetyEvent("block", "Daily limit exceeded", user.id);
+		if (!user) {
+			return NextResponse.json(
+				{
+					role: "assistant",
+					content:
+						"Hi there! 🌟 Please log in to chat with me. I can't wait to help you learn!",
+					requiresAuth: true,
+				},
+				{ status: 401 },
+			);
+		}
+
+		// Check if user is enrolled in at least one course (admins bypass this check)
+		const supabase = await getSupabaseServerClient();
+		const { data: profile } = await supabase
+			.from("profiles")
+			.select("role")
+			.eq("id", user.id)
+			.single();
+
+		const isAdmin = profile?.role === "admin";
+
+		if (!isAdmin) {
+			const enrollments = await getUserEnrollments(user.id);
+			if (enrollments.length === 0) {
+				logSafetyEvent("block", "No enrollment", user.id);
 				return NextResponse.json(
 					{
 						role: "assistant",
-						content: `You've reached your daily limit of ${dailyUsage.limit} messages with BrightByte! 🌟\n\nCome back tomorrow for more help with your Python questions!`,
-						usage: {
-							remaining: 0,
-							limit: dailyUsage.limit,
-						},
+						content:
+							"Hi there! 🌟 To chat with me, you'll need to enroll in one of our courses first. Ask your parent or guardian to help you get started!",
+						requiresEnrollment: true,
 					},
-					{ status: 429 },
+					{ status: 403 },
 				);
 			}
+		}
+
+		// Check daily usage limit for authenticated users
+		let dailyUsage = null;
+		dailyUsage = await checkAndIncrementDailyUsage(user.id, timezone);
+		if (!dailyUsage.allowed) {
+			logSafetyEvent("block", "Daily limit exceeded", user.id);
+			return NextResponse.json(
+				{
+					role: "assistant",
+					content: `You've reached your daily limit of ${dailyUsage.limit} messages with BrightByte! 🌟\n\nCome back tomorrow for more help with your Python questions!`,
+					usage: {
+						remaining: 0,
+						limit: dailyUsage.limit,
+					},
+				},
+				{ status: 429 },
+			);
 		}
 
 		// Validate conversation length
