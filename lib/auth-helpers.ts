@@ -116,3 +116,17 @@ export async function getUserEnrollments(userId: string): Promise<string[]> {
 
 	return data.map((enrollment) => enrollment.course_id);
 }
+
+/**
+ * Check if a lesson is a free trial lesson (first lesson of Term 1 or Term 2).
+ * @param courseSlug - The course slug
+ * @param lessonOrderIndex - The lesson order index (1-based)
+ * @returns True if this is a free trial lesson, false otherwise
+ */
+export function isFreeTrialLesson(
+	courseSlug: string,
+	lessonOrderIndex: number,
+): boolean {
+	const freeTrialCourses = ["term-1-hello-python", "term-2-math-wizard"];
+	return lessonOrderIndex === 1 && freeTrialCourses.includes(courseSlug);
+}
