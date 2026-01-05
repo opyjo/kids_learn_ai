@@ -330,6 +330,299 @@ export const POST = async (request: NextRequest) => {
 
 		console.log("Inquiry email sent successfully:", emailResult.data);
 
+		// Send confirmation email to parent
+		const parentEmailResult = await resend.emails.send({
+			from: "Kids Learn AI <hello@kidslearnai.ca>",
+			to: validatedData.parentEmail,
+			subject: `🎉 Free Trial Confirmed - ${validatedData.childFirstName} is on the list!`,
+			html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f9fafb;
+              }
+              .container {
+                background: white;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              }
+              .header {
+                background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+                color: white;
+                padding: 40px 30px;
+                text-align: center;
+              }
+              .header-badge {
+                background: rgba(255,255,255,0.2);
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: 600;
+                display: inline-block;
+                margin-bottom: 15px;
+              }
+              .header h1 {
+                margin: 0;
+                font-size: 28px;
+                font-weight: 700;
+              }
+              .header p {
+                margin: 10px 0 0 0;
+                opacity: 0.9;
+                font-size: 16px;
+              }
+              .content {
+                padding: 30px;
+              }
+              .greeting {
+                font-size: 18px;
+                margin-bottom: 20px;
+              }
+              .details-box {
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 20px 0;
+              }
+              .details-title {
+                font-weight: 600;
+                color: #6366f1;
+                margin-bottom: 15px;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+              }
+              .detail-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 8px 0;
+                border-bottom: 1px solid #e2e8f0;
+              }
+              .detail-row:last-child {
+                border-bottom: none;
+              }
+              .detail-label {
+                color: #64748b;
+                font-size: 14px;
+              }
+              .detail-value {
+                color: #1e293b;
+                font-weight: 600;
+                font-size: 14px;
+              }
+              .next-steps {
+                background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+                border: 2px solid #22c55e;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 25px 0;
+              }
+              .next-steps-title {
+                font-weight: 700;
+                color: #166534;
+                margin-bottom: 15px;
+                font-size: 16px;
+              }
+              .step {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 12px;
+              }
+              .step:last-child {
+                margin-bottom: 0;
+              }
+              .step-number {
+                background: #22c55e;
+                color: white;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: 700;
+                margin-right: 12px;
+                flex-shrink: 0;
+              }
+              .step-text {
+                color: #166534;
+                font-size: 14px;
+                line-height: 1.5;
+              }
+              .trial-info {
+                background: #faf5ff;
+                border: 1px solid #e9d5ff;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 25px 0;
+              }
+              .trial-info-title {
+                font-weight: 600;
+                color: #7c3aed;
+                margin-bottom: 12px;
+                font-size: 14px;
+              }
+              .trial-info ul {
+                margin: 0;
+                padding-left: 20px;
+                color: #6b21a8;
+              }
+              .trial-info li {
+                margin-bottom: 8px;
+                font-size: 14px;
+              }
+              .contact-box {
+                text-align: center;
+                padding: 20px;
+                background: #f8fafc;
+                border-radius: 8px;
+                margin-top: 25px;
+              }
+              .contact-box p {
+                margin: 0 0 10px 0;
+                color: #64748b;
+                font-size: 14px;
+              }
+              .contact-box a {
+                color: #6366f1;
+                text-decoration: none;
+                font-weight: 600;
+              }
+              .footer {
+                text-align: center;
+                padding: 25px 30px;
+                background: #f8fafc;
+                border-top: 1px solid #e2e8f0;
+              }
+              .footer p {
+                margin: 0;
+                color: #64748b;
+                font-size: 12px;
+              }
+              .footer a {
+                color: #6366f1;
+                text-decoration: none;
+              }
+              .signature {
+                margin-top: 25px;
+                padding-top: 20px;
+                border-top: 1px solid #e2e8f0;
+              }
+              .signature p {
+                margin: 5px 0;
+                color: #475569;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <div class="header-badge">🎉 YOU'RE ALL SET!</div>
+                <h1>Free Trial Request Received</h1>
+                <p>We're excited to meet ${validatedData.childFirstName}!</p>
+              </div>
+              
+              <div class="content">
+                <p class="greeting">Hi ${validatedData.parentName},</p>
+                
+                <p>Thank you for your interest in Kids Learn AI! We've received your free trial request for <strong>${validatedData.childFirstName}</strong> and we can't wait to start their coding journey.</p>
+                
+                <div class="details-box">
+                  <div class="details-title">📋 Your Details</div>
+                  <div class="detail-row">
+                    <span class="detail-label">Child's Name</span>
+                    <span class="detail-value">${validatedData.childFirstName} ${validatedData.childLastName}</span>
+                  </div>
+                  <div class="detail-row">
+                    <span class="detail-label">Age Group</span>
+                    <span class="detail-value">${ageGroupDetails.label}</span>
+                  </div>
+                  <div class="detail-row">
+                    <span class="detail-label">Class Day</span>
+                    <span class="detail-value">${ageGroupDetails.day}</span>
+                  </div>
+                  <div class="detail-row">
+                    <span class="detail-label">Experience Level</span>
+                    <span class="detail-value">${experienceLabel}</span>
+                  </div>
+                </div>
+                
+                <div class="next-steps">
+                  <div class="next-steps-title">⏰ What Happens Next?</div>
+                  <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Our team will contact you within <strong>24 hours</strong></div>
+                  </div>
+                  <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">We'll schedule ${validatedData.childFirstName}'s free trial class</div>
+                  </div>
+                  <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">${validatedData.childFirstName} joins a live online session with other kids</div>
+                  </div>
+                  <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-text"><strong>No payment required</strong> until you decide to continue</div>
+                  </div>
+                </div>
+                
+                <div class="trial-info">
+                  <div class="trial-info-title">💡 What to Expect in the Trial</div>
+                  <ul>
+                    <li>1-hour live online class via Zoom</li>
+                    <li>Small group (max 6 kids) with a real instructor</li>
+                    <li>Fun, hands-on introduction to Python coding</li>
+                    <li>No prior experience needed!</li>
+                  </ul>
+                </div>
+                
+                <div class="contact-box">
+                  <p>Have questions before the trial?</p>
+                  <p>Just reply to this email or contact us at <a href="mailto:hello@kidslearnai.ca">hello@kidslearnai.ca</a></p>
+                </div>
+                
+                <div class="signature">
+                  <p>We can't wait to start ${validatedData.childFirstName}'s coding journey! 🚀</p>
+                  <p><strong>Warm regards,</strong></p>
+                  <p><strong>The Kids Learn AI Team</strong></p>
+                </div>
+              </div>
+              
+              <div class="footer">
+                <p><strong>Kids Learn AI</strong> | <a href="https://kidslearnai.ca">kidslearnai.ca</a></p>
+                <p>Live Python & AI Classes for Kids Ages 9-13</p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+		});
+
+		if (!parentEmailResult.data) {
+			// Log error but don't fail the request - admin was notified and inquiry was saved
+			console.error(
+				"Parent confirmation email error:",
+				parentEmailResult.error,
+			);
+		} else {
+			console.log(
+				"Parent confirmation email sent successfully:",
+				parentEmailResult.data,
+			);
+		}
+
 		return NextResponse.json(
 			{
 				success: true,

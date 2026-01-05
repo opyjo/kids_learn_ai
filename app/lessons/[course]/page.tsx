@@ -1,11 +1,18 @@
-import { ArrowLeft, BookOpen, CheckCircle, Lock, Play } from "lucide-react";
+import {
+	ArrowLeft,
+	BookOpen,
+	CheckCircle,
+	Lock,
+	Play,
+	Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { checkLevelEnrollment } from "@/lib/auth-helpers";
+import { checkLevelEnrollment, isFreeTrialLesson } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface CoursePageProps {
@@ -67,6 +74,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 	// Transform lessons data
 	const lessons = (lessonsData || []).map((lesson) => {
 		const isCompleted = completedLessonIds.has(lesson.id);
+		const isFreeTrial = isFreeTrialLesson(courseSlug, lesson.order_index);
 
 		return {
 			id: lesson.id,
@@ -74,6 +82,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 			title: lesson.title,
 			description: lesson.description,
 			status: isCompleted ? "completed" : "not_started",
+			isFreeTrial,
 		};
 	});
 
@@ -175,7 +184,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 					<Card className="mb-8 border-2 border-dashed border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-950/20">
 						<CardContent className="p-6">
 							<div className="flex items-center gap-4">
-								<div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/50 flex items-center justify-center flex-shrink-0">
+								<div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/50 flex items-center justify-center shrink-0">
 									<Lock className="h-6 w-6 text-orange-600 dark:text-orange-400" />
 								</div>
 								<div className="flex-1">
@@ -183,8 +192,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
 										You're Not Enrolled in This Level
 									</h3>
 									<p className="text-sm text-muted-foreground">
-										You can preview the lesson titles below, but you'll need to
-										enroll to access the full content.
+										{lessons.some((l) => l.isFreeTrial)
+											? "Try the first lesson for free! You can preview other lesson titles below, but you'll need to enroll to access the full content."
+											: "You can preview the lesson titles below, but you'll need to enroll to access the full content."}
 									</p>
 								</div>
 								<Button asChild className="rounded-full">
@@ -228,9 +238,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
 									className={`absolute top-0 left-0 right-0 h-1 ${
 										lesson.status === "completed"
 											? "bg-gradient-to-r from-green-500 to-emerald-500"
-											: isEnrolled
-												? "bg-gradient-to-r from-primary to-accent"
-												: "bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700"
+											: lesson.isFreeTrial && !isEnrolled
+												? "bg-gradient-to-r from-green-400 to-emerald-400"
+												: isEnrolled
+													? "bg-gradient-to-r from-primary to-accent"
+													: "bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700"
 									}`}
 								/>
 
@@ -258,6 +270,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
 												{lesson.status === "completed" && (
 													<CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
 												)}
+												{lesson.isFreeTrial && !isEnrolled && (
+													<Badge className="bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300 text-xs">
+														<Sparkles className="h-3 w-3 mr-1" />
+														FREE
+													</Badge>
+												)}
 											</div>
 											<p className="text-sm text-muted-foreground line-clamp-1">
 												{lesson.description}
@@ -279,6 +297,15 @@ export default async function CoursePage({ params }: CoursePageProps) {
 																Start
 															</>
 														)}
+													</Link>
+												</Button>
+											) : lesson.isFreeTrial ? (
+												<Button asChild size="sm" className="rounded-full">
+													<Link
+														href={`/lessons/${courseSlug}/${lesson.order_index}`}
+													>
+														<Sparkles className="h-3 w-3 mr-1" />
+														Try Free
 													</Link>
 												</Button>
 											) : (

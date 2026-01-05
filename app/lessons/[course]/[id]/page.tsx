@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { LessonViewer } from "@/components/lessons/lesson-viewer";
-import { checkLevelEnrollment } from "@/lib/auth-helpers";
+import { checkLevelEnrollment, isFreeTrialLesson } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface LessonPageProps {
@@ -49,8 +49,11 @@ export default async function LessonPage({ params }: LessonPageProps) {
 		isEnrolled = await checkLevelEnrollment(user.id, course.id);
 	}
 
-	// Redirect to the course page if not enrolled
-	if (!isEnrolled) {
+	// Check if this is a free trial lesson (first lesson of Term 1 or Term 2)
+	const isFreeTrial = isFreeTrialLesson(courseSlug, lessonOrderIndex);
+
+	// Redirect to the course page if not enrolled and not a free trial lesson
+	if (!isEnrolled && !isFreeTrial) {
 		redirect(`/lessons/${courseSlug}`);
 	}
 
