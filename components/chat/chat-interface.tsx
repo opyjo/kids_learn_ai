@@ -223,11 +223,38 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 						body: JSON.stringify({
 							messages: updatedMessages,
 							tutorId: tutorId,
+							timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 						}),
 						signal: abortControllerRef.current.signal,
 					});
 
 					if (!response.ok) {
+						// Handle authentication required (401)
+						if (response.status === 401) {
+							const data = await response.json();
+							const errorMessage: ChatMessage = {
+								id: crypto.randomUUID(),
+								role: "assistant",
+								content: data.content || "Please log in to continue.",
+								timestamp: Date.now(),
+							};
+							setMessages((prev) => [...prev, errorMessage]);
+							return;
+						}
+						// Handle enrollment required (403)
+						if (response.status === 403) {
+							const data = await response.json();
+							const errorMessage: ChatMessage = {
+								id: crypto.randomUUID(),
+								role: "assistant",
+								content:
+									data.content ||
+									"You need to be enrolled in a course to chat with me.",
+								timestamp: Date.now(),
+							};
+							setMessages((prev) => [...prev, errorMessage]);
+							return;
+						}
 						// Handle daily limit exceeded (429)
 						if (response.status === 429) {
 							const data = await response.json();

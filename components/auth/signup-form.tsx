@@ -1,9 +1,9 @@
 "use client";
 
-import { Loader2, Lock, Mail, User } from "lucide-react";
+import { CheckCircle2, Loader2, Lock, Mail, User } from "lucide-react";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -57,6 +57,27 @@ export function SignupForm() {
 			setGoogleLoading(false);
 		}
 	};
+
+	// Show success message when email confirmation is required
+	if (state?.success && state?.message) {
+		return (
+			<div className="space-y-4">
+				<Alert className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950">
+					<CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+					<AlertTitle className="text-green-800 dark:text-green-200">
+						Check your email!
+					</AlertTitle>
+					<AlertDescription className="text-green-700 dark:text-green-300">
+						{state.message}
+					</AlertDescription>
+				</Alert>
+				<p className="text-center text-sm text-muted-foreground">
+					Didn&apos;t receive the email? Check your spam folder or try signing
+					up again.
+				</p>
+			</div>
+		);
+	}
 
 	return (
 		<form action={formAction} className="space-y-4">
