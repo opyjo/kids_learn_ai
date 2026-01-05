@@ -52,12 +52,16 @@ export async function loginAction(
 
 			if (errorMessage.includes("too many requests")) {
 				return {
-					error: "Too many login attempts. Please wait a few minutes and try again.",
+					error:
+						"Too many login attempts. Please wait a few minutes and try again.",
 				};
 			}
 
 			// Default to a generic message for security (don't expose internal errors)
-			return { error: "Unable to sign in. Please check your credentials and try again." };
+			return {
+				error:
+					"Unable to sign in. Please check your credentials and try again.",
+			};
 		}
 
 		if (!authData.user) {

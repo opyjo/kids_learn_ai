@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -11,7 +9,10 @@ import {
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 const getStatusBadge = (status: string) => {
-	const variants: Record<string, { variant: "default" | "secondary" | "destructive"; label: string }> = {
+	const variants: Record<
+		string,
+		{ variant: "default" | "secondary" | "destructive"; label: string }
+	> = {
 		new: { variant: "default", label: "New" },
 		contacted: { variant: "secondary", label: "Contacted" },
 		trial_scheduled: { variant: "secondary", label: "Trial Scheduled" },
@@ -19,7 +20,10 @@ const getStatusBadge = (status: string) => {
 		declined: { variant: "destructive", label: "Declined" },
 	};
 
-	const config = variants[status] || { variant: "secondary" as const, label: status };
+	const config = variants[status] || {
+		variant: "secondary" as const,
+		label: status,
+	};
 	return <Badge variant={config.variant}>{config.label}</Badge>;
 };
 
@@ -207,4 +211,3 @@ export default async function InquiriesPage() {
 		</div>
 	);
 }
-
