@@ -64,9 +64,7 @@ describe("LoginForm Component", () => {
 
 		it("should have password input with correct type", () => {
 			render(<LoginForm />);
-			const passwordInput = screen.getByPlaceholderText(
-				/enter your password/i,
-			);
+			const passwordInput = screen.getByPlaceholderText(/enter your password/i);
 			expect(passwordInput).toHaveAttribute("type", "password");
 		});
 
@@ -78,9 +76,7 @@ describe("LoginForm Component", () => {
 
 		it("should have required attribute on password", () => {
 			render(<LoginForm />);
-			const passwordInput = screen.getByPlaceholderText(
-				/enter your password/i,
-			);
+			const passwordInput = screen.getByPlaceholderText(/enter your password/i);
 			expect(passwordInput).toBeRequired();
 		});
 
@@ -110,9 +106,7 @@ describe("LoginForm Component", () => {
 
 		it("should allow typing in password field", async () => {
 			const { user } = render(<LoginForm />);
-			const passwordInput = screen.getByPlaceholderText(
-				/enter your password/i,
-			);
+			const passwordInput = screen.getByPlaceholderText(/enter your password/i);
 
 			await user.type(passwordInput, "password123");
 			expect(passwordInput).toHaveValue("password123");
@@ -152,9 +146,7 @@ describe("LoginForm Component", () => {
 			render(<LoginForm />);
 
 			const emailInput = screen.getByLabelText(/email/i);
-			const passwordInput = screen.getByPlaceholderText(
-				/enter your password/i,
-			);
+			const passwordInput = screen.getByPlaceholderText(/enter your password/i);
 
 			expect(emailInput).toHaveAttribute("id", "email");
 			expect(passwordInput).toHaveAttribute("id", "password");
@@ -164,9 +156,7 @@ describe("LoginForm Component", () => {
 			render(<LoginForm />);
 
 			const emailInput = screen.getByLabelText(/email/i);
-			const passwordInput = screen.getByPlaceholderText(
-				/enter your password/i,
-			);
+			const passwordInput = screen.getByPlaceholderText(/enter your password/i);
 
 			expect(emailInput).toHaveAttribute("name", "email");
 			expect(passwordInput).toHaveAttribute("name", "password");
