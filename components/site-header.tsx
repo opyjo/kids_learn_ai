@@ -432,11 +432,12 @@ type YearTab = "year1" | "year2";
 
 export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	const pathname = usePathname();
+	const [mounted, setMounted] = useState(false);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [scrollProgress, setScrollProgress] = useState(0);
-	const [showAnnouncement, setShowAnnouncement] = useState(true);
+	const [showAnnouncement, setShowAnnouncement] = useState(false);
 	const [activeYearTab, setActiveYearTab] = useState<YearTab>("year1");
 
 	const isActive = (href: string) =>
@@ -463,10 +464,14 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	};
 
 	useEffect(() => {
+		// Mark component as mounted to prevent hydration mismatch
+		setMounted(true);
+
 		// Check if announcement was previously dismissed
 		const dismissed = localStorage.getItem("announcement-dismissed");
-		if (dismissed === "true") {
-			setShowAnnouncement(false);
+		// Show announcement only if not previously dismissed
+		if (dismissed !== "true") {
+			setShowAnnouncement(true);
 		}
 	}, []);
 
@@ -603,199 +608,202 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 							</Link>
 						</div>
 
-						{/* Desktop Navigation */}
-						<NavigationMenu className="hidden lg:flex bg-background/80 backdrop-blur-sm px-3 py-2 rounded-full border border-border/50 shadow-lg my-3 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
-							<NavigationMenuList className="gap-1">
-								{/* Learn Mega Menu */}
-								<NavigationMenuItem>
-									<NavigationMenuTrigger
-										className={cn(
-											"h-auto px-4 py-2 text-sm font-medium transition-colors duration-150",
-											"data-[state=open]:bg-primary/10 data-[state=open]:text-primary",
-											isLearnActive && "bg-primary/10 text-primary",
-										)}
-									>
-										<GraduationCap className="h-4 w-4 mr-2" />
-										Learn
-									</NavigationMenuTrigger>
-									<NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background/95 backdrop-blur-xl border border-border shadow-xl rounded-xl overflow-visible">
-										<div className="w-[850px] rounded-lg relative">
-											{/* Year Tabs */}
-											<div className="flex border-b border-border px-5 pt-4">
-												<button
-													onClick={() => setActiveYearTab("year1")}
-													className={cn(
-														"px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all cursor-pointer",
-														"border-b-2 -mb-px",
-														activeYearTab === "year1"
-															? "border-primary text-primary bg-primary/5"
-															: "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50",
-													)}
-													aria-label="View Year 1 courses for ages 9-10"
-													tabIndex={0}
-												>
-													<span className="flex items-center gap-2">
-														<BookOpen className="h-4 w-4" />
-														Year 1
-														<Badge
-															variant="secondary"
-															className="text-xs px-1.5 py-0 font-normal"
-														>
-															Ages 9-10
-														</Badge>
-													</span>
-												</button>
-												<button
-													onClick={() => setActiveYearTab("year2")}
-													className={cn(
-														"px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all cursor-pointer",
-														"border-b-2 -mb-px",
-														activeYearTab === "year2"
-															? "border-purple-600 text-purple-600 dark:border-purple-400 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/30"
-															: "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50",
-													)}
-													aria-label="View Year 2 courses for ages 11-13"
-													tabIndex={0}
-												>
-													<span className="flex items-center gap-2">
-														<Brain className="h-4 w-4" />
-														Year 2
-														<Badge
-															variant="secondary"
-															className="text-xs px-1.5 py-0 font-normal"
-														>
-															Ages 11-13
-														</Badge>
-													</span>
-												</button>
-											</div>
-
-											{/* Tab Content */}
-											<div className="p-5 grid grid-cols-3 gap-4">
-												{activeYearTab === "year1" ? (
-													<>
-														<MegaMenuSection
-															title="Terms 1-4: Foundations"
-															icon={BookOpen}
-															items={NAV_ITEMS.year1Terms1to4}
-															isActive={isActive}
-														/>
-														<MegaMenuSection
-															title="Terms 5-8: AI & Games"
-															icon={Brain}
-															items={NAV_ITEMS.year1Terms5to8}
-															isActive={isActive}
-															iconColor="text-purple-600 dark:text-purple-400"
-														/>
-													</>
-												) : (
-													<>
-														<MegaMenuSection
-															title="Terms 1-4: Python Mastery"
-															icon={BookOpen}
-															items={NAV_ITEMS.year2Terms1to4}
-															isActive={isActive}
-															iconColor="text-purple-600 dark:text-purple-400"
-														/>
-														<MegaMenuSection
-															title="Terms 5-8: AI & Data"
-															icon={Brain}
-															items={NAV_ITEMS.year2Terms5to8}
-															isActive={isActive}
-															iconColor="text-purple-600 dark:text-purple-400"
-														/>
-													</>
-												)}
-												<MegaMenuSection
-													title="Tools & Activities"
-													icon={Sparkles}
-													items={NAV_ITEMS.learn}
-													isActive={isActive}
-													iconColor="text-amber-600 dark:text-amber-400"
-												/>
-											</div>
-										</div>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-
-								{/* Dashboard */}
-								{isAuthenticated && (
+						{/* Desktop Navigation - only render after mount to prevent hydration mismatch */}
+						{mounted && (
+							<NavigationMenu className="hidden lg:flex bg-background/80 backdrop-blur-sm px-3 py-2 rounded-full border border-border/50 shadow-lg my-3 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
+								<NavigationMenuList className="gap-1">
+									{/* Learn Mega Menu */}
 									<NavigationMenuItem>
-										<NavLink
-											item={NAV_ITEMS.dashboard}
-											isActive={isActive(NAV_ITEMS.dashboard.href)}
-										/>
-									</NavigationMenuItem>
-								)}
+										<NavigationMenuTrigger
+											className={cn(
+												"h-auto px-4 py-2 text-sm font-medium transition-colors duration-150",
+												"data-[state=open]:bg-primary/10 data-[state=open]:text-primary",
+												isLearnActive && "bg-primary/10 text-primary",
+											)}
+										>
+											<GraduationCap className="h-4 w-4 mr-2" />
+											Learn
+										</NavigationMenuTrigger>
+										<NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background/95 backdrop-blur-xl border border-border shadow-xl rounded-xl overflow-visible">
+											<div className="w-[850px] rounded-lg relative">
+												{/* Year Tabs */}
+												<div className="flex border-b border-border px-5 pt-4">
+													<button
+														onClick={() => setActiveYearTab("year1")}
+														className={cn(
+															"px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all cursor-pointer",
+															"border-b-2 -mb-px",
+															activeYearTab === "year1"
+																? "border-primary text-primary bg-primary/5"
+																: "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50",
+														)}
+														aria-label="View Year 1 courses for ages 9-10"
+														tabIndex={0}
+													>
+														<span className="flex items-center gap-2">
+															<BookOpen className="h-4 w-4" />
+															Year 1
+															<Badge
+																variant="secondary"
+																className="text-xs px-1.5 py-0 font-normal"
+															>
+																Ages 9-10
+															</Badge>
+														</span>
+													</button>
+													<button
+														onClick={() => setActiveYearTab("year2")}
+														className={cn(
+															"px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all cursor-pointer",
+															"border-b-2 -mb-px",
+															activeYearTab === "year2"
+																? "border-purple-600 text-purple-600 dark:border-purple-400 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/30"
+																: "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50",
+														)}
+														aria-label="View Year 2 courses for ages 11-13"
+														tabIndex={0}
+													>
+														<span className="flex items-center gap-2">
+															<Brain className="h-4 w-4" />
+															Year 2
+															<Badge
+																variant="secondary"
+																className="text-xs px-1.5 py-0 font-normal"
+															>
+																Ages 11-13
+															</Badge>
+														</span>
+													</button>
+												</div>
 
-								{/* Ask BrightByte - Top-level navigation */}
-								<NavigationMenuItem>
-									<NavLink
-										item={{
-											href: "/tutor",
-											label: "Ask BrightByte",
-											Icon: Sparkles,
-										}}
-										isActive={isActive("/tutor")}
-									/>
-								</NavigationMenuItem>
-
-								{/* Admin Link */}
-								{isAdmin && (
-									<NavigationMenuItem>
-										<NavLink
-											item={NAV_ITEMS.admin}
-											isActive={isActive(NAV_ITEMS.admin.href)}
-										/>
-									</NavigationMenuItem>
-								)}
-
-								{/* Resources Mega Menu */}
-								<NavigationMenuItem>
-									<NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium transition-colors duration-150">
-										<Library className="h-4 w-4 mr-2" />
-										Resources
-									</NavigationMenuTrigger>
-									<NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background/95 backdrop-blur-xl border border-border shadow-xl rounded-xl overflow-visible">
-										<div className="w-[550px] p-5 rounded-lg">
-											<div className="p-4 rounded-lg bg-card border border-border hover:bg-accent/5 transition-all duration-200">
-												<div className="grid grid-cols-2 gap-2">
-													{NAV_ITEMS.resources.map((item) => (
-														<MegaMenuItem
-															key={item.href}
-															item={item}
-															isActive={isActive(item.href)}
-														/>
-													))}
+												{/* Tab Content */}
+												<div className="p-5 grid grid-cols-3 gap-4">
+													{activeYearTab === "year1" ? (
+														<>
+															<MegaMenuSection
+																title="Terms 1-4: Foundations"
+																icon={BookOpen}
+																items={NAV_ITEMS.year1Terms1to4}
+																isActive={isActive}
+															/>
+															<MegaMenuSection
+																title="Terms 5-8: AI & Games"
+																icon={Brain}
+																items={NAV_ITEMS.year1Terms5to8}
+																isActive={isActive}
+																iconColor="text-purple-600 dark:text-purple-400"
+															/>
+														</>
+													) : (
+														<>
+															<MegaMenuSection
+																title="Terms 1-4: Python Mastery"
+																icon={BookOpen}
+																items={NAV_ITEMS.year2Terms1to4}
+																isActive={isActive}
+																iconColor="text-purple-600 dark:text-purple-400"
+															/>
+															<MegaMenuSection
+																title="Terms 5-8: AI & Data"
+																icon={Brain}
+																items={NAV_ITEMS.year2Terms5to8}
+																isActive={isActive}
+																iconColor="text-purple-600 dark:text-purple-400"
+															/>
+														</>
+													)}
+													<MegaMenuSection
+														title="Tools & Activities"
+														icon={Sparkles}
+														items={NAV_ITEMS.learn}
+														isActive={isActive}
+														iconColor="text-amber-600 dark:text-amber-400"
+													/>
 												</div>
 											</div>
-										</div>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
+										</NavigationMenuContent>
+									</NavigationMenuItem>
 
-								<NavigationMenuItem>
-									<NavLink
-										item={NAV_ITEMS.blog}
-										isActive={isActive(NAV_ITEMS.blog.href)}
-									/>
-								</NavigationMenuItem>
+									{/* Dashboard - only render after mount to prevent hydration mismatch */}
+									{mounted && isAuthenticated && (
+										<NavigationMenuItem>
+											<NavLink
+												item={NAV_ITEMS.dashboard}
+												isActive={isActive(NAV_ITEMS.dashboard.href)}
+											/>
+										</NavigationMenuItem>
+									)}
 
-								<NavigationMenuItem>
-									<NavLink
-										item={NAV_ITEMS.about}
-										isActive={isActive(NAV_ITEMS.about.href)}
-									/>
-								</NavigationMenuItem>
-							</NavigationMenuList>
-						</NavigationMenu>
+									{/* Ask BrightByte - Top-level navigation */}
+									<NavigationMenuItem>
+										<NavLink
+											item={{
+												href: "/tutor",
+												label: "Ask BrightByte",
+												Icon: Sparkles,
+											}}
+											isActive={isActive("/tutor")}
+										/>
+									</NavigationMenuItem>
+
+									{/* Admin Link - only render after mount to prevent hydration mismatch */}
+									{mounted && isAdmin && (
+										<NavigationMenuItem>
+											<NavLink
+												item={NAV_ITEMS.admin}
+												isActive={isActive(NAV_ITEMS.admin.href)}
+											/>
+										</NavigationMenuItem>
+									)}
+
+									{/* Resources Mega Menu */}
+									<NavigationMenuItem>
+										<NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium transition-colors duration-150">
+											<Library className="h-4 w-4 mr-2" />
+											Resources
+										</NavigationMenuTrigger>
+										<NavigationMenuContent className="duration-150! animate-in! fade-in-0! zoom-in-95! mt-3! bg-background/95 backdrop-blur-xl border border-border shadow-xl rounded-xl overflow-visible">
+											<div className="w-[550px] p-5 rounded-lg">
+												<div className="p-4 rounded-lg bg-card border border-border hover:bg-accent/5 transition-all duration-200">
+													<div className="grid grid-cols-2 gap-2">
+														{NAV_ITEMS.resources.map((item) => (
+															<MegaMenuItem
+																key={item.href}
+																item={item}
+																isActive={isActive(item.href)}
+															/>
+														))}
+													</div>
+												</div>
+											</div>
+										</NavigationMenuContent>
+									</NavigationMenuItem>
+
+									<NavigationMenuItem>
+										<NavLink
+											item={NAV_ITEMS.blog}
+											isActive={isActive(NAV_ITEMS.blog.href)}
+										/>
+									</NavigationMenuItem>
+
+									<NavigationMenuItem>
+										<NavLink
+											item={NAV_ITEMS.about}
+											isActive={isActive(NAV_ITEMS.about.href)}
+										/>
+									</NavigationMenuItem>
+								</NavigationMenuList>
+							</NavigationMenu>
+						)}
 
 						{/* Right side actions */}
 						<div className="flex items-center gap-3">
 							<ThemeToggle />
 							<div className="hidden lg:flex items-center gap-2">
-								{isAuthenticated ? (
+								{/* Only render auth-dependent UI after mount to prevent hydration mismatch */}
+								{mounted && isAuthenticated ? (
 									<UserMenu />
-								) : (
+								) : mounted ? (
 									<>
 										<Button variant="ghost" asChild className="text-sm">
 											<Link href="/login">Sign In</Link>
@@ -810,247 +818,253 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 											</Link>
 										</Button>
 									</>
-								)}
+								) : null}
 							</div>
 
-							{/* Mobile Menu */}
-							<Sheet>
-								<SheetTrigger asChild>
-									<Button
-										variant="ghost"
-										size="icon"
-										aria-label="Open menu"
-										className="lg:hidden"
-									>
-										<Menu className="h-5 w-5" />
-									</Button>
-								</SheetTrigger>
-								<SheetContent side="right" className="w-80 p-0">
-									<div className="flex flex-col h-full">
-										<div className="p-6 border-b border-border">
-											<Link
-												href="/"
-												className="flex items-center cursor-pointer"
-												onClick={closeMobileMenu}
-											>
-												<img
-													src="/Logo.png"
-													alt="Kids Learn AI Logo"
-													className="h-10 w-auto"
-												/>
-											</Link>
-										</div>
-
-										<div className="flex-1 overflow-y-auto p-4 space-y-1">
-											{/* Learn Section */}
-											<Collapsible>
-												<CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
-													<div className="flex items-center gap-3">
-														<GraduationCap className="h-5 w-5" />
-														<span>Learn</span>
-													</div>
-													<ChevronDown className="h-4 w-4 transition-transform duration-200" />
-												</CollapsibleTrigger>
-												<CollapsibleContent className="mt-1 space-y-1 pl-4">
-													{/* Year 1 Section */}
-													<div className="px-4 py-2 text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-2 mt-2">
-														<BookOpen className="h-3.5 w-3.5" />
-														Year 1 (Ages 9-10)
-													</div>
-													<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-														Terms 1-4: Foundations
-													</div>
-													{NAV_ITEMS.year1Terms1to4.map((navItem) => (
-														<MobileNavLink
-															key={navItem.href}
-															item={navItem}
-															isActive={isActive(navItem.href)}
-															onClick={closeMobileMenu}
-														/>
-													))}
-													<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
-														Terms 5-8: AI & Games
-													</div>
-													{NAV_ITEMS.year1Terms5to8.map((navItem) => (
-														<MobileNavLink
-															key={navItem.href}
-															item={navItem}
-															isActive={isActive(navItem.href)}
-															onClick={closeMobileMenu}
-														/>
-													))}
-
-													{/* Year 2 Section */}
-													<div className="px-4 py-2 text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-2 mt-4 border-t border-border pt-4">
-														<Brain className="h-3.5 w-3.5" />
-														Year 2 (Ages 11-13)
-													</div>
-													<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-														Terms 1-4: Python Mastery
-													</div>
-													{NAV_ITEMS.year2Terms1to4.map((navItem) => (
-														<MobileNavLink
-															key={navItem.href}
-															item={navItem}
-															isActive={isActive(navItem.href)}
-															onClick={closeMobileMenu}
-														/>
-													))}
-													<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
-														Terms 5-8: AI & Data
-													</div>
-													{NAV_ITEMS.year2Terms5to8.map((navItem) => (
-														<MobileNavLink
-															key={navItem.href}
-															item={navItem}
-															isActive={isActive(navItem.href)}
-															onClick={closeMobileMenu}
-														/>
-													))}
-
-													{/* Tools Section */}
-													<div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-4 border-t border-border pt-4">
-														Tools & Activities
-													</div>
-													{NAV_ITEMS.learn.map((navItem) => (
-														<MobileNavLink
-															key={navItem.href}
-															item={navItem}
-															isActive={isActive(navItem.href)}
-															onClick={closeMobileMenu}
-														/>
-													))}
-												</CollapsibleContent>
-											</Collapsible>
-
-											{/* Dashboard */}
-											{isAuthenticated && (
+							{/* Mobile Menu - only render after mount to prevent hydration mismatch */}
+							{mounted && (
+								<Sheet>
+									<SheetTrigger asChild>
+										<Button
+											variant="ghost"
+											size="icon"
+											aria-label="Open menu"
+											className="lg:hidden"
+										>
+											<Menu className="h-5 w-5" />
+										</Button>
+									</SheetTrigger>
+									<SheetContent side="right" className="w-80 p-0">
+										<div className="flex flex-col h-full">
+											<div className="p-6 border-b border-border">
 												<Link
-													href={NAV_ITEMS.dashboard.href}
+													href="/"
+													className="flex items-center cursor-pointer"
+													onClick={closeMobileMenu}
+												>
+													<img
+														src="/Logo.png"
+														alt="Kids Learn AI Logo"
+														className="h-10 w-auto"
+													/>
+												</Link>
+											</div>
+
+											<div className="flex-1 overflow-y-auto p-4 space-y-1">
+												{/* Learn Section */}
+												<Collapsible>
+													<CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
+														<div className="flex items-center gap-3">
+															<GraduationCap className="h-5 w-5" />
+															<span>Learn</span>
+														</div>
+														<ChevronDown className="h-4 w-4 transition-transform duration-200" />
+													</CollapsibleTrigger>
+													<CollapsibleContent className="mt-1 space-y-1 pl-4">
+														{/* Year 1 Section */}
+														<div className="px-4 py-2 text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-2 mt-2">
+															<BookOpen className="h-3.5 w-3.5" />
+															Year 1 (Ages 9-10)
+														</div>
+														<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+															Terms 1-4: Foundations
+														</div>
+														{NAV_ITEMS.year1Terms1to4.map((navItem) => (
+															<MobileNavLink
+																key={navItem.href}
+																item={navItem}
+																isActive={isActive(navItem.href)}
+																onClick={closeMobileMenu}
+															/>
+														))}
+														<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+															Terms 5-8: AI & Games
+														</div>
+														{NAV_ITEMS.year1Terms5to8.map((navItem) => (
+															<MobileNavLink
+																key={navItem.href}
+																item={navItem}
+																isActive={isActive(navItem.href)}
+																onClick={closeMobileMenu}
+															/>
+														))}
+
+														{/* Year 2 Section */}
+														<div className="px-4 py-2 text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-2 mt-4 border-t border-border pt-4">
+															<Brain className="h-3.5 w-3.5" />
+															Year 2 (Ages 11-13)
+														</div>
+														<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+															Terms 1-4: Python Mastery
+														</div>
+														{NAV_ITEMS.year2Terms1to4.map((navItem) => (
+															<MobileNavLink
+																key={navItem.href}
+																item={navItem}
+																isActive={isActive(navItem.href)}
+																onClick={closeMobileMenu}
+															/>
+														))}
+														<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">
+															Terms 5-8: AI & Data
+														</div>
+														{NAV_ITEMS.year2Terms5to8.map((navItem) => (
+															<MobileNavLink
+																key={navItem.href}
+																item={navItem}
+																isActive={isActive(navItem.href)}
+																onClick={closeMobileMenu}
+															/>
+														))}
+
+														{/* Tools Section */}
+														<div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-4 border-t border-border pt-4">
+															Tools & Activities
+														</div>
+														{NAV_ITEMS.learn.map((navItem) => (
+															<MobileNavLink
+																key={navItem.href}
+																item={navItem}
+																isActive={isActive(navItem.href)}
+																onClick={closeMobileMenu}
+															/>
+														))}
+													</CollapsibleContent>
+												</Collapsible>
+
+												{/* Dashboard - only render after mount */}
+												{mounted && isAuthenticated && (
+													<Link
+														href={NAV_ITEMS.dashboard.href}
+														onClick={closeMobileMenu}
+														className={cn(
+															"flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
+															isActive(NAV_ITEMS.dashboard.href)
+																? "bg-primary/10 text-primary"
+																: "text-foreground hover:bg-muted",
+														)}
+													>
+														{(() => {
+															const DashIcon = NAV_ITEMS.dashboard.Icon;
+															return <DashIcon className="h-5 w-5" />;
+														})()}
+														<span>{NAV_ITEMS.dashboard.label}</span>
+													</Link>
+												)}
+
+												{/* Admin Link - only render after mount */}
+												{mounted && isAdmin && (
+													<Link
+														href={NAV_ITEMS.admin.href}
+														onClick={closeMobileMenu}
+														className={cn(
+															"flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
+															isActive(NAV_ITEMS.admin.href)
+																? "bg-primary/10 text-primary"
+																: "text-foreground hover:bg-muted",
+														)}
+													>
+														<Shield className="h-5 w-5" />
+														<span>{NAV_ITEMS.admin.label}</span>
+													</Link>
+												)}
+
+												{/* Resources Section */}
+												<Collapsible>
+													<CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
+														<div className="flex items-center gap-3">
+															<Library className="h-5 w-5" />
+															<span>Resources</span>
+														</div>
+														<ChevronDown className="h-4 w-4 transition-transform duration-200" />
+													</CollapsibleTrigger>
+													<CollapsibleContent className="mt-1 space-y-1 pl-4">
+														{NAV_ITEMS.resources.map((item) => (
+															<MobileNavLink
+																key={item.href}
+																item={item}
+																isActive={isActive(item.href)}
+																onClick={closeMobileMenu}
+															/>
+														))}
+													</CollapsibleContent>
+												</Collapsible>
+
+												<Link
+													href={NAV_ITEMS.blog.href}
 													onClick={closeMobileMenu}
 													className={cn(
 														"flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
-														isActive(NAV_ITEMS.dashboard.href)
+														isActive(NAV_ITEMS.blog.href)
 															? "bg-primary/10 text-primary"
 															: "text-foreground hover:bg-muted",
 													)}
 												>
 													{(() => {
-														const DashIcon = NAV_ITEMS.dashboard.Icon;
-														return <DashIcon className="h-5 w-5" />;
+														const BlogIcon = NAV_ITEMS.blog.Icon;
+														return <BlogIcon className="h-5 w-5" />;
 													})()}
-													<span>{NAV_ITEMS.dashboard.label}</span>
+													<span>{NAV_ITEMS.blog.label}</span>
 												</Link>
-											)}
 
-											{/* Admin Link */}
-											{isAdmin && (
 												<Link
-													href={NAV_ITEMS.admin.href}
+													href={NAV_ITEMS.about.href}
 													onClick={closeMobileMenu}
 													className={cn(
 														"flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
-														isActive(NAV_ITEMS.admin.href)
+														isActive(NAV_ITEMS.about.href)
 															? "bg-primary/10 text-primary"
 															: "text-foreground hover:bg-muted",
 													)}
 												>
-													<Shield className="h-5 w-5" />
-													<span>{NAV_ITEMS.admin.label}</span>
+													{(() => {
+														const AboutIcon = NAV_ITEMS.about.Icon;
+														return <AboutIcon className="h-5 w-5" />;
+													})()}
+													<span>{NAV_ITEMS.about.label}</span>
 												</Link>
-											)}
-
-											{/* Resources Section */}
-											<Collapsible>
-												<CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
-													<div className="flex items-center gap-3">
-														<Library className="h-5 w-5" />
-														<span>Resources</span>
-													</div>
-													<ChevronDown className="h-4 w-4 transition-transform duration-200" />
-												</CollapsibleTrigger>
-												<CollapsibleContent className="mt-1 space-y-1 pl-4">
-													{NAV_ITEMS.resources.map((item) => (
-														<MobileNavLink
-															key={item.href}
-															item={item}
-															isActive={isActive(item.href)}
-															onClick={closeMobileMenu}
-														/>
-													))}
-												</CollapsibleContent>
-											</Collapsible>
-
-											<Link
-												href={NAV_ITEMS.blog.href}
-												onClick={closeMobileMenu}
-												className={cn(
-													"flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
-													isActive(NAV_ITEMS.blog.href)
-														? "bg-primary/10 text-primary"
-														: "text-foreground hover:bg-muted",
-												)}
-											>
-												{(() => {
-													const BlogIcon = NAV_ITEMS.blog.Icon;
-													return <BlogIcon className="h-5 w-5" />;
-												})()}
-												<span>{NAV_ITEMS.blog.label}</span>
-											</Link>
-
-											<Link
-												href={NAV_ITEMS.about.href}
-												onClick={closeMobileMenu}
-												className={cn(
-													"flex items-center gap-3 px-4 py-3 text-base font-medium rounded-lg transition-colors cursor-pointer",
-													isActive(NAV_ITEMS.about.href)
-														? "bg-primary/10 text-primary"
-														: "text-foreground hover:bg-muted",
-												)}
-											>
-												{(() => {
-													const AboutIcon = NAV_ITEMS.about.Icon;
-													return <AboutIcon className="h-5 w-5" />;
-												})()}
-												<span>{NAV_ITEMS.about.label}</span>
-											</Link>
-										</div>
-
-										{/* Mobile Auth */}
-										<div className="p-4 border-t border-border space-y-2">
-											<div className="flex items-center justify-between px-4 pb-2">
-												<span className="text-sm font-medium text-foreground">
-													Theme
-												</span>
-												<ThemeToggle />
 											</div>
-											{isAuthenticated ? (
-												<div className="px-4">
-													<UserMenu />
+
+											{/* Mobile Auth - only render auth-dependent UI after mount */}
+											<div className="p-4 border-t border-border space-y-2">
+												<div className="flex items-center justify-between px-4 pb-2">
+													<span className="text-sm font-medium text-foreground">
+														Theme
+													</span>
+													<ThemeToggle />
 												</div>
-											) : (
-												<>
-													<Button variant="outline" asChild className="w-full">
-														<Link href="/login">Sign In</Link>
-													</Button>
-													<Button
-														asChild
-														className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
-													>
-														<Link
-															href="/inquiry"
-															className="flex items-center gap-2 justify-center"
+												{mounted && isAuthenticated ? (
+													<div className="px-4">
+														<UserMenu />
+													</div>
+												) : mounted ? (
+													<>
+														<Button
+															variant="outline"
+															asChild
+															className="w-full"
 														>
-															<Sparkles className="h-4 w-4" />
-															Free Trial
-														</Link>
-													</Button>
-												</>
-											)}
+															<Link href="/login">Sign In</Link>
+														</Button>
+														<Button
+															asChild
+															className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
+														>
+															<Link
+																href="/inquiry"
+																className="flex items-center gap-2 justify-center"
+															>
+																<Sparkles className="h-4 w-4" />
+																Free Trial
+															</Link>
+														</Button>
+													</>
+												) : null}
+											</div>
 										</div>
-									</div>
-								</SheetContent>
-							</Sheet>
+									</SheetContent>
+								</Sheet>
+							)}
 						</div>
 					</div>
 				</div>

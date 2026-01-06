@@ -150,3 +150,80 @@ export async function signoutAction() {
 	// Always redirect to home after signout
 	redirect("/");
 }
+
+export async function forgotPasswordAction(
+	_prevState: ActionState,
+	formData: FormData,
+): Promise<ActionState> {
+	const email = formData.get("email") as string;
+
+	// Validation
+	if (!email) {
+		return { error: "Email is required" };
+	}
+
+	try {
+		const supabase = await getSupabaseServerClient();
+
+		const origin = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+		// Redirect to auth callback which will exchange the code and then redirect to reset-password
+		const redirectUrl = `${origin}/auth/callback?next=/reset-password`;
+
+		const { error } = await supabase.auth.resetPasswordForEmail(email, {
+			redirectTo: redirectUrl,
+		});
+
+		if (error) {
+			return { error: error.message };
+		}
+
+		return { success: true };
+	} catch (_error) {
+		return { error: "An error occurred while sending the reset email" };
+	}
+}
+
+export async function resetPasswordAction(
+	_prevState: ActionState,
+	formData: FormData,
+): Promise<ActionState> {
+	const password = formData.get("password") as string;
+	const confirmPassword = formData.get("confirmPassword") as string;
+
+	// Validation
+	if (!password || !confirmPassword) {
+		return { error: "All fields are required" };
+	}
+
+	if (password !== confirmPassword) {
+		return { error: "Passwords do not match" };
+	}
+
+	if (password.length < 6) {
+		return { error: "Password must be at least 6 characters long" };
+	}
+
+	try {
+		const supabase = await getSupabaseServerClient();
+
+		const { error } = await supabase.auth.updateUser({
+			password,
+		});
+
+		if (error) {
+			return { error: error.message };
+		}
+
+		// Revalidate relevant paths
+		revalidatePath("/", "layout");
+		revalidatePath("/dashboard");
+
+		// Redirect to login page
+		redirect("/login?reset=success");
+	} catch (error) {
+		if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+			throw error;
+		}
+		return { error: "An error occurred while resetting your password" };
+	}
+}
