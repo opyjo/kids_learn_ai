@@ -7,6 +7,7 @@ import {
 	FileText,
 	GraduationCap,
 	LayoutDashboard,
+	Mail,
 	Plus,
 	Users,
 } from "lucide-react";
@@ -41,6 +42,11 @@ const adminNavItems = [
 		href: "/admin/students",
 		label: "Students",
 		icon: Users,
+	},
+	{
+		href: "/admin/inquiries",
+		label: "Inquiries",
+		icon: Mail,
 	},
 	{
 		href: "/admin/lessons",

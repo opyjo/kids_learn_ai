@@ -1,12 +1,13 @@
 "use client";
 
-import { Loader2, Lock, Mail, User } from "lucide-react";
+import { Loader2, Mail, User } from "lucide-react";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Separator } from "@/components/ui/separator";
 import { signupAction } from "@/lib/actions/auth";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -98,32 +99,22 @@ export function SignupForm() {
 
 			<div className="space-y-2">
 				<Label htmlFor="password">Password</Label>
-				<div className="relative">
-					<Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-					<Input
-						id="password"
-						name="password"
-						type="password"
-						placeholder="Create a password"
-						className="pl-10"
-						required
-					/>
-				</div>
+				<PasswordInput
+					id="password"
+					name="password"
+					placeholder="Create a password"
+					required
+				/>
 			</div>
 
 			<div className="space-y-2">
 				<Label htmlFor="confirmPassword">Confirm Password</Label>
-				<div className="relative">
-					<Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-					<Input
-						id="confirmPassword"
-						name="confirmPassword"
-						type="password"
-						placeholder="Confirm your password"
-						className="pl-10"
-						required
-					/>
-				</div>
+				<PasswordInput
+					id="confirmPassword"
+					name="confirmPassword"
+					placeholder="Confirm your password"
+					required
+				/>
 			</div>
 
 			<SubmitButton />

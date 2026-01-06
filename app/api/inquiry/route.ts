@@ -110,6 +110,34 @@ export const POST = async (request: NextRequest) => {
 		const ageGroupDetails = getAgeGroupDetails(validatedData.ageGroup);
 		const experienceLabel = getExperienceLabel(validatedData.experience);
 
+		// Save inquiry to database using anon key (RLS allows public inserts)
+		const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+		const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+		if (supabaseUrl && supabaseAnonKey) {
+			const { createClient } = await import("@supabase/supabase-js");
+			const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+			const { error: dbError } = await supabase.from("inquiries").insert({
+				parent_name: validatedData.parentName,
+				parent_email: validatedData.parentEmail,
+				child_name: validatedData.childName,
+				age_group: validatedData.ageGroup,
+				experience: validatedData.experience,
+				how_heard: validatedData.howHeard || null,
+				questions: validatedData.questions || null,
+			});
+
+			if (dbError) {
+				console.error("Database error saving inquiry:", dbError);
+				// Continue to send email even if DB save fails
+			}
+		} else {
+			console.error(
+				"Missing Supabase environment variables - skipping database save",
+			);
+		}
+
 		// Send email via Resend
 		const emailResult = await resend.emails.send({
 			from: "Kids Learn AI <hello@kidslearnai.ca>",
@@ -334,7 +362,7 @@ export const POST = async (request: NextRequest) => {
 		const parentEmailResult = await resend.emails.send({
 			from: "Kids Learn AI <hello@kidslearnai.ca>",
 			to: validatedData.parentEmail,
-			subject: `🎉 Free Trial Confirmed - ${validatedData.childFirstName} is on the list!`,
+			subject: `🎉 Free Trial Confirmed - ${validatedData.childName} is on the list!`,
 			html: `
         <!DOCTYPE html>
         <html>
@@ -530,19 +558,19 @@ export const POST = async (request: NextRequest) => {
               <div class="header">
                 <div class="header-badge">🎉 YOU'RE ALL SET!</div>
                 <h1>Free Trial Request Received</h1>
-                <p>We're excited to meet ${validatedData.childFirstName}!</p>
+                <p>We're excited to meet ${validatedData.childName}!</p>
               </div>
               
               <div class="content">
                 <p class="greeting">Hi ${validatedData.parentName},</p>
                 
-                <p>Thank you for your interest in Kids Learn AI! We've received your free trial request for <strong>${validatedData.childFirstName}</strong> and we can't wait to start their coding journey.</p>
+                <p>Thank you for your interest in Kids Learn AI! We've received your free trial request for <strong>${validatedData.childName}</strong> and we can't wait to start their coding journey.</p>
                 
                 <div class="details-box">
                   <div class="details-title">📋 Your Details</div>
                   <div class="detail-row">
                     <span class="detail-label">Child's Name</span>
-                    <span class="detail-value">${validatedData.childFirstName} ${validatedData.childLastName}</span>
+                    <span class="detail-value">${validatedData.childName}</span>
                   </div>
                   <div class="detail-row">
                     <span class="detail-label">Age Group</span>
@@ -566,11 +594,11 @@ export const POST = async (request: NextRequest) => {
                   </div>
                   <div class="step">
                     <div class="step-number">2</div>
-                    <div class="step-text">We'll schedule ${validatedData.childFirstName}'s free trial class</div>
+                    <div class="step-text">We'll schedule ${validatedData.childName}'s free trial class</div>
                   </div>
                   <div class="step">
                     <div class="step-number">3</div>
-                    <div class="step-text">${validatedData.childFirstName} joins a live online session with other kids</div>
+                    <div class="step-text">${validatedData.childName} joins a live online session with other kids</div>
                   </div>
                   <div class="step">
                     <div class="step-number">4</div>
@@ -594,7 +622,7 @@ export const POST = async (request: NextRequest) => {
                 </div>
                 
                 <div class="signature">
-                  <p>We can't wait to start ${validatedData.childFirstName}'s coding journey! 🚀</p>
+                  <p>We can't wait to start ${validatedData.childName}'s coding journey! 🚀</p>
                   <p><strong>Warm regards,</strong></p>
                   <p><strong>The Kids Learn AI Team</strong></p>
                 </div>
