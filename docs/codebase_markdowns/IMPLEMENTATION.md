@@ -453,6 +453,12 @@ OPENAI_API_KEY=
 # Email (optional)
 RESEND_API_KEY=
 
+# Sentry (optional, for production error tracking)
+NEXT_PUBLIC_SENTRY_DSN=
+SENTRY_ORG=
+SENTRY_PROJECT=
+SENTRY_AUTH_TOKEN=
+
 # Development
 NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL=http://localhost:3000/dashboard
 ```
@@ -468,9 +474,10 @@ pnpm lint        # Run linting
 
 ---
 
-## 📊 Analytics
+## 📊 Analytics & Monitoring
 
 - Vercel Analytics integration (`@vercel/analytics`)
+- Sentry error tracking (`@sentry/nextjs`) - Production only
 - Admin dashboard metrics
 - Lesson completion tracking
 - User engagement data
