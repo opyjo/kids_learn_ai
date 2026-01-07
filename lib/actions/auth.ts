@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 type ActionState = {
@@ -39,13 +40,32 @@ export async function loginAction(
 		}
 
 		// Fetch user profile to check role
-		const { data: profile, error: profileError } = await supabase
-			.from("profiles")
-			.select("*")
-			.eq("id", authData.user.id)
-			.single();
+		let profile: any;
+		let profileError: any;
+
+		// Try to use admin client to bypass potential RLS/Session issues
+		const adminClient = getSupabaseAdminClient();
+		if (adminClient) {
+			const result = await adminClient
+				.from("profiles")
+				.select("*")
+				.eq("id", authData.user.id)
+				.single();
+			profile = result.data;
+			profileError = result.error;
+		} else {
+			// Fallback to standard client if admin client not available
+			const result = await supabase
+				.from("profiles")
+				.select("*")
+				.eq("id", authData.user.id)
+				.single();
+			profile = result.data;
+			profileError = result.error;
+		}
 
 		if (profileError) {
+			console.error("Failed to fetch user profile:", profileError);
 			return { error: "Failed to fetch user profile" };
 		}
 
@@ -213,6 +233,9 @@ export async function resetPasswordAction(
 		if (error) {
 			return { error: error.message };
 		}
+
+		// Sign out to ensure clean state for new login
+		await supabase.auth.signOut();
 
 		// Revalidate relevant paths
 		revalidatePath("/", "layout");
