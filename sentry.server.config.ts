@@ -10,4 +10,3 @@ Sentry.init({
 	debug: false,
 	integrations: [],
 });
-

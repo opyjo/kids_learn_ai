@@ -11,4 +11,3 @@ Sentry.init({
 	replaysOnErrorSampleRate: 0, // Disable session replay
 	replaysSessionSampleRate: 0, // Disable session replay
 });
-

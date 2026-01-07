@@ -9,4 +9,3 @@ Sentry.init({
 	tracesSample: 0, // Disable performance monitoring, only track errors
 	debug: false,
 });
-
