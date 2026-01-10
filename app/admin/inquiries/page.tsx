@@ -7,6 +7,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/auth-helpers";
 
 const getStatusBadge = (status: string) => {
 	const variants: Record<
@@ -57,6 +58,7 @@ interface Inquiry {
 }
 
 export default async function InquiriesPage() {
+	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
 
 	// Fetch all inquiries

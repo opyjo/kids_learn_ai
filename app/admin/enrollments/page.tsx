@@ -1,6 +1,9 @@
+import { requireAdmin } from "@/lib/auth-helpers";
 import { EnrollmentsTab } from "@/components/admin/enrollments-tab";
 
-export default function EnrollmentsPage() {
+export default async function EnrollmentsPage() {
+	await requireAdmin();
+
 	return (
 		<div className="space-y-6">
 			<div>

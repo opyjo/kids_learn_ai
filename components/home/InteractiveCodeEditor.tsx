@@ -5,6 +5,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { usePyodide } from "@/hooks/use-pyodide";
 
 const InteractiveCodeEditor = () => {
 	const [code, setCode] = React.useState(
@@ -13,64 +14,45 @@ const InteractiveCodeEditor = () => {
 	const [output, setOutput] = React.useState("");
 	const [isRunning, setIsRunning] = React.useState(false);
 
-	const runCode = () => {
+	const {
+		isReady: pyodideReady,
+		isLoading,
+		runCode: runPython,
+	} = usePyodide();
+
+	const runCode = async () => {
+		if (!pyodideReady) {
+			setOutput("Python environment is still loading...");
+			return;
+		}
+
 		setIsRunning(true);
 		setOutput("");
 
-		setTimeout(() => {
-			try {
-				let result = "";
-				const lines = code.split("\n");
-				const variables: Record<string, any> = {};
-
-				lines.forEach((line) => {
-					const trimmed = line.trim();
-					if (!trimmed || trimmed.startsWith("#")) return;
-
-					if (trimmed.includes("=") && !trimmed.startsWith("print")) {
-						const [varName, varValue] = trimmed.split("=").map((s) => s.trim());
-						try {
-							if (/^\d+$/.test(varValue)) {
-								variables[varName] = Number.parseInt(varValue, 10);
-							} else if (/^\d+\s*[+\-*/]\s*\d+$/.test(varValue)) {
-								// biome-ignore lint/security/noGlobalEval: Safe eval for simple arithmetic only (validated by regex)
-								variables[varName] = eval(varValue);
-							} else {
-								variables[varName] = varValue.replace(/['"]/g, "");
-							}
-						} catch {
-							variables[varName] = varValue.replace(/['"]/g, "");
-						}
-					}
-
-					if (trimmed.startsWith("print")) {
-						const match = /print\s*\((.*?)\)/.exec(trimmed);
-						if (match?.[1]) {
-							const content = match[1].trim();
-							if (variables[content] !== undefined) {
-								result += `${variables[content]}\n`;
-							} else if (
-								(content.startsWith('"') && content.endsWith('"')) ||
-								(content.startsWith("'") && content.endsWith("'"))
-							) {
-								result += `${content.slice(1, -1)}\n`;
-							} else if (/^\d+\s*[+\-*/]\s*\d+$/.test(content)) {
-								// biome-ignore lint/security/noGlobalEval: Safe eval for simple arithmetic only (validated by regex)
-								result += `${eval(content)}\n`;
-							} else {
-								result += `${content}\n`;
-							}
-						}
-					}
-				});
-
-				setOutput(result.trim() || "Code executed successfully!");
-			} catch (_error) {
-				setOutput("Oops! There's a small error in your code. Try again!");
-			}
-
+		try {
+			const stdout = await runPython(code);
+			setOutput(stdout || "Code executed successfully!");
+		} catch (err: any) {
+			setOutput(`Oops! ${err.message || "There's a small error in your code. Try again!"}`);
+		} finally {
 			setIsRunning(false);
-		}, 800);
+		}
+	};
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.key === "Tab") {
+			e.preventDefault();
+			const start = e.currentTarget.selectionStart;
+			const end = e.currentTarget.selectionEnd;
+			const newValue = `${code.substring(0, start)}    ${code.substring(end)}`;
+			setCode(newValue);
+
+			// Reset cursor position
+			setTimeout(() => {
+				const target = e.target as HTMLTextAreaElement;
+				target.selectionStart = target.selectionEnd = start + 4;
+			}, 0);
+		}
 	};
 
 	const examples = [
@@ -137,8 +119,10 @@ const InteractiveCodeEditor = () => {
 									<textarea
 										value={code}
 										onChange={(e) => setCode(e.target.value)}
+										onKeyDown={handleKeyDown}
 										className="w-full h-48 p-4 bg-secondary/50 border-2 border-border rounded-xl font-mono text-sm text-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
 										placeholder="Type your AI-friendly Python code here..."
+										spellCheck={false}
 									/>
 								</div>
 
@@ -161,7 +145,7 @@ const InteractiveCodeEditor = () => {
 
 								<Button
 									onClick={runCode}
-									disabled={isRunning}
+									disabled={isRunning || !pyodideReady}
 									size="lg"
 									className="w-full rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
 								>
@@ -169,6 +153,11 @@ const InteractiveCodeEditor = () => {
 										<>
 											<div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"></div>
 											Running...
+										</>
+									) : !pyodideReady ? (
+										<>
+											<div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"></div>
+											Loading Python...
 										</>
 									) : (
 										<>

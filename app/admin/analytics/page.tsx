@@ -8,8 +8,10 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/auth-helpers";
 
 export default async function AnalyticsPage() {
+	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
 
 	// Fetch stats
@@ -115,8 +117,8 @@ export default async function AnalyticsPage() {
 							<span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
 								{stats.totalStudents > 0
 									? Math.round(
-											(stats.enrolledStudents / stats.totalStudents) * 100,
-										)
+										(stats.enrolledStudents / stats.totalStudents) * 100,
+									)
 									: 0}
 								%
 							</span>

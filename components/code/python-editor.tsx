@@ -10,10 +10,11 @@ import {
 	Trash2,
 } from "lucide-react";
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { usePyodide } from "@/hooks/use-pyodide";
 
 interface PythonEditorProps {
 	initialCode?: string;
@@ -34,62 +35,20 @@ export function PythonEditor({
 	const [output, setOutput] = useState("");
 	const [isRunning, setIsRunning] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
-	const [pyodideReady, setPyodideReady] = useState(false);
 	const [error, setError] = useState("");
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
-	const pyodideRef = useRef<any>(null);
+	const {
+		isReady: pyodideReady,
+		isLoading,
+		error: pyodideError,
+		runCode,
+	} = usePyodide();
 
 	useEffect(() => {
-		let mounted = true;
-
-		const initPyodide = async () => {
-			try {
-				// Use dynamic import with a script tag approach to avoid build-time issues
-				const script = document.createElement("script");
-				script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js";
-				script.async = true;
-
-				script.onload = async () => {
-					if (!mounted) return;
-
-					try {
-						// @ts-expect-error - Pyodide will be available globally after script load
-						const { loadPyodide } = window as any;
-
-						const pyodide = await loadPyodide({
-							indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
-						});
-
-						if (!mounted) return;
-
-						pyodideRef.current = pyodide;
-						setPyodideReady(true);
-					} catch (err) {
-						if (!mounted) return;
-						setError("Failed to initialize Python environment");
-						console.error("[v0] Pyodide initialization error:", err);
-					}
-				};
-
-				script.onerror = () => {
-					if (!mounted) return;
-					setError("Failed to load Python environment");
-				};
-
-				document.head.appendChild(script);
-			} catch (err) {
-				if (!mounted) return;
-				setError("Failed to initialize Python environment");
-				console.error("[v0] Pyodide initialization error:", err);
-			}
-		};
-
-		initPyodide();
-
-		return () => {
-			mounted = false;
-		};
-	}, []);
+		if (pyodideError) {
+			setError(pyodideError);
+		}
+	}, [pyodideError]);
 
 	// Auto-resize textarea
 	useEffect(() => {
@@ -127,7 +86,7 @@ export function PythonEditor({
 	};
 
 	const handleRunCode = async () => {
-		if (!pyodideReady || !pyodideRef.current) {
+		if (!pyodideReady) {
 			setOutput("Python environment is still loading...");
 			return;
 		}
@@ -138,22 +97,10 @@ export function PythonEditor({
 		setIsSuccess(false);
 
 		try {
-			// Capture stdout
-			pyodideRef.current.runPython(`
-        import sys
-        from io import StringIO
-        sys.stdout = StringIO()
-      `);
-
-			// Run the user's code
-			pyodideRef.current.runPython(code);
-
-			// Get the output
-			const stdout = pyodideRef.current.runPython("sys.stdout.getvalue()");
-
+			const stdout = await runCode(code);
 			setOutput(stdout || "Code executed successfully (no output)");
 			setIsSuccess(true);
-			onRunComplete?.(stdout, true);
+			onRunComplete?.(stdout || "Code executed successfully (no output)", true);
 		} catch (err) {
 			const errorMessage =
 				err instanceof Error ? err.message : "Unknown error occurred";

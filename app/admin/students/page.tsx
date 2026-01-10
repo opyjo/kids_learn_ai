@@ -10,8 +10,10 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/auth-helpers";
 
 export default async function StudentsPage() {
+	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
 
 	// Fetch enrolled students
