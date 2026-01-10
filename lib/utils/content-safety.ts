@@ -101,10 +101,11 @@ export const checkContentSafety = (message: string): SafetyCheckResult => {
 		}
 	}
 
-	// Check for excessive special characters (potential injection)
+	// Check for excessive special characters (potential injection or spam)
+	// For coding, we allow a higher ratio of special characters (parentheses, brackets, etc.)
 	const specialCharRatio =
 		(message.match(/[^a-zA-Z0-9\s.,!?]/g) || []).length / message.length;
-	if (specialCharRatio > 0.3) {
+	if (specialCharRatio > 0.5) {
 		return {
 			isSafe: false,
 			reason: "Suspicious content pattern",
@@ -178,9 +179,31 @@ export const isPythonRelated = (message: string): boolean => {
 		return true;
 	}
 
-	// Short messages might be greetings or follow-ups
-	if (message.length < 50) {
-		return true; // Allow short messages to pass (could be "yes", "thanks", etc.)
+	// For short messages, allow common greetings and conversational fillers
+	const conversationalFillers = [
+		"hi",
+		"hello",
+		"hey",
+		"yes",
+		"no",
+		"ok",
+		"okay",
+		"thanks",
+		"thank you",
+		"help",
+		"stuck",
+		"ready",
+		"next",
+		"bye",
+		"goodbye",
+	];
+
+	const isFiller = conversationalFillers.some((word) =>
+		lowerMessage.includes(word),
+	);
+
+	if (message.length < 30 && isFiller && !isOffTopic) {
+		return true;
 	}
 
 	return false;
@@ -203,6 +226,29 @@ export const isOnTopicForTutor = (
  */
 export const isRequestingCompleteSolution = (message: string): boolean => {
 	return SOLUTION_REQUEST_PATTERNS.some((pattern) => pattern.test(message));
+};
+
+export const SAFETY_CHECK_PROMPT = `Analyze this message and determine if it's:
+1. A Python programming question (YES/NO)
+2. Safe and appropriate for children ages 8-16 (YES/NO)
+3. Requesting a complete solution vs. help/guidance (SOLUTION/HELP)
+
+Message: "{user_message}"
+
+Respond in JSON format:
+{
+  "isPythonQuestion": true/false,
+  "isSafe": true/false,
+  "requestType": "solution"/"help"/"concept"/"debug",
+  "action": "allow"/"redirect"/"block"
+}
+`;
+
+export type AISafetyResult = {
+	isPythonQuestion: boolean;
+	isSafe: boolean;
+	requestType: "solution" | "help" | "concept" | "debug";
+	action: "allow" | "redirect" | "block";
 };
 
 /**

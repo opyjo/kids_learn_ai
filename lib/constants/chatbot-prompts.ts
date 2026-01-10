@@ -184,34 +184,12 @@ export const FALLBACK_RESPONSES = {
 		"It sounds like you might need a quick break. Step away for a few minutes, then come back fresh. Your brain will thank you! 🧠",
 } as const;
 
-export const SAFETY_CHECK_PROMPT = `Analyze this message and determine if it's:
-1. A Python programming question (YES/NO)
-2. Safe and appropriate for children ages 8-16 (YES/NO)
-3. Requesting a complete solution vs. help/guidance (SOLUTION/HELP)
-
-Message: "{user_message}"
-
-Respond in JSON format:
-{
-  "isPythonQuestion": true/false,
-  "isSafe": true/false,
-  "requestType": "solution"/"help"/"concept"/"debug",
-  "action": "allow"/"redirect"/"block"
-}`;
-
 export type MessageRole = "user" | "assistant" | "system";
 
 export interface ChatMessage {
 	role: MessageRole;
 	content: string;
 	timestamp?: Date;
-}
-
-export interface SafetyCheckResult {
-	isPythonQuestion: boolean;
-	isSafe: boolean;
-	requestType: "solution" | "help" | "concept" | "debug";
-	action: "allow" | "redirect" | "block";
 }
 
 // Helper to get system prompt by tutor ID
