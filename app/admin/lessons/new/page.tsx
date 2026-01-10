@@ -3,8 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { LessonEditor } from "@/components/admin/lesson-editor";
 import { Button } from "@/components/ui/button";
+import { requireAdmin } from "@/lib/auth-helpers";
 
-export default function NewLessonPage() {
+export default async function NewLessonPage() {
+	await requireAdmin();
+
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-violet-500/5 via-purple-500/5 to-fuchsia-500/5 dark:from-violet-600/8 dark:via-purple-600/8 dark:to-fuchsia-600/8">
 			{/* Header */}

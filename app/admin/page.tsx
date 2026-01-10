@@ -18,9 +18,11 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { requireAdmin } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function AdminOverviewPage() {
+	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
 
 	// Fetch total students

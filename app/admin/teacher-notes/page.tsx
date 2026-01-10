@@ -1,9 +1,9 @@
 import { AlertCircle, BookOpen, FileText } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { requireAdmin } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface TeacherNote {
@@ -20,32 +20,13 @@ interface LessonWithNote {
 	difficulty_level: string;
 	order_index: number;
 	is_premium: boolean;
-	courses: { slug: string } | null;
+	courses: { slug: string }[] | null;
 	teacher_note: TeacherNote | null;
 }
 
 export default async function TeacherNotesPage() {
+	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
-
-	// Check if user is authenticated
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-
-	if (!user) {
-		redirect("/login");
-	}
-
-	// Check if user is an admin
-	const { data: profile } = await supabase
-		.from("profiles")
-		.select("role")
-		.eq("id", user.id)
-		.single();
-
-	if (!profile || profile.role !== "admin") {
-		redirect("/");
-	}
 
 	// Fetch all lessons
 	const { data: lessons } = await supabase
@@ -268,7 +249,7 @@ export default async function TeacherNotesPage() {
 														className="text-xs h-7 rounded-full"
 													>
 														<Link
-															href={`/lessons/${(lesson.courses as { slug: string } | null)?.slug || "python-foundations"}/${lesson.order_index}`}
+															href={`/lessons/${lesson.courses?.[0]?.slug || "python-foundations"}/${lesson.order_index}`}
 															aria-label={`View student lesson for ${lesson.title}`}
 														>
 															<BookOpen className="mr-1 h-3 w-3" />
@@ -358,7 +339,7 @@ export default async function TeacherNotesPage() {
 													className="text-xs h-7 rounded-full"
 												>
 													<Link
-														href={`/lessons/${(lesson.courses as { slug: string } | null)?.slug || "python-foundations"}/${lesson.order_index}`}
+														href={`/lessons/${lesson.courses?.[0]?.slug || "python-foundations"}/${lesson.order_index}`}
 														aria-label={`View student lesson for ${lesson.title}`}
 													>
 														<BookOpen className="mr-1 h-3 w-3" />

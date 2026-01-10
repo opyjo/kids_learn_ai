@@ -1,6 +1,9 @@
 import { SubmissionsTab } from "@/components/admin/submissions-tab";
+import { requireAdmin } from "@/lib/auth-helpers";
 
-export default function SubmissionsPage() {
+export default async function SubmissionsPage() {
+	await requireAdmin();
+
 	return (
 		<div className="space-y-6">
 			<div>

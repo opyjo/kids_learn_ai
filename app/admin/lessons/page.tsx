@@ -9,6 +9,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { requireAdmin } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface LessonData {
@@ -18,10 +19,11 @@ interface LessonData {
 	difficulty_level: string;
 	order_index: number;
 	completed_lessons: { count: number }[] | null;
-	courses: { id: string; title: string; slug: string } | null;
+	courses: { id: string; title: string; slug: string }[] | null;
 }
 
 export default async function LessonsPage() {
+	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
 
 	// Fetch lessons with completion counts
@@ -40,16 +42,18 @@ export default async function LessonsPage() {
 		)
 		.order("order_index", { ascending: true });
 
-	const lessons = (lessonsData || []).map((lesson: LessonData) => ({
-		id: lesson.id,
-		orderIndex: lesson.order_index,
-		title: lesson.title,
-		description: lesson.description,
-		completions: lesson.completed_lessons?.[0]?.count || 0,
-		difficulty: lesson.difficulty_level,
-		courseTitle: lesson.courses?.title || "Unassigned",
-		courseSlug: lesson.courses?.slug || "python-foundations",
-	}));
+	const lessons = ((lessonsData as unknown as LessonData[]) || []).map(
+		(lesson) => ({
+			id: lesson.id,
+			orderIndex: lesson.order_index,
+			title: lesson.title,
+			description: lesson.description,
+			completions: lesson.completed_lessons?.[0]?.count || 0,
+			difficulty: lesson.difficulty_level,
+			courseTitle: lesson.courses?.[0]?.title || "Unassigned",
+			courseSlug: lesson.courses?.[0]?.slug || "python-foundations",
+		}),
+	);
 
 	return (
 		<div className="space-y-6">
