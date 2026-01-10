@@ -14,11 +14,7 @@ const InteractiveCodeEditor = () => {
 	const [output, setOutput] = React.useState("");
 	const [isRunning, setIsRunning] = React.useState(false);
 
-	const {
-		isReady: pyodideReady,
-		isLoading,
-		runCode: runPython,
-	} = usePyodide();
+	const { isReady: pyodideReady, runCode: runPython } = usePyodide();
 
 	const runCode = async () => {
 		if (!pyodideReady) {
@@ -33,7 +29,9 @@ const InteractiveCodeEditor = () => {
 			const stdout = await runPython(code);
 			setOutput(stdout || "Code executed successfully!");
 		} catch (err: any) {
-			setOutput(`Oops! ${err.message || "There's a small error in your code. Try again!"}`);
+			setOutput(
+				`Oops! ${err.message || "There's a small error in your code. Try again!"}`,
+			);
 		} finally {
 			setIsRunning(false);
 		}

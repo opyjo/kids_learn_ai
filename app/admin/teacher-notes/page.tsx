@@ -1,11 +1,10 @@
 import { AlertCircle, BookOpen, FileText } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/auth-helpers";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface TeacherNote {
 	id: string;
@@ -115,17 +114,18 @@ export default async function TeacherNotesPage() {
 										strokeWidth="3"
 										fill="none"
 										strokeDasharray={`${2 * Math.PI * 16}`}
-										strokeDashoffset={`${2 *
+										strokeDashoffset={`${
+											2 *
 											Math.PI *
 											16 *
 											(1 -
 												(lessonsWithNotesData?.length
 													? ((lessonsWithNotes?.length || 0) /
-														lessonsWithNotesData.length) *
-													100
+															lessonsWithNotesData.length) *
+														100
 													: 0) /
-												100)
-											}`}
+													100)
+										}`}
 										className="text-primary transition-all duration-500"
 										strokeLinecap="round"
 									/>
@@ -134,10 +134,10 @@ export default async function TeacherNotesPage() {
 									<span className="text-xs font-bold text-primary">
 										{lessonsWithNotesData?.length
 											? Math.round(
-												((lessonsWithNotes?.length || 0) /
-													lessonsWithNotesData.length) *
-												100,
-											)
+													((lessonsWithNotes?.length || 0) /
+														lessonsWithNotesData.length) *
+														100,
+												)
 											: 0}
 										%
 									</span>

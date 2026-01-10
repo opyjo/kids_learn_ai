@@ -1,9 +1,9 @@
-import { requireAdmin } from "@/lib/auth-helpers";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { LessonEditor } from "@/components/admin/lesson-editor";
 import { Button } from "@/components/ui/button";
+import { requireAdmin } from "@/lib/auth-helpers";
 
 export default async function NewLessonPage() {
 	await requireAdmin();

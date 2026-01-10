@@ -1,5 +1,5 @@
-import { requireAdmin } from "@/lib/auth-helpers";
 import { EnrollmentsTab } from "@/components/admin/enrollments-tab";
+import { requireAdmin } from "@/lib/auth-helpers";
 
 export default async function EnrollmentsPage() {
 	await requireAdmin();

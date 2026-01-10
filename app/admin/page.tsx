@@ -18,8 +18,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/auth-helpers";
+import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function AdminOverviewPage() {
 	await requireAdmin();

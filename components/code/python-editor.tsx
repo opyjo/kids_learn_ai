@@ -10,7 +10,7 @@ import {
 	Trash2,
 } from "lucide-react";
 import type React from "react";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -37,12 +37,7 @@ export function PythonEditor({
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [error, setError] = useState("");
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
-	const {
-		isReady: pyodideReady,
-		isLoading,
-		error: pyodideError,
-		runCode,
-	} = usePyodide();
+	const { isReady: pyodideReady, error: pyodideError, runCode } = usePyodide();
 
 	useEffect(() => {
 		if (pyodideError) {

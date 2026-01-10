@@ -1,5 +1,5 @@
-import { requireAdmin } from "@/lib/auth-helpers";
 import { AdminLayoutShell } from "@/components/admin/admin-layout-shell";
+import { requireAdmin } from "@/lib/auth-helpers";
 
 export default async function AdminLayout({
 	children,
