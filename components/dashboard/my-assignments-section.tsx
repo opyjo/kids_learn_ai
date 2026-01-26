@@ -1,6 +1,7 @@
 "use client";
 
 import { FileCode, RefreshCw } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -97,15 +98,26 @@ export const MyAssignmentsSection = ({
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
-						<div className="text-center py-6">
-							<div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
-								<FileCode className="h-8 w-8 text-muted-foreground" />
+						<div className="text-center py-8">
+							<div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 mb-6">
+								<FileCode className="h-10 w-10 text-primary" />
 							</div>
-							<p className="text-sm text-muted-foreground max-w-sm mx-auto">
+							<h4 className="text-lg font-semibold text-foreground mb-2">
+								Ready to submit your first assignment?
+							</h4>
+							<p className="text-sm text-muted-foreground max-w-md mx-auto mb-6">
 								After completing a lesson, click "Submit Assignment" to share
 								your Trinket code. Your teacher will review it and provide
-								feedback!
+								helpful feedback!
 							</p>
+							<div className="flex flex-col sm:flex-row gap-3 justify-center">
+								<Button asChild variant="default" className="min-h-[44px]">
+									<a href="/lessons">Browse Lessons</a>
+								</Button>
+								<Button asChild variant="outline" className="min-h-[44px]">
+									<a href="/dashboard">Go to Dashboard</a>
+								</Button>
+							</div>
 						</div>
 					</CardContent>
 				</Card>

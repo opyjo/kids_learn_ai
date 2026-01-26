@@ -270,6 +270,14 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 						toast.info("Request cancelled");
 					} else {
 						console.error("Chat error:", error);
+						const errorMessage: ChatMessage = {
+							id: crypto.randomUUID(),
+							role: "assistant",
+							content:
+								"I'm having trouble responding right now. This might be a network issue. Please check your connection and try again!",
+							timestamp: Date.now(),
+						};
+						setMessages((prev) => [...prev, errorMessage]);
 						toast.error(
 							"Sorry, I'm having trouble responding right now. Please try again!",
 						);
@@ -347,28 +355,30 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 		}, [handleClearChat]);
 
 		return (
-			<div className="flex flex-col h-[85vh] lg:h-[calc(100vh-16rem)] max-h-[700px] lg:max-h-none max-w-4xl mx-auto border-2 border-primary/20 rounded-2xl bg-card shadow-xl shadow-primary/10 overflow-hidden">
+			<div className="flex flex-col h-[calc(100vh-10rem)] sm:h-[calc(100vh-12rem)] md:h-[75vh] lg:h-[calc(100vh-16rem)] max-h-[500px] sm:max-h-[600px] md:max-h-[650px] lg:max-h-none max-w-4xl mx-auto border-2 border-primary/20 rounded-2xl bg-card shadow-xl shadow-primary/10 overflow-hidden">
 				{/* Header */}
 				<div
-					className="flex items-center justify-between gap-3 p-3 border-b shrink-0"
+					className="flex items-center justify-between gap-2 sm:gap-3 p-2 sm:p-3 border-b shrink-0"
 					style={{
 						borderColor: `${tutor.color.primary}40`,
 						background: `linear-gradient(to right, ${tutor.color.primary}10, ${tutor.color.primary}05, ${tutor.color.secondary}10)`,
 					}}
 				>
-					<div className="flex items-center gap-3 flex-1">
-						<AnimatedTutor tutor={tutor} animationState="idle" size="medium" />
+					<div className="flex items-center gap-2 sm:gap-3 flex-1">
+						<div className="scale-75 sm:scale-100 shrink-0">
+							<AnimatedTutor tutor={tutor} animationState="idle" size="medium" />
+						</div>
 						<div className="flex-1">
-							<h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-								{tutor.name} <span className="text-xl">{tutor.emoji}</span>
+							<h2 className="text-base sm:text-lg font-bold text-foreground flex items-center gap-1.5 sm:gap-2">
+								{tutor.name} <span className="text-lg sm:text-xl">{tutor.emoji}</span>
 							</h2>
-							<div className="flex items-center gap-3 flex-wrap">
-								<p className="text-xs text-muted-foreground font-medium">
+							<div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+								<p className="text-[10px] sm:text-xs text-muted-foreground font-medium">
 									Your {tutor.subject} Tutor
 								</p>
 								{remainingMessages !== null && dailyLimit !== null && (
 									<span
-										className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+										className={`text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-full ${
 											remainingMessages <= 3
 												? "bg-destructive/10 text-destructive"
 												: "bg-muted text-muted-foreground"
@@ -385,10 +395,10 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 							variant="ghost"
 							size="sm"
 							onClick={handleClearChat}
-							className="h-8 px-3 text-xs hover:bg-destructive/10 hover:text-destructive"
+							className="h-7 sm:h-8 px-2 sm:px-3 text-[10px] sm:text-xs hover:bg-destructive/10 hover:text-destructive"
 							aria-label="Clear chat"
 						>
-							<Trash2 className="h-3.5 w-3.5 mr-1.5" />
+							<Trash2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1 sm:mr-1.5" />
 							Clear
 						</Button>
 					)}

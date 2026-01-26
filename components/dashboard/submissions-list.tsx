@@ -107,12 +107,19 @@ export const SubmissionsList = ({
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<div className="text-center py-8 text-muted-foreground">
-						<FileCode className="h-12 w-12 mx-auto mb-3 opacity-50" />
-						<p>No assignments submitted yet.</p>
-						<p className="text-sm mt-1">
-							Complete a lesson and submit your code to see it here!
+					<div className="text-center py-8">
+						<div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 mb-6">
+							<FileCode className="h-10 w-10 text-primary" />
+						</div>
+						<h4 className="text-lg font-semibold text-foreground mb-2">
+							No assignments submitted yet
+						</h4>
+						<p className="text-sm text-muted-foreground max-w-md mx-auto mb-6">
+							Complete a lesson and submit your code to see it here! Your teacher will review your work and provide feedback.
 						</p>
+						<Button asChild variant="default" className="min-h-[44px]">
+							<a href="/lessons">Start Learning</a>
+						</Button>
 					</div>
 				</CardContent>
 			</Card>

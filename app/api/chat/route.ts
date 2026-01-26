@@ -21,6 +21,22 @@ import {
 	validateConversationLength,
 } from "@/lib/utils/content-safety";
 
+// Helper to check if user has admin role
+const isUserAdmin = async (userId: string): Promise<boolean> => {
+	try {
+		const supabase = await getSupabaseServerClient();
+		const { data: profile } = await supabase
+			.from("profiles")
+			.select("role")
+			.eq("id", userId)
+			.single();
+
+		return profile?.role === "admin";
+	} catch {
+		return false;
+	}
+};
+
 // Configuration
 const DAILY_MESSAGE_LIMIT = 10;
 const MINUTE_RATE_LIMIT = 3;
@@ -241,34 +257,39 @@ export const POST = async (req: NextRequest) => {
 		}
 
 		const user = await getAuthUser();
-		const clientId = req.headers.get("x-forwarded-for") || "anonymous";
-		const rateLimitIdentifier = user ? user.id : clientId;
+		const isAdmin = user ? await isUserAdmin(user.id) : false;
 
-		if (!(await checkRateLimit(rateLimitIdentifier))) {
-			logSafetyEvent("block", "Rate limit exceeded", clientId);
-			return NextResponse.json(
-				{
-					role: "assistant",
-					content:
-						"Take your time! 😊 You can send up to 3 messages per minute.",
-				},
-				{ status: 429 },
-			);
-		}
-
+		// Skip rate limiting for admin users
 		let dailyUsage = null;
-		if (user) {
-			dailyUsage = await checkAndIncrementDailyUsage(user.id);
-			if (!dailyUsage.allowed) {
-				logSafetyEvent("block", "Daily limit exceeded", user.id);
+		if (!isAdmin) {
+			const clientId = req.headers.get("x-forwarded-for") || "anonymous";
+			const rateLimitIdentifier = user ? user.id : clientId;
+
+			if (!(await checkRateLimit(rateLimitIdentifier))) {
+				logSafetyEvent("block", "Rate limit exceeded", clientId);
 				return NextResponse.json(
 					{
 						role: "assistant",
-						content: `Daily limit reached!`,
-						usage: { remaining: 0, limit: dailyUsage.limit },
+						content:
+							"Take your time! 😊 You can send up to 3 messages per minute.",
 					},
 					{ status: 429 },
 				);
+			}
+
+			if (user) {
+				dailyUsage = await checkAndIncrementDailyUsage(user.id);
+				if (!dailyUsage.allowed) {
+					logSafetyEvent("block", "Daily limit exceeded", user.id);
+					return NextResponse.json(
+						{
+							role: "assistant",
+							content: `Daily limit reached!`,
+							usage: { remaining: 0, limit: dailyUsage.limit },
+						},
+						{ status: 429 },
+					);
+				}
 			}
 		}
 

@@ -71,14 +71,18 @@ export function LoginForm() {
 			<div className="space-y-2">
 				<Label htmlFor="email">Email</Label>
 				<div className="relative">
-					<Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+					<Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" aria-hidden="true" />
 					<Input
 						id="email"
 						name="email"
 						type="email"
 						placeholder="Enter your email"
-						className="pl-10"
+						className="pl-10 min-h-[44px]"
 						required
+						autoComplete="email"
+						aria-required="true"
+						aria-invalid={state?.error ? "true" : "false"}
+						aria-describedby={state?.error ? "email-error" : undefined}
 					/>
 				</div>
 			</div>
@@ -88,7 +92,8 @@ export function LoginForm() {
 					<Label htmlFor="password">Password</Label>
 					<Link
 						href="/forgot-password"
-						className="text-sm font-medium text-blue-600 hover:underline"
+						className="text-sm font-medium text-blue-600 hover:underline min-h-[44px] flex items-center"
+						aria-label="Forgot password? Reset your password"
 					>
 						Forgot Password?
 					</Link>
@@ -97,7 +102,12 @@ export function LoginForm() {
 					id="password"
 					name="password"
 					placeholder="Enter your password"
+					className="min-h-[44px]"
 					required
+					autoComplete="current-password"
+					aria-required="true"
+					aria-invalid={state?.error ? "true" : "false"}
+					aria-describedby={state?.error ? "password-error" : undefined}
 				/>
 			</div>
 
@@ -117,9 +127,10 @@ export function LoginForm() {
 			<Button
 				type="button"
 				variant="outline"
-				className="w-full"
+				className="w-full min-h-[44px]"
 				onClick={handleGoogleSignIn}
 				disabled={googleLoading}
+				aria-label="Sign in with Google"
 			>
 				{googleLoading ? (
 					<>

@@ -191,8 +191,9 @@ export default function PricingPage() {
 					</h2>
 					<Card>
 						<CardContent className="p-0">
-							<div className="overflow-x-auto">
-								<table className="w-full">
+							<div className="overflow-x-auto -mx-4 sm:mx-0">
+								<div className="inline-block min-w-full align-middle px-4 sm:px-0">
+									<table className="w-full min-w-[600px]">
 									<thead>
 										<tr className="border-b">
 											<th className="text-left p-4 font-semibold">Feature</th>
@@ -292,8 +293,12 @@ export default function PricingPage() {
 											</td>
 										</tr>
 									</tbody>
-								</table>
+									</table>
+								</div>
 							</div>
+							<p className="text-xs text-muted-foreground text-center p-4 sm:hidden">
+								Scroll horizontally to see all features
+							</p>
 						</CardContent>
 					</Card>
 				</div>

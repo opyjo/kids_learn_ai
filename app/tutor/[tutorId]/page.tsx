@@ -109,7 +109,7 @@ print(f"Happy coding, {name}!")
 
 	return (
 		<MainLayout>
-			<div className="mx-auto w-full min-h-[calc(100vh-5rem)] px-4 py-3 sm:px-6 lg:px-8">
+			<div className="mx-auto w-full min-h-[calc(100vh-5rem)] px-3 py-2 sm:px-4 sm:py-3 md:px-6 lg:px-8 lg:py-4">
 				{/* Layout - Without Editor (Mobile) */}
 				{!showEditor && (
 					<div className="lg:hidden max-w-4xl mx-auto">
@@ -137,7 +137,7 @@ print(f"Happy coding, {name}!")
 					<div className="lg:hidden max-w-[1600px] mx-auto">
 						<div className="grid grid-cols-1 gap-6">
 							{/* AI Tutor Section - at top */}
-							<div className="flex flex-col">
+							<div className="flex flex-col max-h-[60vh]">
 								<ChatInterface ref={chatInterfaceRef} tutorId={tutorId} />
 							</div>
 

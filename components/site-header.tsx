@@ -404,29 +404,34 @@ const MobileNavLink = ({
 	item: NavItem;
 	isActive: boolean;
 	onClick: () => void;
-}) => (
-	<Link
-		href={item.href}
-		onClick={onClick}
-		className={cn(
-			"flex items-center gap-3 px-4 py-2.5 text-sm rounded-lg transition-colors cursor-pointer",
-			isActive
-				? "bg-primary/10 text-primary font-medium"
-				: "text-foreground hover:bg-muted",
-		)}
-	>
-		<item.Icon className="h-4 w-4" />
-		<span className="flex-1">{item.label}</span>
-		{item.comingSoon && (
-			<Badge
-				variant="outline"
-				className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500"
-			>
-				Coming Soon
-			</Badge>
-		)}
-	</Link>
-);
+}) => {
+	const Icon = item.Icon;
+	return (
+		<Link
+			href={item.href}
+			onClick={onClick}
+			className={cn(
+				"flex items-center gap-3 px-4 py-2.5 text-sm rounded-lg transition-colors cursor-pointer min-h-[44px]",
+				isActive
+					? "bg-primary/10 text-primary font-medium"
+					: "text-foreground hover:bg-muted",
+			)}
+			aria-current={isActive ? "page" : undefined}
+		>
+			<Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+			<span className="flex-1">{item.label}</span>
+			{item.comingSoon && (
+				<Badge
+					variant="outline"
+					className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500"
+					aria-label="Coming soon"
+				>
+					Coming Soon
+				</Badge>
+			)}
+		</Link>
+	);
+};
 
 type YearTab = "year1" | "year2";
 
@@ -828,13 +833,18 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 										<Button
 											variant="ghost"
 											size="icon"
-											aria-label="Open menu"
-											className="lg:hidden"
+											aria-label="Open navigation menu"
+											aria-expanded="false"
+											className="lg:hidden min-h-[44px] min-w-[44px]"
 										>
-											<Menu className="h-5 w-5" />
+											<Menu className="h-5 w-5" aria-hidden="true" />
 										</Button>
 									</SheetTrigger>
-									<SheetContent side="right" className="w-80 p-0">
+									<SheetContent
+										side="right"
+										className="w-80 p-0"
+										aria-label="Navigation menu"
+									>
 										<div className="flex flex-col h-full">
 											<div className="p-6 border-b border-border">
 												<Link
@@ -853,12 +863,15 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 											<div className="flex-1 overflow-y-auto p-4 space-y-1">
 												{/* Learn Section */}
 												<Collapsible>
-													<CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
+													<CollapsibleTrigger
+														className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer min-h-[44px]"
+														aria-label="Toggle Learn menu"
+													>
 														<div className="flex items-center gap-3">
-															<GraduationCap className="h-5 w-5" />
+															<GraduationCap className="h-5 w-5" aria-hidden="true" />
 															<span>Learn</span>
 														</div>
-														<ChevronDown className="h-4 w-4 transition-transform duration-200" />
+														<ChevronDown className="h-4 w-4 transition-transform duration-200" aria-hidden="true" />
 													</CollapsibleTrigger>
 													<CollapsibleContent className="mt-1 space-y-1 pl-4">
 														{/* Year 1 Section */}
@@ -971,12 +984,15 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
 												{/* Resources Section */}
 												<Collapsible>
-													<CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer">
+													<CollapsibleTrigger
+														className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:bg-muted rounded-lg transition-colors cursor-pointer min-h-[44px]"
+														aria-label="Toggle Resources menu"
+													>
 														<div className="flex items-center gap-3">
-															<Library className="h-5 w-5" />
+															<Library className="h-5 w-5" aria-hidden="true" />
 															<span>Resources</span>
 														</div>
-														<ChevronDown className="h-4 w-4 transition-transform duration-200" />
+														<ChevronDown className="h-4 w-4 transition-transform duration-200" aria-hidden="true" />
 													</CollapsibleTrigger>
 													<CollapsibleContent className="mt-1 space-y-1 pl-4">
 														{NAV_ITEMS.resources.map((item) => (

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/password-input";
+import { PasswordStrength } from "@/components/ui/password-strength";
 import { Separator } from "@/components/ui/separator";
 import { signupAction } from "@/lib/actions/auth";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -32,6 +33,7 @@ const SubmitButton = () => {
 export function SignupForm() {
 	const [state, formAction] = useActionState(signupAction, null);
 	const [googleLoading, setGoogleLoading] = useState(false);
+	const [password, setPassword] = useState("");
 
 	const handleGoogleSignUp = async () => {
 		setGoogleLoading(true);
@@ -70,14 +72,17 @@ export function SignupForm() {
 			<div className="space-y-2">
 				<Label htmlFor="fullName">Full Name</Label>
 				<div className="relative">
-					<User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+					<User className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" aria-hidden="true" />
 					<Input
 						id="fullName"
 						name="fullName"
 						type="text"
 						placeholder="Enter your full name"
-						className="pl-10"
+						className="pl-10 min-h-[44px]"
 						required
+						autoComplete="name"
+						aria-required="true"
+						aria-invalid={state?.error ? "true" : "false"}
 					/>
 				</div>
 			</div>
@@ -85,14 +90,17 @@ export function SignupForm() {
 			<div className="space-y-2">
 				<Label htmlFor="email">Email</Label>
 				<div className="relative">
-					<Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+					<Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" aria-hidden="true" />
 					<Input
 						id="email"
 						name="email"
 						type="email"
 						placeholder="Enter your email"
-						className="pl-10"
+						className="pl-10 min-h-[44px]"
 						required
+						autoComplete="email"
+						aria-required="true"
+						aria-invalid={state?.error ? "true" : "false"}
 					/>
 				</div>
 			</div>
@@ -103,8 +111,15 @@ export function SignupForm() {
 					id="password"
 					name="password"
 					placeholder="Create a password"
+					className="min-h-[44px]"
 					required
+					autoComplete="new-password"
+					aria-required="true"
+					aria-invalid={state?.error ? "true" : "false"}
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
 				/>
+				{password && <PasswordStrength password={password} />}
 			</div>
 
 			<div className="space-y-2">
@@ -113,7 +128,11 @@ export function SignupForm() {
 					id="confirmPassword"
 					name="confirmPassword"
 					placeholder="Confirm your password"
+					className="min-h-[44px]"
 					required
+					autoComplete="new-password"
+					aria-required="true"
+					aria-invalid={state?.error ? "true" : "false"}
 				/>
 			</div>
 
@@ -133,9 +152,10 @@ export function SignupForm() {
 			<Button
 				type="button"
 				variant="outline"
-				className="w-full"
+				className="w-full min-h-[44px]"
 				onClick={handleGoogleSignUp}
 				disabled={googleLoading}
+				aria-label="Sign up with Google"
 			>
 				{googleLoading ? (
 					<>
