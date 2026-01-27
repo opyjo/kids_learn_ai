@@ -253,7 +253,9 @@ describe("ContactForm Component", () => {
 				expect(screen.getByLabelText(/your name/i)).toBeDisabled();
 				expect(screen.getByLabelText(/email address/i)).toBeDisabled();
 				expect(screen.getByLabelText(/subject/i)).toBeDisabled();
-				expect(screen.getByRole("textbox", { name: /message/i })).toBeDisabled();
+				expect(
+					screen.getByRole("textbox", { name: /message/i }),
+				).toBeDisabled();
 			});
 
 			resolvePromise?.({
@@ -279,7 +281,9 @@ describe("ContactForm Component", () => {
 				expect(screen.getByLabelText(/your name/i)).toHaveValue("");
 				expect(screen.getByLabelText(/email address/i)).toHaveValue("");
 				expect(screen.getByLabelText(/subject/i)).toHaveValue("");
-				expect(screen.getByRole("textbox", { name: /message/i })).toHaveValue("");
+				expect(screen.getByRole("textbox", { name: /message/i })).toHaveValue(
+					"",
+				);
 			});
 		});
 	});
