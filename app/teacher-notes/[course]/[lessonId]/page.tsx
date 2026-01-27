@@ -4,6 +4,7 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface TeacherNotesPageProps {
 	params: Promise<{
+		course: string;
 		lessonId: string;
 	}>;
 }
@@ -12,7 +13,7 @@ export default async function TeacherNotesPage({
 	params,
 }: TeacherNotesPageProps) {
 	const supabase = await getSupabaseServerClient();
-	const { lessonId } = await params;
+	const { course: courseSlug, lessonId } = await params;
 
 	// Check if user is authenticated
 	const {
@@ -34,11 +35,25 @@ export default async function TeacherNotesPage({
 		redirect("/");
 	}
 
-	// Fetch lesson from Supabase by order_index with course info
+	// First, get the course by slug
+	const { data: course } = await supabase
+		.from("courses")
+		.select("id, slug, title")
+		.eq("slug", courseSlug)
+		.single();
+
+	if (!course) {
+		notFound();
+	}
+
+	const parsedOrderIndex = Number.parseInt(lessonId, 10);
+
+	// Fetch lesson from Supabase by course_id and order_index
 	const { data: lesson, error: lessonError } = await supabase
 		.from("lessons")
 		.select("*, courses(slug, title)")
-		.eq("order_index", Number.parseInt(lessonId, 10))
+		.eq("course_id", course.id)
+		.eq("order_index", parsedOrderIndex)
 		.single();
 
 	if (lessonError || !lesson) {

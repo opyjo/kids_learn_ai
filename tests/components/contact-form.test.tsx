@@ -24,13 +24,15 @@ describe("ContactForm Component", () => {
 			expect(screen.getByLabelText(/your name/i)).toBeInTheDocument();
 			expect(screen.getByLabelText(/email address/i)).toBeInTheDocument();
 			expect(screen.getByLabelText(/subject/i)).toBeInTheDocument();
-			expect(screen.getByLabelText(/message/i)).toBeInTheDocument();
+			expect(
+				screen.getByRole("textbox", { name: /message/i }),
+			).toBeInTheDocument();
 		});
 
 		it("should render submit button", () => {
 			render(<ContactForm />);
 			expect(
-				screen.getByRole("button", { name: /send message/i }),
+				screen.getByRole("button", { name: /send contact message/i }),
 			).toBeInTheDocument();
 		});
 
@@ -61,7 +63,9 @@ describe("ContactForm Component", () => {
 		it("should show error when name is empty on submit", async () => {
 			const { user } = render(<ContactForm />);
 
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(screen.getByText("Name is required")).toBeInTheDocument();
@@ -72,7 +76,9 @@ describe("ContactForm Component", () => {
 			const { user } = render(<ContactForm />);
 
 			await user.type(screen.getByLabelText(/your name/i), "A");
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(
@@ -86,7 +92,9 @@ describe("ContactForm Component", () => {
 
 			await user.type(screen.getByLabelText(/your name/i), "John Doe");
 			await user.type(screen.getByLabelText(/email address/i), "invalid-email");
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(
@@ -104,7 +112,9 @@ describe("ContactForm Component", () => {
 				"john@example.com",
 			);
 			await user.type(screen.getByLabelText(/subject/i), "Hi");
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(
@@ -122,8 +132,13 @@ describe("ContactForm Component", () => {
 				"john@example.com",
 			);
 			await user.type(screen.getByLabelText(/subject/i), "Test Subject");
-			await user.type(screen.getByLabelText(/message/i), "Short");
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.type(
+				screen.getByRole("textbox", { name: /message/i }),
+				"Short",
+			);
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(
@@ -142,7 +157,7 @@ describe("ContactForm Component", () => {
 			);
 			await user.type(screen.getByLabelText(/subject/i), "Test Subject");
 			await user.type(
-				screen.getByLabelText(/message/i),
+				screen.getByRole("textbox", { name: /message/i }),
 				"This is a test message that is long enough.",
 			);
 		};
@@ -156,7 +171,9 @@ describe("ContactForm Component", () => {
 
 			const { user } = render(<ContactForm />);
 			await fillValidForm(user);
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(mockFetch).toHaveBeenCalledWith("/api/contact", {
@@ -176,7 +193,9 @@ describe("ContactForm Component", () => {
 
 			const { user } = render(<ContactForm />);
 			await fillValidForm(user);
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(
@@ -198,7 +217,9 @@ describe("ContactForm Component", () => {
 
 			const { user } = render(<ContactForm />);
 			await fillValidForm(user);
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			// Check for loading state
 			await waitFor(() => {
@@ -224,13 +245,17 @@ describe("ContactForm Component", () => {
 
 			const { user } = render(<ContactForm />);
 			await fillValidForm(user);
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(screen.getByLabelText(/your name/i)).toBeDisabled();
 				expect(screen.getByLabelText(/email address/i)).toBeDisabled();
 				expect(screen.getByLabelText(/subject/i)).toBeDisabled();
-				expect(screen.getByLabelText(/message/i)).toBeDisabled();
+				expect(
+					screen.getByRole("textbox", { name: /message/i }),
+				).toBeDisabled();
 			});
 
 			resolvePromise?.({
@@ -248,13 +273,17 @@ describe("ContactForm Component", () => {
 
 			const { user } = render(<ContactForm />);
 			await fillValidForm(user);
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(screen.getByLabelText(/your name/i)).toHaveValue("");
 				expect(screen.getByLabelText(/email address/i)).toHaveValue("");
 				expect(screen.getByLabelText(/subject/i)).toHaveValue("");
-				expect(screen.getByLabelText(/message/i)).toHaveValue("");
+				expect(screen.getByRole("textbox", { name: /message/i })).toHaveValue(
+					"",
+				);
 			});
 		});
 	});
@@ -268,7 +297,7 @@ describe("ContactForm Component", () => {
 			);
 			await user.type(screen.getByLabelText(/subject/i), "Test Subject");
 			await user.type(
-				screen.getByLabelText(/message/i),
+				screen.getByRole("textbox", { name: /message/i }),
 				"This is a test message that is long enough.",
 			);
 		};
@@ -284,7 +313,9 @@ describe("ContactForm Component", () => {
 
 			const { user } = render(<ContactForm />);
 			await fillValidForm(user);
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(toast.error).toHaveBeenCalledWith(
@@ -304,7 +335,9 @@ describe("ContactForm Component", () => {
 
 			const { user } = render(<ContactForm />);
 			await fillValidForm(user);
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(toast.error).toHaveBeenCalled();
@@ -318,7 +351,9 @@ describe("ContactForm Component", () => {
 
 			const { user } = render(<ContactForm />);
 			await fillValidForm(user);
-			await user.click(screen.getByRole("button", { name: /send message/i }));
+			await user.click(
+				screen.getByRole("button", { name: /send contact message/i }),
+			);
 
 			await waitFor(() => {
 				expect(toast.error).toHaveBeenCalledWith(
@@ -335,7 +370,9 @@ describe("ContactForm Component", () => {
 			expect(screen.getByLabelText(/your name/i)).toBeInTheDocument();
 			expect(screen.getByLabelText(/email address/i)).toBeInTheDocument();
 			expect(screen.getByLabelText(/subject/i)).toBeInTheDocument();
-			expect(screen.getByLabelText(/message/i)).toBeInTheDocument();
+			expect(
+				screen.getByRole("textbox", { name: /message/i }),
+			).toBeInTheDocument();
 		});
 
 		it("should have novalidate attribute on form", () => {

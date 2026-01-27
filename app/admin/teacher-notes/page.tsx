@@ -236,7 +236,7 @@ export default async function TeacherNotesPage() {
 														className="text-xs h-7 rounded-full bg-gradient-to-r from-green-600 to-emerald-600 hover:opacity-90"
 													>
 														<Link
-															href={`/teacher-notes/${lesson.order_index}`}
+															href={`/teacher-notes/${lesson.courses?.[0]?.slug || "term-1-hello-python"}/${lesson.order_index}`}
 															aria-label={`View teacher notes for ${lesson.title}`}
 														>
 															View Notes →

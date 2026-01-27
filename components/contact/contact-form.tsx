@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { type ContactFormData, contactFormSchema } from "@/lib/schemas/contact";
+import { cn } from "@/lib/utils";
 
 export const ContactForm = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -162,31 +163,52 @@ export const ContactForm = () => {
 				<FormField
 					control={form.control}
 					name="message"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>
-								Message <span className="text-red-500">*</span>
-							</FormLabel>
-							<FormControl>
-								<Textarea
-									placeholder="Tell us more about your inquiry..."
-									rows={6}
-									maxLength={1000}
-									disabled={isSubmitting}
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					render={({ field }) => {
+						const charCount = field.value?.length || 0;
+						const maxLength = 1000;
+						return (
+							<FormItem>
+								<FormLabel>
+									Message <span className="text-red-500">*</span>
+								</FormLabel>
+								<FormControl>
+									<Textarea
+										placeholder="Tell us more about your inquiry..."
+										rows={6}
+										maxLength={maxLength}
+										disabled={isSubmitting}
+										className="min-h-[120px] resize-y"
+										aria-describedby="message-counter"
+										{...field}
+									/>
+								</FormControl>
+								<div className="flex items-center justify-between">
+									<FormMessage />
+									<span
+										id="message-counter"
+										className={cn(
+											"text-xs text-muted-foreground",
+											charCount > maxLength * 0.9 &&
+												"text-amber-600 dark:text-amber-400",
+											charCount >= maxLength &&
+												"text-red-600 dark:text-red-400",
+										)}
+									>
+										{charCount} / {maxLength}
+									</span>
+								</div>
+							</FormItem>
+						);
+					}}
 				/>
 
 				{/* Submit Button */}
 				<Button
 					type="submit"
 					disabled={isSubmitting || isSuccess}
-					className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
+					className="w-full min-h-[44px] bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
 					size="lg"
+					aria-label="Send contact message"
 				>
 					{isSubmitting ? (
 						<>

@@ -201,24 +201,39 @@ export default async function DashboardPage() {
 
 				{/* No Enrollments Message */}
 				{enrolledLevelIds.length === 0 && (
-					<Card className="mb-8 border-2 border-dashed border-primary/30 bg-primary/5 rounded-2xl">
-						<CardContent className="p-6">
-							<div className="flex items-center gap-4">
-								<div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-									<GraduationCap className="h-7 w-7 text-primary" />
+					<Card className="mb-8 border-2 border-dashed border-primary/30 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl">
+						<CardContent className="p-8">
+							<div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+								<div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+									<GraduationCap className="h-10 w-10 text-primary" />
 								</div>
 								<div className="flex-1">
-									<h3 className="font-semibold text-foreground text-lg mb-1">
+									<h3 className="font-semibold text-foreground text-xl mb-2">
 										You Haven't Enrolled Yet
 									</h3>
-									<p className="text-muted-foreground">
+									<p className="text-muted-foreground mb-4">
 										Book a free trial class to start learning Python and AI with
-										us!
+										us! No commitment required - try your first class completely
+										free.
 									</p>
+									<div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
+										<Button
+											asChild
+											size="lg"
+											className="rounded-full min-h-[44px]"
+										>
+											<Link href="/inquiry">Book Free Trial →</Link>
+										</Button>
+										<Button
+											asChild
+											variant="outline"
+											size="lg"
+											className="rounded-full min-h-[44px]"
+										>
+											<Link href="/pricing">View Pricing</Link>
+										</Button>
+									</div>
 								</div>
-								<Button asChild size="lg" className="rounded-full">
-									<Link href="/inquiry">Book Free Trial →</Link>
-								</Button>
 							</div>
 						</CardContent>
 					</Card>

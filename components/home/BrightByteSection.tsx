@@ -24,7 +24,7 @@ const BrightByteSection = () => {
 	const [imageError, setImageError] = useState(false);
 
 	return (
-		<section className="container mx-auto px-4 py-20 lg:py-28 bg-gradient-to-b from-background to-muted/30">
+		<section className="container mx-auto px-4 py-12 sm:py-16 md:py-20 lg:py-28 bg-gradient-to-b from-background to-muted/30">
 			<div className="max-w-7xl mx-auto">
 				{/* Header with BrightByte Image */}
 				<div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
