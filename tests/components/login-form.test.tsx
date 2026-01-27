@@ -38,14 +38,14 @@ describe("LoginForm Component", () => {
 		it("should render sign in button", () => {
 			render(<LoginForm />);
 			expect(
-				screen.getByRole("button", { name: /sign in/i }),
+				screen.getByRole("button", { name: "Sign In" }),
 			).toBeInTheDocument();
 		});
 
 		it("should render Google sign in button", () => {
 			render(<LoginForm />);
 			expect(
-				screen.getByRole("button", { name: /continue with google/i }),
+				screen.getByRole("button", { name: /sign in with google/i }),
 			).toBeInTheDocument();
 		});
 
@@ -127,7 +127,7 @@ describe("LoginForm Component", () => {
 
 			const { user } = render(<LoginForm />);
 			const googleButton = screen.getByRole("button", {
-				name: /continue with google/i,
+				name: /sign in with google/i,
 			});
 
 			await user.click(googleButton);
