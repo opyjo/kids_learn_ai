@@ -71,7 +71,10 @@ export function LoginForm() {
 			<div className="space-y-2">
 				<Label htmlFor="email">Email</Label>
 				<div className="relative">
-					<Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" aria-hidden="true" />
+					<Mail
+						className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none"
+						aria-hidden="true"
+					/>
 					<Input
 						id="email"
 						name="email"

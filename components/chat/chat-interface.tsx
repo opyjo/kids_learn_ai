@@ -366,11 +366,16 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 				>
 					<div className="flex items-center gap-2 sm:gap-3 flex-1">
 						<div className="scale-75 sm:scale-100 shrink-0">
-							<AnimatedTutor tutor={tutor} animationState="idle" size="medium" />
+							<AnimatedTutor
+								tutor={tutor}
+								animationState="idle"
+								size="medium"
+							/>
 						</div>
 						<div className="flex-1">
 							<h2 className="text-base sm:text-lg font-bold text-foreground flex items-center gap-1.5 sm:gap-2">
-								{tutor.name} <span className="text-lg sm:text-xl">{tutor.emoji}</span>
+								{tutor.name}{" "}
+								<span className="text-lg sm:text-xl">{tutor.emoji}</span>
 							</h2>
 							<div className="flex items-center gap-2 sm:gap-3 flex-wrap">
 								<p className="text-[10px] sm:text-xs text-muted-foreground font-medium">

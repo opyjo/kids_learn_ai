@@ -213,13 +213,23 @@ export default async function DashboardPage() {
 									</h3>
 									<p className="text-muted-foreground mb-4">
 										Book a free trial class to start learning Python and AI with
-										us! No commitment required - try your first class completely free.
+										us! No commitment required - try your first class completely
+										free.
 									</p>
 									<div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
-										<Button asChild size="lg" className="rounded-full min-h-[44px]">
+										<Button
+											asChild
+											size="lg"
+											className="rounded-full min-h-[44px]"
+										>
 											<Link href="/inquiry">Book Free Trial →</Link>
 										</Button>
-										<Button asChild variant="outline" size="lg" className="rounded-full min-h-[44px]">
+										<Button
+											asChild
+											variant="outline"
+											size="lg"
+											className="rounded-full min-h-[44px]"
+										>
 											<Link href="/pricing">View Pricing</Link>
 										</Button>
 									</div>

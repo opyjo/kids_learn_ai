@@ -194,105 +194,105 @@ export default function PricingPage() {
 							<div className="overflow-x-auto -mx-4 sm:mx-0">
 								<div className="inline-block min-w-full align-middle px-4 sm:px-0">
 									<table className="w-full min-w-[600px]">
-									<thead>
-										<tr className="border-b">
-											<th className="text-left p-4 font-semibold">Feature</th>
-											<th className="text-center p-4 font-semibold">
-												Free Trial
-											</th>
-											<th className="text-center p-4 font-semibold bg-primary/5">
-												Full Program (
-												<span className="line-through text-muted-foreground">
-													$199.99
-												</span>{" "}
-												$159.99)
-											</th>
-										</tr>
-									</thead>
-									<tbody className="divide-y">
-										<tr>
-											<td className="p-4 flex items-center gap-2">
-												<BookOpen className="h-4 w-4 text-primary" />
-												<span>Live Classes</span>
-											</td>
-											<td className="text-center p-4">1 class</td>
-											<td className="text-center p-4 bg-primary/5 font-semibold">
-												8-10 classes
-											</td>
-										</tr>
-										<tr>
-											<td className="p-4 flex items-center gap-2">
-												<Code className="h-4 w-4 text-primary" />
-												<span>Code Playground Access</span>
-											</td>
-											<td className="text-center p-4">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-											<td className="text-center p-4 bg-primary/5">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-										</tr>
-										<tr>
-											<td className="p-4 flex items-center gap-2">
-												<Gamepad2 className="h-4 w-4 text-primary" />
-												<span>Practice Games</span>
-											</td>
-											<td className="text-center p-4">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-											<td className="text-center p-4 bg-primary/5">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-										</tr>
-										<tr>
-											<td className="p-4 flex items-center gap-2">
-												<Sparkles className="h-4 w-4 text-primary" />
-												<span>AI Tutors (24/7)</span>
-											</td>
-											<td className="text-center p-4">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-											<td className="text-center p-4 bg-primary/5">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-										</tr>
-										<tr>
-											<td className="p-4 flex items-center gap-2">
-												<Users className="h-4 w-4 text-primary" />
-												<span>Full Python Curriculum</span>
-											</td>
-											<td className="text-center p-4">
-												<X className="h-5 w-5 text-gray-400 mx-auto" />
-											</td>
-											<td className="text-center p-4 bg-primary/5">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-										</tr>
-										<tr>
-											<td className="p-4 flex items-center gap-2">
-												<Sparkles className="h-4 w-4 text-primary" />
-												<span>AI & Ethics Modules</span>
-											</td>
-											<td className="text-center p-4">
-												<X className="h-5 w-5 text-gray-400 mx-auto" />
-											</td>
-											<td className="text-center p-4 bg-primary/5">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-										</tr>
-										<tr>
-											<td className="p-4 flex items-center gap-2">
-												<CheckCircle2 className="h-4 w-4 text-primary" />
-												<span>Certificate of Completion</span>
-											</td>
-											<td className="text-center p-4">
-												<X className="h-5 w-5 text-gray-400 mx-auto" />
-											</td>
-											<td className="text-center p-4 bg-primary/5">
-												<Check className="h-5 w-5 text-green-600 mx-auto" />
-											</td>
-										</tr>
-									</tbody>
+										<thead>
+											<tr className="border-b">
+												<th className="text-left p-4 font-semibold">Feature</th>
+												<th className="text-center p-4 font-semibold">
+													Free Trial
+												</th>
+												<th className="text-center p-4 font-semibold bg-primary/5">
+													Full Program (
+													<span className="line-through text-muted-foreground">
+														$199.99
+													</span>{" "}
+													$159.99)
+												</th>
+											</tr>
+										</thead>
+										<tbody className="divide-y">
+											<tr>
+												<td className="p-4 flex items-center gap-2">
+													<BookOpen className="h-4 w-4 text-primary" />
+													<span>Live Classes</span>
+												</td>
+												<td className="text-center p-4">1 class</td>
+												<td className="text-center p-4 bg-primary/5 font-semibold">
+													8-10 classes
+												</td>
+											</tr>
+											<tr>
+												<td className="p-4 flex items-center gap-2">
+													<Code className="h-4 w-4 text-primary" />
+													<span>Code Playground Access</span>
+												</td>
+												<td className="text-center p-4">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+												<td className="text-center p-4 bg-primary/5">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+											</tr>
+											<tr>
+												<td className="p-4 flex items-center gap-2">
+													<Gamepad2 className="h-4 w-4 text-primary" />
+													<span>Practice Games</span>
+												</td>
+												<td className="text-center p-4">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+												<td className="text-center p-4 bg-primary/5">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+											</tr>
+											<tr>
+												<td className="p-4 flex items-center gap-2">
+													<Sparkles className="h-4 w-4 text-primary" />
+													<span>AI Tutors (24/7)</span>
+												</td>
+												<td className="text-center p-4">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+												<td className="text-center p-4 bg-primary/5">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+											</tr>
+											<tr>
+												<td className="p-4 flex items-center gap-2">
+													<Users className="h-4 w-4 text-primary" />
+													<span>Full Python Curriculum</span>
+												</td>
+												<td className="text-center p-4">
+													<X className="h-5 w-5 text-gray-400 mx-auto" />
+												</td>
+												<td className="text-center p-4 bg-primary/5">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+											</tr>
+											<tr>
+												<td className="p-4 flex items-center gap-2">
+													<Sparkles className="h-4 w-4 text-primary" />
+													<span>AI & Ethics Modules</span>
+												</td>
+												<td className="text-center p-4">
+													<X className="h-5 w-5 text-gray-400 mx-auto" />
+												</td>
+												<td className="text-center p-4 bg-primary/5">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+											</tr>
+											<tr>
+												<td className="p-4 flex items-center gap-2">
+													<CheckCircle2 className="h-4 w-4 text-primary" />
+													<span>Certificate of Completion</span>
+												</td>
+												<td className="text-center p-4">
+													<X className="h-5 w-5 text-gray-400 mx-auto" />
+												</td>
+												<td className="text-center p-4 bg-primary/5">
+													<Check className="h-5 w-5 text-green-600 mx-auto" />
+												</td>
+											</tr>
+										</tbody>
 									</table>
 								</div>
 							</div>

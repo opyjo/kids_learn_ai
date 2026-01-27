@@ -72,7 +72,10 @@ export class ErrorBoundary extends Component<
 							</details>
 						)}
 						<div className="flex gap-3">
-							<Button onClick={this.handleReset} className="flex-1 min-h-[44px]">
+							<Button
+								onClick={this.handleReset}
+								className="flex-1 min-h-[44px]"
+							>
 								<RefreshCw className="mr-2 h-4 w-4" />
 								Try Again
 							</Button>

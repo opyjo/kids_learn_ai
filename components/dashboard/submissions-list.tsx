@@ -115,7 +115,8 @@ export const SubmissionsList = ({
 							No assignments submitted yet
 						</h4>
 						<p className="text-sm text-muted-foreground max-w-md mx-auto mb-6">
-							Complete a lesson and submit your code to see it here! Your teacher will review your work and provide feedback.
+							Complete a lesson and submit your code to see it here! Your
+							teacher will review your work and provide feedback.
 						</p>
 						<Button asChild variant="default" className="min-h-[44px]">
 							<a href="/lessons">Start Learning</a>

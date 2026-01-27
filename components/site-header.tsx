@@ -868,10 +868,16 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 														aria-label="Toggle Learn menu"
 													>
 														<div className="flex items-center gap-3">
-															<GraduationCap className="h-5 w-5" aria-hidden="true" />
+															<GraduationCap
+																className="h-5 w-5"
+																aria-hidden="true"
+															/>
 															<span>Learn</span>
 														</div>
-														<ChevronDown className="h-4 w-4 transition-transform duration-200" aria-hidden="true" />
+														<ChevronDown
+															className="h-4 w-4 transition-transform duration-200"
+															aria-hidden="true"
+														/>
 													</CollapsibleTrigger>
 													<CollapsibleContent className="mt-1 space-y-1 pl-4">
 														{/* Year 1 Section */}
@@ -992,7 +998,10 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 															<Library className="h-5 w-5" aria-hidden="true" />
 															<span>Resources</span>
 														</div>
-														<ChevronDown className="h-4 w-4 transition-transform duration-200" aria-hidden="true" />
+														<ChevronDown
+															className="h-4 w-4 transition-transform duration-200"
+															aria-hidden="true"
+														/>
 													</CollapsibleTrigger>
 													<CollapsibleContent className="mt-1 space-y-1 pl-4">
 														{NAV_ITEMS.resources.map((item) => (

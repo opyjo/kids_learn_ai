@@ -188,8 +188,10 @@ export const ContactForm = () => {
 										id="message-counter"
 										className={cn(
 											"text-xs text-muted-foreground",
-											charCount > maxLength * 0.9 && "text-amber-600 dark:text-amber-400",
-											charCount >= maxLength && "text-red-600 dark:text-red-400",
+											charCount > maxLength * 0.9 &&
+												"text-amber-600 dark:text-amber-400",
+											charCount >= maxLength &&
+												"text-red-600 dark:text-red-400",
 										)}
 									>
 										{charCount} / {maxLength}

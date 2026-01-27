@@ -9,7 +9,10 @@ interface PasswordStrengthProps {
 	className?: string;
 }
 
-export function PasswordStrength({ password, className }: PasswordStrengthProps) {
+export function PasswordStrength({
+	password,
+	className,
+}: PasswordStrengthProps) {
 	const strength = useMemo(() => {
 		if (!password) return { score: 0, label: "", checks: [] };
 
@@ -18,7 +21,10 @@ export function PasswordStrength({ password, className }: PasswordStrengthProps)
 			{ label: "Contains lowercase letter", test: /[a-z]/.test(password) },
 			{ label: "Contains uppercase letter", test: /[A-Z]/.test(password) },
 			{ label: "Contains number", test: /[0-9]/.test(password) },
-			{ label: "Contains special character", test: /[^a-zA-Z0-9]/.test(password) },
+			{
+				label: "Contains special character",
+				test: /[^a-zA-Z0-9]/.test(password),
+			},
 		];
 
 		const passed = checks.filter((check) => check.test).length;
@@ -70,11 +76,19 @@ export function PasswordStrength({ password, className }: PasswordStrengthProps)
 				{strength.checks.map((check, index) => (
 					<li key={index} className="flex items-center gap-2">
 						{check.test ? (
-							<Check className="h-3 w-3 text-green-600 dark:text-green-400 shrink-0" aria-hidden="true" />
+							<Check
+								className="h-3 w-3 text-green-600 dark:text-green-400 shrink-0"
+								aria-hidden="true"
+							/>
 						) : (
-							<X className="h-3 w-3 text-muted-foreground shrink-0" aria-hidden="true" />
+							<X
+								className="h-3 w-3 text-muted-foreground shrink-0"
+								aria-hidden="true"
+							/>
 						)}
-						<span className={check.test ? "text-foreground" : ""}>{check.label}</span>
+						<span className={check.test ? "text-foreground" : ""}>
+							{check.label}
+						</span>
 					</li>
 				))}
 			</ul>
