@@ -8,21 +8,22 @@ import {
 	BrainCircuit,
 	CheckCircle,
 	Clock,
+	Code,
 	Eye,
 	FileText,
 	MessageSquare,
 	Sparkles,
 	Upload,
+	X,
 } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 import { PythonEditor } from "@/components/code/python-editor";
-import { TrinketEditor } from "@/components/code/trinket-editor";
 import { TrinketPreview } from "@/components/dashboard/trinket-preview";
 import { TrinketSubmissionForm } from "@/components/dashboard/trinket-submission-form";
 import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
@@ -85,6 +86,22 @@ export function LessonViewer({
 	const [showConfetti, setShowConfetti] = useState(false);
 	const supabase = getSupabaseBrowserClient();
 	const [confirmOpen, setConfirmOpen] = useState(false);
+	const [isEditorOpen, setIsEditorOpen] = useState(false);
+	const [activeTab, setActiveTab] = useState("lesson");
+	const [scrollProgress, setScrollProgress] = useState(0);
+	const lessonScrollRef = useRef<HTMLDivElement>(null);
+
+	// Keyboard shortcut: Ctrl+E / Cmd+E to toggle code editor
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if ((e.ctrlKey || e.metaKey) && e.key === "e") {
+				e.preventDefault();
+				setIsEditorOpen((prev) => !prev);
+			}
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, []);
 
 	// Homework submission state
 	const [submission, setSubmission] = useState<{
@@ -762,10 +779,10 @@ export function LessonViewer({
 				) : courseSlug?.startsWith("level-") ||
 					courseSlug?.startsWith("term-") ||
 					courseSlug?.startsWith("year2-term-") ? (
-					// Level/Term courses with tabbed layout and code editor
-					<div className="grid lg:grid-cols-2 gap-6 items-start">
-						{/* Left Column: Lesson Content with Tabs */}
-						<Card className="flex flex-col rounded-2xl border shadow-2xl max-h-[calc(100vh-140px)]">
+					// Level/Term courses with tabbed layout and collapsible code editor
+					<div className="max-w-7xl mx-auto">
+						{/* Lesson Content - full width */}
+						<Card className="flex flex-col rounded-2xl border shadow-2xl">
 							<CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 rounded-t-2xl border-b-2 border-border flex-shrink-0 py-3">
 								<div className="flex items-start justify-between gap-3">
 									<div className="flex-1 min-w-0">
@@ -822,17 +839,18 @@ export function LessonViewer({
 							</CardHeader>
 
 							<Tabs
-								defaultValue="lesson"
+								value={activeTab}
+								onValueChange={setActiveTab}
 								className="flex-1 flex flex-col min-h-0"
 							>
-								<div className="px-4 pt-3 border-b border-border/50">
+								<div className="px-4 pt-3 border-b border-border/50 sticky top-0 z-10 bg-background rounded-t-2xl">
 									<TabsList className="grid w-full grid-cols-4 h-9 bg-muted/60">
 										<TabsTrigger
 											value="lesson"
 											className="flex items-center gap-1.5 text-xs font-semibold data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all"
 										>
 											<FileText className="h-3.5 w-3.5" />
-											<span>Lesson</span>
+											<span>{"\u2460"} Lesson</span>
 										</TabsTrigger>
 										<TabsTrigger
 											value="activity"
@@ -840,7 +858,7 @@ export function LessonViewer({
 											disabled={!lesson.class_activities}
 										>
 											<Sparkles className="h-3.5 w-3.5" />
-											<span>Activity</span>
+											<span>{"\u2461"} Activity</span>
 										</TabsTrigger>
 										<TabsTrigger
 											value="ai-activities"
@@ -848,7 +866,7 @@ export function LessonViewer({
 											disabled={!lesson.ai_activities}
 										>
 											<BrainCircuit className="h-3.5 w-3.5" />
-											<span>AI Lab</span>
+											<span>{"\u2462"} AI Lab</span>
 										</TabsTrigger>
 										<TabsTrigger
 											value="homework"
@@ -856,7 +874,7 @@ export function LessonViewer({
 											disabled={!lesson.take_home_assignment}
 										>
 											<BookOpen className="h-3.5 w-3.5" />
-											<span>Homework</span>
+											<span>{"\u2463"} Homework</span>
 										</TabsTrigger>
 									</TabsList>
 								</div>
@@ -865,7 +883,20 @@ export function LessonViewer({
 								<TabsContent
 									value="lesson"
 									className="flex-1 overflow-auto p-4 mt-0 relative"
+									ref={lessonScrollRef}
+									onScroll={(e) => {
+										const el = e.currentTarget;
+										const progress = el.scrollHeight - el.clientHeight;
+										setScrollProgress(progress > 0 ? (el.scrollTop / progress) * 100 : 0);
+									}}
 								>
+									{/* Reading progress bar */}
+									<div className="h-[3px] rounded-full bg-muted/30 mb-3 overflow-hidden">
+										<div
+											className="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-150 ease-out"
+											style={{ width: `${scrollProgress}%` }}
+										/>
+									</div>
 									{/* Confetti overlay */}
 									{showConfetti && (
 										<div className="pointer-events-none absolute inset-0 flex items-start justify-center z-10">
@@ -1043,6 +1074,20 @@ export function LessonViewer({
 											<ArrowRight className="h-3.5 w-3.5" />
 										</Link>
 									</div>
+
+									{/* Next step prompt */}
+									{lesson.class_activities && (
+										<div className="mt-6 pt-4 border-t border-border/50 flex justify-center">
+											<Button
+												onClick={() => setActiveTab("activity")}
+												className="rounded-xl text-sm font-semibold px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all"
+											>
+												<Sparkles className="h-4 w-4 mr-2" />
+												Ready for the activity?
+												<ArrowRight className="h-4 w-4 ml-2" />
+											</Button>
+										</div>
+									)}
 								</TabsContent>
 
 								{/* Activity Tab */}
@@ -1110,6 +1155,20 @@ export function LessonViewer({
 											</ReactMarkdown>
 										</div>
 									</div>
+
+									{/* Next step prompt */}
+									{lesson.ai_activities && (
+										<div className="mt-6 flex justify-center">
+											<Button
+												onClick={() => setActiveTab("ai-activities")}
+												className="rounded-xl text-sm font-semibold px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all"
+											>
+												<BrainCircuit className="h-4 w-4 mr-2" />
+												Explore the AI Lab
+												<ArrowRight className="h-4 w-4 ml-2" />
+											</Button>
+										</div>
+									)}
 								</TabsContent>
 
 								{/* AI Activities Tab */}
@@ -1187,6 +1246,20 @@ export function LessonViewer({
 											</ReactMarkdown>
 										</div>
 									</div>
+
+									{/* Next step prompt */}
+									{lesson.take_home_assignment && (
+										<div className="mt-6 flex justify-center">
+											<Button
+												onClick={() => setActiveTab("homework")}
+												className="rounded-xl text-sm font-semibold px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all"
+											>
+												<BookOpen className="h-4 w-4 mr-2" />
+												Check your homework
+												<ArrowRight className="h-4 w-4 ml-2" />
+											</Button>
+										</div>
+									)}
 								</TabsContent>
 
 								{/* Homework Tab */}
@@ -1396,22 +1469,46 @@ export function LessonViewer({
 							</output>
 						</Card>
 
-						{/* Right Column: Code Editor */}
-						<div className="sticky top-24 self-start w-full">
-							{lesson.requires_trinket ? (
-								<TrinketEditor
-									initialCode={lesson.starter_code}
-									className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
-								/>
-							) : (
-								<PythonEditor
-									initialCode={lesson.starter_code}
-									onCodeChange={handleCodeChange}
-									onRunComplete={handleRunComplete}
-									className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
-								/>
-							)}
-						</div>
+						{/* Floating Python Editor Trigger Button */}
+						{!isEditorOpen && (
+							<button
+								type="button"
+								onClick={() => setIsEditorOpen(true)}
+								className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-3 py-3 lg:px-5 rounded-full bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-700 text-white shadow-2xl hover:from-gray-800 hover:to-gray-700 dark:hover:from-gray-700 dark:hover:to-gray-600 transition-all hover:scale-105 hover:shadow-3xl"
+								title="Open Python Editor"
+							>
+								<Code className="h-5 w-5 text-emerald-400" />
+								<span className="text-sm font-semibold hidden lg:inline">Code Editor</span>
+							</button>
+						)}
+
+						{/* Floating Drawer - slides in from right, non-modal */}
+						{isEditorOpen && (
+							<div className="fixed top-0 right-0 h-full w-full max-w-md xl:max-w-xl z-50 flex flex-col bg-background border-l shadow-2xl animate-in slide-in-from-right duration-300">
+								<div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-700 text-white shrink-0">
+									<div className="flex items-center gap-2.5">
+										<Code className="h-4 w-4 text-emerald-400" />
+										<span className="text-sm font-semibold">Python Code Editor</span>
+									</div>
+									<button
+										type="button"
+										onClick={() => setIsEditorOpen(false)}
+										className="p-1 rounded-lg hover:bg-white/10 transition-colors"
+										aria-label="Close editor"
+									>
+										<X className="h-5 w-5" />
+									</button>
+								</div>
+								<div className="flex-1 min-h-0 overflow-hidden">
+									<PythonEditor
+										initialCode={lesson.starter_code}
+										onCodeChange={handleCodeChange}
+										onRunComplete={handleRunComplete}
+										className="flex flex-col h-full border-0 overflow-hidden"
+									/>
+								</div>
+							</div>
+						)}
 					</div>
 				) : (
 					// Non-level courses (legacy layout)
