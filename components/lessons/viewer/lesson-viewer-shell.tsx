@@ -33,7 +33,7 @@ export function LessonViewerShell({
 	const hasCodePanel = variant === "level-term" && Boolean(codePanel);
 
 	useEffect(() => {
-		const mediaQuery = window.matchMedia("(min-width: 1536px)");
+		const mediaQuery = window.matchMedia("(min-width: 1280px)");
 		const handleChange = () => setIsWideDesktop(mediaQuery.matches);
 
 		handleChange();
@@ -60,7 +60,7 @@ export function LessonViewerShell({
 					className={cn(
 						"grid gap-4 items-start",
 						hasCodePanel
-							? "2xl:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]"
+							? "xl:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]"
 							: "",
 					)}
 				>
@@ -92,7 +92,7 @@ export function LessonViewerShell({
 					</div>
 
 					{hasCodePanel && isWideDesktop && (
-						<aside className="hidden 2xl:block sticky top-24 self-start min-w-0">
+						<aside className="hidden xl:block sticky top-20 self-start min-w-0">
 							{codePanel}
 						</aside>
 					)}

@@ -226,9 +226,6 @@ export default async function LessonsPage() {
 															{lessonCount > 0 && (
 																<span>{lessonCount} lessons</span>
 															)}
-															{course.age_range && (
-																<span>Ages {course.age_range}</span>
-															)}
 														</div>
 
 														{/* Progress Bar for Enrolled */}

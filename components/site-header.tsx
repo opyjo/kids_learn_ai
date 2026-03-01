@@ -70,7 +70,7 @@ const NAV_ITEMS = {
 	about: { href: "/about", label: "About", Icon: Info },
 	blog: { href: "/blog", label: "Blog", Icon: Newspaper },
 	pricing: { href: "/pricing", label: "Pricing", Icon: DollarSign },
-	// Year 1 (Ages 9-10): Terms 1-4
+	// Year 1: Terms 1-4
 	year1Terms1to4: [
 		{
 			href: "/lessons/term-1-hello-python",
@@ -97,7 +97,7 @@ const NAV_ITEMS = {
 			description: "Advanced decision making",
 		},
 	],
-	// Year 1 (Ages 9-10): Terms 5-8
+	// Year 1: Terms 5-8
 	year1Terms5to8: [
 		{
 			href: "/lessons/term-5-ai-sneak-peek",
@@ -124,7 +124,7 @@ const NAV_ITEMS = {
 			description: "Capstone projects and portfolio",
 		},
 	],
-	// Year 2 (Ages 11-13): Terms 1-4
+	// Year 2: Terms 1-4
 	year2Terms1to4: [
 		{
 			href: "/lessons/year2-term-1-python-accelerated",
@@ -155,7 +155,7 @@ const NAV_ITEMS = {
 			comingSoon: true,
 		},
 	],
-	// Year 2 (Ages 11-13): Terms 5-8
+	// Year 2: Terms 5-8
 	year2Terms5to8: [
 		{
 			href: "/lessons/year2-term-5-ai-deep-dive",
@@ -308,7 +308,7 @@ const NavLink = ({ item, isActive }: { item: NavItem; isActive: boolean }) => (
 	<Link
 		href={item.href}
 		className={cn(
-			"group relative inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-150 cursor-pointer rounded-lg",
+			"group relative inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium transition-all duration-150 cursor-pointer rounded-lg",
 			"text-foreground hover:text-primary",
 			isActive ? "text-primary bg-primary/10" : "hover:bg-muted",
 		)}
@@ -318,7 +318,7 @@ const NavLink = ({ item, isActive }: { item: NavItem; isActive: boolean }) => (
 		{/* Animated underline */}
 		<span
 			className={cn(
-				"absolute bottom-0 left-4 right-4 h-0.5 bg-primary rounded-full transition-transform duration-300 origin-left",
+				"absolute bottom-0 left-3 right-3 h-0.5 bg-primary rounded-full transition-transform duration-300 origin-left",
 				isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
 			)}
 		/>
@@ -595,8 +595,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 						: "bg-background border-border",
 				)}
 			>
-				<div className="container mx-auto px-4 lg:px-6 py-4">
-					<div className="flex h-16 items-center justify-between">
+				<div className="container mx-auto px-4 lg:px-6 py-2">
+					<div className="flex h-12 items-center justify-between">
 						{/* Logo */}
 						<div className="flex items-center gap-3 shrink-0">
 							{leftExtras}
@@ -608,20 +608,20 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 								<img
 									src="/Logo.png"
 									alt="Kids Learn AI Logo"
-									className="h-10 w-auto transition-transform duration-200 group-hover:scale-105"
+									className="h-8 w-auto transition-transform duration-200 group-hover:scale-105"
 								/>
 							</Link>
 						</div>
 
 						{/* Desktop Navigation - only render after mount to prevent hydration mismatch */}
 						{mounted && (
-							<NavigationMenu className="hidden lg:flex bg-background/80 backdrop-blur-sm px-3 py-2 rounded-full border border-border/50 shadow-lg my-3 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
+							<NavigationMenu className="hidden lg:flex bg-background/80 backdrop-blur-sm px-2 py-1 rounded-full border border-border/50 shadow-lg my-0.5 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
 								<NavigationMenuList className="gap-1">
 									{/* Learn Mega Menu */}
 									<NavigationMenuItem>
 										<NavigationMenuTrigger
 											className={cn(
-												"h-auto px-4 py-2 text-sm font-medium transition-colors duration-150",
+												"h-auto px-3 py-1.5 text-sm font-medium transition-colors duration-150",
 												"data-[state=open]:bg-primary/10 data-[state=open]:text-primary",
 												isLearnActive && "bg-primary/10 text-primary",
 											)}
@@ -642,18 +642,12 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 																? "border-primary text-primary bg-primary/5"
 																: "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50",
 														)}
-														aria-label="View Year 1 courses for ages 9-10"
+														aria-label="View Year 1 courses"
 														tabIndex={0}
 													>
 														<span className="flex items-center gap-2">
 															<BookOpen className="h-4 w-4" />
 															Year 1
-															<Badge
-																variant="secondary"
-																className="text-xs px-1.5 py-0 font-normal"
-															>
-																Ages 9-10
-															</Badge>
 														</span>
 													</button>
 													<button
@@ -665,18 +659,12 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 																? "border-purple-600 text-purple-600 dark:border-purple-400 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/30"
 																: "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50",
 														)}
-														aria-label="View Year 2 courses for ages 11-13"
+														aria-label="View Year 2 courses"
 														tabIndex={0}
 													>
 														<span className="flex items-center gap-2">
 															<Brain className="h-4 w-4" />
 															Year 2
-															<Badge
-																variant="secondary"
-																className="text-xs px-1.5 py-0 font-normal"
-															>
-																Ages 11-13
-															</Badge>
 														</span>
 													</button>
 												</div>
@@ -763,7 +751,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
 									{/* Resources Mega Menu */}
 									<NavigationMenuItem>
-										<NavigationMenuTrigger className="h-auto px-4 py-2 text-sm font-medium transition-colors duration-150">
+										<NavigationMenuTrigger className="h-auto px-3 py-1.5 text-sm font-medium transition-colors duration-150">
 											<Library className="h-4 w-4 mr-2" />
 											Resources
 										</NavigationMenuTrigger>
@@ -883,7 +871,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 														{/* Year 1 Section */}
 														<div className="px-4 py-2 text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-2 mt-2">
 															<BookOpen className="h-3.5 w-3.5" />
-															Year 1 (Ages 9-10)
+															Year 1
 														</div>
 														<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
 															Terms 1-4: Foundations
@@ -911,7 +899,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 														{/* Year 2 Section */}
 														<div className="px-4 py-2 text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-2 mt-4 border-t border-border pt-4">
 															<Brain className="h-3.5 w-3.5" />
-															Year 2 (Ages 11-13)
+															Year 2
 														</div>
 														<div className="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
 															Terms 1-4: Python Mastery
