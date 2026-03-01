@@ -48,7 +48,7 @@ export const LessonBreadcrumbs = ({
 			: "Lessons");
 
 	return (
-		<Breadcrumb className={cn("py-2", className)}>
+		<Breadcrumb className={cn("py-1.5", className)}>
 			<BreadcrumbList className="flex-wrap">
 				{/* Home */}
 				<BreadcrumbItem>
@@ -109,7 +109,7 @@ export const LessonBreadcrumbs = ({
 					<ChevronRight className="h-4 w-4 text-muted-foreground/60" />
 				</BreadcrumbSeparator>
 				<BreadcrumbItem className="flex items-center gap-2">
-					<BreadcrumbPage className="text-sm font-semibold text-foreground max-w-[200px] sm:max-w-[300px] truncate">
+					<BreadcrumbPage className="text-sm font-semibold text-foreground max-w-[200px] sm:max-w-[400px] xl:max-w-none truncate">
 						{lessonTitle}
 					</BreadcrumbPage>
 

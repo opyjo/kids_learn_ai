@@ -64,7 +64,7 @@ export function LessonMainPanel({
 			<CardHeader className="border-b bg-background/70">
 				<div className="flex items-start justify-between gap-3">
 					<div className="min-w-0">
-						<CardTitle className="text-lg leading-tight">
+						<CardTitle className="text-base leading-tight">
 							Lesson {lesson.order_index}: {lesson.title}
 						</CardTitle>
 						<CardDescription className="mt-1 text-xs sm:text-sm">
@@ -82,7 +82,7 @@ export function LessonMainPanel({
 					)}
 				</div>
 			</CardHeader>
-			<CardContent className="p-4 sm:p-5 space-y-6 relative">
+			<CardContent className="p-4 space-y-4 relative">
 				{showConfetti && (
 					<div className="pointer-events-none absolute inset-0 flex items-start justify-center z-10">
 						<div className="mt-4 grid grid-cols-6 gap-2 text-xl">

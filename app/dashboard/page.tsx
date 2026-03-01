@@ -186,10 +186,10 @@ export default async function DashboardPage() {
 		<div className="min-h-screen bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-orange-500/5 dark:from-purple-600/8 dark:via-pink-600/8 dark:to-orange-600/8">
 			<SiteHeader />
 
-			<div className="mx-auto w-full max-w-6xl px-4 py-8">
+			<div className="mx-auto w-full max-w-6xl px-4 py-4 xl:py-8">
 				{/* Welcome Section */}
-				<div className="mb-8">
-					<h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+				<div className="mb-5">
+					<h2 className="text-2xl xl:text-3xl font-bold text-gray-900 dark:text-white mb-2">
 						Welcome back, {userName}! 👋
 					</h2>
 					<p className="text-gray-600 dark:text-gray-400">
@@ -240,7 +240,7 @@ export default async function DashboardPage() {
 				)}
 
 				{/* Stats Cards */}
-				<div className="grid md:grid-cols-3 gap-6 mb-8">
+				<div className="grid lg:grid-cols-3 gap-4 mb-8">
 					<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
 						<CardHeader className="space-y-2">
 							<CardTitle className="text-sm font-medium">
@@ -338,7 +338,7 @@ export default async function DashboardPage() {
 
 				{/* Enrolled Levels */}
 				{enrolledCourses && enrolledCourses.length > 0 && (
-					<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10 mb-8">
+					<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10 mb-5">
 						<CardHeader>
 							<CardTitle className="flex items-center gap-2">
 								<GraduationCap className="h-5 w-5 text-primary" />
@@ -349,7 +349,7 @@ export default async function DashboardPage() {
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<div className="grid md:grid-cols-2 gap-4">
+							<div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
 								{enrolledCourses.map((course) => {
 									const lessonsCount = lessonsPerCourse[course.id] || 0;
 									const completed = completionsPerCourse[course.id] || 0;
