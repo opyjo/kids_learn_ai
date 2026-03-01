@@ -483,6 +483,13 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	}, []);
 
 	useEffect(() => {
+		if (
+			!process.env.NEXT_PUBLIC_SUPABASE_URL ||
+			!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+		) {
+			return;
+		}
+
 		const supabase = getSupabaseBrowserClient();
 
 		const checkAuth = async () => {
