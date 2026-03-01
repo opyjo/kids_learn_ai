@@ -96,7 +96,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 		<div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 dark:from-blue-600/8 dark:via-purple-600/8 dark:to-pink-600/8">
 			<SiteHeader />
 
-			<div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+			<div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
 				{/* Back Link */}
 				<Link
 					href="/lessons"
@@ -107,11 +107,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
 				</Link>
 
 				{/* Header */}
-				<div className="mb-8">
+				<div className="mb-5">
 					<div className="flex items-start justify-between mb-4">
 						<div>
 							<div className="flex items-center gap-3 mb-2">
-								<h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+								<h1 className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
 									{course.title}
 								</h1>
 								{isEnrolled ? (
@@ -133,8 +133,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
 						{isEnrolled && lessons.length > 0 && (
 							<div className="flex items-center gap-3 bg-card rounded-full px-4 py-2 shadow-sm border border-border">
 								<div className="flex items-center gap-2">
-									<div className="relative w-10 h-10">
-										<svg className="transform -rotate-90 w-10 h-10">
+									<div className="relative w-9 h-9">
+										<svg className="transform -rotate-90 w-9 h-9">
 											<circle
 												cx="20"
 												cy="20"

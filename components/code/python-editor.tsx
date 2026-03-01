@@ -37,6 +37,7 @@ export function PythonEditor({
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [error, setError] = useState("");
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
+	const lineNumbersRef = useRef<HTMLDivElement>(null);
 	const { isReady: pyodideReady, error: pyodideError, runCode } = usePyodide();
 
 	useEffect(() => {
@@ -45,13 +46,12 @@ export function PythonEditor({
 		}
 	}, [pyodideError]);
 
-	// Auto-resize textarea
-	useEffect(() => {
-		if (textareaRef.current) {
-			textareaRef.current.style.height = "auto";
-			textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+	// Sync line numbers scroll with textarea scroll
+	const handleEditorScroll = () => {
+		if (textareaRef.current && lineNumbersRef.current) {
+			lineNumbersRef.current.style.transform = `translateY(-${textareaRef.current.scrollTop}px)`;
 		}
-	}, []);
+	};
 
 	const handleCodeChange = (newCode: string) => {
 		setCode(newCode);
@@ -196,9 +196,10 @@ export function PythonEditor({
 
 			<CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
 				{/* Code Editor */}
-				<div className="relative bg-gray-900 text-gray-100 flex-1 overflow-hidden">
+				<div className="relative bg-gray-900 text-gray-100 flex-1 min-h-0 overflow-hidden">
 					{/* Line numbers */}
 					<div
+						ref={lineNumbersRef}
 						className="absolute left-0 top-0 p-4 text-gray-500 font-mono text-sm pointer-events-none select-none border-r border-gray-700"
 						style={{ width: lineNumberWidth }}
 					>
@@ -215,11 +216,11 @@ export function PythonEditor({
 						value={code}
 						onChange={(e) => handleCodeChange(e.target.value)}
 						onKeyDown={handleKeyDown}
+						onScroll={handleEditorScroll}
 						className="w-full h-full bg-transparent text-gray-100 font-mono text-sm resize-none border-0 outline-none focus:ring-0"
 						placeholder="Write your Python code here..."
 						spellCheck={false}
 						style={{
-							minHeight: "250px",
 							lineHeight: "1.5",
 							tabSize: 4,
 							paddingLeft: lineNumberWidth + 16,

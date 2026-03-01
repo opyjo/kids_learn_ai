@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -444,6 +444,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	const [scrollProgress, setScrollProgress] = useState(0);
 	const [showAnnouncement, setShowAnnouncement] = useState(false);
 	const [activeYearTab, setActiveYearTab] = useState<YearTab>("year1");
+	const [isHidden, setIsHidden] = useState(false);
+	const lastScrollYRef = useRef(0);
 
 	const isActive = (href: string) =>
 		pathname === href || pathname.startsWith(`${href}/`);
@@ -481,6 +483,13 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	}, []);
 
 	useEffect(() => {
+		if (
+			!process.env.NEXT_PUBLIC_SUPABASE_URL ||
+			!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+		) {
+			return;
+		}
+
 		const supabase = getSupabaseBrowserClient();
 
 		const checkAuth = async () => {
@@ -561,14 +570,25 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 12);
+			const currentScrollY = window.scrollY;
+
+			setIsScrolled(currentScrollY > 12);
 
 			// Calculate scroll progress
 			const scrollHeight =
 				document.documentElement.scrollHeight - window.innerHeight;
 			const progress =
-				scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+				scrollHeight > 0 ? (currentScrollY / scrollHeight) * 100 : 0;
 			setScrollProgress(progress);
+
+			// Hide-on-scroll logic
+			const HIDE_THRESHOLD = 80;
+			if (currentScrollY > HIDE_THRESHOLD) {
+				setIsHidden(currentScrollY > lastScrollYRef.current);
+			} else {
+				setIsHidden(false);
+			}
+			lastScrollYRef.current = currentScrollY;
 		};
 
 		handleScroll();
@@ -590,6 +610,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 			<header
 				className={cn(
 					"sticky top-0 z-50 w-full border-b transition-all duration-300",
+					isHidden ? "-translate-y-full" : "translate-y-0",
 					isScrolled
 						? "bg-background/80 backdrop-blur-xl border-border/50 shadow-lg"
 						: "bg-background border-border",
