@@ -125,18 +125,6 @@ function buildProps(
 }
 
 describe("LessonViewer", () => {
-	it("renders lesson index with current, completed, and locked states", () => {
-		render(<LessonViewer {...buildProps()} />);
-
-		expect(screen.getAllByText("Lesson Navigator").length).toBeGreaterThan(0);
-		expect(screen.getByText(/Lesson 3 Locked/i)).toBeInTheDocument();
-
-		const currentLessonLink = screen.getByRole("link", {
-			name: /Variables/i,
-		});
-		expect(currentLessonLink).toHaveAttribute("aria-current", "page");
-	});
-
 	it("shows one canonical prev/next control set", () => {
 		render(<LessonViewer {...buildProps()} />);
 

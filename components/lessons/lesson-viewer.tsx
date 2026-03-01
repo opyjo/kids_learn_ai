@@ -32,13 +32,11 @@ export function LessonViewer({
 	const [_currentCode, setCurrentCode] = useState(lesson.starter_code);
 	const [showConfetti, setShowConfetti] = useState(false);
 	const [confirmOpen, setConfirmOpen] = useState(false);
-	const [courseLessonsState, setCourseLessonsState] = useState(courseLessons);
 
 	const [submission, setSubmission] = useState<LessonSubmission | null>(null);
 	const [showSubmissionPreview, setShowSubmissionPreview] = useState(false);
 
 	useEffect(() => {
-		setCourseLessonsState(courseLessons);
 		setIsCompleted(
 			courseLessons.find((item) => item.dbId === lesson.dbId)?.isCompleted ??
 				false,
@@ -48,18 +46,8 @@ export function LessonViewer({
 	const setCurrentLessonCompletion = useCallback(
 		(completed: boolean) => {
 			setIsCompleted(completed);
-			setCourseLessonsState((previous) =>
-				previous.map((item) =>
-					item.dbId === lesson.dbId
-						? {
-								...item,
-								isCompleted: completed,
-							}
-						: item,
-				),
-			);
 		},
-		[lesson.dbId],
+		[],
 	);
 
 	useEffect(() => {
@@ -292,7 +280,6 @@ export function LessonViewer({
 				lesson={lesson}
 				courseSlug={courseSlug}
 				courseTitle={courseTitle}
-				courseLessons={courseLessonsState}
 				navigation={navigation}
 				variant={variant}
 				mainPanel={mainPanel}
