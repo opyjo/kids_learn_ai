@@ -157,10 +157,10 @@ export const MarkdownRenderer = memo(
 					headingDepth === 1 ? "h2" : headingDepth === 2 ? "h3" : "h4";
 				const headingClass =
 					headingDepth === 1
-						? "text-lg font-semibold text-foreground"
+						? "text-[13px] font-semibold text-foreground"
 						: headingDepth === 2
-							? "text-base font-semibold text-foreground"
-							: "text-base font-medium text-foreground";
+							? "text-[12px] font-semibold text-foreground"
+							: "text-[12px] font-medium text-foreground";
 
 				elements.push(
 					<HeadingTag key={headingKey} className={headingClass}>

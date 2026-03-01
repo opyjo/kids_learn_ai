@@ -10,19 +10,23 @@ import {
 	useState,
 } from "react";
 import { toast } from "sonner";
+import type { ChatMessage } from "@/components/chat/chat-data";
+import {
+	getInitialMessageContent,
+	STARTER_PROMPTS,
+} from "@/components/chat/chat-data";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
 import {
 	DEFAULT_TUTOR_ID,
 	getTutorById,
-	type TutorCharacter,
 	type TutorId,
 } from "@/lib/constants/tutor-characters";
+import { cn } from "@/lib/utils";
 import { AnimatedTutor } from "./animated-tutor";
 import { Message } from "./message";
 
-// Thinking phrases that rotate during loading
 const THINKING_PHRASES = [
 	"Hmm, let me think... 🤔",
 	"Great question! Thinking... 💭",
@@ -32,120 +36,64 @@ const THINKING_PHRASES = [
 	"Cooking up an answer... 🍳",
 ];
 
-interface ChatMessage {
-	id: string;
-	role: "user" | "assistant";
-	content: string;
-	timestamp: number;
-	suggestions?: string[];
-}
-
-// Starter prompts for BrightByte - Mix of Python and AI questions
-const STARTER_PROMPTS: string[] = [
-	"What is a variable in Python?",
-	"How does AI use loops?",
-	"Can you help me debug my code?",
-	"What's the difference between a list and a tuple?",
-	"How do Python skills connect to AI?",
-	"Can AI help me learn Python?",
-];
-
-// Generate initial message based on tutor
-const getInitialMessage = (tutor: TutorCharacter): ChatMessage => ({
-	id: "initial",
-	role: "assistant",
-	content: `Hi there! I'm ${
-		tutor.name
-	}, your ${tutor.subject.toLowerCase()} tutor! ${tutor.emoji}✨\n\n${
-		tutor.description
-	}\n\nWhat ${tutor.subject.toLowerCase()} question can I help you with today?`,
-	timestamp: Date.now(),
-});
-
 export interface ChatInterfaceRef {
 	sendMessage: (message: string) => void;
 }
 
 interface ChatInterfaceProps {
 	tutorId?: TutorId;
+	messages: ChatMessage[];
+	onMessagesChange: (messages: ChatMessage[]) => void;
+	onClearChat?: () => void;
+	className?: string;
 }
 
+const makeId = () => {
+	if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+		return crypto.randomUUID();
+	}
+	return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+};
+
 export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
-	({ tutorId = DEFAULT_TUTOR_ID }, ref) => {
+	(
+		{
+			tutorId = DEFAULT_TUTOR_ID,
+			messages,
+			onMessagesChange,
+			onClearChat,
+			className,
+		},
+		ref,
+	) => {
 		const tutor = getTutorById(tutorId);
-		const INITIAL_MESSAGE = getInitialMessage(tutor);
-		const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
 		const [input, setInput] = useState("");
 		const [isLoading, setIsLoading] = useState(false);
 		const [remainingMessages, setRemainingMessages] = useState<number | null>(
 			null,
 		);
 		const [dailyLimit, setDailyLimit] = useState<number | null>(null);
-		const [isInitialized, setIsInitialized] = useState(false);
 		const [thinkingPhrase, setThinkingPhrase] = useState(THINKING_PHRASES[0]);
 		const scrollAreaRef = useRef<HTMLDivElement>(null);
 		const textareaRef = useRef<HTMLTextAreaElement>(null);
 		const abortControllerRef = useRef<AbortController | null>(null);
-		const hasMountedRef = useRef(false);
+		const messagesRef = useRef(messages);
 
-		// Load messages from localStorage on mount/tutor change
 		useEffect(() => {
-			const savedMessagesKey = `tutor-messages-${tutorId}`;
-			const savedMessages = localStorage.getItem(savedMessagesKey);
-			const currentTutor = getTutorById(tutorId);
+			messagesRef.current = messages;
+		}, [messages]);
 
-			if (savedMessages) {
-				try {
-					const parsed = JSON.parse(savedMessages);
-					if (Array.isArray(parsed) && parsed.length > 0) {
-						setMessages(parsed);
-					} else {
-						const newInitialMessage = getInitialMessage(currentTutor);
-						setMessages([newInitialMessage]);
-					}
-				} catch (error) {
-					console.error("Error loading saved messages:", error);
-					const newInitialMessage = getInitialMessage(currentTutor);
-					setMessages([newInitialMessage]);
+		useEffect(() => {
+			return () => {
+				if (abortControllerRef.current) {
+					abortControllerRef.current.abort();
+					abortControllerRef.current = null;
 				}
-			} else {
-				const newInitialMessage = getInitialMessage(currentTutor);
-				setMessages([newInitialMessage]);
-			}
+			};
+		}, []);
 
-			setInput("");
-			setIsLoading(false);
-			setIsInitialized(true);
-
-			// Abort any pending requests
-			if (abortControllerRef.current) {
-				abortControllerRef.current.abort();
-				abortControllerRef.current = null;
-			}
-
-			// Show notification when switching tutors (skip on initial mount)
-			if (hasMountedRef.current) {
-				toast.success(
-					`Switched to ${currentTutor.name} ${currentTutor.emoji}`,
-					{
-						description: `Your ${currentTutor.subject} tutor is ready!`,
-					},
-				);
-			}
-		}, [tutorId]);
-
-		// Save messages to localStorage whenever they change (only after initialization)
+		// biome-ignore lint/correctness/useExhaustiveDependencies: intentional scroll sync
 		useEffect(() => {
-			if (isInitialized && messages.length > 0) {
-				const savedMessagesKey = `tutor-messages-${tutorId}`;
-				localStorage.setItem(savedMessagesKey, JSON.stringify(messages));
-			}
-		}, [messages, tutorId, isInitialized]);
-
-		// Auto-scroll inside the ScrollArea when new messages arrive or loading state changes
-		// biome-ignore lint/correctness/useExhaustiveDependencies: Intentionally re-run scroll on messages/loading changes
-		useEffect(() => {
-			// Small delay to ensure DOM has updated
 			const timeoutId = setTimeout(() => {
 				const viewport = scrollAreaRef.current?.querySelector(
 					"[data-radix-scroll-area-viewport]",
@@ -157,16 +105,44 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 			return () => clearTimeout(timeoutId);
 		}, [messages.length, isLoading]);
 
-		// Auto-focus textarea on mount
 		useEffect(() => {
 			textareaRef.current?.focus();
 		}, []);
 
-		// Rotate thinking phrases while loading
+		useEffect(() => {
+			let isActive = true;
+
+			const loadUsage = async () => {
+				try {
+					const response = await fetch("/api/chat", { method: "GET" });
+					if (!response.ok) return;
+
+					const data = await response.json();
+					if (!isActive) return;
+
+					if (!data?.usage) {
+						setRemainingMessages(null);
+						setDailyLimit(null);
+						return;
+					}
+
+					setRemainingMessages(data.usage.remaining);
+					setDailyLimit(data.usage.limit);
+				} catch (error) {
+					console.error("Failed to load chat usage:", error);
+				}
+			};
+
+			void loadUsage();
+
+			return () => {
+				isActive = false;
+			};
+		}, []);
+
 		useEffect(() => {
 			if (!isLoading) return;
 
-			// Set initial random phrase
 			setThinkingPhrase(
 				THINKING_PHRASES[Math.floor(Math.random() * THINKING_PHRASES.length)],
 			);
@@ -180,38 +156,29 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 			return () => clearInterval(interval);
 		}, [isLoading]);
 
-		// Expose sendMessage method via ref
-		useImperativeHandle(ref, () => ({
-			sendMessage: (message: string) => {
-				handleSubmit(message);
-			},
-		}));
-
 		const handleSubmit = useCallback(
 			async (content?: string) => {
 				const messageContent = content || input.trim();
 
 				if (!messageContent || isLoading) return;
 
+				const currentMessages = messagesRef.current;
 				const userMessage: ChatMessage = {
-					id: crypto.randomUUID(),
+					id: makeId(),
 					role: "user",
 					content: messageContent,
 					timestamp: Date.now(),
 				};
 
-				// Update messages state and get the new array
-				const updatedMessages = [...messages, userMessage];
-				setMessages(updatedMessages);
+				const updatedMessages = [...currentMessages, userMessage];
+				onMessagesChange(updatedMessages);
 				setInput("");
 				setIsLoading(true);
 
-				// Reset textarea height
 				if (textareaRef.current) {
 					textareaRef.current.style.height = "60px";
 				}
 
-				// Create abort controller for this request
 				abortControllerRef.current = new AbortController();
 
 				try {
@@ -222,27 +189,26 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 						},
 						body: JSON.stringify({
 							messages: updatedMessages,
-							tutorId: tutorId,
+							tutorId,
 						}),
 						signal: abortControllerRef.current.signal,
 					});
 
 					if (!response.ok) {
-						// Handle daily limit exceeded (429)
 						if (response.status === 429) {
 							const data = await response.json();
-							// Update usage from response body
 							if (data.usage) {
 								setRemainingMessages(data.usage.remaining);
 								setDailyLimit(data.usage.limit);
 							}
-							const errorMessage: ChatMessage = {
-								id: crypto.randomUUID(),
+
+							const limitMessage: ChatMessage = {
+								id: makeId(),
 								role: "assistant",
 								content: data.content || data.error || "Daily limit reached",
 								timestamp: Date.now(),
 							};
-							setMessages((prev) => [...prev, errorMessage]);
+							onMessagesChange([...updatedMessages, limitMessage]);
 							return;
 						}
 						throw new Error("Failed to get response");
@@ -250,48 +216,52 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 
 					const data = await response.json();
 
-					// Update usage from response body
 					if (data.usage) {
 						setRemainingMessages(data.usage.remaining);
 						setDailyLimit(data.usage.limit);
 					}
 
 					const assistantMessage: ChatMessage = {
-						id: crypto.randomUUID(),
+						id: makeId(),
 						role: "assistant",
 						content: data.content,
 						timestamp: Date.now(),
 						suggestions: data.suggestions,
 					};
 
-					setMessages((prev) => [...prev, assistantMessage]);
+					onMessagesChange([...updatedMessages, assistantMessage]);
 				} catch (error) {
 					if (error instanceof Error && error.name === "AbortError") {
 						toast.info("Request cancelled");
-					} else {
-						console.error("Chat error:", error);
-						const errorMessage: ChatMessage = {
-							id: crypto.randomUUID(),
-							role: "assistant",
-							content:
-								"I'm having trouble responding right now. This might be a network issue. Please check your connection and try again!",
-							timestamp: Date.now(),
-						};
-						setMessages((prev) => [...prev, errorMessage]);
-						toast.error(
-							"Sorry, I'm having trouble responding right now. Please try again!",
-						);
-						// Remove the user message if there was an error
-						setMessages((prev) => prev.slice(0, -1));
+						return;
 					}
+
+					console.error("Chat error:", error);
+					const errorMessage: ChatMessage = {
+						id: makeId(),
+						role: "assistant",
+						content:
+							"I'm having trouble responding right now. This might be a network issue. Please check your connection and try again!",
+						timestamp: Date.now(),
+					};
+					onMessagesChange([...updatedMessages, errorMessage]);
+					toast.error(
+						"Sorry, I'm having trouble responding right now. Please try again!",
+					);
 				} finally {
 					setIsLoading(false);
 					abortControllerRef.current = null;
 					textareaRef.current?.focus();
 				}
 			},
-			[input, isLoading, messages, tutorId],
+			[input, isLoading, onMessagesChange, tutorId],
 		);
+
+		useImperativeHandle(ref, () => ({
+			sendMessage: (message: string) => {
+				handleSubmit(message);
+			},
+		}));
 
 		const handleKeyDown = useCallback(
 			(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -311,8 +281,6 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 		const handleInputChange = useCallback(
 			(e: React.ChangeEvent<HTMLTextAreaElement>) => {
 				setInput(e.target.value);
-
-				// Auto-resize textarea
 				e.target.style.height = "60px";
 				const newHeight = Math.min(e.target.scrollHeight, 200);
 				e.target.style.height = `${newHeight}px`;
@@ -327,100 +295,90 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 			[handleSubmit],
 		);
 
-		const handleClearChat = useCallback(() => {
-			if (messages.length <= 1) return;
-
-			const newInitialMessage = getInitialMessage(getTutorById(tutorId));
-			setMessages([newInitialMessage]);
-			setInput("");
-
-			// Clear localStorage for this tutor
-			const savedMessagesKey = `tutor-messages-${tutorId}`;
-			localStorage.removeItem(savedMessagesKey);
-
-			toast.success("Chat cleared");
-		}, [messages.length, tutorId]);
-
-		// Keyboard shortcut for clearing chat (Cmd/Ctrl + K)
 		useEffect(() => {
 			const handleKeyPress = (e: KeyboardEvent) => {
-				if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+				if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
 					e.preventDefault();
-					handleClearChat();
+					onClearChat?.();
 				}
 			};
 
 			window.addEventListener("keydown", handleKeyPress);
 			return () => window.removeEventListener("keydown", handleKeyPress);
-		}, [handleClearChat]);
+		}, [onClearChat]);
+
+		const lastMessage = messages[messages.length - 1];
 
 		return (
-			<div className="flex flex-col h-[calc(100vh-10rem)] sm:h-[calc(100vh-12rem)] md:h-[75vh] lg:h-[calc(100vh-16rem)] max-h-[500px] sm:max-h-[600px] md:max-h-[650px] lg:max-h-none max-w-4xl mx-auto border-2 border-primary/20 rounded-2xl bg-card shadow-xl shadow-primary/10 overflow-hidden">
-				{/* Header */}
+			<div
+				className={cn(
+					"flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border bg-card text-[12px] shadow-sm",
+					className,
+				)}
+			>
 				<div
-					className="flex items-center justify-between gap-2 sm:gap-3 p-2 sm:p-3 border-b shrink-0"
+					className="flex shrink-0 items-center justify-between gap-2 border-b px-2.5 py-1.5 sm:px-3"
 					style={{
-						borderColor: `${tutor.color.primary}40`,
-						background: `linear-gradient(to right, ${tutor.color.primary}10, ${tutor.color.primary}05, ${tutor.color.secondary}10)`,
+						borderColor: `${tutor.color.primary}35`,
+						background: `linear-gradient(to right, ${tutor.color.primary}12, ${tutor.color.secondary}08)`,
 					}}
 				>
-					<div className="flex items-center gap-2 sm:gap-3 flex-1">
-						<div className="scale-75 sm:scale-100 shrink-0">
-							<AnimatedTutor
-								tutor={tutor}
-								animationState="idle"
-								size="medium"
-							/>
+					<div className="flex min-w-0 items-center gap-2">
+						<div className="shrink-0 scale-[0.7] sm:scale-75">
+							<AnimatedTutor tutor={tutor} animationState="idle" size="small" />
 						</div>
-						<div className="flex-1">
-							<h2 className="text-base sm:text-lg font-bold text-foreground flex items-center gap-1.5 sm:gap-2">
-								{tutor.name}{" "}
-								<span className="text-lg sm:text-xl">{tutor.emoji}</span>
+						<div className="min-w-0">
+							<h2 className="truncate text-[14px] font-bold text-foreground">
+								{tutor.name} <span className="text-[14px]">{tutor.emoji}</span>
 							</h2>
-							<div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-								<p className="text-[10px] sm:text-xs text-muted-foreground font-medium">
+							<div className="flex flex-wrap items-center gap-1.5">
+								<p className="text-[14px] font-medium leading-none text-muted-foreground">
 									Your {tutor.subject} Tutor
 								</p>
 								{remainingMessages !== null && dailyLimit !== null && (
 									<span
-										className={`text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-full ${
+										className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium leading-none ${
 											remainingMessages <= 3
 												? "bg-destructive/10 text-destructive"
 												: "bg-muted text-muted-foreground"
 										}`}
 									>
-										{remainingMessages} / {dailyLimit} messages today
+										{remainingMessages} / {dailyLimit} today
 									</span>
 								)}
 							</div>
 						</div>
 					</div>
-					{messages.length > 1 && (
+					{!!onClearChat && messages.length > 1 && (
 						<Button
+							type="button"
 							variant="ghost"
 							size="sm"
-							onClick={handleClearChat}
-							className="h-7 sm:h-8 px-2 sm:px-3 text-[10px] sm:text-xs hover:bg-destructive/10 hover:text-destructive"
+							onClick={onClearChat}
+							className="h-7 px-2 text-[11px] hover:bg-destructive/10 hover:text-destructive"
 							aria-label="Clear chat"
 						>
-							<Trash2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1 sm:mr-1.5" />
+							<Trash2 className="mr-1 h-3 w-3" />
 							Clear
 						</Button>
 					)}
 				</div>
 
-				{/* Messages */}
 				<ScrollArea
-					className="flex-1 p-3 overflow-y-auto overflow-x-hidden"
+					className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-3 py-3 sm:px-4"
 					ref={scrollAreaRef}
 				>
-					<div className="space-y-4 min-h-full">
+					<div className="space-y-3 pb-2">
 						{messages.map((message) => (
 							<Message
 								key={message.id}
 								id={message.id}
 								role={message.role}
-								content={message.content}
+								content={
+									message.id === "initial" && messages.length === 1
+										? getInitialMessageContent(tutor)
+										: message.content
+								}
 								timestamp={message.timestamp}
 								tutor={tutor}
 							/>
@@ -428,9 +386,9 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 
 						{isLoading && (
 							<div
-								className="flex gap-3 p-4 rounded-xl border animate-in fade-in slide-in-from-bottom-2 duration-300"
+								className="flex gap-3 rounded-xl border p-3"
 								style={{
-									background: `linear-gradient(to bottom right, ${tutor.color.primary}05, ${tutor.color.primary}03, transparent)`,
+									background: `linear-gradient(to bottom right, ${tutor.color.primary}05, transparent)`,
 									borderColor: `${tutor.color.primary}20`,
 								}}
 							>
@@ -442,30 +400,30 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 									/>
 								</div>
 								<div className="flex-1">
-									<p className="text-sm font-bold text-foreground">
+									<p className="text-[12px] font-bold text-foreground">
 										{tutor.emoji} {tutor.name}
 									</p>
 									<div className="flex items-center gap-2">
-										<p className="text-sm text-muted-foreground animate-pulse">
+										<p className="text-[12px] text-muted-foreground animate-pulse">
 											{thinkingPhrase}
 										</p>
 										<div className="flex gap-1">
 											<span
-												className="w-2 h-2 rounded-full animate-bounce"
+												className="h-2 w-2 animate-bounce rounded-full"
 												style={{
 													backgroundColor: tutor.color.primary,
 													animationDelay: "0ms",
 												}}
 											/>
 											<span
-												className="w-2 h-2 rounded-full animate-bounce"
+												className="h-2 w-2 animate-bounce rounded-full"
 												style={{
 													backgroundColor: tutor.color.primary,
 													animationDelay: "150ms",
 												}}
 											/>
 											<span
-												className="w-2 h-2 rounded-full animate-bounce"
+												className="h-2 w-2 animate-bounce rounded-full"
 												style={{
 													backgroundColor: tutor.color.primary,
 													animationDelay: "300ms",
@@ -476,96 +434,76 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 								</div>
 							</div>
 						)}
-						{/* Follow-up Suggestions - Show after last assistant message */}
+
 						{!isLoading &&
 							messages.length > 1 &&
-							messages[messages.length - 1]?.role === "assistant" &&
-							messages[messages.length - 1]?.suggestions &&
-							messages[messages.length - 1].suggestions?.length > 0 && (
-								<div className="mt-4 space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
-									<p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+							lastMessage?.role === "assistant" &&
+							lastMessage.suggestions &&
+							lastMessage.suggestions.length > 0 && (
+								<div className="mt-2 space-y-1.5">
+									<p className="flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground">
 										<Lightbulb
-											className="h-4 w-4"
+											className="h-3.5 w-3.5"
 											style={{ color: tutor.color.primary }}
 										/>
-										Want to know more? Try asking:
+										Want to know more?
 									</p>
-									<div className="flex flex-wrap gap-2">
-										{messages[messages.length - 1].suggestions?.map(
-											(suggestion) => (
-												<button
-													key={suggestion}
-													onClick={() => handleStarterPrompt(suggestion)}
-													tabIndex={0}
-													aria-label={`Ask: ${suggestion}`}
-													className="px-3 py-1.5 rounded-full border text-xs font-medium transition-all hover:shadow-md focus:outline-none focus:ring-2"
-													style={{
-														borderColor: `${tutor.color.primary}40`,
-														background: `linear-gradient(to right, ${tutor.color.primary}05, transparent)`,
-													}}
-													onMouseEnter={(e) => {
-														e.currentTarget.style.borderColor = `${tutor.color.primary}60`;
-														e.currentTarget.style.background = `linear-gradient(to right, ${tutor.color.primary}15, ${tutor.color.primary}05)`;
-													}}
-													onMouseLeave={(e) => {
-														e.currentTarget.style.borderColor = `${tutor.color.primary}40`;
-														e.currentTarget.style.background = `linear-gradient(to right, ${tutor.color.primary}05, transparent)`;
-													}}
-												>
-													{suggestion}
-												</button>
-											),
-										)}
+									<div className="flex flex-wrap gap-1.5">
+										{lastMessage.suggestions.map((suggestion) => (
+											<button
+												key={suggestion}
+												onClick={() => handleStarterPrompt(suggestion)}
+												tabIndex={0}
+												aria-label={`Ask: ${suggestion}`}
+												className="rounded-full border px-2.5 py-1 text-[11px] font-medium leading-4 transition-all hover:shadow-sm focus:ring-2"
+												style={{
+													borderColor: `${tutor.color.primary}40`,
+													background: `linear-gradient(to right, ${tutor.color.primary}05, transparent)`,
+												}}
+											>
+												{suggestion}
+											</button>
+										))}
 									</div>
 								</div>
 							)}
-					</div>
 
-					{/* Starter Prompts - Show only when no user messages yet */}
-					{messages.length === 1 && !isLoading && (
-						<div className="mt-4 space-y-2 pb-2 px-1">
-							<p className="text-sm font-bold text-foreground flex items-center gap-2">
-								<Sparkles
-									className="h-4 w-4"
-									style={{ color: tutor.color.primary }}
-								/>
-								Try asking:
-							</p>
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-								{STARTER_PROMPTS.map((prompt) => (
-									<button
-										key={prompt}
-										onClick={() => handleStarterPrompt(prompt)}
-										tabIndex={0}
-										aria-label={`Ask: ${prompt}`}
-										className="text-left p-3 rounded-xl border-2 bg-gradient-to-br to-transparent transition-all text-sm font-medium hover:shadow-md focus:outline-none focus:ring-2"
-										style={{
-											borderColor: `${tutor.color.primary}40`,
-											background: `linear-gradient(to bottom right, ${tutor.color.primary}05, transparent)`,
-										}}
-										onMouseEnter={(e) => {
-											e.currentTarget.style.borderColor = `${tutor.color.primary}60`;
-											e.currentTarget.style.background = `linear-gradient(to bottom right, ${tutor.color.primary}10, transparent)`;
-										}}
-										onMouseLeave={(e) => {
-											e.currentTarget.style.borderColor = `${tutor.color.primary}40`;
-											e.currentTarget.style.background = `linear-gradient(to bottom right, ${tutor.color.primary}05, transparent)`;
-										}}
-									>
-										{prompt}
-									</button>
-								))}
+						{messages.length === 1 && !isLoading && (
+							<div className="mt-2 pb-1">
+								<div className="flex flex-wrap items-center gap-1.5 px-1">
+									<p className="flex items-center gap-1.5 text-[12px] font-semibold text-foreground">
+										<Sparkles
+											className="h-3.5 w-3.5"
+											style={{ color: tutor.color.primary }}
+										/>
+										Try asking:
+									</p>
+									{STARTER_PROMPTS.map((prompt) => (
+										<button
+											key={prompt}
+											onClick={() => handleStarterPrompt(prompt)}
+											tabIndex={0}
+											aria-label={`Ask: ${prompt}`}
+											className="rounded-full border px-2.5 py-1 text-[11px] font-medium leading-4 transition-all hover:shadow-sm focus:ring-2"
+											style={{
+												borderColor: `${tutor.color.primary}35`,
+												background: `linear-gradient(to right, ${tutor.color.primary}05, transparent)`,
+											}}
+										>
+											{prompt}
+										</button>
+									))}
+								</div>
 							</div>
-						</div>
-					)}
+						)}
+					</div>
 				</ScrollArea>
 
-				{/* Input Area */}
 				<div
-					className="p-3 border-t shrink-0"
+					className="shrink-0 border-t p-2.5"
 					style={{
-						borderColor: `${tutor.color.primary}40`,
-						background: `linear-gradient(to right, ${tutor.color.primary}05, transparent, ${tutor.color.secondary}05)`,
+						borderColor: `${tutor.color.primary}35`,
+						background: `linear-gradient(to right, ${tutor.color.primary}05, transparent)`,
 					}}
 				>
 					<div className="flex gap-2">
@@ -574,24 +512,22 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 							value={input}
 							onChange={handleInputChange}
 							onKeyDown={handleKeyDown}
-							placeholder={`Ask me about ${tutor.subject.toLowerCase()}... ${
-								tutor.emoji
-							}`}
-							className="min-h-[60px] max-h-[200px] resize-none rounded-xl"
+							placeholder={`Ask me about ${tutor.subject.toLowerCase()}... ${tutor.emoji}`}
+							className="min-h-[52px] max-h-[200px] resize-none rounded-xl text-[12px]"
 							style={{
-								borderColor: `${tutor.color.primary}40`,
+								borderColor: `${tutor.color.primary}35`,
 							}}
 							disabled={isLoading}
 							aria-label="Chat message input"
 						/>
 						<Button
+							type="button"
 							onClick={() => handleSubmit()}
 							disabled={!input.trim() || isLoading}
 							size="icon"
-							className="h-[60px] w-[60px] shrink-0 rounded-xl shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+							className="h-[52px] w-[52px] shrink-0 rounded-xl"
 							style={{
 								background: `linear-gradient(to bottom right, ${tutor.color.primary}, ${tutor.color.secondary})`,
-								boxShadow: `0 4px 6px ${tutor.color.primary}40`,
 							}}
 							aria-label="Send message"
 						>
@@ -602,13 +538,12 @@ export const ChatInterface = forwardRef<ChatInterfaceRef, ChatInterfaceProps>(
 							)}
 						</Button>
 					</div>
-					<p className="text-xs text-muted-foreground mt-2 flex items-center gap-2 flex-wrap">
-						<span className="font-medium">💡 Tip:</span>
-						<span>Enter to send, Shift+Enter for new line</span>
-						{messages.length > 1 && (
-							<span className="hidden sm:inline">• Cmd/Ctrl+K to clear</span>
-						)}
-						{isLoading && <span>• Esc to cancel</span>}
+					<p className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+						<span className="font-medium">Tip:</span>
+						<span>Enter to send</span>
+						<span>Shift+Enter for new line</span>
+						{messages.length > 1 && <span>Cmd/Ctrl+K to clear</span>}
+						{isLoading && <span>Esc to cancel</span>}
 					</p>
 				</div>
 			</div>

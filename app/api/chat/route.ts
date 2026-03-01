@@ -202,7 +202,7 @@ const checkRateLimit = async (identifier: string): Promise<boolean> => {
 
 async function checkAndIncrementDailyUsage(
 	userId: string,
-): Promise<{ allowed: boolean; remaining: number; limit: number }> {
+): Promise<{ allowed: boolean; remaining: number; limit: number } | null> {
 	try {
 		const supabase = await getSupabaseServerClient();
 
@@ -213,12 +213,7 @@ async function checkAndIncrementDailyUsage(
 
 		if (error || !data || data.length === 0) {
 			console.error("Error tracking daily usage:", error);
-			// Fail open
-			return {
-				allowed: true,
-				remaining: DAILY_MESSAGE_LIMIT,
-				limit: DAILY_MESSAGE_LIMIT,
-			};
+			return null;
 		}
 
 		const result = data[0];
@@ -229,13 +224,92 @@ async function checkAndIncrementDailyUsage(
 		};
 	} catch (error) {
 		console.error("Error checking daily usage:", error);
-		return {
-			allowed: true,
-			remaining: DAILY_MESSAGE_LIMIT,
-			limit: DAILY_MESSAGE_LIMIT,
-		};
+		return null;
 	}
 }
+
+async function checkDailyUsage(
+	userId: string,
+): Promise<{ allowed: boolean; remaining: number; limit: number } | null> {
+	try {
+		const supabase =
+			getSupabaseAdminClient() ?? (await getSupabaseServerClient());
+
+		const today = new Date().toISOString().slice(0, 10);
+		const { data, error } = await supabase
+			.from("chat_usage")
+			.select("message_count")
+			.eq("user_id", userId)
+			.eq("date", today)
+			.maybeSingle();
+
+		if (error) {
+			console.error("Error checking daily usage:", error);
+			return null;
+		}
+
+		const count = data?.message_count ?? 0;
+		return {
+			allowed: count < DAILY_MESSAGE_LIMIT,
+			remaining: Math.max(0, DAILY_MESSAGE_LIMIT - count),
+			limit: DAILY_MESSAGE_LIMIT,
+		};
+	} catch (error) {
+		console.error("Error checking daily usage:", error);
+		return null;
+	}
+}
+
+async function getCurrentDailyUsage(
+	userId: string,
+): Promise<{ remaining: number; limit: number } | null> {
+	try {
+		const supabase =
+			getSupabaseAdminClient() ?? (await getSupabaseServerClient());
+
+		const today = new Date().toISOString().slice(0, 10);
+		const { data, error } = await supabase
+			.from("chat_usage")
+			.select("message_count")
+			.eq("user_id", userId)
+			.eq("date", today)
+			.maybeSingle();
+
+		if (error) {
+			console.error("Error fetching current daily usage:", error);
+			return null;
+		}
+
+		const count = data?.message_count ?? 0;
+		return {
+			remaining: Math.max(0, DAILY_MESSAGE_LIMIT - count),
+			limit: DAILY_MESSAGE_LIMIT,
+		};
+	} catch (error) {
+		console.error("Error getting current daily usage:", error);
+		return null;
+	}
+}
+
+export const GET = async () => {
+	try {
+		const user = await getAuthUser();
+		if (!user) {
+			return NextResponse.json({ usage: null }, { status: 200 });
+		}
+
+		const isAdmin = await isUserAdmin(user.id);
+		if (isAdmin) {
+			return NextResponse.json({ usage: null }, { status: 200 });
+		}
+
+		const usage = await getCurrentDailyUsage(user.id);
+		return NextResponse.json({ usage }, { status: 200 });
+	} catch (error) {
+		console.error("Chat usage GET error:", error);
+		return NextResponse.json({ usage: null }, { status: 200 });
+	}
+};
 
 export const POST = async (req: NextRequest) => {
 	try {
@@ -278,14 +352,14 @@ export const POST = async (req: NextRequest) => {
 			}
 
 			if (user) {
-				dailyUsage = await checkAndIncrementDailyUsage(user.id);
-				if (!dailyUsage.allowed) {
+				const usageCheck = await checkDailyUsage(user.id);
+				if (usageCheck && !usageCheck.allowed) {
 					logSafetyEvent("block", "Daily limit exceeded", user.id);
 					return NextResponse.json(
 						{
 							role: "assistant",
 							content: `Daily limit reached!`,
-							usage: { remaining: 0, limit: dailyUsage.limit },
+							usage: { remaining: 0, limit: usageCheck.limit },
 						},
 						{ status: 429 },
 					);
@@ -354,6 +428,22 @@ export const POST = async (req: NextRequest) => {
 				role: "assistant",
 				content: FALLBACK_RESPONSES.completeSolution,
 			});
+		}
+
+		// All safety checks passed — now increment daily usage for non-admin users
+		if (!isAdmin && user) {
+			dailyUsage = await checkAndIncrementDailyUsage(user.id);
+			if (dailyUsage && !dailyUsage.allowed) {
+				logSafetyEvent("block", "Daily limit exceeded", user.id);
+				return NextResponse.json(
+					{
+						role: "assistant",
+						content: `Daily limit reached!`,
+						usage: { remaining: 0, limit: dailyUsage.limit },
+					},
+					{ status: 429 },
+				);
+			}
 		}
 
 		const systemPrompt =

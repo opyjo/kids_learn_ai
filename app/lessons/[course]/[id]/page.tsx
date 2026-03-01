@@ -1,5 +1,9 @@
 import { notFound, redirect } from "next/navigation";
 import { LessonViewer } from "@/components/lessons/lesson-viewer";
+import {
+	buildCourseLessons,
+	computeLessonNavigation,
+} from "@/components/lessons/viewer/lesson-viewer.helpers";
 import { checkLevelEnrollment, isFreeTrialLesson } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -57,6 +61,42 @@ export default async function LessonPage({ params }: LessonPageProps) {
 		redirect(`/lessons/${courseSlug}`);
 	}
 
+	// Fetch all lessons for navigation metadata
+	const { data: courseLessonRows, error: courseLessonRowsError } =
+		await supabase
+			.from("lessons")
+			.select("id, order_index, title")
+			.eq("course_id", course.id)
+			.order("order_index", { ascending: true });
+
+	if (courseLessonRowsError || !courseLessonRows) {
+		notFound();
+	}
+
+	// Fetch completed lessons for the current user
+	let completedLessonIds = new Set<string>();
+	if (user) {
+		const { data: completedData } = await supabase
+			.from("completed_lessons")
+			.select("lesson_id")
+			.eq("student_id", user.id);
+
+		completedLessonIds = new Set(
+			(completedData || []).map(
+				(item: { lesson_id: string }) => item.lesson_id,
+			),
+		);
+	}
+
+	const courseLessons = buildCourseLessons({
+		courseSlug,
+		lessons: courseLessonRows,
+		completedLessonIds,
+		isAccessibleLesson: (orderIndex: number) =>
+			isEnrolled || isFreeTrialLesson(courseSlug, orderIndex),
+	});
+	const navigation = computeLessonNavigation(lessonOrderIndex, courseLessons);
+
 	// Transform the lesson data to match the expected format
 	const transformedLesson = {
 		id: lesson.order_index, // Use order_index as the display ID
@@ -81,6 +121,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
 			userId={user?.id}
 			courseSlug={lesson.courses?.slug}
 			courseTitle={lesson.courses?.title}
+			navigation={navigation}
+			courseLessons={courseLessons}
 		/>
 	);
 }

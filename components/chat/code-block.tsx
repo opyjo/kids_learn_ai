@@ -25,10 +25,6 @@ export const CodeBlock = memo(({ code, language }: CodeBlockProps) => {
 			? "python"
 			: language?.trim().toLowerCase() || "python";
 
-	const displayLanguage =
-		normalizedLanguage === "python" ? "Python" : normalizedLanguage;
-	const isPython = normalizedLanguage === "python";
-
 	const handleCopy = () => {
 		navigator.clipboard.writeText(code);
 		setCopied(true);
@@ -36,16 +32,12 @@ export const CodeBlock = memo(({ code, language }: CodeBlockProps) => {
 	};
 
 	return (
-		<div className="relative group my-3">
-			<div className="flex items-center justify-between px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 border-t border-x border-border rounded-t-xl">
-				<span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide flex items-center gap-2">
-					<span className="text-base">{isPython ? "🐍" : "📋"}</span>{" "}
-					{displayLanguage}
-				</span>
+		<div className="relative my-2 overflow-hidden rounded-lg border border-border/70 bg-muted/10">
+			<div className="absolute right-3 top-3 z-10">
 				<button
 					onClick={handleCopy}
 					aria-label={copied ? "Copied to clipboard" : "Copy code"}
-					className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-md bg-background/50 hover:bg-background border border-border/50 transition-all hover:scale-105 cursor-pointer"
+					className="flex cursor-pointer items-center gap-1 rounded-md border border-border/50 bg-background px-1.5 py-0.5 text-[10px] font-medium transition-colors hover:bg-muted"
 				>
 					{copied ? (
 						<>
@@ -60,30 +52,26 @@ export const CodeBlock = memo(({ code, language }: CodeBlockProps) => {
 					)}
 				</button>
 			</div>
-			<div className="relative rounded-b-xl overflow-hidden border-x border-b border-border shadow-sm">
-				<SyntaxHighlighter
-					language={normalizedLanguage}
-					style={(theme === "dark" ? atomOneDark : atomOneLight) as any}
-					customStyle={{
-						margin: 0,
-						padding: "1rem",
-						fontSize: "0.875rem",
-						lineHeight: "1.7",
-						background:
-							theme === "dark"
-								? "linear-gradient(to bottom right, rgb(15 23 42), rgb(23 37 84))"
-								: "linear-gradient(to bottom right, rgb(248 250 252), rgb(239 246 255))",
-					}}
-					codeTagProps={{
-						style: {
-							fontFamily:
-								'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-						},
-					}}
-				>
-					{code}
-				</SyntaxHighlighter>
-			</div>
+			<SyntaxHighlighter
+				language={normalizedLanguage}
+				style={(theme === "dark" ? atomOneDark : atomOneLight) as any}
+				customStyle={{
+					margin: 0,
+					padding: "0.75rem",
+					paddingRight: "4.75rem",
+					fontSize: "12px",
+					lineHeight: "1.55",
+					background: theme === "dark" ? "rgb(15 23 42)" : "rgb(248 250 252)",
+				}}
+				codeTagProps={{
+					style: {
+						fontFamily:
+							'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+					},
+				}}
+			>
+				{code}
+			</SyntaxHighlighter>
 		</div>
 	);
 });

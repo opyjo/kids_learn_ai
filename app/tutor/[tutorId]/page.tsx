@@ -1,32 +1,57 @@
 "use client";
 
-import { Code2, GripVertical } from "lucide-react";
+import { GripVertical } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
-import { ChatInterface } from "@/components/chat/chat-interface";
+import { getInitialMessage } from "@/components/chat/chat-data";
+import {
+	ChatInterface,
+	type ChatInterfaceRef,
+} from "@/components/chat/chat-interface";
 import { PythonEditor } from "@/components/code/python-editor";
-import { MainLayout } from "@/components/layouts/main-layout";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getTutorById, type TutorId } from "@/lib/constants/tutor-characters";
+import { TutorWorkspaceShell } from "@/components/tutor/tutor-workspace-shell";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { useTutorThreads } from "@/hooks/use-tutor-threads";
+import {
+	DEFAULT_TUTOR_ID,
+	getTutorById,
+	type TutorId,
+} from "@/lib/constants/tutor-characters";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+
+const LARGE_WORKSPACE_QUERY = "(min-width: 1536px)";
 
 const TutorChatPage = () => {
 	const params = useParams();
-	const tutorId = params?.tutorId as TutorId;
-	const tutor = getTutorById(tutorId);
 	const router = useRouter();
+	const rawTutorId = params?.tutorId;
+	const parsedTutorId = (
+		Array.isArray(rawTutorId) ? rawTutorId[0] : rawTutorId
+	) as TutorId | undefined;
+	const tutorId = parsedTutorId ?? DEFAULT_TUTOR_ID;
+	const tutor = getTutorById(DEFAULT_TUTOR_ID);
 
 	const [isCheckingAccess, setIsCheckingAccess] = useState(true);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [code, setCode] = useState("");
-	const [showEditor, setShowEditor] = useState(false);
-	const chatInterfaceRef = useRef<{
-		sendMessage: (message: string) => void;
-	} | null>(null);
+	const [isEditorOpen, setIsEditorOpen] = useState(false);
+	const [isLargeWorkspace, setIsLargeWorkspace] = useState(false);
+	const chatInterfaceRef = useRef<ChatInterfaceRef | null>(null);
 
-	// Check if user is authenticated
+	const {
+		activeThread,
+		isHydrated,
+		createNewThread,
+		updateActiveMessages,
+		clearActiveThread,
+	} = useTutorThreads(DEFAULT_TUTOR_ID);
+
+	const activeMessages = useMemo(
+		() => activeThread?.messages ?? [getInitialMessage(tutor)],
+		[activeThread, tutor],
+	);
+
 	useEffect(() => {
 		const checkAuth = async () => {
 			const supabase = getSupabaseBrowserClient();
@@ -46,21 +71,31 @@ const TutorChatPage = () => {
 		checkAuth();
 	}, [router]);
 
-	// Validate tutorId - only brightbyte is valid
 	useEffect(() => {
-		if (tutorId !== "brightbyte") {
-			router.push("/tutor");
+		if (tutorId !== DEFAULT_TUTOR_ID) {
+			router.push(`/tutor/${DEFAULT_TUTOR_ID}`);
 		}
 	}, [tutorId, router]);
 
-	// Load saved code from localStorage
+	useEffect(() => {
+		const mediaQuery = window.matchMedia(LARGE_WORKSPACE_QUERY);
+		const syncLayout = (event: MediaQueryListEvent | MediaQueryList) => {
+			setIsLargeWorkspace(event.matches);
+		};
+
+		syncLayout(mediaQuery);
+		mediaQuery.addEventListener("change", syncLayout);
+		return () => mediaQuery.removeEventListener("change", syncLayout);
+	}, []);
+
 	useEffect(() => {
 		const savedCode = localStorage.getItem("tutor-playground-code");
 		if (savedCode) {
 			setCode(savedCode);
-		} else {
-			// Set default starter code
-			const starterCode = `# Welcome to the Python Playground!
+			return;
+		}
+
+		setCode(`# Welcome to the Python Playground!
 # Write your code here and test it alongside your AI Tutor 🐍
 
 print("Hello, ${tutor.name}!")
@@ -68,10 +103,24 @@ print("Hello, ${tutor.name}!")
 # Try some Python basics
 name = "Coder"
 print(f"Happy coding, {name}!")
-`;
-			setCode(starterCode);
-		}
+`);
 	}, [tutor.name]);
+
+	useEffect(() => {
+		const handleNewChatShortcut = (event: KeyboardEvent) => {
+			if (
+				(event.metaKey || event.ctrlKey) &&
+				event.shiftKey &&
+				event.key.toLowerCase() === "n"
+			) {
+				event.preventDefault();
+				createNewThread();
+			}
+		};
+
+		window.addEventListener("keydown", handleNewChatShortcut);
+		return () => window.removeEventListener("keydown", handleNewChatShortcut);
+	}, [createNewThread]);
 
 	const handleCodeChange = (newCode: string) => {
 		setCode(newCode);
@@ -79,92 +128,59 @@ print(f"Happy coding, {name}!")
 	};
 
 	const handleAskAboutCode = () => {
-		if (chatInterfaceRef.current && code.trim()) {
-			const message = `Can you help me with this code?\n\n\`\`\`python\n${code}\n\`\`\``;
-			chatInterfaceRef.current.sendMessage(message);
+		if (!code.trim() || !chatInterfaceRef.current) return;
+		const message = `Can you help me with this code?\n\n\`\`\`python\n${code}\n\`\`\``;
+		chatInterfaceRef.current.sendMessage(message);
+		if (!isLargeWorkspace) {
+			setIsEditorOpen(false);
 		}
 	};
 
-	const handleToggleEditor = () => {
-		setShowEditor(!showEditor);
-	};
-
-	// Show loading state while checking access
-	if (isCheckingAccess) {
+	if (isCheckingAccess || !isHydrated) {
 		return (
-			<MainLayout>
-				<div className="flex items-center justify-center min-h-[calc(100vh-5rem)]">
-					<div className="text-center">
-						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-						<p className="text-muted-foreground">Loading...</p>
-					</div>
+			<div className="flex min-h-dvh items-center justify-center bg-background">
+				<div className="text-center">
+					<div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-b-2 border-primary" />
+					<p className="text-sm text-muted-foreground">Loading workspace...</p>
 				</div>
-			</MainLayout>
+			</div>
 		);
 	}
 
 	if (!isAuthenticated) {
-		return null; // Will redirect in useEffect
+		return null;
 	}
 
 	return (
-		<MainLayout>
-			<div className="mx-auto w-full min-h-[calc(100vh-5rem)] px-3 py-2 sm:px-4 sm:py-3 md:px-6 lg:px-8 lg:py-4">
-				{/* Layout - Without Editor (Mobile) */}
-				{!showEditor && (
-					<div className="lg:hidden max-w-4xl mx-auto">
-						<ChatInterface ref={chatInterfaceRef} tutorId={tutorId} />
-						{/* Toggle Editor Button - below chat (only for BrightByte) */}
-						{tutorId === "brightbyte" && (
-							<div className="flex justify-center gap-2 mt-4">
-								<Button
-									variant="outline"
-									size="sm"
-									onClick={handleToggleEditor}
-									className="rounded-full"
-									aria-label="Show code playground"
-								>
-									<Code2 className="h-4 w-4 mr-2" />
-									Show Code Playground
-								</Button>
+		<TutorWorkspaceShell>
+			<div
+				className={`mx-auto h-full min-h-0 w-full p-2 sm:p-3 ${
+					isEditorOpen && isLargeWorkspace ? "max-w-7xl" : "max-w-5xl"
+				}`}
+			>
+				{isEditorOpen && isLargeWorkspace ? (
+					<PanelGroup direction="horizontal" className="h-full min-h-0">
+						<Panel id="chat-panel" defaultSize={60} minSize={35}>
+							<div className="h-full min-h-0 pr-1.5">
+								<ChatInterface
+									ref={chatInterfaceRef}
+									tutorId={DEFAULT_TUTOR_ID}
+									messages={activeMessages}
+									onMessagesChange={updateActiveMessages}
+									onClearChat={clearActiveThread}
+								/>
 							</div>
-						)}
-					</div>
-				)}
+						</Panel>
 
-				{/* Layout - With Editor (Mobile - stacked) - only for BrightByte */}
-				{showEditor && tutorId === "brightbyte" && (
-					<div className="lg:hidden max-w-[1600px] mx-auto">
-						<div className="grid grid-cols-1 gap-6">
-							{/* AI Tutor Section - at top */}
-							<div className="flex flex-col max-h-[60vh]">
-								<ChatInterface ref={chatInterfaceRef} tutorId={tutorId} />
+						<PanelResizeHandle className="group relative w-2">
+							<div className="absolute inset-y-0 left-1/2 w-1 -translate-x-1/2 bg-border transition-colors group-hover:bg-primary" />
+							<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-border bg-background p-1 transition-colors group-hover:border-primary">
+								<GripVertical className="h-4 w-4 text-muted-foreground group-hover:text-primary" />
 							</div>
+						</PanelResizeHandle>
 
-							{/* Python Playground Section */}
-							<div className="flex flex-col">
-								<div className="mb-2 flex items-center justify-between">
-									<div>
-										<h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-											<Code2 className="h-4 w-4 text-primary" />
-											Python Playground
-										</h2>
-										<p className="text-xs text-muted-foreground">
-											Test and experiment with Python code in real-time
-										</p>
-									</div>
-									<Button
-										variant="outline"
-										size="sm"
-										onClick={handleToggleEditor}
-										className="rounded-full shrink-0"
-										aria-label="Hide code playground"
-									>
-										<Code2 className="h-4 w-4 mr-2" />
-										Hide
-									</Button>
-								</div>
-
+						<Panel id="editor-panel" defaultSize={40} minSize={30}>
+							<div className="h-full min-h-0 pl-1.5">
 								<PythonEditor
 									initialCode={code}
 									onCodeChange={handleCodeChange}
@@ -174,142 +190,39 @@ print(f"Happy coding, {name}!")
 									onAskAboutCode={handleAskAboutCode}
 									className="h-full"
 								/>
-
-								{/* Quick Tips Card */}
-								<Card className="mt-4">
-									<CardHeader className="pb-3">
-										<CardTitle className="text-sm flex items-center gap-2">
-											💡 Quick Tips
-										</CardTitle>
-									</CardHeader>
-									<CardContent className="text-xs text-muted-foreground space-y-1">
-										<p>
-											• Use{" "}
-											<kbd className="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">
-												Ctrl+Enter
-											</kbd>{" "}
-											to run code
-										</p>
-										<p>• Ask {tutor.name} for help with any errors</p>
-										<p>• Copy code from the chat and test it here</p>
-									</CardContent>
-								</Card>
 							</div>
-						</div>
-					</div>
-				)}
-
-				{/* Layout - Without Editor (Desktop) */}
-				{!showEditor && (
-					<div className="hidden lg:block max-w-4xl mx-auto">
-						<ChatInterface ref={chatInterfaceRef} tutorId={tutorId} />
-						{/* Toggle Editor Button - below chat (only for BrightByte) */}
-						{tutorId === "brightbyte" && (
-							<div className="flex justify-center gap-2 mt-4">
-								<Button
-									variant="outline"
-									size="sm"
-									onClick={handleToggleEditor}
-									className="rounded-full"
-									aria-label="Show code playground"
-								>
-									<Code2 className="h-4 w-4 mr-2" />
-									Show Code Playground
-								</Button>
-							</div>
-						)}
-					</div>
-				)}
-
-				{/* Layout - With Editor (Desktop - resizable) - only for BrightByte */}
-				{showEditor && tutorId === "brightbyte" && (
-					<div className="hidden lg:block max-w-[1600px] mx-auto">
-						<PanelGroup
-							direction="horizontal"
-							className="min-h-[calc(100vh-12rem)]"
-						>
-							{/* AI Tutor Panel */}
-							<Panel defaultSize={50} minSize={30} id="chat-panel">
-								<div className="flex flex-col h-full pr-3">
-									<ChatInterface ref={chatInterfaceRef} tutorId={tutorId} />
-								</div>
-							</Panel>
-
-							{/* Resize Handle */}
-							<PanelResizeHandle className="w-2 relative group">
-								<div className="absolute inset-y-0 left-1/2 w-1 -translate-x-1/2 bg-border group-hover:bg-primary transition-colors" />
-								<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background border-2 border-border group-hover:border-primary rounded-full p-1 transition-colors">
-									<GripVertical className="h-4 w-4 text-muted-foreground group-hover:text-primary" />
-								</div>
-							</PanelResizeHandle>
-
-							{/* Python Playground Panel */}
-							<Panel defaultSize={50} minSize={30} id="editor-panel">
-								<div className="flex flex-col h-full pl-3">
-									<div className="mb-2 flex items-center justify-between">
-										<div>
-											<h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-												<Code2 className="h-4 w-4 text-primary" />
-												Python Playground
-											</h2>
-											<p className="text-xs text-muted-foreground">
-												Test and experiment with Python code in real-time
-											</p>
-										</div>
-										<Button
-											variant="outline"
-											size="sm"
-											onClick={handleToggleEditor}
-											className="rounded-full shrink-0"
-											aria-label="Hide code playground"
-										>
-											<Code2 className="h-4 w-4 mr-2" />
-											Hide
-										</Button>
-									</div>
-
-									<PythonEditor
-										initialCode={code}
-										onCodeChange={handleCodeChange}
-										onRunComplete={(output, isSuccess) => {
-											console.log("Code execution:", { output, isSuccess });
-										}}
-										onAskAboutCode={handleAskAboutCode}
-										className="h-full flex-1"
-									/>
-
-									{/* Quick Tips Card */}
-									<Card className="mt-4">
-										<CardHeader className="pb-3">
-											<CardTitle className="text-sm flex items-center gap-2">
-												💡 Quick Tips
-											</CardTitle>
-										</CardHeader>
-										<CardContent className="text-xs text-muted-foreground space-y-1">
-											<p>
-												• Use{" "}
-												<kbd className="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">
-													Ctrl+Enter
-												</kbd>{" "}
-												to run code
-											</p>
-											<p>• Drag the center divider to resize panels</p>
-											<p>
-												• Click{" "}
-												<span className="font-semibold text-primary">
-													Ask {tutor.name}
-												</span>{" "}
-												to get help
-											</p>
-										</CardContent>
-									</Card>
-								</div>
-							</Panel>
-						</PanelGroup>
-					</div>
+						</Panel>
+					</PanelGroup>
+				) : (
+					<ChatInterface
+						ref={chatInterfaceRef}
+						tutorId={DEFAULT_TUTOR_ID}
+						messages={activeMessages}
+						onMessagesChange={updateActiveMessages}
+						onClearChat={clearActiveThread}
+					/>
 				)}
 			</div>
-		</MainLayout>
+
+			<Sheet
+				open={isEditorOpen && !isLargeWorkspace}
+				onOpenChange={(open) => setIsEditorOpen(open)}
+			>
+				<SheetContent side="right" className="w-full p-0 sm:max-w-2xl">
+					<div className="h-full min-h-0 p-3">
+						<PythonEditor
+							initialCode={code}
+							onCodeChange={handleCodeChange}
+							onRunComplete={(output, isSuccess) => {
+								console.log("Code execution:", { output, isSuccess });
+							}}
+							onAskAboutCode={handleAskAboutCode}
+							className="h-full"
+						/>
+					</div>
+				</SheetContent>
+			</Sheet>
+		</TutorWorkspaceShell>
 	);
 };
 
