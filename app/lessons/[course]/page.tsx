@@ -205,130 +205,144 @@ export default async function CoursePage({ params }: CoursePageProps) {
 					</Card>
 				)}
 
-				{/* Lessons List */}
-				{lessons.length === 0 ? (
-					<Card className="p-8 text-center">
-						<CardContent className="pt-6">
-							<BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
-							<h3 className="text-lg font-semibold text-foreground mb-2">
-								No Lessons Yet
-							</h3>
-							<p className="text-muted-foreground">
-								Lessons for this level are coming soon. Check back later!
-							</p>
-						</CardContent>
-					</Card>
-				) : (
-					<div className="space-y-3">
-						{lessons.map((lesson) => (
-							<Card
-								key={lesson.id}
-								className={`group relative overflow-hidden transition-all ${
-									isEnrolled
-										? "hover:shadow-lg hover:scale-[1.01]"
-										: "opacity-80"
-								} ${
+			{/* Lessons Grid */}
+			{lessons.length === 0 ? (
+				<Card className="p-8 text-center">
+					<CardContent className="pt-6">
+						<BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+						<h3 className="text-lg font-semibold text-foreground mb-2">
+							No Lessons Yet
+						</h3>
+						<p className="text-muted-foreground">
+							Lessons for this level are coming soon. Check back later!
+						</p>
+					</CardContent>
+				</Card>
+			) : (
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					{lessons.map((lesson) => (
+						<Card
+							key={lesson.id}
+							className={`group relative overflow-hidden transition-all flex flex-col ${
+								isEnrolled
+									? "hover:shadow-lg hover:-translate-y-0.5"
+									: "opacity-80"
+							} ${
+								lesson.status === "completed"
+									? "border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-950/20"
+									: "bg-card"
+							}`}
+						>
+							{/* Gradient Accent Bar */}
+							<div
+								className={`absolute top-0 left-0 right-0 h-1 ${
 									lesson.status === "completed"
-										? "border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-950/20"
-										: "bg-card"
+										? "bg-gradient-to-r from-green-500 to-emerald-500"
+										: lesson.isFreeTrial && !isEnrolled
+											? "bg-gradient-to-r from-green-400 to-emerald-400"
+											: isEnrolled
+												? "bg-gradient-to-r from-primary to-accent"
+												: "bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700"
 								}`}
-							>
-								{/* Gradient Accent Bar */}
-								<div
-									className={`absolute top-0 left-0 right-0 h-1 ${
-										lesson.status === "completed"
-											? "bg-gradient-to-r from-green-500 to-emerald-500"
-											: lesson.isFreeTrial && !isEnrolled
-												? "bg-gradient-to-r from-green-400 to-emerald-400"
+							/>
+
+							<CardContent className="p-5 flex flex-col gap-3 flex-1">
+								{/* Top row: number + status */}
+								<div className="flex items-center justify-between">
+									<div
+										className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${
+											lesson.status === "completed"
+												? "bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400"
 												: isEnrolled
-													? "bg-gradient-to-r from-primary to-accent"
-													: "bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700"
-									}`}
-								/>
-
-								<CardContent className="p-4">
-									<div className="flex items-center gap-4">
-										{/* Lesson Number */}
-										<div
-											className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${
-												lesson.status === "completed"
-													? "bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400"
-													: isEnrolled
-														? "bg-primary/10 text-primary"
-														: "bg-muted text-muted-foreground"
-											}`}
-										>
-											{lesson.order_index}
-										</div>
-
-										{/* Content */}
-										<div className="flex-1 min-w-0">
-											<div className="flex items-center gap-2 mb-1">
-												<h3 className="font-semibold text-foreground">
-													{lesson.title}
-												</h3>
-												{lesson.status === "completed" && (
-													<CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
-												)}
-												{lesson.isFreeTrial && !isEnrolled && (
-													<Badge className="bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300 text-xs">
-														<Sparkles className="h-3 w-3 mr-1" />
-														FREE
-													</Badge>
-												)}
-											</div>
-											<p className="text-sm text-muted-foreground line-clamp-1">
-												{lesson.description}
-											</p>
-										</div>
-
-										{/* Action */}
-										<div className="flex items-center gap-3">
-											{isEnrolled ? (
-												<Button asChild size="sm" className="rounded-full">
-													<Link
-														href={`/lessons/${courseSlug}/${lesson.order_index}`}
-													>
-														{lesson.status === "completed" ? (
-															<>Review</>
-														) : (
-															<>
-																<Play className="h-3 w-3 mr-1" />
-																Start
-															</>
-														)}
-													</Link>
-												</Button>
-											) : lesson.isFreeTrial ? (
-												<Button asChild size="sm" className="rounded-full">
-													<Link
-														href={`/lessons/${courseSlug}/${lesson.order_index}`}
-													>
-														<Sparkles className="h-3 w-3 mr-1" />
-														Try Free
-													</Link>
-												</Button>
-											) : (
-												<Button
-													variant="ghost"
-													size="sm"
-													disabled
-													className="rounded-full"
-												>
-													<Lock className="h-3 w-3 mr-1" />
-													Locked
-												</Button>
-											)}
-										</div>
+													? "bg-primary/10 text-primary"
+													: "bg-muted text-muted-foreground"
+										}`}
+									>
+										{lesson.order_index}
 									</div>
-								</CardContent>
-							</Card>
-						))}
-					</div>
-				)}
+									<div className="flex items-center gap-1.5">
+										{lesson.status === "completed" && (
+											<CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+										)}
+										{lesson.isFreeTrial && !isEnrolled && (
+											<Badge className="bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300 text-xs">
+												<Sparkles className="h-3 w-3 mr-1" />
+												FREE
+											</Badge>
+										)}
+									</div>
+								</div>
 
-				{/* Enrollment CTA at bottom for non-enrolled */}
-				{!isEnrolled && lessons.length > 0 && (
+								{/* Title + Description */}
+								<div className="flex-1">
+									<h3 className="font-semibold text-foreground mb-1 leading-snug">
+										{lesson.title}
+									</h3>
+									<p className="text-sm text-muted-foreground line-clamp-2">
+										{lesson.description}
+									</p>
+								</div>
+
+								{/* Action Button */}
+								<div className="pt-2 border-t border-border/50">
+									{isEnrolled ? (
+										<Button
+											asChild
+											size="sm"
+											variant={
+												lesson.status === "completed" ? "outline" : "default"
+											}
+											className="w-full rounded-lg"
+										>
+											<Link
+												href={`/lessons/${courseSlug}/${lesson.order_index}`}
+											>
+												{lesson.status === "completed" ? (
+													<>
+														<CheckCircle className="h-3.5 w-3.5 mr-1.5" />
+														Review
+													</>
+												) : (
+													<>
+														<Play className="h-3.5 w-3.5 mr-1.5" />
+														Start Lesson
+													</>
+												)}
+											</Link>
+										</Button>
+									) : lesson.isFreeTrial ? (
+										<Button
+											asChild
+											size="sm"
+											className="w-full rounded-lg"
+										>
+											<Link
+												href={`/lessons/${courseSlug}/${lesson.order_index}`}
+											>
+												<Sparkles className="h-3.5 w-3.5 mr-1.5" />
+												Try Free
+											</Link>
+										</Button>
+									) : (
+										<Button
+											variant="ghost"
+											size="sm"
+											disabled
+											className="w-full rounded-lg text-muted-foreground"
+										>
+											<Lock className="h-3.5 w-3.5 mr-1.5" />
+											Locked
+										</Button>
+									)}
+								</div>
+							</CardContent>
+						</Card>
+					))}
+				</div>
+			)}
+
+			{/* Enrollment CTA at bottom for non-enrolled */}
+			{!isEnrolled && lessons.length > 0 && (
 					<Card className="mt-8 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
 						<CardContent className="p-6 text-center">
 							<h3 className="text-lg font-bold text-foreground mb-2">
