@@ -23,7 +23,7 @@ export const Message = memo(
 		return (
 			<div
 				className={cn(
-					"flex gap-3 p-4 rounded-xl transition-all relative z-10 animate-in fade-in slide-in-from-bottom-2 duration-300",
+					"relative z-10 flex gap-2.5 rounded-xl p-3 transition-all animate-in fade-in slide-in-from-bottom-2 duration-300",
 					isAssistant
 						? "bg-gradient-to-br from-primary/5 via-primary/3 to-transparent border border-primary/10"
 						: "bg-gradient-to-br from-secondary/30 to-transparent border border-secondary/20",
@@ -31,7 +31,7 @@ export const Message = memo(
 			>
 				<Avatar
 					className={cn(
-						"h-9 w-9 shrink-0 shadow-sm overflow-visible",
+						"h-8 w-8 shrink-0 overflow-visible shadow-sm",
 						isAssistant
 							? "bg-transparent ring-2 ring-primary/20"
 							: "bg-gradient-to-br from-accent to-accent/80 ring-2 ring-accent/20",
@@ -52,16 +52,16 @@ export const Message = memo(
 					</AvatarFallback>
 				</Avatar>
 
-				<div className="flex-1 space-y-2 overflow-hidden min-w-0">
+				<div className="min-w-0 flex-1 space-y-1.5 overflow-hidden">
 					<div className="flex items-center justify-between gap-2">
-						<p className="text-sm font-bold text-foreground">
+						<p className="text-[12px] font-bold text-foreground">
 							{isAssistant
 								? tutor
 									? `${tutor.emoji} ${tutor.name}`
 									: "🤖 AI Tutor"
 								: "You"}
 						</p>
-						<time className="text-xs text-muted-foreground">
+						<time className="text-[11px] text-muted-foreground">
 							{new Date(timestamp).toLocaleTimeString([], {
 								hour: "2-digit",
 								minute: "2-digit",

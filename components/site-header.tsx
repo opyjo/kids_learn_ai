@@ -739,12 +739,12 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 										</NavigationMenuItem>
 									)}
 
-									{/* Ask BrightByte - Top-level navigation */}
+									{/* BrightByte - Top-level navigation */}
 									<NavigationMenuItem>
 										<NavLink
 											item={{
 												href: "/tutor",
-												label: "Ask BrightByte",
+												label: "BrightByte",
 												Icon: Sparkles,
 											}}
 											isActive={isActive("/tutor")}

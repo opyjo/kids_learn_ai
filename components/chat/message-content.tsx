@@ -43,7 +43,7 @@ export const MessageContent = memo(({ content, role }: MessageContentProps) => {
 	}, [content, role]);
 
 	return (
-		<div className="text-sm leading-relaxed break-words w-full space-y-4">
+		<div className="w-full break-words space-y-2.5 text-[12px] leading-5">
 			{parsedContent}
 		</div>
 	);
