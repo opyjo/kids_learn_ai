@@ -878,18 +878,18 @@ export function LessonViewer({
 						</Card>
 
 						{courseSlug === "python-foundations" ? (
-							<div className="sticky top-24 self-start w-full">
+							<div className="sticky top-24 self-start w-full max-h-[calc(100vh-140px)]">
 								{lesson.requires_trinket ? (
 									<TrinketEditor
 										initialCode={lesson.starter_code}
-										className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
+										className="h-full flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
 									/>
 								) : (
 									<PythonEditor
 										initialCode={lesson.starter_code}
 										onCodeChange={handleCodeChange}
 										onRunComplete={handleRunComplete}
-										className="flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
+										className="h-full flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
 									/>
 								)}
 							</div>

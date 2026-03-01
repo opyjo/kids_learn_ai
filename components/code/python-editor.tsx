@@ -196,7 +196,7 @@ export function PythonEditor({
 
 			<CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
 				{/* Code Editor */}
-				<div className="relative bg-gray-900 text-gray-100 flex-1 overflow-hidden">
+				<div className="relative bg-gray-900 text-gray-100 flex-1 min-h-0 overflow-hidden">
 					{/* Line numbers */}
 					<div
 						className="absolute left-0 top-0 p-4 text-gray-500 font-mono text-sm pointer-events-none select-none border-r border-gray-700"
