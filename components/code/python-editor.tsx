@@ -129,26 +129,30 @@ export function PythonEditor({
 
 	return (
 		<Card className={`flex flex-col ${className}`}>
-			<CardHeader className="bg-card border-b shrink-0">
+			<CardHeader className="bg-card border-b shrink-0 px-4 py-2">
 				<div className="flex items-center justify-between">
-					<CardTitle className="flex items-center gap-3 text-base">
-						<div className="flex items-center gap-2">
-							<div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-							<span className="font-semibold tracking-tight">
-								Python Code Editor
-							</span>
-						</div>
-					</CardTitle>
 					<div className="flex items-center gap-2">
+						<div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
+						<span className="font-semibold tracking-tight text-sm">
+							Python Code Editor
+						</span>
+						<span className="text-xs text-gray-500 hidden sm:inline">
+							<kbd className="px-1 py-0.5 bg-gray-100 rounded text-[10px]">
+								Ctrl+Enter
+							</kbd>{" "}
+							to run
+						</span>
+					</div>
+					<div className="flex items-center gap-1.5">
 						{onAskAboutCode && (
 							<Button
 								variant="outline"
 								size="sm"
 								onClick={onAskAboutCode}
-								className="rounded-full border-primary/40 hover:bg-primary/10 hover:border-primary"
+								className="rounded-full border-primary/40 hover:bg-primary/10 hover:border-primary h-7 px-2 text-xs"
 								disabled={!code.trim()}
 							>
-								<MessageSquare className="h-4 w-4 mr-2" />
+								<MessageSquare className="h-3.5 w-3.5 mr-1" />
 								Ask BrightByte
 							</Button>
 						)}
@@ -156,51 +160,44 @@ export function PythonEditor({
 							variant="outline"
 							size="sm"
 							onClick={handleReset}
-							className="rounded-full"
+							className="rounded-full h-7 w-7 p-0"
 							aria-label="Reset code"
 						>
-							<RotateCcw className="h-4 w-4" />
+							<RotateCcw className="h-3.5 w-3.5" />
 						</Button>
 						<Button
 							variant="outline"
 							size="sm"
 							onClick={handleClear}
-							className="rounded-full"
+							className="rounded-full h-7 w-7 p-0"
 							aria-label="Clear code"
 							disabled={!code.trim()}
 						>
-							<Trash2 className="h-4 w-4" />
+							<Trash2 className="h-3.5 w-3.5" />
 						</Button>
 						<Button
 							onClick={handleRunCode}
 							disabled={isRunning || !pyodideReady}
-							className="rounded-full bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600"
+							className="rounded-full bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 h-7 w-7 p-0"
 							aria-label={isRunning ? "Running code" : "Run code"}
 						>
 							{isRunning ? (
-								<Loader2 className="h-4 w-4 animate-spin" />
+								<Loader2 className="h-3.5 w-3.5 animate-spin" />
 							) : (
-								<Play className="h-4 w-4" />
+								<Play className="h-3.5 w-3.5" />
 							)}
 						</Button>
 					</div>
 				</div>
-				<div className="text-sm text-gray-500">
-					Press{" "}
-					<kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">
-						Ctrl+Enter
-					</kbd>{" "}
-					to run code
-				</div>
 			</CardHeader>
 
-			<CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
+			<CardContent className="p-0 flex-1 flex flex-col overflow-y-auto min-h-0">
 				{/* Code Editor */}
-				<div className="relative bg-gray-900 text-gray-100 flex-1 min-h-0 overflow-hidden">
+				<div className="relative bg-gray-900 text-gray-100 min-h-[200px] overflow-hidden">
 					{/* Line numbers */}
 					<div
 						ref={lineNumbersRef}
-						className="absolute left-0 top-0 p-4 text-gray-500 font-mono text-sm pointer-events-none select-none border-r border-gray-700"
+						className="absolute left-0 top-0 p-4 text-gray-500 font-mono text-xs pointer-events-none select-none border-r border-gray-700"
 						style={{ width: lineNumberWidth }}
 					>
 						{code.split("\n").map((_, index) => (
@@ -217,7 +214,7 @@ export function PythonEditor({
 						onChange={(e) => handleCodeChange(e.target.value)}
 						onKeyDown={handleKeyDown}
 						onScroll={handleEditorScroll}
-						className="w-full h-full bg-transparent text-gray-100 font-mono text-sm resize-none border-0 outline-none focus:ring-0"
+						className="w-full min-h-[200px] bg-transparent text-gray-100 font-mono text-xs resize-none border-0 outline-none focus:ring-0"
 						placeholder="Write your Python code here..."
 						spellCheck={false}
 						style={{
@@ -252,7 +249,7 @@ export function PythonEditor({
 							</Button>
 						)}
 					</div>
-					<div className="p-4 min-h-[100px] max-h-[200px] overflow-auto">
+					<div className="p-4 min-h-[60px] max-h-[300px] overflow-auto">
 						{output ? (
 							<pre className="whitespace-pre-wrap text-sm">
 								{error ? (
