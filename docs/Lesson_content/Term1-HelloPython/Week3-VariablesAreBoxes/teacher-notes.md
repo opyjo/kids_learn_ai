@@ -19,12 +19,10 @@ This lesson introduces variables—arguably the most fundamental concept in prog
 
 By the end of this lesson, students will be able to:
 
-1. Explain what variables are using the "labeled box" analogy
-2. Create variables that store strings (text) and integers (numbers)
-3. Use variables correctly in print() statements
-4. Change variable values and observe the results
-5. Apply Python's variable naming rules (snake_case)
-6. Distinguish between strings and integers
+1. Create variables that store strings (text) and integers (numbers)
+2. Use variables correctly in print() statements
+3. Change variable values and observe the results
+4. Apply Python's variable naming rules (snake_case)
 
 ### Prerequisites
 
@@ -61,10 +59,10 @@ Students should have completed Lessons 1-2 and be able to:
 | 0:00 | 5 min    | Welcome & Homework Showcase | Celebrate Lesson 2 poems    |
 | 0:05 | 7 min    | The Box Analogy             | Introduce variables concept |
 | 0:12 | 10 min   | Creating Variables          | Strings and integers        |
-| 0:22 | 8 min    | Using Variables in print()  | Four methods                |
-| 0:30 | 7 min    | Changing Variables          | Dynamic values              |
-| 0:37 | 8 min    | Naming Rules & Quiz         | Valid vs invalid names      |
-| 0:45 | 10 min   | Practice Challenges         | Guided independent work     |
+| 0:22 | 8 min    | Using Variables in print()  | Commas method               |
+| 0:30 | 5 min    | Changing Variables          | Dynamic values              |
+| 0:35 | 5 min    | Naming Rules                | Valid vs invalid names      |
+| 0:40 | 15 min   | Class Activity              | My Profile Card             |
 | 0:55 | 5 min    | Wrap-up & Homework          | Summary and assignment      |
 
 ---
@@ -242,7 +240,7 @@ age = "10"    # This is TEXT
 
 #### Goals
 
-- Teach multiple ways to use variables with print()
+- Teach how to use variables with print() using commas
 - Emphasize the "quotes vs no quotes" distinction
 - Enable students to output their stored values
 
@@ -299,24 +297,15 @@ print("I am", name, "and I am", age, "years old from", city)
 
 > "You can use as many commas as you need!"
 
-#### Method 4: Using + (Brief Mention)
-
-```python
-name = "Alex"
-print("Hello, " + name + "!")
-```
-
-> "You CAN use plus signs, but there's a catch—it only works with strings. For now, commas are safer and easier!"
-
 #### Student Practice
 
-> "Now print your three variables! Try using different methods."
+> "Now print your three variables! Try combining text and variables with commas."
 
-**Give 3 minutes. Help anyone stuck on the quotes confusion.**
+**Give 2 minutes. Help anyone stuck on the quotes confusion.**
 
 ---
 
-### Part 5: Changing Variables (7 minutes)
+### Part 5: Changing Variables (5 minutes)
 
 #### Goals
 
@@ -380,13 +369,12 @@ print("Game Over! Lives:", lives)
 
 ---
 
-### Part 6: Naming Rules & Quiz (8 minutes)
+### Part 6: Naming Rules (5 minutes)
 
 #### Goals
 
 - Teach valid variable naming conventions
 - Establish good habits (snake_case)
-- Prevent common errors
 
 #### The Rules (Visual on Screen)
 
@@ -395,9 +383,7 @@ print("Game Over! Lives:", lives)
 ```python
 name = "Alex"
 player_score = 100
-favoriteFood = "pizza"
 age2 = 11
-_private = "secret"
 ```
 
 **❌ INVALID Names:**
@@ -405,33 +391,14 @@ _private = "secret"
 ```python
 player score = 100    # ❌ No spaces!
 2nd_place = "Sam"     # ❌ Can't start with number!
-my-score = 50         # ❌ No hyphens!
-print = "hello"       # ❌ Don't use Python keywords!
+my-score = 50         # ❌ No special characters!
 ```
-
-#### Interactive Quiz Game
-
-> "Let's play Valid or Invalid! I'll show you a variable name—shout out if it's VALID (yes!) or INVALID (no!)."
-
-| Variable Name    | Valid? | Why?                    |
-| ---------------- | ------ | ----------------------- |
-| `player_name`    | ✅ Yes | Good snake_case!        |
-| `my age`         | ❌ No  | Space not allowed!      |
-| `score2`         | ✅ Yes | Numbers okay at end     |
-| `2players`       | ❌ No  | Can't start with number |
-| `favorite-color` | ❌ No  | Hyphens not allowed     |
-| `favoriteColor`  | ✅ Yes | Works (camelCase)       |
-| `SCORE`          | ✅ Yes | Works (but shouty!)     |
 
 #### Introduce snake_case
 
-> "In Python, the preferred style is called 'snake_case':
->
-> - All lowercase
-> - Words separated by underscores"
+> "In Python, the preferred style is called 'snake_case': all lowercase, words separated by underscores."
 
 ```python
-# Python style (snake_case) - PREFERRED:
 first_name = "Alex"
 favorite_color = "blue"
 high_score = 9500
@@ -441,63 +408,79 @@ high_score = 9500
 
 ---
 
-### Part 7: Practice Challenges (10 minutes)
+### Part 7: Class Activity — My Profile Card (15 minutes)
 
 #### Goals
 
-- Apply all concepts through hands-on practice
-- Provide scaffolded challenges at different levels
-- Identify students who need extra support
+- Apply all concepts through a hands-on personal activity
+- Practice creating variables with both strings and integers
+- Use print() with commas and decorative borders
 
-#### Challenge Options (Display on Screen)
+#### How to Run This Activity
 
-**Level 1: About Me (Easier)**
+> "Now it's your turn! You're going to create a Profile Card about yourself — like a character stats screen in a video game, but about YOU!"
+
+Display the activity instructions on screen. Remind students of the requirements:
+
+- At least 5 variables about themselves
+- At least 2 string variables (text) and 2 number variables (integers)
+- Use descriptive variable names with underscores (snake_case)
+- Print everything in a nicely formatted output
+- Add a decorative border using `*` or `-` multiplication from Lesson 2
+
+> "Be creative! This is YOUR profile card. Make it look cool!"
+
+#### Sample Answer (For Teacher Reference)
 
 ```python
-my_name = "____"
-my_age = ____
-my_hobby = "____"
+# My Profile Card
 
+my_name = "Alex"
+my_age = 10
+my_city = "Toronto"
+favorite_food = "pizza"
+lucky_number = 7
+favorite_color = "blue"
+
+print("*" * 30)
+print("    MY PROFILE CARD")
+print("*" * 30)
+print("")
 print("Name:", my_name)
-print("Age:", my_age)
-print("Hobby:", my_hobby)
+print("Age:", my_age, "years old")
+print("City:", my_city)
+print("Favorite Food:", favorite_food)
+print("Lucky Number:", lucky_number)
+print("Favorite Color:", favorite_color)
+print("")
+print("*" * 30)
 ```
 
-**Level 2: Pet Profile (Medium)**
+#### Expected Output
 
-```python
-pet_name = "____"
-pet_type = "____"
-pet_age = ____
-
-print("My pet's name is", pet_name)
-print(pet_name, "is a", pet_type)
-print(pet_name, "is", pet_age, "years old")
 ```
+******************************
+    MY PROFILE CARD
+******************************
 
-**Level 3: Game Character (Challenge)**
+Name: Alex
+Age: 10 years old
+City: Toronto
+Favorite Food: pizza
+Lucky Number: 7
+Favorite Color: blue
 
-```python
-character_name = "____"
-health = ____
-attack_power = ____
-level = ____
-
-print("⚔️ CHARACTER STATS ⚔️")
-print("Name:", character_name)
-print("Health:", health, "HP")
-print("Attack:", attack_power)
-print("Level:", level)
+******************************
 ```
 
 #### Teacher Circulation
 
-**During practice, move around and:**
+**During the activity, move around and:**
 
 - Check for quote errors on strings
 - Ensure integers don't have quotes
-- Praise good variable naming
-- Help anyone stuck
+- Praise good variable naming and creative formatting
+- Help anyone stuck — focus on getting 5 variables and printing them first, border can come last
 
 **Common Issues to Address:**
 
@@ -531,17 +514,15 @@ print("Level:", level)
 
 #### Introduce Homework
 
-> "For homework, you're going to create a Profile Card about yourself. It's like a character stats screen in a video game, but about YOU!"
+> "For homework, you're going to build a Game Character Profile! You'll create a character, level them up, and write a short adventure story — all using variables."
 
-**Briefly explain requirements:**
+**Briefly explain the 3 parts:**
 
-- At least 5 variables
-- At least 2 strings AND 2 integers
-- Use snake_case naming
-- Print nicely formatted output
-- Add a decorative border
+- Part 1: Create variables for a game character and print a profile card
+- Part 2: Change the variables to show the character levelling up
+- Part 3: Add location and enemy variables and write a 3-line story
 
-> "All the details are in your lesson notes. This is a chance to practice everything from lessons 1, 2, AND 3!"
+> "All the details are in your lesson notes. This is a chance to practice everything from today — creating variables, printing them, AND changing them!"
 
 #### Preview Next Week
 
@@ -639,9 +620,9 @@ Ask throughout the lesson:
 #### For Students Who Need More Support
 
 - Provide starter template with blanks to fill in
-- Pair with confident peer for practice
 - Focus on just strings first, add integers next class
 - Reduce homework requirement (3 variables instead of 5)
+- Focus on getting 3 variables and printing them during the class activity
 - Offer extra help session
 
 #### For Advanced Students
@@ -694,24 +675,20 @@ SyntaxError: invalid syntax
 
 > "Variable names can't have spaces! Use an underscore instead: `my_name = \"Alex\"`"
 
-#### 3. TypeError: Mixing + with Strings and Integers
+#### 3. Printing Variable Name Instead of Value
 
 **Student writes:**
 
 ```python
-age = 10
-print("I am " + age + " years old")
+name = "Alex"
+print("name")
 ```
 
-**Error message:**
-
-```
-TypeError: can only concatenate str (not "int") to str
-```
+**Output:** `name` (not `Alex`)
 
 **How to help:**
 
-> "The `+` can only join strings together. `age` is a number! Use commas instead: `print(\"I am\", age, \"years old\")`"
+> "When you put quotes around `name`, Python prints the word 'name'. Remove the quotes so Python looks inside the variable: `print(name)`"
 
 ### Conceptual Confusions
 
@@ -837,10 +814,10 @@ KidsLearnAI
 - [ ] Box analogy demonstration (physical or visual)
 - [ ] First variable creation (name, age, color)
 - [ ] Strings vs integers distinction (CRITICAL)
-- [ ] Using variables in print() (four methods)
+- [ ] Using variables in print() with commas
 - [ ] Changing variables demonstration
-- [ ] Naming rules and quiz game
-- [ ] Practice challenges
+- [ ] Naming rules (snake_case)
+- [ ] Class Activity: My Profile Card
 - [ ] Homework explanation
 - [ ] Preview Week 4
 
