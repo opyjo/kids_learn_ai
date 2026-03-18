@@ -61,7 +61,6 @@ ai_activities: |
 # Term 3, Lesson 6: Story Choices! 📖
 
 **Course:** Term 3: Decision Maker  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 3 of 8 | **Week:** 6 of 8
 

@@ -100,7 +100,6 @@ ai_activities: |
 # Term 1, Week 7: Project - Joke Machine! 🎭
 
 **Course:** Term 1: Hello Python!  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 1 of 8 | **Week:** 7 of 8
 

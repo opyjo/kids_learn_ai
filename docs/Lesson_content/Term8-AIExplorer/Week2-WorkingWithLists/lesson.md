@@ -61,7 +61,6 @@ ai_activities: |
 # Term 8, Lesson 2: Working with Lists 📋
 
 **Course:** Term 8: AI Explorer  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 8 of 8 | **Week:** 2 of 8
 

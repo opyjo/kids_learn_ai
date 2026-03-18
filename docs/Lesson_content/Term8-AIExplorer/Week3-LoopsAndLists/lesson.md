@@ -59,7 +59,6 @@ ai_activities: |
 # Term 8, Lesson 3: Loops + Lists 🔄📋
 
 **Course:** Term 8: AI Explorer  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 8 of 8 | **Week:** 3 of 8
 

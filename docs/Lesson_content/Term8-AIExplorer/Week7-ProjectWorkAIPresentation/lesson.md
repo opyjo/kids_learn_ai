@@ -73,7 +73,6 @@ ai_activities: |
 # Term 8, Lesson 7: Project Work - AI Presentation 🤖
 
 **Course:** Term 8: AI Explorer  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 8 of 8 | **Week:** 7 of 8
 

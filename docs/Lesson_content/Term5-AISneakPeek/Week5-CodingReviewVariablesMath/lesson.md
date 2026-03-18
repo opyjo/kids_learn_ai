@@ -72,7 +72,6 @@ ai_activities: |
 # Term 5, Lesson 5: Coding Review - Variables & Math! 💻
 
 **Course:** Term 5: AI Sneak Peek  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 5 of 8 | **Week:** 5 of 8
 

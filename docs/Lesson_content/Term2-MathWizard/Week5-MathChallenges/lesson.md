@@ -58,7 +58,6 @@ ai_activities: |
 # Term 2, Lesson 5: Math Challenges! 🎯
 
 **Course:** Term 2: Math Wizard  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 2 of 8 | **Week:** 5 of 8
 

@@ -85,7 +85,6 @@ ai_activities: |
 # Term 5, Lesson 7: Project - AI in My Life Poster! 🎨
 
 **Course:** Term 5: AI Sneak Peek  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 5 of 8 | **Week:** 7 of 8
 

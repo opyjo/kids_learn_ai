@@ -3,7 +3,6 @@
 ## Teacher's Guide
 
 **Course:** Python Foundations I
-**Age Group:** 9-13 years old
 **Duration:** 60-75 minutes
 **Format:** Live online via Zoom
 **Term:** 1 of 8 | **Week:** 1 of 8

@@ -76,7 +76,6 @@ ai_activities: |
 # Term 7, Lesson 6: Putting It Together 🎮
 
 **Course:** Term 7: Game Builder  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 7 of 8 | **Week:** 6 of 8
 
