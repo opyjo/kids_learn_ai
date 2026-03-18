@@ -57,7 +57,6 @@ ai_activities: |
 # Term 6, Lesson 2: For Loops Intro 🔄
 
 **Course:** Term 6: Loop Magic  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 6 of 8 | **Week:** 2 of 8
 

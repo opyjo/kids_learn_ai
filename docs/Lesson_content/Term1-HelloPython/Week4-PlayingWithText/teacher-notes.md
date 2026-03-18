@@ -2,9 +2,8 @@
 
 ## Teacher's Guide
 
-**Course:** Term 1: Hello Python!  
-**Age Group:** 9-10 years old  
-**Duration:** 60 minutes  
+**Course:** Term 1: Hello Python!
+**Duration:** 60 minutes
 **Term:** 1 of 8 | **Week:** 4 of 8
 
 ---
@@ -23,8 +22,7 @@ By the end of this lesson, students will be able to:
 2. Apply string methods: `.upper()`, `.lower()`, `.capitalize()`, `.title()`
 3. Use `len()` to find string length
 4. Use `str()` to convert numbers for concatenation
-5. Combine multiple techniques to create creative text outputs
-6. Build a simple Mad Libs program
+5. Build a simple Mad Libs program
 
 ### Prerequisites
 
@@ -40,16 +38,14 @@ Students should have completed Lessons 1-3 and be able to:
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
 - Student handouts (printed or digital)
-- Optional: Mad Libs examples (physical or digital)
 - Prepared demonstration code
 
 ### Pre-Lesson Preparation
 
 1. **Review Lesson 3 homework** - Note creative profile cards to showcase
 2. **Prepare method comparison demo** - Same text through all four methods
-3. **Create Mad Libs examples** - Have 2-3 silly examples ready
-4. **Test string methods** - Refresh your memory on edge cases
-5. **Prepare "space problem" demo** - For the concatenation section
+3. **Test string methods** - Refresh your memory on edge cases
+4. **Prepare "space problem" demo** - For the concatenation section
 
 ---
 
@@ -60,13 +56,12 @@ Students should have completed Lessons 1-3 and be able to:
 | Time | Duration | Activity                    | Details                                     |
 | ---- | -------- | --------------------------- | ------------------------------------------- |
 | 0:00 | 5 min    | Welcome & Homework Showcase | Celebrate Lesson 3 profile cards            |
-| 0:05 | 10 min   | String Concatenation        | The + operator for strings                  |
+| 0:05 | 10 min   | String Concatenation        | The + operator for strings, space problem   |
 | 0:15 | 12 min   | String Methods              | .upper(), .lower(), .capitalize(), .title() |
-| 0:27 | 7 min    | len() and str()             | Counting and converting                     |
-| 0:34 | 8 min    | Name Transformer Activity   | Guided practice                             |
-| 0:42 | 10 min   | Mad Libs Creation           | Independent creative work                   |
-| 0:52 | 5 min    | Wrap-up & Homework          | Summary and assignment                      |
-| 0:57 | 3 min    | Q&A Buffer                  | Questions and preview                       |
+| 0:27 | 8 min    | len() and str()             | Counting and converting                     |
+| 0:35 | 10 min   | Name Transformer Activity   | Guided practice with all concepts           |
+| 0:45 | 10 min   | Mad Libs Creation           | Independent creative work                   |
+| 0:55 | 5 min    | Wrap-up & Homework          | Summary, assignment, and Week 5 preview     |
 
 ---
 
@@ -90,7 +85,7 @@ Students should have completed Lessons 1-3 and be able to:
 - Praise creative use of borders and formatting
 - Point out proper use of strings vs integers
 
-> "I love seeing how you used variables to store information. Today, we're going to learn SUPERPOWERS that strings have. You'll be able to transform text, shout it, whisper it, and even count it!"
+> "Today, we're going to learn SUPERPOWERS that strings have. You'll be able to transform text, shout it, whisper it, and even count it!"
 
 ---
 
@@ -113,11 +108,7 @@ together = first + second
 print(together)
 ```
 
-**Run it:**
-
-```
-HelloWorld
-```
+**Run it:** `HelloWorld`
 
 > "Wait... where's the space? 🤔"
 
@@ -128,34 +119,15 @@ HelloWorld
 ```python
 first = "Hello"
 second = "World"
-# Method 1: Add space in the string
 together = first + " " + second
 print(together)
 ```
 
-**Run it:**
+**Run it:** `Hello World`
 
-```
-Hello World
-```
-
-> "See? We added `\" \"` (a string that's just a space) between them. The `+` signs glue all three pieces together."
-
-**Demonstrate multiple ways:**
-
-```python
-# Space at end of first word
-together = first + " " + second
-
-# Or space at beginning of second word
-greeting = "Hello"
-name = " Alex"  # Space at the beginning
-print(greeting + name)  # Hello Alex
-```
+> "See? We added `" "` (a string that's just a space) between them."
 
 #### Building Sentences
-
-> "Let's build a complete sentence:"
 
 ```python
 name = "Alex"
@@ -187,11 +159,7 @@ print(greeting)
 
 > "Strings have special powers called METHODS. Think of methods as superpowers that strings can use on themselves!"
 
-**Visual analogy:**
-
-> "Imagine if you could say 'Hey name, transform yourself to uppercase!' In Python, you do that with a DOT and the method name."
-
-#### The Syntax
+**The Syntax:**
 
 ```python
 variable.method()
@@ -205,13 +173,8 @@ variable.method()
 
 ```python
 message = "hello"
-loud_message = message.upper()
-print(loud_message)
+print(message.upper())    # HELLO
 ```
-
-**Output:** `HELLO`
-
-> "It's like the string is SHOUTING!"
 
 #### Method 2: .lower()
 
@@ -219,13 +182,8 @@ print(loud_message)
 
 ```python
 message = "HELLO"
-quiet_message = message.lower()
-print(quiet_message)
+print(message.lower())    # hello
 ```
-
-**Output:** `hello`
-
-> "Like a whisper."
 
 #### Method 3: .capitalize()
 
@@ -233,13 +191,8 @@ print(quiet_message)
 
 ```python
 name = "aLEX"
-proper_name = name.capitalize()
-print(proper_name)
+print(name.capitalize())    # Alex
 ```
-
-**Output:** `Alex`
-
-> "Perfect for fixing messy names!"
 
 #### Method 4: .title()
 
@@ -247,11 +200,8 @@ print(proper_name)
 
 ```python
 book = "harry potter and the sorcerer's stone"
-book_title = book.title()
-print(book_title)
+print(book.title())    # Harry Potter And The Sorcerer'S Stone
 ```
-
-**Output:** `Harry Potter And The Sorcerer'S Stone`
 
 #### Side-by-Side Comparison
 
@@ -266,18 +216,6 @@ print("capitalize():", text.capitalize())
 print("title():", text.title())
 ```
 
-**Output:**
-
-```
-Original: hELLo wORLd
-upper(): HELLO WORLD
-lower(): hello world
-capitalize(): Hello world
-title(): Hello World
-```
-
-> "See how each one transforms the text differently?"
-
 #### CRITICAL: Methods Don't Change the Original!
 
 > "Here's something VERY important. Watch carefully..."
@@ -285,29 +223,26 @@ title(): Hello World
 ```python
 name = "alex"
 name.upper()
-print(name)
+print(name)    # Still "alex"!
 ```
 
-**Output:** `alex` (not ALEX!)
-
-> "Wait, it didn't change! That's because `.upper()` CREATES a new string but doesn't save it. You need to either save it to a variable or use it directly in print!"
+> "`.upper()` CREATES a new string but doesn't save it. You need to either save it or use it directly in print!"
 
 ```python
 # Option 1: Save it
-name = "alex"
 name = name.upper()
-print(name)  # ALEX
+print(name)    # ALEX
 
 # Option 2: Use directly in print
 name = "alex"
-print(name.upper())  # ALEX (but name is still "alex")
+print(name.upper())    # ALEX
 ```
 
 **This is a common student error—spend time on it!**
 
 ---
 
-### Part 4: len() and str() (7 minutes)
+### Part 4: len() and str() (8 minutes)
 
 #### Goals
 
@@ -321,19 +256,11 @@ print(name.upper())  # ALEX (but name is still "alex")
 
 ```python
 name = "Alex"
-print(len(name))  # 4
-```
+print(len(name))    # 4
 
-> "Let's count: A-l-e-x. Four characters!"
-
-```python
 greeting = "Hello World"
-print(len(greeting))  # 11
+print(len(greeting))    # 11 (space counts too!)
 ```
-
-> "H-e-l-l-o-SPACE-W-o-r-l-d. Eleven! The space counts too."
-
-#### Quick len() Practice
 
 > "What's the length of your first name? Try it!"
 
@@ -355,27 +282,15 @@ age = 10
 print("I am " + str(age) + " years old")  # Works!
 ```
 
-**Output:** `I am 10 years old`
-
 > "Or remember, you can just use commas which is easier:"
 
 ```python
-age = 10
 print("I am", age, "years old")  # Also works!
 ```
 
-#### When to Use Each
-
-| Method         | Code                        | Result                          |
-| -------------- | --------------------------- | ------------------------------- |
-| Commas         | `print("Age:", age)`        | `Age: 10` (auto space)          |
-| str() + concat | `print("Age: " + str(age))` | `Age: 10` (you control spacing) |
-
-> "Commas are easier. Use `str()` when you need precise control."
-
 ---
 
-### Part 5: Name Transformer Activity (8 minutes)
+### Part 5: Name Transformer Activity (10 minutes)
 
 #### Goals
 
@@ -392,24 +307,18 @@ print("I am", age, "years old")  # Also works!
 ```python
 my_name = "your name here"
 
-# Basic transformations
 print("Original:", my_name)
 print("UPPERCASE:", my_name.upper())
 print("lowercase:", my_name.lower())
 print("Title Case:", my_name.title())
 print("Capitalized:", my_name.capitalize())
-
-# Fun with length
 print("Your name has", len(my_name), "characters!")
-
-# Creative transformations
 print("Shouting:", my_name.upper() + "!!!")
-print("Repeated:", (my_name + " ") * 3)
 ```
 
 > "Everyone code this with YOUR name. Then experiment—try different things!"
 
-**Give 6-7 minutes. Circulate and help.**
+**Give 8-9 minutes. Circulate and help.**
 
 **Share out:** Have 2-3 students share their favorite transformation.
 
@@ -440,8 +349,6 @@ print(story)
 ```
 
 **Output:** `The purple elephant danced on the moon!`
-
-> "See how we used variables for the words, then concatenated them into a sentence? Now YOU try!"
 
 #### Student Work Time
 
@@ -486,40 +393,11 @@ print(story)
 
 #### Introduce Homework
 
-> "For homework, you're creating a BIGGER Mad Libs story! You need at least 5 word variables, 3 sentences, and at least 2 different string methods."
-
-**Show brief example structure:**
-
-```python
-# At least 5 word variables
-adjective1 = "..."
-noun1 = "..."
-# etc.
-
-# Build sentences with concatenation
-sentence1 = "..." + adjective1 + "..."
-
-# Use string methods
-print(name.title())
-print("THE END".center(20))
-```
-
-> "Make it as silly as possible! Details are in your notes."
+> "For homework, you're creating a BIGGER Mad Libs story! You need at least 5 word variables, 3 sentences, and at least 2 different string methods. Details are in your notes."
 
 #### Preview Week 5
 
 > "Next week is Practice & Play! We'll review everything from Lessons 1-4, do fun challenges, and create mini projects. It's like a coding party!"
-
----
-
-### Part 8: Q&A Buffer (3 minutes)
-
-Use remaining time for:
-
-- Student questions
-- Method pronunciation (some struggle with "concatenation")
-- Individual help for confused students
-- Early preview of fun Week 5 activities
 
 ---
 
@@ -533,8 +411,7 @@ Use remaining time for:
 - [ ] Can student apply `.upper()` and `.lower()`?
 - [ ] Can student use `.capitalize()` and `.title()` appropriately?
 - [ ] Does student understand that methods don't change the original?
-- [ ] Can student use `len()` correctly?
-- [ ] Can student use `str()` for concatenation?
+- [ ] Can student use `len()` and `str()` correctly?
 
 ### Quick Check Questions
 
@@ -545,7 +422,6 @@ Ask throughout the lesson:
 3. "How do we make text uppercase?" → `.upper()`
 4. "Does `.upper()` change the original variable?" → No! It creates a new string
 5. "What does `len()` count?" → Characters in a string
-6. "Why do we need `str()`?" → To convert numbers for concatenation
 
 ### Homework Assessment: "Mad Libs Story Generator"
 
@@ -565,7 +441,6 @@ Ask throughout the lesson:
 - Provide a Mad Libs template with blanks to fill in
 - Focus on just `.upper()` and `.lower()` first
 - Pair with confident peer for activities
-- Offer sentence starters for concatenation
 - Reduce homework to 3 variables, 2 sentences
 
 #### For Advanced Students
@@ -573,38 +448,27 @@ Ask throughout the lesson:
 - Challenge: Chain multiple methods
 - Introduce `.replace()` method
 - Introduce `.center()`, `.ljust()`, `.rjust()`
-- Ask them to create a "name badge generator" program
-- Have them help struggling peers explain concepts
+- Have them create a "name badge generator" program
 
 ---
 
 ## ⚠️ Common Pitfalls & Solutions
 
-### The Big Four Errors
+### The Top Three Errors
 
 #### 1. Forgetting Spaces in Concatenation
 
-**Student writes:**
-
-```python
-print("Hello" + name)  # HelloAlex
-```
+**Student writes:** `print("Hello" + name)` → `HelloAlex`
 
 **How to help:**
-
-> "The `+` glues things EXACTLY together. You need to add the space yourself: `\"Hello \" + name` or `\"Hello\" + \" \" + name`"
+> "The `+` glues things EXACTLY together. You need to add the space yourself: `"Hello " + name`"
 
 #### 2. Missing Parentheses on Methods
 
-**Student writes:**
-
-```python
-print(name.upper)  # Prints something weird
-```
+**Student writes:** `print(name.upper)` → Prints something weird
 
 **How to help:**
-
-> "The parentheses ACTIVATE the method. Without them, you're just referring to the method itself, not using it. Always: `name.upper()`"
+> "The parentheses ACTIVATE the method. Always: `name.upper()`"
 
 #### 3. Expecting Methods to Change the Original
 
@@ -613,34 +477,11 @@ print(name.upper)  # Prints something weird
 ```python
 name = "alex"
 name.upper()
-print(name)  # Still prints "alex"
+print(name)  # Still "alex"
 ```
 
 **How to help:**
-
-> "Methods create a NEW string—they don't change the original. You need to either save it (`name = name.upper()`) or use it directly (`print(name.upper())`)"
-
-#### 4. Mixing + with Strings and Integers
-
-**Student writes:**
-
-```python
-age = 10
-print("I am " + age)  # TypeError
-```
-
-**How to help:**
-
-> "The `+` can only join strings together. Use commas (`print(\"I am\", age)`) or convert the number (`print(\"I am \" + str(age))`)"
-
-### Conceptual Confusions
-
-| Confusion                                                       | How to Address                                                                             |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| "What's the difference between `.capitalize()` and `.title()`?" | "`.capitalize()` = first letter of STRING. `.title()` = first letter of EACH WORD"         |
-| "Why didn't `.upper()` save?"                                   | "Methods return NEW strings. Save it: `x = x.upper()` or use directly: `print(x.upper())`" |
-| "Why use `str()` when commas work?"                             | "Commas add spaces automatically. `str()` gives you exact control over formatting"         |
-| "Does `len()` count spaces?"                                    | "Yes! `len()` counts EVERYTHING—letters, spaces, punctuation, emojis"                      |
+> "Methods create a NEW string. Save it: `name = name.upper()` or use directly: `print(name.upper())`"
 
 ---
 
@@ -648,94 +489,9 @@ print("I am " + age)  # TypeError
 
 ### After Each Class, Note:
 
-1. **What went well?**
-
-   - Did the method demonstrations click?
-   - Was the Mad Libs activity engaging?
-   - Did students understand the "space problem"?
-
-2. **What needs improvement?**
-
-   - Did anyone struggle with method syntax?
-   - Was the pacing appropriate?
-   - Any concepts that need Week 5 review?
-
-3. **Individual student notes:**
-   - Who's ready for advanced challenges?
-   - Who needs extra help before Week 5?
-   - Any creative Mad Libs to share?
-
-### Sample Reflection Template
-
-```
-Date: ____________
-Students Present: ____________
-
-Engagement Level (1-5): ____
-
-Method understanding (1-5): ____
-
-Concatenation spacing issues (count): ____
-
-Students needing follow-up:
--
-
-Best Mad Libs of the day:
--
-
-Concepts to review in Week 5:
--
-```
-
----
-
-## 🔗 Additional Resources
-
-### For Teachers
-
-- **String Method Reference:** docs.python.org/3/library/stdtypes.html#string-methods
-- **Mad Libs Examples:** Search "Mad Libs templates" for inspiration
-- **Common String Operations:** Keep a quick reference handy
-
-### For Students (Share with Parents)
-
-- **Practice Idea:** Create Mad Libs for family game night
-- **Name Games:** Transform names of family members, pets, celebrities
-- **String Exploration:** Try other methods like `.count()`, `.replace()`
-
-### Parent Communication Template
-
-```
-Subject: What Your Child Learned in KidsLearnAI - Lesson 4
-
-Dear Parent/Guardian,
-
-Today your child learned string manipulation—the ability to transform and combine text in Python!
-
-What we covered:
-- Concatenation: joining strings together with +
-- String methods: .upper(), .lower(), .title(), .capitalize()
-- Counting characters with len()
-- Converting numbers to strings with str()
-- Building Mad Libs stories!
-
-Homework due by [date]:
-"Mad Libs Story Generator" - creating a silly story using variables and string methods
-All instructions are in the student notes.
-
-Fun practice at home:
-- Create Mad Libs together as a family!
-- Transform family members' names with .upper() and .lower()
-- Count whose name is longest using len()
-
-These skills are used constantly in real applications—formatting names, creating messages, and building user interfaces!
-
-Questions? Reply to this email.
-
-Happy coding!
-[Instructor Name]
-KidsLearnAI
-```
+1. **What went well?** - Did method demos click? Was Mad Libs engaging?
+2. **What needs improvement?** - Any concepts that need Week 5 review?
+3. **Individual student notes:** - Who's ready for advanced challenges? Who needs extra help?
 
 ---
 
@@ -745,10 +501,8 @@ KidsLearnAI
 
 - [ ] Review Lesson 3 homework (profile cards)
 - [ ] Prepare method comparison demonstration
-- [ ] Have Mad Libs examples ready
 - [ ] Set up screen sharing
 - [ ] Test all code examples
-- [ ] Prepare word type list for Mad Libs
 
 ### During Class
 
@@ -768,92 +522,11 @@ KidsLearnAI
 - [ ] Identify concepts needing Week 5 review
 - [ ] Send parent communication
 - [ ] Review Mad Libs homework as submitted
-- [ ] Plan Week 5 review activities
 
 ---
 
-## 🎨 Sample Code Bank
-
-Keep these ready for quick demonstrations:
-
-### Concatenation Examples
-
-```python
-# Basic concatenation
-first = "Hello"
-second = "World"
-print(first + " " + second)
-
-# Building sentences
-name = "Alex"
-age = 10
-intro = "My name is " + name + " and I am " + str(age) + "."
-print(intro)
-```
-
-### Method Demonstrations
-
-```python
-text = "hELLo WoRLd"
-print("upper():", text.upper())       # HELLO WORLD
-print("lower():", text.lower())       # hello world
-print("capitalize():", text.capitalize())  # Hello world
-print("title():", text.title())       # Hello World
-```
-
-### The "Methods Don't Save" Demo
-
-```python
-name = "alex"
-print("Before:", name)
-name.upper()  # Does nothing visible!
-print("After:", name)  # Still "alex"
-
-# Correct way:
-name = name.upper()
-print("Now:", name)  # "ALEX"
-```
-
-### Mad Libs Starter
-
-```python
-# Simple Mad Libs
-adj = "sparkly"
-noun = "penguin"
-verb = "danced"
-place = "moon"
-
-story = "The " + adj + " " + noun + " " + verb + " on the " + place + "!"
-print(story)
-```
-
-### Common Errors (For Teaching)
-
-```python
-# ERROR 1: Missing space
-print("Hello" + "World")    # HelloWorld
-print("Hello" + " " + "World")  # Hello World ✓
-
-# ERROR 2: Missing parentheses
-name.upper    # Wrong - just references method
-name.upper()  # Correct - calls the method ✓
-
-# ERROR 3: Method doesn't save
-name = "alex"
-name.upper()
-print(name)   # Still "alex"!
-
-# ERROR 4: Number + string
-age = 10
-print("Age: " + age)  # TypeError!
-print("Age: " + str(age))  # Correct ✓
-print("Age:", age)  # Also correct ✓
-```
-
----
-
-_KidsLearnAI Teacher Resources_  
-*www.kidslearnai.ca*  
+_KidsLearnAI Teacher Resources_
+*www.kidslearnai.ca*
 _For instructor support, contact: [instructor support email]_
 
 ---

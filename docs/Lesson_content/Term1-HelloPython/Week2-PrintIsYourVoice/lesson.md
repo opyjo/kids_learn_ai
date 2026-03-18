@@ -58,7 +58,6 @@ ai_activities: |
 # Term 1, Week 2: Print is Your Voice! 📢
 
 **Course:** Term 1: Hello Python!  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 1 of 8 | **Week:** 2 of 8
 

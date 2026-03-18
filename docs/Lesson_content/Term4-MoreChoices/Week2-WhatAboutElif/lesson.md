@@ -63,7 +63,6 @@ ai_activities: |
 # Term 4, Lesson 2: What About Elif? 🎯
 
 **Course:** Term 4: More Choices  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 4 of 8 | **Week:** 2 of 8
 

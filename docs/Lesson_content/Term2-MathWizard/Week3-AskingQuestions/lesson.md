@@ -58,7 +58,6 @@ ai_activities: |
 # Term 2, Lesson 3: Asking Questions! 🗣️
 
 **Course:** Term 2: Math Wizard  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 2 of 8 | **Week:** 3 of 8
 

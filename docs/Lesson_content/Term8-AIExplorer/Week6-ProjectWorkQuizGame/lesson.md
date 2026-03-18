@@ -105,7 +105,6 @@ ai_activities: |
 # Term 8, Lesson 6: Project Work - Quiz Game 🎮
 
 **Course:** Term 8: AI Explorer  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 8 of 8 | **Week:** 6 of 8
 

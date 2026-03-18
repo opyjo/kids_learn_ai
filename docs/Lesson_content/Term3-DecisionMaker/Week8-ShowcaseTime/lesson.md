@@ -60,7 +60,6 @@ ai_activities: |
 # Term 3, Lesson 8: Showcase Time! 🎉
 
 **Course:** Term 3: Decision Maker  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 3 of 8 | **Week:** 8 of 8
 

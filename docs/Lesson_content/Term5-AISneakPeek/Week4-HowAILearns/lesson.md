@@ -64,7 +64,6 @@ ai_activities: |
 # Term 5, Lesson 4: How AI Learns! 📚
 
 **Course:** Term 5: AI Sneak Peek  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 5 of 8 | **Week:** 4 of 8
 

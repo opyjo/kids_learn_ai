@@ -60,7 +60,6 @@ ai_activities: |
 # Term 7, Lesson 1: While Loops Intro 🔄
 
 **Course:** Term 7: Game Builder  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 7 of 8 | **Week:** 1 of 8
 

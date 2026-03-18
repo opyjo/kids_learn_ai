@@ -3,7 +3,6 @@
 ## Teacher's Guide
 
 **Course:** Term 1: Hello Python!  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 1 of 8 | **Week:** 5 of 8
 

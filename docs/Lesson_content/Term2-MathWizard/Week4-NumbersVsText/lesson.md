@@ -64,7 +64,6 @@ ai_activities: |
 # Term 2, Lesson 4: Numbers vs Text! 🔢
 
 **Course:** Term 2: Math Wizard  
-**Age Group:** 9-10 years old  
 **Duration:** 60 minutes  
 **Term:** 2 of 8 | **Week:** 4 of 8
 
