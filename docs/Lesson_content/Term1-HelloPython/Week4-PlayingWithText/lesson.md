@@ -481,9 +481,9 @@ Your program must include:
 
 ## 🌟 Next Lesson Preview
 
-**Week 5: Practice & Play**
+**Week 5: Clean Code & F-Strings!**
 
-Next week is all about PRACTICE! We'll use everything you've learned in Lessons 1-4 to create fun programs, play coding games, and build cool projects. Get ready to show off your skills!
+Next week you'll learn two awesome new tricks — comments (leaving notes in your code!) and f-strings (a much easier way to print with variables). Get ready to level up your coding style!
 
 ---
 
@@ -499,7 +499,7 @@ You've now learned string SUPERPOWERS! Look at everything you can do:
 - ✅ Convert numbers to strings with `str()`
 - ✅ Create Mad Libs stories!
 
-> _BrightByte says: "You're becoming a real text wizard! 🧙‍♂️ These string methods are used in REAL programs every day—games use them for player names, websites use them for usernames, and apps use them everywhere! Keep practicing, and I'll see you next week for our Practice & Play session!"_
+> _BrightByte says: "You're becoming a real text wizard! 🧙‍♂️ These string methods are used in REAL programs every day—games use them for player names, websites use them for usernames, and apps use them everywhere! Keep practicing, and I'll see you next week when we learn about Clean Code & F-Strings!"_
 
 ---
 

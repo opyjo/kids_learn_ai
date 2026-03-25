@@ -277,7 +277,7 @@ Let's look back at everything you learned in Term 1:
 | 2    | Print is Your Voice!  | Multiple prints, patterns, emojis |
 | 3    | Variables are Boxes!  | Storing information               |
 | 4    | Playing with Text!    | String methods, concatenation     |
-| 5    | Practice & Play!      | Combining all skills              |
+| 5    | Clean Code & F-Strings! | Comments and f-strings          |
 | 6    | Debugging Adventures! | Finding and fixing bugs           |
 | 7    | Joke Machine Project  | Building a complete program       |
 | 8    | Showcase Party!       | Presenting your work!             |
