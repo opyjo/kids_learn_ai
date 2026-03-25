@@ -12,7 +12,7 @@
 
 ### Purpose
 
-This lesson introduces string manipulation—one of the most practical and immediately useful programming skills. Students learn to join strings, transform text case, and measure string length. These concepts appear everywhere in real applications: formatting names, creating messages, processing user input, and building dynamic content. This is also the last "new concept" lesson before the Week 5 review.
+This lesson introduces string manipulation—one of the most practical and immediately useful programming skills. Students learn to join strings, transform text case, and measure string length. These concepts appear everywhere in real applications: formatting names, creating messages, processing user input, and building dynamic content. This is the foundation for Week 5, which introduces comments and f-strings.
 
 ### Learning Objectives
 
@@ -397,7 +397,7 @@ print(story)
 
 #### Preview Week 5
 
-> "Next week is Practice & Play! We'll review everything from Lessons 1-4, do fun challenges, and create mini projects. It's like a coding party!"
+> "Next week you'll learn two awesome new tricks — comments and f-strings! Comments let you leave notes in your code, and f-strings make printing with variables SO much easier. You'll love it!"
 
 ---
 
@@ -514,7 +514,7 @@ print(name)  # Still "alex"
 - [ ] Name Transformer activity
 - [ ] Mad Libs creation time
 - [ ] Homework explanation
-- [ ] Preview Week 5 (Practice & Play)
+- [ ] Preview Week 5 (Clean Code & F-Strings)
 
 ### After Class
 
@@ -531,4 +531,4 @@ _For instructor support, contact: [instructor support email]_
 
 ---
 
-_Remember: This is the last "new concept" lesson before the Week 5 review. Make sure students feel confident with string methods—they'll use them constantly. The Mad Libs activity should be FUN—creativity over perfection!_ 🚀
+_Remember: String methods are the foundation for next week's f-strings lesson. Make sure students feel confident with .upper(), .lower(), and len() — they'll use them inside f-strings! The Mad Libs activity should be FUN—creativity over perfection!_ 🚀
