@@ -1,9 +1,9 @@
-# Term 1, Week 6: Debugging Adventures! 🐛
+# Term 1, Week 6: Talk to Python! Introducing input() 🎤
 
 ## Teacher's Guide
 
-**Course:** Term 1: Hello Python!  
-**Duration:** 60 minutes  
+**Course:** Term 1: Hello Python!
+**Duration:** 60 minutes
 **Term:** 1 of 8 | **Week:** 6 of 8
 
 ---
@@ -12,44 +12,41 @@
 
 ### Purpose
 
-This lesson teaches one of the most critical programming skills: debugging. Students learn to read error messages, identify common bug types, and apply systematic strategies to fix problems. This lesson also builds resilience and a growth mindset around mistakes—essential for long-term success in programming.
+This lesson introduces `input()` — the function that transforms a program from a static display into an interactive conversation. Students will experience the "wow" moment of seeing their name appear in a program's output for the first time. This is a pivotal lesson that bridges everything they've learned (variables, strings, f-strings) into something that feels genuinely alive and personal.
 
 ### Learning Objectives
 
 By the end of this lesson, students will be able to:
 
-1. Explain what bugs are and why they're normal
-2. Read and interpret Python error messages
-3. Identify at least 5 common bug types
-4. Apply the "Debug Dance" (STOP, READ, FIND, THINK, FIX, TEST)
-5. Use debugging techniques like comments and print statements
-6. Fix bugs in provided code samples
+1. Explain what `input()` does in plain English
+2. Write a correct `input()` statement with a clear prompt
+3. Store user input in a well-named variable
+4. Use stored input inside `print()` and f-strings
+5. Ask multiple questions in one program and use all the answers
+6. Understand that `input()` always returns a string
 
 ### Prerequisites
 
-Students should have completed Lessons 1-5 covering:
+Students should have completed Lessons 1–5 covering:
 
-- Print statements and patterns
+- Print statements and string concatenation
 - Variables (strings and integers)
-- String methods and concatenation
+- String methods and f-strings
 
 ### Materials Needed
 
 - Computer with internet access (for each student)
-- Projector/screen share for demonstrations
-- Student handouts with debug challenges
-- Optional: Physical "bug" (toy insect) for storytelling
-- Optional: Debug Dance poster
-- Prepared buggy code samples for demonstration
+- Projector/screen share for live demonstrations
+- Optional: a toy microphone or prop to introduce the "talking to Python" theme
+- Prepared starter programs to demo live (see code bank below)
 
 ### Pre-Lesson Preparation
 
-1. **Review Week 5 submissions** - Note any recurring errors to address
-2. **Prepare buggy code samples** - Have multiple examples ready
-3. **Test error messages** - Know exactly what each bug produces
-4. **Create Debug Dance visual** - Poster or slide with the 6 steps
-5. **Grace Hopper story prep** - Have the moth story ready
-6. **Prepare partner activities** - Plan student pairings
+1. **Review Week 5 submissions** — Note any f-string confusion to revisit briefly
+2. **Test all demo programs** — Run each example yourself so you know the exact output
+3. **Prepare your "demo conversation"** — Plan what name/answers you'll type during live demos to make them fun and funny
+4. **Plan student pairs** — For the Interview Show activity
+5. **Have the homework code** ready to display at the end
 
 ---
 
@@ -57,457 +54,253 @@ Students should have completed Lessons 1-5 covering:
 
 ### Minute-by-Minute Breakdown
 
-| Time | Duration | Activity               | Details                             |
-| ---- | -------- | ---------------------- | ----------------------------------- |
-| 0:00 | 5 min    | Welcome & Bug Story    | Grace Hopper moth story             |
-| 0:05 | 8 min    | What Are Bugs?         | Types of bugs, why they happen      |
-| 0:13 | 10 min   | Reading Error Messages | Anatomy of an error message         |
-| 0:23 | 12 min   | Common Bug Types       | Demo 5-6 common bugs                |
-| 0:35 | 5 min    | The Debug Dance        | Teach the 6-step strategy           |
-| 0:40 | 12 min   | Debug Challenges       | Pair activities, practice           |
-| 0:52 | 5 min    | Pro Tips & Mindset     | Advanced strategies, growth mindset |
-| 0:57 | 3 min    | Wrap-up & Homework     | Assignment, preview Week 7          |
+| Time | Duration | Activity | Details |
+|------|----------|----------|---------|
+| 0:00 | 5 min | Hook & Big Idea | "Your programs are about to come alive!" |
+| 0:05 | 10 min | Introducing input() | Live demo, anatomy of the function |
+| 0:15 | 8 min | Storing & Using Answers | Multiple questions, variable names |
+| 0:23 | 7 min | input() with f-strings | Connect to Week 5 knowledge |
+| 0:30 | 15 min | Practice Challenges | Pair work on Challenges 1–3 |
+| 0:45 | 8 min | Class Activity: Interview Show | Students build and run interview programs |
+| 0:53 | 4 min | Pro Tips & input() = string | Key concepts before homework |
+| 0:57 | 3 min | Wrap-up & Homework | Assignment intro, preview Week 7 |
 
 ---
 
 ## 📚 Detailed Teaching Guide
 
-### Part 1: Welcome & Bug Story (5 minutes)
+### Part 1: Hook & Big Idea (5 minutes)
 
 #### Goals
 
-- Capture attention with interesting history
-- Introduce the term "bug" in a memorable way
-- Set a positive, curious tone
+- Create excitement and curiosity
+- Contrast static programs with interactive ones
+- Set the tone for a "conversation" lesson
 
-#### The Grace Hopper Story
+#### Opening
 
-> "Before we start, I have an amazing TRUE story for you! Have you ever wondered why we call code mistakes 'bugs'?"
+> "Quick question — how many of you have used Siri, Alexa, or ChatGPT?"
 
-**Tell the story with enthusiasm:**
+**[Take a show of hands]**
 
-> "In 1947, there was a brilliant scientist named Grace Hopper. She was working on one of the very first computers ever made—a HUGE machine called the Mark II that filled an entire room!
+> "Every one of those tools does one fundamental thing: they listen to YOU and then respond. Today, you're going to learn how to make your Python programs do the exact same thing. One new function. That's all it takes."
+
+#### The Static vs. Interactive Contrast
+
+**Type this and run it:**
+
+```python
+print("Hello, Alex!")
+```
+
+> "This always says Alex. Doesn't matter who runs it — Alex, Alex, Alex. Boring, right?"
+
+**Now type this:**
+
+```python
+name = input("What is your name? ")
+print("Hello, " + name + "!")
+```
+
+**Run it and type your own name (or something silly).**
+
+> "Now it knows WHO is running the program. Every single person who runs this gets their own personalised hello. THAT is what `input()` does."
+
+---
+
+### Part 2: Introducing input() (10 minutes)
+
+#### Goals
+
+- Explain the anatomy of an `input()` statement clearly
+- Make students comfortable with the pause-and-wait behaviour
+- Establish the prompt spacing habit early
+
+#### Anatomy Breakdown
+
+Write on the board or display:
+
+```python
+name = input("What is your name? ")
+```
+
+Walk through each part slowly:
+
+| Part | Explanation |
+|------|-------------|
+| `name` | "This is our variable — it's going to hold the answer" |
+| `=` | "This arrow means: put whatever comes from the right into `name`" |
+| `input(...)` | "This is the magic function — it pauses and waits for typing" |
+| `"What is your name? "` | "This is the prompt — the question the user sees. Notice the space before the closing quote!" |
+
+> "That little space before the closing quote is a pro habit. It means the cursor appears with a gap after the question mark, like this: `What is your name? _`. Much nicer than `What is your name?_`."
+
+#### What Happens Step by Step
+
+Walk through the execution:
+
+> "When Python hits this line, it does three things in order:
 >
-> One day, the computer stopped working. Grace and her team searched and searched... and guess what they found? An actual MOTH stuck inside the machine! A real bug!
->
-> Grace taped the moth into her notebook and wrote 'First actual case of bug being found.' Ever since then, programmers have called code mistakes 'bugs' and fixing them 'debugging'!"
+> 1. It prints the prompt — the question
+> 2. It **waits**. Completely frozen. Until the user types something and presses Enter
+> 3. It takes whatever was typed, puts it into `name`, and moves on"
 
-**Optional: Show the famous photo of Grace Hopper's notebook with the moth**
-
-> "Grace Hopper was one of the first computer programmers EVER. She helped create programming languages and was also a Navy Admiral! She's a true coding hero—and she reminds us that everyone encounters bugs!"
-
-#### Transition
-
-> "Today, YOU are going to become Bug Detectives! You'll learn how to find bugs and squash them like a pro. Let's go! 🔍"
+**Demo it slowly** — pause after running to let students watch the cursor blink before you type.
 
 ---
 
-### Part 2: What Are Bugs? (8 minutes)
+### Part 3: Storing & Using Answers (8 minutes)
 
 #### Goals
 
-- Define bugs clearly
-- Explain why bugs happen
-- Normalize bugs as part of programming
+- Show that you can ask multiple questions
+- Reinforce good variable naming
+- Show that stored answers can be used many times
 
-#### Definition
+#### Multiple Questions Demo
 
-> "A **bug** is any mistake in your code that makes it not work the way you want. Bugs can:
->
-> - Stop your code from running at all (errors)
-> - Make your code do the wrong thing
-> - Show weird or unexpected results"
+```python
+name   = input("What is your name? ")
+colour = input("What is your favourite colour? ")
+animal = input("What is your favourite animal? ")
 
-#### Why Do Bugs Happen?
+print("Hi " + name + "!")
+print("A " + colour + " " + animal + " — that's amazing!")
+```
 
-> "Bugs happen because..."
+Type something fun when you run it (e.g., name: "BrightByte", colour: "neon green", animal: "robot dragon"). Students love it when the teacher types silly answers.
 
-**List on board:**
+> "Three questions, three variables, and then we mix them all together. Notice the variable names — `name`, `colour`, `animal` — they tell you exactly what's stored inside them."
 
-1. **We're human** - Everyone makes mistakes!
-2. **Computers are literal** - They do EXACTLY what we say, not what we mean
-3. **Code has strict rules** - One missing character can break everything
-4. **We're learning** - New skills mean new mistakes
+#### Use the Same Variable Many Times
 
-#### Interactive Poll
+```python
+name = input("What is your name? ")
+print("Hello, " + name + "!")
+print("Welcome, " + name + "!")
+print("Great to meet you, " + name + "!")
+```
 
-> "Raise your hand if you've EVER had code that didn't work on the first try."
-
-**[Everyone should raise their hand, including you!]**
-
-> "Me too! In fact, I still get bugs in my code ALL the time. The difference between a frustrated programmer and a happy one isn't that one makes fewer mistakes—it's that one knows how to FIX them!"
+> "You only asked ONCE, but we used `name` three times. That's the power of storing answers in variables — you ask once and use it forever."
 
 ---
 
-### Part 3: Reading Error Messages (10 minutes)
+### Part 4: input() with f-strings (7 minutes)
 
 #### Goals
 
-- Teach students to see error messages as helpful
-- Explain the anatomy of an error message
-- Practice "translating" error messages
+- Connect new learning to Week 5 (f-strings)
+- Show that both styles work — let students choose
 
-#### Reframe Error Messages
+#### Quick Bridge to Week 5
 
-> "When Python finds a problem, it shows you an ERROR MESSAGE. Some people see these and think 'Oh no, I broke it!' But actually, error messages are Python trying to HELP you! They're like clues in a mystery."
+> "Remember f-strings? They work perfectly with `input()` too."
 
-#### Anatomy of an Error Message
-
-**Type this buggy code:**
+**Show both side by side:**
 
 ```python
-print("Hello World)
+name = input("What is your name? ")
+
+# Concatenation style
+print("Hello, " + name + "!")
+
+# f-string style
+print(f"Hello, {name}!")
 ```
 
-**Show the error:**
-
-```
-  File "main.py", line 1
-    print("Hello World)
-                      ^
-SyntaxError: EOL while scanning string literal
-```
-
-**Break it down:**
-
-> "Let's read this like detectives!"
-
-| Part                                | What It Tells Us                                          |
-| ----------------------------------- | --------------------------------------------------------- |
-| `File "main.py", line 1`            | "The problem is on line 1"                                |
-| `print("Hello World)`               | "Here's the code near the problem"                        |
-| `^`                                 | "This arrow points to where I got confused"               |
-| `SyntaxError`                       | "This is a grammar/spelling type of error"                |
-| `EOL while scanning string literal` | "I reached End Of Line while looking for a closing quote" |
-
-> "Translation: 'You started a string with a quote but never closed it!'"
-
-#### Common Error Types (Quick Overview)
-
-| Error Type           | Plain English                                 |
-| -------------------- | --------------------------------------------- |
-| **SyntaxError**      | "Your code has a grammar mistake"             |
-| **NameError**        | "I don't recognize this name"                 |
-| **TypeError**        | "You're mixing things that don't go together" |
-| **IndentationError** | "Your spacing is wrong"                       |
-
-#### Practice: Error Translation Game
-
-Show 2-3 error messages. Students "translate" to plain English.
-
-**Error 1:**
-
-```
-NameError: name 'nane' is not defined
-```
-
-> "What's Python trying to tell us?" → "It doesn't know what 'nane' is—probably a typo!"
-
-**Error 2:**
-
-```
-TypeError: can only concatenate str (not "int") to str
-```
-
-> "What does this mean?" → "You can't use + to add a string and a number together!"
+> "Both do exactly the same thing. Use whichever feels more natural. As programs get longer, most people prefer f-strings because they're easier to read."
 
 ---
 
-### Part 4: Common Bug Types (12 minutes)
+### Part 5: Practice Challenges — Pair Work (15 minutes)
 
 #### Goals
 
-- Demonstrate specific common bugs
-- Show the error message for each
-- Demonstrate the fix
-
-#### Live Debugging Demonstration
-
-**Bug 1: Missing Quote**
-
-> "Watch what happens when I forget a closing quote..."
-
-```python
-print("Hello World)
-```
-
-**Run it. Show the error. Fix it.**
-
-```python
-print("Hello World")
-```
-
-> "Always check that quotes come in pairs—like socks! 🧦"
-
----
-
-**Bug 2: Typo in Variable Name**
-
-> "This is SUPER common. Watch..."
-
-```python
-name = "Alex"
-print(nane)
-```
-
-**Error:** `NameError: name 'nane' is not defined`
-
-> "Python is VERY picky about spelling. 'name' and 'nane' are completely different to Python!"
-
-**Fix it:**
-
-```python
-name = "Alex"
-print(name)
-```
-
----
-
-**Bug 3: Wrong Capitalization**
-
-> "Remember: Python commands are lowercase!"
-
-```python
-Print("Hello")
-```
-
-**Error:** `NameError: name 'Print' is not defined`
-
-> "Python knows `print` but not `Print`. Capitalization matters!"
-
-**Fix it:**
-
-```python
-print("Hello")
-```
-
----
-
-**Bug 4: Mixing Types with +**
-
-> "This trips up a LOT of people..."
-
-```python
-age = 10
-print("I am " + age + " years old")
-```
-
-**Error:** `TypeError: can only concatenate str (not "int") to str`
-
-> "The `+` can only join strings together. `age` is a number!"
-
-**Fix it (two options):**
-
-```python
-# Option 1: Use commas
-print("I am", age, "years old")
-
-# Option 2: Convert to string
-print("I am " + str(age) + " years old")
-```
-
----
-
-**Bug 5: Missing Parentheses**
-
-```python
-print "Hello"
-```
-
-**Error:** `SyntaxError: Missing parentheses in call to 'print'`
-
-> "Helpful error message! It tells us exactly what's wrong!"
-
-**Fix it:**
-
-```python
-print("Hello")
-```
-
----
-
-**Bug 6: Forgetting () on Methods**
-
-```python
-name = "alex"
-print(name.upper)
-```
-
-**Output:** `<built-in method upper of str object at...>` (weird output, no error!)
-
-> "This is a sneaky bug—no error, but wrong output!"
-
-**Fix it:**
-
-```python
-name = "alex"
-print(name.upper())
-```
-
----
-
-### Part 5: The Debug Dance (5 minutes)
-
-#### Goals
-
-- Teach a memorable debugging strategy
-- Make it physical/fun
-- Give students a process to follow
-
-#### Introduce the Debug Dance
-
-> "When you find a bug, don't panic! Follow these 6 steps. We call it the DEBUG DANCE!"
-
-**Display on screen/board:**
-
-1. **STOP** 🛑 - Don't panic! Take a breath.
-2. **READ** 📖 - Read the error message carefully.
-3. **FIND** 🔍 - Go to the line number mentioned.
-4. **THINK** 🤔 - What could be wrong?
-5. **FIX** 🔧 - Make ONE change.
-6. **TEST** ▶️ - Run the code again!
-
-#### Make It Physical
-
-> "Let's do the Debug Dance together! Stand up!"
-
-**Lead the class through motions:**
-
-- STOP: Hold up hand like "stop"
-- READ: Pretend to read a book
-- FIND: Hand above eyes, searching
-- THINK: Finger on temple, thinking
-- FIX: Pretend to turn a wrench
-- TEST: Press an imaginary "play" button
-
-> "Let's say it together: STOP, READ, FIND, THINK, FIX, TEST!"
-
-**Repeat 2-3 times until it's memorized.**
-
-#### The Debug Dance Song (Optional)
-
-🎵 _"Stop, Read, Find, Think, Fix, Test!_  
-_Stop, Read, Find, Think, Fix, Test!_  
-_When you see a bug, don't stress—_  
-_Do the Debug Dance, you're the best!"_ 🎵
-
----
-
-### Part 6: Debug Challenges - Pair Activities (12 minutes)
-
-#### Goals
-
-- Apply debugging skills
-- Practice in a supportive pair setting
-- Build confidence through success
+- Apply input() in progressively harder challenges
+- Build confidence through early success
+- Encourage creativity in later challenges
 
 #### Activity Setup
 
-> "Now it's YOUR turn to be Bug Detectives! You'll work with a partner."
+> "You're going to work through challenges with your partner. Start at Challenge 1 and go as far as you can. If you finish all four, make up your own!"
 
-**Pair students strategically:**
+**Pair students:**
+- Mix skill levels where possible
+- Ensure both students contribute — suggest one types, one reads/directs, then swap
 
-- Mix skill levels (stronger with developing)
-- Consider personality compatibility
-- Ensure everyone has a partner
+#### Challenges at a Glance
 
-#### Activity 1: Bug Hunt (8 minutes)
+| Challenge | Stars | Key Skill |
+|-----------|-------|-----------|
+| 1: The Greeter | ⭐ | 2 input() calls, basic print |
+| 2: The Compliment Machine | ⭐⭐ | f-strings with input |
+| 3: The Story Builder | ⭐⭐⭐ | 3 inputs, narrative output |
+| 4: The Robot Introduction | ⭐⭐⭐⭐ | 4 inputs, creative formatting |
 
-**Instructions:**
+#### Circulate and Watch For
 
-> "Here's how it works:
->
-> 1. Person A writes a SHORT program (2-3 lines) with ONE bug hidden in it
-> 2. Person B has 2 minutes to find and fix the bug
-> 3. If Person B finds it, they get a point!
-> 4. Switch roles and repeat
-> 5. Try to stump your partner!"
-
-**Give examples of bugs to hide:**
-
-- Missing quote
-- Typo in variable name
-- Wrong capitalization on print
-- Missing parentheses
-
-**Tips:**
-
-- Start with obvious bugs, then make them sneakier
-- If Partner B is stuck, Partner A gives a hint
-- Celebrate each bug found!
-
-**Circulate during activity:**
-
-- Help stuck pairs
-- Encourage creative bugs
-- Note common struggles
-
-#### Activity 2: Debug Detective Race (4 minutes)
-
-**Display buggy code on screen:**
-
-```python
-name = "Alex
-print("Hello, " + Name)
-age = 10
-print("I am + age + years old")
-```
-
-> "READY? Find ALL the bugs! First pair to identify them all wins!"
-
-**Bugs:**
-
-1. Missing closing quote on "Alex"
-2. `Name` should be `name` (capitalization)
-3. Missing quotes around text in last print
-4. Can't use `+` with integer `age`
-5. Missing spaces in concatenation
-
-**Walk through the answers together.**
+- Students forgetting to store the result: `input("Name? ")` instead of `name = input("Name? ")`
+- Using the variable name inside quotes: `print("Hello, name!")` — gently redirect to `print("Hello, " + name + "!")`
+- Not running the program after writing it — encourage run-early, run-often
 
 ---
 
-### Part 7: Pro Tips & Mindset (5 minutes)
+### Part 6: Class Activity — The Interview Show (8 minutes)
 
 #### Goals
 
-- Share advanced debugging strategies
-- Build growth mindset around mistakes
-- Prepare students for independent debugging
+- Apply input() in a social, fun context
+- Give students the experience of "running" someone else's program
+- Build excitement about interactivity
 
-#### Pro Tips
+#### Setup
 
-> "Here are some pro debugging tips that even professional programmers use:"
+> "Now we're doing The Interview Show! You're going to build a mini interview program — 3 questions — and then your partner is going to run it."
 
-1. **Check the line BEFORE the error** - Sometimes Python doesn't notice a bug until the next line!
+**Instructions:**
 
-2. **Use print() to investigate** - Add `print("DEBUG:", variable)` to see what's happening
+1. Each student writes a program that asks 3 questions (their choice — be creative!)
+2. They hand the keyboard to their partner
+3. The partner runs the program and types in answers
+4. Both students see the personalised output together
+5. Switch roles
 
-3. **Comment out code** - Use `#` to disable sections and isolate the bug
+> "The programmer gets to see their code come to life. The 'guest' gets to see themselves in the output. Everyone wins!"
 
-4. **Fix ONE thing at a time** - If you change multiple things, you won't know what worked
+**Example to show:**
 
-5. **Take a break** - Fresh eyes spot bugs faster!
+```python
+name    = input("Welcome to the Interview Show! What is your name? ")
+talent  = input("What is your hidden talent? ")
+wish    = input("If you had one superpower, what would it be? ")
 
-6. **Rubber Duck Debugging** - Explain your code out loud to find bugs 🦆
+print("")
+print("--- TONIGHT ON THE INTERVIEW SHOW ---")
+print(f"Please welcome the incredible {name}!")
+print(f"Did you know {name} can {talent}? Amazing!")
+print(f"And their dream superpower? {wish}. Watch out world!")
+```
 
-#### Mindset Message (Important!)
+---
 
-> "Here's the most important thing to remember: **BUGS ARE NORMAL!**
->
-> Every programmer in the world—the ones at Google, Apple, the ones who make your favorite games—they ALL get bugs. Every single day.
->
-> The difference between a frustrated programmer and a happy one isn't that one makes fewer mistakes. It's that one sees bugs as PUZZLES to solve instead of failures."
+### Part 7: Pro Tips & input() = String (4 minutes)
 
-**Mindset comparison:**
+#### Goals
 
-| ❌ Unhelpful Thinking | ✅ Helpful Thinking          |
-| --------------------- | ---------------------------- |
-| "I broke it"          | "I found a puzzle to solve"  |
-| "I'm bad at this"     | "I'm learning something new" |
-| "Why won't it work?!" | "What is Python telling me?" |
+- Cement best practices before independent work
+- Plant the "input is always a string" seed without overwhelming
 
-> "When you fix a bug, you should CELEBRATE! You just solved something that most people couldn't!"
+#### Pro Tips (Quick Fire)
+
+> "Three golden rules for input():"
+
+1. **Make your prompt clear** — the user should know exactly what to type
+2. **Add a space at the end of your prompt** — before the closing `"`
+3. **Name your variables clearly** — `name`, `colour`, `city` — not `a`, `b`, `x`
+
+#### The String Note (Keep It Brief)
+
+> "One important thing to know — and we'll explore this more in a future lesson — everything `input()` gives you is text. Even if someone types the number 5, Python treats it as the text '5', not the number 5. For now, use `input()` for names, colours, and words. We'll handle numbers later!"
 
 ---
 
@@ -515,31 +308,31 @@ print("I am + age + years old")
 
 #### Quick Review
 
-> "What did we learn today? Shout out the Debug Dance steps!"
+> "What does input() do?" → Pauses the program and waits for the user to type something
 
-**Together:** STOP, READ, FIND, THINK, FIX, TEST!
+> "Where does the answer go?" → Into a variable
+
+> "What type of data does input() always give you?" → A string
 
 #### Homework Introduction
 
-> "For homework, you're the Debug Detective! I have a program with 6 bugs hidden in it. Your job is to find and fix ALL of them, and add comments explaining what each bug was."
+> "For homework, you're building a Personal Greeter — a program that asks 4 questions and uses every single answer to print a friendly, personalised message."
 
-**Show the buggy code briefly:**
+**Show the starter code briefly:**
 
 ```python
-naem = "Alex"
-Print("Hello, " + name)
-age = 10
-print("I am " + age + " years old)
-favoritecolor = "blue
-print("My favorite color is" favoriteColor)
-print("Goodbye!)
+name = input("What is your name? ")
+# TODO: Ask 3 more questions
+
+print("Welcome, " + name + "!")
+# TODO: Print 3 more lines
 ```
 
-> "Use your detective skills! All the details are in your notes."
+> "Make it fun. Make it YOU. The questions can be about anything!"
 
 #### Preview Week 7
 
-> "Next week is going to be SO fun! We start building our first BIG project—a Joke Machine that tells jokes! You'll use everything you've learned to make Python funny! 🎭"
+> "Next week we build the Joke Machine — our first big project. And guess what skill we'll be using? `input()`. You're already prepared!"
 
 ---
 
@@ -549,48 +342,46 @@ print("Goodbye!)
 
 **During class, observe:**
 
-- [ ] Can student read error messages?
-- [ ] Can student identify line numbers in errors?
-- [ ] Does student understand common bug types?
-- [ ] Can student apply the Debug Dance strategy?
-- [ ] Is student building resilience around mistakes?
+- [ ] Does student write `name = input(...)` (not just `input(...)`)?
+- [ ] Does student use the variable in print (not retype the word)?
+- [ ] Can student ask 2+ questions and use all answers?
+- [ ] Does student use descriptive variable names?
+- [ ] Does student understand the prompt vs. the variable?
 
 ### Quick Check Questions
 
 Ask throughout the lesson:
 
-1. "What do we call a mistake in code?" → Bug
-2. "What do we call fixing mistakes?" → Debugging
-3. "What type of error is a grammar mistake?" → SyntaxError
-4. "What should you do FIRST when you see an error?" → STOP (don't panic!)
-5. "Why should you only fix ONE thing at a time?" → So you know what fixed it
+1. "What does `input()` do?" → Pauses and waits for the user to type
+2. "Why do we write `name = input(...)` instead of just `input(...)`?" → To save the answer so we can use it
+3. "What is the prompt?" → The question text inside the parentheses
+4. "Can you use the same variable in more than one print?" → Yes!
+5. "What type does input() always return?" → A string
 
-### Homework Assessment: "Debug Detective Challenge"
+### Homework Assessment: "My Personal Greeter"
 
-| Criteria   | Full Credit        | Partial Credit      | Needs Work   |
-| ---------- | ------------------ | ------------------- | ------------ |
-| Bugs found | All 6 bugs fixed   | 4-5 bugs fixed      | Fewer than 4 |
-| Code runs  | No errors          | Minor errors remain | Major errors |
-| Comments   | Each bug explained | Some comments       | No comments  |
-| Output     | Displays correctly | Partially correct   | Incorrect    |
+| Criteria | Full Credit | Partial Credit | Needs Work |
+|----------|-------------|----------------|------------|
+| 4 input() calls | All 4 present | 2–3 present | Fewer than 2 |
+| Variables named clearly | All descriptive | Some descriptive | `a`, `b`, `x` style |
+| All variables used | Every answer used | Most used | Some unused |
+| Output quality | Personalised and friendly | Basic but correct | Doesn't use answers |
 
 ### Differentiation Strategies
 
 #### For Students Who Need More Support
 
-- Provide buggy code with FEWER bugs (2-3 instead of 6)
-- Give hints about what TYPE of bug to look for
-- Pair with stronger debugger during activities
-- Create a "bug checklist" to work through systematically
-- Allow use of error message "cheat sheet"
+- Start with Challenge 1 only — celebrate finishing it
+- Provide a template with the variables already named
+- Let them use one `input()` and three `print()` lines to start
+- Sit with them during the demo and run it together first
 
 #### For Advanced Students
 
-- Challenge: Find bugs WITHOUT running the code first
-- Introduce: Logic bugs (code runs but does wrong thing)
-- Have them create "bug puzzles" for classmates
-- Introduce the concept of test cases
-- Preview: try-except error handling (very briefly)
+- Challenge them to use f-strings exclusively
+- Ask: "Can you use the same variable three different times in your output?"
+- Introduce: `input()` inside a function call — `print("Hi " + input("Name? "))`
+- Preview: What happens if you try to add a number from input() to another number? (leads to next lesson)
 
 ---
 
@@ -598,31 +389,43 @@ Ask throughout the lesson:
 
 ### Teaching Challenges
 
-| Challenge                               | Solution                                 |
-| --------------------------------------- | ---------------------------------------- |
-| Students panic at error messages        | Reframe: "It's Python trying to help!"   |
-| Students can't find obvious bugs        | Teach line-by-line reading strategy      |
-| Partner activity becomes competitive    | Emphasize collaboration over competition |
-| Students frustrated with their own bugs | Celebrate bug-finding as an achievement  |
-| Rushing through fixes                   | Enforce "one change at a time" rule      |
+| Challenge | Solution |
+|-----------|----------|
+| Student forgets `=` and the variable | Show: "Without `=`, the answer disappears forever!" |
+| Student puts variable name inside quotes | Demo both wrong and right side by side |
+| Student asks a question but doesn't use the answer | Ask: "Where did you store it? Can we use it?" |
+| Student runs the program but doesn't type anything | Remind them to click the input field and press Enter |
+| Program asks questions in wrong order | Walk through line by line — Python runs top to bottom |
 
 ### Technical Issues
 
-| Issue                          | Solution                                |
-| ------------------------------ | --------------------------------------- |
-| Error messages too long        | Focus on last line (the summary)        |
-| Multiple errors at once        | Fix first error, run again, repeat      |
-| Bug on wrong line              | Teach "check line before" strategy      |
-| Syntax highlighting hides bugs | Use plain text or turn off highlighting |
+| Issue | Solution |
+|-------|----------|
+| Trinket input field is hard to find | Point to the output panel — input appears there |
+| Program seems frozen | It's waiting for input! Click output and type |
+| Student types a number and sees unexpected behaviour | Acknowledge it, say "Great discovery — we'll fix this in a future lesson!" |
+| Student's output is on one line | Check that they have separate `print()` calls |
 
-### Mindset Issues
+### Common Code Mistakes
 
-| Issue                  | Response                                           |
-| ---------------------- | -------------------------------------------------- |
-| "I can't do this"      | "You haven't done it YET. Let's try together"      |
-| "My code is broken"    | "Your code is learning! Let's fix it"              |
-| Giving up quickly      | "What does the error message say? Let's decode it" |
-| Embarrassed about bugs | "Even I make bugs! Watch me fix one of mine"       |
+```python
+# ❌ Forgetting to store the answer
+input("What is your name? ")
+print("Hello, " + name)   # name doesn't exist!
+
+# ✅ Correct
+name = input("What is your name? ")
+print("Hello, " + name)
+```
+
+```python
+# ❌ Putting variable inside quotes
+name = input("What is your name? ")
+print("Hello, name!")   # prints "Hello, name!" literally
+
+# ✅ Correct
+print("Hello, " + name + "!")
+```
 
 ---
 
@@ -630,22 +433,18 @@ Ask throughout the lesson:
 
 ### Key Questions
 
-1. **Error message comprehension:**
+1. **Understanding of input():**
+   - Did students grasp the pause-and-wait behaviour?
+   - Could they explain what a prompt is?
+   - Did they understand the difference between the prompt and the variable?
 
-   - Can students identify line numbers?
-   - Can they distinguish error types?
-   - Do they see errors as helpful?
+2. **Variable usage:**
+   - Did students successfully store answers AND use them?
+   - Were variable names descriptive or cryptic?
 
-2. **Bug identification:**
-
-   - Which bug types were easy to spot?
-   - Which bug types need more practice?
-   - Any unexpected bugs students created?
-
-3. **Mindset:**
-   - Did students embrace bugs as normal?
-   - Any students still frustrated?
-   - Success stories to share next week?
+3. **Excitement level:**
+   - Did students have a "wow" moment when their name appeared in the output?
+   - Who was most excited? (Celebrate them next week!)
 
 ### Reflection Template
 
@@ -653,25 +452,21 @@ Ask throughout the lesson:
 Date: ____________
 Students Present: ____________
 
-Debug Dance retention (1-5): ____
+input() understanding (1-5): ____
 
-Error message understanding (1-5): ____
+Variable naming quality (1-5): ____
 
-Bug types students grasped:
-- [ ] Missing quotes
-- [ ] Typos in variables
-- [ ] Wrong capitalization
-- [ ] Type mixing
-- [ ] Missing parentheses
-- [ ] Missing method ()
+Skills students grasped:
+- [ ] Writing input() with a prompt
+- [ ] Storing the answer in a variable
+- [ ] Using the variable in print()
+- [ ] Using multiple input() calls
+- [ ] Using input() with f-strings
 
-Students needing support:
+Students needing support next week:
 -
 
-Mindset observations:
--
-
-Highlights from pair activities:
+Highlight moments (students who "got it" excitedly):
 -
 
 Changes for next time:
@@ -684,16 +479,15 @@ Changes for next time:
 
 ### For Teachers
 
-- **Grace Hopper info:** Search "Grace Hopper moth" for the famous photo
-- **Error message guide:** docs.python.org/3/tutorial/errors.html
-- **Growth mindset:** Carol Dweck's research on mistakes and learning
-- **Rubber Duck Debugging:** Search "rubber duck debugging" for the technique
+- **Python docs — input():** docs.python.org/3/library/functions.html#input
+- **Trinket input tip:** In Trinket, the input field appears at the bottom of the output panel — point this out before the first demo
+- **Growth mindset:** When students see the "wow" of their name on screen, lean into that joy — it's a powerful hook
 
 ### For Students (Share with Parents)
 
-- **Bug Journal:** Keep a log of bugs found and fixed
-- **Bug Creator:** Try writing buggy code on purpose, then fixing it
-- **Teach Someone:** Explain debugging to a family member
+- **Challenge at home:** Ask a family member to be the "user" and run their Personal Greeter
+- **Extend it:** Can they add a 5th or 6th question to their program?
+- **Teach it:** Can they explain what `input()` does to a sibling or parent?
 
 ### Parent Communication Template
 
@@ -702,27 +496,81 @@ Subject: What Your Child Learned in KidsLearnAI - Lesson 6
 
 Dear Parent/Guardian,
 
-Today your child became a "Bug Detective"! They learned one of the most important skills in programming: debugging.
+Today your child unlocked one of the most exciting features in programming: interactivity!
 
 What we covered:
-- What bugs are and where the name comes from (Grace Hopper's moth!)
-- How to read Python error messages
-- Common bug types (missing quotes, typos, capitalization, type mixing)
-- The "Debug Dance" strategy: STOP, READ, FIND, THINK, FIX, TEST
-- Debugging techniques like comments and print statements
+- The input() function — how to make Python ask questions
+- Storing user answers in variables
+- Using answers to print personalised messages
+- Building programs that feel like real conversations
 
 Homework due by [date]:
-"Debug Detective Challenge" - fix 6 bugs in a provided code sample
-Details are in the student notes.
+"My Personal Greeter" — a program that asks 4 questions and responds with a friendly, personalised message. Details are in the student notes.
 
-Important mindset message:
-Bugs are NORMAL! Every programmer makes them. The skill is learning to find and fix them. Please encourage your child when they encounter bugs—it's a learning opportunity, not a failure!
+Try this at home:
+Ask your child to run their Personal Greeter for you! Type in your own name and answers and see your personalised output. They'll love showing it off.
 
 Coming up:
-Next week we start building the "Joke Machine" - our first big project!
+Next week we build the Joke Machine — our first big project, using input() to make it interactive!
 
 [Instructor Name]
 KidsLearnAI
+```
+
+---
+
+## 💻 Sample Code Bank
+
+### Simple Starters (For Early Demos)
+
+```python
+# One question
+name = input("What is your name? ")
+print("Hello, " + name + "!")
+```
+
+```python
+# Two questions
+name   = input("What is your name? ")
+colour = input("What is your favourite colour? ")
+print(f"Hi {name}! {colour} is a great colour!")
+```
+
+### Medium Programs (For Challenges 2–3)
+
+```python
+# Compliment machine
+name    = input("What is your name? ")
+quality = input("What is your best quality? ")
+print(f"Hey {name}, you are so {quality}!")
+print(f"The world is a better place with you in it!")
+```
+
+```python
+# Story builder
+hero  = input("Enter a hero's name: ")
+place = input("Enter a magical place: ")
+item  = input("Enter a magical object: ")
+print(f"Once upon a time, {hero} travelled to {place}.")
+print(f"There, {hero} discovered a magical {item}.")
+print(f"{hero} used the {item} to save {place} forever!")
+```
+
+### Advanced Programs (For Challenge 4 / Fast Finishers)
+
+```python
+# Robot introduction
+name    = input("ROBOT: Hello human. What is your name? ")
+planet  = input("ROBOT: Where are you from? ")
+skill   = input("ROBOT: What is your special skill? ")
+mission = input("ROBOT: What is your mission today? ")
+
+print("")
+print("ROBOT: Processing... beep boop...")
+print(f"ROBOT: Greetings, {name} from {planet}!")
+print(f"ROBOT: I see you are skilled at {skill}. Impressive.")
+print(f"ROBOT: I will help you with your mission: {mission}.")
+print("ROBOT: Welcome aboard. Beep.")
 ```
 
 ---
@@ -731,81 +579,37 @@ KidsLearnAI
 
 ### Before Class
 
-- [ ] Prepare Grace Hopper story (optional: find moth photo)
-- [ ] Create buggy code samples for demonstration
-- [ ] Test all error messages you'll show
-- [ ] Prepare Debug Dance visual (poster/slide)
-- [ ] Plan student pairs for activities
-- [ ] Have Debug Challenge code ready
+- [ ] Test all demo programs in Trinket
+- [ ] Plan your "funny answers" for live demos (keep it age-appropriate and silly)
+- [ ] Have the Interview Show example ready to display
+- [ ] Plan student pairs
+- [ ] Prepare homework starter code to display
 
 ### During Class
 
-- [ ] Tell Grace Hopper story engagingly
-- [ ] Reframe error messages as helpful clues
-- [ ] Demonstrate anatomy of error message
-- [ ] Show at least 5 common bug types
-- [ ] Teach Debug Dance with physical motions
-- [ ] Run pair debugging activities
-- [ ] Share pro tips and mindset message
+- [ ] Open with the static vs. interactive contrast demo
+- [ ] Walk through input() anatomy on the board
+- [ ] Demo multiple questions with fun answers
+- [ ] Connect input() to f-strings from Week 5
+- [ ] Run pair challenge activities (Challenges 1–3 minimum)
+- [ ] Run The Interview Show activity
+- [ ] Share the "input always returns a string" note briefly
 - [ ] Assign homework and preview Week 7
 
 ### After Class
 
 - [ ] Complete reflection notes
-- [ ] Note students who struggled with mindset
+- [ ] Note students who struggled with variable storage vs. prompt
 - [ ] Send parent communication
 - [ ] Review homework submissions
-- [ ] Prepare Week 7 (Joke Machine project)
+- [ ] Prepare Week 7: Joke Machine (incorporate input() for user interaction)
 
 ---
 
-## 🐛 Sample Buggy Code Bank
-
-### Easy Bugs (1-2 per example)
-
-```python
-# Missing quote
-print("Hello World)
-
-# Wrong case
-Print("Hello")
-
-# Typo in variable
-name = "Alex"
-print(nane)
-```
-
-### Medium Bugs (2-3 per example)
-
-```python
-# Two bugs
-name = "Alex
-print("Hello, " + Name)
-
-# Two bugs
-Print("I am " + 10 + " years old")
-```
-
-### Hard Bugs (4+ per example)
-
-```python
-# Four bugs
-favoritecolor = Blue
-Prnt("My favorite color is, color)
-
-# Multiple bugs
-Name = "alex
-age = 10
-print("Hello, + name)
-Print("I am " + age + "years old)
-```
-
----
-
-_KidsLearnAI Teacher Resources_  
-*www.kidslearnai.ca*  
+_KidsLearnAI Teacher Resources_
+*www.kidslearnai.ca*
 _For instructor support, contact: [instructor support email]_
 
 ---
 
-_Remember: This lesson is as much about MINDSET as it is about technical skills. Help students see bugs as puzzles to solve, not failures. Your reaction to bugs during demonstrations teaches them how to react to their own!_ 🔍🐛
+_Remember: The "wow" moment when a student sees their own name in the program output is one of the most powerful hooks in early programming education. Let it land. Pause. Let them feel it. Then build on it!_ 🎤✨
