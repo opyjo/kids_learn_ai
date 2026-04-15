@@ -1,10 +1,10 @@
-# Term 1, Week 7: Input Superpower — Numbers and Conversions! 🔢
+# Term 1, Week 7: Project - Joke Machine! 🎭
 
 ## Teacher's Guide
 
-**Course:** Term 1: Hello Python!
-**Duration:** 60 minutes
-**Term:** 1 of 8 | **Week:** 7 of 9
+**Course:** Term 1: Hello Python!  
+**Duration:** 60 minutes  
+**Term:** 1 of 8 | **Week:** 7 of 8
 
 ---
 
@@ -12,45 +12,44 @@
 
 ### Purpose
 
-This lesson bridges Lesson 6 (input()) to Lesson 8 (Mad Libs game build). Students discovered in Lesson 6 that input() always returns a string — a deliberate cliffhanger. Lesson 7 resolves this by teaching type conversion with int() and float(). This knowledge is not optional: without it, students cannot make their Mad Libs game use numbers meaningfully, and they will hit TypeErrors as soon as they try to do any maths with user input. This lesson follows a problem → cause → solution structure, opening with the TypeError crash to generate curiosity, then teaching the fix.
+This is the culminating project lesson for Term 1. Students apply ALL skills learned in Weeks 1-6 to build a complete, working program. The Joke Machine project is designed to be achievable while still challenging, creative while still structured. This lesson marks the transition from "learning skills" to "building things"—a critical milestone in programming education.
 
 ### Learning Objectives
 
 By the end of this lesson, students will have:
 
-1. Understood why `input()` returns a string and why that matters
-2. Used `int()` to convert string input to a whole number
-3. Used `float()` to convert string input to a decimal number
-4. Performed calculations with converted numbers
-5. Recognised and fixed a `TypeError` when mixing types
+1. Planned a complete program before coding
+2. Applied print statements, variables, and string methods together
+3. Created organized, structured code with clear sections
+4. Debugged their own project independently
+5. Built something they're proud to share!
 
 ### Prerequisites
 
-Students should have completed Lessons 1–6 covering:
+Students should have completed Lessons 1-6 covering:
 
-- Print statements and patterns (Weeks 1–2)
+- Print statements and patterns (Week 1-2)
 - Variables (Week 3)
-- String methods and f-strings (Weeks 4–5)
-- input() basics — understanding that input() returns a string (Week 6)
+- String methods and concatenation (Week 4)
+- Practice and reinforcement (Week 5)
+- Debugging (Week 6)
 
 ### Materials Needed
 
 - Computer with internet access (for each student)
-- Projector/screen share for the TypeError demo
-- Whiteboard or slide showing the string vs int comparison table
+- Projector/screen share for demonstrations
+- Student handouts with project template
+- Joke reference sheets (optional but helpful)
+- Paper/pencils for planning jokes
 - Timer for activity transitions
 
 ### Pre-Lesson Preparation
 
-1. **Prepare the TypeError demo** — have this code ready to run live:
-   ```python
-   age = input("How old are you? ")
-   older = age + 10
-   print(older)
-   ```
-2. **Prepare the fixed version** — ready to show immediately after
-3. **Prepare practice challenge answers** — for quick support
-4. **Preview Mad Libs sneak peek** — have the sample output ready to display at the end
+1. **Create a completed example** - Have a working Joke Machine to demo
+2. **Prepare joke reference sheets** - Lists of age-appropriate jokes
+3. **Set up student pairs/groups** - For brainstorming phase
+4. **Review common bugs** - From Weeks 1-6 for quick fixes
+5. **Plan showcase logistics** - For Week 8
 
 ---
 
@@ -58,347 +57,449 @@ Students should have completed Lessons 1–6 covering:
 
 ### Minute-by-Minute Breakdown
 
-| Time | Duration | Activity | Details |
-|------|----------|----------|---------|
-| 0:00 | 5 min | Hook — The TypeError Demo | Live crash creates curiosity |
-| 0:05 | 10 min | The Problem: Strings vs Numbers | Visual explanation of types |
-| 0:15 | 15 min | int() and float() Teaching | Syntax, examples, shortcut |
-| 0:30 | 15 min | Practice Challenges | 4 star-rated challenges |
-| 0:45 | 10 min | Bridge to Games + Mad Libs Tease | Set up excitement for Lesson 8 |
-| 0:55 | 5 min | Homework & Wrap-Up | Number Wizard assignment |
+| Time | Duration | Activity                    | Details                    |
+| ---- | -------- | --------------------------- | -------------------------- |
+| 0:00 | 5 min    | Welcome & Project Intro     | Excitement building!       |
+| 0:05 | 10 min   | Joke Brainstorm             | Groups collect jokes       |
+| 0:15 | 10 min   | Project Structure Demo      | Walk through the 5 steps   |
+| 0:25 | 25 min   | Build Time                  | Students code with support |
+| 0:50 | 7 min    | Quick Share & Debug Help    | Volunteers show progress   |
+| 0:57 | 3 min    | Homework & Showcase Preview | Set expectations           |
 
 ---
 
 ## 📚 Detailed Teaching Guide
 
-### Part 1: Hook — The TypeError Demo (5 minutes)
+### Part 1: Welcome & Project Introduction (5 minutes)
 
 #### Goals
 
-- Create immediate, memorable curiosity about WHY input() returns strings
-- Show the exact error students will hit if they try to do maths without converting
-- Set up the "problem" that the rest of the lesson solves
+- Generate excitement about first "real" project
+- Explain what they're building
+- Set expectations for success
 
 #### Script/Talking Points
 
-> "Last week you learned that Python can listen to you with input(). And I gave you a warning at the end: input() ALWAYS returns a string, even if you type a number.
+> "Welcome to one of the MOST exciting days of Term 1! 🎉
 >
-> Why does that matter? Let me SHOW you."
-
-**Type this live on the projector (do NOT fix it yet):**
-
-```python
-age = input("How old are you? ")
-older = age + 10
-print(older)
-```
-
-**Run it. Enter a number like 12. Watch it crash.**
-
-> "Who expected that? Who can read the error message?
+> For the past 6 weeks, you've been learning individual skills—like collecting tools for a toolbox. Today, you get to USE those tools to build something REAL!
 >
-> 'TypeError: can only concatenate str (not int) to str.' Python is saying: I have text, you gave me a number — I don't know how to add those together!
+> You're going to create your very first complete Python project: THE JOKE MACHINE! 🎭"
+
+**Show the example output briefly:**
+
+> "When you're done, your program will look something like this..."
+
+**Run your pre-made example. Students will react positively to the jokes.**
+
+> "By the end of today's class, you'll have a working Joke Machine. Then you'll finish it for homework, and NEXT WEEK, you'll present it at our Showcase Party!
 >
-> This is the mystery we're solving today. By the end of this lesson, you'll know exactly how to fix this — and you'll never be surprised by a TypeError again."
+> This is what REAL programmers do—they build things. And that's exactly what you're about to do!"
 
-**Do NOT fix it yet.** Keep the tension for a moment, then move to the explanation.
+#### Build Excitement
 
-#### Teaching Tips
+> "Who's ready to make Python FUNNY? 🎭"
 
-- Let the TypeError error message stay on screen for 20–30 seconds. Ask students to read it aloud.
-- Ask "What do YOU think the problem is?" before explaining. Some students will have intuitions.
-- Connect to the real world: "Every game that keeps score, every app that adds up totals — they ALL had to solve this exact problem."
+**Get a cheer/response!**
 
 ---
 
-### Part 2: The Problem — Strings vs Numbers (10 minutes)
+### Part 2: Joke Brainstorm (10 minutes)
 
 #### Goals
 
-- Make the string/int distinction visually clear
-- Show the counterintuitive behaviour of "12" + "12" = "1212"
-- Build intuition before introducing the fix
-
-#### Key Demonstration
-
-Show these two lines side by side:
-
-```python
-text_twelve = "12"    # string — like "hello"
-real_twelve  = 12     # integer — a real number
-
-print(text_twelve + text_twelve)   # Output: 1212
-print(real_twelve  + real_twelve)  # Output: 24
-```
-
-> "Notice anything? The STRING '12' doubled gives us '1212' — Python just joined the text together, like 'hello' + 'hello' = 'hellohello'. The INTEGER 12 doubled gives us 24 — actual maths.
->
-> input() always gives you the string version. So when you type 12, Python stores '12' — the text, not the number. That's why our code crashed."
-
-#### Visual Aid (Draw on Whiteboard or Show Slide)
-
-```
-"12"   ← String. Python sees this like any text. "12" + "12" = "1212"
-12     ← Integer. Python knows this is a number. 12 + 12 = 24
-```
-
-#### Check for Understanding
-
-Ask: "If I type the number 5 into input(), what does Python store?"
-
-Expected answer: The string "5" — text, not the number 5.
-
----
-
-### Part 3: int() and float() (15 minutes)
-
-#### Goals
-
-- Teach the conversion syntax clearly
-- Introduce the "wrap" shortcut
-- Cover both int() and float(), and when to use each
-
-#### Teaching int()
-
-> "The fix is beautifully simple. Python gives us a function called int() that converts text into a real number."
-
-**Show the two-step version first:**
-
-```python
-age_text   = input("How old are you? ")    # "12" (string)
-age_number = int(age_text)                  # 12 (integer)
-
-older = age_number + 10
-print(f"In 10 years you'll be {older}!")
-```
-
-> "int() takes whatever is inside the brackets and turns it into an integer. Now the maths works!"
-
-**Then show the shortcut:**
-
-```python
-age = int(input("How old are you? "))
-```
-
-> "This is the same thing in one line. Read it from the inside out: first input() asks the question, then int() converts the answer. Most programmers write it this way."
-
-**Run it. Type 12. Show the output: "In 10 years you'll be 22!"**
-
-#### Teaching float()
-
-> "What if the number has a decimal point? Like a score of 8.5, or a price of £3.99? int() won't work — it needs a whole number. That's where float() comes in."
-
-```python
-score = float(input("Enter your score: "))
-bonus = score * 1.5
-print(f"Bonus score: {bonus}")
-```
-
-**Show the int() vs float() table from the lesson.**
-
-#### When to Use Each
-
-> "Simple rule: use int() for whole things you can count — ages, lives, coins. Use float() for things that might have a decimal — scores, measurements, prices. When in doubt, start with int() and switch if you need decimals."
-
-#### Common Mistakes to Anticipate
-
-- Forgetting brackets: `int input("Age: ")` — show this fails
-- Using `int()` on a decimal input like "3.5" — show the ValueError this causes, then switch to `float()`
-
----
-
-### Part 4: Practice Challenges (15 minutes)
-
-#### Goals
-
-- Students apply int() and float() independently
-- Four difficulty levels ensure everyone is challenged appropriately
-- Teacher circulates to catch common errors early
+- Collect joke material BEFORE coding
+- Make it social and fun
+- Reduce "blank page" anxiety
 
 #### Setup
 
-> "You have 15 minutes to work through the challenges. Start with Challenge 1. If you finish early, move to 2, then 3, then 4. The harder ones are optional — if you're stuck on 3, go back to 2 and make sure that's solid."
+> "Before we write ANY code, we need JOKES! You can't build a Joke Machine without them.
+>
+> Get into groups of 3-4. Your mission: brainstorm as many jokes as you can in 8 minutes. Write them down—you need the SETUP and the PUNCHLINE for each one."
 
-#### Circulation Strategy
+**Form groups. Distribute paper or have them use devices.**
 
-**First 5 minutes:**
-- Check all students have int() working on Challenge 1
-- Watch for the "forgot to convert" error — they run input() but skip int()
-- Common fix: "Wrap int() around your input() call"
+#### Joke Resources
 
-**Middle 5 minutes:**
-- Help students on Challenge 2 with score doubling
-- Encourage f-string use for the output
+**Option 1: Memory**
 
-**Last 5 minutes:**
-- Let fast students tackle Challenge 4 (float() + round())
-- Help any students who are still stuck on Challenge 1
+> "What jokes do you already know? Family jokes? School jokes?"
 
-#### Differentiation
+**Option 2: Reference Sheet**
+Provide printed joke lists (age-appropriate):
 
-**For students who need more support:**
-- Keep them on Challenges 1 and 2
-- Provide the scaffold: write `age = int(input("..."))` and ask them to fill in the prompt and do the calculation
+- Classic jokes
+- Animal jokes
+- Food jokes
+- School jokes
 
-**For advanced students:**
-- Challenge 4 uses `round(value, 2)` — a new function they haven't seen
-- Encourage them to look at the answer, understand it, then modify it
-- Ask: "Can you add a BMI calculation? BMI = weight ÷ (height in m × height in m)"
+**Option 3: Partner Ideas**
+
+> "Share jokes you've heard. Help each other remember the punchlines!"
+
+#### Circulate During Brainstorm
+
+- Help groups who are stuck
+- Ensure jokes are appropriate
+- Encourage variety
+- Remind about setup/punchline format
+
+#### Wrap Up Brainstorm
+
+> "Okay, time's up! Everyone should have at least 3-5 jokes written down. Pick your TOP 3 favorites—those are going in your Joke Machine!"
+
+**Quick share-out: Ask 2-3 groups to share their funniest joke.**
 
 ---
 
-### Part 5: Bridge to Games + Mad Libs Tease (10 minutes)
+### Part 3: Project Structure Demo (10 minutes)
 
 #### Goals
 
-- Connect type conversion to game development — make it feel relevant
-- Build excitement for Lesson 8 (Mad Libs build)
-- End the lesson with a "want to build this?" feeling
+- Show the complete project structure
+- Walk through each of the 5 steps
+- Answer questions before build time
 
-#### Bridge to Games Script
+#### The 5 Steps (Display on Screen)
 
-> "Let's talk about why this matters for game building.
->
-> Think about any game you've played — what numbers does it use?"
-
-Get students to brainstorm: scores, lives, levels, time, coins, health...
-
-> "Every single one of those had to come from somewhere. When a player types in their score, or chooses how many lives they want — that's input(), converted to int(). You now know the technique that powers every game."
-
-**Show the game taster:**
-
-```python
-player_name = input("Enter your name: ")
-lives       = int(input("How many lives do you want? (1-5) "))
-
-print(f"Welcome, {player_name}! You have {lives} lives.")
-print(f"Game begins in 3... 2... 1... GO!")
+```
+Step 1: Plan Your Jokes (Done! ✅)
+Step 2: Create the Welcome Screen
+Step 3: Store Jokes in Variables
+Step 4: Display Each Joke
+Step 5: Add the Ending
 ```
 
-**Run it. Let a student call out values.**
+#### Step-by-Step Demo
 
-#### Mad Libs Tease
+**Step 2: Welcome Screen**
 
-> "Now let me show you what we're building NEXT week."
+> "Every program needs a welcoming introduction. Watch how I make one..."
 
-**Display the sample Mad Libs output from the lesson (the BrightByte / penguin / moonwalk example).**
+```python
+print("🎭" * 15)
+print("")
+print("     WELCOME TO THE JOKE MACHINE!")
+print("")
+print("🎭" * 15)
+```
 
-> "You give it a name, an animal, an action word, a place — and it reveals a completely unique, hilarious story every time. The sillier the words, the funnier the story.
->
-> And here's the thing: every skill you've learned — input(), variables, f-strings, even the print decorations — goes into this one game. It's the ultimate Term 1 project.
->
-> Want to build it? That's Lesson 8. See you there."
+**Run it. Show the output.**
+
+> "See how we used string multiplication to make the border? You can customize this however you want!"
 
 ---
 
-### Part 6: Homework & Wrap-Up (5 minutes)
+**Step 3: Store Jokes in Variables**
+
+> "Now we store our jokes in variables. Each joke needs TWO variables—one for setup, one for punchline."
+
+```python
+joke1_setup = "Why don't scientists trust atoms?"
+joke1_punchline = "Because they make up everything!"
+```
+
+> "Why variables? Because it keeps our code organized, and we can easily change jokes later!"
+
+---
+
+**Step 4: Display Each Joke**
+
+> "Now we tell each joke with proper formatting..."
+
+```python
+print("=" * 30)
+print("📢 Joke #1:")
+print(joke1_setup)
+print("...")
+print(joke1_punchline)
+print("😂" * 3)
+```
+
+> "Notice the '...' for suspense! That's what comedians do—they PAUSE before the punchline!"
+
+---
+
+**Step 5: Add the Ending**
+
+> "Finally, thank your audience and close the show!"
+
+```python
+print("=" * 30)
+print("Thanks for laughing!")
+print("🎭 THE END 🎭")
+```
+
+#### Questions Before Building
+
+> "Any questions before you start building your own?"
+
+**Address common questions:**
+
+- "Can I use more than 3 jokes?" → "Yes! More is great!"
+- "Can I change the emojis?" → "Absolutely! Make it your own!"
+- "What if my joke is long?" → "That's fine, just put it in quotes!"
+
+---
+
+### Part 4: Build Time (25 minutes)
+
+#### Goals
+
+- Students create their Joke Machines
+- Provide support without taking over
+- Encourage peer collaboration
+
+#### Setup Build Time
+
+> "It's BUILD TIME! You have 25 minutes to create your Joke Machine. Here's what you need:
+>
+> 1. ✅ Welcome screen with decorations
+> 2. ✅ At least 3 jokes in variables
+> 3. ✅ Display each joke with setup, pause, punchline
+> 4. ✅ Ending message
+>
+> Open Trinket, start coding, and have FUN! I'll be walking around to help."
+
+#### Teacher Circulation Strategy
+
+**First 10 minutes:**
+
+- Help students who can't start
+- Ensure everyone has at least the welcome screen started
+- Address immediate questions
+
+**Middle 10 minutes:**
+
+- Check on joke variable creation
+- Help with variable naming issues
+- Encourage students who are ahead to add more jokes
+
+**Last 5 minutes:**
+
+- Quick progress check: "Raise your hand if you have all 3 jokes working!"
+- Help struggling students prioritize (get 2 jokes working perfectly vs. 3 with bugs)
+- Remind about saving work
+
+#### Common Issues During Build Time
+
+| Issue                       | Quick Fix                                                     |
+| --------------------------- | ------------------------------------------------------------- |
+| "I don't know how to start" | "Start with `print(\"Welcome!\")`—we'll add decorations next" |
+| Variable name typos         | Check that setup/punchline names match exactly                |
+| Missing quotes on jokes     | "Remember, jokes are text—text needs quotes!"                 |
+| Copied example exactly      | "This is great! Now change the jokes to YOUR favorites"       |
+| Finished early              | "Add a 4th joke! Or try ASCII art!"                           |
+
+#### Peer Support
+
+> "If you finish early or figure something out, help a neighbor! Teaching others helps you learn too!"
+
+Encourage collaboration but ensure each student writes their own code.
+
+---
+
+### Part 5: Quick Share & Debug Help (7 minutes)
+
+#### Goals
+
+- Celebrate progress
+- Catch common bugs
+- Build excitement for showcase
+
+#### Quick Share
+
+> "Let's see some work-in-progress! Who wants to share what they have so far?"
+
+**Select 3-4 volunteers:**
+
+- One who has a working program
+- One who has creative decorations
+- One who has funny jokes
+- (Optional) One who had a bug they fixed
+
+**For each share:**
+
+- Run their code
+- Point out something positive
+- Quick applause!
+
+#### Common Bug Fix Session
+
+> "I noticed some common issues. Let's fix them together..."
+
+**Address top 1-2 bugs you observed:**
+
+- Missing quotes
+- Typos in variable names
+- Forgetting to print the variables
+
+#### Encouragement
+
+> "Everyone is making great progress! You'll have time to finish for homework, and remember—next week we SHOWCASE! 🎉"
+
+---
+
+### Part 6: Homework & Showcase Preview (3 minutes)
 
 #### Homework Assignment
 
-> "For homework, you're building a Number Wizard Calculator. It uses everything from today:
-> - At least 3 input() calls with numbers
-> - int() or float() on each one
-> - At least 2 calculations
-> - A neat results card
+> "For homework, you need to COMPLETE and POLISH your Joke Machine. Here are the requirements..."
+
+**Display checklist:**
+
+| Requirement                     | Check |
+| ------------------------------- | ----- |
+| Welcome screen with decorations | ⬜    |
+| Your name as creator            | ⬜    |
+| At least 3 jokes in variables   | ⬜    |
+| Setup, pause, punchline format  | ⬜    |
+| Visual separators               | ⬜    |
+| Laughing emojis                 | ⬜    |
+| Ending message                  | ⬜    |
+| NO BUGS                         | ⬜    |
+
+> "Test your code multiple times. Fix any bugs. Make it something you're PROUD of!"
+
+#### Showcase Preview
+
+> "NEXT WEEK is the Term 1 Showcase Party! 🎉
 >
-> Use the starter template in the lesson. Customise it however you like!"
+> You'll each present your Joke Machine to the class. You'll run your code, tell us about your project, and we'll all laugh together!
+>
+> Come prepared with:
+>
+> - Your finished, working Joke Machine
+> - A short explanation of what you built
+> - Excitement to share and celebrate!
+>
+> This is YOUR moment to shine. You've worked hard all term—now show it off!"
 
-**Display the grading rubric briefly.**
+#### Final Reminder
 
-#### Wrap-Up
-
-> "You've just solved the mystery from last week. You know why input() gives you strings, and you know exactly how to convert them. That's one of the most important things you'll ever learn about Python. See you next week for the build!"
+> "Save your work! Test it again tonight! And have FUN with it. See you next week, comedians! 🎭"
 
 ---
 
-## 🤖 AI Activity: Type Conversion in the Real World (5–10 minutes, optional)
+## 🤖 AI Activity: AI Joke Rating - Training Data Concept (5-10 minutes)
 
 ### What to Do
 
 1. **Introduction** (1 min)
-   > "You just learned to convert strings to numbers. Did you know AI does this billions of times a second?"
+   > "You just built a Joke Machine that stores jokes in variables. Did you know AI learns which jokes are funny the same way?"
 
-2. **Discussion** (3–4 min)
-   - "When you type a Google search, what does Google do with your text?"
-   - "AI can't process words directly — it converts them to numbers first (called embeddings)"
-   - "Every photo you take that an AI identifies goes through this: image → numbers → AI analysis → result back to text"
+2. **Interactive Activity** (4-5 min)
+   - Show students 3-4 jokes (on screen or read aloud)
+   - Have students rate each joke: "Funny" 👍 or "Not Funny" 👎
+   - Collect the votes (count hands or use a simple poll)
+   - Explain: "When you rate jokes, you're creating training data - exactly how AI learns!"
 
-3. **Connection** (2 min)
-   > "Your int() and float() are tiny versions of the very first step in every AI system: converting raw data into numbers that can be processed. You learned a concept today that sits at the heart of all machine learning."
+3. **Connection Discussion** (2-3 min)
+   - "How do you think AI knows which jokes are funny?"
+   - "What if everyone rated a joke as 'not funny' - what would AI learn?"
+   - "How is your Joke Machine similar to how AI stores jokes?"
+
+4. **Key Concept** (1 min)
+   > "AI learns from millions of people rating things - just like we did today! When you rate jokes, movies, or songs, you're helping train AI. Your Joke Machine stores jokes in variables - AI does the same, but learns which ones people like!"
+
+### Discussion Questions
+
+- "How do you think Netflix knows which shows you'll like?"
+- "What happens when lots of people rate something as 'funny' or 'not funny'?"
+- "How is your Joke Machine similar to how AI works?"
 
 ### Teaching Tips
 
-- Keep it conceptual — no need to explain neural networks
-- Use the analogy: "A library catalogue is strings. The computer needs to convert them to numbers (like book reference codes) to sort and find things efficiently. Same idea."
+- Keep it simple - focus on the concept of "rating = training data"
+- Use concrete examples: Netflix ratings, YouTube likes, app store reviews
+- Connect to their project: "Your jokes are stored in variables - AI does the same!"
+- If students ask technical questions, simplify: "AI learns from what people like, just like we did today!"
+- Emphasize they're learning real AI concepts: "This is exactly how AI training works!"
+
+### Alternative Activity (If Short on Time)
+
+- Quick discussion: "Who has rated a movie or show? That's training data!"
+- Connect: "When you rate jokes, you're teaching AI what's funny!"
+- Emphasize: "Your Joke Machine works the same way - storing jokes in variables!"
 
 ---
 
 ## 🎯 Assessment & Differentiation
 
-### Formative Assessment (During Class)
+### Formative Assessment (During Build Time)
 
-**Watch each student for:**
+**Observe each student for:**
 
-- [ ] Correctly wraps `int()` around `input()` without being told
-- [ ] Understands WHY the conversion is needed (not just HOW)
-- [ ] Chooses `int()` vs `float()` appropriately
-- [ ] Uses f-strings to print results (not `+` with numbers)
-- [ ] Can read a TypeError and explain what caused it
+- [ ] Can start project independently
+- [ ] Uses variables correctly for jokes
+- [ ] Organizes code in logical sections
+- [ ] Applies debugging skills when stuck
+- [ ] Adds personal creative touches
+- [ ] Manages time effectively
 
-### Lesson Rubric
+### Project Rubric
 
-| Criteria | Excellent (3) | Good (2) | Developing (1) |
-|----------|--------------|----------|----------------|
-| **Conversion syntax** | Writes `int(input(...))` fluently | Writes it correctly with prompting | Needs template |
-| **int vs float** | Chooses correctly and explains why | Makes correct choice | Needs guidance |
-| **Calculations** | Multiple; correct results | Basic addition/multiplication | Attempts but errors |
-| **Error recognition** | Names TypeError, explains cause | Recognises it's a type error | Confused by error |
-| **Application** | Challenge 3 or 4 attempted | Challenge 2 complete | Challenge 1 complete |
+| Criteria             | Excellent (3)                    | Good (2)                 | Developing (1)     |
+| -------------------- | -------------------------------- | ------------------------ | ------------------ |
+| **Welcome Screen**   | Creative, personalized           | Basic but complete       | Missing or minimal |
+| **Jokes (quantity)** | 4+ jokes                         | 3 jokes                  | Fewer than 3       |
+| **Joke Format**      | All have setup, pause, punchline | Most formatted correctly | Formatting issues  |
+| **Variables**        | Well-named, organized            | Variables used           | Variables not used |
+| **Visual Design**    | Creative separators, emojis      | Basic separators         | Minimal formatting |
+| **Ending**           | Creative, personalized           | Basic ending             | Missing            |
+| **Code Quality**     | Bug-free, well-organized         | Minor issues             | Major bugs         |
+| **Creativity**       | Unique touches, extras           | Meets requirements       | Minimal effort     |
 
 ### Differentiation Strategies
 
 #### For Students Who Need More Support
 
-- Focus only on `int()` — skip `float()` for now
-- Provide the scaffold code with blanks to fill in
-- Use a physical analogy: "The input() box delivers packages in bubble wrap (the string). int() unwraps them so you can use what's inside."
-- Let them complete Challenge 1 multiple times with different scenarios
+- Provide partially completed template (more structure)
+- Suggest they start with just 2 jokes
+- Pair with a supportive peer
+- Focus on getting something working vs. adding extras
+- Offer 1:1 time before showcase to ensure completion
 
 #### For Advanced Students
 
-- Introduce `round(value, 2)` from Challenge 4
-- Ask: "What happens if someone types a word instead of a number? What error do you get?" (ValueError — foreshadows error handling)
-- Challenge: "Can you write a program that asks for 5 scores and calculates the average?"
-- Bonus: "What does `//` do? What does `%` do?"
+- Challenge: Add 5+ jokes
+- Create themed joke categories
+- Add ASCII art characters
+- Use string methods creatively (`.upper()` for SHOUTING punchlines)
+- Create a "rating" for each joke using stars
 
 ---
 
 ## ⚠️ Common Pitfalls & Solutions
 
-### Technical Issues
+### Project-Specific Issues
 
-| Issue | Solution |
-|-------|----------|
-| `ValueError: invalid literal for int()` | Student typed a word, not a number. Explain: `int()` only works with number text like "12" |
-| `TypeError` when printing with `+` | Switch to f-string: `f"Result: {number}"` |
-| `int()` failing on decimal like "3.5" | Use `float()` instead |
-| Forgot `int()` entirely | Point to their age = input() line: "That gives you text — wrap it with int()" |
-
-### Concept Issues
-
-| Issue | Solution |
-|-------|----------|
-| "I don't understand why '12' is different from 12" | Run the `"12" + "12"` demonstration — seeing 1212 makes it click |
-| Confusing int() and float() | Ask: "Will this number ever have a decimal?" If yes: float. If no: int. |
-| Using `int()` on a variable they already stored | Show both: `int(age_text)` and `int(input(...))` — both work |
+| Issue                           | Solution                                             |
+| ------------------------------- | ---------------------------------------------------- |
+| "I don't have any jokes"        | Provide joke reference sheet; brainstorm together    |
+| Copying template exactly        | "Great start! Now make it YOUR jokes"                |
+| Jokes too long                  | Split across multiple print statements               |
+| Inappropriate jokes             | Redirect to age-appropriate humor gently             |
+| Perfectionism blocking progress | "Done is better than perfect! You can improve later" |
+| Overwhelmed by scope            | "Let's focus on just the welcome screen first"       |
 
 ### Time Management Issues
 
-| Issue | Solution |
-|-------|----------|
-| Not enough time for all challenges | Challenges 1–2 are the priority; 3–4 are stretch |
-| Students rushing to Challenge 4 | "Challenge 4 uses a new function — make sure 1–3 are solid first" |
-| Too much time on TypeError explanation | Keep Part 2 tight; the demonstration does most of the work |
+| Issue                         | Solution                                        |
+| ----------------------------- | ----------------------------------------------- |
+| Spent too long on decorations | "Your welcome looks great! Let's move to jokes" |
+| Stuck on first step           | "Skip that for now, let's do jokes first"       |
+| Won't move on from bugs       | "Mark it, we'll fix it later, keep going"       |
+| Not saving work               | "Save NOW! We're saving every 5 minutes"        |
+
+### Peer Dynamics
+
+| Issue                     | Solution                                                 |
+| ------------------------- | -------------------------------------------------------- |
+| Student copying neighbor  | "I love that inspiration! Now change the jokes to yours" |
+| Student won't help others | "Being a helper makes you a better programmer!"          |
+| Competitive comparison    | "Everyone's project is unique—that's what makes it fun!" |
 
 ---
 
@@ -406,17 +507,22 @@ print(f"Game begins in 3... 2... 1... GO!")
 
 ### Key Questions
 
-1. **Understanding check:**
-   - Can students explain WHY input() returns a string (not just that it does)?
-   - Can they choose int() vs float() appropriately?
+1. **Completion status:**
 
-2. **Application check:**
-   - Did students write the one-line shortcut `int(input(...))` by end of class?
-   - Are their Challenge answers running without errors?
+   - How many students have working code?
+   - How many need significant homework time?
+   - Who might need extra support before showcase?
 
-3. **Readiness for Lesson 8:**
-   - Do students understand enough to use numbers in their Mad Libs game (e.g. for a "how many minutes" line)?
-   - Any students who are still confused about conversion will struggle with the bonus in Lesson 8 — flag them for extra support
+2. **Skill application:**
+
+   - Are students combining concepts effectively?
+   - What concepts are they struggling to apply?
+   - Who exceeded expectations?
+
+3. **Creativity:**
+   - Did students personalize their projects?
+   - Any particularly creative approaches?
+   - Any students who need encouragement to add personality?
 
 ### Reflection Template
 
@@ -424,48 +530,124 @@ print(f"Game begins in 3... 2... 1... GO!")
 Date: ____________
 Students Present: ____________
 
-Concept understanding (estimate %):
-- Can use int() correctly: ___%
-- Can use float() correctly: ___%
-- Can explain WHY conversion is needed: ___%
+Completion by end of class (estimate %):
+- Welcome screen: ___%
+- 3+ jokes in variables: ___%
+- Full program working: ___%
 
-Challenges completed:
-- Challenge 1 (most students): ___%
-- Challenge 2: ___%
-- Challenge 3: ___%
-- Challenge 4: ___%
-
-Students who may need extra support in Lesson 8:
+Students needing support before showcase:
 -
 
-Students who are ready for advanced challenges:
+Creative highlights:
 -
 
-Adjustments for next time:
+Concepts students applied well:
+-
+
+Areas needing reinforcement:
+-
+
+Showcase preparation notes:
 -
 ```
 
 ---
 
+## 🎭 Showcase Preparation (For Next Week)
+
+### Teacher Preparation for Week 8
+
+1. **Confirm all submissions:**
+
+   - Follow up with students who haven't submitted
+   - Offer last-minute help sessions if needed
+
+2. **Presentation order:**
+
+   - Create a list of presenters
+   - Mix up skill levels
+   - Consider volunteers first
+
+3. **Technical setup:**
+
+   - Test displaying student Trinket links
+   - Have a backup plan if a project won't run
+
+4. **Celebration elements:**
+
+   - Certificates for completion?
+   - "Awards" for categories (funniest, most creative, etc.)?
+   - Snacks/party atmosphere?
+
+5. **Time management:**
+   - 2-3 minutes per presentation max
+   - 25-30 students = need to be efficient
+   - Consider small group showcases if large class
+
+### What to Tell Students
+
+> "Next week's showcase:
+>
+> - You'll have 2-3 minutes to present
+> - Tell us your name and project title
+> - Run your code
+> - Share one thing you're proud of
+> - We'll all clap and celebrate!
+>
+> Don't stress—everyone's in the same boat. We're here to have fun and celebrate what you built!"
+
+---
+
 ## 🔗 Additional Resources
+
+### Joke Collections (Age-Appropriate)
+
+**Classic Kid Jokes:**
+
+- Why did the chicken cross the road? To get to the other side!
+- What do you call a sleeping dinosaur? A dino-snore!
+- Why did the math book look sad? Because it had too many problems!
+
+**Computer/Coding Jokes:**
+
+- Why was the computer cold? It left its Windows open!
+- What's a computer's favorite snack? Microchips!
+- Why did the programmer quit? Because they didn't get arrays!
+
+**Animal Jokes:**
+
+- What do you call a fish without eyes? A fsh!
+- Why do cows wear bells? Because their horns don't work!
+- What do you call a bear with no teeth? A gummy bear!
 
 ### Parent Communication Template
 
 ```
-Subject: Week 7 — Python Maths! Your Child Learned Type Conversion
+Subject: Week 7 - Your Child is Building Their First Python Project!
 
 Dear Parent/Guardian,
 
-This week your child tackled one of the most important concepts in programming: type conversion!
+This week marks a major milestone! Your child started building their FIRST complete Python project: The Joke Machine!
 
-What they learned:
-- Why Python stores typed numbers as text (strings)
-- How to convert text to numbers with int() and float()
-- How to do real maths with user input
+What they're creating:
+- A program that tells jokes
+- Using all the skills learned in Term 1
+- Complete with welcome screen, jokes, and ending
 
-Ask them to show you: Run their Homework Number Wizard Calculator and let them explain what int() does!
+Homework:
+Your child needs to COMPLETE their Joke Machine for next week's Showcase Party! They should:
+- Finish any unfinished sections
+- Add at least 3 jokes
+- Test that it runs without errors
+- Practice explaining their project
 
-Next week: They start building their first game — a Mad Libs Adventure! They'll use everything learned so far to create a hilarious story generator. Have them ask you for a silly word to test it with.
+Next week:
+Students will present their Joke Machines to the class! This is a celebration of their hard work all term. Please encourage them and maybe help them practice their presentation at home.
+
+Fun idea:
+Ask your child to run their Joke Machine for the family! They'd love to make you laugh with their creation.
+
+Questions? Reply to this email.
 
 [Instructor Name]
 KidsLearnAI
@@ -477,33 +659,35 @@ KidsLearnAI
 
 ### Before Class
 
-- [ ] Prepare the TypeError demo code (ready to run live)
-- [ ] Prepare the fixed version
-- [ ] Have the string vs int comparison table ready
-- [ ] Prepare the Mad Libs sample output for the tease
+- [ ] Create completed Joke Machine example
+- [ ] Prepare joke reference sheets
+- [ ] Plan student groups for brainstorm
+- [ ] Set up project template for display
+- [ ] Prepare showcase logistics
 
 ### During Class
 
-- [ ] Live TypeError demo — do NOT fix immediately
-- [ ] Clear visual explanation of string vs number
-- [ ] Both int() and float() taught with examples
-- [ ] Students attempt challenges independently
-- [ ] Mad Libs tease at the end builds excitement
-- [ ] Homework explained with starter template
+- [ ] Exciting project introduction
+- [ ] Joke brainstorm in groups (with collection)
+- [ ] Clear 5-step structure demo
+- [ ] Active build time with circulation
+- [ ] Quick share with celebration
+- [ ] Homework and showcase preview
 
 ### After Class
 
-- [ ] Note students who didn't complete Challenge 1
-- [ ] Flag students who may need Lesson 8 number support
+- [ ] Complete reflection notes
+- [ ] Identify students needing support
 - [ ] Send parent communication
-- [ ] Prepare Mad Libs demo for Lesson 8
+- [ ] Begin showcase planning
+- [ ] Follow up with incomplete projects
 
 ---
 
-_KidsLearnAI Teacher Resources_
-*www.kidslearnai.ca*
+_KidsLearnAI Teacher Resources_  
+*www.kidslearnai.ca*  
 _For instructor support, contact: [instructor support email]_
 
 ---
 
-_Remember: The TypeError demo is the heart of this lesson. Seeing the program CRASH before knowing the fix creates genuine curiosity. Don't rush past it — let students sit with the problem for a moment before teaching the solution._
+_Remember: This is their FIRST project. The goal is completion and pride, not perfection. Every student should leave today feeling like they built something REAL. That feeling of creation is what keeps programmers going for a lifetime!_ 🎭🎉
