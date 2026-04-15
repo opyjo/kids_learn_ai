@@ -1,6 +1,6 @@
 ---
-title: "Let's Build a Mad Libs Game!"
-description: "Design and build your own Mad Libs story generator — the perfect Term 1 project that combines input(), variables, and f-strings into a hilarious, replayable game!"
+title: "Term 1 Recap and Final Project!"
+description: "Review everything from Term 1 with challenges and quizzes, then choose your final project: Mad Libs or Joke Machine — both use every skill you've learned!"
 difficulty: "beginner"
 order_index: 8
 course_slug: "term-1-hello-python"
@@ -38,57 +38,65 @@ starter_code: |
   print(f"It took exactly {number} minutes. The end!")
   print("")
   print("😂" * 10)
+
+  # 🎤 Want to build a Joke Machine instead?
+  # See "Option B" in the lesson for the Joke Machine starter code!
 class_activities: |
-  ## 🎮 Class Activity: Mad Libs Build Session!
+  ## 🎮 Class Activity: Recap + Final Project Intro!
 
-  **Part 1: Teacher Demo (5 min)**
-  - Teacher runs a pre-built Mad Libs — class shouts the words
-  - Everyone laughs at the silly result
-  - "This is what YOU are building today!"
+  **Part 1: Skills Speed Round (5 min)**
+  - Quick-fire questions — one per week
+  - Build confidence: "You know ALL of this!"
 
-  **Part 2: Design Phase (10 min)**
-  Pick a theme and sketch your story on paper:
-  - Themes: Space 🚀, School 📚, Fantasy 🐉, Sports ⚽, Food 🍕
-  - Write out your story with BLANKS where the input words will go
-  - Label each blank: __NOUN__, __VERB__, __ADJECTIVE__, __PLACE__
+  **Part 2: Skill-by-Skill Recap with Challenges (20 min)**
+  - Walk through each of the 7 skills with code examples
+  - Mini-challenges for each skill
+  - Skills Checkpoint: one program using ALL 7 skills
 
-  **Part 3: Build Time (30 min)**
-  Code your Mad Libs game:
-  1. Welcome screen (print + string multiplication)
-  2. Collect words (at least 6 input() calls with clear prompts)
-  3. Reveal the story (f-strings)
-  Test it with a classmate — get them to enter the silliest words!
+  **Part 3: Kahoot Quiz (10 min)**
+  - Teacher-led Kahoot quiz covering all Term 1 concepts
 
-  **Part 4: Quick Demo (5 min)**
-  Two or three students share their in-progress game.
-  Class helps debug any issues!
+  **Part 4: Project Introduction + Choice (15 min)**
+  - Teacher demos both projects — Mad Libs AND Joke Machine
+  - Students choose and start designing on paper
+
+  **Part 5: Wrap-Up (5 min)**
+  - Homework expectations
+  - Week 9 Showcase preview
 take_home_assignment: |
-  ## 📚 Homework: Complete Your Mad Libs Game
+  ## 📚 Homework: Build Your Final Project
 
-  **Assignment:** Finish and polish your Mad Libs game for the Week 9 Game Showcase!
+  **Assignment:** Build your chosen project (Mad Libs OR Joke Machine) for the Week 9 Showcase!
 
-  **Requirements:**
-  1. At least 6 different word inputs (noun, verb, adjective, place, name, number...)
-  2. A proper welcome screen with decorative borders
-  3. The full story revealed cleanly using f-strings
-  4. Every word appears in the story (no unused variables!)
+  **Mad Libs Requirements:**
+  1. Welcome screen with decorative borders
+  2. At least 6 different word inputs with clear prompts
+  3. Full story revealed using f-strings
+  4. Every word appears in the story
   5. Your name in the program header comment
   6. Code runs without bugs!
 
-  **Bonus:**
-  - Add a second story (run the game twice with different prompts)
-  - Use int() on your number input and include it in a calculation
-  - Add ASCII art or creative decorations to your welcome screen
-  - Create a "silliness rating" using string multiplication with your number
+  **Joke Machine Requirements:**
+  1. Welcome screen with player's name
+  2. At least 3 jokes with setup → pause → punchline
+  3. Punchlines use `.upper()` for emphasis
+  4. Personalised with f-strings (player name in jokes)
+  5. Rating system using `int()` with a comedy score card
+  6. Code runs without bugs!
 
-  **Submit:** Share your Trinket link with your instructor. Be ready to present at the Week 9 Game Showcase!
+  **Bonus (either project):**
+  - Add extra content (more jokes or a second story)
+  - Use `int()` for a calculation
+  - Add ASCII art or creative decorations
+
+  **Submit:** Share your Trinket link with your instructor. Be ready to present at the Week 9 Showcase!
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Mad Libs works by separating STRUCTURE from CONTENT — the story template stays the same, but the words inside change every time. This is exactly how AI language models work! A model like ChatGPT learns the structure of language (grammar, story patterns) separately from specific words. When generating text, it fills in words based on context — just like your f-strings fill in the blanks. Your Mad Libs game is a tiny, human-powered version of how AI text generation works!
+  Both projects today separate STRUCTURE from CONTENT — the Mad Libs template stays the same but the words change, and the Joke Machine structure stays the same but different names and ratings go in. This is exactly how AI language models work! A model like ChatGPT learns the structure of language (grammar, story patterns) separately from specific words. When generating text, it fills in words based on context — just like your f-strings fill in the blanks. Your project is a tiny, human-powered version of how AI text generation works!
 ---
 
-# Term 1, Week 8: Let's Build a Mad Libs Game! 🎭
+# Term 1, Week 8: Term 1 Recap and Final Project! 🎉
 
 **Course:** Term 1: Hello Python!
 **Duration:** 60 minutes
@@ -96,109 +104,302 @@ ai_activities: |
 
 ---
 
-## 🎯 What We're Building
+## 🎯 What We're Doing Today
 
-Today you start building your **first complete Python game**: a **Mad Libs Adventure**!
+Today has **two parts**:
 
-Mad Libs is the perfect game for right now because it uses EVERYTHING you've learned in Term 1:
+1. **A victory lap** — we recap EVERY skill from Weeks 1–7 with challenges and a quiz
+2. **Meet your final project** — YOU choose: build a **Mad Libs Game** OR a **Joke Machine**
 
-- ✅ `print()` for the welcome screen and story reveal
-- ✅ String multiplication for decorative borders
-- ✅ `input()` to collect hilarious words from the player
-- ✅ Variables to store each word
-- ✅ f-strings to weave everything into a funny story
-
-By the end of today, you'll have a working Mad Libs game that produces a unique, hilarious story every time someone plays it!
+The recap is the main event today. By the end, you'll prove to yourself that you know more Python than you think!
 
 ---
 
-## 🤖 BrightByte's Game Design Pep Talk!
+## 🤖 BrightByte's Pep Talk!
 
-> _"You've spent 7 weeks building your toolkit. Today you use it all to build a GAME. Here's the secret about Mad Libs: every run is completely unique. Your friends will play it again and again to get different silly stories. That's what makes a game addictive! The funnier the words your players choose, the funnier the story. Ready to build something genuinely fun? Let's go! 🎭"_
-
----
-
-## 🎮 What IS Mad Libs?
-
-Mad Libs is a word game where:
-
-1. A story has **blank spaces** where words are missing
-2. A player gets asked to fill in the blanks WITHOUT seeing the story first
-3. The filled-in story is **revealed** — usually with hilarious results!
-
-### Example Story (Blanks Version)
-
-```
-One ________(ADJECTIVE) morning, ________(NAME) woke up to find a ________(ANIMAL)
-sitting in their kitchen in ________(PLACE).
-Without hesitating, they decided to ________(VERB) it!
-```
-
-### Example Story (Filled In)
-
-```
-One sparkly morning, BrightByte woke up to find a penguin
-sitting in their kitchen in the supermarket.
-Without hesitating, they decided to moonwalk it!
-```
-
-The magic? **The funnier the words, the funnier the story!**
-
-> _BrightByte says: "The best Mad Libs happen when the player doesn't know what the story is about BEFORE they choose their words. Keep the story hidden — reveal it all at once for maximum impact!"_
+> _"Seven weeks. SEVEN! You went from 'What is Python?' to building programs that talk to people, crunch numbers, and create unique outputs every time. Today we're going to prove it. We'll speed through every skill, tackle some challenges, and then I'll show you TWO awesome projects you can build using everything you know. Ready for your victory lap? Let's go! 🎉"_
 
 ---
 
-## 📋 Game Design: Plan Before You Code
+## 🏆 Part 1: Term 1 Skills Rally
 
-Before you write ANY code, you need a plan. Real game developers design first!
-
-### Step 1: Choose Your Theme
-
-Pick ONE theme for your story:
-
-| Theme | Story Idea |
-|-------|-----------|
-| 🚀 **Space** | Astronaut discovers something weird on a new planet |
-| 📚 **School** | Student's wild first day at a new school |
-| 🐉 **Fantasy** | Hero on a quest to find a magical object |
-| ⚽ **Sports** | The world's strangest sports competition |
-| 🍕 **Food** | A restaurant that goes completely wrong |
-| 🐾 **Animals** | Zoo animals plan a great escape |
-
-### Step 2: Write Your Story Template
-
-On **paper**, write a short story (4–6 sentences) with BLANKS. Label each blank:
-
-```
-The ___ADJECTIVE___ explorer, ___NAME___, arrived at ___PLACE___.
-They were carrying a ___NOUN___ and looking for a ___ADJECTIVE2___ ___NOUN2___.
-"I must ___VERB___ this before ___NUMBER___ minutes pass!" they cried.
-```
-
-### Step 3: List Your Word Types
-
-The most common word types in Mad Libs:
-
-| Word Type | What It Is | Examples |
-|-----------|-----------|---------|
-| **Noun** | A person, place, or thing | cat, pizza, cloud, spaceship |
-| **Verb** | An action word | jump, sneeze, calculate, explode |
-| **Adjective** | A describing word | sparkly, enormous, confused, purple |
-| **Place** | A location | the moon, a library, a sock drawer |
-| **Name** | A person's name | BrightByte, Alex, Captain Snuggles |
-| **Number** | Any number | 7, 42, 9000 |
+You've built an incredible toolkit over 7 weeks. Let's revisit each one!
 
 ---
 
-## 🏗️ Building Your Game: The Three Parts
+### Week 1: `print()` — Making Python Talk
 
-Every Mad Libs game has three parts. Let's build them one at a time.
+The very first thing you ever learned. `print()` is how Python talks to the world.
+
+```python
+print("Hello, world!")
+print("My name is BrightByte!")
+print("Python is awesome!")
+```
+
+**Quick reminder:**
+- Every `print()` outputs on a **new line**
+- Text inside `print()` goes in **quotes** (single `'` or double `"`)
+- You can print **anything** — words, numbers, emojis
+
+#### Try It!
+
+Write THREE `print()` statements about yourself — your name, your favourite food, and your favourite animal.
+
+```python
+print("My name is Alex.")
+print("My favourite food is pizza.")
+print("My favourite animal is a red panda.")
+```
 
 ---
 
-### Part 1: The Welcome Screen
+### Week 2: String `*` and `+` — Patterns and Joining
 
-Create an exciting intro that gets the player ready:
+You learned that strings aren't just text — you can **multiply** and **add** them!
+
+```python
+print("⭐" * 10)           # Prints 10 stars
+print("Ha" * 5)             # Prints HaHaHaHaHa
+print("Hello" + " " + "World")  # Joins strings together
+```
+
+**Quick reminder:**
+- `*` repeats a string: `"abc" * 3` gives `"abcabcabc"`
+- `+` joins strings together: `"Hi" + "!" ` gives `"Hi!"`
+- Great for making **borders** and **decorations**
+
+#### Try It!
+
+Create a decorative banner using string multiplication:
+
+```python
+print("🎉" * 15)
+print("   TERM 1 RECAP!")
+print("🎉" * 15)
+```
+
+---
+
+### Week 3: Variables — Storing Data in Boxes
+
+Variables let you **save** information and use it later.
+
+```python
+name = "BrightByte"
+age = 10
+food = "pizza"
+
+print(name)     # Prints: BrightByte
+print(age)      # Prints: 10
+```
+
+**Quick reminder:**
+- Use `=` to **assign** a value: `name = "Alex"`
+- Variable names should be **descriptive**: `player_name` not `x`
+- You can **change** a variable: `score = 10` then later `score = 20`
+
+#### Try It!
+
+Create three variables and print them all:
+
+```python
+hero = "Captain Python"
+power = "super coding"
+level = 99
+
+print(hero)
+print(power)
+print(level)
+```
+
+---
+
+### Week 4: String Methods — `.upper()`, `len()`
+
+You discovered that strings have **built-in superpowers** called methods.
+
+```python
+name = "brightbyte"
+print(name.upper())     # BRIGHTBYTE
+print(name.lower())     # brightbyte
+print(name.title())     # Brightbyte
+print(len(name))        # 10
+```
+
+**Quick reminder:**
+- `.upper()` makes ALL CAPS
+- `.lower()` makes all lowercase
+- `.title()` Capitalises Each Word
+- `len()` counts the characters (note: it's `len(name)` not `name.len()`)
+
+#### Try It!
+
+```python
+city = "london"
+print(city.upper())          # LONDON
+print(city.title())          # London
+print(len(city))             # 6
+print("=" * len(city))       # ======  (border matches the word length!)
+```
+
+---
+
+### Week 5: Comments & F-Strings — Clean Code
+
+You learned to **explain your code** with comments and **embed variables** inside strings with f-strings.
+
+```python
+# This is a comment — Python ignores it
+name = "Alex"
+age = 11
+
+# f-strings let you put variables RIGHT INSIDE text
+print(f"Hello, {name}!")          # Hello, Alex!
+print(f"{name} is {age} years old.")  # Alex is 11 years old.
+```
+
+**Quick reminder:**
+- Comments start with `#` — they're notes for humans, not Python
+- F-strings start with `f` before the quote: `f"text {variable}"`
+- Variables go inside **curly braces** `{}`
+- Without the `f`, you get `{name}` printed literally!
+
+#### Try It!
+
+```python
+# My favourite things
+colour = "blue"
+number = 7
+animal = "dolphin"
+
+print(f"My favourite colour is {colour}.")
+print(f"My lucky number is {number}.")
+print(f"I love {animal}s!")
+```
+
+---
+
+### Week 6: `input()` — Talking TO Python
+
+The game-changer! `input()` lets the user TYPE information into your program.
+
+```python
+name = input("What is your name? ")
+colour = input("What is your favourite colour? ")
+
+print(f"Hi {name}! Great choice — {colour} is awesome!")
+```
+
+**Quick reminder:**
+- `input()` **pauses** the program and waits for the user to type
+- Whatever the user types is **stored** in a variable
+- `input()` ALWAYS gives you a **string** (text) — even if the user types a number!
+- Write **clear prompts** so the user knows what to type
+
+#### Try It!
+
+```python
+food = input("What is your favourite food? ")
+place = input("Where would you love to visit? ")
+
+print(f"Imagine eating {food} in {place}!")
+print(f"That would be amazing!")
+```
+
+---
+
+### Week 7: `int()` and `float()` — Number Conversions
+
+You learned that `input()` always returns a string — and how to **convert** it to a real number.
+
+```python
+age = int(input("How old are you? "))     # Converts to whole number
+score = float(input("Enter your score: ")) # Converts to decimal
+
+next_year = age + 1
+double_score = score * 2
+
+print(f"Next year you'll be {next_year}!")
+print(f"Double score: {double_score}!")
+```
+
+**Quick reminder:**
+- `int()` converts to a **whole number**: `int("12")` → `12`
+- `float()` converts to a **decimal**: `float("3.5")` → `3.5`
+- Without converting, you get a **TypeError** when you try to do maths
+- The shortcut: `int(input("..."))` — wrap `int()` around `input()`
+
+#### Try It!
+
+```python
+items = int(input("How many items do you have? "))
+price = float(input("How much does each cost? "))
+
+total = items * price
+print(f"Your total is {total}!")
+```
+
+---
+
+## 🧪 Skills Checkpoint — All 7 in One Program!
+
+Here's the ultimate proof: ALL 7 skills in one short program. Can you spot each one?
+
+```python
+# Skills Checkpoint — all 7 skills in action!       # Week 5: comment
+player = input("What is your name? ")                # Week 6: input()
+age = int(input("How old are you? "))                # Week 7: int()
+future_age = age + 10                                # Week 3: variable
+print("=" * 30)                                      # Week 2: string *
+print(f"Welcome, {player.upper()}!")                  # Week 5: f-string + Week 4: .upper()
+print(f"In 10 years you'll be {future_age}!")        # Week 1: print()
+```
+
+**Sample output:**
+```
+What is your name? Alex
+How old are you? 11
+==============================
+Welcome, ALEX!
+In 10 years you'll be 21!
+```
+
+Seven lines, seven skills. You know all of this!
+
+---
+
+## 🎮 Part 2: Choose Your Final Project!
+
+Now for the exciting part — you're going to build a **complete program** that uses everything you've learned. And YOU get to choose which one!
+
+### The Two Options
+
+| | 🎭 Mad Libs Game | 🎤 Joke Machine |
+|---|---|---|
+| **What is it?** | A word game that creates a unique silly story every time | A comedy show that tells jokes and rates how funny they are |
+| **How it works** | Collect words → reveal a hilarious story | Tell jokes → reveal punchlines → rate the laughs |
+| **Skills used** | `print()`, `*`, variables, f-strings, `input()` | `print()`, `*`, variables, `.upper()`, f-strings, `input()`, `int()` |
+| **Best for** | "I love creative writing and silly stories!" | "I love telling jokes and making people laugh!" |
+| **Difficulty** | Great starting point | Slightly more features |
+
+**Can't decide?** Both are great! If you're still stuck after 1 minute, go with **Mad Libs** — you can always try the other one later.
+
+---
+
+### 🎭 Option A: Mad Libs Game
+
+Mad Libs is a word game where a player fills in blanks WITHOUT seeing the story — then the filled-in story is revealed with hilarious results!
+
+**Your game has three parts:**
+
+```
+Part 1: Welcome Screen      → print() + string *
+Part 2: Collect the Words    → input() + variables
+Part 3: Reveal the Story     → f-strings
+```
+
+**Starter Code:**
 
 ```python
 # ================================
@@ -211,26 +412,7 @@ print("   WELCOME TO MAD LIBS!")
 print("   Get ready for a silly story...")
 print("🎭" * 20)
 print("")
-```
 
-**Customise your welcome!** Change the theme, the emojis, the title. Make it YOURS.
-
-```python
-# Space theme example:
-print("🚀" * 20)
-print("   SPACE STATION MAD LIBS!")
-print("   Houston, we have a silly story...")
-print("🚀" * 20)
-print("")
-```
-
----
-
-### Part 2: Collecting the Words
-
-Ask the player for each word type. **Use descriptive prompts** — tell them WHAT TYPE of word to enter, not just "word 1", "word 2":
-
-```python
 # === COLLECT THE WORDS ===
 name      = input("Enter a person's name: ")
 animal    = input("Enter an animal: ")
@@ -238,25 +420,7 @@ verb      = input("Enter an action word (verb): ")
 place     = input("Enter a place: ")
 adjective = input("Enter a describing word: ")
 number    = input("Enter a number: ")
-```
 
-**Good prompts vs. bad prompts:**
-
-| ❌ Bad | ✅ Good |
-|--------|---------|
-| `input("Enter word 1: ")` | `input("Enter a noun (a thing): ")` |
-| `input("Type something: ")` | `input("Enter an action word (verb): ")` |
-| `input("Word: ")` | `input("Enter a describing word (adjective): ")` |
-
-**Why does this matter?** Better prompts guide players toward funnier, more varied word choices — which makes the story much better!
-
----
-
-### Part 3: Revealing the Story
-
-Now comes the big moment! Build your story using f-strings. This is where all those variables finally get used:
-
-```python
 # === REVEAL THE STORY ===
 print("")
 print("=" * 30)
@@ -271,220 +435,236 @@ print("")
 print("😂" * 10)
 ```
 
-**Sample output when played:**
+**Requirements Checklist:**
 
-```
-Enter a person's name: Grandma Dorothy
-Enter an animal: crab
-Enter an action word (verb): skateboard
-Enter a place: a swimming pool
-Enter a describing word: extremely confused
-Enter a number: 7
+| # | Requirement | Check |
+|---|-------------|-------|
+| 1 | Welcome screen with decorative borders | ⬜ |
+| 2 | At least 6 inputs with descriptive prompts | ⬜ |
+| 3 | Story revealed using f-strings | ⬜ |
+| 4 | Every word appears in the story | ⬜ |
+| 5 | Themed emoji reaction at the end | ⬜ |
+| 6 | Your name in the header comment | ⬜ |
+| 7 | Code runs without bugs | ⬜ |
 
-==============================
-🌟 YOUR STORY 🌟
-==============================
-
-One extremely confused morning, Grandma Dorothy woke up to find a crab
-sitting in their kitchen in a swimming pool.
-Without hesitating, they decided to skateboard it!
-It took exactly 7 minutes. The end!
-
-😂😂😂😂😂😂😂😂😂😂
-```
+**Design Tips:**
+- Choose a theme: Space 🚀, School 📚, Fantasy 🐉, Sports ⚽, Food 🍕, Animals 🐾
+- Write your story on **paper first** with blanks: __NOUN__, __VERB__, __ADJECTIVE__
+- Use **descriptive prompts**: `"Enter an action word (verb): "` not `"Enter word 3: "`
 
 ---
 
-## 📄 Complete Starter Code
+### 🎤 Option B: Joke Machine
 
-Here's the full template to build on. Replace the story and theme with YOUR version!
+The Joke Machine is a comedy show program that welcomes a player, tells jokes with dramatic punchline reveals, and rates the laughs!
+
+**Your program has four parts:**
+
+```
+Part 1: Welcome Screen      → print() + string * + input() for name
+Part 2: Tell the Jokes       → print() + input("Press Enter...") for timing
+Part 3: Rate the Jokes        → int() + variables for scores
+Part 4: Comedy Score Card     → f-strings + .upper() + calculations
+```
+
+**Starter Code:**
 
 ```python
 # ================================
-# MY MAD LIBS GAME
+# MY JOKE MACHINE
 # By: [Your Name]
 # ================================
 
-print("🎭" * 20)
-print("   WELCOME TO MAD LIBS!")
-print("   Get ready for a silly story...")
-print("🎭" * 20)
+# === PART 1: WELCOME SCREEN ===
+print("🎤" * 20)
+print("   THE JOKE MACHINE!")
+print("   Prepare to laugh...")
+print("🎤" * 20)
 print("")
 
-# === COLLECT THE WORDS ===
-name      = input("Enter a person's name: ")
-animal    = input("Enter an animal: ")
-verb      = input("Enter an action word (verb): ")
-place     = input("Enter a place: ")
-adjective = input("Enter a describing word: ")
-number    = input("Enter a number: ")
+player = input("What is your name, comedy fan? ")
+print("")
+print(f"Welcome to the show, {player}! Let's see if these jokes crack you up...")
+print("")
 
-# === REVEAL THE STORY ===
-print("")
+# === PART 2: TELL THE JOKES ===
+
+# Joke 1
 print("=" * 30)
-print("🌟 YOUR STORY 🌟")
+print(f"JOKE 1 — just for you, {player}!")
 print("=" * 30)
+print("Why do programmers prefer dark mode?")
+input("(Press Enter for the punchline...)")
+print("BECAUSE LIGHT ATTRACTS BUGS!")
 print("")
-print(f"One {adjective} morning, {name} woke up to find a {animal}")
-print(f"sitting in their kitchen in {place}.")
-print(f"Without hesitating, they decided to {verb} it!")
-print(f"It took exactly {number} minutes. The end!")
+
+# Joke 2
+print("=" * 30)
+print("JOKE 2")
+print("=" * 30)
+print(f"Hey {player}, what do you call a snake that is 3.14 metres long?")
+input("(Press Enter for the punchline...)")
+print("A PI-THON!")
 print("")
-print("😂" * 10)
+
+# Joke 3
+print("=" * 30)
+print("JOKE 3")
+print("=" * 30)
+print("Why was the computer cold?")
+input("(Press Enter for the punchline...)")
+print("IT LEFT ITS WINDOWS OPEN!")
+print("")
+
+# === PART 3: RATE THE JOKES ===
+print("~" * 30)
+print(f"OK {player}, time to rate the jokes!")
+print("~" * 30)
+print("")
+
+rating1 = int(input("Rate Joke 1 (1-10): "))
+rating2 = int(input("Rate Joke 2 (1-10): "))
+rating3 = int(input("Rate Joke 3 (1-10): "))
+
+# === PART 4: COMEDY SCORE CARD ===
+total_score = rating1 + rating2 + rating3
+average = total_score // 3
+
+print("")
+print("*" * 30)
+print("   COMEDY SCORE CARD")
+print(f"   Comedian: {player.upper()}")
+print("*" * 30)
+print(f"Joke 1 rating: {'⭐' * rating1}")
+print(f"Joke 2 rating: {'⭐' * rating2}")
+print(f"Joke 3 rating: {'⭐' * rating3}")
+print(f"Total score: {total_score} out of 30")
+print(f"Average rating: {average}")
+print("*" * 30)
+print(f"Thanks for coming to the show, {player.upper()}!")
+print("🎤" * 10)
 ```
+
+**Requirements Checklist:**
+
+| # | Requirement | Check |
+|---|-------------|-------|
+| 1 | Welcome screen with player's name | ⬜ |
+| 2 | At least 3 jokes with setup → pause → punchline | ⬜ |
+| 3 | Punchlines use `.upper()` for emphasis | ⬜ |
+| 4 | Player name appears in jokes (f-strings) | ⬜ |
+| 5 | Rating system using `int()` | ⬜ |
+| 6 | Comedy score card with total and stars | ⬜ |
+| 7 | Your name in the header comment | ⬜ |
+| 8 | Code runs without bugs | ⬜ |
+
+**Design Tips:**
+- Write your jokes on **paper first** — setup on one line, punchline on the next
+- Use `input("(Press Enter for the punchline...)")` for dramatic pauses
+- Make punchlines LOUD with `.upper()`
+- Use the player's name in at least 2 jokes with f-strings
 
 ---
 
-## ✅ Game Requirements Checklist
+## ⭐ Bonus Challenges (Both Projects)
 
-Your Mad Libs game MUST have:
+**Mad Libs:** Use `int()` on your number for a calculation | Add a second story | Add ASCII art
 
-| # | Requirement | Description | Check |
-|---|-------------|-------------|-------|
-| 1 | Welcome Screen | Decorative intro with title and theme | ⬜ |
-| 2 | At Least 6 Inputs | Ask for 6 different word types | ⬜ |
-| 3 | Descriptive Prompts | Tell player what TYPE of word to enter | ⬜ |
-| 4 | Story Reveal Section | Clear "YOUR STORY" header | ⬜ |
-| 5 | F-strings in Story | Use f-strings to insert words | ⬜ |
-| 6 | All 6 Words Used | Every input appears in the story | ⬜ |
-| 7 | Emoji Reaction | Fun ending reaction | ⬜ |
-| 8 | Bug-Free | Runs without errors! | ⬜ |
-
----
-
-## ⭐ Bonus Challenges
-
-### Bonus 1: Use a Number in a Calculation
-
-Instead of just printing the number directly, calculate something with it using what you learned in Lesson 7!
-
-```python
-number = int(input("Enter a number of minutes: "))   # Note: int()!
-hours  = number // 60
-mins   = number % 60
-
-print(f"It took {number} minutes — that's {hours} hours and {mins} minutes!")
-```
-
-### Bonus 2: Add a Second Story
-
-Ask for more words and reveal a second, completely different story!
-
-```python
-# After your first story...
-print("")
-print("🎭 Ready for a SECOND story? 🎭")
-print("")
-# ... ask for new inputs and print a different story
-```
-
-### Bonus 3: Create a Silliness Rating
-
-Print a row of emojis based on the number the user entered:
-
-```python
-number = int(input("Enter a silliness level (1-10): "))
-print("Silliness level: " + "🤣" * number)
-```
-
-### Bonus 4: Add ASCII Art
-
-Put a themed ASCII picture in your welcome screen:
-
-```python
-# Space theme example:
-print("      *    .  *")
-print("   .  *  . * .")
-print("  * .  🚀   . *")
-print("    .  *  .   *")
-```
+**Joke Machine:** Add more jokes (aim for 5!) | Create themed jokes | Add an encore bonus joke
 
 ---
 
 ## 🐛 Common Bugs to Watch For
 
-| Bug | What Happens | Fix |
-|-----|-------------|-----|
-| Variable name typo in story | `NameError` | Copy the exact variable name |
-| Missing `f` before string | `{name}` prints literally | `f"Hello {name}"` not `"Hello {name}"` |
-| Missing `{` or `}` in f-string | Variable doesn't appear | Check both opening and closing braces |
-| Unused variable | Variable collected but not in story | Add it to a line in the story |
-| Used `+` with int variable | `TypeError` | Use f-string instead |
+| Bug | What Happens | Fix | Which Project? |
+|-----|-------------|-----|----------------|
+| Missing `f` before string | `{name}` prints literally | `f"Hello {name}"` not `"Hello {name}"` | Both |
+| Variable name typo | `NameError` | Copy the exact variable name from where you created it | Both |
+| Missing `{` or `}` in f-string | Variable doesn't appear | Check both opening and closing braces | Both |
+| Forgot `int()` on rating | Can't do maths with rating | `rating = int(input(...))` | Joke Machine |
+| Used `+` to join string and int | `TypeError` | Use f-strings instead of `+` | Both |
+| Unused variable | Collected a word but not in story | Add it to a line in your story | Mad Libs |
 
 ---
 
-## 🏠 Homework: Complete Your Mad Libs Game
+## 🏠 Homework: Build Your Final Project
 
 **Platform:** Complete this assignment on [Trinket](https://trinket.io/python)
 
-### Requirements
+### If You Chose Mad Libs
 
-Your finished Mad Libs game must have:
+1. ✅ Welcome screen with decorative borders and a clear theme
+2. ✅ At least 6 different word inputs with clear, descriptive prompts
+3. ✅ Full story revealed using f-strings
+4. ✅ Every word appears in the story (no unused variables!)
+5. ✅ Your name in the program header comment
+6. ✅ NO BUGS — code runs perfectly!
 
-1. ✅ **Welcome screen** with decorative borders and a clear theme
-2. ✅ **At least 6 different word inputs** with clear, descriptive prompts
-3. ✅ **Full story revealed** using f-strings
-4. ✅ **Every word appears** in the story (no unused variables!)
-5. ✅ **Your name** in the program header comment
-6. ✅ **NO BUGS** — code runs perfectly!
+### If You Chose Joke Machine
 
-### Grading Rubric
+1. ✅ Welcome screen with player's name
+2. ✅ At least 3 jokes with setup → pause → punchline
+3. ✅ Punchlines in `.upper()` for emphasis
+4. ✅ Player name in at least 2 jokes (f-strings)
+5. ✅ Rating system using `int()` with a comedy score card
+6. ✅ Your name in the program header comment
+7. ✅ NO BUGS — code runs perfectly!
+
+### Grading Rubric (Same for Both)
 
 | Criteria | Points |
 |----------|--------|
-| Welcome screen with theme | ⭐ |
-| At least 6 inputs with good prompts | ⭐⭐ |
-| Story uses all words via f-strings | ⭐⭐ |
-| Story is funny and makes sense | ⭐⭐ |
+| Welcome screen with theme/personality | ⭐ |
+| Core content (6 inputs OR 3 jokes) | ⭐⭐ |
+| Correct use of f-strings throughout | ⭐⭐ |
+| Creative and fun output | ⭐⭐ |
 | Code runs without errors | ⭐⭐ |
 | **Total** | **9 points** |
 
 ### Bonus Points
 
-- +1 for using `int()` in the story
-- +1 for a second story
+- +1 for using `int()` in a calculation (Mad Libs) or 4+ jokes (Joke Machine)
+- +1 for extra creative content (second story or themed joke set)
 - +1 for ASCII art or creative decorations
 
 ### How to Submit
 
-1. Complete your Mad Libs game on Trinket
-2. Test it with at least 2 different sets of silly words
+1. Complete your project on Trinket
+2. Test it at least 2 times with different inputs
 3. Save your work
 4. Click **Share** and copy the link
 5. Submit the link to your instructor
-6. **Be ready to present at the Week 9 Game Showcase!**
+6. **Be ready to present at the Week 9 Showcase!**
 
 ---
 
-## 🌟 Next Week: Game Showcase!
+## 🌟 Next Week: The Showcase!
 
-**Week 9 is the Term 1 Game Showcase!** 🎉
+**Week 9 is the Term 1 Showcase!** 🎉
 
-You'll present your Mad Libs game to the class:
+You'll present your project to the class:
 
-- Run it LIVE with a classmate entering the words
-- Let the class call out suggestions for the silliest words!
+- Run your **Mad Libs** or **Joke Machine** LIVE
+- For Mad Libs: a classmate enters the words, the class shouts suggestions!
+- For Joke Machine: the class watches the jokes and rates them together!
 - Share one thing you're proud of
 
 **Come prepared with:**
 
-- Your finished, working Mad Libs game
-- A 1-sentence intro: "My game is a [theme] Mad Libs about..."
+- Your finished, working project
+- A 1-sentence intro: "My project is a [Mad Libs about... / Joke Machine that...]"
 - A classmate ready to be your player!
 
 ---
 
-## 🎉 You're a Game Builder!
+## 🎉 What You Accomplished Today
 
-**What you accomplished today:**
+- ✅ Reviewed ALL 7 Term 1 skills with challenges
+- ✅ Proved you can use every skill together in one program
+- ✅ Chose YOUR final project — Mad Libs or Joke Machine
+- ✅ Started planning your project
 
-- ✅ Planned a game BEFORE coding it
-- ✅ Used `input()` to make a game interactive
-- ✅ Built a 3-part program structure: welcome → collect → reveal
-- ✅ Combined ALL Term 1 skills into one working program
-- ✅ Created something that generates a unique, funny output every run
-
-> _BrightByte says: "Here's the thing about your Mad Libs game: it's genuinely different every time someone plays it. That's not just a program — that's a GAME. Real games produce unique experiences for every player, and you just built one! Finish it for homework, and next week we celebrate together. I can't wait to see what your classmates type in! 🎭😂"_
+> _BrightByte says: "Seven weeks of skills, one awesome project. Whether you're revealing a silly story or delivering punchlines, you're doing the same thing: writing a program that creates a unique experience every time someone runs it. That's not just code — that's a CREATION. Build it for homework, and next week we celebrate. I am SO proud of you! 🎉🎤🎭"_
 
 ---
 
@@ -494,4 +674,4 @@ _Instagram: @kids_learn_ai_
 
 ---
 
-_Remember: The best Mad Libs stories come from the most unexpected word combinations. Encourage players to think of the WEIRDEST possible words — that's what makes it funny every time!_
+_Remember: The best projects come from having fun with them. Pick silly words, write ridiculous jokes, make yourself laugh — that's the whole point!_
