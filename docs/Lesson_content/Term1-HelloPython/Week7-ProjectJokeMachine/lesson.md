@@ -1,898 +1,470 @@
 ---
-title: "Project - Joke Machine!"
-description: "Build your first complete Python project - a program that tells jokes using everything you've learned!"
+title: "Input Superpower — Numbers and Conversions!"
+description: "Discover why input() always returns a string and learn how to use int() and float() to convert it into numbers — so Python can do real maths with player input!"
 difficulty: "beginner"
 order_index: 7
 course_slug: "term-1-hello-python"
 is_premium: false
 requires_trinket: true
 starter_code: |
-  # ================================
-  # THE JOKE MACHINE
-  # By: [Your Name]
-  # ================================
+  # Input Superpower!
+  # input() always gives us a STRING. Let's convert it!
 
-  # === WELCOME SCREEN ===
-  print("🎭" * 15)
-  print("")
-  print("     WELCOME TO THE JOKE MACHINE!")
-  print("")
-  print("🎭" * 15)
-  print("")
-  print("Get ready to laugh! Here come the jokes...")
-  print("")
+  name = input("What is your name? ")
+  age = int(input("How old are you? "))
 
-  # === STORE YOUR JOKES ===
-  joke1_setup = "Why don't scientists trust atoms?"
-  joke1_punchline = "Because they make up everything!"
-
-  joke2_setup = "What do you call a fish without eyes?"
-  joke2_punchline = "A fsh!"
-
-  joke3_setup = "YOUR THIRD JOKE HERE"
-  joke3_punchline = "YOUR PUNCHLINE HERE"
-
-  # === TELL THE JOKES ===
-  print("-" * 30)
-  print("Joke #1:")
-  print(joke1_setup)
-  print("...")
-  print(joke1_punchline)
-  print("😂" * 3)
-  print("")
-
-  # Add Joke #2 and Joke #3 below!
-
-  # === ENDING ===
-  print("-" * 30)
-  print("Thanks for laughing with me!")
-  print("🎭 THE END 🎭")
+  next_birthday = age + 1
+  print(f"Hi {name}! Next year you'll be {next_birthday}!")
+  print(f"That means you were born around {2026 - age}!")
 class_activities: |
-  ## 🎮 Class Activity: Joke Workshop!
+  ## 🎮 Class Activity: Birthday Calculator!
 
-  **Part 1: Joke Brainstorm (10 min)**
-  - Work in small groups
-  - Brainstorm as many jokes as you can
-  - Write them down (setup and punchline)
+  Build a program that greets the user and tells them about their age. Here's what your program should do:
 
-  **Part 2: Pick Your Favorites (5 min)**
-  - Each person picks their 3-5 favorite jokes
-  - Make sure you know the setup AND punchline
+  1. Ask the user for their name
+  2. Ask the user how old they are — remember to convert the answer to a number!
+  3. Calculate what age they will be next year
+  4. Print a greeting that includes their name and their age next year
+  5. Print a second message that estimates the year they were born (hint: subtract their age from the current year)
 
-  **Part 3: Build Together (20 min)**
-  - Start building your Joke Machine
-  - Help neighbors with bugs
-  - Test your code frequently!
+  Run it and test it with your own name and age. Does the output look correct?
 
-  **Part 4: Preview & Polish (10 min)**
-  - Run your program
-  - Fix any bugs
-  - Add extra decorations if time permits
+  **Bonus:** Add a third message that tells the user how many years until they turn 18.
 take_home_assignment: |
-  ## 📚 Homework: Complete Your Joke Machine
+  ## 📚 Homework: Number Wizard Calculator
 
-  **Assignment:** Finish and polish your Joke Machine for the showcase!
+  **Assignment:** Build a program that collects at least 3 numbers from the user and does something interesting with them!
 
   **Requirements:**
-  1. Welcome message with decorative borders
-  2. At least 3 jokes stored in variables
-  3. Each joke has setup, pause (...), and punchline
-  4. Visual separators between jokes
-  5. Laughing emojis after each punchline
-  6. Ending message thanking the audience
-  7. NO BUGS - code runs perfectly!
+  1. Use `input()` at least 3 times to collect numbers
+  2. Use `int()` or `float()` to convert each one
+  3. Perform at least 2 different calculations
+  4. Print results using f-strings
 
-  **Bonus Points:**
-  - Add a 4th or 5th joke
-  - Create a themed joke collection
-  - Add creative ASCII art
-  - Use string methods for effects
+  **Ideas:**
+  - Age calculator: ask for birth year and current year, calculate age
+  - Score tracker: ask for 3 game scores, find the total
+  - Step counter: ask for steps on 3 days, add them up
 
-  **Submit:** Share your Trinket link. Be ready to present at the Week 8 Showcase Party!
+  **Bonus:**
+  - Use `float()` for a decimal result (e.g. average score)
+  - Add a decorated "results card" with a border
+
+  **Submit:** Share your Trinket link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
-  Chatbots and AI assistants store jokes and responses in variables, just like your Joke Machine! When you ask Alexa to tell a joke, she picks from stored jokes - same idea as your program. AI learns which jokes are funny by seeing how people rate them - if you rated jokes as "funny" or "not funny," that's exactly how AI training data works!
+  AI systems work with numbers constantly — processing millions of them to recognise faces, translate languages, and predict your next search. But ALL data coming from the real world starts as raw text (strings), just like your input() values. The very first step in AI data pipelines is converting raw text into numbers — exactly what you learned today with int() and float()!
 
-  You built something that works like real AI!
+  When you type a search query, that text gets converted into numbers called "embeddings" before the AI can process it. You've just learned one of the most fundamental ideas in computing!
 ---
 
-# Term 1, Week 7: Project - Joke Machine! 🎭
+# Term 1, Week 7: Input Superpower — Numbers and Conversions! 🔢
 
-**Course:** Term 1: Hello Python!  
-**Duration:** 60 minutes  
-**Term:** 1 of 8 | **Week:** 7 of 8
-
----
-
-## 🎯 What We're Building
-
-Today you start building your **first complete Python project**: The Joke Machine!
-
-This is YOUR chance to show off everything you've learned in Term 1:
-
-- ✅ Print statements
-- ✅ Patterns and decorations
-- ✅ Variables
-- ✅ String methods
-- ✅ Concatenation
-- ✅ Debugging skills
-
-By the end of today, you'll have a working program that tells jokes!
+**Course:** Term 1: Hello Python!
+**Duration:** 60 minutes
+**Term:** 1 of 8 | **Week:** 7 of 9
 
 ---
 
-## 🤖 BrightByte's Project Pep Talk!
+## 🎯 What You'll Learn Today
 
-> _"This is it—your FIRST real project! 🎉 I'm SO excited for you! You've spent 6 weeks learning individual skills, and now you get to put them ALL together to create something amazing. Building projects is what REAL programmers do every day. Don't worry if it feels challenging—that's how you know you're growing! I'll be right here cheering you on. Let's make Python FUNNY! 🎭"_
+By the end of this lesson, you will be able to:
 
----
-
-## 📋 Project Overview
-
-### What is a Joke Machine?
-
-A Joke Machine is a program that:
-
-1. **Welcomes** the user with a fun introduction
-2. **Tells jokes** with proper setup and punchlines
-3. **Uses variables** to store the jokes
-4. **Looks polished** with decorations and formatting
-5. **Ends nicely** with a closing message
-
-### Example Output
-
-Here's what a finished Joke Machine looks like when you run it:
-
-```
-🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭
-
-     WELCOME TO THE JOKE MACHINE!
-
-          Created by Alex
-
-🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭🎭
-
-Get ready to laugh! Here come the jokes...
-
-==============================
-
-📢 Joke #1:
-
-Why don't scientists trust atoms?
-
-...
-
-Because they make up everything!
-
-😂😂😂
-
-==============================
-
-📢 Joke #2:
-
-What do you call a fish without eyes?
-
-...
-
-A fsh!
-
-🤣🤣🤣
-
-==============================
-
-📢 Joke #3:
-
-Why did the scarecrow win an award?
-
-...
-
-Because he was outstanding in his field!
-
-😆😆😆
-
-==============================
-
-Thanks for laughing with me!
-Run me again whenever you need a giggle!
-
-🎭 THE END 🎭
-```
-
-Pretty cool, right? Let's build it step by step!
+- Explain why `input()` always returns a string — and why that matters
+- Use `int()` to convert string input to a whole number
+- Use `float()` to convert string input to a decimal number
+- Perform calculations with converted numbers
+- Recognise and fix a `TypeError` when mixing strings and numbers
 
 ---
 
-## 🎪 Step 1: Plan Your Jokes
+## 🤖 BrightByte's Welcome!
 
-Before you write ANY code, you need to collect your jokes!
-
-### The Anatomy of a Joke
-
-Every joke has two parts:
-
-| Part          | What It Is                                      | Example                             |
-| ------------- | ----------------------------------------------- | ----------------------------------- |
-| **Setup**     | The question or beginning that creates suspense | "Why don't scientists trust atoms?" |
-| **Punchline** | The funny answer that surprises you!            | "Because they make up everything!"  |
-
-### Your Joke Collection
-
-You need **at least 3 jokes**. Here are some classics to get you started:
-
-**Classic Jokes:**
-
-| #   | Setup                                  | Punchline                                |
-| --- | -------------------------------------- | ---------------------------------------- |
-| 1   | Why don't scientists trust atoms?      | Because they make up everything!         |
-| 2   | What do you call a fish without eyes?  | A fsh!                                   |
-| 3   | Why did the scarecrow win an award?    | Because he was outstanding in his field! |
-| 4   | What do you call a bear with no teeth? | A gummy bear!                            |
-| 5   | Why don't eggs tell jokes?             | They'd crack each other up!              |
-
-**Animal Jokes:**
-
-| #   | Setup                                       | Punchline                                            |
-| --- | ------------------------------------------- | ---------------------------------------------------- |
-| 1   | What do you call a sleeping dinosaur?       | A dino-snore!                                        |
-| 2   | Why do cows wear bells?                     | Because their horns don't work!                      |
-| 3   | What do you call a fish that wears a crown? | A king fish!                                         |
-| 4   | Why do seagulls fly over the sea?           | Because if they flew over the bay, they'd be bagels! |
-
-**Food Jokes:**
-
-| #   | Setup                                          | Punchline                               |
-| --- | ---------------------------------------------- | --------------------------------------- |
-| 1   | What did the grape say when it got stepped on? | Nothing, it just let out a little wine! |
-| 2   | Why did the banana go to the doctor?           | Because it wasn't peeling well!         |
-| 3   | What do you call a fake noodle?                | An impasta!                             |
-| 4   | Why did the cookie go to the doctor?           | Because it felt crummy!                 |
-
-**School/Learning Jokes:**
-
-| #   | Setup                                       | Punchline                                        |
-| --- | ------------------------------------------- | ------------------------------------------------ |
-| 1   | Why was the math book sad?                  | Because it had too many problems!                |
-| 2   | What's a computer's favorite snack?         | Microchips!                                      |
-| 3   | Why did the student eat their homework?     | Because the teacher said it was a piece of cake! |
-| 4   | What do you call a teacher who never farts? | A private tutor!                                 |
-
-### ✏️ Write Down YOUR Jokes
-
-Pick at least 3 jokes you want to use. Write them here:
-
-**My Joke #1:**
-
-- Setup: ****************\_****************
-- Punchline: ****************\_****************
-
-**My Joke #2:**
-
-- Setup: ****************\_****************
-- Punchline: ****************\_****************
-
-**My Joke #3:**
-
-- Setup: ****************\_****************
-- Punchline: ****************\_****************
-
-**Bonus Joke #4 (optional):**
-
-- Setup: ****************\_****************
-- Punchline: ****************\_****************
-
-> _BrightByte says: "You can use the jokes above, find your own, or even make up brand new ones! The funnier YOUR jokes are, the more fun your project will be!"_
+> _"Last week Python learned to LISTEN — and you started having real conversations with your programs! But there was one mystery I left you with: input() always gives you text, even when you type a number. Why does that matter? Because Python can't do maths on text! Today we fix that forever. By the end of this lesson, your programs will count, calculate, and crunch numbers like a real computer. Let's go!"_ 🔢
 
 ---
 
-## 🎨 Step 2: Create the Welcome Screen
+## 🔍 The Mystery From Last Week
 
-Every good program has a welcome screen! This is the first thing users see.
+Remember this warning from Lesson 6?
 
-### Basic Welcome Screen
+> **"input() ALWAYS returns a string — even if the user types a number!"**
 
-```python
-# ================================
-# THE JOKE MACHINE
-# By: [Your Name]
-# ================================
-
-print("🎭" * 15)
-print("")
-print("     WELCOME TO THE JOKE MACHINE!")
-print("")
-print("🎭" * 15)
-print("")
-print("Get ready to laugh! Here come the jokes...")
-print("")
-```
-
-### Making It Personal
-
-Add your name to make it YOUR program:
+Let's see exactly why this matters. Try this code:
 
 ```python
-# Store your name in a variable
-creator_name = "Alex"
-
-print("🎭" * 15)
-print("")
-print("     WELCOME TO THE JOKE MACHINE!")
-print("")
-print("          Created by", creator_name)
-print("")
-print("🎭" * 15)
-print("")
-print("Get ready to laugh! Here come the jokes...")
-print("")
+age = input("How old are you? ")
+older_age = age + 10
+print(older_age)
 ```
 
-### Creative Welcome Ideas
+**What do you expect?** If you type `12`, you might expect `22`.
 
-Try different decorations:
+**What actually happens?**
 
-```python
-# Option 1: Stars
-print("⭐" * 20)
-print("   THE COMEDY CLUB   ")
-print("⭐" * 20)
-
-# Option 2: Box style
-print("+" + "=" * 28 + "+")
-print("|" + "    JOKE-O-MATIC 3000    " + "|")
-print("+" + "=" * 28 + "+")
-
-# Option 3: Simple but elegant
-print("~" * 30)
-print("      LAUGH FACTORY      ")
-print("~" * 30)
+```
+TypeError: can only concatenate str (not "int") to str
 ```
 
-### Your Task
-
-✅ Create a welcome screen with:
-
-- Decorative border (use `*`, `=`, `-`, or emojis)
-- A catchy title
-- Your name as the creator
-- An intro message like "Get ready to laugh!"
+**A TypeError!** Python is confused. You gave it the text `"12"` and tried to add the number `10`. Those are two different *types*, and Python refuses to mix them.
 
 ---
 
-## 📦 Step 3: Store Your Jokes in Variables
+## 💡 Strings vs Numbers: What's the Difference?
 
-Now we use **variables** to store each joke. This is important because:
+Think of it like this:
 
-- It keeps our code organized
-- We can easily change jokes later
-- It's how real programmers structure data!
+| Type | Example | Can do maths? | Python name |
+|------|---------|--------------|-------------|
+| String (text) | `"12"` | ❌ No | `str` |
+| Integer (whole number) | `12` | ✅ Yes | `int` |
+| Float (decimal number) | `12.5` | ✅ Yes | `float` |
 
-### Variable Naming for Jokes
-
-Use clear, descriptive names:
-
-```python
-# Joke 1
-joke1_setup = "Why don't scientists trust atoms?"
-joke1_punchline = "Because they make up everything!"
-
-# Joke 2
-joke2_setup = "What do you call a fish without eyes?"
-joke2_punchline = "A fsh!"
-
-# Joke 3
-joke3_setup = "Why did the scarecrow win an award?"
-joke3_punchline = "Because he was outstanding in his field!"
-```
-
-### Why Use Variables?
-
-Look at the difference:
-
-**Without Variables (messy):**
+The string `"12"` and the number `12` **look the same to us**, but Python treats them completely differently.
 
 ```python
-print("Why don't scientists trust atoms?")
-print("Because they make up everything!")
-print("What do you call a fish without eyes?")
-print("A fsh!")
+# These look similar but are NOT the same:
+text_twelve = "12"    # str — it's text, like "abc"
+real_twelve  = 12     # int — it's a number you can calculate with
+
+print(text_twelve + text_twelve)   # Output: 1212  (joined together!)
+print(real_twelve  + real_twelve)  # Output: 24    (added together!)
 ```
 
-**With Variables (organized):**
-
-```python
-joke1_setup = "Why don't scientists trust atoms?"
-joke1_punchline = "Because they make up everything!"
-
-print(joke1_setup)
-print(joke1_punchline)
-```
-
-The variable version is easier to read, change, and expand!
-
-### Your Task
-
-✅ Store at least 3 jokes in variables:
-
-- Each joke needs a `_setup` and `_punchline` variable
-- Use snake_case naming (like `joke1_setup`)
-- Put all variables together in one section
+> _BrightByte says: "The string '12' doubled gives you '1212' — Python just glued the text together! The integer 12 doubled gives you 24 — Python did real maths. Same digits, completely different behaviour!"_
 
 ---
 
-## 🎤 Step 4: Display Each Joke
+## 🔧 The Fix: int() and float()
 
-Now let's tell the jokes! A good joke needs:
+Python gives us special functions to **convert** (change) a string into a number:
 
-1. A header (Joke #1, Joke #2, etc.)
-2. The setup (the question)
-3. A pause for suspense (...)
-4. The punchline (the funny answer!)
-5. A reaction (laughing emojis)
+| Function | What it does | Example |
+|----------|-------------|---------|
+| `int()` | Converts to a whole number | `int("12")` → `12` |
+| `float()` | Converts to a decimal number | `float("3.5")` → `3.5` |
 
-### Single Joke Display
-
-```python
-# Joke #1
-print("=" * 30)
-print("")
-print("📢 Joke #1:")
-print("")
-print(joke1_setup)
-print("")
-print("...")
-print("")
-print(joke1_punchline)
-print("")
-print("😂" * 3)
-print("")
-```
-
-### Why the "..." Pause?
-
-The `...` creates suspense! It's like when a comedian pauses before the punchline. It makes the joke funnier!
+### Using int()
 
 ```python
-print("Why don't scientists trust atoms?")
-print("")
-print("...")  # <-- The dramatic pause!
-print("")
-print("Because they make up everything!")
+age_text   = input("How old are you? ")    # stores "12" (string)
+age_number = int(age_text)                  # converts to 12 (int)
+
+older = age_number + 10
+print(f"In 10 years you'll be {older}!")    # Output: In 10 years you'll be 22!
 ```
 
-### Display All Your Jokes
+### The Shortcut — Wrap int() Around input()
 
-Repeat the pattern for each joke:
+Instead of two lines, you can do it in one:
 
 ```python
-# Joke #1
-print("=" * 30)
-print("📢 Joke #1:")
-print(joke1_setup)
-print("...")
-print(joke1_punchline)
-print("😂" * 3)
-print("")
-
-# Joke #2
-print("=" * 30)
-print("📢 Joke #2:")
-print(joke2_setup)
-print("...")
-print(joke2_punchline)
-print("🤣" * 3)
-print("")
-
-# Joke #3
-print("=" * 30)
-print("📢 Joke #3:")
-print(joke3_setup)
-print("...")
-print(joke3_punchline)
-print("😆" * 3)
-print("")
+age = int(input("How old are you? "))
 ```
 
-### Different Laugh Emojis
+**How to read this:** "Ask the user how old they are, take whatever they type, convert it to an integer, and store it in `age`."
 
-Mix it up with different reactions:
+```python
+# Long version (two lines)
+age_text   = input("How old are you? ")
+age_number = int(age_text)
 
-- 😂 - Face with tears of joy
-- 🤣 - Rolling on the floor laughing
-- 😆 - Grinning squinting face
-- 😹 - Cat with tears of joy
-- 🤭 - Face with hand over mouth
-- 😜 - Winking face with tongue
+# Short version (one line) — same result!
+age_number = int(input("How old are you? "))
+```
 
-### Your Task
-
-✅ Display each joke with:
-
-- A separator line between jokes
-- A joke number header
-- The setup from your variable
-- A pause (...)
-- The punchline from your variable
-- Laughing emojis
+Both work exactly the same. The short version is what most programmers use.
 
 ---
 
-## 🎬 Step 5: Add the Ending
+## 🧮 Calculations with Converted Numbers
 
-Every good show needs a closing! Thank your audience and invite them to come back.
-
-### Basic Ending
+Once you convert to `int()`, you can do real maths:
 
 ```python
-print("=" * 30)
-print("")
-print("Thanks for laughing with me!")
-print("Run me again whenever you need a giggle!")
-print("")
-print("🎭 THE END 🎭")
+name = input("What is your name? ")
+age  = int(input("How old are you? "))
+
+next_birthday  = age + 1
+birth_year     = 2026 - age
+age_in_decades = age // 10   # // means divide and drop the decimal
+
+print(f"Hi {name}!")
+print(f"Next year you'll be {next_birthday}.")
+print(f"You were born around {birth_year}.")
+print(f"You've lived for about {age_in_decades} decade(s)!")
 ```
 
-### Creative Endings
-
-```python
-# Option 1: Curtain call
-print("=" * 30)
-print("")
-print("🎭 THAT'S ALL FOLKS! 🎭")
-print("")
-print("Thanks for being a great audience!")
-print("See you next time!")
-print("")
-print("*takes a bow*")
-print("🎭" * 10)
-
-# Option 2: Comedy club style
-print("=" * 30)
-print("")
-print("👏" * 10)
-print("")
-print("Thank you, thank you!")
-print("You've been a wonderful audience!")
-print("Don't forget to tip your programmer! 😄")
-print("")
-print("🎤 THE END 🎤")
-
-# Option 3: Personal touch
-creator = "Alex"
-print("=" * 30)
-print("")
-print("Thanks for using", creator + "'s Joke Machine!")
-print("Come back anytime you need to laugh!")
-print("")
-print("Made with ❤️ and Python 🐍")
+**Sample run:**
 ```
+What is your name? Sam
+How old are you? 13
 
-### Your Task
-
-✅ Create an ending with:
-
-- A final separator
-- A thank you message
-- An invitation to run again
-- "THE END" in a creative way
-
----
-
-## 📄 Complete Code Template
-
-Here's the full structure. Fill in YOUR jokes!
-
-```python
-# ================================
-# THE JOKE MACHINE
-# By: [Your Name]
-# Date: [Today's Date]
-# ================================
-
-# === VARIABLES ===
-creator_name = "YOUR NAME"
-
-# Joke 1
-joke1_setup = "YOUR FIRST JOKE SETUP"
-joke1_punchline = "YOUR FIRST PUNCHLINE"
-
-# Joke 2
-joke2_setup = "YOUR SECOND JOKE SETUP"
-joke2_punchline = "YOUR SECOND PUNCHLINE"
-
-# Joke 3
-joke3_setup = "YOUR THIRD JOKE SETUP"
-joke3_punchline = "YOUR THIRD PUNCHLINE"
-
-# === WELCOME SCREEN ===
-print("🎭" * 15)
-print("")
-print("     WELCOME TO THE JOKE MACHINE!")
-print("")
-print("          Created by", creator_name)
-print("")
-print("🎭" * 15)
-print("")
-print("Get ready to laugh! Here come the jokes...")
-print("")
-
-# === JOKE #1 ===
-print("=" * 30)
-print("")
-print("📢 Joke #1:")
-print("")
-print(joke1_setup)
-print("")
-print("...")
-print("")
-print(joke1_punchline)
-print("")
-print("😂" * 3)
-print("")
-
-# === JOKE #2 ===
-print("=" * 30)
-print("")
-print("📢 Joke #2:")
-print("")
-print(joke2_setup)
-print("")
-print("...")
-print("")
-print(joke2_punchline)
-print("")
-print("🤣" * 3)
-print("")
-
-# === JOKE #3 ===
-print("=" * 30)
-print("")
-print("📢 Joke #3:")
-print("")
-print(joke3_setup)
-print("")
-print("...")
-print("")
-print(joke3_punchline)
-print("")
-print("😆" * 3)
-print("")
-
-# === ENDING ===
-print("=" * 30)
-print("")
-print("Thanks for laughing with me!")
-print("Run me again whenever you need a giggle!")
-print("")
-print("Made with ❤️ by", creator_name)
-print("")
-print("🎭 THE END 🎭")
+Hi Sam!
+Next year you'll be 14.
+You were born around 2013.
+You've lived for about 1 decade(s)!
 ```
 
 ---
 
-## ✅ Project Requirements Checklist
+## 🌊 When to Use float()
 
-Your Joke Machine MUST have:
+Use `float()` when the number might have a **decimal point** — like a score, a measurement, or a temperature.
 
-| #   | Requirement       | Description                 | Check |
-| --- | ----------------- | --------------------------- | ----- |
-| 1   | Welcome Screen    | Decorative intro with title | ⬜    |
-| 2   | Creator Name      | Your name in the program    | ⬜    |
-| 3   | At Least 3 Jokes  | Stored in variables         | ⬜    |
-| 4   | Setup & Punchline | Each joke has both parts    | ⬜    |
-| 5   | Dramatic Pause    | "..." before punchlines     | ⬜    |
-| 6   | Visual Separators | Lines between jokes         | ⬜    |
-| 7   | Laugh Reactions   | Emojis after punchlines     | ⬜    |
-| 8   | Ending Message    | Thank you and THE END       | ⬜    |
-| 9   | Bug-Free          | Runs without errors!        | ⬜    |
+```python
+score = float(input("Enter your score (e.g. 8.5): "))
+bonus = score * 1.5
+
+print(f"Your score: {score}")
+print(f"Your bonus score: {bonus}")
+```
+
+**Sample run:**
+```
+Enter your score (e.g. 8.5): 8.5
+Your score: 8.5
+Your bonus score: 12.75
+```
+
+### int() vs float() — Which to Use?
+
+| Use `int()` for... | Use `float()` for... |
+|--------------------|---------------------|
+| Ages | Scores with decimals |
+| Number of items (3 cats) | Prices (£2.99) |
+| Whole counts | Temperatures |
+| Game lives | Measurements (height, weight) |
+
+> _BrightByte says: "When in doubt, use int(). You can always switch to float() if you need decimals later!"_
 
 ---
 
-## ⭐ Bonus Challenges
+## 🎯 Practice Challenges
 
-Want to make your Joke Machine even better? Try these!
+### Challenge 1: Age Calculator ⭐
 
-### Bonus 1: More Jokes
-
-Add a 4th and 5th joke! The more the merrier!
-
-### Bonus 2: Themed Collection
-
-Make all your jokes about ONE topic:
-
-- All animal jokes 🐾
-- All food jokes 🍕
-- All school jokes 📚
-- All computer/tech jokes 💻
-
-### Bonus 3: ASCII Art
-
-Add text art to your program:
+Write a program that:
+1. Asks for the user's name
+2. Asks for their age (convert with `int()`)
+3. Calculates their age next year
+4. Prints: `"Hi [name]! Next year you'll be [age + 1]!"`
 
 ```python
-print("   _____ ")
-print("  /     \\")
-print(" | 😂😂 |")
-print("  \\_____/")
+name = input("What is your name? ")
+age  = int(input("How old are you? "))
+
+print(f"Hi {name}! Next year you'll be {age + 1}!")
 ```
 
-### Bonus 4: String Methods Magic
+---
 
-Use `.upper()` for emphasis:
+### Challenge 2: Score Doubler ⭐⭐
+
+Ask the user for their game score, double it, and print the result with a congratulations message.
+
+**Hint:** Use `int(input(...))` to get the score, then multiply by 2.
 
 ```python
-print("GET READY TO " + "laugh".upper() + "!")
-# Output: GET READY TO LAUGH!
+name   = input("What is your name? ")
+score  = int(input("What was your score? "))
+double = score * 2
+
+print(f"Amazing, {name}!")
+print(f"Your score: {score}")
+print(f"Double score power-up: {double}!")
 ```
 
-### Bonus 5: Joke Counter
+---
 
-Use variables to count:
+### Challenge 4: The Measurement Converter ⭐⭐⭐⭐
+
+Build a mini stats card. Ask for:
+- The user's name
+- Their height in centimetres (use `float()`)
+- Their weight in kilograms (use `float()`)
+
+Then calculate and print a "Stats Card" with:
+- Height in metres (divide by 100), rounded to 2 decimal places using `round(value, 2)`
+- Weight displayed neatly
 
 ```python
-total_jokes = 3
-print("You just heard", total_jokes, "amazing jokes!")
+name   = input("What is your name? ")
+height = float(input("Enter your height in cm: "))
+weight = float(input("Enter your weight in kg: "))
+
+height_m = round(height / 100, 2)
+
+print("")
+print("=" * 30)
+print(f"   STATS CARD: {name.upper()}")
+print("=" * 30)
+print(f"Height: {height} cm  ({height_m} m)")
+print(f"Weight: {weight} kg")
+print("=" * 30)
 ```
 
-### Bonus 6: Personalized Message
+---
 
-Ask for the audience's name (just use a variable for now):
+## 🎮 Bridge to Games
+
+You've just unlocked something huge.
+
+**Games use numbers all the time:**
+
+- 🎮 High scores
+- ❤️ Lives remaining
+- ⏱️ Time left
+- 💰 Coins collected
+- 📈 Experience points
+
+Without `int()` and `float()`, your game couldn't keep score — or even know how many lives a player has left!
 
 ```python
-audience_name = "Friend"
-print("Hey " + audience_name + ", thanks for visiting!")
+# A tiny taste of what's coming in Lesson 8...
+player_name = input("Enter your name: ")
+lives       = int(input("How many lives do you want? (1-5) "))
+
+print(f"Welcome, {player_name}! You have {lives} lives.")
+print(f"Game begins in 3... 2... 1... GO!")
 ```
+
+> _BrightByte says: "Every game you've ever played — from Minecraft to Roblox to Wordle — handles numbers like this under the hood. Now you know the secret!"_
+
+---
+
+## 📝 Key Points to Remember
+
+### The Conversion Formula
+
+```python
+# Convert to whole number
+number = int(input("Enter a number: "))
+
+# Convert to decimal number
+decimal = float(input("Enter a decimal: "))
+```
+
+### Quick Reference
+
+| Situation | Code |
+|-----------|------|
+| Get a whole number from user | `age = int(input("How old are you? "))` |
+| Get a decimal from user | `score = float(input("Enter your score: "))` |
+| Maths with converted number | `double = score * 2` |
+| Use result in f-string | `print(f"Double: {double}")` |
+
+### Vocabulary
+
+| Word | Meaning |
+|------|---------|
+| **string** | Text data — `"hello"`, `"12"`, `"abc"` |
+| **int** | A whole number — `12`, `100`, `0` |
+| **float** | A decimal number — `3.14`, `9.5`, `0.7` |
+| **TypeError** | Error when Python gets the wrong type of data |
+| **type conversion** | Changing data from one type to another (e.g. string → int) |
 
 ---
 
 ## 🐛 Common Bugs to Watch For
 
-Use your debugging skills! Watch out for:
+| Bug | Example | Fix |
+|-----|---------|-----|
+| Forgot to convert | `age = input(...)` then `age + 1` | Wrap with `int()` |
+| Used `int()` on a decimal | `int("3.5")` | Use `float()` instead |
+| Wrong brackets | `int input("Age: ")` | `int(input("Age: "))` |
+| Mixed types in print with `+` | `"Age: " + age` where age is int | Use f-string: `f"Age: {age}"` |
 
-| Bug                   | What Happens  | How to Fix                          |
-| --------------------- | ------------- | ----------------------------------- |
-| Missing quote         | `SyntaxError` | Check all strings have matching `"` |
-| Typo in variable      | `NameError`   | Check spelling matches exactly      |
-| Wrong capitalization  | `NameError`   | Use lowercase for `print`           |
-| Missing comma         | Weird output  | Check `print()` statements          |
-| Mixing + with numbers | `TypeError`   | Use comma or `str()`                |
-
-### Debugging Checklist
-
-Before you submit:
-
-1. ⬜ Run your code - does it work?
-2. ⬜ Read through the output - does it look right?
-3. ⬜ Check each joke - do they display correctly?
-4. ⬜ Look for typos in your jokes
-5. ⬜ Make sure the ending appears
+> **TypeError alert!** If you see `TypeError: can only concatenate str (not "int") to str`, it means you're trying to mix text and numbers with `+`. Switch to f-strings!
 
 ---
 
-## 🎭 Presentation Tips for Next Week
-
-Next week is the **Showcase Party**! Here are tips for presenting:
-
-### Before the Showcase
-
-1. ✅ Test your code one more time
-2. ✅ Practice explaining what you built
-3. ✅ Think about your favorite part
-
-### During Your Presentation
-
-1. **Introduce yourself:** "Hi, I'm [name]!"
-2. **Explain your project:** "I built a Joke Machine that tells [number] jokes!"
-3. **Run your code:** Show it working
-4. **Share something cool:** "My favorite part was..." or "I learned..."
-5. **Thank your audience:** "Thanks for watching!"
-
-### Don't Worry If...
-
-- You feel nervous (everyone does!)
-- Your code has a small bug (we'll help fix it!)
-- Someone else has similar jokes (that's okay!)
-
----
-
-## 🏠 Homework: Complete Your Joke Machine
+## 🏠 Homework: Number Wizard Calculator
 
 **Platform:** Complete this assignment on [Trinket](https://trinket.io/python)
 
-### Requirements
+### The Assignment
 
-Your finished Joke Machine must have:
+Build a **Number Wizard Calculator** that:
 
-1. ✅ **Welcome message** with decorative borders
-2. ✅ **Your name** as the creator
-3. ✅ **At least 3 jokes** stored in variables
-4. ✅ **Each joke** has setup, pause (...), and punchline
-5. ✅ **Visual separators** between jokes (lines of `=` or `-`)
-6. ✅ **Laughing emojis** after each punchline
-7. ✅ **Ending message** thanking the audience
-8. ✅ **NO BUGS** - code runs perfectly!
+1. Asks the user at least **3 questions** that need number answers
+2. Converts each answer with `int()` or `float()`
+3. Performs at least **2 calculations**
+4. Prints a neat results "card" using f-strings and borders
+
+### Starter Template
+
+```python
+# ================================
+# NUMBER WIZARD CALCULATOR
+# By: [Your Name]
+# ================================
+
+print("🔢" * 15)
+print("   WELCOME TO NUMBER WIZARD!")
+print("🔢" * 15)
+print("")
+
+# === COLLECT NUMBERS ===
+name = input("What is your name? ")
+num1 = int(input("Enter your first number: "))
+num2 = int(input("Enter your second number: "))
+# TODO: add a third question
+
+# === CALCULATIONS ===
+total   = num1 + num2
+product = num1 * num2
+# TODO: add another calculation
+
+# === RESULTS CARD ===
+print("")
+print("=" * 30)
+print(f"   RESULTS FOR {name.upper()}")
+print("=" * 30)
+print(f"Sum: {total}")
+print(f"Product: {product}")
+print("=" * 30)
+```
 
 ### Grading Rubric
 
-| Criteria                           | Points        |
-| ---------------------------------- | ------------- |
-| Welcome screen with decorations    | ⭐            |
-| Creator name included              | ⭐            |
-| At least 3 jokes in variables      | ⭐⭐          |
-| Jokes have setup, pause, punchline | ⭐⭐          |
-| Visual separators and emojis       | ⭐            |
-| Ending message                     | ⭐            |
-| Code runs without bugs             | ⭐⭐          |
-| **Total**                          | **10 points** |
+| Criteria | Points |
+|----------|--------|
+| 3+ input() calls with numbers | ⭐⭐⭐ |
+| Correct use of int() or float() | ⭐⭐ |
+| 2+ calculations performed | ⭐⭐ |
+| Results displayed with f-strings | ⭐⭐ |
+| Code runs without errors | ⭐ |
+| **Total** | **10 points** |
 
-### Bonus Points Available
+### Bonus Points
 
-- +1 for 4+ jokes
-- +1 for themed joke collection
-- +1 for creative ASCII art
-- +1 for using string methods creatively
-
-### How to Submit
-
-1. Complete your Joke Machine on Trinket
-2. Test it multiple times to make sure it works
-3. Save your work
-4. Click **Share** and copy the link
-5. Submit the link to your instructor
-6. **Be ready to present at the Week 8 Showcase!**
+- +1 for using `float()` for a decimal result
+- +1 for a creative decorated results card
+- +1 for 4+ different calculations
 
 ---
 
-## 🌟 Next Week: Showcase Party!
+## 🎉 You Now Have Input Superpower!
 
-**Week 8 is the Term 1 Showcase Party!** 🎉
+**What you can now do:**
 
-You'll:
+- ✅ Explain why `input()` always returns a string
+- ✅ Use `int()` to convert string input to a whole number
+- ✅ Use `float()` to convert string input to a decimal
+- ✅ Perform calculations with converted numbers
+- ✅ Recognise and fix a `TypeError`
+- ✅ Build programs that work with both words AND numbers
 
-- Present your Joke Machine to the class
-- Watch your classmates' projects
-- Celebrate completing Term 1!
-- Get a preview of what's coming in Term 2
-
-**Come prepared with:**
-
-- Your finished Joke Machine
-- A short explanation of your project
-- Excitement to share and celebrate!
+> _BrightByte says: "Before today, your programs could talk to users but couldn't DO anything with numbers. Now they can count, calculate, and compute. You've just levelled up from 'input programmer' to 'calculating programmer'. Next stop: game builder! 🔢🎮"_
 
 ---
 
-## 🎉 You're Building Something Real!
-
-This is a BIG moment—you're not just learning, you're CREATING!
-
-**What you're proving:**
-
-- ✅ You can plan a project
-- ✅ You can write structured code
-- ✅ You can use variables effectively
-- ✅ You can make something FUN
-- ✅ You're a REAL programmer!
-
-> _BrightByte says: "I am SO proud of you! Building your first project is a huge milestone. Every programmer remembers their first real program. Years from now, you'll look back at your Joke Machine and remember this is where it all started. You're not just learning—you're CREATING. That's what real programmers do! Now go make some people LAUGH! 🎭😂"_
-
----
-
-## 📚 Joke Resources (Optional)
-
-Need more jokes? Check these out:
-
-- Ask family members for their favorite jokes
-- Think about funny things that happened at school
-- Make up your own! (Q: Why did [thing] do [action]? A: Because [silly reason]!)
-
----
-
-_KidsLearnAI - Empowering the Next Generation with AI Education_  
-*www.kidslearnai.ca*  
+_KidsLearnAI - Empowering the Next Generation with AI Education_
+*www.kidslearnai.ca*
 _Instagram: @kids_learn_ai_
 
 ---
 
-_Remember: The best Joke Machine is one that makes YOU laugh! Have fun with it!_
+_Remember: Every time you see int() or float() in a program, someone knew exactly why they needed it. Now you know too!_
