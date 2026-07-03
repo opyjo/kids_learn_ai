@@ -179,7 +179,10 @@ export default async function DashboardPage() {
 
 	const progressPercentage =
 		totalLessonsInEnrolledLevels > 0
-			? (completedLessonsCount / totalLessonsInEnrolledLevels) * 100
+			? Math.min(
+					100,
+					(completedLessonsCount / totalLessonsInEnrolledLevels) * 100,
+				)
 			: 0;
 
 	return (
@@ -352,7 +355,11 @@ export default async function DashboardPage() {
 							<div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
 								{enrolledCourses.map((course) => {
 									const lessonsCount = lessonsPerCourse[course.id] || 0;
-									const completed = completionsPerCourse[course.id] || 0;
+									// Clamp so stale/duplicate completions can't show >100% or "12/9".
+									const completed = Math.min(
+										completionsPerCourse[course.id] || 0,
+										lessonsCount,
+									);
 									const progress =
 										lessonsCount > 0
 											? Math.round((completed / lessonsCount) * 100)

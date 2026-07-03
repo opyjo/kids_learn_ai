@@ -53,7 +53,7 @@ export default function ResetPasswordPage() {
 											Password tips:
 										</p>
 										<ul className="mt-1 space-y-1 text-sm text-gray-600 dark:text-gray-400">
-											<li>• At least 6 characters long</li>
+											<li>• At least 8 characters long</li>
 											<li>• Mix letters and numbers</li>
 											<li>• Something you can remember!</li>
 										</ul>

@@ -1,5 +1,3 @@
-"use client";
-
 import {
 	ArrowRight,
 	BookOpen,
@@ -15,12 +13,25 @@ import {
 	Star,
 	Users,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Careers: Coding Instructor — Kids Learn AI",
+	description:
+		"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
+	openGraph: {
+		title: "Careers: Coding Instructor — Kids Learn AI",
+		description:
+			"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
+		type: "website",
+	},
+};
 
 export default function CareersPage() {
 	return (

@@ -47,6 +47,9 @@ export default async function TeacherNotesPage({
 	}
 
 	const parsedOrderIndex = Number.parseInt(lessonId, 10);
+	if (Number.isNaN(parsedOrderIndex)) {
+		notFound();
+	}
 
 	// Fetch lesson from Supabase by course_id and order_index
 	const { data: lesson, error: lessonError } = await supabase

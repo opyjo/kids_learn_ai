@@ -1,5 +1,3 @@
-"use client";
-
 import {
 	Compass,
 	GraduationCap,
@@ -8,6 +6,7 @@ import {
 	ShieldCheck,
 	Sparkles,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +18,18 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "About Us — Kids Learn AI",
+	description:
+		"Our mission to help every child master Python and understand AI through warm, culturally aware teaching that turns kids into thoughtful creators, not passive users.",
+	openGraph: {
+		title: "About Us — Kids Learn AI",
+		description:
+			"Our mission to help every child master Python and understand AI through warm, culturally aware teaching that turns kids into thoughtful creators, not passive users.",
+		type: "website",
+	},
+};
 
 const pillars = [
 	{

@@ -1,6 +1,19 @@
+import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Teaching AI Ethics to Kids — Kids Learn AI",
+	description:
+		"Practical strategies for talking to kids about AI bias and fairness, spotting bias in everyday tech, and raising responsible, critical AI creators.",
+	openGraph: {
+		title: "Teaching AI Ethics to Kids — Kids Learn AI",
+		description:
+			"Practical strategies for talking to kids about AI bias and fairness, spotting bias in everyday tech, and raising responsible, critical AI creators.",
+		type: "article",
+	},
+};
 
 const ethicalPillars = [
 	{

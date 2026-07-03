@@ -65,6 +65,8 @@ interface Lesson {
 	order_index: number;
 }
 
+const SUBMISSIONS_PAGE_SIZE = 20;
+
 const getStatusBadge = (status: string) => {
 	switch (status) {
 		case "graded":
@@ -115,6 +117,7 @@ export const SubmissionsTab = () => {
 	const [feedback, setFeedback] = useState("");
 	const [grade, setGrade] = useState("");
 	const [isSaving, setIsSaving] = useState(false);
+	const [page, setPage] = useState(1);
 
 	const fetchSubmissions = async () => {
 		setIsLoading(true);
@@ -189,6 +192,14 @@ export const SubmissionsTab = () => {
 		fetchSubmissions();
 	}, []);
 
+	// Reset to the first page whenever the filters change so we never land on an
+	// out-of-range page. These deps are intentional triggers, not values read in
+	// the body.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: reset page on filter change
+	useEffect(() => {
+		setPage(1);
+	}, [searchTerm, filterLesson, filterStatus]);
+
 	const handleOpenReview = (submission: Submission) => {
 		setSelectedSubmission(submission);
 		setFeedback(submission.feedback || "");
@@ -247,6 +258,20 @@ export const SubmissionsTab = () => {
 
 		return matchesSearch && matchesLesson && matchesStatus;
 	});
+
+	// Paginate the filtered list (client-side, since filters run client-side).
+	const totalPages = Math.max(
+		1,
+		Math.ceil(filteredSubmissions.length / SUBMISSIONS_PAGE_SIZE),
+	);
+	const currentPage = Math.min(page, totalPages);
+	const pageStart = (currentPage - 1) * SUBMISSIONS_PAGE_SIZE;
+	const pagedSubmissions = filteredSubmissions.slice(
+		pageStart,
+		pageStart + SUBMISSIONS_PAGE_SIZE,
+	);
+	const rangeStart = filteredSubmissions.length === 0 ? 0 : pageStart + 1;
+	const rangeEnd = pageStart + pagedSubmissions.length;
 
 	// Stats
 	const pendingCount = submissions.filter(
@@ -367,8 +392,11 @@ export const SubmissionsTab = () => {
 				<CardHeader>
 					<CardTitle>All Submissions</CardTitle>
 					<CardDescription>
-						{filteredSubmissions.length} submission
-						{filteredSubmissions.length !== 1 ? "s" : ""} found
+						{filteredSubmissions.length === 0
+							? "No submissions found"
+							: `Showing ${rangeStart}–${rangeEnd} of ${filteredSubmissions.length} submission${
+									filteredSubmissions.length !== 1 ? "s" : ""
+								} found`}
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
@@ -379,7 +407,7 @@ export const SubmissionsTab = () => {
 						</div>
 					) : (
 						<div className="space-y-3">
-							{filteredSubmissions.map((submission) => (
+							{pagedSubmissions.map((submission) => (
 								<div
 									key={submission.id}
 									className="flex items-center justify-between p-4 border rounded-lg hover:shadow-md transition-shadow"
@@ -419,6 +447,32 @@ export const SubmissionsTab = () => {
 									</Button>
 								</div>
 							))}
+						</div>
+					)}
+
+					{totalPages > 1 && (
+						<div className="flex items-center justify-between border-t pt-4 mt-4">
+							<p className="text-sm text-muted-foreground">
+								Page {currentPage} of {totalPages}
+							</p>
+							<div className="flex items-center gap-2">
+								<Button
+									variant="outline"
+									size="sm"
+									onClick={() => setPage((p) => Math.max(1, p - 1))}
+									disabled={currentPage <= 1}
+								>
+									Previous
+								</Button>
+								<Button
+									variant="outline"
+									size="sm"
+									onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+									disabled={currentPage >= totalPages}
+								>
+									Next
+								</Button>
+							</div>
 						</div>
 					)}
 				</CardContent>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { PythonEditor } from "@/components/code/python-editor";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -10,8 +11,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
-export default function PlaygroundPage() {
-	const starterCode = `# Welcome to the Python Playground!
+const STARTER_CODE = `# Welcome to the Python Playground!
 # Try writing some Python code here
 
 print("Hello, Python Playground!")
@@ -26,6 +26,28 @@ print("My favorite colors:")
 for color in colors:
     print(f"- {color}")
 `;
+
+const STORAGE_KEY = "playground-code";
+
+export default function PlaygroundPage() {
+	// Restore the student's last session from localStorage. This runs after mount
+	// (localStorage is unavailable during SSR); we hold the editor's render until
+	// then so it mounts once with the correct initial code instead of flashing the
+	// starter code and remounting.
+	const [initialCode, setInitialCode] = useState(STARTER_CODE);
+	const [ready, setReady] = useState(false);
+
+	useEffect(() => {
+		try {
+			const saved = localStorage.getItem(STORAGE_KEY);
+			if (saved?.trim()) {
+				setInitialCode(saved);
+			}
+		} catch {
+			// Ignore storage access errors (private mode, disabled storage).
+		}
+		setReady(true);
+	}, []);
 
 	return (
 		<div className="min-h-screen">
@@ -45,16 +67,19 @@ for color in colors:
 
 				{/* Python Editor */}
 				<div className="flex-1 mb-6">
-					<PythonEditor
-						initialCode={starterCode}
-						onCodeChange={(code) => {
-							// Save code to localStorage for persistence
-							localStorage.setItem("playground-code", code);
-						}}
-						onRunComplete={(output, isSuccess) => {
-							console.log("[v0] Playground execution:", { output, isSuccess });
-						}}
-					/>
+					{ready && (
+						<PythonEditor
+							initialCode={initialCode}
+							onCodeChange={(code) => {
+								// Save code to localStorage so work survives a reload.
+								try {
+									localStorage.setItem(STORAGE_KEY, code);
+								} catch {
+									// Ignore storage write errors (private mode / quota).
+								}
+							}}
+						/>
+					)}
 				</div>
 
 				{/* Tips Card */}

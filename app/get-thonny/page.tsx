@@ -1,7 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Download Thonny — Kids Learn AI",
+	description:
+		"Step-by-step guide to download and install Thonny, the beginner-friendly Python editor, on Windows, Mac, or Linux so your child can start coding.",
+	openGraph: {
+		title: "Download Thonny — Kids Learn AI",
+		description:
+			"Step-by-step guide to download and install Thonny, the beginner-friendly Python editor, on Windows, Mac, or Linux so your child can start coding.",
+		type: "website",
+	},
+};
 
 const GetThonnyPage = () => {
 	return (

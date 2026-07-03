@@ -2,12 +2,31 @@ import type { EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
+/**
+ * Only allow same-origin relative redirect targets. Rejects absolute URLs and
+ * protocol-relative / backslash tricks (e.g. "//evil.com", "/\evil.com",
+ * "@evil.com") that browsers resolve to an external host. Returns null when the
+ * value isn't a safe relative path.
+ */
+function safeNextPath(next: string | null): string | null {
+	if (!next) return null;
+	// Must start with a single "/" and not "//" or "/\" (protocol-relative).
+	if (
+		!next.startsWith("/") ||
+		next.startsWith("//") ||
+		next.startsWith("/\\")
+	) {
+		return null;
+	}
+	return next;
+}
+
 export async function GET(request: Request) {
 	const requestUrl = new URL(request.url);
 	const code = requestUrl.searchParams.get("code");
 	const token_hash = requestUrl.searchParams.get("token_hash");
 	const type = requestUrl.searchParams.get("type") as EmailOtpType | null;
-	const next = requestUrl.searchParams.get("next");
+	const next = safeNextPath(requestUrl.searchParams.get("next"));
 	const origin = requestUrl.origin;
 
 	const supabase = await getSupabaseServerClient();

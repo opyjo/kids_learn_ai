@@ -1,6 +1,19 @@
+import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "The Future of AI in Education — Kids Learn AI",
+	description:
+		"How AI is shifting from an answer machine into a personalized 24/7 learning coach that empowers teachers and prepares students for the 2030 workplace.",
+	openGraph: {
+		title: "The Future of AI in Education — Kids Learn AI",
+		description:
+			"How AI is shifting from an answer machine into a personalized 24/7 learning coach that empowers teachers and prepares students for the 2030 workplace.",
+		type: "article",
+	},
+};
 
 const futureTrends = [
 	{
