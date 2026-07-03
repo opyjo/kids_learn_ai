@@ -2,7 +2,7 @@
 title: "Project - My Calculator!"
 description: "Build your complete term project - a full-featured calculator using everything you've learned!"
 difficulty: "beginner"
-order_index: 7
+order_index: 8
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
@@ -68,7 +68,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Complete Your Calculator
 
-  **Assignment:** Finish and polish your calculator for the Week 8 showcase!
+  **Assignment:** Finish and polish your calculator for the Week 9 showcase!
 
   **Requirements:**
   1. Welcome message with decorative borders
@@ -87,7 +87,7 @@ take_home_assignment: |
    - Create a menu to choose operations
   - Add error handling for division by zero
 
-  **Submit:** Share your Trinket link. Be ready to present at the Week 8 Showcase!
+  **Submit:** Share your Trinket link. Be ready to present at the Week 9 Showcase!
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -95,11 +95,11 @@ ai_activities: |
 
   You're building something that works like real-world applications!
 ---
-# Term 2, Lesson 7: Project - My Calculator! 🧮
+# Term 2, Lesson 8: Project - My Calculator! 🧮
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 7 of 8
+**Term:** 2 of 8 | **Week:** 8 of 9
 
 ---
 
@@ -110,7 +110,7 @@ By the end of this lesson, you will have:
 - Built a complete calculator program
 - Used all the skills you've learned this term
 - Created something you can be proud of
-- Prepared for the Week 8 showcase!
+- Prepared for the Week 9 showcase!
 
 ---
 
@@ -172,6 +172,8 @@ print("     WELCOME TO MY CALCULATOR!")
 print("=" * 40)
 print("")
 ```
+
+> 💡 **Remember string patterns?** `"=" * 40` repeats the `=` sign 40 times to make a neat border — the same `*` trick you reviewed in Week 1 and first learned in Term 1!
 
 ### Step 2: Get Numbers from User
 
@@ -368,7 +370,7 @@ Before you're done, test your calculator with:
 
 ## 🌟 Next Lesson Preview
 
-**Week 8: Showcase Party + Badge! 🎉**
+**Week 9: Showcase Party + Badge! 🎉**
 
 Next week, you'll present your calculator to the class, celebrate your achievements, and earn your "Python Beginner" badge! Get ready to show off your amazing work!
 

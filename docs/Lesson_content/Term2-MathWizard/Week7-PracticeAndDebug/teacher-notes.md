@@ -1,10 +1,10 @@
-# Term 2, Lesson 6: Practice & Debug! 🔍
+# Term 2, Lesson 7: Practice & Debug! 🔍
 
 ## Teacher's Guide
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 6 of 8
+**Term:** 2 of 8 | **Week:** 7 of 9
 
 ---
 
@@ -390,7 +390,7 @@ Use this time for:
 - [ ] Complete reflection notes
 - [ ] Identify students needing support
 - [ ] Review homework submissions
-- [ ] Prepare for Week 7 (term project)
+- [ ] Prepare for Week 8 (term project)
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Showcase Party + Badge! 🎉"
 description: "Celebrate your achievements, showcase your calculator, and earn your Python Beginner badge!"
 difficulty: "beginner"
-order_index: 8
+order_index: 9
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
@@ -57,11 +57,11 @@ ai_activities: |
 
   You're building the skills that power AI!
 ---
-# Term 2, Lesson 8: Showcase Party + Badge! 🎉
+# Term 2, Lesson 9: Showcase Party + Badge! 🎉
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 8 of 8
+**Term:** 2 of 8 | **Week:** 9 of 9
 
 ---
 
@@ -178,36 +178,40 @@ What are you excited to learn in Term 3?
 
 Let's look back at everything you learned:
 
-**Week 1:** Python Does Math
+**Week 1:** Welcome Back — Term 1 Recap
+- Reviewed `print()`, variables, strings, and f-strings
+- Warmed up with a mixed-skills challenge
+
+**Week 2:** Python Does Math
 - Addition, subtraction, multiplication, division
 - Using `+`, `-`, `*`, `/`
 
-**Week 2:** Bigger Math
+**Week 3:** Bigger Math
 - Exponents (`**`)
 - Modulo (`%`)
 - Order of operations (PEMDAS)
 
-**Week 3:** Asking Questions
+**Week 4:** Asking Questions
 - Using `input()` to get user information
 - Making programs interactive
 
-**Week 4:** Numbers vs Text
+**Week 5:** Numbers vs Text
 - Understanding the difference
 - Using `int()` to convert text to numbers
 
-**Week 5:** Math Challenges
+**Week 6:** Math Challenges
 - Solving real-world problems
 - Building useful calculators
 
-**Week 6:** Practice & Debug
+**Week 7:** Practice & Debug
 - Finding and fixing bugs
 - Using the Debug Dance
 
-**Week 7:** Project - My Calculator
+**Week 8:** Project - My Calculator
 - Building your term project
 - Putting it all together!
 
-**Week 8:** Showcase & Badge
+**Week 9:** Showcase & Badge
 - Celebrating your achievements
 - Earning your badge!
 

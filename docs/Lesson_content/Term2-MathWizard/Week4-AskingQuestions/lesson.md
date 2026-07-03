@@ -2,7 +2,7 @@
 title: "Asking Questions!"
 description: "Learn to make your programs interactive using input() - get information from users!"
 difficulty: "beginner"
-order_index: 3
+order_index: 4
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
@@ -55,11 +55,11 @@ ai_activities: |
 
   You're learning the same interaction pattern that powers every AI conversation in the world!
 ---
-# Term 2, Lesson 3: Asking Questions! 🗣️
+# Term 2, Lesson 4: Asking Questions! 🗣️
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 3 of 8
+**Term:** 2 of 8 | **Week:** 4 of 9
 
 ---
 
@@ -77,21 +77,21 @@ By the end of this lesson, you will be able to:
 
 ## 🤖 Welcome from BrightByte!
 
-> _"Hey there! So far, your programs have been like a one-way conversation—Python talks, but that's it. But today, we're going to change that! Today, you'll learn how to make your programs ASK QUESTIONS and LISTEN to answers! Your programs will become INTERACTIVE—they'll actually talk WITH users, not just AT them!"_
+> _"Hey there! You've actually met `input()` before—back in Term 1, and again in our warm-up week. So this isn't brand-new... but this week we're going to truly MASTER it! We'll ask lots of questions, store the answers, and build programs that talk WITH people, not just AT them. And it sets up something HUGE coming next week!"_
 
-### What's New This Week?
+### Picking `input()` Back Up
 
 Last week you learned:
-- Exponents (`**`) and modulo (`%`)
+- Exponents (`**`), modulo (`%`), and floor division (`//`)
 - Order of operations (PEMDAS)
 - Complex math expressions
 
-This week you'll discover:
-- **`input()`** — How to ask users for information
-- **Interactive programs** — Programs that respond to users
-- **Conversations** — Making programs feel alive!
+This week we go all-in on a skill you've already seen:
+- **`input()`** — asking users for information (a quick refresher, then deeper)
+- **Interactive programs** — programs that respond to users
+- **Conversations** — making programs feel alive!
 
-> _BrightByte says: "This is a HUGE step! Once you can ask questions, you can build calculators, games, quizzes, and so much more! Every AI assistant uses this same skill!"_
+> _BrightByte says: "Here's the exciting part: once you're a pro at `input()`, next week we'll turn typed answers into real numbers and start building actual calculators! Every AI assistant uses this same skill."_
 
 ---
 
@@ -397,7 +397,7 @@ Remember: After typing your answer, you MUST press Enter! The program is waiting
 
 ## 🌟 Next Lesson Preview
 
-**Week 4: Numbers vs Text!**
+**Week 5: Numbers vs Text!**
 
 Next week, you'll learn a SUPER important skill: converting text to numbers! Right now, when you ask for a number with `input()`, Python gives you text. We'll learn how to turn that text into a real number so you can do math with it!
 

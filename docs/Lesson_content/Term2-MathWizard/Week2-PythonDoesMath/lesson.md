@@ -2,7 +2,7 @@
 title: "Python Does Math!"
 description: "Discover Python's super-calculator powers - learn addition, subtraction, multiplication, and division"
 difficulty: "beginner"
-order_index: 1
+order_index: 2
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
@@ -53,11 +53,11 @@ ai_activities: |
   You're learning the same math operations that power every AI in the world!
 ---
 
-# Term 2, Lesson 1: Python Does Math! 🧮
+# Term 2, Lesson 2: Python Does Math! 🧮
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 1 of 8
+**Term:** 2 of 8 | **Week:** 2 of 9
 
 ---
 
@@ -505,7 +505,7 @@ print("Total points:", total_points)
 
 ## 🌟 Next Lesson Preview
 
-**Week 2: Bigger Math!**
+**Week 3: Bigger Math!**
 
 Next week, you'll discover even MORE math powers:
 

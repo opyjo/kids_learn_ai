@@ -196,7 +196,7 @@ else:
 ```
 
 **How it works:**
-- `number % 2` finds the remainder when dividing by 2
+- `number % 2` finds the remainder when dividing by 2 (remember **modulo** `%` from Term 2?)
 - If remainder is 0, the number is even
 - Otherwise, it's odd!
 
