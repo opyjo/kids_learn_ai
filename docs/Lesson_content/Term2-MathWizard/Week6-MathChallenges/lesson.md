@@ -2,7 +2,7 @@
 title: "Math Challenges!"
 description: "Solve real-world math problems with Python - age calculators, tip calculators, and more!"
 difficulty: "beginner"
-order_index: 5
+order_index: 6
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
@@ -55,11 +55,11 @@ ai_activities: |
 
   You're building the same type of programs that power real-world applications!
 ---
-# Term 2, Lesson 5: Math Challenges! 🎯
+# Term 2, Lesson 6: Math Challenges! 🎯
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 5 of 8
+**Term:** 2 of 8 | **Week:** 6 of 9
 
 ---
 
@@ -400,7 +400,7 @@ print("Leftover slices:", leftovers)
 
 ## 🌟 Next Lesson Preview
 
-**Week 6: Practice & Debug!**
+**Week 7: Practice & Debug!**
 
 Next week, we'll practice everything we've learned and learn how to find and fix mistakes (bugs)! You'll become a debugging detective!
 

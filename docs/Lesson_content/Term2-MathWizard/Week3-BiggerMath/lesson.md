@@ -2,7 +2,7 @@
 title: "Bigger Math!"
 description: "Discover exponents, modulo, and the order of operations - Python's advanced math powers"
 difficulty: "beginner"
-order_index: 2
+order_index: 3
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
@@ -41,7 +41,7 @@ take_home_assignment: |
   **Requirements:**
   1. Use all 6 operations: +, -, *, /, **, %
   2. Include at least 3 examples of exponents
-  3. Include at least 3 examples of modulo
+  3. Include at least 3 examples of modulo (and try `//` for a bonus!)
   4. Show order of operations with and without parentheses
   5. Add comments explaining what each calculation does
   6. Make it tell a story or solve a real problem
@@ -60,11 +60,11 @@ ai_activities: |
 
   The order of operations (PEMDAS) is exactly how AI calculates everything - from simple math to complex neural networks!
 ---
-# Term 2, Lesson 2: Bigger Math! 🚀
+# Term 2, Lesson 3: Bigger Math! 🚀
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 2 of 8
+**Term:** 2 of 8 | **Week:** 3 of 9
 
 ---
 
@@ -210,7 +210,7 @@ Is 15 even? 1
 # You have 25 stickers to share among 6 friends
 stickers = 25
 friends = 6
-each_gets = stickers // friends  # We'll learn // later!
+each_gets = stickers // friends  # // = whole-number division (see below!)
 leftovers = stickers % friends
 
 print("Each friend gets:", each_gets, "stickers")
@@ -235,6 +235,36 @@ print("Day", day_number, "is day", day_of_week, "of the week")
 **Output:** `Day 15 is day 1 of the week`
 
 > _BrightByte says: "Modulo is like asking 'What's left over?' after sharing! Programmers use it ALL the time!"_
+
+---
+
+## ➗ Floor Division: Whole Numbers Only
+
+Normal division `/` always gives a decimal answer:
+
+```python
+print(25 / 6)   # 4.166666666666667
+```
+
+But often you only care about the **whole-number** part — like "how many full teams can I make?" That's **floor division**, written with two slashes `//`:
+
+```python
+print(25 // 6)  # 4  (drops the decimal — it does NOT round up!)
+```
+
+**Floor division and modulo make a perfect team:**
+
+- `//` tells you **how many** fit evenly
+- `%` tells you **what's left over**
+
+```python
+stickers = 25
+friends = 6
+print("Each friend gets:", stickers // friends, "stickers")  # 4
+print("Left over:", stickers % friends, "stickers")          # 1
+```
+
+> _BrightByte says: "Use `/` when you want the exact decimal, and `//` when you just want whole groups. Together with `%`, you can share ANYTHING fairly!"_
 
 ---
 
@@ -330,7 +360,7 @@ result = (10 + 5) * 2 ** 3 - 20 % 6
 print("Result:", result)
 ```
 
-**Output:** `Result: 116`
+**Output:** `Result: 118`
 
 **Step by step:**
 1. Parentheses: `(10 + 5) = 15`
@@ -339,34 +369,7 @@ print("Result:", result)
 4. Modulo: `20 % 6 = 2`
 5. Subtraction: `120 - 2 = 118`
 
-Wait, that doesn't match! Let me recalculate...
-
-Actually: `(10 + 5) = 15`, then `2 ** 3 = 8`, then `15 * 8 = 120`, then `20 % 6 = 2`, then `120 - 2 = 118`
-
-But the output says 116... Let me fix this example:
-
-```python
-# A complex calculation
-result = (10 + 5) * 2 ** 3 - 20 % 6
-print("Result:", result)
-```
-
-Actually, let me provide a correct example:
-
-```python
-# Calculate: (5 + 3) * 2^2 - 10 % 3
-result = (5 + 3) * 2 ** 2 - 10 % 3
-print("Result:", result)
-```
-
-**Output:** `Result: 31`
-
-**Step by step:**
-1. Parentheses: `(5 + 3) = 8`
-2. Exponents: `2 ** 2 = 4`
-3. Multiplication: `8 * 4 = 32`
-4. Modulo: `10 % 3 = 1`
-5. Subtraction: `32 - 1 = 31`
+Try changing the numbers and predicting the answer before you run it!
 
 ### Example 2: Game Score with All Operations
 
@@ -382,7 +385,9 @@ final_score = (base_score * multiplier ** 2) + bonus_points - penalty % 5
 print("Final score:", final_score)
 ```
 
-**Output:** `Final score: 447`
+**Output:** `Final score: 448`
+
+**Why?** `2 ** 2 = 4`, so `100 * 4 = 400`; then `7 % 5 = 2`; then `400 + 50 - 2 = 448`.
 
 ---
 
@@ -451,14 +456,15 @@ print("Leftovers:", leftovers)
 
 ## 📝 Key Takeaways
 
-### The Six Math Operators
+### The Seven Math Operators
 
 | Operation      | Symbol | Example         | What It Does                    |
 | -------------- | ------ | --------------- | ------------------------------- |
 | Addition       | `+`    | `5 + 3`         | Adds numbers                    |
 | Subtraction    | `-`    | `10 - 4`        | Subtracts numbers               |
 | Multiplication | `*`    | `6 * 7`         | Multiplies numbers              |
-| Division       | `/`    | `20 / 5`        | Divides numbers                 |
+| Division       | `/`    | `20 / 5`        | Divides numbers (gives decimal) |
+| Floor Division | `//`   | `25 // 6`       | Whole-number part, no decimal   |
 | Exponent       | `**`   | `2 ** 3`        | Raises to a power (2³ = 8)      |
 | Modulo         | `%`    | `17 % 5`        | Finds remainder (17 ÷ 5 = 2)    |
 
@@ -482,6 +488,7 @@ print("Leftovers:", leftovers)
 | -------------- | --------------------------------------------- | -------------------- |
 | **Exponent**   | A number showing how many times to multiply   | `2 ** 3` means 2³    |
 | **Modulo**     | The remainder after division                  | `17 % 5` = 2         |
+| **Floor Division** | Division that keeps only the whole number | `25 // 6` = 4        |
 | **PEMDAS**     | Order of operations rule                      | Parentheses first!   |
 | **Remainder**  | What's left over after dividing               | 17 ÷ 5 = 3 remainder 2 |
 | **Power**      | Another word for exponent                     | 2 to the power of 3  |
@@ -490,7 +497,7 @@ print("Leftovers:", leftovers)
 
 ## 🌟 Next Lesson Preview
 
-**Week 3: Asking Questions!**
+**Week 4: Asking Questions!**
 
 Next week, you'll learn how to make your programs INTERACTIVE! You'll use `input()` to ask users for information, then use that information in your calculations.
 

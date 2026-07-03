@@ -1,10 +1,10 @@
-# Term 2, Lesson 2: Bigger Math! 🚀
+# Term 2, Lesson 3: Bigger Math! 🚀
 
 ## Teacher's Guide
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 2 of 8
+**Term:** 2 of 8 | **Week:** 3 of 9
 
 ---
 
@@ -12,7 +12,7 @@
 
 ### Purpose
 
-This lesson introduces students to Python's advanced math operations: exponents and modulo. Students also learn about order of operations (PEMDAS), which is crucial for writing correct mathematical expressions. This builds directly on Week 1's basic operations and prepares students for more complex calculations in future lessons.
+This lesson introduces students to Python's advanced math operations: exponents and modulo. Students also learn about order of operations (PEMDAS), which is crucial for writing correct mathematical expressions. This builds directly on Week 2's basic operations and prepares students for more complex calculations in future lessons.
 
 ### Learning Objectives
 
@@ -34,7 +34,7 @@ By the end of this lesson, students will be able to:
 
 ### Pre-Lesson Preparation
 
-1. **Review Week 1** — Ensure students remember +, -, *, /
+1. **Review Week 2** — Ensure students remember +, -, *, /
 2. **Prepare exponent examples** — Have visual examples ready (2², 2³, etc.)
 3. **Modulo examples** — Prepare real-world scenarios (sharing, grouping)
 4. **PEMDAS chart** — Create a visual PEMDAS reminder
@@ -64,7 +64,7 @@ By the end of this lesson, students will be able to:
 
 #### Goals
 
-- Quick review of Week 1 operations
+- Quick review of Week 2 operations
 - Build excitement for "bigger math"
 - Transition smoothly into new content
 
@@ -80,7 +80,7 @@ Wait for: `+`, `-`, `*`, `/`
 
 - Keep review brief—students are eager for new content
 - Build anticipation with "superpowers" language
-- Connect to Week 1: "Remember how we did 5 + 3? Now we'll do 5 ** 3!"
+- Connect to Week 2: "Remember how we did 5 + 3? Now we'll do 5 ** 3!"
 
 ---
 
@@ -466,7 +466,7 @@ Students Excelling:
 Students Needing Support:
 -
 
-Adjustments for Week 3:
+Adjustments for Week 4:
 -
 ```
 
@@ -489,7 +489,7 @@ Adjustments for Week 3:
 ### Parent Communication Template
 
 ```
-Subject: Week 2 Complete - Bigger Math! 🚀
+Subject: Week 3 Complete - Bigger Math! 🚀
 
 Dear Parent/Guardian,
 
@@ -523,7 +523,7 @@ KidsLearnAI
 
 ### Before Class
 
-- [ ] Review Week 1 concepts
+- [ ] Review Week 2 concepts
 - [ ] Prepare exponent examples
 - [ ] Prepare modulo examples
 - [ ] Create PEMDAS visual aid
@@ -531,7 +531,7 @@ KidsLearnAI
 
 ### During Class
 
-- [ ] Reviewed Week 1 operations
+- [ ] Reviewed Week 2 operations
 - [ ] Introduced exponents with `**`
 - [ ] Introduced modulo with `%`
 - [ ] Taught PEMDAS order of operations
@@ -544,7 +544,7 @@ KidsLearnAI
 - [ ] Identify students needing support
 - [ ] Send parent communication
 - [ ] Review homework submissions as they come in
-- [ ] Prepare for Week 3 (input())
+- [ ] Prepare for Week 4 (input())
 
 ---
 

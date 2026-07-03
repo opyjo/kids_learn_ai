@@ -1,10 +1,10 @@
-# Term 2, Lesson 7: Project - My Calculator! 🧮
+# Term 2, Lesson 8: Project - My Calculator! 🧮
 
 ## Teacher's Guide
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 7 of 8
+**Term:** 2 of 8 | **Week:** 8 of 9
 
 ---
 
@@ -21,7 +21,7 @@ By the end of this lesson, students will be able to:
 1. Build a complete calculator program
 2. Apply all skills learned this term
 3. Create a polished, working program
-4. Prepare for the Week 8 showcase
+4. Prepare for the Week 9 showcase
 
 ### Materials Needed
 
@@ -371,7 +371,7 @@ Have students test with:
 
 - [ ] Complete reflection notes
 - [ ] Identify students needing help
-- [ ] Prepare for Week 8 showcase
+- [ ] Prepare for Week 9 showcase
 - [ ] Prepare badges/certificates
 - [ ] Plan celebration activities
 

@@ -1,10 +1,10 @@
-# Term 2, Lesson 5: Math Challenges! 🎯
+# Term 2, Lesson 6: Math Challenges! 🎯
 
 ## Teacher's Guide
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 5 of 8
+**Term:** 2 of 8 | **Week:** 6 of 9
 
 ---
 
@@ -423,7 +423,7 @@ Use this time for:
 - [ ] Complete reflection notes
 - [ ] Identify students needing support
 - [ ] Review homework submissions
-- [ ] Prepare for Week 6 (practice & debug)
+- [ ] Prepare for Week 7 (practice & debug)
 
 ---
 

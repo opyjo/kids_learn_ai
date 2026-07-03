@@ -1,10 +1,10 @@
-# Term 2, Lesson 3: Asking Questions! 🗣️
+# Term 2, Lesson 4: Asking Questions! 🗣️
 
 ## Teacher's Guide
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 3 of 8
+**Term:** 2 of 8 | **Week:** 4 of 9
 
 ---
 
@@ -478,7 +478,7 @@ Students Excelling:
 Students Needing Support:
 -
 
-Adjustments for Week 4:
+Adjustments for Week 5:
 -
 ```
 
@@ -501,7 +501,7 @@ Adjustments for Week 4:
 ### Parent Communication Template
 
 ```
-Subject: Week 3 Complete - Asking Questions! 🗣️
+Subject: Week 4 Complete - Asking Questions! 🗣️
 
 Dear Parent/Guardian,
 
@@ -555,7 +555,7 @@ KidsLearnAI
 - [ ] Identify students needing support
 - [ ] Send parent communication
 - [ ] Review homework submissions as they come in
-- [ ] Prepare for Week 4 (int() conversion)
+- [ ] Prepare for Week 5 (int() conversion)
 
 ---
 

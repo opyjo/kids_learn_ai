@@ -1,10 +1,10 @@
-# Term 2, Lesson 8: Showcase Party + Badge! 🎉
+# Term 2, Lesson 9: Showcase Party + Badge! 🎉
 
 ## Teacher's Guide
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 8 of 8
+**Term:** 2 of 8 | **Week:** 9 of 9
 
 ---
 

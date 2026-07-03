@@ -94,6 +94,33 @@ This week is all about **application**! You'll use if/else to solve real problem
 
 ---
 
+## 🔄 Quick Refresher: Input from Term 2
+
+So far in Term 3, our programs used values we typed into the code ourselves. Today they'll ask the **user** questions — so let's dust off two skills from **Term 2**.
+
+**`input()`** pauses your program and grabs whatever the user types (as text):
+
+```python
+name = input("What's your name? ")
+print("Hi,", name)
+```
+
+**`int()`** turns that text into a real number so you can compare it. Remember — `input()` ALWAYS gives back text, even if the user types `12`! To check an age or score, convert it first:
+
+```python
+age_text = input("How old are you? ")   # "12" (text)
+age = int(age_text)                      # 12 (a real number)
+
+if age >= 13:
+    print("You can sign up!")
+else:
+    print("Ask a grown-up first.")
+```
+
+> _BrightByte says: "You mastered `input()` and `int()` in Term 2 — now we combine them with `if/else` to make programs that react to real answers!"_
+
+---
+
 ## 🔐 Challenge 1: Password Checker
 
 ### The Problem

@@ -169,6 +169,8 @@ print("=" * 40)
 print("")
 ```
 
+> 💡 **Remember string patterns?** `"=" * 40` repeats the `=` sign 40 times to make a neat border — the same `*` trick you used with strings back in Term 1!
+
 ### Step 2: Story Beginning
 
 Tell the beginning of your story:

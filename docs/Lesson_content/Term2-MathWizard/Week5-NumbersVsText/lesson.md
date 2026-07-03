@@ -2,7 +2,7 @@
 title: "Numbers vs Text!"
 description: "Learn to convert text to numbers using int() - make your calculators actually work!"
 difficulty: "beginner"
-order_index: 4
+order_index: 5
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
@@ -61,11 +61,11 @@ ai_activities: |
 
   You're learning the same data conversion that powers every AI system!
 ---
-# Term 2, Lesson 4: Numbers vs Text! 🔢
+# Term 2, Lesson 5: Numbers vs Text! 🔢
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 4 of 8
+**Term:** 2 of 8 | **Week:** 5 of 9
 
 ---
 
@@ -391,7 +391,7 @@ age = int(name)  # Error if name isn't a number!
 
 ## 🌟 Next Lesson Preview
 
-**Week 5: Math Challenges!**
+**Week 6: Math Challenges!**
 
 Next week, we'll put everything together! You'll build real-world calculators like:
 - Age calculators

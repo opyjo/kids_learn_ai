@@ -2,7 +2,7 @@
 title: "Practice & Debug!"
 description: "Practice everything you've learned and become a debugging detective - find and fix bugs in math programs!"
 difficulty: "beginner"
-order_index: 6
+order_index: 7
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
@@ -76,11 +76,11 @@ ai_activities: |
 
   You're learning a skill every programmer needs - finding and fixing mistakes!
 ---
-# Term 2, Lesson 6: Practice & Debug! 🔍
+# Term 2, Lesson 7: Practice & Debug! 🔍
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 6 of 8
+**Term:** 2 of 8 | **Week:** 7 of 9
 
 ---
 
@@ -355,7 +355,7 @@ print(result)
 
 ## 🌟 Next Lesson Preview
 
-**Week 7: Project - My Calculator!**
+**Week 8: Project - My Calculator!**
 
 Next week, you'll build your BIG term project: a complete calculator program! You'll use everything you've learned to create something amazing!
 

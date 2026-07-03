@@ -1,10 +1,10 @@
-# Term 2, Lesson 4: Numbers vs Text! 🔢
+# Term 2, Lesson 5: Numbers vs Text! 🔢
 
 ## Teacher's Guide
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
-**Term:** 2 of 8 | **Week:** 4 of 8
+**Term:** 2 of 8 | **Week:** 5 of 9
 
 ---
 
@@ -477,7 +477,7 @@ Students Excelling:
 Students Needing Support:
 -
 
-Adjustments for Week 5:
+Adjustments for Week 6:
 -
 ```
 
@@ -500,7 +500,7 @@ Adjustments for Week 5:
 ### Parent Communication Template
 
 ```
-Subject: Week 4 Complete - Numbers vs Text! 🔢
+Subject: Week 5 Complete - Numbers vs Text! 🔢
 
 Dear Parent/Guardian,
 
@@ -555,7 +555,7 @@ KidsLearnAI
 - [ ] Identify students needing support
 - [ ] Send parent communication
 - [ ] Review homework submissions as they come in
-- [ ] Prepare for Week 5 (math challenges)
+- [ ] Prepare for Week 6 (math challenges)
 
 ---
 

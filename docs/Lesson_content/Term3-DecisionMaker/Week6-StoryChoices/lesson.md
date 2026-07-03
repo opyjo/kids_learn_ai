@@ -204,6 +204,27 @@ else:
     print("THE END - FRIENDSHIP ENDING!")
 ```
 
+### 🪆 New Idea: Nesting (a Choice Inside a Choice)
+
+Did you spot it? There's an `if/else` **inside** another `if`! Putting one decision inside another is called **nesting**, and it's the secret to branching adventures.
+
+The trick is **indentation** — each level goes 4 more spaces to the right:
+
+```python
+if choice1 == "cave":          # outer choice → its block is indented 4 spaces
+    choice2 = input("Take a crystal? (yes/no): ")
+    if choice2 == "yes":       # inner choice → indented 8 spaces
+        print("Power ending!")
+    else:
+        print("Continue ending!")
+else:
+    print("Forest ending!")
+```
+
+**Rule of thumb:** every time you go one decision deeper, indent 4 more spaces. Line up each `else` under its own `if`.
+
+> _BrightByte says: "Nesting is powerful! A choice inside a choice inside a choice makes a big, branching story. Just watch your indentation super carefully—that's where most bugs hide!"_
+
 ---
 
 ## 🎮 Practice Time!
