@@ -64,7 +64,35 @@ describe("ConceptLabHost cohorts", () => {
 		const init = fetchSpy.mock.calls[0]?.[1];
 		const body = JSON.parse(init?.body ?? "{}");
 		expect(body.cohort).toBe("baseline");
+		expect(body.context).toBe("lesson");
 		expect(body.summary.apply?.isCorrect).toBe(true);
+	});
+
+	it("standalone context never gets the baseline arm, even with the experiment on", async () => {
+		vi.stubEnv("NEXT_PUBLIC_CONCEPT_LAB_EXPERIMENT", "on");
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async () => ({ ok: true, json: async () => ({}) })),
+		);
+
+		// A user who WOULD be baseline in a lesson gets the full lab standalone.
+		const { user } = render(
+			<ConceptLabHost
+				definition={howAiLearnsLab}
+				userId={baselineUserId()}
+				context="standalone"
+			/>,
+		);
+
+		const predictTarget = howAiLearnsLab.predictProbe.options.find(
+			(o) => o.id === howAiLearnsLab.predictProbe.correctOptionId,
+		);
+		await user.click(screen.getByText(predictTarget?.text ?? ""));
+		await user.click(screen.getByRole("button", { name: /made my guess/i }));
+
+		expect(
+			screen.getByRole("button", { name: /Teach as Cat/i }),
+		).toBeInTheDocument();
 	});
 
 	it("defaults everyone to the full lab when the experiment is off", async () => {

@@ -18,6 +18,7 @@ import { LabTelemetryRecorder } from "@/lib/concept-labs/telemetry";
 import type {
 	ConceptLabDefinition,
 	LabAction,
+	LabContext,
 	LabPhase,
 	LabSessionSummary,
 } from "@/lib/concept-labs/types";
@@ -27,6 +28,8 @@ interface ConceptLabHostProps {
 	definition: ConceptLabDefinition;
 	/** Signed-in learner id — used for cohort assignment and to persist results. */
 	userId?: string;
+	/** Where this attempt happens; standalone runs are excluded from the lesson experiment. */
+	context?: LabContext;
 	/** Called once per completed attempt with the anonymizable session summary. */
 	onComplete?: (summary: LabSessionSummary) => void;
 }
@@ -48,6 +51,7 @@ const BASELINE_STEPS: { phase: LabPhase; label: string }[] = [
 export function ConceptLabHost({
 	definition,
 	userId,
+	context = "lesson",
 	onComplete,
 }: ConceptLabHostProps) {
 	const recorderRef = useRef<LabTelemetryRecorder>(
@@ -55,12 +59,15 @@ export function ConceptLabHost({
 	);
 	// The baseline-vs-lab A/B stays OFF until explicitly enabled, so the live
 	// product never hides the lab from students. When off, everyone gets the full
-	// loop and sessions still persist (lab-arm data accrues).
+	// loop and sessions still persist (lab-arm data accrues). Standalone
+	// playground runs are never split — a "baseline" (no-lab) arm makes no sense
+	// outside a lesson, and playground data is excluded from the experiment.
 	const [cohort] = useState<Cohort>(() =>
 		resolveCohort(
 			userId,
 			definition.labId,
-			process.env.NEXT_PUBLIC_CONCEPT_LAB_EXPERIMENT === "on",
+			context === "lesson" &&
+				process.env.NEXT_PUBLIC_CONCEPT_LAB_EXPERIMENT === "on",
 		),
 	);
 	const seedRef = useRef(deriveSeed(userId ?? "anon", definition.labId));
@@ -127,6 +134,7 @@ export function ConceptLabHost({
 				summary: result,
 				cohort,
 				seed: seedRef.current,
+				context,
 			}),
 		}).catch(() => {});
 	}

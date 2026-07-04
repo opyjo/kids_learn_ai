@@ -34,9 +34,18 @@ wired into a real lesson.
 
 ## How to see it
 
-Open the Term 5 Week 4 lesson ("How AI Learns"). The **Concept Lab** tab renders
-the loop. No database change or content sync is required — labs are resolved from
-the registry (`registry.ts`), not the DB, in this phase.
+Two entry points:
+
+1. **In-lesson:** open the Term 5 Week 4 lesson ("How AI Learns") — the
+   **Concept Lab** tab renders the loop. These sessions are the experiment data.
+2. **Standalone playground:** any signed-in student can open **`/labs`**
+   (nav → Learn → AI Labs) and run any registered lab outside its lesson.
+   These sessions are tagged `context = 'standalone'`
+   (`scripts/31-add-lab-session-context.sql`) and are **excluded from the
+   lesson experiment** — they're reported separately (within-lab gain only,
+   never a baseline arm) in the admin dashboard.
+
+Labs are resolved from the registry (`registry.ts`), not the DB.
 
 ## Adding a lab
 

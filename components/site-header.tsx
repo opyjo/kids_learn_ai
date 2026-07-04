@@ -10,6 +10,7 @@ import {
 	DollarSign,
 	Download,
 	ExternalLink,
+	FlaskConical,
 	Gamepad2,
 	GraduationCap,
 	HelpCircle,
@@ -198,6 +199,12 @@ const NAV_ITEMS = {
 			label: "Games",
 			Icon: Gamepad2,
 			description: "Learn through interactive games",
+		},
+		{
+			href: "/labs",
+			label: "AI Labs",
+			Icon: FlaskConical,
+			description: "Teach a real AI and see how it learns",
 		},
 	],
 	resources: [

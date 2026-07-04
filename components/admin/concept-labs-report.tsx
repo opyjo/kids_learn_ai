@@ -28,6 +28,7 @@ interface LabReport {
 interface ReportResponse {
 	totalSessions: number;
 	report: LabReport[];
+	standaloneReport?: LabReport[];
 }
 
 const EXPERIMENT_ON = process.env.NEXT_PUBLIC_CONCEPT_LAB_EXPERIMENT === "on";
@@ -185,22 +186,45 @@ export function ConceptLabsReport() {
 				</div>
 			)}
 
-			{data && data.report.length === 0 && !loading && (
-				<Card>
-					<CardContent className="flex flex-col items-center gap-2 py-10 text-center">
-						<FlaskConical className="h-8 w-8 text-muted-foreground/50" />
-						<p className="text-sm font-medium">No completed lab sessions yet</p>
-						<p className="text-xs text-muted-foreground">
-							Finish a Concept Lab (Term 5 Week 4) while signed in, then
-							refresh.
-						</p>
-					</CardContent>
-				</Card>
+			{data &&
+				data.report.length === 0 &&
+				(data.standaloneReport?.length ?? 0) === 0 &&
+				!loading && (
+					<Card>
+						<CardContent className="flex flex-col items-center gap-2 py-10 text-center">
+							<FlaskConical className="h-8 w-8 text-muted-foreground/50" />
+							<p className="text-sm font-medium">
+								No completed lab sessions yet
+							</p>
+							<p className="text-xs text-muted-foreground">
+								Finish a Concept Lab (Term 5 Week 4 or the /labs playground)
+								while signed in, then refresh.
+							</p>
+						</CardContent>
+					</Card>
+				)}
+
+			{data && data.report.length > 0 && (
+				<div className="space-y-3">
+					<h2 className="text-sm font-semibold text-foreground">
+						In-lesson sessions (experiment data)
+					</h2>
+					{data.report.map((lab) => (
+						<LabCard key={lab.labId} lab={lab} />
+					))}
+				</div>
 			)}
 
-			{data?.report.map((lab) => (
-				<LabCard key={lab.labId} lab={lab} />
-			))}
+			{data && (data.standaloneReport?.length ?? 0) > 0 && (
+				<div className="space-y-3">
+					<h2 className="text-sm font-semibold text-foreground">
+						Standalone playground sessions (/labs — outside the experiment)
+					</h2>
+					{data.standaloneReport?.map((lab) => (
+						<LabCard key={`standalone-${lab.labId}`} lab={lab} />
+					))}
+				</div>
+			)}
 		</div>
 	);
 }
