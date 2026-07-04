@@ -18,6 +18,7 @@ interface LessonViewerShellProps {
 	variant: LessonVariant;
 	mainPanel: React.ReactNode;
 	codePanel?: React.ReactNode;
+	outline?: React.ReactNode;
 }
 
 export function LessonViewerShell({
@@ -28,6 +29,7 @@ export function LessonViewerShell({
 	variant,
 	mainPanel,
 	codePanel,
+	outline,
 }: LessonViewerShellProps) {
 	const [isWideDesktop, setIsWideDesktop] = useState(false);
 	const [isHeaderHidden, setIsHeaderHidden] = useState(false);
@@ -64,22 +66,23 @@ export function LessonViewerShell({
 			<SiteHeader />
 
 			<div className="container mx-auto px-4 pt-2">
-				<LessonBreadcrumbs
-					courseSlug={courseSlug}
-					courseTitle={courseTitle}
-					lessonTitle={lesson.title}
-					difficulty={lesson.difficulty}
-					isPremium={lesson.is_premium}
-				/>
+				<div className="flex flex-wrap items-center justify-between gap-2">
+					<LessonBreadcrumbs
+						courseSlug={courseSlug}
+						courseTitle={courseTitle}
+						lessonTitle={lesson.title}
+						difficulty={lesson.difficulty}
+						isPremium={lesson.is_premium}
+					/>
+					{outline}
+				</div>
 			</div>
 
 			<div className="mx-auto max-w-[1600px] px-4 pb-5">
 				<div
 					className={cn(
 						"grid gap-3 items-start",
-						hasCodePanel
-							? "xl:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]"
-							: "",
+						hasCodePanel ? "xl:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)]" : "",
 					)}
 				>
 					<div className="min-w-0">

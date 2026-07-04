@@ -123,7 +123,10 @@ const WhatYoullCreateSection = () => {
 							) : (
 								<div className="w-full h-full bg-gradient-to-br from-accent/20 via-primary/10 to-secondary flex items-center justify-center">
 									<div className="text-center p-8">
-										<Trophy className="h-16 w-16 text-accent/50 mx-auto mb-4" />
+										<Trophy
+											className="h-16 w-16 text-accent/50 mx-auto mb-4"
+											aria-hidden="true"
+										/>
 										<p className="text-muted-foreground">
 											Celebrate achievements!
 										</p>
@@ -138,7 +141,7 @@ const WhatYoullCreateSection = () => {
 						<div className="absolute -top-6 -left-6 w-24 h-24 bg-primary/20 rounded-full blur-2xl" />
 						{/* Achievement badge */}
 						<div className="absolute -top-4 -right-4 bg-accent text-accent-foreground rounded-full p-4 shadow-lg z-10">
-							<Star className="h-6 w-6 fill-current" />
+							<Star className="h-6 w-6 fill-current" aria-hidden="true" />
 						</div>
 					</SlideInLeft>
 
@@ -177,6 +180,7 @@ const WhatYoullCreateSection = () => {
 											>
 												<IconComponent
 													className={`h-5 w-5 ${card.iconColor}`}
+													aria-hidden="true"
 												/>
 											</div>
 											{card.badgeType === "premium" ? (

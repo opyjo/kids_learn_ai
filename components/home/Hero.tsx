@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { CheckCircle, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { FadeIn, SlideInRight } from "@/components/ui/motion";
 
 const Hero = () => {
+	const shouldReduceMotion = useReducedMotion();
+
 	return (
 		<section className="container mx-auto px-4 py-20 lg:py-28 relative overflow-hidden">
 			{/* Background Decor */}
@@ -19,7 +21,7 @@ const Hero = () => {
 				<div className="text-center lg:text-left z-10 relative">
 					<FadeIn>
 						<Badge className="mb-6 bg-accent/10 text-accent hover:bg-accent/20 border-accent/20 rounded-full px-4 py-2 text-sm font-medium cursor-pointer relative z-10">
-							<Sparkles className="w-4 h-4 inline mr-2" />
+							<Sparkles className="w-4 h-4 inline mr-2" aria-hidden="true" />
 							Live Classes with Expert Instructors
 						</Badge>
 					</FadeIn>
@@ -43,9 +45,13 @@ const Hero = () => {
 						<div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
 							{/* Brightbyte pointing toward the CTA button */}
 							<motion.div
-								animate={{
-									x: [0, 8, 12, 8, 0],
-								}}
+								animate={
+									shouldReduceMotion
+										? undefined
+										: {
+												x: [0, 8, 12, 8, 0],
+											}
+								}
 								transition={{
 									duration: 3,
 									repeat: Infinity,
@@ -66,7 +72,7 @@ const Hero = () => {
 									size="lg"
 									className="text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
 								>
-									<Sparkles className="mr-2 h-5 w-5" />
+									<Sparkles className="mr-2 h-5 w-5" aria-hidden="true" />
 									Book a FREE Trial Class
 								</Button>
 							</Link>
@@ -78,11 +84,17 @@ const Hero = () => {
 					<FadeIn delay={0.4}>
 						<div className="mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center lg:justify-start text-sm text-muted-foreground relative">
 							<div className="flex items-center gap-2">
-								<CheckCircle className="h-5 w-5 text-green-600" />
+								<CheckCircle
+									className="h-5 w-5 text-green-600"
+									aria-hidden="true"
+								/>
 								<span>First class FREE - try before you commit</span>
 							</div>
 							<div className="flex items-center gap-2">
-								<CheckCircle className="h-5 w-5 text-primary" />
+								<CheckCircle
+									className="h-5 w-5 text-primary"
+									aria-hidden="true"
+								/>
 								<span>Ages 9-10 (Mon) & 11-13 (Wed)</span>
 							</div>
 						</div>
@@ -102,6 +114,8 @@ const Hero = () => {
 								loop
 								muted
 								playsInline
+								tabIndex={-1}
+								aria-hidden="true"
 								className="w-full h-full object-cover [mask-image:radial-gradient(circle_at_center,black_40%,transparent_80%)] lg:[mask-image:linear-gradient(to_left,black_20%,transparent_95%)]"
 								poster="/images/student-focused.png"
 							>

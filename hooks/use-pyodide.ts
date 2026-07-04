@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 /**
  * Hook to manage Pyodide (Python in the browser) initialization and execution.
@@ -10,64 +10,74 @@ export function usePyodide() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const pyodideRef = useRef<any>(null);
+    const mountedRef = useRef(true);
 
-    useEffect(() => {
-        let mounted = true;
+    const initPyodide = useCallback(async () => {
+        if (typeof window === "undefined") return;
 
-        const initPyodide = async () => {
-            if (typeof window === "undefined") return;
+        // Check if already loaded
+        if ((window as any).loadPyodide && pyodideRef.current) {
+            setIsReady(true);
+            setIsLoading(false);
+            return;
+        }
 
-            // Check if already loaded
-            if ((window as any).loadPyodide && pyodideRef.current) {
-                setIsReady(true);
-                setIsLoading(false);
-                return;
-            }
+        setIsLoading(true);
+        setError(null);
 
-            try {
-                // 1. Add Pyodide script
-                if (!(window as any).loadPyodide) {
-                    const script = document.createElement("script");
-                    script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js";
-                    script.async = true;
+        try {
+            // 1. Add Pyodide script
+            if (!(window as any).loadPyodide) {
+                const script = document.createElement("script");
+                script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js";
+                script.async = true;
 
-                    const loadPromise = new Promise((resolve, reject) => {
-                        script.onload = resolve;
-                        script.onerror = reject;
-                    });
-
-                    document.head.appendChild(script);
-                    await loadPromise;
-                }
-
-                if (!mounted) return;
-
-                // 2. Initialize Pyodide
-                const { loadPyodide } = window as any;
-                const pyodide = await loadPyodide({
-                    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
+                const loadPromise = new Promise((resolve, reject) => {
+                    script.onload = resolve;
+                    script.onerror = reject;
                 });
 
-                if (!mounted) return;
-
-                pyodideRef.current = pyodide;
-                setIsReady(true);
-                setIsLoading(false);
-            } catch (err) {
-                console.error("Pyodide initialization failed:", err);
-                if (mounted) {
-                    setError("Failed to load Python environment");
-                    setIsLoading(false);
-                }
+                document.head.appendChild(script);
+                await loadPromise;
             }
-        };
 
+            if (!mountedRef.current) return;
+
+            // 2. Initialize Pyodide
+            const { loadPyodide } = window as any;
+            const pyodide = await loadPyodide({
+                indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
+            });
+
+            if (!mountedRef.current) return;
+
+            pyodideRef.current = pyodide;
+            setIsReady(true);
+            setIsLoading(false);
+        } catch (err) {
+            console.error("Pyodide initialization failed:", err);
+            if (mountedRef.current) {
+                setError("Failed to load Python environment");
+                setIsLoading(false);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        mountedRef.current = true;
         initPyodide();
 
         return () => {
-            mounted = false;
+            mountedRef.current = false;
         };
-    }, []);
+    }, [initPyodide]);
+
+    /**
+     * Retries initialization after a failure (e.g. CDN blocked/offline).
+     */
+    const retry = useCallback(() => {
+        initPyodide();
+    }, [initPyodide]);
 
     /**
      * Runs Python code and returns the captured stdout.
@@ -103,5 +113,6 @@ export function usePyodide() {
         isLoading,
         error,
         runCode,
+        retry,
     };
 }
