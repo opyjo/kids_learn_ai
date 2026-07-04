@@ -21,11 +21,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: AI Data Processing Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can create a list that represents data AI might use?
   3. Challenge 2: Who can loop through data like AI does?
   4. Challenge 3: Who can find patterns in data?
-  5. Share your ideas with the class!
+  5. Share your ideas in the Zoom chat!
 
   **Bonus:** Try thinking about what data different AIs use!
 take_home_assignment: |

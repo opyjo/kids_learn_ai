@@ -30,8 +30,8 @@ class_activities: |
   3. Ask for their superpower
   Then print a fun story using all three answers!
 
-  **Part 2: Pass the Keyboard**
-  One student types the program, another runs it and types in answers.
+  **Part 2: Share the Screen**
+  In a breakout room, one student shares their screen and types the program, while their partner calls out the answers to type in.
   Switch roles so everyone practices both coding and talking to the program!
 
   **Part 3: Personalize It!**

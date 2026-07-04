@@ -20,11 +20,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Loop Race!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can count from 1 to 20 the fastest using a loop?
   3. Challenge 2: Who can print "Python is awesome!" 10 times?
   4. Challenge 3: Who can count backwards from 10 to 1?
-  5. Share your code with the class!
+  5. Share your code in the Zoom chat!
 
   **Bonus:** Try printing your name 5 times using a loop!
 take_home_assignment: |

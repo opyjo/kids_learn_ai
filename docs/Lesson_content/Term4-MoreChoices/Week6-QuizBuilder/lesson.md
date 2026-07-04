@@ -42,8 +42,8 @@ class_activities: |
   - Make it your own!
 
   **Part 3: Share & Play (10 min)**
-  - Share your quizzes
-  - Take each other's quizzes
+  - Share your quizzes on screen
+  - Take each other's quizzes (share Trinket links in the Zoom chat)
   - Give feedback
 
   **Challenge:** Who can create the most fun and challenging quiz?

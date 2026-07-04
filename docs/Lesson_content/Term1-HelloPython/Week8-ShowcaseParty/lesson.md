@@ -42,14 +42,14 @@ class_activities: |
   - Deep breaths - you've got this!
 
   **Part 2: Showcase Presentations (30 min)**
-  - Each student presents their Joke Machine
+  - Each student shares their screen and presents their Joke Machine
   - 2-3 minutes per presentation
   - Audience laughs and applauds!
 
   **Part 3: Celebration & Awards (10 min)**
   - Special recognition awards
-  - Class photo (optional)
-  - Treats and celebration!
+  - Class screenshot (optional)
+  - Celebration and shout-outs!
 
   **Part 4: Term 1 Reflection & Term 2 Preview (10 min)**
   - What we learned

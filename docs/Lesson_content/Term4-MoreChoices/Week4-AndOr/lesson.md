@@ -29,11 +29,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Condition Combiner Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create 3 programs using 'and'
   3. Create 3 programs using 'or'
   4. Test with different values
-  5. Share your programs!
+  5. Share your programs in the Zoom chat!
 
   **Challenge:** Who can create the most creative combined conditions?
 take_home_assignment: |

@@ -24,11 +24,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: List Operations Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can access the third item in a list?
   3. Challenge 2: Who can add 3 items to a list?
   4. Challenge 3: Who can find the length of a list with 10 items?
-  5. Share your code with the class!
+  5. Share your code in the Zoom chat!
 
   **Bonus:** Try accessing items from the end of the list!
 take_home_assignment: |

@@ -25,11 +25,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Smart Pattern Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can print only even numbers from 1-20?
   3. Challenge 2: Who can create a pattern that alternates stars and numbers?
   4. Challenge 3: Who can create the most creative conditional pattern?
-  5. Share your patterns with the class!
+  5. Share your patterns in the Zoom chat!
 
   **Bonus:** Try creating a pattern that changes based on the row number!
 take_home_assignment: |

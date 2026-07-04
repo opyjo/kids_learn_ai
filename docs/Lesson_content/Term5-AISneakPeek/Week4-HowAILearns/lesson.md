@@ -22,11 +22,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Learning Like AI!
 
-  1. Work in pairs
+  1. Your teacher puts you in a breakout room with a partner
   2. Practice recognizing patterns
   3. Show how you learn from examples
   4. Compare to how AI learns
-  5. Share your discoveries!
+  5. Share your discoveries in the Zoom chat!
 
   **Activity: Pattern Recognition**
   - Look at examples of cats and dogs

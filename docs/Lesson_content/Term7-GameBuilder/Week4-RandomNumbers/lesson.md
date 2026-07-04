@@ -22,11 +22,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Random Number Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can generate a random number between 1 and 20?
   3. Challenge 2: Who can simulate rolling a die (1-6)?
   4. Challenge 3: Who can create the most creative random game?
-  5. Share your code with the class!
+  5. Share your code in the Zoom chat!
 
   **Bonus:** Try creating a random number guessing game!
 take_home_assignment: |

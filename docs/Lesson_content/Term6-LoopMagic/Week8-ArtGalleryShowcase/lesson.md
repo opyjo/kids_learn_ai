@@ -29,14 +29,14 @@ class_activities: |
   - Get ready to share!
 
   **Part 2: Presentations (40 min)**
-  - Each student presents their ASCII Art Generator
+  - Each student shares their screen and presents their ASCII Art Generator
   - Show your patterns
   - Explain what makes yours special
   - Answer questions
 
-  **Part 3: Gallery Walk (10 min)**
-  - Walk around and see classmates' projects
-  - Try out different generators
+  **Part 3: Gallery Share (10 min)**
+  - See classmates' projects as they share their screens
+  - Try out different generators (share Trinket links in the Zoom chat)
   - Give compliments and feedback
 
   **Part 4: Celebration (5 min)**

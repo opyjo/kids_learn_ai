@@ -34,11 +34,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Variables & Math Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create 5 different programs using variables and math
   3. Each program should solve a different problem
   4. Test with different values
-  5. Share your favorite program!
+  5. Share your favorite program in the Zoom chat!
 
   **Challenge:** Who can create the most creative program using variables and math?
 take_home_assignment: |

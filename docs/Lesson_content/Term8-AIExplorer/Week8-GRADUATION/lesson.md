@@ -24,13 +24,13 @@ class_activities: |
   ## 🎮 Class Activity: Graduation Ceremony!
 
   **Part 1: Quiz Game Presentations (25 min)**
-  - Each student presents their quiz game
+  - Each student shares their screen and presents their quiz game
   - Show your game features
   - Demonstrate gameplay
   - Answer questions
 
   **Part 2: AI Presentation Presentations (25 min)**
-  - Each student presents their AI topic
+  - Each student shares their screen and presents their AI topic
   - Share what you learned
   - Explain your topic
   - Answer questions
@@ -42,7 +42,7 @@ class_activities: |
 
   **Part 4: Final Celebration (5 min)**
   - Celebrate everything you've learned
-  - Take photos
+  - Take a screenshot
   - Share memories
   - Look forward to Year 2!
 take_home_assignment: |
