@@ -22,10 +22,10 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Interview Game!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create a program that asks 5 questions about your partner
   3. Questions can be: favorite color, favorite food, favorite number, etc.
-  4. Run your program and answer the questions
+  4. Interview your partner over Zoom, share your screen, and run the program with their answers
   5. Switch roles and try your partner's program!
 
   **Challenge:** Make your program use the answers in a fun way (like a story or joke)!

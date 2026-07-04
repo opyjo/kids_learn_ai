@@ -26,13 +26,13 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Comparison Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create variables with your names
   3. Compare them: Are they equal? Which comes first alphabetically?
   4. Create number variables and compare them
-  5. Share your comparisons with the class!
+  5. Share your screen and show your comparisons to your partner!
 
-  **Challenge:** Who can create the most creative comparison?
+  **Challenge:** Who can create the most creative comparison? Post it in the Zoom chat!
 take_home_assignment: |
   ## 📚 Homework: My Comparison Program
 

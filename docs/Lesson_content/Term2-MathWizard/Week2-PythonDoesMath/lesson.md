@@ -20,13 +20,13 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Math Race!
 
-  1. Partner up with a classmate
-  2. One person says a math problem (like "15 + 27")
-  3. The other person types it in Python and runs it
-  4. Check if the answer is correct!
+  1. Your teacher puts you in a breakout room with a partner (or play with the whole class in the Zoom chat)
+  2. One person says a math problem out loud (like "15 + 27")
+  3. The other person types it into their Trinket, shares their screen, and runs it
+  4. Check together if the answer is correct!
   5. Switch roles after 5 problems
 
-  **Challenge:** Who can solve 10 problems the fastest (correctly)?
+  **Challenge:** Who can solve 10 problems the fastest (correctly)? Post your winning time in the Zoom chat!
 take_home_assignment: |
   ## 📚 Homework: My Math Story
 

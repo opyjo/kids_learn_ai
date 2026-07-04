@@ -20,10 +20,10 @@ class_activities: |
   ## 🎮 Class Activity: Showcase Party!
 
   **Part 1: Adventure Presentations (30 min)**
-  - Each student presents their adventure game
+  - Each student shares their screen and presents their adventure game
   - Show what it does
   - Share what you're proud of
-  - Play each other's adventures!
+  - Drop your Trinket link in the Zoom chat so everyone can play each other's adventures!
 
   **Part 2: Celebration & Reflection (15 min)**
   - Share favorite moments from Term 3
@@ -36,8 +36,8 @@ class_activities: |
 
   **Part 4: Final Celebration (10 min)**
   - Celebrate all your hard work
-  - Take photos
-  - Share achievements!
+  - Take a screenshot of the whole class on screen
+  - Share achievements in the Zoom chat!
 take_home_assignment: |
   ## 📚 No Homework This Week!
 

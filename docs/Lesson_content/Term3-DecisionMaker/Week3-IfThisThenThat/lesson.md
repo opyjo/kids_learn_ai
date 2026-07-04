@@ -20,13 +20,13 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Decision Maker Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create a program with at least 3 if statements
   3. Each if statement should check something different
   4. Test your program with different values
-  5. Share your decisions with the class!
+  5. Share your screen and show your decisions to your partner!
 
-  **Challenge:** Who can create the most creative decision-making program?
+  **Challenge:** Who can create the most creative decision-making program? Share it in the Zoom chat!
 take_home_assignment: |
   ## 📚 Homework: My Decision Program
 
