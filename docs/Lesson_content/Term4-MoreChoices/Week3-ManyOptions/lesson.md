@@ -34,11 +34,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Menu Builder Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Design a menu together (restaurant, game, store, etc.)
   3. Build the menu program using elif
   4. Test with different choices
-  5. Share your menus with the class!
+  5. Share your menus in the Zoom chat!
 
   **Challenge:** Who can create the most creative and useful menu?
 take_home_assignment: |

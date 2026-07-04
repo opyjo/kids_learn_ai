@@ -51,7 +51,7 @@ class_activities: |
   ## 🎮 Class Activity: Joke Workshop!
 
   **Part 1: Joke Brainstorm (10 min)**
-  - Work in small groups
+  - Join a small-group breakout room
   - Brainstorm as many jokes as you can
   - Write them down (setup and punchline)
 
@@ -61,7 +61,7 @@ class_activities: |
 
   **Part 3: Build Together (20 min)**
   - Start building your Joke Machine
-  - Help neighbors with bugs
+  - Ask for help in the Zoom chat or raise your virtual hand
   - Test your code frequently!
 
   **Part 4: Preview & Polish (10 min)**

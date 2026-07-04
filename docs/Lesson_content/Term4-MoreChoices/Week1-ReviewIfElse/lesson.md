@@ -21,11 +21,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: If/Else Challenge Showdown!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create 3 different if/else programs together
   3. Each program should solve a different problem
   4. Test with different values
-  5. Share your favorite program with the class!
+  5. Share your favorite program in the Zoom chat!
 
   **Challenge:** Who can create the most creative if/else program?
 take_home_assignment: |

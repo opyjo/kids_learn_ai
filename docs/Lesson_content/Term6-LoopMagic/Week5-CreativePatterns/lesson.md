@@ -24,11 +24,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Pattern Design Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can create the biggest triangle?
   3. Challenge 2: Who can create a diamond pattern?
   4. Challenge 3: Who can create the most creative pattern?
-  5. Share your patterns with the class!
+  5. Share your patterns in the Zoom chat!
 
   **Bonus:** Try creating a pattern with your name!
 take_home_assignment: |

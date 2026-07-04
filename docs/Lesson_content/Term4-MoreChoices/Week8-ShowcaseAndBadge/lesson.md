@@ -22,13 +22,13 @@ class_activities: |
   ## 🎮 Class Activity: Adventure Showcase!
 
   **Part 1: Presentations (30 min)**
-  - Each student presents their adventure
+  - Each student shares their screen and presents their adventure
   - Show the game running
   - Explain choices and endings
   - Answer questions
 
   **Part 2: Playing Games (20 min)**
-  - Play each other's adventures
+  - Play each other's adventures (drop your Trinket links in the Zoom chat)
   - Try different paths
   - Give positive feedback
   - Celebrate creativity!
@@ -36,7 +36,7 @@ class_activities: |
   **Part 3: Badge Ceremony (10 min)**
   - Award Decision Master badges
   - Celebrate achievements
-  - Take photos
+  - Take a screenshot
   - Share with families!
 
   **Celebration Time!** 🎉

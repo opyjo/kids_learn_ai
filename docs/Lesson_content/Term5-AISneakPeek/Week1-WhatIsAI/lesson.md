@@ -18,9 +18,9 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: AI Scavenger Hunt!
 
-  1. Work in pairs or small groups
+  1. Join your breakout room (with a partner or small group)
   2. Make a list of AI you use or see every day
-  3. Share your list with the class
+  3. Share your list in the Zoom chat
   4. Discuss: What makes each one "AI"?
 
   **Examples to get you started:**

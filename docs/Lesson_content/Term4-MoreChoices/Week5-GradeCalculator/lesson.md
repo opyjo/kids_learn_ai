@@ -42,8 +42,8 @@ class_activities: |
   - Make it your own!
 
   **Part 3: Share & Test (10 min)**
-  - Share your calculators
-  - Test each other's programs
+  - Share your calculators on screen
+  - Try each other's programs (share Trinket links in the Zoom chat)
   - Give feedback
 
   **Challenge:** Who can create the most useful grade calculator?

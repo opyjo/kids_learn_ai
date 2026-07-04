@@ -22,11 +22,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: AI Detective Challenge!
 
-  1. Work in pairs or small groups
+  1. Join your breakout room (with a partner or small group)
   2. Create a list of 10+ AI examples you use
   3. For each AI, write what it does
   4. Categorize them (entertainment, helpful, games, etc.)
-  5. Share your findings with the class!
+  5. Share your findings in the Zoom chat!
 
   **Challenge:** Who can find the most creative or surprising AI example?
 take_home_assignment: |

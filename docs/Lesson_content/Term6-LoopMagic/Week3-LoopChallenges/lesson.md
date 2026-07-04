@@ -24,7 +24,7 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Loop Challenge Race!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can count by 3s from 0 to 30 the fastest?
   3. Challenge 2: Who can count backwards from 20 to 1?
   4. Challenge 3: Who can count by 10s from 0 to 100?

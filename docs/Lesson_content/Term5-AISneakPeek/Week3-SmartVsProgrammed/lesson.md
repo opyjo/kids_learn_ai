@@ -22,11 +22,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Smart or Programmed?
 
-  1. Work in pairs
+  1. Your teacher puts you in a breakout room with a partner
   2. Look at different programs and technologies
   3. Decide: Is it "Smart" (AI) or "Programmed" (regular)?
   4. Explain why you think so
-  5. Share your reasoning with the class!
+  5. Share your reasoning in the Zoom chat!
 
   **Examples to discuss:**
   - Calculator app

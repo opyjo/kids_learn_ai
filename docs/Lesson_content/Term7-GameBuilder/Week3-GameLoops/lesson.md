@@ -21,11 +21,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Game Loop Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can create a game loop that asks "Play again?" until "no"?
   3. Challenge 2: Who can create a menu that loops until "quit"?
   4. Challenge 3: Who can create the most creative game loop?
-  5. Share your game loops with the class!
+  5. Share your game loops in the Zoom chat!
 
   **Bonus:** Try creating a game that tracks how many times you played!
 take_home_assignment: |
