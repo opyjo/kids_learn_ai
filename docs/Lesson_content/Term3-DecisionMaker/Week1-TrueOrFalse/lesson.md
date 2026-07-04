@@ -23,13 +23,13 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: True or False Game!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner (or play with the whole class in the Zoom chat)
   2. Take turns making statements
   3. The other person decides: True or False?
-  4. Then check in Python!
+  4. Then check in Python by sharing your screen!
   5. Example: "Is 10 greater than 5?" → Check with: print(10 > 5)
 
-  **Challenge:** Who can come up with the trickiest True/False question?
+  **Challenge:** Who can come up with the trickiest True/False question? Post it in the Zoom chat!
 take_home_assignment: |
   ## 📚 Homework: My True/False Quiz
 

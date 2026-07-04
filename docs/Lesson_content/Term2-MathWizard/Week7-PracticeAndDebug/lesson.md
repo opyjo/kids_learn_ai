@@ -33,9 +33,9 @@ class_activities: |
   ## 🎮 Class Activity: Math Bug Hunt!
 
   **Part 1: Partner Bug Challenge**
-  1. Work in pairs
+  1. Your teacher puts you in a breakout room with a partner
   2. Person A writes a calculator with ONE bug hidden on purpose
-  3. Person B tries to find and fix the bug
+  3. Person A shares their Trinket link in the room; Person B tries to find and fix the bug
   4. Switch roles and repeat!
 
   **Part 2: Debug Dance Practice**
@@ -43,8 +43,8 @@ class_activities: |
   STOP → READ → FIND → THINK → FIX → TEST
 
   **Part 3: Bug Detective Challenge**
-  Race to fix the buggy calculator code on the board!
-  First team with working code wins!
+  Your teacher shares the buggy calculator code on their screen.
+  Race to spot the fix — the first student to paste the corrected line in the Zoom chat wins!
 take_home_assignment: |
   ## 📚 Homework: Debug Detective Challenge
 

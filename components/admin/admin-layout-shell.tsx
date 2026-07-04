@@ -6,6 +6,7 @@ import {
 	CalendarClock,
 	FileCode,
 	FileText,
+	FlaskConical,
 	GraduationCap,
 	LayoutDashboard,
 	Mail,
@@ -68,6 +69,11 @@ const adminNavItems = [
 		href: "/admin/analytics",
 		label: "Analytics",
 		icon: BarChart3,
+	},
+	{
+		href: "/admin/concept-labs",
+		label: "Concept Labs",
+		icon: FlaskConical,
 	},
 ];
 

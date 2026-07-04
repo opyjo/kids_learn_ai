@@ -5,12 +5,14 @@ import {
 	Clock,
 	Eye,
 	FileText,
+	FlaskConical,
 	MessageSquare,
 	Sparkles,
 	Upload,
 } from "lucide-react";
 import type React from "react";
 import { useMemo } from "react";
+import { ConceptLabHost } from "@/components/concept-labs/concept-lab-host";
 import { TrinketPreview } from "@/components/dashboard/trinket-preview";
 import { TrinketSubmissionForm } from "@/components/dashboard/trinket-submission-form";
 import {
@@ -27,6 +29,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getLabForLesson } from "@/lib/concept-labs/registry";
 import { cn } from "@/lib/utils";
 
 const URL_PATTERN = /^https?:\/\//;
@@ -34,6 +37,7 @@ const URL_PATTERN = /^https?:\/\//;
 interface LessonSectionsProps {
 	lesson: Lesson;
 	variant: LessonVariant;
+	courseSlug?: string;
 	userId?: string;
 	submission: LessonSubmission | null;
 	showSubmissionPreview: boolean;
@@ -116,6 +120,7 @@ function AiMlActivities({ starterCode }: { starterCode: string }) {
 export function LessonSections({
 	lesson,
 	variant,
+	courseSlug,
 	userId,
 	submission,
 	showSubmissionPreview,
@@ -130,6 +135,16 @@ export function LessonSections({
 	};
 
 	const sections: SectionItem[] = [lessonSection];
+
+	const conceptLab = getLabForLesson(courseSlug, lesson.order_index);
+	if (conceptLab) {
+		sections.push({
+			id: "concept-lab",
+			label: "Concept Lab",
+			icon: FlaskConical,
+			content: <ConceptLabHost definition={conceptLab} userId={userId} />,
+		});
+	}
 
 	if (variant === "ai-ml") {
 		sections.push({

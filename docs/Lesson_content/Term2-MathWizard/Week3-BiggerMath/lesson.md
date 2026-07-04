@@ -26,13 +26,13 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Math Power Challenge!
 
-  1. Partner up with a classmate
-  2. Take turns creating math problems using ** (exponents)
+  1. Your teacher puts you in a breakout room with a partner
+  2. Take turns creating math problems using ** (exponents), sharing your screen as you type
   3. Try to make the BIGGEST number you can!
   4. Example: Who can calculate 2 ** 10? 3 ** 5?
   5. Then try modulo: "What's the remainder when you divide 25 by 7?"
 
-  **Challenge:** Create a problem that uses BOTH exponents and modulo!
+  **Challenge:** Create a problem that uses BOTH exponents and modulo, then post your biggest number in the Zoom chat!
 take_home_assignment: |
   ## 📚 Homework: The Math Wizard Challenge
 

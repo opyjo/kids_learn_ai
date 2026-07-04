@@ -21,13 +21,13 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: If/Else Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create a program with at least 3 if/else statements
   3. Each one should handle both True and False cases
   4. Test with different values
-  5. Share your programs!
+  5. Share your screen and walk your partner through your programs!
 
-  **Challenge:** Who can create the most creative if/else program?
+  **Challenge:** Who can create the most creative if/else program? Post it in the Zoom chat!
 take_home_assignment: |
   ## 📚 Homework: My If/Else Program
 

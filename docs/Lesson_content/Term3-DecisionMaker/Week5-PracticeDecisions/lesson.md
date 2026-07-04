@@ -22,11 +22,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Decision Maker Challenge!
 
-  1. Work in pairs
+  1. Your teacher puts you in a breakout room with a partner
   2. Choose a problem to solve with if/else (password, age, score, etc.)
-  3. Build a decision-making program together
+  3. Build a decision-making program together in a shared Trinket (one person shares their screen)
   4. Test it with different inputs
-  5. Share your programs with the class!
+  5. Back in the main room, share your screen and present your program to the class!
 
   **Challenge:** Who can create the most creative decision-making program?
 take_home_assignment: |

@@ -24,11 +24,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Story Workshop!
 
-  1. Work in pairs
+  1. Your teacher puts you in a breakout room with a partner
   2. Brainstorm story ideas together
-  3. Create a simple interactive story with at least 2 choices
+  3. Create a simple interactive story with at least 2 choices in a shared Trinket (one person shares their screen)
   4. Test your story with different choices
-  5. Share your stories with the class!
+  5. Back in the main room, share your screen and read your story to the class!
 
   **Challenge:** Who can create the most creative interactive story?
 take_home_assignment: |

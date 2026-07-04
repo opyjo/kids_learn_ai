@@ -23,11 +23,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: The Age Calculator Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create a program that asks for someone's age
   3. Convert it to a number using int()
   4. Calculate: How old will they be in 5 years? 10 years? 20 years?
-  5. Show all the results!
+  5. Share your screen and show all the results to your partner!
 
   **Challenge:** Add a birth year calculator - if someone is 10 years old, what year were they born?
 take_home_assignment: |
