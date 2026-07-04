@@ -13,6 +13,12 @@
 /** The forward-only phases of the pedagogical loop. */
 export type LabPhase = "predict" | "play" | "explain" | "apply" | "done";
 
+/**
+ * Where an attempt happened. Standalone (playground) sessions are tagged so
+ * they are never mixed into lesson-context experiment analysis.
+ */
+export type LabContext = "lesson" | "standalone";
+
 /** A single labelled training example fed to a simulation. */
 export interface LabeledSample {
 	label: string;

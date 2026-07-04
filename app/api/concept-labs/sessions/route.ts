@@ -1,13 +1,14 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getAuthUser } from "@/lib/auth-helpers";
 import type { Cohort } from "@/lib/concept-labs/cohort";
-import type { LabSessionSummary } from "@/lib/concept-labs/types";
+import type { LabContext, LabSessionSummary } from "@/lib/concept-labs/types";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface PersistBody {
 	summary: LabSessionSummary;
 	cohort: Cohort;
 	seed: number;
+	context?: LabContext;
 }
 
 /**
@@ -23,10 +24,13 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 			return NextResponse.json({ persisted: false, reason: "anonymous" });
 		}
 
-		const { summary, cohort, seed } = (await req.json()) as PersistBody;
+		const { summary, cohort, seed, context } =
+			(await req.json()) as PersistBody;
 		if (!summary?.labId || (cohort !== "baseline" && cohort !== "labs-v1")) {
 			return NextResponse.json({ persisted: false, reason: "invalid" });
 		}
+		const labContext: LabContext =
+			context === "standalone" ? "standalone" : "lesson";
 
 		const supabase = await getSupabaseServerClient();
 
@@ -48,6 +52,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 				trained_sample_count: summary.trainedSampleCount,
 				test_count: summary.testCount,
 				test_correct_count: summary.testCorrectCount,
+				context: labContext,
 				completed: true,
 			})
 			.select("id")

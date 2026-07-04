@@ -9,6 +9,7 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 interface LabSessionRow {
 	lab_id: string;
 	cohort: Cohort;
+	context: string | null;
 	predict_correct: boolean | null;
 	apply_correct: boolean | null;
 	predict_misconception: string | null;
@@ -43,7 +44,7 @@ export const GET = async (): Promise<NextResponse> => {
 	const { data, error } = await supabase
 		.from("lab_sessions")
 		.select(
-			"lab_id, cohort, predict_correct, apply_correct, predict_misconception, apply_misconception, explain_rubric_score",
+			"lab_id, cohort, context, predict_correct, apply_correct, predict_misconception, apply_misconception, explain_rubric_score",
 		)
 		.eq("completed", true);
 
@@ -51,7 +52,7 @@ export const GET = async (): Promise<NextResponse> => {
 		return NextResponse.json({ error: error.message }, { status: 500 });
 	}
 
-	const sessions: AnalysisSession[] = (data as LabSessionRow[]).map((row) => ({
+	const toAnalysis = (row: LabSessionRow): AnalysisSession => ({
 		labId: row.lab_id,
 		cohort: row.cohort,
 		predictCorrect: row.predict_correct ?? undefined,
@@ -59,10 +60,22 @@ export const GET = async (): Promise<NextResponse> => {
 		predictMisconception: row.predict_misconception ?? undefined,
 		applyMisconception: row.apply_misconception ?? undefined,
 		rubricScore: row.explain_rubric_score ?? undefined,
-	}));
+	});
+
+	// Standalone (/labs playground) sessions are analysed separately so they
+	// never pollute the lesson-context experiment. Rows predating the context
+	// column count as lesson-context.
+	const rows = data as LabSessionRow[];
+	const lessonSessions = rows
+		.filter((row) => row.context !== "standalone")
+		.map(toAnalysis);
+	const standaloneSessions = rows
+		.filter((row) => row.context === "standalone")
+		.map(toAnalysis);
 
 	return NextResponse.json({
-		totalSessions: sessions.length,
-		report: computeCohortReport(sessions),
+		totalSessions: rows.length,
+		report: computeCohortReport(lessonSessions),
+		standaloneReport: computeCohortReport(standaloneSessions),
 	});
 };
