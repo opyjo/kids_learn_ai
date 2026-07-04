@@ -235,6 +235,7 @@ export function LessonViewer({
 		<LessonSections
 			lesson={lesson}
 			variant={variant}
+			courseSlug={courseSlug}
 			userId={userId}
 			submission={submission}
 			showSubmissionPreview={showSubmissionPreview}
