@@ -1,19 +1,26 @@
 "use client";
 
+import { indentWithTab } from "@codemirror/commands";
+import { python } from "@codemirror/lang-python";
+import { indentUnit } from "@codemirror/language";
+import { oneDark } from "@codemirror/theme-one-dark";
+import CodeMirror, { keymap, Prec } from "@uiw/react-codemirror";
 import {
 	AlertCircle,
 	CheckCircle,
+	History,
 	Loader2,
 	MessageSquare,
 	Play,
 	RotateCcw,
 	Trash2,
+	X,
 } from "lucide-react";
-import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { usePersistedCode } from "@/hooks/use-persisted-code";
 import { usePyodide } from "@/hooks/use-pyodide";
 
 interface PythonEditorProps {
@@ -22,7 +29,15 @@ interface PythonEditorProps {
 	onRunComplete?: (output: string, isSuccess: boolean) => void;
 	onAskAboutCode?: () => void;
 	className?: string;
+	/**
+	 * When set, the student's code is persisted to localStorage under this key
+	 * and restored on the next visit. Reset returns to the starter code and
+	 * clears the saved copy.
+	 */
+	storageKey?: string;
 }
+
+const INPUT_CALL_PATTERN = /\binput\s*\(/;
 
 export function PythonEditor({
 	initialCode = "",
@@ -30,59 +45,40 @@ export function PythonEditor({
 	onRunComplete,
 	onAskAboutCode,
 	className,
+	storageKey,
 }: PythonEditorProps) {
-	const [code, setCode] = useState(initialCode);
+	const { code, setCode, wasRestored, clearSaved, dismissRestored } =
+		usePersistedCode(storageKey, initialCode);
 	const [output, setOutput] = useState("");
 	const [isRunning, setIsRunning] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [error, setError] = useState("");
-	const textareaRef = useRef<HTMLTextAreaElement>(null);
-	const lineNumbersRef = useRef<HTMLDivElement>(null);
-	const { isReady: pyodideReady, error: pyodideError, runCode } = usePyodide();
-
-	useEffect(() => {
-		if (pyodideError) {
-			setError(pyodideError);
-		}
-	}, [pyodideError]);
-
-	// Sync line numbers scroll with textarea scroll
-	const handleEditorScroll = () => {
-		if (textareaRef.current && lineNumbersRef.current) {
-			lineNumbersRef.current.style.transform = `translateY(-${textareaRef.current.scrollTop}px)`;
-		}
-	};
+	const {
+		isReady: pyodideReady,
+		isLoading: pyodideLoading,
+		error: pyodideError,
+		runCode,
+		retry: retryPyodide,
+	} = usePyodide();
 
 	const handleCodeChange = (newCode: string) => {
 		setCode(newCode);
 		onCodeChange?.(newCode);
 	};
 
-	const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-		if (e.key === "Tab") {
-			e.preventDefault();
-			const start = e.currentTarget.selectionStart;
-			const end = e.currentTarget.selectionEnd;
-			const newValue = `${code.substring(0, start)}    ${code.substring(end)}`;
-			handleCodeChange(newValue);
-
-			setTimeout(() => {
-				if (textareaRef.current) {
-					textareaRef.current.selectionStart =
-						textareaRef.current.selectionEnd = start + 4;
-				}
-			}, 0);
-		}
-
-		if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-			e.preventDefault();
-			handleRunCode();
-		}
-	};
-
 	const handleRunCode = async () => {
 		if (!pyodideReady) {
 			setOutput("Python environment is still loading...");
+			return;
+		}
+
+		if (INPUT_CALL_PATTERN.test(code)) {
+			setOutput(
+				"Heads up: input() isn't supported in the browser editor.\n" +
+					'Give your variables values directly (e.g. name = "Ada"), or run this program in Trinket or Thonny instead.',
+			);
+			setError("");
+			setIsSuccess(false);
 			return;
 		}
 
@@ -108,8 +104,35 @@ export function PythonEditor({
 		}
 	};
 
+	// Keep the CodeMirror keymap stable across renders while always invoking
+	// the latest run handler.
+	const runRef = useRef(handleRunCode);
+	runRef.current = handleRunCode;
+
+	const extensions = useMemo(
+		() => [
+			python(),
+			indentUnit.of("    "),
+			Prec.highest(
+				keymap.of([
+					{
+						key: "Mod-Enter",
+						run: () => {
+							runRef.current();
+							return true;
+						},
+					},
+				]),
+			),
+			// Tab indents; Esc then Tab moves focus (keyboard-trap escape hatch)
+			keymap.of([indentWithTab]),
+		],
+		[],
+	);
+
 	const handleReset = () => {
 		setCode(initialCode);
+		clearSaved();
 		setOutput("");
 		setError("");
 		setIsSuccess(false);
@@ -124,20 +147,26 @@ export function PythonEditor({
 		onCodeChange?.("");
 	};
 
-	const lineCount = code.split("\n").length;
-	const lineNumberWidth = lineCount.toString().length * 8 + 16;
-
 	return (
 		<Card className={`flex flex-col ${className}`}>
 			<CardHeader className="bg-card border-b shrink-0 px-4 py-2">
 				<div className="flex items-center justify-between">
 					<div className="flex items-center gap-2">
-						<div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
+						{pyodideError ? (
+							<div
+								className="w-2.5 h-2.5 bg-red-500 rounded-full"
+								title="Python failed to load"
+							/>
+						) : pyodideReady ? (
+							<div className="w-2.5 h-2.5 bg-green-500 rounded-full" />
+						) : (
+							<div className="w-2.5 h-2.5 bg-amber-400 rounded-full animate-pulse" />
+						)}
 						<span className="font-semibold tracking-tight text-sm">
 							Python Code Editor
 						</span>
 						<span className="text-xs text-gray-500 hidden sm:inline">
-							<kbd className="px-1 py-0.5 bg-gray-100 rounded text-[10px]">
+							<kbd className="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-[10px]">
 								Ctrl+Enter
 							</kbd>{" "}
 							to run
@@ -152,7 +181,10 @@ export function PythonEditor({
 								className="rounded-full border-primary/40 hover:bg-primary/10 hover:border-primary h-7 px-2 text-xs"
 								disabled={!code.trim()}
 							>
-								<MessageSquare className="h-3.5 w-3.5 mr-1" />
+								<MessageSquare
+									className="h-3.5 w-3.5 mr-1"
+									aria-hidden="true"
+								/>
 								Ask BrightByte
 							</Button>
 						)}
@@ -163,7 +195,7 @@ export function PythonEditor({
 							className="rounded-full h-7 w-7 p-0"
 							aria-label="Reset code"
 						>
-							<RotateCcw className="h-3.5 w-3.5" />
+							<RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
 						</Button>
 						<Button
 							variant="outline"
@@ -173,7 +205,7 @@ export function PythonEditor({
 							aria-label="Clear code"
 							disabled={!code.trim()}
 						>
-							<Trash2 className="h-3.5 w-3.5" />
+							<Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
 						</Button>
 						<Button
 							onClick={handleRunCode}
@@ -182,9 +214,12 @@ export function PythonEditor({
 							aria-label={isRunning ? "Running code" : "Run code"}
 						>
 							{isRunning ? (
-								<Loader2 className="h-3.5 w-3.5 animate-spin" />
+								<Loader2
+									className="h-3.5 w-3.5 animate-spin"
+									aria-hidden="true"
+								/>
 							) : (
-								<Play className="h-3.5 w-3.5" />
+								<Play className="h-3.5 w-3.5" aria-hidden="true" />
 							)}
 						</Button>
 					</div>
@@ -192,41 +227,54 @@ export function PythonEditor({
 			</CardHeader>
 
 			<CardContent className="p-0 flex-1 flex flex-col overflow-y-auto min-h-0">
-				{/* Code Editor */}
-				<div className="relative bg-gray-900 text-gray-100 min-h-[200px] overflow-hidden">
-					{/* Line numbers */}
-					<div
-						ref={lineNumbersRef}
-						className="absolute left-0 top-0 p-4 text-gray-500 font-mono text-xs pointer-events-none select-none border-r border-gray-700"
-						style={{ width: lineNumberWidth }}
-					>
-						{code.split("\n").map((_, index) => (
-							<div key={index} style={{ lineHeight: "1.5", height: "21px" }}>
-								{index + 1}
-							</div>
-						))}
+				{/* Restored-work hint */}
+				{wasRestored && (
+					<div className="flex items-center justify-between gap-2 bg-primary/10 px-4 py-1.5 text-xs text-foreground">
+						<span className="flex items-center gap-1.5">
+							<History
+								className="h-3.5 w-3.5 text-primary"
+								aria-hidden="true"
+							/>
+							Restored your saved work
+						</span>
+						<span className="flex items-center gap-2">
+							<button
+								type="button"
+								onClick={handleReset}
+								className="underline hover:text-primary"
+							>
+								Reset to start over
+							</button>
+							<button
+								type="button"
+								onClick={dismissRestored}
+								aria-label="Dismiss"
+								className="hover:text-primary"
+							>
+								<X className="h-3.5 w-3.5" aria-hidden="true" />
+							</button>
+						</span>
 					</div>
+				)}
 
-					{/* Code textarea */}
-					<textarea
-						ref={textareaRef}
-						value={code}
-						onChange={(e) => handleCodeChange(e.target.value)}
-						onKeyDown={handleKeyDown}
-						onScroll={handleEditorScroll}
-						className="w-full min-h-[200px] bg-transparent text-gray-100 font-mono text-xs resize-none border-0 outline-none focus:ring-0"
-						placeholder="Write your Python code here..."
-						spellCheck={false}
-						style={{
-							lineHeight: "1.5",
-							tabSize: 4,
-							paddingLeft: lineNumberWidth + 16,
-							paddingRight: "16px",
-							paddingTop: "16px",
-							paddingBottom: "16px",
-						}}
-					/>
-				</div>
+				{/* Code Editor */}
+				<CodeMirror
+					value={code}
+					onChange={handleCodeChange}
+					extensions={extensions}
+					theme={oneDark}
+					minHeight="200px"
+					placeholder="Write your Python code here..."
+					basicSetup={{
+						lineNumbers: true,
+						highlightActiveLine: true,
+						autocompletion: true,
+						bracketMatching: true,
+						closeBrackets: true,
+						foldGutter: false,
+					}}
+					style={{ fontSize: "13px" }}
+				/>
 
 				<Separator />
 
@@ -235,8 +283,18 @@ export function PythonEditor({
 					<div className="flex items-center justify-between p-3 border-b border-gray-800">
 						<div className="flex items-center gap-2">
 							<span className="text-gray-400">Output:</span>
-							{isSuccess && <CheckCircle className="h-4 w-4 text-green-400" />}
-							{error && <AlertCircle className="h-4 w-4 text-red-400" />}
+							{isSuccess && (
+								<CheckCircle
+									className="h-4 w-4 text-green-400"
+									aria-hidden="true"
+								/>
+							)}
+							{error && (
+								<AlertCircle
+									className="h-4 w-4 text-red-400"
+									aria-hidden="true"
+								/>
+							)}
 						</div>
 						{output && (
 							<Button
@@ -258,11 +316,30 @@ export function PythonEditor({
 									<span className="text-green-400">{output}</span>
 								)}
 							</pre>
+						) : pyodideError ? (
+							<div className="space-y-2 not-italic">
+								<p className="text-red-400">
+									We couldn't load the Python engine. This can happen on slow or
+									restricted networks (like school wifi).
+								</p>
+								<Button
+									variant="outline"
+									size="sm"
+									onClick={retryPyodide}
+									className="rounded-full h-7 px-3 text-xs"
+								>
+									<RotateCcw className="h-3.5 w-3.5 mr-1" aria-hidden="true" />
+									Try again
+								</Button>
+							</div>
+						) : pyodideLoading ? (
+							<span className="flex items-center gap-2 text-gray-500 italic">
+								<Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+								Warming up the Python engine… first load can take ~10 seconds
+							</span>
 						) : (
 							<span className="text-gray-500 italic">
-								{pyodideReady
-									? "Click 'Run Code' to see the output here..."
-									: "Loading Python environment..."}
+								Click 'Run Code' to see the output here...
 							</span>
 						)}
 					</div>

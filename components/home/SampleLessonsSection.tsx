@@ -61,7 +61,10 @@ const SampleLessonsSection = () => {
 						) : (
 							<div className="w-full h-full bg-gradient-to-br from-primary/20 via-accent/10 to-secondary flex items-center justify-center">
 								<div className="text-center p-8">
-									<Code className="h-16 w-16 text-primary/50 mx-auto mb-4" />
+									<Code
+										className="h-16 w-16 text-primary/50 mx-auto mb-4"
+										aria-hidden="true"
+									/>
 									<p className="text-muted-foreground">Hands-on coding</p>
 								</div>
 							</div>
@@ -93,6 +96,7 @@ const SampleLessonsSection = () => {
 										<Star
 											key={`l1-${i}`}
 											className="h-4 w-4 text-yellow-500 fill-yellow-500"
+											aria-hidden="true"
 										/>
 									))}
 								</div>
@@ -116,7 +120,10 @@ const SampleLessonsSection = () => {
 								<div className="text-foreground">(cheers[0])</div>
 							</div>
 							<div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-								<CheckCircle className="h-4 w-4 text-primary" />
+								<CheckCircle
+									className="h-4 w-4 text-primary"
+									aria-hidden="true"
+								/>
 								<span>5 min • Beginner</span>
 							</div>
 						</CardContent>
@@ -139,6 +146,7 @@ const SampleLessonsSection = () => {
 										<Star
 											key={`l3-${i}`}
 											className="h-4 w-4 text-yellow-500 fill-yellow-500"
+											aria-hidden="true"
 										/>
 									))}
 								</div>
@@ -164,7 +172,10 @@ const SampleLessonsSection = () => {
 								</div>
 							</div>
 							<div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-								<CheckCircle className="h-4 w-4 text-accent" />
+								<CheckCircle
+									className="h-4 w-4 text-accent"
+									aria-hidden="true"
+								/>
 								<span>10 min • Explorer</span>
 							</div>
 						</CardContent>
@@ -184,6 +195,7 @@ const SampleLessonsSection = () => {
 										<Star
 											key={`lP-${i}`}
 											className="h-4 w-4 text-yellow-500 fill-yellow-500"
+											aria-hidden="true"
 										/>
 									))}
 								</div>
@@ -209,7 +221,10 @@ const SampleLessonsSection = () => {
 								</div>
 							</div>
 							<div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-								<CheckCircle className="h-4 w-4 text-primary" />
+								<CheckCircle
+									className="h-4 w-4 text-primary"
+									aria-hidden="true"
+								/>
 								<span>12 min • Story Maker</span>
 							</div>
 						</CardContent>
@@ -224,7 +239,7 @@ const SampleLessonsSection = () => {
 						variant="outline"
 						className="rounded-full border-2 px-8 py-6 text-lg hover:bg-secondary bg-transparent"
 					>
-						<BookOpen className="mr-2 h-5 w-5" />
+						<BookOpen className="mr-2 h-5 w-5" aria-hidden="true" />
 						Explore All Lessons
 					</Button>
 				</Link>

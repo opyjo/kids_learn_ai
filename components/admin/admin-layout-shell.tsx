@@ -3,6 +3,7 @@
 import {
 	BarChart3,
 	BookOpen,
+	CalendarClock,
 	FileCode,
 	FileText,
 	GraduationCap,
@@ -31,6 +32,11 @@ const adminNavItems = [
 		href: "/admin/enrollments",
 		label: "Enrollments",
 		icon: GraduationCap,
+	},
+	{
+		href: "/admin/schedules",
+		label: "Class Schedules",
+		icon: CalendarClock,
 	},
 	{
 		href: "/admin/submissions",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { PythonEditor } from "@/components/code/python-editor";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -10,8 +11,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
-export default function PlaygroundPage() {
-	const starterCode = `# Welcome to the Python Playground!
+const STARTER_CODE = `# Welcome to the Python Playground!
 # Try writing some Python code here
 
 print("Hello, Python Playground!")
@@ -26,6 +26,29 @@ print("My favorite colors:")
 for color in colors:
     print(f"- {color}")
 `;
+
+const LEGACY_STORAGE_KEY = "playground-code";
+const EDITOR_STORAGE_KEY = "playground"; // PythonEditor persists under kla:code:v1:playground
+
+export default function PlaygroundPage() {
+	// Persistence lives in PythonEditor now (storageKey prop). We only migrate
+	// code saved under the legacy key, and hold the editor's render until the
+	// migration ran so its restore effect sees the migrated value.
+	const [ready, setReady] = useState(false);
+
+	useEffect(() => {
+		try {
+			const legacy = localStorage.getItem(LEGACY_STORAGE_KEY);
+			const newKey = `kla:code:v1:${EDITOR_STORAGE_KEY}`;
+			if (legacy?.trim() && localStorage.getItem(newKey) === null) {
+				localStorage.setItem(newKey, legacy);
+			}
+			localStorage.removeItem(LEGACY_STORAGE_KEY);
+		} catch {
+			// Ignore storage access errors (private mode, disabled storage).
+		}
+		setReady(true);
+	}, []);
 
 	return (
 		<div className="min-h-screen">
@@ -45,16 +68,12 @@ for color in colors:
 
 				{/* Python Editor */}
 				<div className="flex-1 mb-6">
-					<PythonEditor
-						initialCode={starterCode}
-						onCodeChange={(code) => {
-							// Save code to localStorage for persistence
-							localStorage.setItem("playground-code", code);
-						}}
-						onRunComplete={(output, isSuccess) => {
-							console.log("[v0] Playground execution:", { output, isSuccess });
-						}}
-					/>
+					{ready && (
+						<PythonEditor
+							initialCode={STARTER_CODE}
+							storageKey={EDITOR_STORAGE_KEY}
+						/>
+					)}
 				</div>
 
 				{/* Tips Card */}

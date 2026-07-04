@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { LessonCodePanel } from "@/components/lessons/viewer/lesson-code-panel";
 import { LessonMainPanel } from "@/components/lessons/viewer/lesson-main-panel";
+import { LessonOutline } from "@/components/lessons/viewer/lesson-outline";
 import { LessonSections } from "@/components/lessons/viewer/lesson-sections";
 import { getLessonVariant } from "@/components/lessons/viewer/lesson-viewer.helpers";
 import type {
@@ -43,12 +44,9 @@ export function LessonViewer({
 		);
 	}, [courseLessons, lesson.dbId]);
 
-	const setCurrentLessonCompletion = useCallback(
-		(completed: boolean) => {
-			setIsCompleted(completed);
-		},
-		[],
-	);
+	const setCurrentLessonCompletion = useCallback((completed: boolean) => {
+		setIsCompleted(completed);
+	}, []);
 
 	useEffect(() => {
 		const checkCompletionStatus = async () => {
@@ -284,6 +282,12 @@ export function LessonViewer({
 				variant={variant}
 				mainPanel={mainPanel}
 				codePanel={codePanel}
+				outline={
+					<LessonOutline
+						courseLessons={courseLessons}
+						currentOrder={navigation.currentOrder}
+					/>
+				}
 			/>
 			<output className="sr-only" aria-live="polite">
 				{isCompleted ? "Lesson marked as complete" : "Lesson not completed"}

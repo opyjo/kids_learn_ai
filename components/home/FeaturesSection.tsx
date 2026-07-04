@@ -62,7 +62,10 @@ const FeaturesSection = () => {
 							) : (
 								<div className="w-full h-full bg-gradient-to-br from-primary/20 via-accent/10 to-secondary flex items-center justify-center">
 									<div className="text-center p-8">
-										<Users className="h-16 w-16 text-primary/50 mx-auto mb-4" />
+										<Users
+											className="h-16 w-16 text-primary/50 mx-auto mb-4"
+											aria-hidden="true"
+										/>
 										<p className="text-muted-foreground">
 											Expert-led instruction
 										</p>
@@ -94,7 +97,10 @@ const FeaturesSection = () => {
 						<Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
 							<CardHeader className="text-center pb-4">
 								<div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-									<BrainCircuit className="h-8 w-8 text-primary-foreground" />
+									<BrainCircuit
+										className="h-8 w-8 text-primary-foreground"
+										aria-hidden="true"
+									/>
 								</div>
 								<CardTitle className="text-2xl">
 									Learn Python from Expert Instructors
@@ -115,7 +121,10 @@ const FeaturesSection = () => {
 						<Card className="border-2 hover:border-accent/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
 							<CardHeader className="text-center pb-4">
 								<div className="mx-auto w-16 h-16 bg-gradient-to-br from-accent to-accent/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-									<Sparkles className="h-8 w-8 text-accent-foreground" />
+									<Sparkles
+										className="h-8 w-8 text-accent-foreground"
+										aria-hidden="true"
+									/>
 								</div>
 								<CardTitle className="text-2xl">
 									Build Together in a Safe Community
@@ -136,7 +145,10 @@ const FeaturesSection = () => {
 						<Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
 							<CardHeader className="text-center pb-4">
 								<div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary/80 to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-									<ShieldCheck className="h-8 w-8 text-primary-foreground" />
+									<ShieldCheck
+										className="h-8 w-8 text-primary-foreground"
+										aria-hidden="true"
+									/>
 								</div>
 								<CardTitle className="text-2xl">
 									Expert-Led AI Education

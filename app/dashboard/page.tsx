@@ -1,5 +1,6 @@
 import {
 	BookOpen,
+	CalendarClock,
 	ChevronRight,
 	Code,
 	GraduationCap,
@@ -8,7 +9,14 @@ import {
 	Trophy,
 } from "lucide-react";
 import Link from "next/link";
+import { ContinueLearningCard } from "@/components/dashboard/continue-learning-card";
+import { HomeworkDueCard } from "@/components/dashboard/homework-due-card";
 import { MyAssignmentsSection } from "@/components/dashboard/my-assignments-section";
+import {
+	NextClassCard,
+	type NextClassInfo,
+} from "@/components/dashboard/next-class-card";
+import { RecentFeedbackCard } from "@/components/dashboard/recent-feedback-card";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,6 +29,7 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { getUserEnrollments, requireAuth } from "@/lib/auth-helpers";
+import { formatScheduleLine, getNextOccurrence } from "@/lib/schedule-utils";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
@@ -93,7 +102,9 @@ export default async function DashboardPage() {
 	// Fetch total lessons count for enrolled levels only
 	const { data: enrolledLessons } = await supabase
 		.from("lessons")
-		.select("id, course_id")
+		.select(
+			"id, course_id, title, order_index, take_home_assignment, requires_trinket",
+		)
 		.in("course_id", enrolledLevelIds.length > 0 ? enrolledLevelIds : ["none"]);
 
 	const totalLessonsInEnrolledLevels = enrolledLessons?.length || 0;
@@ -168,6 +179,118 @@ export default async function DashboardPage() {
 		submittedAt: sub.submitted_at,
 	}));
 
+	// Fetch active class schedules for enrolled levels (RLS: enrolled students
+	// can read these, including the meeting link)
+	const { data: schedulesData } = await supabase
+		.from("class_schedules")
+		.select(
+			"course_id, label, day_of_week, start_time, duration_minutes, timezone, meeting_link, meeting_notes",
+		)
+		.in("course_id", enrolledLevelIds.length > 0 ? enrolledLevelIds : ["none"])
+		.eq("is_active", true);
+
+	const courseById = new Map(
+		(enrolledCourses || []).map((course) => [course.id, course]),
+	);
+
+	const nextClasses: NextClassInfo[] = (schedulesData || []).flatMap(
+		(schedule: any) => {
+			try {
+				return [
+					{
+						courseTitle:
+							courseById.get(schedule.course_id)?.title ?? "Your course",
+						label: schedule.label,
+						nextOccursAt: getNextOccurrence(schedule).toISOString(),
+						scheduleLine: formatScheduleLine(schedule),
+						meetingLink: schedule.meeting_link,
+						meetingNotes: schedule.meeting_notes,
+						durationMinutes: schedule.duration_minutes,
+					},
+				];
+			} catch {
+				// Skip schedules with an invalid timezone rather than break the page
+				return [];
+			}
+		},
+	);
+
+	const scheduleLinesByCourse: Record<string, string[]> = {};
+	for (const schedule of schedulesData || []) {
+		try {
+			const line = formatScheduleLine(schedule as any);
+			if (!scheduleLinesByCourse[schedule.course_id]) {
+				scheduleLinesByCourse[schedule.course_id] = [];
+			}
+			scheduleLinesByCourse[schedule.course_id].push(line);
+		} catch {
+			// ignore invalid schedule
+		}
+	}
+
+	// Continue where you left off: first incomplete lesson of the first
+	// enrolled course that has one
+	const completedLessonIds = new Set(
+		(completedLessonsData || []).map((item: any) => item.lesson_id),
+	);
+	let continueLesson: {
+		courseTitle: string;
+		lessonTitle: string;
+		weekNumber: number;
+		href: string;
+	} | null = null;
+	for (const course of enrolledCourses || []) {
+		const nextIncomplete = (enrolledLessons || [])
+			.filter((lesson: any) => lesson.course_id === course.id)
+			.sort((a: any, b: any) => a.order_index - b.order_index)
+			.find((lesson: any) => !completedLessonIds.has(lesson.id));
+		if (nextIncomplete) {
+			continueLesson = {
+				courseTitle: course.title,
+				lessonTitle: nextIncomplete.title,
+				weekNumber: nextIncomplete.order_index,
+				href: `/lessons/${course.slug}/${nextIncomplete.order_index}`,
+			};
+			break;
+		}
+	}
+
+	// Homework due: lessons with a take-home assignment and no submission yet
+	const submittedLessonIds = new Set(submissions.map((sub) => sub.lessonId));
+	const homeworkDue = (enrolledLessons || [])
+		.filter(
+			(lesson: any) =>
+				lesson.take_home_assignment &&
+				lesson.requires_trinket &&
+				!submittedLessonIds.has(lesson.id),
+		)
+		.sort((a: any, b: any) => a.order_index - b.order_index)
+		.slice(0, 5)
+		.flatMap((lesson: any) => {
+			const course = courseById.get(lesson.course_id);
+			if (!course) return [];
+			return [
+				{
+					lessonTitle: lesson.title,
+					courseTitle: course.title,
+					weekNumber: lesson.order_index,
+					href: `/lessons/${course.slug}/${lesson.order_index}`,
+				},
+			];
+		});
+
+	// Latest reviewed/graded submissions with teacher feedback
+	const recentFeedback = submissions
+		.filter((sub) => sub.status !== "submitted" && sub.feedback)
+		.slice(0, 3)
+		.map((sub) => ({
+			id: sub.id,
+			lessonTitle: sub.lessonTitle,
+			grade: sub.grade,
+			feedback: sub.feedback,
+			href: `/lessons/${sub.courseSlug}/${sub.lessonOrderIndex}`,
+		}));
+
 	const metadata = authUser.user_metadata as { full_name?: string } | null;
 	const userName =
 		profile?.full_name ||
@@ -237,6 +360,21 @@ export default async function DashboardPage() {
 							</div>
 						</CardContent>
 					</Card>
+				)}
+
+				{/* Next Class + Continue Learning */}
+				{(nextClasses.length > 0 || continueLesson) && (
+					<div className="grid lg:grid-cols-2 gap-4 mb-8">
+						<NextClassCard classes={nextClasses} />
+						{continueLesson && <ContinueLearningCard lesson={continueLesson} />}
+					</div>
+				)}
+
+				{/* Homework Due */}
+				{enrolledLevelIds.length > 0 && (
+					<div className="mb-8">
+						<HomeworkDueCard items={homeworkDue} />
+					</div>
 				)}
 
 				{/* Stats Cards */}
@@ -380,6 +518,17 @@ export default async function DashboardPage() {
 													<p className="text-sm text-muted-foreground mb-3 line-clamp-1">
 														{course.description}
 													</p>
+													{(scheduleLinesByCourse[course.id] || []).length >
+														0 && (
+														<p className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
+															<CalendarClock
+																className="h-3.5 w-3.5 shrink-0"
+																aria-hidden="true"
+															/>
+															Live class:{" "}
+															{scheduleLinesByCourse[course.id].join(" · ")}
+														</p>
+													)}
 													<div className="flex items-center gap-3">
 														<div className="flex-1">
 															<div className="h-2 bg-muted rounded-full overflow-hidden">
@@ -401,6 +550,13 @@ export default async function DashboardPage() {
 							</div>
 						</CardContent>
 					</Card>
+				)}
+
+				{/* Recent Teacher Feedback */}
+				{recentFeedback.length > 0 && (
+					<div className="mb-5">
+						<RecentFeedbackCard items={recentFeedback} />
+					</div>
 				)}
 
 				{/* Quick Actions */}

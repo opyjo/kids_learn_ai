@@ -77,7 +77,7 @@ const InteractiveCodeEditor = () => {
 			<div className="max-w-5xl mx-auto">
 				<div className="text-center mb-12">
 					<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-						<Play className="w-4 h-4 inline mr-2" />
+						<Play className="w-4 h-4 inline mr-2" aria-hidden="true" />
 						Try It Now
 					</Badge>
 					<h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
@@ -111,10 +111,14 @@ const InteractiveCodeEditor = () => {
 						<div className="grid lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-border">
 							<div className="p-6">
 								<div className="mb-4">
-									<label className="text-sm font-medium text-foreground mb-2 block">
+									<label
+										htmlFor="playground-code"
+										className="text-sm font-medium text-foreground mb-2 block"
+									>
 										Your Code:
 									</label>
 									<textarea
+										id="playground-code"
 										value={code}
 										onChange={(e) => setCode(e.target.value)}
 										onKeyDown={handleKeyDown}
@@ -149,17 +153,24 @@ const InteractiveCodeEditor = () => {
 								>
 									{isRunning ? (
 										<>
-											<div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"></div>
+											<div
+												className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"
+												aria-hidden="true"
+											></div>
 											Running...
 										</>
 									) : !pyodideReady ? (
 										<>
-											<div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"></div>
+											<div
+												className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2"
+												aria-hidden="true"
+											></div>
 											Loading Python...
 										</>
 									) : (
 										<>
-											<Play className="mr-2 h-5 w-5" /> Run Code
+											<Play className="mr-2 h-5 w-5" aria-hidden="true" /> Run
+											Code
 										</>
 									)}
 								</Button>
@@ -172,7 +183,10 @@ const InteractiveCodeEditor = () => {
 									</label>
 									{output && (
 										<Badge variant="secondary" className="rounded-full">
-											<CheckCircle className="w-3 h-3 mr-1" />
+											<CheckCircle
+												className="w-3 h-3 mr-1"
+												aria-hidden="true"
+											/>
 											Success
 										</Badge>
 									)}
@@ -199,8 +213,11 @@ const InteractiveCodeEditor = () => {
 											Click "Run Code" to see your output here...
 											<div className="mt-4 text-xs">
 												<div>
-													<Sparkles className="inline h-3 w-3 mr-1" /> Tip: Try
-													changing the message inside the quotes!
+													<Sparkles
+														className="inline h-3 w-3 mr-1"
+														aria-hidden="true"
+													/>{" "}
+													Tip: Try changing the message inside the quotes!
 												</div>
 											</div>
 										</div>
@@ -209,7 +226,10 @@ const InteractiveCodeEditor = () => {
 
 								<div className="mt-6 p-4 bg-accent/10 border-2 border-accent/20 rounded-xl">
 									<div className="flex items-start gap-3">
-										<Sparkles className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+										<Sparkles
+											className="h-5 w-5 text-accent flex-shrink-0 mt-0.5"
+											aria-hidden="true"
+										/>
 										<div>
 											<div className="font-medium text-foreground mb-1">
 												Ready to train bigger ideas?
