@@ -36,11 +36,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Complete Game Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can create a complete game with all features?
   3. Challenge 2: Who can combine loops, random, and scoring?
   4. Challenge 3: Who can create the most creative complete game?
-  5. Share your complete games with the class!
+  5. Share your complete games in the Zoom chat!
 
   **Bonus:** Try adding hints (higher/lower) to your game!
 take_home_assignment: |

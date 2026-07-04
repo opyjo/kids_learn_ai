@@ -29,13 +29,13 @@ class_activities: |
   - Get ready to share!
 
   **Part 2: Presentations (40 min)**
-  - Each student presents their guessing game
+  - Each student shares their screen and presents their guessing game
   - Show your game features
   - Explain what makes yours special
   - Answer questions
 
   **Part 3: Game Tournament (10 min)**
-  - Play classmates' games
+  - Play classmates' games (share Trinket links in the Zoom chat)
   - Try to beat high scores
   - Give compliments and feedback
 

@@ -22,14 +22,14 @@ class_activities: |
   ## 🎮 Class Activity: AI Poster Showcase!
 
   **Part 1: Presentations (30 min)**
-  - Each student presents their AI poster
+  - Each student shares their screen and presents their AI poster
   - Show the AI examples they found
   - Explain what each AI does
   - Share their question about AI
   - Answer questions
 
-  **Part 2: Gallery Walk (15 min)**
-  - Look at each other's posters
+  **Part 2: Gallery Share (15 min)**
+  - Look at each other's posters as they share their screens
   - Discover new AI examples
   - Give positive feedback
   - Celebrate creativity!
@@ -37,7 +37,7 @@ class_activities: |
   **Part 3: Badge Ceremony (10 min)**
   - Award AI Curious badges
   - Celebrate achievements
-  - Take photos
+  - Take a screenshot
   - Share with families!
 
   **Celebration Time!** 🎉

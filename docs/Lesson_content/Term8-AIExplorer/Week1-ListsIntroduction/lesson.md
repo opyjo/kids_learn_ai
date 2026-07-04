@@ -24,11 +24,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: List Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can create a list with 5 of their favorite things?
   3. Challenge 2: Who can create a list of numbers from 1 to 10?
   4. Challenge 3: Who can create the most creative list?
-  5. Share your lists with the class!
+  5. Share your lists in the Zoom chat!
 
   **Bonus:** Try creating a list of your favorite games or foods!
 take_home_assignment: |

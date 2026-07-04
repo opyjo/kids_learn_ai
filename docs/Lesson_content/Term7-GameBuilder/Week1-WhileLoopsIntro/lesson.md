@@ -24,11 +24,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: While Loop Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can count from 1 to 10 using a while loop?
   3. Challenge 2: Who can create a loop that asks for a password until correct?
   4. Challenge 3: Who can create a loop that counts backwards from 10 to 1?
-  5. Share your code with the class!
+  5. Share your code in the Zoom chat!
 
   **Bonus:** Try creating a loop that continues until you type "stop"!
 take_home_assignment: |

@@ -61,7 +61,7 @@ class_activities: |
   **Part 2: Building (30 min)**
   - Start building your guessing game
   - Test frequently as you go
-  - Help neighbors with bugs
+  - Ask for help in the Zoom chat or raise your virtual hand
   - Add your personal touches!
 
   **Part 3: Testing & Polish (15 min)**

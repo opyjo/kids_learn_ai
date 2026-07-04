@@ -23,11 +23,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Pattern Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can print a row of 10 stars the fastest?
   3. Challenge 2: Who can create a 5x5 square of stars?
   4. Challenge 3: Who can create the most creative pattern?
-  5. Share your patterns with the class!
+  5. Share your patterns in the Zoom chat!
 
   **Bonus:** Try creating a triangle pattern!
 take_home_assignment: |

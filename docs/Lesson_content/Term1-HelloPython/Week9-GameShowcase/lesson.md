@@ -42,14 +42,14 @@ class_activities: |
   - Deep breaths — you've got this!
 
   **Part 2: Showcase Presentations (30 min)**
-  - Each student presents their Mad Libs game
+  - Each student shares their screen and presents their Mad Libs game
   - 2–3 minutes per presentation
   - Audience plays along and cheers!
 
   **Part 3: Celebration & Awards (10 min)**
   - Special recognition awards
-  - Class photo (optional)
-  - Treats and celebration!
+  - Class screenshot (optional)
+  - Celebration and shout-outs!
 
   **Part 4: Term 2 Preview (10 min)**
   - What we learned in Term 1

@@ -23,7 +23,7 @@ class_activities: |
   2. Add at least one emoji to your story (or use symbols like *, !, @, or # if emojis don't work on your device)
   3. Use print("") to add blank lines between paragraphs
   4. Use string multiplication (*) to create a decorative border
-  5. Share your story with a partner!
+  5. Share your story in your breakout room or the Zoom chat!
 
   **Bonus Challenge:** Create a text box around your story title using + and *
 
