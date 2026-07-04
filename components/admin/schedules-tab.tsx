@@ -227,6 +227,17 @@ export const SchedulesTab = () => {
 	const courseTitle = (courseId: string) =>
 		courses.find((c) => c.id === courseId)?.title ?? "Unknown course";
 
+	// formatScheduleLine throws on an invalid IANA timezone. Since the timezone
+	// is a free-text admin field, guard so one bad row can't crash the whole
+	// page (which would also block editing/deleting that row to fix it).
+	const safeScheduleLine = (schedule: ClassSchedule) => {
+		try {
+			return formatScheduleLine(schedule);
+		} catch {
+			return `Day ${schedule.day_of_week} · ${schedule.start_time} · ${schedule.timezone} (check timezone)`;
+		}
+	};
+
 	// Group schedules by course, in course order
 	const courseIdsWithSchedules = courses
 		.filter((c) => schedules.some((s) => s.course_id === c.id))
@@ -291,7 +302,7 @@ export const SchedulesTab = () => {
 										<div className="min-w-0">
 											<div className="flex items-center gap-2 flex-wrap">
 												<p className="font-medium">
-													{formatScheduleLine(schedule)}
+													{safeScheduleLine(schedule)}
 												</p>
 												{schedule.label && (
 													<Badge variant="secondary">{schedule.label}</Badge>
