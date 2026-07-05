@@ -12,7 +12,7 @@ const PromotionalVideoSection = () => {
 				<div className="text-center mb-10">
 					<FadeIn>
 						<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-							<Play className="w-4 h-4 inline mr-2" />
+							<Play className="w-4 h-4 inline mr-2" aria-hidden="true" />
 							See Our Program in Action
 						</Badge>
 					</FadeIn>

@@ -23,11 +23,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Score Tracking Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can track score in a game?
   3. Challenge 2: Who can count attempts?
   4. Challenge 3: Who can track wins and losses?
-  5. Share your scoring systems with the class!
+  5. Share your scoring systems in the Zoom chat!
 
   **Bonus:** Try creating a leaderboard!
 take_home_assignment: |

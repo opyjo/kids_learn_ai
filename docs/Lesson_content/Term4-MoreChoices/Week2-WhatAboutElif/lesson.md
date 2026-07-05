@@ -25,11 +25,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Grade Calculator Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Create a grade calculator using elif
   3. Test with different scores (95, 85, 75, 65)
   4. See if you can add more grade levels!
-  5. Share your programs!
+  5. Share your programs in the Zoom chat!
 
   **Challenge:** Who can create the most creative grading system?
 take_home_assignment: |

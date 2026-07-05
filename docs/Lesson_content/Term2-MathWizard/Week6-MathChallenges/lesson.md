@@ -19,11 +19,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Calculator Challenge!
 
-  1. Work in pairs
+  1. Your teacher puts you in a breakout room with a partner
   2. Choose a real-world problem to solve (age, money, distance, etc.)
-  3. Build a calculator program together
+  3. Build a calculator program together in a shared Trinket (one person shares their screen)
   4. Test it with different numbers
-  5. Present your calculator to the class!
+  5. Back in the main room, share your screen and present your calculator to the class!
 
   **Challenge:** Can you build a calculator that solves a problem YOU face in real life?
 take_home_assignment: |

@@ -18,7 +18,7 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: The Repetition Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. One person writes code to print "I love coding!" 10 times (the old way)
   3. The other person times how long it takes
   4. Switch roles and try again

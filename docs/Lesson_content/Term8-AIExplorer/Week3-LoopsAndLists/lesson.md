@@ -22,11 +22,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Loop Through Lists Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can print every item in a list?
   3. Challenge 2: Who can loop through a list and count items?
   4. Challenge 3: Who can create the most creative loop + list program?
-  5. Share your code with the class!
+  5. Share your code in the Zoom chat!
 
   **Bonus:** Try looping through a list and doing something with each item!
 take_home_assignment: |

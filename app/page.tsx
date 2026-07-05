@@ -9,6 +9,7 @@ import ProjectShowcaseBanner from "@/components/home/ProjectShowcaseBanner";
 import PromotionalVideoSection from "@/components/home/PromotionalVideoSection";
 import SampleLessonsSection from "@/components/home/SampleLessonsSection";
 import StatsSection from "@/components/home/StatsSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 import WhatYoullCreateSection from "@/components/home/WhatYoullCreateSection";
 import { MainLayout } from "@/components/layouts/main-layout";
 
@@ -35,6 +36,7 @@ const HomePage = () => {
 			<InteractiveCodeEditor />
 			<WhatYoullCreateSection />
 			<SampleLessonsSection />
+			<TestimonialsSection />
 			<FAQTeaser />
 			<PromotionalVideoSection />
 			<CTASection />

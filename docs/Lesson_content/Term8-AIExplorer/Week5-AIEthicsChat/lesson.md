@@ -24,11 +24,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: AI Ethics Discussion!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Discussion 1: Is AI always fair? Why or why not?
   3. Discussion 2: What data should AI have access to?
   4. Discussion 3: What should we do when AI makes mistakes?
-  5. Share your thoughts with the class!
+  5. Share your thoughts in the Zoom chat!
 
   **Bonus:** Think about AI systems you use. Are they fair? Do they protect privacy?
 take_home_assignment: |

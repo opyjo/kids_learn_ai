@@ -27,22 +27,23 @@ for color in colors:
     print(f"- {color}")
 `;
 
-const STORAGE_KEY = "playground-code";
+const LEGACY_STORAGE_KEY = "playground-code";
+const EDITOR_STORAGE_KEY = "playground"; // PythonEditor persists under kla:code:v1:playground
 
 export default function PlaygroundPage() {
-	// Restore the student's last session from localStorage. This runs after mount
-	// (localStorage is unavailable during SSR); we hold the editor's render until
-	// then so it mounts once with the correct initial code instead of flashing the
-	// starter code and remounting.
-	const [initialCode, setInitialCode] = useState(STARTER_CODE);
+	// Persistence lives in PythonEditor now (storageKey prop). We only migrate
+	// code saved under the legacy key, and hold the editor's render until the
+	// migration ran so its restore effect sees the migrated value.
 	const [ready, setReady] = useState(false);
 
 	useEffect(() => {
 		try {
-			const saved = localStorage.getItem(STORAGE_KEY);
-			if (saved?.trim()) {
-				setInitialCode(saved);
+			const legacy = localStorage.getItem(LEGACY_STORAGE_KEY);
+			const newKey = `kla:code:v1:${EDITOR_STORAGE_KEY}`;
+			if (legacy?.trim() && localStorage.getItem(newKey) === null) {
+				localStorage.setItem(newKey, legacy);
 			}
+			localStorage.removeItem(LEGACY_STORAGE_KEY);
 		} catch {
 			// Ignore storage access errors (private mode, disabled storage).
 		}
@@ -69,15 +70,8 @@ export default function PlaygroundPage() {
 				<div className="flex-1 mb-6">
 					{ready && (
 						<PythonEditor
-							initialCode={initialCode}
-							onCodeChange={(code) => {
-								// Save code to localStorage so work survives a reload.
-								try {
-									localStorage.setItem(STORAGE_KEY, code);
-								} catch {
-									// Ignore storage write errors (private mode / quota).
-								}
-							}}
+							initialCode={STARTER_CODE}
+							storageKey={EDITOR_STORAGE_KEY}
 						/>
 					)}
 				</div>

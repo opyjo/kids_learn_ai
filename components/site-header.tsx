@@ -10,6 +10,7 @@ import {
 	DollarSign,
 	Download,
 	ExternalLink,
+	FlaskConical,
 	Gamepad2,
 	GraduationCap,
 	HelpCircle,
@@ -198,6 +199,12 @@ const NAV_ITEMS = {
 			label: "Games",
 			Icon: Gamepad2,
 			description: "Learn through interactive games",
+		},
+		{
+			href: "/labs",
+			label: "AI Labs",
+			Icon: FlaskConical,
+			description: "Teach a real AI and see how it learns",
 		},
 	],
 	resources: [
@@ -532,6 +539,11 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	}, []);
 
 	useEffect(() => {
+		// Role is cached per user in sessionStorage so the Admin link doesn't
+		// flash in after the profile fetch on every page load. Keys are scoped
+		// by user id, so a different user signing in never sees a stale role.
+		const roleCacheKey = (userId: string) => `kla:role:${userId}`;
+
 		const checkAdminRole = async () => {
 			if (!isAuthenticated) {
 				setIsAdmin(false);
@@ -545,6 +557,15 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 				} = await supabase.auth.getUser();
 
 				if (user) {
+					try {
+						const cachedRole = sessionStorage.getItem(roleCacheKey(user.id));
+						if (cachedRole) {
+							setIsAdmin(cachedRole === "admin");
+						}
+					} catch {
+						// sessionStorage unavailable — fall through to the fetch
+					}
+
 					const { data: profile, error } = await supabase
 						.from("profiles")
 						.select("role")
@@ -558,6 +579,14 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 					}
 
 					setIsAdmin(profile?.role === "admin");
+					try {
+						sessionStorage.setItem(
+							roleCacheKey(user.id),
+							profile?.role ?? "student",
+						);
+					} catch {
+						// ignore storage write errors
+					}
 				}
 			} catch (error) {
 				console.error("Error in checkAdminRole:", error);

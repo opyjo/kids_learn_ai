@@ -31,7 +31,7 @@ const BrightByteSection = () => {
 					<div className="text-center lg:text-left">
 						<FadeIn>
 							<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-								<Sparkles className="w-4 h-4 inline mr-2" />
+								<Sparkles className="w-4 h-4 inline mr-2" aria-hidden="true" />
 								Meet Your AI Coding Buddy
 							</Badge>
 						</FadeIn>
@@ -54,7 +54,7 @@ const BrightByteSection = () => {
 									size="lg"
 									className="text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
 								>
-									<MessageSquare className="mr-2 h-5 w-5" />
+									<MessageSquare className="mr-2 h-5 w-5" aria-hidden="true" />
 									Start Chatting with BrightByte
 								</Button>
 							</Link>
@@ -79,7 +79,10 @@ const BrightByteSection = () => {
 							) : (
 								<div className="w-full h-full bg-gradient-to-br from-primary/20 via-accent/10 to-secondary flex items-center justify-center">
 									<div className="text-center p-8">
-										<Sparkles className="h-16 w-16 text-primary/50 mx-auto mb-4" />
+										<Sparkles
+											className="h-16 w-16 text-primary/50 mx-auto mb-4"
+											aria-hidden="true"
+										/>
 										<p className="text-muted-foreground">BrightByte AI Tutor</p>
 									</div>
 								</div>
@@ -99,7 +102,10 @@ const BrightByteSection = () => {
 						<Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
 							<CardHeader className="text-center pb-4">
 								<div className="mx-auto w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-									<MessageSquare className="h-8 w-8 text-white" />
+									<MessageSquare
+										className="h-8 w-8 text-white"
+										aria-hidden="true"
+									/>
 								</div>
 								<CardTitle className="text-2xl">24/7 Help Available</CardTitle>
 							</CardHeader>
@@ -117,7 +123,7 @@ const BrightByteSection = () => {
 						<Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
 							<CardHeader className="text-center pb-4">
 								<div className="mx-auto w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-									<Sparkles className="h-8 w-8 text-white" />
+									<Sparkles className="h-8 w-8 text-white" aria-hidden="true" />
 								</div>
 								<CardTitle className="text-2xl">Learn, Don't Cheat</CardTitle>
 							</CardHeader>
@@ -135,7 +141,9 @@ const BrightByteSection = () => {
 						<Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
 							<CardHeader className="text-center pb-4">
 								<div className="mx-auto w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-									<span className="text-4xl">🐍</span>
+									<span className="text-4xl" aria-hidden="true">
+										🐍
+									</span>
 								</div>
 								<CardTitle className="text-2xl">Python-Focused</CardTitle>
 							</CardHeader>

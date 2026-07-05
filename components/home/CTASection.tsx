@@ -27,7 +27,10 @@ const CTASection = () => {
 						) : (
 							<div className="w-full h-full bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center">
 								<div className="text-center">
-									<User className="h-20 w-20 text-white/50 mx-auto mb-4" />
+									<User
+										className="h-20 w-20 text-white/50 mx-auto mb-4"
+										aria-hidden="true"
+									/>
 									<p className="text-white/70 text-lg">Future Coder</p>
 								</div>
 							</div>
@@ -75,7 +78,7 @@ const CTASection = () => {
 											variant="secondary"
 											className="text-lg px-8 py-6 rounded-full shadow-xl hover:scale-105 transition-transform w-full sm:w-auto"
 										>
-											<Sparkles className="mr-2 h-5 w-5" />
+											<Sparkles className="mr-2 h-5 w-5" aria-hidden="true" />
 											Book Free Trial Class
 										</Button>
 									</Link>

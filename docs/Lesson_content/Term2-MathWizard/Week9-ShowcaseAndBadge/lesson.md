@@ -20,15 +20,15 @@ class_activities: |
   ## 🎮 Class Activity: Showcase Party!
 
   **Part 1: Calculator Presentations (30 min)**
-  - Each student presents their calculator
+  - Each student shares their screen and presents their calculator
   - Show what it does
   - Share what you're proud of
-  - Celebrate each other's work!
+  - Celebrate each other's work in the Zoom chat!
 
   **Part 2: Badge Ceremony (10 min)**
   - Receive your "Python Beginner" badge
   - Celebrate your achievements
-  - Take photos with your badge!
+  - Take a screenshot with your badge on screen!
 
   **Part 3: Celebration & Reflection (15 min)**
   - Share favorite moments from Term 2

@@ -21,7 +21,8 @@ const StatsSection = () => {
 				{!imageError ? (
 					<Image
 						src="/images/students-collaboration.png"
-						alt="Students collaborating in classroom"
+						alt=""
+						aria-hidden="true"
 						fill
 						className="object-cover"
 						priority

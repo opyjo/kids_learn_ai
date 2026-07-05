@@ -5,13 +5,9 @@ import {
 	Calendar,
 	Check,
 	CheckCircle2,
-	Clock,
 	Code,
-	DollarSign,
-	FileText,
 	Gamepad2,
 	GraduationCap,
-	Mail,
 	Shield,
 	Sparkles,
 	Users,
@@ -21,7 +17,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +27,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { PaymentInstructions } from "./payment-instructions";
 
 export function PricingContent() {
 	const [userEmail, setUserEmail] = useState("");
@@ -80,7 +76,8 @@ export function PricingContent() {
 					</p>
 				</div>
 
-				{/* Schedule Cards */}
+				{/* Schedule Cards — hardcoded for now; the class_schedules table is the
+				    future source of truth for days/times shown here */}
 				<div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
 					<Card className="border-2 border-primary/20">
 						<CardContent className="p-6 text-center">
@@ -303,136 +300,7 @@ export function PricingContent() {
 					</Card>
 				</div>
 
-				{/* Payment Instructions */}
-				<div
-					id="payment-instructions"
-					className="max-w-3xl mx-auto scroll-mt-20 mb-16"
-				>
-					<div className="text-center mb-8">
-						<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-							Already Tried Your Free Class?
-						</Badge>
-						<h2 className="text-3xl font-bold mb-2">How to Pay</h2>
-						<p className="text-muted-foreground">
-							Continue your child's learning journey with the full program
-						</p>
-					</div>
-
-					<Card className="border-2 border-primary/20">
-						<CardHeader>
-							<CardTitle className="flex items-center gap-2">
-								<DollarSign className="h-5 w-5 text-primary" />
-								Pay via e-Transfer
-							</CardTitle>
-							<CardDescription>
-								Send your one-time payment using Interac e-Transfer
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="space-y-4">
-							<div className="p-4 bg-primary/5 rounded-lg space-y-3">
-								<div className="flex items-start gap-3">
-									<Mail className="h-5 w-5 text-primary mt-0.5" />
-									<div>
-										<p className="text-sm font-semibold text-foreground">
-											Send to:
-										</p>
-										<p className="text-lg font-mono text-primary break-all">
-											payment@kidslearnai.ca
-										</p>
-									</div>
-								</div>
-
-								<div className="flex items-start gap-3">
-									<DollarSign className="h-5 w-5 text-primary mt-0.5" />
-									<div>
-										<p className="text-sm font-semibold text-foreground">
-											Amount (Founding Student Rate):
-										</p>
-										<p className="text-lg font-semibold">
-											<span className="line-through text-muted-foreground mr-2">
-												$199.99
-											</span>
-											$159.99 CAD
-										</p>
-									</div>
-								</div>
-
-								<div className="flex items-start gap-3">
-									<FileText className="h-5 w-5 text-primary mt-0.5" />
-									<div>
-										<p className="text-sm font-semibold text-foreground">
-											Message:
-										</p>
-										<p className="text-sm text-muted-foreground">
-											Include your child's name and your email
-											{userEmail && (
-												<>
-													:{" "}
-													<span className="font-mono text-foreground">
-														{userEmail}
-													</span>
-												</>
-											)}
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<Alert>
-								<CheckCircle2 className="h-4 w-4" />
-								<AlertDescription>
-									<strong>Important:</strong> Include your child's name and your
-									email in the e-Transfer message so we can match your payment.
-								</AlertDescription>
-							</Alert>
-						</CardContent>
-					</Card>
-
-					{/* What Happens Next */}
-					<Card className="mt-6">
-						<CardHeader>
-							<CardTitle className="flex items-center gap-2">
-								<Clock className="h-5 w-5 text-primary" />
-								What Happens Next?
-							</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<div className="space-y-3 text-sm">
-								<div className="flex items-start gap-3">
-									<CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
-									<div>
-										<p className="font-medium">
-											Payment verified within 24-48 hours
-										</p>
-										<p className="text-muted-foreground">
-											Usually much faster - we'll confirm by email
-										</p>
-									</div>
-								</div>
-								<div className="flex items-start gap-3">
-									<CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
-									<div>
-										<p className="font-medium">Full program access unlocked</p>
-										<p className="text-muted-foreground">
-											Your child joins their age group's weekly class
-										</p>
-									</div>
-								</div>
-								<div className="flex items-start gap-3">
-									<CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
-									<div>
-										<p className="font-medium">
-											8-10 weeks of live instruction
-										</p>
-										<p className="text-muted-foreground">
-											Expert-led classes every week until program completion
-										</p>
-									</div>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-				</div>
+				<PaymentInstructions userEmail={userEmail} />
 
 				{/* FAQ Section */}
 				<div className="max-w-3xl mx-auto mt-16">

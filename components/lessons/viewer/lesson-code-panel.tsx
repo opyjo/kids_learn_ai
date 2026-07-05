@@ -17,6 +17,7 @@ export function LessonCodePanel({
 			initialCode={lesson.starter_code}
 			onCodeChange={onCodeChange}
 			onRunComplete={onRunComplete}
+			storageKey={lesson.dbId}
 			className="flex flex-col rounded-xl ring-1 ring-border/70 overflow-hidden shadow-sm"
 		/>
 	);

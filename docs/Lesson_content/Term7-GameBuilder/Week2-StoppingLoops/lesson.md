@@ -27,11 +27,11 @@ starter_code: |
 class_activities: |
   ## 🎮 Class Activity: Loop Control Challenge!
 
-  1. Partner up with a classmate
+  1. Your teacher puts you in a breakout room with a partner
   2. Challenge 1: Who can create a loop that stops when you type "stop"?
   3. Challenge 2: Who can create a loop that skips even numbers?
   4. Challenge 3: Who can create the safest loop (no infinite loops!)?
-  5. Share your code with the class!
+  5. Share your code in the Zoom chat!
 
   **Bonus:** Try creating a menu that loops until user chooses "exit"!
 take_home_assignment: |

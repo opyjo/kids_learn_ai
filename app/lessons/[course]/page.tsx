@@ -1,6 +1,7 @@
 import {
 	ArrowLeft,
 	BookOpen,
+	CalendarClock,
 	CheckCircle,
 	Lock,
 	Play,
@@ -13,6 +14,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { checkLevelEnrollment, isFreeTrialLesson } from "@/lib/auth-helpers";
+import {
+	type ClassScheduleSlot,
+	formatScheduleLine,
+} from "@/lib/schedule-utils";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface CoursePageProps {
@@ -86,6 +92,33 @@ export default async function CoursePage({ params }: CoursePageProps) {
 		};
 	});
 
+	// Public class-time lines (day/time only — never the meeting link). The
+	// class_schedules table has no public SELECT policy, so this goes through
+	// the server admin client with an explicit non-sensitive column list.
+	let scheduleLines: string[] = [];
+	const adminClient = getSupabaseAdminClient();
+	if (adminClient) {
+		const { data: schedules } = await adminClient
+			.from("class_schedules")
+			.select("day_of_week, start_time, timezone, label, duration_minutes")
+			.eq("course_id", course.id)
+			.eq("is_active", true)
+			.order("day_of_week");
+
+		scheduleLines = (schedules || []).flatMap((schedule) => {
+			try {
+				const line = formatScheduleLine(schedule as ClassScheduleSlot);
+				return [
+					(schedule as { label: string | null }).label
+						? `${line} (${(schedule as { label: string | null }).label})`
+						: line,
+				];
+			} catch {
+				return [];
+			}
+		});
+	}
+
 	const completedCount = lessons.filter((l) => l.status === "completed").length;
 	const overallProgress =
 		lessons.length > 0
@@ -127,6 +160,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
 								)}
 							</div>
 							<p className="text-muted-foreground">{course.description}</p>
+							{scheduleLines.length > 0 && (
+								<p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-primary">
+									<CalendarClock className="h-4 w-4" aria-hidden="true" />
+									Live class: {scheduleLines.join(" · ")}
+								</p>
+							)}
 						</div>
 
 						{/* Progress Badge - Only for enrolled users */}
