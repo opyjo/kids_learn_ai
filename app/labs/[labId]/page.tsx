@@ -11,6 +11,16 @@ interface LabPageProps {
 	params: Promise<{ labId: string }>;
 }
 
+export async function generateMetadata({ params }: LabPageProps) {
+	const { labId } = await params;
+	const definition = getLabById(labId);
+	if (!definition) return { title: "AI Labs — Kids Learn AI" };
+	return {
+		title: `${definition.title} — AI Labs — Kids Learn AI`,
+		description: `${definition.concept}. A hands-on AI lab for kids (about ${definition.estimatedMinutes} minutes).`,
+	};
+}
+
 export default async function StandaloneLabPage({ params }: LabPageProps) {
 	const user = await requireAuth();
 	const { labId } = await params;

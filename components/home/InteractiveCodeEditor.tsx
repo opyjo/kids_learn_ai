@@ -237,13 +237,13 @@ const InteractiveCodeEditor = () => {
 												Ready to train bigger ideas?
 											</div>
 											<p className="text-sm text-muted-foreground mb-3">
-												This demo shows a tiny slice of KidsLearn AI. Unlock 60+
-												guided missions with safety tips, creative challenges,
-												and mentor feedback.
+												This demo shows a tiny slice of KidsLearn AI. In live
+												classes, kids build 60+ guided projects with instructor
+												feedback — try a full lesson free.
 											</p>
-											<Link href="/signup">
+											<Link href="/inquiry">
 												<Button size="sm" className="rounded-full">
-													Start Learning Free
+													Book a Free Trial Class
 												</Button>
 											</Link>
 										</div>

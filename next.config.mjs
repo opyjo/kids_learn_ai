@@ -2,9 +2,6 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	images: {
-		unoptimized: true,
-	},
 	// Empty turbopack config to silence the warning
 	turbopack: {},
 	webpack: (config, { isServer }) => {

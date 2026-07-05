@@ -25,6 +25,7 @@ import {
 	TerminalSquare,
 	X,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useEffect, useRef, useState } from "react";
@@ -653,9 +654,12 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 								className="flex items-center cursor-pointer group"
 								aria-label="Go to homepage"
 							>
-								<img
+								<Image
 									src="/Logo.png"
 									alt="Kids Learn AI Logo"
+									width={64}
+									height={64}
+									priority
 									className="h-8 w-auto transition-transform duration-200 group-hover:scale-105"
 								/>
 							</Link>
@@ -888,9 +892,11 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 													className="flex items-center cursor-pointer"
 													onClick={closeMobileMenu}
 												>
-													<img
+													<Image
 														src="/Logo.png"
 														alt="Kids Learn AI Logo"
+														width={80}
+														height={80}
 														className="h-10 w-auto"
 													/>
 												</Link>

@@ -1,7 +1,8 @@
 "use client";
 
-import { BrainCircuit, ShieldCheck, Sparkles, Users } from "lucide-react";
+import { BrainCircuit, MessageSquare, Sparkles, Users } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -41,8 +42,8 @@ const FeaturesSection = () => {
 							<p className="text-xl text-muted-foreground text-pretty leading-relaxed">
 								Expert instructors guide kids through Python fundamentals in
 								live classes, then layer on age-appropriate AI concepts. Learn
-								together in a supportive community where understanding how
-								intelligent tools work becomes second nature.
+								together in a supportive community, with 24/7 AI tutor support
+								between classes.
 							</p>
 						</FadeIn>
 					</div>
@@ -145,22 +146,28 @@ const FeaturesSection = () => {
 						<Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group h-full cursor-pointer">
 							<CardHeader className="text-center pb-4">
 								<div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary/80 to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-									<ShieldCheck
+									<MessageSquare
 										className="h-8 w-8 text-primary-foreground"
 										aria-hidden="true"
 									/>
 								</div>
 								<CardTitle className="text-2xl">
-									Expert-Led AI Education
+									BrightByte, Your 24/7 AI Tutor
 								</CardTitle>
 							</CardHeader>
 							<CardContent className="text-center">
 								<CardDescription className="text-base leading-relaxed">
-									Experienced instructors provide personalized guidance, ethical
-									discussions, and age-appropriate curriculum designed by
-									educators. Safe, positive learning with expert oversight
-									ensures kids build both skills and responsibility.
+									Stuck between classes? BrightByte, our friendly AI coding
+									buddy, is ready to help day or night with hints, explanations,
+									and step-by-step guidance that helps kids truly learn — never
+									just hand over answers.
 								</CardDescription>
+								<Link
+									href="/tutor"
+									className="mt-4 inline-block text-sm text-primary hover:underline"
+								>
+									Meet BrightByte →
+								</Link>
 							</CardContent>
 						</Card>
 					</StaggerItem>

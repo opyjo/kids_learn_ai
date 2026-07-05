@@ -10,6 +10,12 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
+export const metadata = {
+	title: "Reset Password — Kids Learn AI",
+	description: "Choose a new password for your Kids Learn AI account.",
+	robots: { index: false },
+};
+
 export default function ResetPasswordPage() {
 	return (
 		<AuthLayout>
