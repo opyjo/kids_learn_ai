@@ -1,3 +1,4 @@
+import { InquiryStatusControl } from "@/components/admin/inquiry-status-control";
 import { Badge } from "@/components/ui/badge";
 import {
 	Card,
@@ -61,10 +62,16 @@ export default async function InquiriesPage() {
 	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
 
-	// Fetch all inquiries
-	const { data: inquiriesData, error } = await supabase
+	// Fetch inquiries (most recent first). `count: exact` lets us detect when
+	// more rows exist than were returned (Supabase caps a SELECT at 1000) so the
+	// list can say so instead of silently truncating.
+	const {
+		data: inquiriesData,
+		error,
+		count,
+	} = await supabase
 		.from("inquiries")
-		.select("*")
+		.select("*", { count: "exact" })
 		.order("created_at", { ascending: false });
 
 	if (error) {
@@ -72,6 +79,8 @@ export default async function InquiriesPage() {
 	}
 
 	const inquiries: Inquiry[] = inquiriesData || [];
+	const totalCount = count ?? inquiries.length;
+	const isTruncated = totalCount > inquiries.length;
 
 	// Count by status
 	const statusCounts = inquiries.reduce(
@@ -155,8 +164,9 @@ export default async function InquiriesPage() {
 				<CardHeader className="pb-4">
 					<CardTitle className="text-lg font-semibold">All Inquiries</CardTitle>
 					<CardDescription>
-						{inquiries.length} inquiry{inquiries.length !== 1 ? "ies" : ""}{" "}
-						total
+						{isTruncated
+							? `Showing ${inquiries.length} of ${totalCount} inquiries`
+							: `${inquiries.length} inquir${inquiries.length !== 1 ? "ies" : "y"} total`}
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="pt-0">
@@ -232,6 +242,13 @@ export default async function InquiriesPage() {
 													<strong>Questions:</strong> {inquiry.questions}
 												</div>
 											)}
+										</div>
+										<div className="mt-3">
+											<InquiryStatusControl
+												id={inquiry.id}
+												initialStatus={inquiry.status}
+												initialNotes={inquiry.notes}
+											/>
 										</div>
 									</div>
 								</div>

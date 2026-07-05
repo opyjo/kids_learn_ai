@@ -1,5 +1,3 @@
-"use client";
-
 import {
 	ArrowLeft,
 	Clock,
@@ -8,12 +6,25 @@ import {
 	Sparkles,
 	Users,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { InstructorApplicationForm } from "@/components/careers/instructor-application-form";
 import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Apply to Become an Instructor — Kids Learn AI",
+	description:
+		"Apply to teach live Python and AI classes to kids and gain valuable teaching experience. Complete our instructor application form; we respond in 2-3 business days.",
+	openGraph: {
+		title: "Apply to Become an Instructor — Kids Learn AI",
+		description:
+			"Apply to teach live Python and AI classes to kids and gain valuable teaching experience. Complete our instructor application form; we respond in 2-3 business days.",
+		type: "website",
+	},
+};
 
 export default function ApplyPage() {
 	return (

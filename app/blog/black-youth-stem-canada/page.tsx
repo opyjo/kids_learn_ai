@@ -1,6 +1,19 @@
+import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Supporting Black Youth in Canadian STEM — Kids Learn AI",
+	description:
+		"The data behind Black youth underrepresentation in Canadian STEM, the barriers they face, and practical steps families and schools can take to help.",
+	openGraph: {
+		title: "Supporting Black Youth in Canadian STEM — Kids Learn AI",
+		description:
+			"The data behind Black youth underrepresentation in Canadian STEM, the barriers they face, and practical steps families and schools can take to help.",
+		type: "article",
+	},
+};
 
 const stats = [
 	{

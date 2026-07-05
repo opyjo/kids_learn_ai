@@ -105,8 +105,8 @@ export async function signupAction(
 		return { error: "Passwords do not match" };
 	}
 
-	if (password.length < 6) {
-		return { error: "Password must be at least 6 characters long" };
+	if (password.length < 8) {
+		return { error: "Password must be at least 8 characters long" };
 	}
 
 	try {
@@ -131,7 +131,16 @@ export async function signupAction(
 			return { error: "Failed to create user" };
 		}
 
-		// Update profile with full name (profile created by database trigger)
+		// When email confirmation is enabled, signUp returns a user but NO
+		// session. Don't redirect (the user isn't logged in yet) — tell them to
+		// confirm via email. The full_name is stored in user metadata above and
+		// applied to the profile by the DB trigger / on first sign-in.
+		if (!authData.session) {
+			return { success: true };
+		}
+
+		// Email confirmation disabled: the user is signed in now, so finish
+		// setting up their profile and send them home.
 		const { error: profileError } = await supabase
 			.from("profiles")
 			.update({ full_name: fullName })
@@ -219,8 +228,8 @@ export async function resetPasswordAction(
 		return { error: "Passwords do not match" };
 	}
 
-	if (password.length < 6) {
-		return { error: "Password must be at least 6 characters long" };
+	if (password.length < 8) {
+		return { error: "Password must be at least 8 characters long" };
 	}
 
 	try {

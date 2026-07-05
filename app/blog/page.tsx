@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,18 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Blog — Kids Learn AI",
+	description:
+		"Research-backed articles, community spotlights, and practical guidance to help every child build a strong Python and AI foundation.",
+	openGraph: {
+		title: "Blog — Kids Learn AI",
+		description:
+			"Research-backed articles, community spotlights, and practical guidance to help every child build a strong Python and AI foundation.",
+		type: "website",
+	},
+};
 
 const posts = [
 	{

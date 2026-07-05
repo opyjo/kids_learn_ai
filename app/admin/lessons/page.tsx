@@ -1,4 +1,4 @@
-import { Eye, Pencil, Plus } from "lucide-react";
+import { Eye, Plus } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -121,28 +121,20 @@ export default async function LessonsPage() {
 										</div>
 									</div>
 									<div className="flex items-center gap-2">
+										{/* Lessons are authored as markdown in docs/Lesson_content
+											and pushed via "Sync Lessons"; there is no in-app editor,
+											so only a live Preview is offered here. */}
 										<Button
 											variant="ghost"
 											size="sm"
 											asChild
-											className="h-8 w-8 p-0"
-										>
-											<Link href={`/admin/lessons/${lesson.orderIndex}/edit`}>
-												<Pencil className="h-4 w-4" />
-												<span className="sr-only">Edit</span>
-											</Link>
-										</Button>
-										<Button
-											variant="ghost"
-											size="sm"
-											asChild
-											className="h-8 w-8 p-0"
+											className="h-8 gap-1.5 px-2"
 										>
 											<Link
 												href={`/lessons/${lesson.courseSlug}/${lesson.orderIndex}`}
 											>
 												<Eye className="h-4 w-4" />
-												<span className="sr-only">Preview</span>
+												Preview
 											</Link>
 										</Button>
 									</div>

@@ -24,7 +24,7 @@ export default async function LessonsPage() {
 	} = await supabase.auth.getUser();
 
 	// Fetch all courses (levels)
-	const { data: coursesData } = await supabase
+	const { data: coursesData, error: coursesError } = await supabase
 		.from("courses")
 		.select("*")
 		.order("order_index", { ascending: true });
@@ -137,6 +137,36 @@ export default async function LessonsPage() {
 					</Card>
 				)}
 
+				{/* Error / empty state when levels can't be loaded */}
+				{coursesError && (
+					<Card className="mb-8 p-8 text-center">
+						<CardContent className="pt-6">
+							<BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+							<h3 className="text-lg font-semibold text-foreground mb-2">
+								Couldn't Load Levels
+							</h3>
+							<p className="text-muted-foreground">
+								Something went wrong loading the course levels. Please refresh
+								the page or try again in a moment.
+							</p>
+						</CardContent>
+					</Card>
+				)}
+
+				{!coursesError && totalLevels === 0 && (
+					<Card className="mb-8 p-8 text-center">
+						<CardContent className="pt-6">
+							<BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+							<h3 className="text-lg font-semibold text-foreground mb-2">
+								No Levels Yet
+							</h3>
+							<p className="text-muted-foreground">
+								New course levels are coming soon. Check back later!
+							</p>
+						</CardContent>
+					</Card>
+				)}
+
 				{/* Levels by Year */}
 				{Object.entries(coursesByYear).map(([yearGroup, courses]) => (
 					<div key={yearGroup} className="mb-10">
@@ -149,7 +179,11 @@ export default async function LessonsPage() {
 							{courses?.map((course) => {
 								const isEnrolled = enrolledLevelIds.includes(course.id);
 								const lessonCount = lessonCountMap[course.id] || 0;
-								const completedCount = completedCountMap[course.id] || 0;
+								// Clamp so stale/duplicate completions can't exceed the lesson count.
+								const completedCount = Math.min(
+									completedCountMap[course.id] || 0,
+									lessonCount,
+								);
 								const progress =
 									lessonCount > 0
 										? Math.round((completedCount / lessonCount) * 100)

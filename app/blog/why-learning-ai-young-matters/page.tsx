@@ -1,6 +1,19 @@
+import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Why Learning AI Young Matters — Kids Learn AI",
+	description:
+		"Nine reasons kids should learn AI concepts early, plus an age-by-age Python learning path for ages 8-16 and tips for parents and educators.",
+	openGraph: {
+		title: "Why Learning AI Young Matters — Kids Learn AI",
+		description:
+			"Nine reasons kids should learn AI concepts early, plus an age-by-age Python learning path for ages 8-16 and tips for parents and educators.",
+		type: "article",
+	},
+};
 
 const keyTakeaways = [
 	{

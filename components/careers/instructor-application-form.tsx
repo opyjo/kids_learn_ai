@@ -77,11 +77,17 @@ const applicationFormSchema = z.object({
 		.url("Please enter a valid URL")
 		.optional()
 		.or(z.literal("")),
-	resume: z.object({
-		name: z.string(),
-		type: z.string(),
-		content: z.string(),
-	}),
+	// Optional at the form level so the field can be cleared (undefined) while a
+	// file is being (re)selected; presence is enforced in onSubmit and again by
+	// the server. Keeping it required here made every `setValue("resume", undefined)`
+	// a type error.
+	resume: z
+		.object({
+			name: z.string(),
+			type: z.string(),
+			content: z.string(),
+		})
+		.optional(),
 });
 
 type ApplicationFormData = z.infer<typeof applicationFormSchema>;

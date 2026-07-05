@@ -1,5 +1,3 @@
-"use client";
-
 import {
 	ArrowRight,
 	Calendar,
@@ -11,6 +9,7 @@ import {
 	Star,
 	Users,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
@@ -23,6 +22,18 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Free Trial Class & Program Details — Kids Learn AI",
+	description:
+		"Try your child's first live Python & AI class free. See our 8-10 week program for ages 9-13, small class sizes, founding rate, and answers to common questions.",
+	openGraph: {
+		title: "Free Trial Class & Program Details — Kids Learn AI",
+		description:
+			"Try your child's first live Python & AI class free. See our 8-10 week program for ages 9-13, small class sizes, founding rate, and answers to common questions.",
+		type: "website",
+	},
+};
 
 export default function InquiryPage() {
 	return (

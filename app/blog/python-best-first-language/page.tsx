@@ -1,6 +1,19 @@
+import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+	title: "Why Python is the Best First Language — Kids Learn AI",
+	description:
+		"Discover how Python's English-like readability, versatility, and huge community make it the ideal first programming language for young learners.",
+	openGraph: {
+		title: "Why Python is the Best First Language — Kids Learn AI",
+		description:
+			"Discover how Python's English-like readability, versatility, and huge community make it the ideal first programming language for young learners.",
+		type: "article",
+	},
+};
 
 const keyTakeaways = [
 	{

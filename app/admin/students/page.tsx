@@ -1,4 +1,3 @@
-import { Download } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,11 +11,17 @@ import {
 import { requireAdmin } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
-export default async function StudentsPage() {
+const PAGE_SIZE = 25;
+
+export default async function StudentsPage({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string }>;
+}) {
 	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
 
-	// Fetch enrolled students
+	// Enrolled student ids (used for the per-row badge and the Enrolled stat).
 	const { data: enrolledStudentsData } = await supabase
 		.from("level_enrollments")
 		.select("student_id")
@@ -27,12 +32,32 @@ export default async function StudentsPage() {
 			(e: { student_id: string }) => e.student_id,
 		),
 	);
+	const enrolledCount = enrolledStudentIds.size;
 
-	// Fetch all students
+	// Total student count (exact) drives the stats and page count independently
+	// of the current page.
+	const { count: totalStudents } = await supabase
+		.from("profiles")
+		.select("id", { count: "exact", head: true });
+
+	const total = totalStudents ?? 0;
+	const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+	const { page: pageParam } = await searchParams;
+	const requestedPage = Number.parseInt(pageParam ?? "1", 10);
+	const page =
+		Number.isNaN(requestedPage) || requestedPage < 1
+			? 1
+			: Math.min(requestedPage, totalPages);
+	const from = (page - 1) * PAGE_SIZE;
+	const to = from + PAGE_SIZE - 1;
+
+	// Fetch just this page of students.
 	const { data: studentsData } = await supabase
 		.from("profiles")
 		.select("id, email, full_name, created_at")
-		.order("created_at", { ascending: false });
+		.order("created_at", { ascending: false })
+		.range(from, to);
 
 	const students = (studentsData || []).map((student) => ({
 		id: student.id,
@@ -42,21 +67,18 @@ export default async function StudentsPage() {
 		isEnrolled: enrolledStudentIds.has(student.id),
 	}));
 
+	const rangeStart = total === 0 ? 0 : from + 1;
+	const rangeEnd = from + students.length;
+
 	return (
 		<div className="space-y-6">
-			<div className="flex items-center justify-between">
-				<div>
-					<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-						Student Management
-					</h1>
-					<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-						View and manage all registered students
-					</p>
-				</div>
-				<Button variant="outline" className="gap-2">
-					<Download className="h-4 w-4" />
-					Export
-				</Button>
+			<div>
+				<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+					Student Management
+				</h1>
+				<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+					View and manage all registered students
+				</p>
 			</div>
 
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -66,7 +88,7 @@ export default async function StudentsPage() {
 							Total Students
 						</p>
 						<p className="mt-2 text-3xl font-semibold text-gray-900 dark:text-white">
-							{students.length}
+							{total}
 						</p>
 					</CardContent>
 				</Card>
@@ -76,7 +98,7 @@ export default async function StudentsPage() {
 							Enrolled
 						</p>
 						<p className="mt-2 text-3xl font-semibold text-green-600 dark:text-green-400">
-							{students.filter((s) => s.isEnrolled).length}
+							{enrolledCount}
 						</p>
 					</CardContent>
 				</Card>
@@ -86,7 +108,7 @@ export default async function StudentsPage() {
 							Not Enrolled
 						</p>
 						<p className="mt-2 text-3xl font-semibold text-gray-600 dark:text-gray-400">
-							{students.filter((s) => !s.isEnrolled).length}
+							{Math.max(0, total - enrolledCount)}
 						</p>
 					</CardContent>
 				</Card>
@@ -96,8 +118,9 @@ export default async function StudentsPage() {
 				<CardHeader className="pb-4">
 					<CardTitle className="text-lg font-semibold">All Students</CardTitle>
 					<CardDescription>
-						{students.length} student{students.length !== 1 ? "s" : ""}{" "}
-						registered
+						{total === 0
+							? "No students registered"
+							: `Showing ${rangeStart}–${rangeEnd} of ${total} student${total !== 1 ? "s" : ""}`}
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="pt-0">
@@ -139,6 +162,36 @@ export default async function StudentsPage() {
 							</div>
 						))}
 					</div>
+
+					{totalPages > 1 && (
+						<div className="flex items-center justify-between border-t border-gray-100 dark:border-gray-800 pt-4 mt-4">
+							<p className="text-sm text-gray-500 dark:text-gray-400">
+								Page {page} of {totalPages}
+							</p>
+							<div className="flex items-center gap-2">
+								{page > 1 ? (
+									<Button variant="outline" size="sm" asChild>
+										<Link href={`/admin/students?page=${page - 1}`}>
+											Previous
+										</Link>
+									</Button>
+								) : (
+									<Button variant="outline" size="sm" disabled>
+										Previous
+									</Button>
+								)}
+								{page < totalPages ? (
+									<Button variant="outline" size="sm" asChild>
+										<Link href={`/admin/students?page=${page + 1}`}>Next</Link>
+									</Button>
+								) : (
+									<Button variant="outline" size="sm" disabled>
+										Next
+									</Button>
+								)}
+							</div>
+						</div>
+					)}
 				</CardContent>
 			</Card>
 		</div>

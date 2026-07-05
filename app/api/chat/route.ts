@@ -147,11 +147,16 @@ const runAISafetyCheck = async (
 		return JSON.parse(data.choices[0].message.content);
 	} catch (error) {
 		console.error("AI Safety Check Error:", error);
+		// Fail CLOSED: if the audit can't run, do not silently disable the safety
+		// filter for a children's product. Treat the message as not-safe so the
+		// caller returns the gentle off-topic fallback rather than an unaudited
+		// model reply. (The completion call uses the same provider, so a real
+		// outage already degrades the tutor — this just avoids a safety bypass.)
 		return {
-			isPythonQuestion: true,
-			isSafe: true,
+			isPythonQuestion: false,
+			isSafe: false,
 			requestType: "help",
-			action: "allow",
+			action: "block",
 		};
 	}
 };
@@ -330,17 +335,26 @@ export const POST = async (req: NextRequest) => {
 			);
 		}
 
+		// Require authentication. Each accepted message triggers two paid model
+		// calls (safety audit + completion); allowing anonymous access let a
+		// script burn the OpenAI quota behind only a spoofable per-IP limit.
 		const user = await getAuthUser();
-		const isAdmin = user ? await isUserAdmin(user.id) : false;
+		if (!user) {
+			return NextResponse.json(
+				{ error: "Please log in to chat with your tutor." },
+				{ status: 401 },
+			);
+		}
+		const isAdmin = await isUserAdmin(user.id);
 
 		// Skip rate limiting for admin users
 		let dailyUsage = null;
 		if (!isAdmin) {
-			const clientId = req.headers.get("x-forwarded-for") || "anonymous";
-			const rateLimitIdentifier = user ? user.id : clientId;
+			// Rate-limit per authenticated user (not spoofable IP header).
+			const rateLimitIdentifier = user.id;
 
 			if (!(await checkRateLimit(rateLimitIdentifier))) {
-				logSafetyEvent("block", "Rate limit exceeded", clientId);
+				logSafetyEvent("block", "Rate limit exceeded", user.id);
 				return NextResponse.json(
 					{
 						role: "assistant",
@@ -452,12 +466,35 @@ export const POST = async (req: NextRequest) => {
 			? `\n\nCURRENT LESSON CONTEXT:\n${context}`
 			: "";
 
+		// Sanitize the client-supplied history before forwarding it to the model.
+		// The client sends the whole conversation from localStorage with arbitrary
+		// roles/content, so we must (1) drop any injected "system" turns, (2) allow
+		// only user/assistant roles, (3) sanitize each turn's text, and (4) cap the
+		// length so old turns can't be used to jailbreak the tutor.
+		const MAX_HISTORY_TURNS = 20;
+		const sanitizedHistory: { role: "user" | "assistant"; content: string }[] =
+			[];
+		for (const m of messages.slice(0, -1)) {
+			if (
+				m &&
+				(m.role === "user" || m.role === "assistant") &&
+				typeof m.content === "string"
+			) {
+				sanitizedHistory.push({
+					role: m.role,
+					content: sanitizeMessage(m.content),
+				});
+			}
+		}
+		// Cap to the most recent turns so old history can't be used to jailbreak.
+		const cappedHistory = sanitizedHistory.slice(-MAX_HISTORY_TURNS);
+
 		const openAIMessages = [
 			{
 				role: "system",
 				content: `${systemPrompt}${contextSection}\n\nCRITICAL SAFETY REMINDER: You are chatting with a child (8-16).`,
 			},
-			...messages.slice(0, -1),
+			...cappedHistory,
 			{ role: "user", content: sanitizedContent },
 		];
 

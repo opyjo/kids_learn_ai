@@ -33,9 +33,11 @@ const SubmitButton = () => {
 export function SignupForm() {
 	const [state, formAction] = useActionState(signupAction, null);
 	const [googleLoading, setGoogleLoading] = useState(false);
+	const [googleError, setGoogleError] = useState<string | null>(null);
 	const [password, setPassword] = useState("");
 
 	const handleGoogleSignUp = async () => {
+		setGoogleError(null);
 		setGoogleLoading(true);
 
 		try {
@@ -57,15 +59,36 @@ export function SignupForm() {
 			}
 		} catch (err) {
 			console.error("Google sign up error:", err);
+			setGoogleError("Could not sign up with Google. Please try again.");
 			setGoogleLoading(false);
 		}
 	};
+
+	// Email confirmation required: signup succeeded but there's no session yet.
+	if (state?.success) {
+		return (
+			<Alert>
+				<Mail className="h-4 w-4" aria-hidden="true" />
+				<AlertDescription>
+					<strong>Almost there — check your email!</strong> We've sent a
+					confirmation link to finish creating your account. Click it, then come
+					back and log in.
+				</AlertDescription>
+			</Alert>
+		);
+	}
 
 	return (
 		<form action={formAction} className="space-y-4">
 			{state?.error && (
 				<Alert variant="destructive">
 					<AlertDescription>{state.error}</AlertDescription>
+				</Alert>
+			)}
+
+			{googleError && (
+				<Alert variant="destructive">
+					<AlertDescription>{googleError}</AlertDescription>
 				</Alert>
 			)}
 

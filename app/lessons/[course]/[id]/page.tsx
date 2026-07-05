@@ -18,6 +18,11 @@ export default async function LessonPage({ params }: LessonPageProps) {
 	const supabase = await getSupabaseServerClient();
 	const { course: courseSlug, id } = await params;
 	const lessonOrderIndex = Number.parseInt(id, 10);
+	// Guard against non-numeric ids (e.g. /lessons/slug/abc) instead of relying
+	// on the DB rejecting a NaN filter.
+	if (Number.isNaN(lessonOrderIndex)) {
+		notFound();
+	}
 
 	// Check if user is authenticated
 	const {
