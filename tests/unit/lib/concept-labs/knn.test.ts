@@ -28,6 +28,19 @@ describe("classify", () => {
 		const result = classify([], [1, 1]);
 		expect(result.label).toBeNull();
 		expect(result.nearestDistance).toBe(Number.POSITIVE_INFINITY);
+		expect(result.neighbors).toEqual([]);
+	});
+
+	it("reports the voting neighbours nearest-first with sample indices", () => {
+		const result = classify(samples, [0, 0], 3);
+		expect(result.neighbors).toHaveLength(3);
+		expect(result.neighbors[0]).toEqual({
+			sampleIndex: 0,
+			label: "cat",
+			distance: 0,
+		});
+		const distances = result.neighbors.map((n) => n.distance);
+		expect(distances).toEqual([...distances].sort((a, b) => a - b));
 	});
 
 	it("predicts the nearest cluster", () => {

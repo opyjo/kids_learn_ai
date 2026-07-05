@@ -40,11 +40,13 @@ export function classify(
 			label: null,
 			votes: {},
 			nearestDistance: Number.POSITIVE_INFINITY,
+			neighbors: [],
 		};
 	}
 
 	const ranked = samples
-		.map((sample) => ({
+		.map((sample, sampleIndex) => ({
+			sampleIndex,
 			label: sample.label,
 			distance: squaredDistance(sample.features, query),
 		}))
@@ -80,5 +82,10 @@ export function classify(
 		label: winner,
 		votes,
 		nearestDistance: ranked[0].distance,
+		neighbors: neighbours.map(({ sampleIndex, label, distance }) => ({
+			sampleIndex,
+			label,
+			distance,
+		})),
 	};
 }

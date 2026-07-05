@@ -8,17 +8,30 @@
  * `getLabForLesson`.
  */
 
+import { fixTheBiasLab } from "./labs/fix-the-bias";
 import { howAiLearnsLab } from "./labs/how-ai-learns";
+import { nextWordGuesserLab } from "./labs/next-word-guesser";
+import { shapeSorterLab } from "./labs/shape-sorter";
 import type { ConceptLabDefinition } from "./types";
 
-const LABS: ConceptLabDefinition[] = [howAiLearnsLab];
+const LABS: ConceptLabDefinition[] = [
+	howAiLearnsLab,
+	fixTheBiasLab,
+	shapeSorterLab,
+	nextWordGuesserLab,
+];
 
 function keyFor(courseSlug: string, orderIndex: number): string {
 	return `${courseSlug}#${orderIndex}`;
 }
 
+// Standalone-only labs (no lesson binding) appear in /labs but never here.
 const LAB_BY_LESSON = new Map<string, ConceptLabDefinition>(
-	LABS.map((lab) => [keyFor(lab.courseSlug, lab.orderIndex), lab]),
+	LABS.flatMap((lab) =>
+		lab.courseSlug !== undefined && lab.orderIndex !== undefined
+			? [[keyFor(lab.courseSlug, lab.orderIndex), lab] as const]
+			: [],
+	),
 );
 
 /** The lab authored for a given lesson, or null if none. */

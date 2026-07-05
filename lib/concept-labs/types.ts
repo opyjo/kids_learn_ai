@@ -24,6 +24,20 @@ export interface LabeledSample {
 	label: string;
 	/** Fixed-length numeric feature vector (e.g. a downsampled drawing). */
 	features: number[];
+	/**
+	 * Small data-URL preview of the source drawing. Client-side only — used to
+	 * show the child which taught examples the model compared against. Never
+	 * persisted or sent to the server.
+	 */
+	thumbnail?: string;
+}
+
+/** One of the k nearest neighbours consulted for a classification. */
+export interface NeighborVote {
+	/** Index into the training-sample array the classifier was given. */
+	sampleIndex: number;
+	label: string;
+	distance: number;
 }
 
 /** Result of asking a classifier to label a new example. */
@@ -34,6 +48,11 @@ export interface ClassificationResult {
 	votes: Record<string, number>;
 	/** Distance to the single nearest neighbour (Infinity if untrained). */
 	nearestDistance: number;
+	/**
+	 * The k neighbours that actually voted, nearest first — so the UI can show
+	 * the child *which* of their taught examples the machine compared against.
+	 */
+	neighbors: NeighborVote[];
 }
 
 /** One selectable answer in a probe. */
@@ -71,8 +90,8 @@ export type LabAction =
 	  }
 	| { type: "reset" };
 
-/** The simulation primitives available to authored labs. v1 ships one. */
-export type LabPrimitive = "trainable-classifier";
+/** The simulation primitives available to authored labs. */
+export type LabPrimitive = "trainable-classifier" | "next-word-guesser";
 
 /**
  * A fully-authored lab. Curriculum authors describe a lab as data; the host
@@ -85,15 +104,27 @@ export interface ConceptLabDefinition {
 	/** One-line name of the concept being taught (shown to the child). */
 	concept: string;
 	primitive: LabPrimitive;
-	/** Which lesson this lab belongs to. */
-	courseSlug: string;
-	orderIndex: number;
-	/** The two class labels the child will teach the machine (v1 = binary). */
-	classes: [string, string];
+	/** Emoji shown on the /labs gallery card. */
+	icon: string;
+	/** Honest time estimate shown on the gallery card. */
+	estimatedMinutes: number;
+	/**
+	 * Which lesson this lab belongs to. Standalone-only labs (playground, no
+	 * lesson binding yet) omit both fields and appear only in /labs.
+	 */
+	courseSlug?: string;
+	orderIndex?: number;
+	/**
+	 * Class labels the child will teach a classifier (two or more). Empty for
+	 * non-classifier primitives such as the next-word guesser.
+	 */
+	classes: string[];
 	/** Optional emoji shown alongside each class label. */
 	classEmoji?: Partial<Record<string, string>>;
 	/** Kid-facing framing that sets up the deliberate-failure moment. */
 	biasTrapHint?: string;
+	/** One-tap example sentences offered by next-word-guesser labs. */
+	starterSentences?: string[];
 	predictProbe: Probe;
 	applyProbe: Probe;
 	/** Prompt for the (currently non-LLM) reflection step. */

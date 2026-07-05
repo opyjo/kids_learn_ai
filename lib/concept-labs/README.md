@@ -10,25 +10,41 @@ wired into a real lesson.
 ## What ships now
 
 - **Pure ML core** (`lib/concept-labs/`): `knn.ts` (k-nearest-neighbours
-  classifier), `features.ts` (drawing → feature vector), `types.ts`,
-  `telemetry.ts` (in-memory session recorder). No dependencies, unit-tested.
+  classifier that also reports its voting neighbours), `ngram.ts` (bigram
+  next-word model), `bias.ts` (dataset-skew detection: class imbalance +
+  low-variety classes), `features.ts` (drawing → feature vector), `types.ts`,
+  `telemetry.ts` (in-memory session recorder), `safety.ts` (word-bounded
+  kid-chat safety checks). No dependencies, unit-tested.
 - **`TrainableClassifier` lab** (`components/concept-labs/trainable-classifier-lab.tsx`):
-  the child draws examples, teaches the machine two classes, trains, then tests
-  — including the deliberate **bias trap** (teach only left-facing cats → watch
-  it fail on a right-facing one).
+  the child draws examples, teaches the machine two **or more** classes,
+  trains, then tests — including the deliberate **bias trap** (teach only
+  left-facing cats → watch it fail on a right-facing one). The result view
+  shows the actual nearest-neighbour drawings that won the vote, skew nudges
+  fire when the child's dataset is lopsided or same-y, and the canvas supports
+  per-stroke undo.
+- **`NextWordLab`** (`components/concept-labs/next-word-lab.tsx`): the child
+  teaches sentences, then watches a bigram model continue phrases greedily —
+  with the counts behind each pick shown, so "AI predicts from patterns" is
+  visible rather than narrated.
 - **Phase-machine host** (`concept-lab-host.tsx`): enforces the four-phase loop
   and records a `LabSessionSummary` per attempt, including misconception-tagged
   probe answers.
 - **Socratic Explain phase** (Phase 2): `explain.ts` (pure prompt construction —
   ask-don't-tell contract, misconception targeting, turn budget, rubric),
-  `app/api/concept-labs/explain/route.ts` (OpenAI-backed reply + 0–2 rubric
-  scorer, reusing the existing content-safety utils), and
+  `app/api/concept-labs/explain/route.ts` (auth + rate-limited, OpenAI-backed
+  reply + 0–2 rubric scorer; child messages pass a narrow word-bounded
+  blocklist in `safety.ts` plus the OpenAI moderation model — not the tutor's
+  blunt substring blocklist, which false-positives on innocent lab talk), and
   `explain-dialogue.tsx` (the BrightByte chat UI). Capped at
   `MAX_CHILD_TURNS` (5) turns; **fails soft** — if the model is unavailable it
   falls back to canned Socratic questions so a child is never blocked from
   finishing. The rubric score and full dialogue are captured in the session
   summary.
-- **Authored lab**: `labs/how-ai-learns.ts` for Term 5 Week 4 (`term-5-ai-sneak-peek`, order 4).
+- **Authored labs**: `labs/how-ai-learns.ts` for Term 5 Week 4
+  (`term-5-ai-sneak-peek`, order 4), plus three standalone labs (no lesson
+  binding yet): `labs/fix-the-bias.ts` (deliberately build a biased machine,
+  then repair it), `labs/shape-sorter.ts` (three-class classifier), and
+  `labs/next-word-guesser.ts` (bigram language model).
 - **Wiring**: a **Concept Lab** tab appears in the lesson viewer whenever
   `getLabForLesson(courseSlug, orderIndex)` returns a lab.
 
@@ -50,7 +66,8 @@ Labs are resolved from the registry (`registry.ts`), not the DB.
 ## Adding a lab
 
 Add a `ConceptLabDefinition` under `labs/`, register it in `registry.ts`. It
-binds to a lesson by `courseSlug` + `orderIndex`.
+binds to a lesson by `courseSlug` + `orderIndex`; omit both to ship a
+standalone-only lab that appears just in the `/labs` gallery.
 
 - **Validation harness** (Phase 3): `cohort.ts` (deterministic ~50/50 arm
   assignment + seed), `analysis.ts` (Hake normalized gain, misconception shift,
@@ -86,8 +103,8 @@ No new secret or dependency was added. Human-scoring spot-checks of the rubric
   treat `explain_rubric_score` as provisional.
 - **`concept_labs` table + delayed-retention probe** — labs live in the code
   registry for now; the injected 2–3-week retention probe (doc §8) is future.
-- **Other 4 primitives** (decision boundary, next-word guesser, reward trainer,
-  fairness auditor) — doc §3.
+- **Other primitives** (decision boundary, reward trainer, fairness auditor) —
+  doc §3. (The next-word guesser shipped.)
 - **DB-persisted telemetry** — the recorder produces a summary in memory; the
   Supabase sink (`concept_labs` / `lab_sessions` / `lab_events` /
   `probe_responses`) plugs in behind the same interface (doc §7).

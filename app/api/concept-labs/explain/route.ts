@@ -10,14 +10,13 @@ import {
 	MAX_CHILD_TURNS,
 } from "@/lib/concept-labs/explain";
 import { getLabById } from "@/lib/concept-labs/registry";
+import { checkKidChatSafety } from "@/lib/concept-labs/safety";
 import type { DialogueTurn } from "@/lib/concept-labs/types";
 import { createRateLimiter } from "@/lib/rate-limit";
-import {
-	checkContentSafety,
-	sanitizeMessage,
-} from "@/lib/utils/content-safety";
+import { sanitizeMessage } from "@/lib/utils/content-safety";
 
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
+const OPENAI_MODERATION_URL = "https://api.openai.com/v1/moderations";
 const MODEL = "gpt-4o-mini";
 
 // Each Explain phase is at most 5 child turns plus one rubric score, so a
@@ -33,6 +32,36 @@ const STEER_BACK =
 
 function countChildTurns(dialogue: DialogueTurn[]): number {
 	return dialogue.filter((turn) => turn.role === "user").length;
+}
+
+/**
+ * Ask OpenAI's moderation model whether a child's message is safe. The local
+ * blocklist only catches the unambiguous cases; this catches nuance without
+ * false-positive-blocking innocent kid talk ("the machine is so dumb!").
+ * Fails open: if moderation is unreachable, the Socratic prompt's own safety
+ * instructions and the output check still stand between the child and harm.
+ */
+async function passesModeration(message: string): Promise<boolean> {
+	const apiKey = process.env.OPENAI_API_KEY;
+	if (!apiKey) return true;
+	try {
+		const response = await fetch(OPENAI_MODERATION_URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${apiKey}`,
+			},
+			body: JSON.stringify({
+				model: "omni-moderation-latest",
+				input: message,
+			}),
+		});
+		if (!response.ok) return true;
+		const data = await response.json();
+		return !data.results?.[0]?.flagged;
+	} catch {
+		return true;
+	}
 }
 
 async function callOpenAI(
@@ -79,11 +108,17 @@ async function handleReply(body: {
 	const dialogue = Array.isArray(body.dialogue) ? body.dialogue : [];
 	const childTurns = countChildTurns(dialogue);
 
-	// Safety-check the child's most recent message before it reaches the model.
+	// Safety-check the child's most recent message before it reaches the model:
+	// a narrow word-bounded blocklist locally, then the moderation model for
+	// nuance. (The tutor's blunt substring blocklist false-positives on innocent
+	// lab talk like "the machine is dumb", so it is not used here.)
 	const lastUser = [...dialogue].reverse().find((t) => t.role === "user");
 	if (lastUser) {
 		const sanitized = sanitizeMessage(lastUser.content);
-		if (!checkContentSafety(sanitized).isSafe) {
+		if (
+			!checkKidChatSafety(sanitized).isSafe ||
+			!(await passesModeration(sanitized))
+		) {
 			return NextResponse.json({
 				role: "assistant",
 				content: STEER_BACK,
@@ -113,7 +148,7 @@ async function handleReply(body: {
 
 	const raw = await callOpenAI(messages, { temperature: 0.5, maxTokens: 150 });
 	const content =
-		raw && checkContentSafety(raw).isSafe
+		raw && checkKidChatSafety(raw).isSafe
 			? raw
 			: fallbackSocraticReply(childTurns);
 
@@ -138,7 +173,7 @@ async function handleScore(body: {
 
 	const raw = await callOpenAI(
 		[
-			{ role: "system", content: buildRubricSystemPrompt() },
+			{ role: "system", content: buildRubricSystemPrompt(definition) },
 			{
 				role: "user",
 				content: buildRubricUserPrompt({
@@ -159,7 +194,7 @@ async function handleScore(body: {
 		const score = clampRubricScore(parsed.score);
 		const feedback =
 			typeof parsed.feedback === "string" &&
-			checkContentSafety(parsed.feedback).isSafe
+			checkKidChatSafety(parsed.feedback).isSafe
 				? parsed.feedback
 				: "Nice job explaining what you learned!";
 		return NextResponse.json({ score, feedback });
