@@ -12,6 +12,12 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
+export const metadata = {
+	title: "Log In — Kids Learn AI",
+	description:
+		"Log in to Kids Learn AI to continue your Python and AI learning adventure.",
+};
+
 type LoginPageProps = {
 	searchParams: Promise<{ reset?: string; error?: string }>;
 };

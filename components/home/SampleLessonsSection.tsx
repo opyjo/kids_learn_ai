@@ -1,11 +1,10 @@
 "use client";
 
-import { BookOpen, CheckCircle, Code, Star } from "lucide-react";
+import { CheckCircle, Code, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -233,15 +232,11 @@ const SampleLessonsSection = () => {
 			</StaggerContainer>
 
 			<FadeIn delay={0.3} className="text-center mt-12">
-				<Link href="/lessons?course=level-1-python-foundations-1">
-					<Button
-						size="lg"
-						variant="outline"
-						className="rounded-full border-2 px-8 py-6 text-lg hover:bg-secondary bg-transparent"
-					>
-						<BookOpen className="mr-2 h-5 w-5" aria-hidden="true" />
-						Explore All Lessons
-					</Button>
+				<Link
+					href="/lessons?course=level-1-python-foundations-1"
+					className="text-sm text-primary hover:underline"
+				>
+					Browse the full lesson library →
 				</Link>
 			</FadeIn>
 		</section>

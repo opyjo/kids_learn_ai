@@ -11,6 +11,12 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
+export const metadata = {
+	title: "Sign Up — Kids Learn AI",
+	description:
+		"Create a free Kids Learn AI account and start learning Python and AI with hands-on projects made for kids.",
+};
+
 export default function SignupPage() {
 	return (
 		<AuthLayout>
