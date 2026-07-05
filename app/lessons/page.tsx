@@ -15,6 +15,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getUserEnrollments } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
+export const metadata = {
+	title: "Python & AI Lessons — Kids Learn AI",
+	description:
+		"Browse the full Kids Learn AI curriculum — term-by-term Python and AI lessons with hands-on projects for kids.",
+};
+
 export default async function LessonsPage() {
 	const supabase = await getSupabaseServerClient();
 

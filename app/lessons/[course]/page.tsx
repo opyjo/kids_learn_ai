@@ -27,6 +27,20 @@ interface CoursePageProps {
 	}>;
 }
 
+export async function generateMetadata({ params }: CoursePageProps) {
+	const { course } = await params;
+	// Slug-derived title ("term-5-ai-sneak-peek" → "Term 5 Ai Sneak Peek") —
+	// good enough for tabs/search without a second DB round-trip.
+	const name = course
+		.split("-")
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(" ");
+	return {
+		title: `${name} — Kids Learn AI`,
+		description: `Lessons and projects in the ${name} course on Kids Learn AI.`,
+	};
+}
+
 export default async function CoursePage({ params }: CoursePageProps) {
 	const supabase = await getSupabaseServerClient();
 	const { course: courseSlug } = await params;

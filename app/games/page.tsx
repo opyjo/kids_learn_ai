@@ -5,6 +5,12 @@ import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { games } from "@/lib/games-data";
 
+export const metadata = {
+	title: "Python Games for Kids — Kids Learn AI",
+	description:
+		"Build and play real Python games — from guessing games to adventures — designed for kids learning to code.",
+};
+
 export default function GamesPage() {
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-green-500/5 via-cyan-500/5 to-blue-500/5 dark:from-green-600/8 dark:via-cyan-600/8 dark:to-blue-600/8">
