@@ -9,6 +9,8 @@ import {
 	openingQuestion,
 } from "@/lib/concept-labs/explain";
 import { howAiLearnsLab } from "@/lib/concept-labs/labs/how-ai-learns";
+import { nextWordGuesserLab } from "@/lib/concept-labs/labs/next-word-guesser";
+import { shapeSorterLab } from "@/lib/concept-labs/labs/shape-sorter";
 import type { DialogueTurn } from "@/lib/concept-labs/types";
 
 const stats = { trainedSampleCount: 6, testCount: 2, testCorrectCount: 1 };
@@ -18,6 +20,19 @@ describe("openingQuestion", () => {
 		const q = openingQuestion(howAiLearnsLab);
 		expect(q).toContain("Cat");
 		expect(q).toContain("Dog");
+	});
+
+	it("names all classes for a multi-class lab", () => {
+		const q = openingQuestion(shapeSorterLab);
+		for (const label of shapeSorterLab.classes) {
+			expect(q).toContain(label);
+		}
+	});
+
+	it("asks about word choice for next-word labs, not drawings", () => {
+		const q = openingQuestion(nextWordGuesserLab);
+		expect(q).toMatch(/word/i);
+		expect(q).not.toMatch(/drawing/i);
 	});
 });
 
@@ -70,6 +85,25 @@ describe("buildRubricSystemPrompt", () => {
 		const prompt = buildRubricSystemPrompt();
 		expect(prompt).toMatch(/only as json/i);
 		expect(prompt).toContain('"score"');
+	});
+
+	it("describes the next-word activity for next-word labs", () => {
+		const prompt = buildRubricSystemPrompt(nextWordGuesserLab);
+		expect(prompt).toMatch(/next word/i);
+		expect(prompt).not.toMatch(/drawing/i);
+	});
+});
+
+describe("buildSocraticSystemPrompt for next-word labs", () => {
+	it("describes sentences and word-counting, not drawings", () => {
+		const prompt = buildSocraticSystemPrompt({
+			definition: nextWordGuesserLab,
+			stats,
+			misconceptionTags: [],
+			childTurnsSoFar: 0,
+		});
+		expect(prompt).toMatch(/sentence/i);
+		expect(prompt).not.toMatch(/drawing examples/i);
 	});
 });
 

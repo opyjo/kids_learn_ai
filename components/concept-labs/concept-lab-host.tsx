@@ -6,6 +6,7 @@ import {
 	ExplainDialogue,
 	type ExplainOutcome,
 } from "@/components/concept-labs/explain-dialogue";
+import { NextWordLab } from "@/components/concept-labs/next-word-lab";
 import { ProbeRunner } from "@/components/concept-labs/probe-runner";
 import { TrainableClassifierLab } from "@/components/concept-labs/trainable-classifier-lab";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ import type {
 	ConceptLabDefinition,
 	LabAction,
 	LabContext,
+	LabeledSample,
 	LabPhase,
 	LabSessionSummary,
 } from "@/lib/concept-labs/types";
@@ -76,6 +78,10 @@ export function ConceptLabHost({
 	const [canContinuePlay, setCanContinuePlay] = useState(false);
 	const [predictTag, setPredictTag] = useState<string | undefined>(undefined);
 	const [summary, setSummary] = useState<LabSessionSummary | null>(null);
+	// Replay support: the trained machine survives "Play again with my machine".
+	const [attempt, setAttempt] = useState(0);
+	const [keepSamples, setKeepSamples] = useState(false);
+	const lastSamplesRef = useRef<LabeledSample[]>([]);
 
 	const steps = cohort === "baseline" ? BASELINE_STEPS : STEPS;
 	const stepIndex = steps.findIndex((s) => s.phase === phase);
@@ -83,6 +89,10 @@ export function ConceptLabHost({
 
 	const handleAction = useCallback((action: LabAction) => {
 		recorderRef.current.recordAction(action);
+	}, []);
+
+	const handleSamplesChange = useCallback((samples: LabeledSample[]) => {
+		lastSamplesRef.current = samples;
 	}, []);
 
 	function goTo(next: LabPhase) {
@@ -139,8 +149,11 @@ export function ConceptLabHost({
 		}).catch(() => {});
 	}
 
-	function playAgain() {
+	function playAgain(withTrainedMachine: boolean) {
 		recorderRef.current = new LabTelemetryRecorder(definition.labId);
+		setKeepSamples(withTrainedMachine);
+		if (!withTrainedMachine) lastSamplesRef.current = [];
+		setAttempt((n) => n + 1);
 		setCanContinuePlay(false);
 		setPredictTag(undefined);
 		setSummary(null);
@@ -171,7 +184,11 @@ export function ConceptLabHost({
 			{phase !== "done" && (
 				<ol className="flex items-center gap-1.5" aria-label="Lab progress">
 					{steps.map((step, i) => (
-						<li key={step.phase} className="flex flex-1 items-center gap-1.5">
+						<li
+							key={step.phase}
+							className="flex flex-1 items-center gap-1.5"
+							aria-current={i === stepIndex ? "step" : undefined}
+						>
 							<div
 								className={cn(
 									"flex flex-1 flex-col items-center gap-1 rounded-lg py-1.5 text-[11px] font-semibold transition-colors",
@@ -199,7 +216,7 @@ export function ConceptLabHost({
 			)}
 
 			{phase === "predict" && (
-				<div className="space-y-3">
+				<div className="space-y-3 animate-in fade-in slide-in-from-bottom-2 duration-300">
 					<p className="text-xs font-semibold uppercase tracking-wide text-primary">
 						Step 1 · Make a prediction
 					</p>
@@ -215,15 +232,27 @@ export function ConceptLabHost({
 			)}
 
 			{phase === "play" && (
-				<div className="space-y-4">
+				<div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
 					<p className="text-xs font-semibold uppercase tracking-wide text-primary">
 						Step 2 · Teach the machine
 					</p>
-					<TrainableClassifierLab
-						definition={definition}
-						onAction={handleAction}
-						onCanContinueChange={setCanContinuePlay}
-					/>
+					{definition.primitive === "next-word-guesser" ? (
+						<NextWordLab
+							key={attempt}
+							definition={definition}
+							onAction={handleAction}
+							onCanContinueChange={setCanContinuePlay}
+						/>
+					) : (
+						<TrainableClassifierLab
+							key={attempt}
+							definition={definition}
+							onAction={handleAction}
+							onCanContinueChange={setCanContinuePlay}
+							initialSamples={keepSamples ? lastSamplesRef.current : undefined}
+							onSamplesChange={handleSamplesChange}
+						/>
+					)}
 					<div className="flex justify-end">
 						<Button
 							onClick={() => goTo("explain")}
@@ -239,7 +268,7 @@ export function ConceptLabHost({
 			)}
 
 			{phase === "explain" && (
-				<div className="space-y-3">
+				<div className="space-y-3 animate-in fade-in slide-in-from-bottom-2 duration-300">
 					<p className="text-xs font-semibold uppercase tracking-wide text-primary">
 						Step 3 · Explain it to BrightByte
 					</p>
@@ -260,7 +289,7 @@ export function ConceptLabHost({
 			)}
 
 			{phase === "apply" && (
-				<div className="space-y-3">
+				<div className="space-y-3 animate-in fade-in slide-in-from-bottom-2 duration-300">
 					<p className="text-xs font-semibold uppercase tracking-wide text-primary">
 						Step {steps.length} · Use what you learned
 					</p>
@@ -276,7 +305,7 @@ export function ConceptLabHost({
 			)}
 
 			{phase === "done" && summary && (
-				<div className="space-y-4 rounded-xl border-2 border-emerald-200/60 bg-emerald-50/60 dark:border-emerald-900/60 dark:bg-emerald-950/20 p-5 text-center">
+				<div className="space-y-4 rounded-xl border-2 border-emerald-200/60 bg-emerald-50/60 dark:border-emerald-900/60 dark:bg-emerald-950/20 p-5 text-center animate-in fade-in zoom-in-95 duration-500">
 					<PartyPopper className="mx-auto h-8 w-8 text-emerald-600" />
 					<h3 className="text-lg font-bold text-emerald-900 dark:text-emerald-100">
 						You did it!
@@ -291,9 +320,22 @@ export function ConceptLabHost({
 						machine {summary.testCount} time
 						{summary.testCount === 1 ? "" : "s"}.
 					</p>
-					<Button onClick={playAgain} variant="outline" className="rounded-xl">
-						Play again
-					</Button>
+					<div className="flex flex-wrap justify-center gap-2">
+						<Button
+							onClick={() => playAgain(false)}
+							variant="outline"
+							className="rounded-xl"
+						>
+							Play again
+						</Button>
+						{definition.primitive === "trainable-classifier" &&
+							lastSamplesRef.current.length > 0 && (
+								<Button onClick={() => playAgain(true)} className="rounded-xl">
+									Keep teaching my machine ({lastSamplesRef.current.length}{" "}
+									examples)
+								</Button>
+							)}
+					</div>
 				</div>
 			)}
 		</div>

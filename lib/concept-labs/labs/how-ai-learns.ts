@@ -16,6 +16,8 @@ export const howAiLearnsLab: ConceptLabDefinition = {
 	title: "Teach the Machine",
 	concept: "AI learns from the examples you give it",
 	primitive: "trainable-classifier",
+	icon: "🧠",
+	estimatedMinutes: 15,
 	courseSlug: "term-5-ai-sneak-peek",
 	orderIndex: 4,
 	classes: ["Cat", "Dog"],
