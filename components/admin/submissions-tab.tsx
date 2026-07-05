@@ -13,6 +13,7 @@ import {
 	Search,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { TrinketPreview } from "@/components/dashboard/trinket-preview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -182,6 +183,7 @@ export const SubmissionsTab = () => {
 			setLessons(lessonsData || []);
 		} catch (error) {
 			console.error("Error fetching submissions:", error);
+			toast.error("Failed to load submissions. Please refresh the page.");
 		} finally {
 			setIsLoading(false);
 		}
@@ -236,8 +238,10 @@ export const SubmissionsTab = () => {
 			// Refresh submissions
 			await fetchSubmissions();
 			setIsReviewOpen(false);
+			toast.success("Feedback saved");
 		} catch (error) {
 			console.error("Error saving feedback:", error);
+			toast.error("Failed to save feedback. Please try again.");
 		} finally {
 			setIsSaving(false);
 		}

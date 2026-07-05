@@ -91,7 +91,7 @@ export const Footer = () => {
 							</li>
 							<li>
 								<Link
-									href="/profile"
+									href="/settings"
 									className="hover:text-foreground transition-colors cursor-pointer"
 								>
 									My Profile
@@ -105,10 +105,10 @@ export const Footer = () => {
 						<ul className="space-y-3 text-muted-foreground">
 							<li>
 								<Link
-									href="/help"
+									href="/faq"
 									className="hover:text-foreground transition-colors cursor-pointer"
 								>
-									Help Center
+									FAQ
 								</Link>
 							</li>
 							<li>
@@ -149,30 +149,11 @@ export const Footer = () => {
 
 				<div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
 					<p className="text-muted-foreground text-sm">
-						&copy; 2025 Kids Learn AI. All rights reserved. Made with{" "}
+						&copy; {new Date().getFullYear()} Kids Learn AI. All rights
+						reserved. Made with{" "}
 						<Heart className="inline h-4 w-4 text-red-400 fill-red-400" /> for
 						young coders.
 					</p>
-					<div className="flex gap-6">
-						<Link
-							href="/twitter"
-							className="text-muted-foreground hover:text-foreground transition-colors"
-						>
-							Twitter
-						</Link>
-						<Link
-							href="/facebook"
-							className="text-muted-foreground hover:text-foreground transition-colors"
-						>
-							Facebook
-						</Link>
-						<Link
-							href="/instagram"
-							className="text-muted-foreground hover:text-foreground transition-colors"
-						>
-							Instagram
-						</Link>
-					</div>
 				</div>
 			</div>
 		</footer>

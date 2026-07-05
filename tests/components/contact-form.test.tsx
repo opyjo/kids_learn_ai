@@ -206,7 +206,7 @@ describe("ContactForm Component", () => {
 
 		it("should show loading state while submitting", async () => {
 			// Create a promise that we can control
-			let resolvePromise: (value: unknown) => void;
+			let resolvePromise: ((value: unknown) => void) | undefined;
 			const mockFetch = vi.fn().mockImplementation(
 				() =>
 					new Promise((resolve) => {
@@ -234,7 +234,7 @@ describe("ContactForm Component", () => {
 		});
 
 		it("should disable inputs while submitting", async () => {
-			let resolvePromise: (value: unknown) => void;
+			let resolvePromise: ((value: unknown) => void) | undefined;
 			const mockFetch = vi.fn().mockImplementation(
 				() =>
 					new Promise((resolve) => {

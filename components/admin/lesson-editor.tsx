@@ -1,7 +1,9 @@
 "use client";
 
-import { AlertCircle, Eye, Save } from "lucide-react";
+import { AlertCircle, Save } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 import { PythonEditor } from "@/components/code/python-editor";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -50,6 +52,7 @@ export function LessonEditor() {
 
 	const [saving, setSaving] = useState(false);
 	const [error, setError] = useState("");
+	const router = useRouter();
 
 	const handleSave = async () => {
 		setSaving(true);
@@ -61,33 +64,37 @@ export function LessonEditor() {
 				throw new Error("Please fill in all required fields");
 			}
 
-			console.log("[v0] Saving lesson:", lesson);
-
 			const response = await fetch("/api/admin/lessons", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(lesson),
+				// The API expects snake_case column names
+				body: JSON.stringify({
+					title: lesson.title,
+					description: lesson.description,
+					content: lesson.content,
+					difficulty_level: lesson.difficulty,
+					order_index: lesson.orderIndex,
+					is_premium: lesson.isPremium,
+					starter_code: lesson.starterCode,
+					solution_code: lesson.solutionCode,
+				}),
 			});
 
 			if (!response.ok) {
-				throw new Error("Failed to save lesson");
+				const data = await response.json().catch(() => null);
+				throw new Error(data?.error || "Failed to save lesson");
 			}
 
-			// Success - could redirect or show success message
-			console.log("[v0] Lesson saved successfully");
+			toast.success("Lesson created");
+			router.push("/admin/lessons");
+			router.refresh();
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "An error occurred");
 		} finally {
 			setSaving(false);
 		}
-	};
-
-	const handlePreview = () => {
-		// Open preview in new tab
-		const previewData = encodeURIComponent(JSON.stringify(lesson));
-		window.open(`/admin/lessons/preview?data=${previewData}`, "_blank");
 	};
 
 	return (
@@ -103,10 +110,6 @@ export function LessonEditor() {
 					</p>
 				</div>
 				<div className="flex items-center gap-2">
-					<Button variant="outline" onClick={handlePreview}>
-						<Eye className="h-4 w-4 mr-2" />
-						Preview
-					</Button>
 					<Button onClick={handleSave} disabled={saving}>
 						{saving ? (
 							<>

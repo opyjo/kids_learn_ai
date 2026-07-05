@@ -18,6 +18,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { getEnrolledStudentIds } from "@/lib/admin/enrolled-students";
 import { requireAdmin } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -32,16 +33,7 @@ export default async function AdminOverviewPage() {
 		.eq("role", "student");
 
 	// Fetch enrolled students (students with at least one level enrollment)
-	const { data: enrolledStudentsData } = await supabase
-		.from("level_enrollments")
-		.select("student_id")
-		.limit(1000);
-
-	const enrolledStudentIds = new Set(
-		(enrolledStudentsData || []).map(
-			(e: { student_id: string }) => e.student_id,
-		),
-	);
+	const enrolledStudentIds = await getEnrolledStudentIds(supabase);
 	const enrolledStudentsCount = enrolledStudentIds.size;
 
 	// Fetch total enrollments

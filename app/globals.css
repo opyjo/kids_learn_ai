@@ -197,8 +197,8 @@
   list-style-type: disc;
 }
 
-.lesson-content ul::marker {
-  color: hsl(var(--primary));
+.lesson-content ul li::marker {
+  color: var(--primary);
   font-size: 0.875rem;
 }
 
@@ -222,8 +222,8 @@
   list-style-type: decimal;
 }
 
-.lesson-content ol::marker {
-  color: hsl(var(--primary));
+.lesson-content ol li::marker {
+  color: var(--primary);
   font-weight: 700;
 }
 
