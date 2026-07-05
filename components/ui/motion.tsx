@@ -1,11 +1,16 @@
 "use client";
 
-import { type HTMLMotionProps, motion, type Variants } from "framer-motion";
+import {
+	type HTMLMotionProps,
+	motion,
+	type Transition,
+	type Variants,
+} from "framer-motion";
 import type { ReactNode } from "react";
 
 // Default animation settings
 const defaultViewport = { once: true, amount: 0.3 };
-const defaultTransition = { duration: 0.6, ease: "easeOut" };
+const defaultTransition: Transition = { duration: 0.6, ease: "easeOut" };
 
 // Animation variants
 const fadeUpVariants: Variants = {

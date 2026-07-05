@@ -5,6 +5,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { getEnrolledStudentIds } from "@/lib/admin/enrolled-students";
 import { requireAdmin } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -18,16 +19,7 @@ export default async function AnalyticsPage() {
 		.select("*", { count: "exact", head: true })
 		.eq("role", "student");
 
-	const { data: enrolledStudentsData } = await supabase
-		.from("level_enrollments")
-		.select("student_id")
-		.limit(1000);
-
-	const enrolledStudentIds = new Set(
-		(enrolledStudentsData || []).map(
-			(e: { student_id: string }) => e.student_id,
-		),
-	);
+	const enrolledStudentIds = await getEnrolledStudentIds(supabase);
 	const enrolledStudentsCount = enrolledStudentIds.size;
 
 	const { count: totalEnrollments } = await supabase

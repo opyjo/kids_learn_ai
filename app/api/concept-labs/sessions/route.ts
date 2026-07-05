@@ -2,7 +2,14 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getAuthUser } from "@/lib/auth-helpers";
 import type { Cohort } from "@/lib/concept-labs/cohort";
 import type { LabContext, LabSessionSummary } from "@/lib/concept-labs/types";
+import { createRateLimiter } from "@/lib/rate-limit";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+
+// A child completes at most a handful of lab attempts per sitting.
+const sessionsRateLimiter = createRateLimiter({
+	windowMs: 5 * 60 * 1000, // 5 minutes
+	maxRequests: 20,
+});
 
 interface PersistBody {
 	summary: LabSessionSummary;
@@ -22,6 +29,10 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 		const user = await getAuthUser();
 		if (!user) {
 			return NextResponse.json({ persisted: false, reason: "anonymous" });
+		}
+
+		if (!sessionsRateLimiter.checkRateLimit(user.id)) {
+			return NextResponse.json({ persisted: false, reason: "rate-limited" });
 		}
 
 		const { summary, cohort, seed, context } =

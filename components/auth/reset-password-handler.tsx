@@ -1,5 +1,6 @@
 "use client";
 
+import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
@@ -31,11 +32,16 @@ export function ResetPasswordHandler() {
 		// Listen for auth state changes (PASSWORD_RECOVERY event)
 		const {
 			data: { subscription },
-		} = supabase.auth.onAuthStateChange(async (event, session) => {
-			if (event === "PASSWORD_RECOVERY" || (event === "SIGNED_IN" && session)) {
-				setIsValidSession(true);
-			}
-		});
+		} = supabase.auth.onAuthStateChange(
+			async (event: AuthChangeEvent, session: Session | null) => {
+				if (
+					event === "PASSWORD_RECOVERY" ||
+					(event === "SIGNED_IN" && session)
+				) {
+					setIsValidSession(true);
+				}
+			},
+		);
 
 		checkSession();
 

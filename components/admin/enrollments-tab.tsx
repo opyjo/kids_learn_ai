@@ -12,6 +12,7 @@ import {
 	Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -161,6 +162,7 @@ export const EnrollmentsTab = () => {
 			setStudents(studentsWithEnrollments);
 		} catch (error) {
 			console.error("Error fetching data:", error);
+			toast.error("Failed to load students. Please refresh the page.");
 		} finally {
 			setIsLoading(false);
 		}
@@ -241,8 +243,10 @@ export const EnrollmentsTab = () => {
 			// Refresh data
 			await fetchData();
 			setIsEnrollDialogOpen(false);
+			toast.success("Enrollments updated");
 		} catch (error) {
 			console.error("Error saving enrollments:", error);
+			toast.error("Failed to save enrollments. Please try again.");
 		} finally {
 			setIsSaving(false);
 		}
@@ -283,8 +287,10 @@ export const EnrollmentsTab = () => {
 			if (error) throw error;
 
 			await fetchData();
+			toast.success("Enrollment revoked");
 		} catch (error) {
 			console.error("Error revoking enrollment:", error);
+			toast.error("Failed to revoke enrollment. Please try again.");
 		}
 	};
 

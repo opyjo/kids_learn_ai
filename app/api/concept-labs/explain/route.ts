@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { getAuthUser } from "@/lib/auth-helpers";
 import {
 	buildRubricSystemPrompt,
 	buildRubricUserPrompt,
@@ -10,6 +11,7 @@ import {
 } from "@/lib/concept-labs/explain";
 import { getLabById } from "@/lib/concept-labs/registry";
 import type { DialogueTurn } from "@/lib/concept-labs/types";
+import { createRateLimiter } from "@/lib/rate-limit";
 import {
 	checkContentSafety,
 	sanitizeMessage,
@@ -17,6 +19,13 @@ import {
 
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const MODEL = "gpt-4o-mini";
+
+// Each Explain phase is at most 5 child turns plus one rubric score, so a
+// generous per-user ceiling still caps runaway OpenAI spend.
+const explainRateLimiter = createRateLimiter({
+	windowMs: 5 * 60 * 1000, // 5 minutes
+	maxRequests: 30,
+});
 
 /** A gentle nudge back on-topic if the child's message trips the safety check. */
 const STEER_BACK =
@@ -161,6 +170,21 @@ async function handleScore(body: {
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
 	try {
+		// The lab is auth-gated in the UI; unauthenticated calls can only be
+		// abuse, so reject them before spending OpenAI tokens. The client
+		// falls back to canned Socratic questions on any non-OK response.
+		const user = await getAuthUser();
+		if (!user) {
+			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		}
+
+		if (!explainRateLimiter.checkRateLimit(user.id)) {
+			return NextResponse.json(
+				{ error: "Too many requests. Please slow down a little!" },
+				{ status: 429 },
+			);
+		}
+
 		const body = await req.json();
 
 		if (body?.action === "reply") {

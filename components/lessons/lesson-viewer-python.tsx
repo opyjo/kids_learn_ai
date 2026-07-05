@@ -1,6 +1,12 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, CheckCircle, FileText } from "lucide-react";
+import {
+	ArrowLeft,
+	ArrowRight,
+	BookOpen,
+	CheckCircle,
+	FileText,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -21,6 +27,7 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Card,

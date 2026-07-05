@@ -80,15 +80,9 @@ export function SignupForm() {
 
 	return (
 		<form action={formAction} className="space-y-4">
-			{state?.error && (
+			{(state?.error || googleError) && (
 				<Alert variant="destructive">
-					<AlertDescription>{state.error}</AlertDescription>
-				</Alert>
-			)}
-
-			{googleError && (
-				<Alert variant="destructive">
-					<AlertDescription>{googleError}</AlertDescription>
+					<AlertDescription>{state?.error || googleError}</AlertDescription>
 				</Alert>
 			)}
 
@@ -142,6 +136,7 @@ export function SignupForm() {
 					placeholder="Create a password"
 					className="min-h-[44px]"
 					required
+					minLength={8}
 					autoComplete="new-password"
 					aria-required="true"
 					aria-invalid={state?.error ? "true" : "false"}

@@ -52,7 +52,7 @@ export const useLessonCompletion = ({
 	// Toggle lesson completion
 	const toggleCompletion = async (action?: "complete" | "uncomplete") => {
 		if (!userId || !lessonDbId) {
-			alert("Please sign in to track your progress");
+			toast.error("Please sign in to track your progress");
 			return;
 		}
 
@@ -65,7 +65,7 @@ export const useLessonCompletion = ({
 			console.error("Session fetch error:", sessionError);
 		}
 		if (!session) {
-			alert("Your session expired. Please sign in again.");
+			toast.error("Your session expired. Please sign in again.");
 			return;
 		}
 
@@ -73,7 +73,7 @@ export const useLessonCompletion = ({
 			data: { user: authUser },
 		} = await supabase.auth.getUser();
 		if (!authUser) {
-			alert("Your session expired. Please sign in again.");
+			toast.error("Your session expired. Please sign in again.");
 			return;
 		}
 
@@ -90,12 +90,12 @@ export const useLessonCompletion = ({
 
 				if (error) {
 					console.error("Error unmarking lesson:", error);
-					alert(error.message ?? "Failed to update completion status");
+					setIsCompleted(true); // roll back the optimistic update
+					toast.error("Failed to update completion status");
 					return;
 				}
 
 				setIsCompleted(false);
-				console.log("✅ Lesson unmarked as complete");
 				return;
 			}
 
@@ -106,17 +106,17 @@ export const useLessonCompletion = ({
 
 			if (error) {
 				console.error("Error marking lesson complete:", error);
-				alert(error.message ?? "Failed to mark lesson as complete");
+				setIsCompleted(false); // roll back the optimistic update
+				toast.error("Failed to mark lesson as complete");
 				return;
 			}
 
 			setIsCompleted(true);
-			console.log("✅ Lesson marked as complete!");
 			setShowConfetti(true);
 			setTimeout(() => setShowConfetti(false), 2200);
 		} catch (error: any) {
 			console.error("Error toggling completion:", error);
-			alert(error?.message ?? "An error occurred");
+			toast.error("Something went wrong. Please try again.");
 		} finally {
 			setIsLoading(false);
 		}

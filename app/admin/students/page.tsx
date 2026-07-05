@@ -8,6 +8,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { getEnrolledStudentIds } from "@/lib/admin/enrolled-students";
 import { requireAdmin } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -22,16 +23,8 @@ export default async function StudentsPage({
 	const supabase = await getSupabaseServerClient();
 
 	// Enrolled student ids (used for the per-row badge and the Enrolled stat).
-	const { data: enrolledStudentsData } = await supabase
-		.from("level_enrollments")
-		.select("student_id")
-		.limit(1000);
-
-	const enrolledStudentIds = new Set(
-		(enrolledStudentsData || []).map(
-			(e: { student_id: string }) => e.student_id,
-		),
-	);
+	// Paged helper avoids the 1000-row cap that would silently undercount.
+	const enrolledStudentIds = await getEnrolledStudentIds(supabase);
 	const enrolledCount = enrolledStudentIds.size;
 
 	// Total student count (exact) drives the stats and page count independently

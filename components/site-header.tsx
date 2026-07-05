@@ -452,6 +452,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	const [showAnnouncement, setShowAnnouncement] = useState(false);
 	const [activeYearTab, setActiveYearTab] = useState<YearTab>("year1");
 	const [isHidden, setIsHidden] = useState(false);
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const lastScrollYRef = useRef(0);
 
 	const isActive = (href: string) =>
@@ -465,10 +466,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 		NAV_ITEMS.year2Terms5to8.some((item) => isActive(item.href));
 
 	const closeMobileMenu = () => {
-		const trigger = document.querySelector(
-			'[aria-label="Open menu"]',
-		) as HTMLElement;
-		trigger?.click();
+		setMobileMenuOpen(false);
 	};
 
 	const handleDismissAnnouncement = () => {
@@ -866,13 +864,13 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
 							{/* Mobile Menu - only render after mount to prevent hydration mismatch */}
 							{mounted && (
-								<Sheet>
+								<Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
 									<SheetTrigger asChild>
 										<Button
 											variant="ghost"
 											size="icon"
 											aria-label="Open navigation menu"
-											aria-expanded="false"
+											aria-expanded={mobileMenuOpen}
 											className="lg:hidden min-h-[44px] min-w-[44px]"
 										>
 											<Menu className="h-5 w-5" aria-hidden="true" />

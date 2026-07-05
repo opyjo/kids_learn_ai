@@ -33,9 +33,11 @@ const SubmitButton = () => {
 export function LoginForm() {
 	const [state, formAction] = useActionState(loginAction, null);
 	const [googleLoading, setGoogleLoading] = useState(false);
+	const [googleError, setGoogleError] = useState("");
 
 	const handleGoogleSignIn = async () => {
 		setGoogleLoading(true);
+		setGoogleError("");
 
 		try {
 			const supabase = getSupabaseBrowserClient();
@@ -56,15 +58,18 @@ export function LoginForm() {
 			}
 		} catch (err) {
 			console.error("Google sign in error:", err);
+			setGoogleError(
+				"Google sign-in didn't work. Please try again, or sign in with your email and password.",
+			);
 			setGoogleLoading(false);
 		}
 	};
 
 	return (
 		<form action={formAction} className="space-y-4">
-			{state?.error && (
+			{(state?.error || googleError) && (
 				<Alert variant="destructive">
-					<AlertDescription>{state.error}</AlertDescription>
+					<AlertDescription>{state?.error || googleError}</AlertDescription>
 				</Alert>
 			)}
 

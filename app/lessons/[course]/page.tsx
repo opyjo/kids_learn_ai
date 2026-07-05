@@ -173,26 +173,29 @@ export default async function CoursePage({ params }: CoursePageProps) {
 							<div className="flex items-center gap-3 bg-card rounded-full px-4 py-2 shadow-sm border border-border">
 								<div className="flex items-center gap-2">
 									<div className="relative w-9 h-9">
-										<svg className="transform -rotate-90 w-9 h-9">
+										<svg
+											className="transform -rotate-90 w-9 h-9"
+											viewBox="0 0 36 36"
+										>
 											<circle
-												cx="20"
-												cy="20"
-												r="16"
+												cx="18"
+												cy="18"
+												r="15"
 												stroke="currentColor"
 												strokeWidth="3"
 												fill="none"
 												className="text-muted"
 											/>
 											<circle
-												cx="20"
-												cy="20"
-												r="16"
+												cx="18"
+												cy="18"
+												r="15"
 												stroke="currentColor"
 												strokeWidth="3"
 												fill="none"
-												strokeDasharray={`${2 * Math.PI * 16}`}
+												strokeDasharray={`${2 * Math.PI * 15}`}
 												strokeDashoffset={`${
-													2 * Math.PI * 16 * (1 - overallProgress / 100)
+													2 * Math.PI * 15 * (1 - overallProgress / 100)
 												}`}
 												className="text-primary transition-all duration-500"
 												strokeLinecap="round"

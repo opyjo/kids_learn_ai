@@ -24,8 +24,13 @@ export function ErrorMessage({
 }: ErrorMessageProps) {
 	return (
 		<Alert
-			variant={variant}
-			className={cn("relative", className)}
+			variant={variant === "warning" ? "default" : variant}
+			className={cn(
+				"relative",
+				variant === "warning" &&
+					"border-amber-500/50 text-amber-700 dark:text-amber-400 [&>svg]:text-amber-600",
+				className,
+			)}
 			role="alert"
 			aria-live="assertive"
 		>

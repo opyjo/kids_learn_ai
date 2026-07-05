@@ -45,7 +45,7 @@ export function ResetPasswordForm() {
 					name="password"
 					placeholder="Enter your new password"
 					required
-					minLength={6}
+					minLength={8}
 				/>
 			</div>
 
@@ -56,7 +56,7 @@ export function ResetPasswordForm() {
 					name="confirmPassword"
 					placeholder="Confirm your new password"
 					required
-					minLength={6}
+					minLength={8}
 				/>
 			</div>
 
