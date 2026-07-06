@@ -39,6 +39,49 @@ interface PythonEditorProps {
 
 const INPUT_CALL_PATTERN = /\binput\s*\(/;
 
+/**
+ * Remove Python comments and string literals so an input() that only
+ * appears in a commented-out line (or inside a string) doesn't trigger
+ * the "input() isn't supported" warning.
+ */
+function stripCommentsAndStrings(code: string): string {
+	let result = "";
+	let i = 0;
+	while (i < code.length) {
+		const ch = code[i];
+		if (ch === "#") {
+			while (i < code.length && code[i] !== "\n") i++;
+			continue;
+		}
+		if (ch === '"' || ch === "'") {
+			const triple = code.slice(i, i + 3) === ch.repeat(3);
+			const delim = triple ? ch.repeat(3) : ch;
+			i += delim.length;
+			while (i < code.length) {
+				if (code[i] === "\\") {
+					i += 2;
+					continue;
+				}
+				if (code.startsWith(delim, i)) {
+					i += delim.length;
+					break;
+				}
+				if (!triple && code[i] === "\n") break;
+				i++;
+			}
+			result += " ";
+			continue;
+		}
+		result += ch;
+		i++;
+	}
+	return result;
+}
+
+function codeCallsInput(code: string): boolean {
+	return INPUT_CALL_PATTERN.test(stripCommentsAndStrings(code));
+}
+
 export function PythonEditor({
 	initialCode = "",
 	onCodeChange,
@@ -72,7 +115,7 @@ export function PythonEditor({
 			return;
 		}
 
-		if (INPUT_CALL_PATTERN.test(code)) {
+		if (codeCallsInput(code)) {
 			setOutput(
 				"Heads up: input() isn't supported in the browser editor.\n" +
 					'Give your variables values directly (e.g. name = "Ada"), or run this program in Trinket or Thonny instead.',
