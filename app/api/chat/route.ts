@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { CLAUDE_MODEL, getAnthropicClient } from "@/lib/anthropic";
 import { getAuthUser } from "@/lib/auth-helpers";
 import {
 	FALLBACK_RESPONSES,
@@ -112,39 +113,55 @@ const generateFollowUpSuggestions = (
 	return FOLLOW_UP_SUGGESTIONS.default;
 };
 
-// Run AI-powered safety check (Shadow Auditing)
-const runAISafetyCheck = async (
-	message: string,
-	apiKey: string,
-): Promise<AISafetyResult> => {
-	try {
-		const response = await fetch("https://api.openai.com/v1/chat/completions", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${apiKey}`,
-			},
-			body: JSON.stringify({
-				model: "gpt-4o-mini",
-				messages: [
-					{
-						role: "system",
-						content:
-							"You are a strict safety auditor for a kids' coding site. Analyze the message for safety, topic relevance (Python/AI), and request type. Respond ONLY in valid JSON.",
-					},
-					{
-						role: "user",
-						content: SAFETY_CHECK_PROMPT.replace("{user_message}", message),
-					},
-				],
-				response_format: { type: "json_object" },
-				temperature: 0,
-			}),
-		});
+// JSON schema for the safety-audit structured output (matches AISafetyResult)
+const SAFETY_RESULT_JSON_SCHEMA = {
+	type: "object",
+	properties: {
+		isPythonQuestion: { type: "boolean" },
+		isSafe: { type: "boolean" },
+		requestType: {
+			type: "string",
+			enum: ["solution", "help", "concept", "debug"],
+		},
+		action: { type: "string", enum: ["allow", "redirect", "block"] },
+	},
+	required: ["isPythonQuestion", "isSafe", "requestType", "action"],
+	additionalProperties: false,
+} as const;
 
-		if (!response.ok) throw new Error("Safety check failed");
-		const data = await response.json();
-		return JSON.parse(data.choices[0].message.content);
+// Run AI-powered safety check (Shadow Auditing)
+const runAISafetyCheck = async (message: string): Promise<AISafetyResult> => {
+	try {
+		const anthropic = getAnthropicClient();
+		if (!anthropic) throw new Error("Safety check failed");
+		const response = await anthropic.messages.create({
+			model: CLAUDE_MODEL,
+			max_tokens: 256,
+			temperature: 0,
+			system:
+				"You are a strict safety auditor for a kids' coding site. Analyze the message for safety, topic relevance (Python/AI), and request type. Respond ONLY in valid JSON.",
+			output_config: {
+				format: { type: "json_schema", schema: SAFETY_RESULT_JSON_SCHEMA },
+			},
+			messages: [
+				{
+					role: "user",
+					content: SAFETY_CHECK_PROMPT.replace("{user_message}", message),
+				},
+			],
+		});
+		if (response.stop_reason === "refusal") {
+			// The model itself declined the content — treat as unsafe.
+			return {
+				isPythonQuestion: false,
+				isSafe: false,
+				requestType: "help",
+				action: "block",
+			};
+		}
+		const text = response.content.find((block) => block.type === "text")?.text;
+		if (!text) throw new Error("Safety check failed");
+		return JSON.parse(text);
 	} catch (error) {
 		console.error("AI Safety Check Error:", error);
 		// Fail CLOSED: if the audit can't run, do not silently disable the safety
@@ -327,8 +344,8 @@ export const POST = async (req: NextRequest) => {
 			);
 		}
 
-		const apiKey = process.env.OPENAI_API_KEY;
-		if (!apiKey) {
+		const anthropic = getAnthropicClient();
+		if (!anthropic) {
 			return NextResponse.json(
 				{ error: "Chat service is not configured." },
 				{ status: 500 },
@@ -337,7 +354,7 @@ export const POST = async (req: NextRequest) => {
 
 		// Require authentication. Each accepted message triggers two paid model
 		// calls (safety audit + completion); allowing anonymous access let a
-		// script burn the OpenAI quota behind only a spoofable per-IP limit.
+		// script burn the API quota behind only a spoofable per-IP limit.
 		const user = await getAuthUser();
 		if (!user) {
 			return NextResponse.json(
@@ -417,7 +434,7 @@ export const POST = async (req: NextRequest) => {
 		}
 
 		// AI Shadow Audit
-		const aiSafety = await runAISafetyCheck(sanitizedContent, apiKey);
+		const aiSafety = await runAISafetyCheck(sanitizedContent);
 
 		if (!aiSafety.isSafe || aiSafety.action === "block") {
 			logSafetyEvent("block", "AI Shadow Audit: Unsafe", sanitizedContent);
@@ -488,40 +505,43 @@ export const POST = async (req: NextRequest) => {
 		}
 		// Cap to the most recent turns so old history can't be used to jailbreak.
 		const cappedHistory = sanitizedHistory.slice(-MAX_HISTORY_TURNS);
+		// The Claude API requires the first message to be a user turn; drop any
+		// leading assistant greeting the client stored in localStorage.
+		while (cappedHistory.length > 0 && cappedHistory[0].role !== "user") {
+			cappedHistory.shift();
+		}
 
-		const openAIMessages = [
-			{
-				role: "system",
-				content: `${systemPrompt}${contextSection}\n\nCRITICAL SAFETY REMINDER: You are chatting with a child (8-16).`,
-			},
-			...cappedHistory,
-			{ role: "user", content: sanitizedContent },
-		];
-
-		const response = await fetch("https://api.openai.com/v1/chat/completions", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${apiKey}`,
-			},
-			body: JSON.stringify({
-				model: "gpt-4o-mini",
-				messages: openAIMessages,
-				temperature: 0.6,
+		let response: Awaited<ReturnType<typeof anthropic.messages.create>>;
+		try {
+			response = await anthropic.messages.create({
+				model: CLAUDE_MODEL,
 				max_tokens: 800,
-			}),
-		});
-
-		if (!response.ok)
+				temperature: 0.6,
+				system: `${systemPrompt}${contextSection}\n\nCRITICAL SAFETY REMINDER: You are chatting with a child (8-16).`,
+				messages: [
+					...cappedHistory,
+					{ role: "user", content: sanitizedContent },
+				],
+			});
+		} catch (error) {
+			console.error("Chat completion error:", error);
 			return NextResponse.json({ error: "API error" }, { status: 500 });
+		}
 
-		const data = await response.json();
-		const assistantMessage = data.choices[0]?.message;
+		if (response.stop_reason === "refusal")
+			return NextResponse.json({
+				role: "assistant",
+				content: FALLBACK_RESPONSES.offTopic,
+			});
 
-		if (!assistantMessage?.content)
+		const assistantContent = response.content.find(
+			(block) => block.type === "text",
+		)?.text;
+
+		if (!assistantContent)
 			return NextResponse.json({ error: "No response" }, { status: 500 });
 
-		const responseCheck = checkContentSafety(assistantMessage.content);
+		const responseCheck = checkContentSafety(assistantContent);
 		if (!responseCheck.isSafe)
 			return NextResponse.json({
 				role: "assistant",
@@ -529,10 +549,11 @@ export const POST = async (req: NextRequest) => {
 			});
 
 		return NextResponse.json({
-			...assistantMessage,
+			role: "assistant",
+			content: assistantContent,
 			suggestions: generateFollowUpSuggestions(
 				sanitizedContent,
-				assistantMessage.content,
+				assistantContent,
 			),
 			usage: dailyUsage
 				? { remaining: dailyUsage.remaining, limit: dailyUsage.limit }
