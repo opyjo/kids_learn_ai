@@ -31,9 +31,9 @@ wired into a real lesson.
   probe answers.
 - **Socratic Explain phase** (Phase 2): `explain.ts` (pure prompt construction —
   ask-don't-tell contract, misconception targeting, turn budget, rubric),
-  `app/api/concept-labs/explain/route.ts` (auth + rate-limited, OpenAI-backed
+  `app/api/concept-labs/explain/route.ts` (auth + rate-limited, Claude-backed
   reply + 0–2 rubric scorer; child messages pass a narrow word-bounded
-  blocklist in `safety.ts` plus the OpenAI moderation model — not the tutor's
+  blocklist in `safety.ts` plus a Claude moderation check — not the tutor's
   blunt substring blocklist, which false-positives on innocent lab talk), and
   `explain-dialogue.tsx` (the BrightByte chat UI). Capped at
   `MAX_CHILD_TURNS` (5) turns; **fails soft** — if the model is unavailable it
@@ -90,9 +90,9 @@ standalone-only lab that appears just in the `/labs` gallery.
 
 ## Provider note
 
-The Explain phase reuses the project's **existing OpenAI (`gpt-4o-mini`)** chat
-infrastructure and `OPENAI_API_KEY` — not Anthropic — for consistency with
-`app/api/chat`. (The design doc §6 assumed Claude; the live codebase is OpenAI.)
+The Explain phase reuses the project's **Claude (`claude-haiku-4-5`)** chat
+infrastructure and `ANTHROPIC_API_KEY`, for consistency with
+`app/api/chat`.
 No new secret or dependency was added. Human-scoring spot-checks of the rubric
 (doc §8) remain future work.
 

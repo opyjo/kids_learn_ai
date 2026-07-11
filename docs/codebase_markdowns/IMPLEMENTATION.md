@@ -8,7 +8,7 @@
 - **Frontend:** Next.js 14 (App Router), React 18, TypeScript
 - **Styling:** Tailwind CSS 4, shadcn/ui, Radix UI
 - **Backend:** Supabase (PostgreSQL, Auth, RLS)
-- **AI:** OpenAI GPT-4o-mini
+- **AI:** Anthropic Claude (claude-haiku-4-5)
 - **Code Execution:** Pyodide (Python in browser), Trinket integration
 - **Animation:** Lottie React
 - **Package Manager:** pnpm
@@ -164,7 +164,7 @@ CREATE TABLE lessons (
 - **No Complete Solutions** - Educational approach (hints only)
 
 ### Chat API (`/api/chat`)
-- Uses OpenAI GPT-4o-mini
+- Uses Anthropic Claude (claude-haiku-4-5)
 - Custom system prompts per tutor
 - Safety filtering for child-appropriate content
 - Edge runtime for performance
@@ -447,8 +447,8 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 
-# OpenAI
-OPENAI_API_KEY=
+# Anthropic
+ANTHROPIC_API_KEY=
 
 # Email (optional)
 RESEND_API_KEY=

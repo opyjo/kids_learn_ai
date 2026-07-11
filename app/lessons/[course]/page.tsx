@@ -1,6 +1,7 @@
 import {
 	ArrowLeft,
 	BookOpen,
+	Brain,
 	CalendarClock,
 	CheckCircle,
 	Lock,
@@ -91,10 +92,54 @@ export default async function CoursePage({ params }: CoursePageProps) {
 		);
 	}
 
+	// Quick Check quizzes live behind RLS (answer keys must stay server-side),
+	// so the badge lookup goes through the admin client: which lessons have a
+	// published quiz, and the student's best attempt on each.
+	const adminClient = getSupabaseAdminClient();
+	const quizIdByLesson = new Map<string, string>();
+	const bestAttemptByQuiz = new Map<
+		string,
+		{ percentage: number; passed: boolean }
+	>();
+	const lessonIds = (lessonsData || []).map((lesson) => lesson.id);
+	if (adminClient && lessonIds.length > 0) {
+		const { data: quizRows } = await adminClient
+			.from("quizzes")
+			.select("id, lesson_id")
+			.in("lesson_id", lessonIds)
+			.eq("quiz_type", "quick_check")
+			.eq("status", "published")
+			.eq("is_active", true);
+		for (const quiz of quizRows || []) {
+			quizIdByLesson.set(quiz.lesson_id, quiz.id);
+		}
+		if (user && quizRows && quizRows.length > 0) {
+			const { data: attempts } = await adminClient
+				.from("quiz_attempts")
+				.select("quiz_id, percentage, passed")
+				.eq("user_id", user.id)
+				.in(
+					"quiz_id",
+					quizRows.map((quiz) => quiz.id),
+				);
+			for (const attempt of attempts || []) {
+				const previous = bestAttemptByQuiz.get(attempt.quiz_id);
+				if (!previous || attempt.percentage > previous.percentage) {
+					bestAttemptByQuiz.set(attempt.quiz_id, {
+						percentage: attempt.percentage,
+						passed: attempt.passed,
+					});
+				}
+			}
+		}
+	}
+
 	// Transform lessons data
 	const lessons = (lessonsData || []).map((lesson) => {
 		const isCompleted = completedLessonIds.has(lesson.id);
 		const isFreeTrial = isFreeTrialLesson(courseSlug, lesson.order_index);
+		const quizId = quizIdByLesson.get(lesson.id);
+		const quizBest = quizId ? bestAttemptByQuiz.get(quizId) : undefined;
 
 		return {
 			id: lesson.id,
@@ -103,6 +148,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
 			description: lesson.description,
 			status: isCompleted ? "completed" : "not_started",
 			isFreeTrial,
+			hasQuiz: Boolean(quizId),
+			quizBest: quizBest || null,
 		};
 	});
 
@@ -110,7 +157,6 @@ export default async function CoursePage({ params }: CoursePageProps) {
 	// class_schedules table has no public SELECT policy, so this goes through
 	// the server admin client with an explicit non-sensitive column list.
 	let scheduleLines: string[] = [];
-	const adminClient = getSupabaseAdminClient();
 	if (adminClient) {
 		const { data: schedules } = await adminClient
 			.from("class_schedules")
@@ -322,6 +368,25 @@ export default async function CoursePage({ params }: CoursePageProps) {
 											{lesson.status === "completed" && (
 												<CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
 											)}
+											{isEnrolled &&
+												lesson.hasQuiz &&
+												(lesson.quizBest ? (
+													<Badge
+														className={`text-xs ${
+															lesson.quizBest.passed
+																? "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300"
+																: "bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300"
+														}`}
+													>
+														<Brain className="h-3 w-3 mr-1" />
+														Quiz {Math.round(lesson.quizBest.percentage)}%
+													</Badge>
+												) : (
+													<Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 text-xs">
+														<Brain className="h-3 w-3 mr-1" />
+														Quiz
+													</Badge>
+												))}
 											{lesson.isFreeTrial && !isEnrolled && (
 												<Badge className="bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300 text-xs">
 													<Sparkles className="h-3 w-3 mr-1" />

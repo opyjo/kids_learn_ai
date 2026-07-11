@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { checkKidChatSafety } from "@/lib/concept-labs/safety";
-import { quizQuestionInputSchema } from "@/lib/quizzes/schemas";
+import { generateQuizQuestions } from "@/lib/quizzes/generation";
 import { getApiContext } from "@/lib/quizzes/server";
 import { createRateLimiter } from "@/lib/rate-limit";
 
@@ -56,64 +55,11 @@ export async function POST(request: NextRequest) {
 			{ error: "No lesson content found" },
 			{ status: 404 },
 		);
-	const apiKey = process.env.OPENAI_API_KEY;
-	if (!apiKey)
+	const result = await generateQuizQuestions(source, parsed.data.count);
+	if ("error" in result)
 		return NextResponse.json(
-			{ error: "OPENAI_API_KEY is not configured" },
-			{ status: 503 },
+			{ error: result.error },
+			{ status: result.status },
 		);
-	const response = await fetch("https://api.openai.com/v1/chat/completions", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Authorization: `Bearer ${apiKey}`,
-		},
-		body: JSON.stringify({
-			model: "gpt-4o-mini",
-			temperature: 0.3,
-			response_format: { type: "json_object" },
-			messages: [
-				{
-					role: "system",
-					content:
-						"Create safe, clear quiz questions for children ages 9-13. Return JSON {questions:[...]}. Each item must have question, question_type (multiple_choice, true_false, code_output, or code_ordering), options, correct_answer (an array only for code_ordering), explanation, hint, misconception_tag, concept_tag (a short reusable skill label such as for-loops), points=1000, order_index, and time_limit_seconds=30. Never introduce facts absent from the source.",
-				},
-				{
-					role: "user",
-					content: `Create ${parsed.data.count} varied questions from this course material:\n${source.slice(0, 60_000)}`,
-				},
-			],
-		}),
-	});
-	if (!response.ok)
-		return NextResponse.json(
-			{ error: "Question generation failed" },
-			{ status: 502 },
-		);
-	const json = await response.json();
-	try {
-		const generated = JSON.parse(json.choices?.[0]?.message?.content || "{}");
-		const output = z
-			.object({ questions: z.array(quizQuestionInputSchema).min(1).max(20) })
-			.parse(generated);
-		if (
-			output.questions.some(
-				(question) =>
-					!checkKidChatSafety(
-						`${question.question} ${question.explanation} ${question.hint}`,
-					).isSafe,
-			)
-		) {
-			return NextResponse.json(
-				{ error: "Generated content did not pass safety review" },
-				{ status: 422 },
-			);
-		}
-		return NextResponse.json({ questions: output.questions, status: "draft" });
-	} catch {
-		return NextResponse.json(
-			{ error: "The model returned invalid questions. Please try again." },
-			{ status: 422 },
-		);
-	}
+	return NextResponse.json({ questions: result.questions, status: "draft" });
 }

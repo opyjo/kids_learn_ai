@@ -17,6 +17,10 @@ import {
 	NextClassCard,
 	type NextClassInfo,
 } from "@/components/dashboard/next-class-card";
+import {
+	type QuickCheckItem,
+	QuickChecksCard,
+} from "@/components/dashboard/quick-checks-card";
 import { RecentFeedbackCard } from "@/components/dashboard/recent-feedback-card";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +35,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { getUserEnrollments, requireAuth } from "@/lib/auth-helpers";
 import { formatScheduleLine, getNextOccurrence } from "@/lib/schedule-utils";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
@@ -292,6 +297,70 @@ export default async function DashboardPage() {
 			href: `/lessons/${sub.courseSlug}/${sub.lessonOrderIndex}`,
 		}));
 
+	// Quick Check quizzes for enrolled lessons, with the student's best attempt.
+	// Quiz tables are RLS-locked (answer keys stay server-side), so this read
+	// goes through the admin client with non-sensitive columns only.
+	let quickChecks: QuickCheckItem[] = [];
+	const adminClient = getSupabaseAdminClient();
+	if (adminClient && enrolledLessons && enrolledLessons.length > 0) {
+		const { data: quizRows } = await adminClient
+			.from("quizzes")
+			.select("id, lesson_id")
+			.in(
+				"lesson_id",
+				enrolledLessons.map((lesson: any) => lesson.id),
+			)
+			.eq("quiz_type", "quick_check")
+			.eq("status", "published")
+			.eq("is_active", true);
+		if (quizRows && quizRows.length > 0) {
+			const { data: attemptRows } = await adminClient
+				.from("quiz_attempts")
+				.select("quiz_id, percentage, passed")
+				.eq("user_id", authUser.id)
+				.in(
+					"quiz_id",
+					quizRows.map((quiz) => quiz.id),
+				);
+			const attemptsByQuiz = new Map<
+				string,
+				{ best: number; passed: boolean; count: number }
+			>();
+			for (const attempt of attemptRows || []) {
+				const previous = attemptsByQuiz.get(attempt.quiz_id);
+				attemptsByQuiz.set(attempt.quiz_id, {
+					best: Math.max(previous?.best ?? 0, attempt.percentage),
+					passed: (previous?.passed ?? false) || attempt.passed,
+					count: (previous?.count ?? 0) + 1,
+				});
+			}
+			const lessonById = new Map(
+				enrolledLessons.map((lesson: any) => [lesson.id, lesson]),
+			);
+			quickChecks = quizRows
+				.flatMap((quiz) => {
+					const lesson: any = lessonById.get(quiz.lesson_id);
+					const course = lesson ? courseById.get(lesson.course_id) : undefined;
+					if (!lesson || !course) return [];
+					const attempts = attemptsByQuiz.get(quiz.id);
+					// Out of attempts without passing: nothing actionable, so leave
+					// it off the list rather than offer a retry that will be refused.
+					if (attempts && !attempts.passed && attempts.count >= 2) return [];
+					return [
+						{
+							lessonTitle: lesson.title,
+							courseTitle: course.title,
+							weekNumber: lesson.order_index,
+							href: `/lessons/${course.slug}/${lesson.order_index}`,
+							bestPercentage: attempts ? attempts.best : null,
+							passed: attempts?.passed ?? false,
+						},
+					];
+				})
+				.sort((a, b) => a.weekNumber - b.weekNumber);
+		}
+	}
+
 	const metadata = authUser.user_metadata as { full_name?: string } | null;
 	const userName =
 		profile?.full_name ||
@@ -478,8 +547,11 @@ export default async function DashboardPage() {
 					</Card>
 				</div>
 
-				{/* Enrolled Levels */}
+				{/* Learning Map (spaced review) */}
 				<LearningProgressCard />
+
+				{/* Lesson quizzes to take or retry */}
+				<QuickChecksCard items={quickChecks} />
 
 				{/* Enrolled Levels */}
 				{enrolledCourses && enrolledCourses.length > 0 && (

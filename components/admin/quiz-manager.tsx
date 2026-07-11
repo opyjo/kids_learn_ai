@@ -6,11 +6,12 @@ import {
 	Copy,
 	Download,
 	Gamepad2,
+	ListChecks,
 	Plus,
 	Save,
 	Sparkles,
 } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { QuestionInput } from "@/components/quizzes/question-input";
 import { Badge } from "@/components/ui/badge";
@@ -101,6 +102,8 @@ export function QuizManager({
 	]);
 	const [busy, setBusy] = useState(false);
 	const [showPreview, setShowPreview] = useState(false);
+	const [batchBusy, setBatchBusy] = useState(false);
+	const [batchNote, setBatchNote] = useState("");
 	const load = useCallback(async () => {
 		const [quizResponse, reportResponse] = await Promise.all([
 			fetch("/api/admin/quizzes"),
@@ -196,6 +199,75 @@ export function QuizManager({
 		setStatus("draft");
 		toast.success("AI draft ready for your review");
 	};
+	const coverage = useMemo(() => {
+		const statusByLesson = new Map<string, "published" | "draft">();
+		for (const quiz of quizzes) {
+			if (
+				quiz.quiz_type !== "quick_check" ||
+				!quiz.lesson_id ||
+				quiz.status === "archived"
+			)
+				continue;
+			if (quiz.status === "published")
+				statusByLesson.set(quiz.lesson_id, "published");
+			else if (!statusByLesson.has(quiz.lesson_id))
+				statusByLesson.set(quiz.lesson_id, "draft");
+		}
+		const missing = lessons.filter((lesson) => !statusByLesson.has(lesson.id));
+		return {
+			published: lessons.filter(
+				(lesson) => statusByLesson.get(lesson.id) === "published",
+			).length,
+			drafts: lessons.filter(
+				(lesson) => statusByLesson.get(lesson.id) === "draft",
+			).length,
+			missing,
+		};
+	}, [quizzes, lessons]);
+	const courseTitles = useMemo(
+		() => new Map(courses.map((course) => [course.id, course.title])),
+		[courses],
+	);
+	const generateMissing = async () => {
+		setBatchBusy(true);
+		let createdTotal = 0;
+		const failures = new Set<string>();
+		try {
+			for (;;) {
+				setBatchNote(
+					createdTotal
+						? `${createdTotal} draft${createdTotal === 1 ? "" : "s"} created so far…`
+						: "Generating drafts…",
+				);
+				const response = await fetch("/api/admin/quizzes/generate-missing", {
+					method: "POST",
+				});
+				const data = await response.json().catch(() => ({}));
+				if (!response.ok) {
+					toast.error(data.error || "Batch generation failed");
+					break;
+				}
+				createdTotal += data.created?.length || 0;
+				for (const failure of data.failed || [])
+					failures.add(failure.title as string);
+				// A round that creates nothing means every remaining lesson is
+				// failing generation — stop instead of retrying the same batch.
+				if (!data.created?.length || data.remaining <= 0) break;
+			}
+		} finally {
+			setBatchBusy(false);
+			setBatchNote("");
+		}
+		if (createdTotal)
+			toast.success(
+				`${createdTotal} draft${createdTotal === 1 ? "" : "s"} ready for your review`,
+			);
+		if (failures.size)
+			toast.warning(`Could not generate for: ${[...failures].join(", ")}`, {
+				description: "Try these again or write them by hand.",
+			});
+		void load();
+	};
 	const updateQuestion = (index: number, patch: Partial<QuizQuestionInput>) =>
 		setQuestions(
 			questions.map((question, questionIndex) =>
@@ -267,6 +339,79 @@ export function QuizManager({
 					</a>
 				</Button>
 			</div>
+			{lessons.length > 0 && (
+				<Card>
+					<CardHeader>
+						<div className="flex flex-wrap items-center justify-between gap-3">
+							<div>
+								<CardTitle className="flex items-center gap-2">
+									<ListChecks className="h-5 w-5 text-purple-500" />
+									Quick Check coverage
+								</CardTitle>
+								<CardDescription>
+									{coverage.published} of {lessons.length} lessons have a
+									published Quick Check
+									{coverage.drafts > 0 &&
+										` · ${coverage.drafts} draft${coverage.drafts === 1 ? "" : "s"} awaiting review`}
+								</CardDescription>
+							</div>
+							{coverage.missing.length > 0 && (
+								<Button
+									type="button"
+									disabled={batchBusy}
+									onClick={generateMissing}
+								>
+									<Sparkles className="mr-2 h-4 w-4" />
+									{batchBusy
+										? batchNote || "Working…"
+										: `Generate drafts for ${coverage.missing.length} missing lesson${coverage.missing.length === 1 ? "" : "s"}`}
+								</Button>
+							)}
+						</div>
+					</CardHeader>
+					<CardContent className="space-y-3">
+						<div
+							className="h-2 w-full overflow-hidden rounded-full bg-muted"
+							role="progressbar"
+							aria-valuemin={0}
+							aria-valuemax={lessons.length}
+							aria-valuenow={coverage.published}
+							aria-label="Lessons with a published Quick Check"
+						>
+							<div
+								className="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all"
+								style={{
+									width: `${Math.round((coverage.published / lessons.length) * 100)}%`,
+								}}
+							/>
+						</div>
+						{coverage.missing.length > 0 ? (
+							<details>
+								<summary className="cursor-pointer text-sm text-muted-foreground">
+									{coverage.missing.length} lesson
+									{coverage.missing.length === 1 ? "" : "s"} without a quiz
+								</summary>
+								<ul className="mt-2 space-y-1 text-sm">
+									{coverage.missing.map((lesson) => (
+										<li key={lesson.id} className="flex items-center gap-2">
+											<Badge variant="outline" className="text-xs">
+												{courseTitles.get(lesson.course_id) || "Unknown level"}
+											</Badge>
+											{lesson.order_index}. {lesson.title}
+										</li>
+									))}
+								</ul>
+							</details>
+						) : (
+							<p className="text-sm text-muted-foreground">
+								Every lesson has a Quick Check.
+								{coverage.drafts > 0 &&
+									" Publish the remaining drafts to make them visible to students."}
+							</p>
+						)}
+					</CardContent>
+				</Card>
+			)}
 			<Card>
 				<CardHeader>
 					<CardTitle>{editingId ? "Edit quiz" : "Create a quiz"}</CardTitle>

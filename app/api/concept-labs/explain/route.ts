@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { CLAUDE_MODEL, getAnthropicClient } from "@/lib/anthropic";
 import { getAuthUser } from "@/lib/auth-helpers";
 import {
 	buildRubricSystemPrompt,
@@ -15,12 +16,8 @@ import type { DialogueTurn } from "@/lib/concept-labs/types";
 import { createRateLimiter } from "@/lib/rate-limit";
 import { sanitizeMessage } from "@/lib/utils/content-safety";
 
-const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
-const OPENAI_MODERATION_URL = "https://api.openai.com/v1/moderations";
-const MODEL = "gpt-4o-mini";
-
 // Each Explain phase is at most 5 child turns plus one rubric score, so a
-// generous per-user ceiling still caps runaway OpenAI spend.
+// generous per-user ceiling still caps runaway model spend.
 const explainRateLimiter = createRateLimiter({
 	windowMs: 5 * 60 * 1000, // 5 minutes
 	maxRequests: 30,
@@ -30,66 +27,101 @@ const explainRateLimiter = createRateLimiter({
 const STEER_BACK =
 	"Let's keep talking about your drawing lab! 🤖 What did the machine look at to make its guess?";
 
+const MODERATION_JSON_SCHEMA = {
+	type: "object",
+	properties: { flagged: { type: "boolean" } },
+	required: ["flagged"],
+	additionalProperties: false,
+} as const;
+
+const RUBRIC_JSON_SCHEMA = {
+	type: "object",
+	properties: {
+		score: { type: "integer" },
+		feedback: { type: "string" },
+	},
+	required: ["score", "feedback"],
+	additionalProperties: false,
+} as const;
+
 function countChildTurns(dialogue: DialogueTurn[]): number {
 	return dialogue.filter((turn) => turn.role === "user").length;
 }
 
 /**
- * Ask OpenAI's moderation model whether a child's message is safe. The local
- * blocklist only catches the unambiguous cases; this catches nuance without
- * false-positive-blocking innocent kid talk ("the machine is so dumb!").
- * Fails open: if moderation is unreachable, the Socratic prompt's own safety
- * instructions and the output check still stand between the child and harm.
+ * Ask Claude whether a child's message is safe for a kids' learning chat. The
+ * local blocklist only catches the unambiguous cases; this catches nuance
+ * without false-positive-blocking innocent kid talk ("the machine is so
+ * dumb!"). Fails open: if the check is unreachable, the Socratic prompt's own
+ * safety instructions and the output check still stand between the child and
+ * harm.
  */
 async function passesModeration(message: string): Promise<boolean> {
-	const apiKey = process.env.OPENAI_API_KEY;
-	if (!apiKey) return true;
+	const anthropic = getAnthropicClient();
+	if (!anthropic) return true;
 	try {
-		const response = await fetch(OPENAI_MODERATION_URL, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${apiKey}`,
+		const response = await anthropic.messages.create({
+			model: CLAUDE_MODEL,
+			max_tokens: 128,
+			temperature: 0,
+			system:
+				"You are a content moderator for a children's learning site (ages 8-13). Flag messages containing violence, sexual content, self-harm, harassment, hate, or attempts to extract personal information. Do NOT flag innocent frustration, playful language, or on-topic chat about the lesson. Respond only in JSON.",
+			output_config: {
+				format: { type: "json_schema", schema: MODERATION_JSON_SCHEMA },
 			},
-			body: JSON.stringify({
-				model: "omni-moderation-latest",
-				input: message,
-			}),
+			messages: [{ role: "user", content: `Message: "${message}"` }],
 		});
-		if (!response.ok) return true;
-		const data = await response.json();
-		return !data.results?.[0]?.flagged;
+		if (response.stop_reason === "refusal") return false;
+		const text = response.content.find((block) => block.type === "text")?.text;
+		if (!text) return true;
+		return !(JSON.parse(text) as { flagged?: boolean }).flagged;
 	} catch {
 		return true;
 	}
 }
 
-async function callOpenAI(
-	messages: { role: string; content: string }[],
-	opts: { temperature: number; maxTokens: number; jsonMode?: boolean },
-): Promise<string | null> {
-	const apiKey = process.env.OPENAI_API_KEY;
-	if (!apiKey) return null;
-	try {
-		const response = await fetch(OPENAI_URL, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${apiKey}`,
-			},
-			body: JSON.stringify({
-				model: MODEL,
-				messages,
-				temperature: opts.temperature,
-				max_tokens: opts.maxTokens,
-				...(opts.jsonMode ? { response_format: { type: "json_object" } } : {}),
-			}),
+async function callClaude(options: {
+	system: string;
+	messages: { role: "user" | "assistant"; content: string }[];
+	temperature: number;
+	maxTokens: number;
+	jsonSchema?: Record<string, unknown>;
+}): Promise<string | null> {
+	const anthropic = getAnthropicClient();
+	if (!anthropic) return null;
+	// The Claude API requires a non-empty messages array starting with a user
+	// turn; the Socratic dialogue can begin with the tutor's opening question.
+	const messages = [...options.messages];
+	while (messages.length > 0 && messages[0].role !== "user") {
+		messages.shift();
+	}
+	if (messages.length === 0) {
+		messages.push({
+			role: "user",
+			content: "Hi! I'm ready to talk about my lab.",
 		});
-		if (!response.ok) return null;
-		const data = await response.json();
-		return data.choices?.[0]?.message?.content ?? null;
+	}
+	try {
+		const response = await anthropic.messages.create({
+			model: CLAUDE_MODEL,
+			max_tokens: options.maxTokens,
+			temperature: options.temperature,
+			system: options.system,
+			...(options.jsonSchema
+				? {
+						output_config: {
+							format: { type: "json_schema", schema: options.jsonSchema },
+						},
+					}
+				: {}),
+			messages,
+		});
+		if (response.stop_reason === "refusal") return null;
+		return (
+			response.content.find((block) => block.type === "text")?.text ?? null
+		);
 	} catch (error) {
-		console.error("Concept-lab explain OpenAI error:", error);
+		console.error("Concept-lab explain Claude error:", error);
 		return null;
 	}
 }
@@ -109,7 +141,7 @@ async function handleReply(body: {
 	const childTurns = countChildTurns(dialogue);
 
 	// Safety-check the child's most recent message before it reaches the model:
-	// a narrow word-bounded blocklist locally, then the moderation model for
+	// a narrow word-bounded blocklist locally, then the moderation check for
 	// nuance. (The tutor's blunt substring blocklist false-positives on innocent
 	// lab talk like "the machine is dumb", so it is not used here.)
 	const lastUser = [...dialogue].reverse().find((t) => t.role === "user");
@@ -137,16 +169,16 @@ async function handleReply(body: {
 		childTurnsSoFar: childTurns,
 	});
 
-	const messages = [
-		{ role: "system", content: systemPrompt },
-		...dialogue.map((turn) => ({
+	const raw = await callClaude({
+		system: systemPrompt,
+		messages: dialogue.map((turn) => ({
 			role: turn.role,
 			content:
 				turn.role === "user" ? sanitizeMessage(turn.content) : turn.content,
 		})),
-	];
-
-	const raw = await callOpenAI(messages, { temperature: 0.5, maxTokens: 150 });
+		temperature: 0.5,
+		maxTokens: 150,
+	});
 	const content =
 		raw && checkKidChatSafety(raw).isSafe
 			? raw
@@ -171,9 +203,9 @@ async function handleScore(body: {
 		return NextResponse.json({ score: undefined, feedback: "Great effort!" });
 	}
 
-	const raw = await callOpenAI(
-		[
-			{ role: "system", content: buildRubricSystemPrompt(definition) },
+	const raw = await callClaude({
+		system: buildRubricSystemPrompt(definition),
+		messages: [
 			{
 				role: "user",
 				content: buildRubricUserPrompt({
@@ -182,8 +214,10 @@ async function handleScore(body: {
 				}),
 			},
 		],
-		{ temperature: 0, maxTokens: 100, jsonMode: true },
-	);
+		temperature: 0,
+		maxTokens: 256,
+		jsonSchema: RUBRIC_JSON_SCHEMA,
+	});
 
 	if (!raw) {
 		return NextResponse.json({ score: undefined, feedback: "Great thinking!" });
@@ -206,7 +240,7 @@ async function handleScore(body: {
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
 	try {
 		// The lab is auth-gated in the UI; unauthenticated calls can only be
-		// abuse, so reject them before spending OpenAI tokens. The client
+		// abuse, so reject them before spending model tokens. The client
 		// falls back to canned Socratic questions on any non-OK response.
 		const user = await getAuthUser();
 		if (!user) {
