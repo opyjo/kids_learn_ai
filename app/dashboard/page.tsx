@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { ContinueLearningCard } from "@/components/dashboard/continue-learning-card";
 import { HomeworkDueCard } from "@/components/dashboard/homework-due-card";
+import { LearningProgressCard } from "@/components/dashboard/learning-progress-card";
 import { MyAssignmentsSection } from "@/components/dashboard/my-assignments-section";
 import {
 	NextClassCard,
@@ -476,6 +477,9 @@ export default async function DashboardPage() {
 						</CardContent>
 					</Card>
 				</div>
+
+				{/* Enrolled Levels */}
+				<LearningProgressCard />
 
 				{/* Enrolled Levels */}
 				{enrolledCourses && enrolledCourses.length > 0 && (

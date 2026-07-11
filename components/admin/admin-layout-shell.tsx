@@ -11,6 +11,7 @@ import {
 	LayoutDashboard,
 	Mail,
 	Plus,
+	Trophy,
 	Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -59,6 +60,11 @@ const adminNavItems = [
 		href: "/admin/lessons",
 		label: "Lessons",
 		icon: BookOpen,
+	},
+	{
+		href: "/admin/quizzes",
+		label: "Quizzes & Games",
+		icon: Trophy,
 	},
 	{
 		href: "/admin/teacher-notes",
