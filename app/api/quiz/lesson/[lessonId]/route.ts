@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { answersMatch, sanitizeQuestion } from "@/lib/quizzes/grading";
-import { type AnswerInput, answerInputSchema } from "@/lib/quizzes/schemas";
+import { answerInputSchema } from "@/lib/quizzes/schemas";
 import {
 	getApiContext,
 	isCourseEnrolled,
@@ -9,6 +9,8 @@ import {
 import type { QuizQuestionRecord } from "@/lib/quizzes/types";
 
 type Context = { params: Promise<{ lessonId: string }> };
+
+const MAX_ATTEMPTS = 2;
 
 async function loadQuiz(lessonId: string) {
 	const context = await getApiContext();
@@ -58,7 +60,7 @@ export async function GET(_request: NextRequest, { params }: Context) {
 			sanitizeQuestion,
 		),
 		attempts: attempts || [],
-		canAttempt: (attempts?.length || 0) < 2,
+		canAttempt: (attempts?.length || 0) < MAX_ATTEMPTS,
 	});
 }
 
@@ -69,6 +71,14 @@ export async function POST(request: NextRequest, { params }: Context) {
 	if (!loaded.quiz)
 		return NextResponse.json({ error: "Quiz not found" }, { status: 404 });
 	const body = await request.json();
+	const { count } = await loaded.db
+		.from("quiz_attempts")
+		.select("id", { count: "exact", head: true })
+		.eq("quiz_id", loaded.quiz.id)
+		.eq("user_id", loaded.user.id);
+	const attemptNumber = (count || 0) + 1;
+	if (attemptNumber > MAX_ATTEMPTS)
+		return NextResponse.json({ error: "Retry limit reached" }, { status: 409 });
 	if (body.action === "check") {
 		const answer = answerInputSchema.safeParse(body);
 		if (!answer.success)
@@ -85,57 +95,77 @@ export async function POST(request: NextRequest, { params }: Context) {
 				{ status: 404 },
 			);
 		const typed = question as QuizQuestionRecord;
-		return NextResponse.json({
+		// The first answer checked for a question is binding for the attempt:
+		// it is recorded server-side and the final grade is computed from these
+		// rows, so revealing the verdict here cannot be used to switch answers.
+		const { data: existing } = await loaded.db
+			.from("quiz_question_checks")
+			.select("answer, correct")
+			.eq("user_id", loaded.user.id)
+			.eq("question_id", typed.id)
+			.eq("attempt_number", attemptNumber)
+			.maybeSingle();
+		const verdict = existing ?? {
+			answer: answer.data.answer,
 			correct: answersMatch(answer.data.answer, typed.correct_answer),
+		};
+		if (!existing) {
+			const { error } = await loaded.db.from("quiz_question_checks").insert({
+				user_id: loaded.user.id,
+				quiz_id: loaded.quiz.id,
+				question_id: typed.id,
+				attempt_number: attemptNumber,
+				answer: verdict.answer,
+				correct: verdict.correct,
+				time_taken_ms: answer.data.timeTakenMs,
+			});
+			if (error)
+				return NextResponse.json({ error: error.message }, { status: 500 });
+		}
+		return NextResponse.json({
+			correct: verdict.correct,
 			explanation: typed.explanation || "Review this concept and try again.",
 			correctAnswer: typed.correct_answer,
+			lockedAnswer: verdict.answer,
 		});
 	}
-	const answerRows: unknown[] = Array.isArray(body.answers) ? body.answers : [];
-	const validAnswers: AnswerInput[] = [];
-	for (const row of answerRows) {
-		const result = answerInputSchema.safeParse(row);
-		if (result.success) validAnswers.push(result.data);
-	}
-	if (answerRows.length === 0 || validAnswers.length !== answerRows.length) {
-		return NextResponse.json({ error: "Invalid answers" }, { status: 400 });
-	}
-	const { count } = await loaded.db
-		.from("quiz_attempts")
-		.select("id", { count: "exact", head: true })
-		.eq("quiz_id", loaded.quiz.id)
-		.eq("user_id", loaded.user.id);
-	if ((count || 0) >= 2)
-		return NextResponse.json({ error: "Retry limit reached" }, { status: 409 });
-	const { data: questions } = await loaded.db
-		.from("quiz_questions")
-		.select("*")
-		.eq("quiz_id", loaded.quiz.id);
-	const byId = new Map(
-		((questions || []) as QuizQuestionRecord[]).map((q) => [q.id, q]),
+	// Finish the attempt: grade from the answers recorded at check time — the
+	// client no longer supplies answers, so feedback can't be replayed into a
+	// perfect submission.
+	const [{ data: questions }, { data: checks }] = await Promise.all([
+		loaded.db.from("quiz_questions").select("*").eq("quiz_id", loaded.quiz.id),
+		loaded.db
+			.from("quiz_question_checks")
+			.select("question_id, answer, correct, time_taken_ms")
+			.eq("user_id", loaded.user.id)
+			.eq("quiz_id", loaded.quiz.id)
+			.eq("attempt_number", attemptNumber),
+	]);
+	const typedQuestions = (questions || []) as QuizQuestionRecord[];
+	const checkByQuestion = new Map(
+		(checks || []).map((check) => [check.question_id, check]),
 	);
-	let score = 0;
-	const graded = validAnswers.map((answer) => {
-		const question = byId.get(answer.questionId);
-		const correct = Boolean(
-			question && answersMatch(answer.answer, question.correct_answer),
+	if (typedQuestions.some((question) => !checkByQuestion.has(question.id)))
+		return NextResponse.json(
+			{ error: "Check every question before finishing" },
+			{ status: 400 },
 		);
-		if (correct) score += question?.points || 1;
+	let score = 0;
+	const graded = typedQuestions.map((question) => {
+		const check = checkByQuestion.get(question.id);
+		const correct = Boolean(check?.correct);
+		if (correct) score += question.points || 1;
 		return {
-			questionId: answer.questionId,
-			answer: answer.answer,
+			questionId: question.id,
+			answer: check?.answer,
 			correct,
-			explanation:
-				question?.explanation || "Review this concept and try again.",
-			correctAnswer: question?.correct_answer,
-			misconceptionTag: correct ? null : question?.misconception_tag,
-			timeTakenMs: answer.timeTakenMs,
+			explanation: question.explanation || "Review this concept and try again.",
+			correctAnswer: question.correct_answer,
+			misconceptionTag: correct ? null : question.misconception_tag,
+			timeTakenMs: check?.time_taken_ms ?? 0,
 		};
 	});
-	const maxScore = ((questions || []) as QuizQuestionRecord[]).reduce(
-		(sum, q) => sum + q.points,
-		0,
-	);
+	const maxScore = typedQuestions.reduce((sum, q) => sum + q.points, 0);
 	const percentage = maxScore ? Math.round((score / maxScore) * 100) : 0;
 	const passed = percentage >= loaded.quiz.passing_score;
 	const { error } = await loaded.db.from("quiz_attempts").insert({
@@ -146,9 +176,9 @@ export async function POST(request: NextRequest, { params }: Context) {
 		percentage,
 		passed,
 		answers: graded,
-		attempt_number: (count || 0) + 1,
+		attempt_number: attemptNumber,
 		time_taken_seconds: Math.round(
-			validAnswers.reduce((sum, item) => sum + item.timeTakenMs, 0) / 1000,
+			graded.reduce((sum, item) => sum + item.timeTakenMs, 0) / 1000,
 		),
 	});
 	if (error)

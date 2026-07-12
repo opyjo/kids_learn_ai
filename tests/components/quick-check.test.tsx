@@ -8,7 +8,6 @@ const question = {
 	question: "What does print(2 + 2) show?",
 	question_type: "multiple_choice" as const,
 	options: ["4", "22", "Error"],
-	explanation: "Python adds numbers.",
 	hint: "Think about maths, not text.",
 	order_index: 0,
 	time_limit_seconds: 30,

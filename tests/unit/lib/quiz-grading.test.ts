@@ -83,6 +83,7 @@ describe("quiz grading", () => {
 			unknown
 		>;
 		expect(safe.correct_answer).toBeUndefined();
+		expect(safe.explanation).toBeUndefined();
 		expect(safe.points).toBeUndefined();
 		expect(safe.misconception_tag).toBeUndefined();
 		expect(safe.concept_tag).toBeUndefined();

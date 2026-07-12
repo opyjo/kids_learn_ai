@@ -791,7 +791,6 @@ export function QuizManager({
 																	question={{
 																		...question,
 																		id: question.id || `preview-${index}`,
-																		explanation: question.explanation || null,
 																		hint: question.hint || null,
 																	}}
 																	value={
