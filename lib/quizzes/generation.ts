@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CLAUDE_MODEL, getAnthropicClient } from "@/lib/anthropic";
+import { getAnthropicClient, QUIZ_MODEL } from "@/lib/anthropic";
 import { checkKidChatSafety } from "@/lib/concept-labs/safety";
 import {
 	type QuizQuestionInput,
@@ -84,7 +84,7 @@ export async function generateQuizQuestions(
 	let response: Awaited<ReturnType<typeof anthropic.messages.create>>;
 	try {
 		response = await anthropic.messages.create({
-			model: CLAUDE_MODEL,
+			model: QUIZ_MODEL,
 			max_tokens: 8192,
 			system:
 				"Create safe, clear quiz questions for children ages 9-13. Return JSON {questions:[...]}. Each item must have question, question_type (multiple_choice, true_false, code_output, or code_ordering), options, correct_answer (an array only for code_ordering), explanation, hint, misconception_tag, concept_tag (a short reusable skill label such as for-loops), adaptive_difficulty from 1 to 5, variant_group shared only by equivalent variants, learning_objective, prerequisite_tags, a short remediation mini-lesson, points=1000, order_index, and time_limit_seconds=30. Never introduce facts absent from the source.",

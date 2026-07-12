@@ -46,6 +46,7 @@ export interface LessonViewerProps {
 	courseTitle?: string;
 	navigation: LessonNavigation;
 	courseLessons: CourseLessonNavItem[];
+	hasQuickCheck?: boolean;
 }
 
 export type LessonVariant = "ai-ml" | "level-term" | "legacy";

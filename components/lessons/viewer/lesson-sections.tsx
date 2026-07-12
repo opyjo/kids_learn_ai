@@ -1,6 +1,7 @@
 import {
 	Award,
 	BookOpen,
+	Brain,
 	BrainCircuit,
 	Clock,
 	Eye,
@@ -25,6 +26,7 @@ import type {
 	LessonSubmission,
 	LessonVariant,
 } from "@/components/lessons/viewer/lesson-viewer.types";
+import { QuickCheck } from "@/components/quizzes/quick-check";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -43,6 +45,7 @@ interface LessonSectionsProps {
 	showSubmissionPreview: boolean;
 	onToggleSubmissionPreview: () => void;
 	onSubmissionSuccess: () => Promise<void> | void;
+	hasQuickCheck?: boolean;
 }
 
 interface SectionItem {
@@ -57,7 +60,8 @@ function getGridClass(sectionCount: number): string {
 	if (sectionCount === 2) return "grid-cols-2";
 	if (sectionCount === 3) return "grid-cols-3";
 	if (sectionCount === 4) return "grid-cols-4";
-	return "grid-cols-5";
+	if (sectionCount === 5) return "grid-cols-5";
+	return "grid-cols-6";
 }
 
 function AiMlActivities({ starterCode }: { starterCode: string }) {
@@ -126,6 +130,7 @@ export function LessonSections({
 	showSubmissionPreview,
 	onToggleSubmissionPreview,
 	onSubmissionSuccess,
+	hasQuickCheck,
 }: LessonSectionsProps) {
 	const lessonSection: SectionItem = {
 		id: "lesson",
@@ -318,6 +323,21 @@ export function LessonSections({
 				),
 			});
 		}
+	}
+
+	if (hasQuickCheck && lesson.dbId) {
+		const quizSection: SectionItem = {
+			id: "quick-check",
+			label: "Quick Check",
+			icon: Brain,
+			content: <QuickCheck lessonId={lesson.dbId} signedIn={Boolean(userId)} />,
+		};
+		// The quiz belongs after the in-class work but before the take-home piece.
+		const homeworkIndex = sections.findIndex(
+			(section) => section.id === "homework",
+		);
+		if (homeworkIndex === -1) sections.push(quizSection);
+		else sections.splice(homeworkIndex, 0, quizSection);
 	}
 
 	if (sections.length === 1) {

@@ -13,6 +13,7 @@ import {
 	Plus,
 	Save,
 	Sparkles,
+	Trash2,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
@@ -84,25 +85,6 @@ interface QuizReport {
 	};
 }
 
-const blankQuestion = (index: number): QuizQuestionInput => ({
-	question: "",
-	question_type: "multiple_choice",
-	options: ["", "", "", ""],
-	correct_answer: "",
-	explanation: "",
-	hint: "",
-	misconception_tag: "",
-	concept_tag: "general",
-	adaptive_difficulty: 1,
-	variant_group: "",
-	learning_objective: "",
-	prerequisite_tags: [],
-	remediation: "",
-	points: 1000,
-	order_index: index,
-	time_limit_seconds: 30,
-});
-
 export function QuizManager({
 	courses,
 	lessons,
@@ -120,11 +102,7 @@ export function QuizManager({
 	);
 	const [scopeId, setScopeId] = useState("");
 	const [status, setStatus] = useState<"draft" | "published">("draft");
-	const [questions, setQuestions] = useState<QuizQuestionInput[]>([
-		blankQuestion(0),
-		blankQuestion(1),
-		blankQuestion(2),
-	]);
+	const [questions, setQuestions] = useState<QuizQuestionInput[]>([]);
 	const [busy, setBusy] = useState(false);
 	const [showPreview, setShowPreview] = useState(false);
 	const [batchBusy, setBatchBusy] = useState(false);
@@ -150,11 +128,7 @@ export function QuizManager({
 		setDescription("");
 		setScopeId("");
 		setStatus("draft");
-		setQuestions(
-			Array.from({ length: type === "quick_check" ? 3 : 12 }, (_, index) =>
-				blankQuestion(index),
-			),
-		);
+		setQuestions([]);
 	};
 	const edit = async (id: string) => {
 		const response = await fetch(`/api/admin/quizzes/${id}`);
@@ -212,15 +186,20 @@ export function QuizManager({
 		setTab("quizzes");
 		void load();
 	};
-	const generate = async () => {
-		if (!scopeId) return toast.error("Choose a lesson or course first");
+	const generate = async (override?: {
+		scopeId: string;
+		type: "quick_check" | "term_finale";
+	}) => {
+		const scope = override?.scopeId ?? scopeId;
+		const quizType = override?.type ?? type;
+		if (!scope) return toast.error("Choose a lesson or course first");
 		setBusy(true);
 		const response = await fetch("/api/admin/quizzes/generate", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				[type === "quick_check" ? "lessonId" : "courseId"]: scopeId,
-				count: type === "quick_check" ? 3 : 12,
+				[quizType === "quick_check" ? "lessonId" : "courseId"]: scope,
+				count: quizType === "quick_check" ? 3 : 12,
 			}),
 		});
 		const data = await response.json();
@@ -228,7 +207,31 @@ export function QuizManager({
 		if (!response.ok) return toast.error(data.error || "Generation failed");
 		setQuestions(data.questions);
 		setStatus("draft");
+		if (!title) {
+			const scopeTitle =
+				quizType === "quick_check"
+					? lessons.find((lesson) => lesson.id === scope)?.title
+					: courses.find((course) => course.id === scope)?.title;
+			if (scopeTitle)
+				setTitle(
+					`${scopeTitle} — ${quizType === "quick_check" ? "Quick Check" : "Term Finale"}`,
+				);
+		}
 		toast.success("AI draft ready for your review");
+	};
+	// One-click path from the coverage list: prefill the builder for the given
+	// lesson and start AI generation right away.
+	const startDraftFor = (lesson: Lesson) => {
+		setEditingId(null);
+		setType("quick_check");
+		setScopeId(lesson.id);
+		setTitle(`${lesson.title} — Quick Check`);
+		setDescription("");
+		setStatus("draft");
+		setQuestions([]);
+		setTab("builder");
+		window.scrollTo({ top: 0, behavior: "smooth" });
+		void generate({ scopeId: lesson.id, type: "quick_check" });
 	};
 	const coverage = useMemo(() => {
 		const statusByLesson = new Map<string, "published" | "draft">();
@@ -304,6 +307,15 @@ export function QuizManager({
 			questions.map((question, questionIndex) =>
 				questionIndex === index ? { ...question, ...patch } : question,
 			),
+		);
+	const removeQuestion = (index: number) =>
+		setQuestions(
+			questions
+				.filter((_, questionIndex) => questionIndex !== index)
+				.map((question, questionIndex) => ({
+					...question,
+					order_index: questionIndex,
+				})),
 		);
 	const duplicate = async (id: string) => {
 		const response = await fetch(`/api/admin/quizzes/${id}`);
@@ -483,12 +495,28 @@ export function QuizManager({
 										</summary>
 										<ul className="mt-2 space-y-1 text-sm">
 											{coverage.missing.map((lesson) => (
-												<li key={lesson.id} className="flex items-center gap-2">
+												<li
+													key={lesson.id}
+													className="flex flex-wrap items-center gap-2"
+												>
 													<Badge variant="outline" className="text-xs">
 														{courseTitles.get(lesson.course_id) ||
 															"Unknown level"}
 													</Badge>
-													{lesson.order_index}. {lesson.title}
+													<span className="min-w-0 flex-1">
+														{lesson.order_index}. {lesson.title}
+													</span>
+													<Button
+														type="button"
+														variant="ghost"
+														size="sm"
+														className="h-7 text-xs"
+														disabled={busy || batchBusy}
+														onClick={() => startDraftFor(lesson)}
+													>
+														<Sparkles className="mr-1 h-3 w-3" />
+														Generate draft
+													</Button>
 												</li>
 											))}
 										</ul>
@@ -621,341 +649,398 @@ export function QuizManager({
 							<CardDescription>
 								{editingId
 									? "You are editing an existing quiz. Save to apply your changes."
-									: "Write questions by hand or let AI draft them from the selected lesson. Nothing reaches students until the status is Published."}
+									: "Pick a lesson, let AI draft the questions, then review and edit anything before publishing. Nothing reaches students until the status is Published."}
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="space-y-5">
-							<div className="grid gap-4 md:grid-cols-2">
-								<div>
-									<Label>Title</Label>
-									<Input
-										value={title}
-										onChange={(event) => setTitle(event.target.value)}
-										placeholder="Term 1 Challenge"
-									/>
+							<div className="space-y-4 rounded-lg border bg-muted/20 p-4">
+								<p className="text-sm font-semibold">
+									Step 1 · Choose what to quiz
+								</p>
+								<div className="grid gap-4 md:grid-cols-2">
+									<div>
+										<Label>Type</Label>
+										<Select
+											value={type}
+											onValueChange={(value: "quick_check" | "term_finale") => {
+												setType(value);
+												setScopeId("");
+												setQuestions([]);
+											}}
+										>
+											<SelectTrigger>
+												<SelectValue />
+											</SelectTrigger>
+											<SelectContent>
+												<SelectItem value="quick_check">
+													Lesson Quick Check
+												</SelectItem>
+												<SelectItem value="term_finale">Term Finale</SelectItem>
+											</SelectContent>
+										</Select>
+									</div>
+									<div>
+										<Label>
+											{type === "quick_check" ? "Lesson" : "Course"}
+										</Label>
+										<Select value={scopeId} onValueChange={setScopeId}>
+											<SelectTrigger>
+												<SelectValue placeholder="Choose…" />
+											</SelectTrigger>
+											<SelectContent>
+												{type === "quick_check"
+													? lessons.map((item) => (
+															<SelectItem key={item.id} value={item.id}>
+																{courseTitles.get(item.course_id) ||
+																	"Unknown level"}{" "}
+																· {item.order_index}. {item.title}
+															</SelectItem>
+														))
+													: courses.map((item) => (
+															<SelectItem key={item.id} value={item.id}>
+																{item.title}
+															</SelectItem>
+														))}
+											</SelectContent>
+										</Select>
+									</div>
 								</div>
-								<div>
-									<Label>Type</Label>
-									<Select
-										value={type}
-										onValueChange={(value: "quick_check" | "term_finale") => {
-											setType(value);
-											setScopeId("");
-											setQuestions(
-												Array.from(
-													{ length: value === "quick_check" ? 3 : 12 },
-													(_, index) => blankQuestion(index),
-												),
-											);
-										}}
+								<div className="flex flex-wrap items-center gap-3">
+									<Button
+										type="button"
+										disabled={busy || !scopeId}
+										onClick={() => generate()}
 									>
-										<SelectTrigger>
-											<SelectValue />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="quick_check">
-												Lesson Quick Check
-											</SelectItem>
-											<SelectItem value="term_finale">Term Finale</SelectItem>
-										</SelectContent>
-									</Select>
+										<Sparkles className="mr-2 h-4 w-4" />
+										{busy
+											? "Drafting questions…"
+											: questions.length
+												? "Regenerate with AI"
+												: "Generate with AI"}
+									</Button>
+									{questions.length > 0 && (
+										<p className="text-xs text-muted-foreground">
+											Regenerating replaces the questions below with a fresh AI
+											draft.
+										</p>
+									)}
 								</div>
 							</div>
-							<div>
-								<Label>Description</Label>
-								<Textarea
-									value={description}
-									onChange={(event) => setDescription(event.target.value)}
-								/>
-							</div>
-							<div className="grid gap-4 md:grid-cols-2">
-								<div>
-									<Label>{type === "quick_check" ? "Lesson" : "Course"}</Label>
-									<Select value={scopeId} onValueChange={setScopeId}>
-										<SelectTrigger>
-											<SelectValue placeholder="Choose…" />
-										</SelectTrigger>
-										<SelectContent>
-											{type === "quick_check"
-												? lessons.map((item) => (
-														<SelectItem key={item.id} value={item.id}>
-															{courseTitles.get(item.course_id) ||
-																"Unknown level"}{" "}
-															· {item.order_index}. {item.title}
-														</SelectItem>
-													))
-												: courses.map((item) => (
-														<SelectItem key={item.id} value={item.id}>
-															{item.title}
-														</SelectItem>
-													))}
-										</SelectContent>
-									</Select>
-								</div>
-								<div>
-									<Label>Status</Label>
-									<Select
-										value={status}
-										onValueChange={(value: "draft" | "published") =>
-											setStatus(value)
-										}
+							{questions.length === 0 ? (
+								<p className="text-sm text-muted-foreground">
+									{busy
+										? "The AI is reading the lesson and drafting questions…"
+										: "Pick a lesson and generate — the AI draft lands here for you to review, edit, and publish."}
+								</p>
+							) : (
+								<>
+									<div className="space-y-1">
+										<p className="text-sm font-semibold">
+											Step 2 · Review & edit the draft
+										</p>
+										<p className="text-xs text-muted-foreground">
+											Tweak anything the AI got wrong — questions, answers,
+											hints, and explanations are all editable.
+										</p>
+									</div>
+									<div className="grid gap-4 md:grid-cols-2">
+										<div>
+											<Label>Title</Label>
+											<Input
+												value={title}
+												onChange={(event) => setTitle(event.target.value)}
+												placeholder="Term 1 Challenge"
+											/>
+										</div>
+										<div>
+											<Label>Description</Label>
+											<Textarea
+												value={description}
+												onChange={(event) => setDescription(event.target.value)}
+												placeholder="Shown to students above the quiz"
+											/>
+										</div>
+									</div>
+									<Button
+										type="button"
+										variant="outline"
+										onClick={() => setShowPreview((value) => !value)}
 									>
-										<SelectTrigger>
-											<SelectValue />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="draft">Draft</SelectItem>
-											<SelectItem value="published">Published</SelectItem>
-										</SelectContent>
-									</Select>
-								</div>
-							</div>
-							<div className="flex gap-2">
-								<Button
-									type="button"
-									variant="secondary"
-									disabled={busy}
-									onClick={generate}
-								>
-									<Sparkles className="mr-2 h-4 w-4" />
-									Generate with AI
-								</Button>
-								<Button
-									type="button"
-									variant="outline"
-									onClick={() =>
-										setQuestions([
-											...questions,
-											blankQuestion(questions.length),
-										])
-									}
-								>
-									<Plus className="mr-2 h-4 w-4" />
-									Add question
-								</Button>
-								<Button
-									type="button"
-									variant="outline"
-									onClick={() => setShowPreview((value) => !value)}
-								>
-									{showPreview ? "Hide preview" : "Preview student view"}
-								</Button>
-							</div>
-							{showPreview && (
-								<Card className="border-purple-200 bg-purple-50/30">
-									<CardHeader>
-										<CardTitle>{title || "Untitled quiz"}</CardTitle>
-										<CardDescription>
-											{description || "Student quiz preview"}
-										</CardDescription>
-									</CardHeader>
-									<CardContent className="space-y-6">
-										{questions.map(
-											(question, index) =>
-												question.question && (
-													<div
-														key={`preview-${index}`}
-														className="space-y-3 border-t pt-4"
-													>
-														<p className="font-semibold">
-															{index + 1}. {question.question}
-														</p>
-														<QuestionInput
-															question={{
-																...question,
-																id: question.id || `preview-${index}`,
-																explanation: question.explanation || null,
-																hint: question.hint || null,
-															}}
-															value={
-																question.question_type === "code_ordering"
-																	? question.options
-																	: ""
+										{showPreview ? "Hide preview" : "Preview student view"}
+									</Button>
+									{showPreview && (
+										<Card className="border-purple-200 bg-purple-50/30">
+											<CardHeader>
+												<CardTitle>{title || "Untitled quiz"}</CardTitle>
+												<CardDescription>
+													{description || "Student quiz preview"}
+												</CardDescription>
+											</CardHeader>
+											<CardContent className="space-y-6">
+												{questions.map(
+													(question, index) =>
+														question.question && (
+															<div
+																key={`preview-${index}`}
+																className="space-y-3 border-t pt-4"
+															>
+																<p className="font-semibold">
+																	{index + 1}. {question.question}
+																</p>
+																<QuestionInput
+																	question={{
+																		...question,
+																		id: question.id || `preview-${index}`,
+																		explanation: question.explanation || null,
+																		hint: question.hint || null,
+																	}}
+																	value={
+																		question.question_type === "code_ordering"
+																			? question.options
+																			: ""
+																	}
+																	onChange={() => undefined}
+																	disabled
+																/>
+															</div>
+														),
+												)}
+											</CardContent>
+										</Card>
+									)}
+									<div className="space-y-4">
+										{questions.map((question, index) => (
+											<Card key={index} className="bg-muted/20">
+												<CardContent className="space-y-3 pt-5">
+													<div className="flex items-center justify-between gap-2">
+														<strong>Question {index + 1}</strong>
+														<div className="flex items-center gap-1">
+															<Select
+																value={question.question_type}
+																onValueChange={(value: QuestionType) =>
+																	updateQuestion(index, {
+																		question_type: value,
+																	})
+																}
+															>
+																<SelectTrigger className="w-48">
+																	<SelectValue />
+																</SelectTrigger>
+																<SelectContent>
+																	<SelectItem value="multiple_choice">
+																		Multiple choice
+																	</SelectItem>
+																	<SelectItem value="true_false">
+																		True / false
+																	</SelectItem>
+																	<SelectItem value="code_output">
+																		Code output
+																	</SelectItem>
+																	<SelectItem value="code_ordering">
+																		Code ordering
+																	</SelectItem>
+																</SelectContent>
+															</Select>
+															<Button
+																type="button"
+																variant="ghost"
+																size="icon"
+																aria-label={`Remove question ${index + 1}`}
+																onClick={() => removeQuestion(index)}
+															>
+																<Trash2 className="h-4 w-4 text-muted-foreground" />
+															</Button>
+														</div>
+													</div>
+													<Textarea
+														value={question.question}
+														onChange={(event) =>
+															updateQuestion(index, {
+																question: event.target.value,
+															})
+														}
+														placeholder="Question"
+													/>
+													<div className="grid gap-3 md:grid-cols-2">
+														<Textarea
+															value={question.options.join("\n")}
+															onChange={(event) =>
+																updateQuestion(index, {
+																	options: event.target.value.split("\n"),
+																})
 															}
-															onChange={() => undefined}
-															disabled
+															placeholder="One option/code line per line"
+														/>
+														<Textarea
+															value={
+																Array.isArray(question.correct_answer)
+																	? question.correct_answer.join("\n")
+																	: question.correct_answer
+															}
+															onChange={(event) =>
+																updateQuestion(index, {
+																	correct_answer:
+																		question.question_type === "code_ordering"
+																			? event.target.value.split("\n")
+																			: event.target.value,
+																})
+															}
+															placeholder="Correct answer; ordered lines for ordering questions"
 														/>
 													</div>
-												),
-										)}
-									</CardContent>
-								</Card>
-							)}
-							<div className="space-y-4">
-								{questions.map((question, index) => (
-									<Card key={index} className="bg-muted/20">
-										<CardContent className="space-y-3 pt-5">
-											<div className="flex items-center justify-between">
-												<strong>Question {index + 1}</strong>
+													<div className="grid gap-3 md:grid-cols-2">
+														<Input
+															value={question.explanation}
+															onChange={(event) =>
+																updateQuestion(index, {
+																	explanation: event.target.value,
+																})
+															}
+															placeholder="Explanation"
+														/>
+														<Input
+															value={question.hint}
+															onChange={(event) =>
+																updateQuestion(index, {
+																	hint: event.target.value,
+																})
+															}
+															placeholder="Hint"
+														/>
+													</div>
+													<details className="rounded-lg border bg-background/60 p-3">
+														<summary className="cursor-pointer text-sm text-muted-foreground">
+															Advanced settings (adaptive practice & review)
+														</summary>
+														<div className="mt-3 space-y-3">
+															<div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+																<Input
+																	value={question.misconception_tag}
+																	onChange={(event) =>
+																		updateQuestion(index, {
+																			misconception_tag: event.target.value,
+																		})
+																	}
+																	placeholder="Misconception tag"
+																/>
+																<Input
+																	value={question.concept_tag}
+																	onChange={(event) =>
+																		updateQuestion(index, {
+																			concept_tag: event.target.value,
+																		})
+																	}
+																	placeholder="Concept, e.g. for-loops"
+																/>
+																<Input
+																	type="number"
+																	min={1}
+																	max={5}
+																	value={question.adaptive_difficulty}
+																	onChange={(event) =>
+																		updateQuestion(index, {
+																			adaptive_difficulty: Number(
+																				event.target.value,
+																			),
+																		})
+																	}
+																	aria-label="Adaptive difficulty from 1 to 5"
+																/>
+																<Input
+																	value={question.variant_group}
+																	onChange={(event) =>
+																		updateQuestion(index, {
+																			variant_group: event.target.value,
+																		})
+																	}
+																	placeholder="Variant group"
+																/>
+															</div>
+															<div className="grid gap-3 md:grid-cols-2">
+																<Input
+																	value={question.learning_objective}
+																	onChange={(event) =>
+																		updateQuestion(index, {
+																			learning_objective: event.target.value,
+																		})
+																	}
+																	placeholder="Learning objective"
+																/>
+																<Input
+																	value={question.prerequisite_tags.join(", ")}
+																	onChange={(event) =>
+																		updateQuestion(index, {
+																			prerequisite_tags: event.target.value
+																				.split(",")
+																				.map((value) => value.trim())
+																				.filter(Boolean),
+																		})
+																	}
+																	placeholder="Prerequisites, comma separated"
+																/>
+															</div>
+															<Textarea
+																value={question.remediation}
+																onChange={(event) =>
+																	updateQuestion(index, {
+																		remediation: event.target.value,
+																	})
+																}
+																placeholder="Approved mini-lesson shown after repeated mistakes"
+															/>
+														</div>
+													</details>
+												</CardContent>
+											</Card>
+										))}
+									</div>
+									<div className="space-y-4">
+										<p className="text-sm font-semibold">Step 3 · Publish</p>
+										<div className="grid gap-4 md:grid-cols-2">
+											<div>
+												<Label>Status</Label>
 												<Select
-													value={question.question_type}
-													onValueChange={(value: QuestionType) =>
-														updateQuestion(index, { question_type: value })
+													value={status}
+													onValueChange={(value: "draft" | "published") =>
+														setStatus(value)
 													}
 												>
-													<SelectTrigger className="w-48">
+													<SelectTrigger>
 														<SelectValue />
 													</SelectTrigger>
 													<SelectContent>
-														<SelectItem value="multiple_choice">
-															Multiple choice
-														</SelectItem>
-														<SelectItem value="true_false">
-															True / false
-														</SelectItem>
-														<SelectItem value="code_output">
-															Code output
-														</SelectItem>
-														<SelectItem value="code_ordering">
-															Code ordering
-														</SelectItem>
+														<SelectItem value="draft">Draft</SelectItem>
+														<SelectItem value="published">Published</SelectItem>
 													</SelectContent>
 												</Select>
+												<p className="mt-1 text-xs text-muted-foreground">
+													Only published quizzes are visible to students.
+												</p>
 											</div>
-											<Textarea
-												value={question.question}
-												onChange={(event) =>
-													updateQuestion(index, {
-														question: event.target.value,
-													})
+										</div>
+										<div className="flex gap-2">
+											<Button
+												disabled={
+													busy || !title || !scopeId || !questions.length
 												}
-												placeholder="Question"
-											/>
-											<div className="grid gap-3 md:grid-cols-2">
-												<Textarea
-													value={question.options.join("\n")}
-													onChange={(event) =>
-														updateQuestion(index, {
-															options: event.target.value.split("\n"),
-														})
-													}
-													placeholder="One option/code line per line"
-												/>
-												<Textarea
-													value={
-														Array.isArray(question.correct_answer)
-															? question.correct_answer.join("\n")
-															: question.correct_answer
-													}
-													onChange={(event) =>
-														updateQuestion(index, {
-															correct_answer:
-																question.question_type === "code_ordering"
-																	? event.target.value.split("\n")
-																	: event.target.value,
-														})
-													}
-													placeholder="Correct answer; ordered lines for ordering questions"
-												/>
-											</div>
-											<div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-												<Input
-													value={question.explanation}
-													onChange={(event) =>
-														updateQuestion(index, {
-															explanation: event.target.value,
-														})
-													}
-													placeholder="Explanation"
-												/>
-												<Input
-													value={question.hint}
-													onChange={(event) =>
-														updateQuestion(index, { hint: event.target.value })
-													}
-													placeholder="Hint"
-												/>
-												<Input
-													value={question.misconception_tag}
-													onChange={(event) =>
-														updateQuestion(index, {
-															misconception_tag: event.target.value,
-														})
-													}
-													placeholder="Misconception tag"
-												/>
-												<Input
-													value={question.concept_tag}
-													onChange={(event) =>
-														updateQuestion(index, {
-															concept_tag: event.target.value,
-														})
-													}
-													placeholder="Concept, e.g. for-loops"
-												/>
-											</div>
-											<div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-												<Input
-													type="number"
-													min={1}
-													max={5}
-													value={question.adaptive_difficulty}
-													onChange={(event) =>
-														updateQuestion(index, {
-															adaptive_difficulty: Number(event.target.value),
-														})
-													}
-													aria-label="Adaptive difficulty from 1 to 5"
-												/>
-												<Input
-													value={question.variant_group}
-													onChange={(event) =>
-														updateQuestion(index, {
-															variant_group: event.target.value,
-														})
-													}
-													placeholder="Variant group"
-												/>
-												<Input
-													value={question.learning_objective}
-													onChange={(event) =>
-														updateQuestion(index, {
-															learning_objective: event.target.value,
-														})
-													}
-													placeholder="Learning objective"
-												/>
-												<Input
-													value={question.prerequisite_tags.join(", ")}
-													onChange={(event) =>
-														updateQuestion(index, {
-															prerequisite_tags: event.target.value
-																.split(",")
-																.map((value) => value.trim())
-																.filter(Boolean),
-														})
-													}
-													placeholder="Prerequisites, comma separated"
-												/>
-											</div>
-											<Textarea
-												value={question.remediation}
-												onChange={(event) =>
-													updateQuestion(index, {
-														remediation: event.target.value,
-													})
-												}
-												placeholder="Approved mini-lesson shown after repeated mistakes"
-											/>
-										</CardContent>
-									</Card>
-								))}
-							</div>
-							<div className="flex gap-2">
-								<Button disabled={busy || !title || !scopeId} onClick={save}>
-									<Save className="mr-2 h-4 w-4" />
-									{busy ? "Working…" : "Save quiz"}
-								</Button>
-								<Button
-									variant="ghost"
-									onClick={() => {
-										reset();
-										setTab("quizzes");
-									}}
-								>
-									Cancel
-								</Button>
-							</div>
+												onClick={save}
+											>
+												<Save className="mr-2 h-4 w-4" />
+												{busy ? "Working…" : "Save quiz"}
+											</Button>
+											<Button
+												variant="ghost"
+												onClick={() => {
+													reset();
+													setTab("quizzes");
+												}}
+											>
+												Cancel
+											</Button>
+										</div>
+									</div>
+								</>
+							)}
 						</CardContent>
 					</Card>
 				</TabsContent>

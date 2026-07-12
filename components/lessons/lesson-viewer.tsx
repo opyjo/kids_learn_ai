@@ -12,7 +12,6 @@ import type {
 	LessonViewerProps,
 } from "@/components/lessons/viewer/lesson-viewer.types";
 import { LessonViewerShell } from "@/components/lessons/viewer/lesson-viewer-shell";
-import { QuickCheck } from "@/components/quizzes/quick-check";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 export function LessonViewer({
@@ -22,6 +21,7 @@ export function LessonViewer({
 	courseTitle,
 	navigation,
 	courseLessons,
+	hasQuickCheck,
 }: Readonly<LessonViewerProps>) {
 	const supabase = getSupabaseBrowserClient();
 	const variant = useMemo(() => getLessonVariant(courseSlug), [courseSlug]);
@@ -233,23 +233,19 @@ export function LessonViewer({
 	);
 
 	const sections = (
-		<>
-			<LessonSections
-				lesson={lesson}
-				variant={variant}
-				courseSlug={courseSlug}
-				userId={userId}
-				submission={submission}
-				showSubmissionPreview={showSubmissionPreview}
-				onToggleSubmissionPreview={() =>
-					setShowSubmissionPreview((previous) => !previous)
-				}
-				onSubmissionSuccess={fetchSubmission}
-			/>
-			{lesson.dbId && (
-				<QuickCheck lessonId={lesson.dbId} signedIn={Boolean(userId)} />
-			)}
-		</>
+		<LessonSections
+			lesson={lesson}
+			variant={variant}
+			courseSlug={courseSlug}
+			userId={userId}
+			submission={submission}
+			showSubmissionPreview={showSubmissionPreview}
+			onToggleSubmissionPreview={() =>
+				setShowSubmissionPreview((previous) => !previous)
+			}
+			onSubmissionSuccess={fetchSubmission}
+			hasQuickCheck={hasQuickCheck}
+		/>
 	);
 
 	const mainPanel = (
