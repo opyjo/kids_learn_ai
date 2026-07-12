@@ -48,6 +48,11 @@ export function sanitizeQuestion(
 		points: _points,
 		misconception_tag: _tag,
 		concept_tag: _concept,
+		adaptive_difficulty: _difficulty,
+		variant_group: _variant,
+		learning_objective: _objective,
+		prerequisite_tags: _prerequisites,
+		remediation: _remediation,
 		...safe
 	} = question;
 	return safe;

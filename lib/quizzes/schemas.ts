@@ -15,6 +15,14 @@ export const quizQuestionInputSchema = z
 		hint: z.string().trim().max(500).default(""),
 		misconception_tag: z.string().trim().max(100).default(""),
 		concept_tag: z.string().trim().min(1).max(100).default("general"),
+		adaptive_difficulty: z.number().int().min(1).max(5).default(1),
+		variant_group: z.string().trim().max(100).default(""),
+		learning_objective: z.string().trim().max(300).default(""),
+		prerequisite_tags: z
+			.array(z.string().trim().min(1).max(100))
+			.max(10)
+			.default([]),
+		remediation: z.string().trim().max(2000).default(""),
 		points: z.number().int().min(1).max(5000).default(1000),
 		order_index: z.number().int().min(0),
 		time_limit_seconds: z.number().int().min(5).max(300).default(30),

@@ -45,21 +45,25 @@ describe("SpacedReviewHub", () => {
 	it("shows due work, mastery, and the next spaced interval after grading", async () => {
 		const fetchMock = vi
 			.spyOn(globalThis, "fetch")
-			.mockResolvedValueOnce(
-				new Response(JSON.stringify(learningPayload), { status: 200 }),
-			)
-			.mockResolvedValueOnce(
-				new Response(
-					JSON.stringify({
-						correct: true,
-						correctAnswer: "4",
-						explanation: "Python adds the two numbers.",
-						concept: "python-arithmetic",
-						nextReviewDays: 7,
-					}),
-					{ status: 200 },
-				),
-			);
+			.mockImplementation(async (input, init) => {
+				const url = String(input);
+				if (url === "/api/practice/v1/sessions")
+					return new Response(JSON.stringify({ mode: "fallback" }), {
+						status: 200,
+					});
+				if (url === "/api/quiz/learning" && init?.method === "POST")
+					return new Response(
+						JSON.stringify({
+							correct: true,
+							correctAnswer: "4",
+							explanation: "Python adds the two numbers.",
+							concept: "python-arithmetic",
+							nextReviewDays: 7,
+						}),
+						{ status: 200 },
+					);
+				return new Response(JSON.stringify(learningPayload), { status: 200 });
+			});
 
 		render(<SpacedReviewHub />);
 		expect(
@@ -82,8 +86,12 @@ describe("SpacedReviewHub", () => {
 	});
 
 	it("shows a caught-up state when nothing is due", async () => {
-		vi.spyOn(globalThis, "fetch").mockResolvedValue(
-			new Response(
+		vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+			if (String(input) === "/api/practice/v1/sessions")
+				return new Response(JSON.stringify({ mode: "fallback" }), {
+					status: 200,
+				});
+			return new Response(
 				JSON.stringify({
 					...learningPayload,
 					dueCount: 0,
@@ -91,8 +99,8 @@ describe("SpacedReviewHub", () => {
 					nextReviewAt: "2026-07-18T12:00:00.000Z",
 				}),
 				{ status: 200 },
-			),
-		);
+			);
+		});
 		render(<SpacedReviewHub />);
 		expect(await screen.findByText("You’re caught up!")).toBeInTheDocument();
 	});

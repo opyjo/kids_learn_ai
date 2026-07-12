@@ -7,7 +7,14 @@ const csvCell = (value: unknown) =>
 export async function GET(request: NextRequest) {
 	const context = await getApiContext({ admin: true });
 	if ("error" in context) return context.error;
-	const [attemptResult, liveResult, playerResult] = await Promise.all([
+	const [
+		attemptResult,
+		liveResult,
+		playerResult,
+		adaptiveQuestionResult,
+		adaptiveEventResult,
+		adaptiveDiagnosticResult,
+	] = await Promise.all([
 		context.db
 			.from("quiz_attempts")
 			.select(
@@ -24,6 +31,18 @@ export async function GET(request: NextRequest) {
 			.select(
 				"game_id, team_id, display_name, score, quiz_game_teams(name), quiz_games(code, quizzes(title))",
 			),
+		context.db
+			.from("quiz_questions")
+			.select(
+				"id, concept_tag, adaptive_difficulty, variant_group, quizzes!inner(course_id, status, lesson_id, lessons(course_id))",
+			)
+			.eq("quizzes.status", "published"),
+		context.db
+			.from("adaptive_practice_events")
+			.select("confidence, correct, remediation_shown"),
+		context.db
+			.from("adaptive_practice_diagnostics")
+			.select("event_type, reason"),
 	]);
 	const { data: attempts, error } = attemptResult;
 	if (error)
@@ -107,6 +126,53 @@ export async function GET(request: NextRequest) {
 		current.members += 1;
 		teamGroups.set(key, current);
 	}
+	const coverageGroups = new Map<
+		string,
+		{
+			courseId: string;
+			concept: string;
+			questions: number;
+			variants: Set<string>;
+			difficulties: Set<number>;
+		}
+	>();
+	const courseVariants = new Map<string, Set<string>>();
+	for (const question of adaptiveQuestionResult.data || []) {
+		const quiz = question.quizzes?.[0];
+		const courseId = quiz?.course_id || quiz?.lessons?.[0]?.course_id;
+		if (!courseId) continue;
+		const key = `${courseId}:${question.concept_tag}`;
+		const current = coverageGroups.get(key) || {
+			courseId,
+			concept: question.concept_tag,
+			questions: 0,
+			variants: new Set<string>(),
+			difficulties: new Set<number>(),
+		};
+		current.questions += 1;
+		current.variants.add(question.variant_group);
+		current.difficulties.add(question.adaptive_difficulty);
+		coverageGroups.set(key, current);
+		const variants = courseVariants.get(courseId) || new Set<string>();
+		variants.add(question.variant_group);
+		courseVariants.set(courseId, variants);
+	}
+	const coverageGaps = [...coverageGroups.values()]
+		.map((group) => ({
+			courseId: group.courseId,
+			concept: group.concept,
+			questions: group.questions,
+			variants: group.variants.size,
+			missingDifficulties: [1, 2, 3, 4, 5].filter(
+				(difficulty) => !group.difficulties.has(difficulty),
+			),
+		}))
+		.filter((group) => group.variants < 2 || group.missingDifficulties.length)
+		.sort(
+			(a, b) => a.variants - b.variants || a.concept.localeCompare(b.concept),
+		);
+	const adaptiveEvents = adaptiveEventResult.data || [];
+	const diagnostics = adaptiveDiagnosticResult.data || [];
 	return NextResponse.json({
 		participation: rows.length,
 		livePlayers: new Set(
@@ -129,6 +195,43 @@ export async function GET(request: NextRequest) {
 			members: team.members,
 			averageScore: Math.round(team.total / team.members),
 		})),
+		adaptive: {
+			publishedQuestions: (adaptiveQuestionResult.data || []).length,
+			coverageGaps,
+			insufficientCourses: [...courseVariants.entries()]
+				.filter(([, variants]) => variants.size < 10)
+				.map(([courseId, variants]) => ({ courseId, variants: variants.size })),
+			fallbacks: diagnostics.filter((item) => item.event_type === "fallback")
+				.length,
+			sessionErrors: diagnostics.filter(
+				(item) => item.event_type === "session_error",
+			).length,
+			remediationRate: adaptiveEvents.length
+				? Math.round(
+						(adaptiveEvents.filter((event) => event.remediation_shown).length /
+							adaptiveEvents.length) *
+							100,
+					)
+				: 0,
+			confidence: (["sure", "unsure", "guessing"] as const).map(
+				(confidence) => {
+					const events = adaptiveEvents.filter(
+						(event) => event.confidence === confidence,
+					);
+					return {
+						confidence,
+						answers: events.length,
+						accuracy: events.length
+							? Math.round(
+									(events.filter((event) => event.correct).length /
+										events.length) *
+										100,
+								)
+							: 0,
+					};
+				},
+			),
+		},
 		rows,
 	});
 }
