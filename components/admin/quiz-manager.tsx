@@ -676,16 +676,19 @@ export function QuizManager({
 											<SelectValue placeholder="Choose…" />
 										</SelectTrigger>
 										<SelectContent>
-											{(type === "quick_check" ? lessons : courses).map(
-												(item) => (
-													<SelectItem key={item.id} value={item.id}>
-														{"order_index" in item
-															? `${item.order_index}. `
-															: ""}
-														{item.title}
-													</SelectItem>
-												),
-											)}
+											{type === "quick_check"
+												? lessons.map((item) => (
+														<SelectItem key={item.id} value={item.id}>
+															{courseTitles.get(item.course_id) ||
+																"Unknown level"}{" "}
+															· {item.order_index}. {item.title}
+														</SelectItem>
+													))
+												: courses.map((item) => (
+														<SelectItem key={item.id} value={item.id}>
+															{item.title}
+														</SelectItem>
+													))}
 										</SelectContent>
 									</Select>
 								</div>
