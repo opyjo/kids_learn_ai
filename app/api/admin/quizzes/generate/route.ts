@@ -4,6 +4,10 @@ import { generateQuizQuestions } from "@/lib/quizzes/generation";
 import { getApiContext } from "@/lib/quizzes/server";
 import { createRateLimiter } from "@/lib/rate-limit";
 
+// AI generation from a full lesson can exceed the platform's default
+// function timeout; match the batch generate-missing route's limit.
+export const maxDuration = 60;
+
 const limiter = createRateLimiter({ windowMs: 60_000, maxRequests: 5 });
 const requestSchema = z.object({
 	lessonId: z.string().uuid().optional(),
