@@ -2,6 +2,7 @@
 
 import { Brain, CalendarClock, CheckCircle2, RefreshCw } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { AdaptivePracticeCard } from "@/components/quizzes/adaptive-practice-card";
 import { QuestionInput } from "@/components/quizzes/question-input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -51,6 +52,7 @@ export function SpacedReviewHub() {
 		nextReviewDays: number | null;
 	} | null>(null);
 	const [busy, setBusy] = useState(false);
+	const [adaptiveUnavailable, setAdaptiveUnavailable] = useState(false);
 	const load = useCallback(() => {
 		fetch("/api/quiz/learning")
 			.then((response) => (response.ok ? response.json() : null))
@@ -97,77 +99,91 @@ export function SpacedReviewHub() {
 					Short reviews at the right time help ideas stay with you.
 				</p>
 			</div>
-			<Card className="border-purple-200">
-				<CardHeader>
-					<div className="flex items-center justify-between gap-3">
-						<div>
-							<CardTitle>Today’s review</CardTitle>
-							<CardDescription>
-								{data.dueCount} question{data.dueCount === 1 ? "" : "s"} ready
-							</CardDescription>
+			{!adaptiveUnavailable && (
+				<AdaptivePracticeCard
+					onUnavailable={() => setAdaptiveUnavailable(true)}
+					onProgress={load}
+				/>
+			)}
+			{adaptiveUnavailable && (
+				<Card className="border-purple-200">
+					<CardHeader>
+						<div className="flex items-center justify-between gap-3">
+							<div>
+								<CardTitle>Today’s review</CardTitle>
+								<CardDescription>
+									{data.dueCount} question{data.dueCount === 1 ? "" : "s"} ready
+								</CardDescription>
+							</div>
+							<Badge>{data.dueCount} due</Badge>
 						</div>
-						<Badge>{data.dueCount} due</Badge>
-					</div>
-				</CardHeader>
-				<CardContent className="space-y-4">
-					{review ? (
-						<>
-							<p className="text-sm text-muted-foreground">
-								{review.courseTitle} · Review stage {review.intervalStep + 1} of
-								3
-							</p>
-							<h2 className="text-xl font-semibold">
-								{review.question.question}
-							</h2>
-							<QuestionInput
-								question={review.question}
-								value={currentAnswer}
-								onChange={setAnswer}
-								disabled={Boolean(feedback)}
-							/>
-							{feedback && (
-								<Alert
-									className={
-										feedback.correct ? "border-emerald-300" : "border-amber-300"
-									}
+					</CardHeader>
+					<CardContent className="space-y-4">
+						{review ? (
+							<>
+								<p className="text-sm text-muted-foreground">
+									{review.courseTitle} · Review stage {review.intervalStep + 1}{" "}
+									of 3
+								</p>
+								<h2 className="text-xl font-semibold">
+									{review.question.question}
+								</h2>
+								<QuestionInput
+									question={review.question}
+									value={currentAnswer}
+									onChange={setAnswer}
+									disabled={Boolean(feedback)}
+								/>
+								{feedback && (
+									<Alert
+										className={
+											feedback.correct
+												? "border-emerald-300"
+												: "border-amber-300"
+										}
+									>
+										<AlertDescription>
+											<strong>
+												{feedback.correct
+													? "Nice work!"
+													: `Answer: ${Array.isArray(feedback.correctAnswer) ? feedback.correctAnswer.join(" → ") : feedback.correctAnswer}`}
+											</strong>
+											<br />
+											{feedback.explanation}
+											<br />
+											<span className="text-xs text-muted-foreground">
+												{feedback.nextReviewDays
+													? `We’ll revisit ${conceptLabel(feedback.concept)} in ${feedback.nextReviewDays} days.`
+													: `${conceptLabel(feedback.concept)} has completed its review cycle.`}
+											</span>
+										</AlertDescription>
+									</Alert>
+								)}
+								<Button
+									disabled={busy || currentAnswer === ""}
+									onClick={feedback ? next : submit}
 								>
-									<AlertDescription>
-										<strong>
-											{feedback.correct
-												? "Nice work!"
-												: `Answer: ${Array.isArray(feedback.correctAnswer) ? feedback.correctAnswer.join(" → ") : feedback.correctAnswer}`}
-										</strong>
-										<br />
-										{feedback.explanation}
-										<br />
-										<span className="text-xs text-muted-foreground">
-											{feedback.nextReviewDays
-												? `We’ll revisit ${conceptLabel(feedback.concept)} in ${feedback.nextReviewDays} days.`
-												: `${conceptLabel(feedback.concept)} has completed its review cycle.`}
-										</span>
-									</AlertDescription>
-								</Alert>
-							)}
-							<Button
-								disabled={busy || currentAnswer === ""}
-								onClick={feedback ? next : submit}
-							>
-								{feedback ? "Next review" : busy ? "Checking…" : "Check answer"}
-							</Button>
-						</>
-					) : (
-						<div className="py-8 text-center">
-							<CheckCircle2 className="mx-auto mb-3 h-12 w-12 text-emerald-500" />
-							<p className="text-lg font-semibold">You’re caught up!</p>
-							<p className="text-sm text-muted-foreground">
-								{data.nextReviewAt
-									? `Next review: ${new Date(data.nextReviewAt).toLocaleDateString()}`
-									: "Complete a quiz to start your review schedule."}
-							</p>
-						</div>
-					)}
-				</CardContent>
-			</Card>
+									{feedback
+										? "Next review"
+										: busy
+											? "Checking…"
+											: "Check answer"}
+								</Button>
+							</>
+						) : (
+							<div className="py-8 text-center">
+								<CheckCircle2 className="mx-auto mb-3 h-12 w-12 text-emerald-500" />
+								<p className="text-lg font-semibold">You’re caught up!</p>
+								<p className="text-sm text-muted-foreground">
+									{data.nextReviewAt
+										? `Next review: ${new Date(data.nextReviewAt).toLocaleDateString()}`
+										: "Complete a quiz to start your review schedule."}
+								</p>
+							</div>
+						)}
+					</CardContent>
+				</Card>
+			)}
 			<section>
 				<h2 className="mb-4 text-2xl font-semibold">Concept mastery</h2>
 				{data.mastery.length ? (

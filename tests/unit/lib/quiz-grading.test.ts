@@ -20,6 +20,11 @@ const question: QuizQuestionRecord = {
 	hint: "Think about the plus sign.",
 	misconception_tag: "addition-vs-concatenation",
 	concept_tag: "arithmetic",
+	adaptive_difficulty: 1,
+	variant_group: "arithmetic-output",
+	learning_objective: "Evaluate a simple arithmetic expression",
+	prerequisite_tags: [],
+	remediation: "The plus sign adds numbers before print displays the result.",
 	points: 1000,
 	order_index: 0,
 	time_limit_seconds: 30,
@@ -80,6 +85,12 @@ describe("quiz grading", () => {
 		expect(safe.correct_answer).toBeUndefined();
 		expect(safe.points).toBeUndefined();
 		expect(safe.misconception_tag).toBeUndefined();
+		expect(safe.concept_tag).toBeUndefined();
+		expect(safe.adaptive_difficulty).toBeUndefined();
+		expect(safe.variant_group).toBeUndefined();
+		expect(safe.learning_objective).toBeUndefined();
+		expect(safe.prerequisite_tags).toBeUndefined();
+		expect(safe.remediation).toBeUndefined();
 		expect(safe.question).toBe(question.question);
 	});
 

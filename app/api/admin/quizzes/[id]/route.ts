@@ -45,6 +45,9 @@ export async function PUT(request: NextRequest, { params }: Context) {
 		.insert(
 			questions.map(({ id: _questionId, ...question }) => ({
 				...question,
+				variant_group: question.variant_group || crypto.randomUUID(),
+				learning_objective: question.learning_objective || question.concept_tag,
+				remediation: question.remediation || question.explanation,
 				quiz_id: id,
 			})),
 		);

@@ -18,6 +18,11 @@ export interface QuizQuestionRecord {
 	hint: string | null;
 	misconception_tag: string | null;
 	concept_tag: string;
+	adaptive_difficulty: number;
+	variant_group: string;
+	learning_objective: string;
+	prerequisite_tags: string[];
+	remediation: string;
 	points: number;
 	order_index: number;
 	time_limit_seconds: number;
@@ -25,7 +30,15 @@ export interface QuizQuestionRecord {
 
 export type StudentQuestion = Omit<
 	QuizQuestionRecord,
-	"correct_answer" | "points" | "misconception_tag" | "concept_tag"
+	| "correct_answer"
+	| "points"
+	| "misconception_tag"
+	| "concept_tag"
+	| "adaptive_difficulty"
+	| "variant_group"
+	| "learning_objective"
+	| "prerequisite_tags"
+	| "remediation"
 >;
 
 export interface GradeResult {
