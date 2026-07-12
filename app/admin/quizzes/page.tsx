@@ -12,5 +12,16 @@ export default async function QuizzesPage() {
 			.select("id, title, course_id, order_index")
 			.order("order_index"),
 	]);
-	return <QuizManager courses={courses || []} lessons={lessons || []} />;
+	// Lessons share order_index values across courses (every course starts at
+	// lesson 1), so group them by course order before sorting by lesson number.
+	const courseRank = new Map(
+		(courses || []).map((course, index) => [course.id, index]),
+	);
+	const sortedLessons = (lessons || []).sort(
+		(a, b) =>
+			(courseRank.get(a.course_id) ?? Number.MAX_SAFE_INTEGER) -
+				(courseRank.get(b.course_id) ?? Number.MAX_SAFE_INTEGER) ||
+			a.order_index - b.order_index,
+	);
+	return <QuizManager courses={courses || []} lessons={sortedLessons} />;
 }
