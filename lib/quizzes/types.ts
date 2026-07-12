@@ -28,9 +28,13 @@ export interface QuizQuestionRecord {
 	time_limit_seconds: number;
 }
 
+// Explanations are excluded because they usually restate the correct answer;
+// they are only returned in post-answer responses. Hints stay as a pre-answer
+// scaffold (live games strip them separately — there they are a paid power-up).
 export type StudentQuestion = Omit<
 	QuizQuestionRecord,
 	| "correct_answer"
+	| "explanation"
 	| "points"
 	| "misconception_tag"
 	| "concept_tag"

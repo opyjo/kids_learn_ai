@@ -169,16 +169,12 @@ export function QuickCheck({
 		}
 		setBusy(true);
 		setSubmitError("");
+		// Answers were recorded server-side as each question was checked; the
+		// finish call just asks the server to grade that attempt.
 		const response = await fetch(`/api/quiz/lesson/${lessonId}`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				answers: questions.map((item) => ({
-					questionId: item.id,
-					answer: answers[item.id] ?? defaultAnswer(item),
-					timeTakenMs: timeTaken.current[item.id] ?? 0,
-				})),
-			}),
+			body: JSON.stringify({ action: "finish" }),
 		});
 		if (response.ok) {
 			const saved = await response.json();

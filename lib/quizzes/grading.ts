@@ -45,6 +45,7 @@ export function sanitizeQuestion(
 ): StudentQuestion {
 	const {
 		correct_answer: _answer,
+		explanation: _explanation,
 		points: _points,
 		misconception_tag: _tag,
 		concept_tag: _concept,

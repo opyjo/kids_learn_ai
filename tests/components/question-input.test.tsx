@@ -8,7 +8,6 @@ const orderingQuestion: StudentQuestion = {
 	question: "Put the code in order",
 	question_type: "code_ordering",
 	options: ["name = input()", "print(name)"],
-	explanation: "Ask before printing.",
 	hint: "Input comes first.",
 	order_index: 0,
 	time_limit_seconds: 30,

@@ -149,7 +149,9 @@ export async function GET(_request: NextRequest, { params }: Context) {
 		teams: teams || [],
 		leaderboard,
 		teamLeaderboard,
-		question: question ? sanitizeQuestion(question) : null,
+		// Hints are a paid power-up in live games, so they never ride along on
+		// the question payload — the powerup action returns them after purchase.
+		question: question ? { ...sanitizeQuestion(question), hint: null } : null,
 		review,
 	});
 }
