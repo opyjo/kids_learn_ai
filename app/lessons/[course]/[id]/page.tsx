@@ -5,6 +5,7 @@ import {
 	computeLessonNavigation,
 } from "@/components/lessons/viewer/lesson-viewer.helpers";
 import { checkLevelEnrollment, isFreeTrialLesson } from "@/lib/auth-helpers";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 interface LessonPageProps {
@@ -93,6 +94,22 @@ export default async function LessonPage({ params }: LessonPageProps) {
 		);
 	}
 
+	// Quizzes are only readable by admins under RLS, so use the admin client
+	// (same as the quiz API) just to learn whether a Quick Check tab should show.
+	let hasQuickCheck = false;
+	const adminDb = getSupabaseAdminClient();
+	if (adminDb) {
+		const { data: quiz } = await adminDb
+			.from("quizzes")
+			.select("id")
+			.eq("lesson_id", lesson.id)
+			.eq("quiz_type", "quick_check")
+			.eq("status", "published")
+			.eq("is_active", true)
+			.maybeSingle();
+		hasQuickCheck = Boolean(quiz);
+	}
+
 	const courseLessons = buildCourseLessons({
 		courseSlug,
 		lessons: courseLessonRows,
@@ -128,6 +145,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
 			courseTitle={lesson.courses?.title}
 			navigation={navigation}
 			courseLessons={courseLessons}
+			hasQuickCheck={hasQuickCheck}
 		/>
 	);
 }
