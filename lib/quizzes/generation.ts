@@ -35,7 +35,9 @@ const QUESTIONS_JSON_SCHEMA = {
 					hint: { type: "string" },
 					misconception_tag: { type: "string" },
 					concept_tag: { type: "string" },
-					adaptive_difficulty: { type: "integer", minimum: 1, maximum: 5 },
+					// Structured outputs reject minimum/maximum on integers; the zod
+					// schema still enforces the 1-5 range after parsing.
+					adaptive_difficulty: { type: "integer" },
 					variant_group: { type: "string" },
 					learning_objective: { type: "string" },
 					prerequisite_tags: { type: "array", items: { type: "string" } },
