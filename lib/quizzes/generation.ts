@@ -114,6 +114,42 @@ export async function generateQuizQuestions(
 	try {
 		const generated = JSON.parse(text || "{}");
 		const output = generatedOutputSchema.parse(generated);
+		if (output.questions.length !== count) {
+			return {
+				error: `The model returned ${output.questions.length} questions instead of ${count}. Please try again.`,
+				status: 422,
+			};
+		}
+		if (
+			new Set(
+				output.questions.map((question) =>
+					question.question.trim().toLowerCase(),
+				),
+			).size !== output.questions.length
+		) {
+			return {
+				error: "The model returned duplicate questions. Please try again.",
+				status: 422,
+			};
+		}
+		if (
+			output.questions.some((question) =>
+				[
+					question.hint,
+					question.misconception_tag,
+					question.concept_tag,
+					question.variant_group,
+					question.learning_objective,
+					question.remediation,
+				].some((value) => !value.trim()),
+			)
+		) {
+			return {
+				error:
+					"The model omitted required teaching metadata. Please try again.",
+				status: 422,
+			};
+		}
 		if (
 			output.questions.some(
 				(question) =>

@@ -50,17 +50,33 @@ export const quizQuestionInputSchema = z
 		}
 	});
 
-export const quizInputSchema = z.object({
-	id: z.string().uuid().optional(),
-	title: z.string().trim().min(3).max(200),
-	description: z.string().trim().max(1000).default(""),
-	lesson_id: z.string().uuid().nullable().optional(),
-	course_id: z.string().uuid().nullable().optional(),
-	quiz_type: z.enum(["quick_check", "term_finale"]),
-	status: z.enum(["draft", "published", "archived"]).default("draft"),
-	passing_score: z.number().int().min(0).max(100).default(67),
-	questions: z.array(quizQuestionInputSchema).min(1).max(50),
-});
+export const quizInputSchema = z
+	.object({
+		id: z.string().uuid().optional(),
+		title: z.string().trim().min(3).max(200),
+		description: z.string().trim().max(1000).default(""),
+		lesson_id: z.string().uuid().nullable().optional(),
+		course_id: z.string().uuid().nullable().optional(),
+		quiz_type: z.enum(["quick_check", "term_finale", "lesson_challenge"]),
+		status: z.enum(["draft", "published", "archived"]).default("draft"),
+		passing_score: z.number().int().min(0).max(100).default(67),
+		questions: z.array(quizQuestionInputSchema).min(1).max(50),
+	})
+	.superRefine((value, context) => {
+		const lessonScoped = value.quiz_type !== "term_finale";
+		if (lessonScoped && (!value.lesson_id || value.course_id))
+			context.addIssue({
+				code: z.ZodIssueCode.custom,
+				path: ["lesson_id"],
+				message: "Lesson quizzes require only a lesson scope",
+			});
+		if (!lessonScoped && (!value.course_id || value.lesson_id))
+			context.addIssue({
+				code: z.ZodIssueCode.custom,
+				path: ["course_id"],
+				message: "Term finales require only a course scope",
+			});
+	});
 
 export const answerInputSchema = z.object({
 	questionId: z.string().uuid(),

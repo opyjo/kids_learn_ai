@@ -7,7 +7,10 @@ import {
 	sortLeaderboard,
 	sortTeamLeaderboard,
 } from "@/lib/quizzes/grading";
-import { quizQuestionInputSchema } from "@/lib/quizzes/schemas";
+import {
+	quizInputSchema,
+	quizQuestionInputSchema,
+} from "@/lib/quizzes/schemas";
 import type { QuizQuestionRecord } from "@/lib/quizzes/types";
 
 const question: QuizQuestionRecord = {
@@ -153,5 +156,29 @@ describe("quiz question validation", () => {
 			correct_answer: "4",
 		});
 		expect(parsed.success).toBe(false);
+	});
+
+	it("requires lesson challenges to use lesson scope only", () => {
+		const valid = quizInputSchema.safeParse({
+			title: "Loops live challenge",
+			description: "Collaborative review",
+			quiz_type: "lesson_challenge",
+			status: "draft",
+			lesson_id: "00000000-0000-4000-8000-000000000010",
+			course_id: null,
+			questions: [question],
+		});
+		const invalid = quizInputSchema.safeParse({
+			title: "Loops live challenge",
+			description: "Collaborative review",
+			quiz_type: "lesson_challenge",
+			status: "draft",
+			lesson_id: null,
+			course_id: "00000000-0000-4000-8000-000000000020",
+			questions: [question],
+		});
+
+		expect(valid.success).toBe(true);
+		expect(invalid.success).toBe(false);
 	});
 });

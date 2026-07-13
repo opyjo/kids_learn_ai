@@ -12,11 +12,11 @@ export async function POST(request: NextRequest) {
 		.single();
 	if (
 		!quiz ||
-		quiz.quiz_type !== "term_finale" ||
+		!["term_finale", "lesson_challenge"].includes(quiz.quiz_type) ||
 		quiz.status !== "published"
 	) {
 		return NextResponse.json(
-			{ error: "Select a published term finale" },
+			{ error: "Select a published live quiz" },
 			{ status: 400 },
 		);
 	}
@@ -24,7 +24,13 @@ export async function POST(request: NextRequest) {
 		const code = makeGameCode();
 		const { data, error } = await context.db
 			.from("quiz_games")
-			.insert({ quiz_id: quizId, host_id: context.user.id, code })
+			.insert({
+				quiz_id: quizId,
+				host_id: context.user.id,
+				code,
+				powerups_enabled: true,
+				team_mode: false,
+			})
 			.select("id, code")
 			.single();
 		if (!error && data) return NextResponse.json(data, { status: 201 });

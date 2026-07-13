@@ -9,8 +9,10 @@ import {
 	Gamepad2,
 	Layers,
 	ListChecks,
+	LoaderCircle,
 	Pencil,
 	Plus,
+	RefreshCw,
 	Save,
 	Sparkles,
 	Trash2,
@@ -39,13 +41,13 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import type { QuizQuestionInput } from "@/lib/quizzes/schemas";
-import type { QuestionType } from "@/lib/quizzes/types";
+import type { QuestionType, QuizType } from "@/lib/quizzes/types";
 
 interface QuizRow {
 	id: string;
 	title: string;
 	description: string;
-	quiz_type: "quick_check" | "term_finale";
+	quiz_type: QuizType;
 	status: "draft" | "published" | "archived";
 	lesson_id: string | null;
 	course_id: string | null;
@@ -53,6 +55,9 @@ interface QuizRow {
 	quiz_attempts?: { count: number }[];
 	lessons?: { title: string } | null;
 	courses?: { title: string } | null;
+	source_outdated?: boolean;
+	generated_at?: string | null;
+	supersedes_quiz_id?: string | null;
 }
 interface Course {
 	id: string;
@@ -68,6 +73,11 @@ interface QuizReport {
 	participation: number;
 	livePlayers: number;
 	masteryRate: number;
+	lessonChallenges: {
+		games: number;
+		participants: number;
+		accuracy: number;
+	};
 	misconceptions: [string, number][];
 	adaptive: {
 		publishedQuestions: number;
@@ -97,9 +107,7 @@ export function QuizManager({
 	const [editingId, setEditingId] = useState<string | null>(null);
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
-	const [type, setType] = useState<"quick_check" | "term_finale">(
-		"quick_check",
-	);
+	const [type, setType] = useState<QuizType>("quick_check");
 	const [scopeId, setScopeId] = useState("");
 	const [status, setStatus] = useState<"draft" | "published">("draft");
 	const [questions, setQuestions] = useState<QuizQuestionInput[]>([]);
@@ -107,6 +115,7 @@ export function QuizManager({
 	const [showPreview, setShowPreview] = useState(false);
 	const [batchBusy, setBatchBusy] = useState(false);
 	const [batchNote, setBatchNote] = useState("");
+	const [challengeBusyId, setChallengeBusyId] = useState<string | null>(null);
 	const [tab, setTab] = useState("overview");
 	const [statusFilter, setStatusFilter] = useState<
 		"all" | "draft" | "published"
@@ -157,7 +166,7 @@ export function QuizManager({
 			quiz_type: type,
 			status,
 			passing_score: 67,
-			lesson_id: type === "quick_check" ? scopeId : null,
+			lesson_id: type === "term_finale" ? null : scopeId,
 			course_id: type === "term_finale" ? scopeId : null,
 			questions: questions.map((question, index) => ({
 				...question,
@@ -192,6 +201,10 @@ export function QuizManager({
 	}) => {
 		const scope = override?.scopeId ?? scopeId;
 		const quizType = override?.type ?? type;
+		if (quizType === "lesson_challenge")
+			return toast.error(
+				"Use Run or Regenerate from the Lesson Challenge dashboard.",
+			);
 		if (!scope) return toast.error("Choose a lesson or course first");
 		setBusy(true);
 		const response = await fetch("/api/admin/quizzes/generate", {
@@ -258,6 +271,47 @@ export function QuizManager({
 			missing,
 		};
 	}, [quizzes, lessons]);
+	const challengeCoverage = useMemo(
+		() =>
+			lessons.map((lesson) => {
+				const candidates = quizzes.filter(
+					(quiz) =>
+						quiz.quiz_type === "lesson_challenge" &&
+						quiz.lesson_id === lesson.id &&
+						quiz.status !== "archived",
+				);
+				const draft = candidates.find((quiz) => quiz.status === "draft");
+				const published = candidates.find(
+					(quiz) => quiz.status === "published",
+				);
+				const challengeStatus = draft
+					? "Draft"
+					: published?.source_outdated
+						? "Outdated"
+						: published
+							? "Published"
+							: "Missing";
+				return { lesson, draft, published, challengeStatus };
+			}),
+		[quizzes, lessons],
+	);
+	const runChallenge = async (lesson: Lesson, regenerate: boolean) => {
+		setChallengeBusyId(lesson.id);
+		const response = await fetch("/api/admin/quizzes/generate-challenge", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ lessonId: lesson.id, regenerate }),
+		});
+		const data = await response.json().catch(() => ({}));
+		setChallengeBusyId(null);
+		if (!response.ok)
+			return toast.error(data.error || "Challenge generation failed", {
+				description: "Nothing was replaced. You can safely try again.",
+			});
+		toast.success("Eight-question challenge draft ready for review");
+		await load();
+		await edit(data.id);
+	};
 	const courseTitles = useMemo(
 		() => new Map(courses.map((course) => [course.id, course.title])),
 		[courses],
@@ -531,15 +585,118 @@ export function QuizManager({
 							</CardContent>
 						</Card>
 					)}
+					{lessons.length > 0 && (
+						<Card>
+							<CardHeader>
+								<CardTitle className="flex items-center gap-2">
+									<Gamepad2 className="h-5 w-5 text-purple-500" />
+									Live Lesson Challenges
+								</CardTitle>
+								<CardDescription>
+									Run AI for one lesson, review the eight-question draft, then
+									publish and host it with a game code.
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<div className="max-h-[32rem] space-y-2 overflow-y-auto pr-1">
+									{challengeCoverage.map(
+										({ lesson, draft, published, challengeStatus }) => {
+											const running = challengeBusyId === lesson.id;
+											return (
+												<div
+													key={lesson.id}
+													className="flex flex-wrap items-center gap-2 rounded-lg border p-3"
+												>
+													<Badge variant="outline" className="text-xs">
+														{courseTitles.get(lesson.course_id) ||
+															"Unknown level"}
+													</Badge>
+													<span className="min-w-48 flex-1 text-sm font-medium">
+														{lesson.order_index}. {lesson.title}
+													</span>
+													<Badge
+														variant={
+															challengeStatus === "Published"
+																? "default"
+																: challengeStatus === "Outdated"
+																	? "destructive"
+																	: "outline"
+														}
+													>
+														{challengeStatus}
+													</Badge>
+													{draft ? (
+														<Button
+															type="button"
+															size="sm"
+															onClick={() => edit(draft.id)}
+														>
+															Review draft
+														</Button>
+													) : (
+														<Button
+															type="button"
+															size="sm"
+															disabled={challengeBusyId !== null}
+															onClick={() =>
+																void runChallenge(lesson, Boolean(published))
+															}
+														>
+															{running ? (
+																<LoaderCircle className="mr-1 h-4 w-4 animate-spin" />
+															) : published ? (
+																<RefreshCw className="mr-1 h-4 w-4" />
+															) : (
+																<Sparkles className="mr-1 h-4 w-4" />
+															)}
+															{running
+																? "Generating…"
+																: published
+																	? "Regenerate"
+																	: "Run"}
+														</Button>
+													)}
+													{published && (
+														<Button
+															type="button"
+															size="sm"
+															variant="outline"
+															onClick={() => host(published.id)}
+														>
+															Host current
+														</Button>
+													)}
+												</div>
+											);
+										},
+									)}
+								</div>
+							</CardContent>
+						</Card>
+					)}
 					{report && (
 						<>
-							<div className="grid gap-4 sm:grid-cols-3">
+							<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 								<Card>
 									<CardContent className="pt-5">
 										<p className="text-sm text-muted-foreground">
 											Self-paced attempts
 										</p>
 										<p className="text-3xl font-bold">{report.participation}</p>
+									</CardContent>
+								</Card>
+								<Card>
+									<CardContent className="pt-5">
+										<p className="text-sm text-muted-foreground">
+											Lesson challenge participation
+										</p>
+										<p className="text-3xl font-bold">
+											{report.lessonChallenges.participants}
+										</p>
+										<p className="text-xs text-muted-foreground">
+											{report.lessonChallenges.games} games ·{" "}
+											{report.lessonChallenges.accuracy}% accuracy
+										</p>
 									</CardContent>
 								</Card>
 								<Card>
@@ -662,7 +819,7 @@ export function QuizManager({
 										<Label>Type</Label>
 										<Select
 											value={type}
-											onValueChange={(value: "quick_check" | "term_finale") => {
+											onValueChange={(value: QuizType) => {
 												setType(value);
 												setScopeId("");
 												setQuestions([]);
@@ -676,19 +833,22 @@ export function QuizManager({
 													Lesson Quick Check
 												</SelectItem>
 												<SelectItem value="term_finale">Term Finale</SelectItem>
+												<SelectItem value="lesson_challenge">
+													Live Lesson Challenge
+												</SelectItem>
 											</SelectContent>
 										</Select>
 									</div>
 									<div>
 										<Label>
-											{type === "quick_check" ? "Lesson" : "Course"}
+											{type === "term_finale" ? "Course" : "Lesson"}
 										</Label>
 										<Select value={scopeId} onValueChange={setScopeId}>
 											<SelectTrigger>
 												<SelectValue placeholder="Choose…" />
 											</SelectTrigger>
 											<SelectContent>
-												{type === "quick_check"
+												{type !== "term_finale"
 													? lessons.map((item) => (
 															<SelectItem key={item.id} value={item.id}>
 																{courseTitles.get(item.course_id) ||
@@ -705,26 +865,33 @@ export function QuizManager({
 										</Select>
 									</div>
 								</div>
-								<div className="flex flex-wrap items-center gap-3">
-									<Button
-										type="button"
-										disabled={busy || !scopeId}
-										onClick={() => generate()}
-									>
-										<Sparkles className="mr-2 h-4 w-4" />
-										{busy
-											? "Drafting questions…"
-											: questions.length
-												? "Regenerate with AI"
-												: "Generate with AI"}
-									</Button>
-									{questions.length > 0 && (
-										<p className="text-xs text-muted-foreground">
-											Regenerating replaces the questions below with a fresh AI
-											draft.
-										</p>
-									)}
-								</div>
+								{type !== "lesson_challenge" ? (
+									<div className="flex flex-wrap items-center gap-3">
+										<Button
+											type="button"
+											disabled={busy || !scopeId}
+											onClick={() => generate()}
+										>
+											<Sparkles className="mr-2 h-4 w-4" />
+											{busy
+												? "Drafting questions…"
+												: questions.length
+													? "Regenerate with AI"
+													: "Generate with AI"}
+										</Button>
+										{questions.length > 0 && (
+											<p className="text-xs text-muted-foreground">
+												Regenerating replaces the questions below with a fresh
+												AI draft.
+											</p>
+										)}
+									</div>
+								) : (
+									<p className="text-sm text-muted-foreground">
+										Lesson Challenge AI drafts are created from the Overview
+										dashboard. Teacher edits here are never replaced in place.
+									</p>
+								)}
 							</div>
 							{questions.length === 0 ? (
 								<p className="text-sm text-muted-foreground">
@@ -1091,7 +1258,9 @@ export function QuizManager({
 											<CardDescription>
 												{quiz.quiz_type === "quick_check"
 													? "Lesson Quick Check"
-													: "Term Finale"}
+													: quiz.quiz_type === "lesson_challenge"
+														? "Live Lesson Challenge"
+														: "Term Finale"}
 												{quiz.lessons?.title
 													? ` · ${quiz.lessons.title}`
 													: quiz.courses?.title
@@ -1099,13 +1268,18 @@ export function QuizManager({
 														: ""}
 											</CardDescription>
 										</div>
-										<Badge
-											variant={
-												quiz.status === "published" ? "default" : "outline"
-											}
-										>
-											{quiz.status}
-										</Badge>
+										<div className="flex flex-col items-end gap-1">
+											<Badge
+												variant={
+													quiz.status === "published" ? "default" : "outline"
+												}
+											>
+												{quiz.status}
+											</Badge>
+											{quiz.source_outdated && (
+												<Badge variant="destructive">Outdated</Badge>
+											)}
+										</div>
 									</div>
 								</CardHeader>
 								<CardContent>
@@ -1129,7 +1303,8 @@ export function QuizManager({
 											<Copy className="mr-1 h-4 w-4" />
 											Duplicate
 										</Button>
-										{quiz.quiz_type === "term_finale" &&
+										{(quiz.quiz_type === "term_finale" ||
+											quiz.quiz_type === "lesson_challenge") &&
 											quiz.status === "published" && (
 												<Button size="sm" onClick={() => host(quiz.id)}>
 													<Gamepad2 className="mr-1 h-4 w-4" />
