@@ -3,6 +3,8 @@ import { getApiContext } from "@/lib/quizzes/server";
 
 const csvCell = (value: unknown) =>
 	`"${String(value ?? "").replaceAll('"', '""')}"`;
+const firstRelation = <T>(value: T | T[] | null | undefined) =>
+	Array.isArray(value) ? value[0] : (value ?? undefined);
 
 export async function GET(request: NextRequest) {
 	const context = await getApiContext({ admin: true });
@@ -24,12 +26,12 @@ export async function GET(request: NextRequest) {
 		context.db
 			.from("quiz_game_answers")
 			.select(
-				"question_id, player_id, correct, quiz_questions(question, misconception_tag)",
+				"game_id, question_id, player_id, correct, quiz_questions(question, misconception_tag)",
 			),
 		context.db
 			.from("quiz_game_players")
 			.select(
-				"game_id, team_id, display_name, score, quiz_game_teams(name), quiz_games(code, quizzes(title))",
+				"id, game_id, team_id, display_name, score, quiz_game_teams(name), quiz_games(code, quizzes(title, quiz_type))",
 			),
 		context.db
 			.from("quiz_questions")
@@ -47,21 +49,40 @@ export async function GET(request: NextRequest) {
 	const { data: attempts, error } = attemptResult;
 	if (error)
 		return NextResponse.json({ error: error.message }, { status: 500 });
-	const rows = (attempts || []).map((attempt) => ({
-		student:
-			attempt.profiles?.[0]?.full_name ||
-			attempt.profiles?.[0]?.email ||
-			"Student",
-		quiz: attempt.quizzes?.[0]?.title || "Quiz",
-		type: attempt.quizzes?.[0]?.quiz_type,
-		percentage: attempt.percentage,
-		mastered: attempt.passed,
-		misconceptions: (Array.isArray(attempt.answers) ? attempt.answers : [])
-			.map((answer: { misconceptionTag?: string }) => answer.misconceptionTag)
-			.filter(Boolean)
-			.join("; "),
-		completedAt: attempt.completed_at,
-	}));
+	const rows = (attempts || []).map((attempt) => {
+		const profile = firstRelation(attempt.profiles);
+		const quiz = firstRelation(attempt.quizzes);
+		return {
+			student: profile?.full_name || profile?.email || "Student",
+			quiz: quiz?.title || "Quiz",
+			type: quiz?.quiz_type,
+			percentage: attempt.percentage,
+			mastered: attempt.passed,
+			misconceptions: (Array.isArray(attempt.answers) ? attempt.answers : [])
+				.map((answer: { misconceptionTag?: string }) => answer.misconceptionTag)
+				.filter(Boolean)
+				.join("; "),
+			completedAt: attempt.completed_at,
+		};
+	});
+	const liveChallengeRows = (playerResult.data || [])
+		.filter((player) => {
+			const game = firstRelation(player.quiz_games);
+			return firstRelation(game?.quizzes)?.quiz_type === "lesson_challenge";
+		})
+		.map((player) => {
+			const game = firstRelation(player.quiz_games);
+			return {
+				student: player.display_name,
+				quiz: firstRelation(game?.quizzes)?.title || "Lesson Challenge",
+				type: "lesson_challenge",
+				percentage: "",
+				mastered: "Report only",
+				misconceptions: "",
+				completedAt: "",
+				score: player.score,
+			};
+		});
 	if (request.nextUrl.searchParams.get("format") === "csv") {
 		const header = [
 			"Student",
@@ -71,8 +92,13 @@ export async function GET(request: NextRequest) {
 			"Mastered",
 			"Misconceptions",
 			"Completed at",
+			"Live score",
 		];
-		const csv = [header, ...rows.map((row) => Object.values(row))]
+		const exportRows = [
+			...rows.map((row) => [...Object.values(row), ""]),
+			...liveChallengeRows.map((row) => Object.values(row)),
+		];
+		const csv = [header, ...exportRows]
 			.map((row) => row.map(csvCell).join(","))
 			.join("\n");
 		return new NextResponse(csv, {
@@ -91,7 +117,7 @@ export async function GET(request: NextRequest) {
 		{ question: string; correct: number; total: number }
 	>();
 	for (const answer of liveResult.data || []) {
-		const relation = answer.quiz_questions?.[0];
+		const relation = firstRelation(answer.quiz_questions);
 		const current = questionStats.get(answer.question_id) || {
 			question: relation?.question || "Question",
 			correct: 0,
@@ -112,13 +138,14 @@ export async function GET(request: NextRequest) {
 	>();
 	for (const player of playerResult.data || []) {
 		if (!player.team_id) continue;
+		const gameRelation = firstRelation(player.quiz_games);
 		const key = `${player.game_id}:${player.team_id}`;
 		const current = teamGroups.get(key) || {
 			game:
-				player.quiz_games?.[0]?.quizzes?.[0]?.title ||
-				player.quiz_games?.[0]?.code ||
+				firstRelation(gameRelation?.quizzes)?.title ||
+				gameRelation?.code ||
 				"Game",
-			team: player.quiz_game_teams?.[0]?.name || "Team",
+			team: firstRelation(player.quiz_game_teams)?.name || "Team",
 			total: 0,
 			members: 0,
 		};
@@ -138,8 +165,8 @@ export async function GET(request: NextRequest) {
 	>();
 	const courseVariants = new Map<string, Set<string>>();
 	for (const question of adaptiveQuestionResult.data || []) {
-		const quiz = question.quizzes?.[0];
-		const courseId = quiz?.course_id || quiz?.lessons?.[0]?.course_id;
+		const quiz = firstRelation(question.quizzes);
+		const courseId = quiz?.course_id || firstRelation(quiz?.lessons)?.course_id;
 		if (!courseId) continue;
 		const key = `${courseId}:${question.concept_tag}`;
 		const current = coverageGroups.get(key) || {
@@ -173,6 +200,65 @@ export async function GET(request: NextRequest) {
 		);
 	const adaptiveEvents = adaptiveEventResult.data || [];
 	const diagnostics = adaptiveDiagnosticResult.data || [];
+	const challengePlayers = (playerResult.data || []).filter((player) => {
+		const game = firstRelation(player.quiz_games);
+		return firstRelation(game?.quizzes)?.quiz_type === "lesson_challenge";
+	});
+	const challengeGameIds = new Set(
+		challengePlayers.map((player) => player.game_id),
+	);
+	const challengeAnswers = (liveResult.data || []).filter((answer) =>
+		challengeGameIds.has(answer.game_id),
+	);
+	const challengeMisconceptions = new Map<string, number>();
+	for (const answer of challengeAnswers) {
+		const tag = firstRelation(answer.quiz_questions)?.misconception_tag;
+		if (!answer.correct && tag)
+			challengeMisconceptions.set(
+				tag,
+				(challengeMisconceptions.get(tag) || 0) + 1,
+			);
+	}
+	const challengeTeams = new Map<
+		string,
+		{ game: string; team: string; total: number; members: number }
+	>();
+	for (const player of challengePlayers) {
+		if (!player.team_id) continue;
+		const gameRelation = firstRelation(player.quiz_games);
+		const key = `${player.game_id}:${player.team_id}`;
+		const current = challengeTeams.get(key) || {
+			game:
+				firstRelation(gameRelation?.quizzes)?.title ||
+				gameRelation?.code ||
+				"Lesson Challenge",
+			team: firstRelation(player.quiz_game_teams)?.name || "Team",
+			total: 0,
+			members: 0,
+		};
+		current.total += player.score;
+		current.members += 1;
+		challengeTeams.set(key, current);
+	}
+	const challengeQuestionStats = [...questionStats.entries()]
+		.map(([questionId, item]) => {
+			const answers = challengeAnswers.filter(
+				(answer) => answer.question_id === questionId,
+			);
+			return {
+				question: item.question,
+				responses: answers.length,
+				accuracy: answers.length
+					? Math.round(
+							(answers.filter((answer) => answer.correct).length /
+								answers.length) *
+								100,
+						)
+					: 0,
+			};
+		})
+		.filter((item) => item.responses > 0)
+		.sort((a, b) => a.accuracy - b.accuracy);
 	return NextResponse.json({
 		participation: rows.length,
 		livePlayers: new Set(
@@ -195,6 +281,27 @@ export async function GET(request: NextRequest) {
 			members: team.members,
 			averageScore: Math.round(team.total / team.members),
 		})),
+		lessonChallenges: {
+			games: challengeGameIds.size,
+			participants: challengePlayers.length,
+			accuracy: challengeAnswers.length
+				? Math.round(
+						(challengeAnswers.filter((answer) => answer.correct).length /
+							challengeAnswers.length) *
+							100,
+					)
+				: 0,
+			difficultQuestions: challengeQuestionStats.slice(0, 10),
+			teamResults: [...challengeTeams.values()].map((team) => ({
+				game: team.game,
+				team: team.team,
+				members: team.members,
+				averageScore: Math.round(team.total / team.members),
+			})),
+			misconceptions: [...challengeMisconceptions.entries()].sort(
+				(a, b) => b[1] - a[1],
+			),
+		},
 		adaptive: {
 			publishedQuestions: (adaptiveQuestionResult.data || []).length,
 			coverageGaps,

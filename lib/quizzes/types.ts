@@ -7,6 +7,7 @@ export const QUESTION_TYPES = [
 
 export type QuestionType = (typeof QUESTION_TYPES)[number];
 export type PowerUp = "fifty_fifty" | "hint" | "second_chance";
+export type QuizType = "quick_check" | "term_finale" | "lesson_challenge";
 
 export interface QuizQuestionRecord {
 	id: string;
@@ -66,4 +67,11 @@ export interface TeamLeaderboardEntry {
 	averagePoints: number;
 	accuracy: number;
 	members: number;
+}
+
+export interface PersonalLiveResult {
+	rank: number;
+	points: number;
+	correctAnswers: number;
+	averageResponseMs: number;
 }

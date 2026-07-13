@@ -32,8 +32,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import type {
 	LeaderboardEntry,
+	PersonalLiveResult,
 	StudentQuestion,
 	TeamLeaderboardEntry,
 } from "@/lib/quizzes/types";
@@ -43,10 +45,10 @@ interface Player {
 	id: string;
 	team_id: string | null;
 	display_name: string;
-	score: number;
-	fifty_fifty_available: boolean;
-	hint_available: boolean;
-	second_chance_available: boolean;
+	score?: number;
+	fifty_fifty_available?: boolean;
+	hint_available?: boolean;
+	second_chance_available?: boolean;
 }
 interface Team {
 	id: string;
@@ -62,6 +64,9 @@ interface GameState {
 		questionStartedAt: string | null;
 		title: string;
 		totalQuestions: number;
+		quizType: "term_finale" | "lesson_challenge";
+		powerupsEnabled: boolean;
+		teamMode: boolean;
 	};
 	isHost: boolean;
 	player: Player | null;
@@ -75,6 +80,7 @@ interface GameState {
 		explanation: string;
 		answers: { answer: string | string[]; correct: boolean }[];
 	} | null;
+	personalResult: PersonalLiveResult | null;
 }
 
 export function LiveQuizGame({ code }: { code: string }) {
@@ -128,6 +134,16 @@ export function LiveQuizGame({ code }: { code: string }) {
 					event: "*",
 					schema: "public",
 					table: "quiz_game_players",
+					filter: `game_id=eq.${state.game.id}`,
+				},
+				load,
+			)
+			.on(
+				"postgres_changes",
+				{
+					event: "*",
+					schema: "public",
+					table: "quiz_game_teams",
 					filter: `game_id=eq.${state.game.id}`,
 				},
 				load,
@@ -223,6 +239,13 @@ export function LiveQuizGame({ code }: { code: string }) {
 					),
 				)
 			: (state.question?.time_limit_seconds ?? 0);
+	const requiresTeamAssignments =
+		state.game.teamMode &&
+		state.players.some((player) => player.team_id === null);
+	const needsTeam = state.game.teamMode && state.teams.length === 0;
+	const teamFirst =
+		state.game.quizType === "lesson_challenge" && state.game.teamMode;
+	const showIndividualLeaderboard = !teamFirst || state.isHost;
 
 	return (
 		<div className="space-y-6">
@@ -231,7 +254,9 @@ export function LiveQuizGame({ code }: { code: string }) {
 					<div className="flex flex-wrap items-center justify-between gap-4">
 						<div>
 							<CardDescription className="text-purple-100">
-								Live Term Challenge
+								{state.game.quizType === "lesson_challenge"
+									? "Live Lesson Challenge"
+									: "Live Term Finale"}
 							</CardDescription>
 							<CardTitle className="text-2xl">{state.game.title}</CardTitle>
 						</div>
@@ -304,8 +329,10 @@ export function LiveQuizGame({ code }: { code: string }) {
 										</Select>
 									) : (
 										<Badge variant="outline">
-											{state.teams.find((team) => team.id === player.team_id)
-												?.name || "Waiting for team"}
+											{state.game.teamMode
+												? state.teams.find((team) => team.id === player.team_id)
+														?.name || "Waiting for team"
+												: "Individual play"}
 										</Badge>
 									)}
 								</div>
@@ -343,9 +370,50 @@ export function LiveQuizGame({ code }: { code: string }) {
 											</Badge>
 										))}
 									</div>
+									<div className="flex items-center justify-between rounded-lg border p-3">
+										<div>
+											<p className="text-sm font-medium">Team mode</p>
+											<p className="text-xs text-muted-foreground">
+												Show team-first rankings using average points.
+											</p>
+										</div>
+										<Switch
+											checked={state.game.teamMode}
+											onCheckedChange={(enabled) =>
+												void hostAction("set_team_mode", { enabled })
+											}
+											aria-label="Use teacher-assigned teams"
+										/>
+									</div>
+									<div className="flex items-center justify-between rounded-lg border p-3">
+										<div>
+											<p className="text-sm font-medium">Power-ups</p>
+											<p className="text-xs text-muted-foreground">
+												Allow 50/50, hints, and second chances.
+											</p>
+										</div>
+										<Switch
+											checked={state.game.powerupsEnabled}
+											onCheckedChange={(enabled) =>
+												void hostAction("set_powerups", { enabled })
+											}
+											aria-label="Allow power-ups in this game"
+										/>
+									</div>
+									{(requiresTeamAssignments || needsTeam) && (
+										<p className="text-sm text-amber-700">
+											{needsTeam
+												? "Create at least one team before starting team mode."
+												: "Assign every player to a team before starting."}
+										</p>
+									)}
 									<Button
 										className="w-full"
-										disabled={!state.players.length}
+										disabled={
+											!state.players.length ||
+											requiresTeamAssignments ||
+											needsTeam
+										}
 										onClick={() => hostAction("start")}
 									>
 										<Play className="mr-2 h-4 w-4" />
@@ -401,27 +469,32 @@ export function LiveQuizGame({ code }: { code: string }) {
 											</p>
 										)}
 										<div className="flex flex-wrap gap-2">
-											<Button
-												variant="outline"
-												disabled={
-													remainingSeconds === 0 ||
-													!state.player.fifty_fifty_available ||
-													state.question.question_type !== "multiple_choice"
-												}
-												onClick={() => activatePowerUp("fifty_fifty")}
-											>
-												50/50
-											</Button>
-											<Button
-												variant="outline"
-												disabled={
-													remainingSeconds === 0 || !state.player.hint_available
-												}
-												onClick={() => activatePowerUp("hint")}
-											>
-												<Lightbulb className="mr-1 h-4 w-4" />
-												Hint
-											</Button>
+											{state.game.powerupsEnabled && (
+												<>
+													<Button
+														variant="outline"
+														disabled={
+															remainingSeconds === 0 ||
+															!state.player.fifty_fifty_available ||
+															state.question.question_type !== "multiple_choice"
+														}
+														onClick={() => activatePowerUp("fifty_fifty")}
+													>
+														50/50
+													</Button>
+													<Button
+														variant="outline"
+														disabled={
+															remainingSeconds === 0 ||
+															!state.player.hint_available
+														}
+														onClick={() => activatePowerUp("hint")}
+													>
+														<Lightbulb className="mr-1 h-4 w-4" />
+														Hint
+													</Button>
+												</>
+											)}
 											<Button
 												disabled={
 													remainingSeconds === 0 ||
@@ -445,7 +518,8 @@ export function LiveQuizGame({ code }: { code: string }) {
 												? `Correct! +${answerResult.points}`
 												: "Not quite"}
 										</p>
-										{answerResult.canSecondChance &&
+										{state.game.powerupsEnabled &&
+											answerResult.canSecondChance &&
 											state.player.second_chance_available && (
 												<Button
 													className="mt-3"
@@ -538,53 +612,101 @@ export function LiveQuizGame({ code }: { code: string }) {
 						<Medal className="mx-auto h-12 w-12 text-amber-500" />
 						<CardTitle className="text-2xl">Final podium</CardTitle>
 						<CardDescription>
-							Solo review attempts won’t change these official results.
+							{state.game.quizType === "lesson_challenge"
+								? "This collaborative result is for teacher reports and does not affect adaptive mastery."
+								: "Solo review attempts won’t change these official results."}
 						</CardDescription>
 					</CardHeader>
 					<CardContent className="grid gap-6 md:grid-cols-2">
+						{showIndividualLeaderboard && (
+							<Leaderboard
+								title="Individual leaders"
+								entries={state.leaderboard.map((entry) => ({
+									id: entry.id,
+									label: entry.displayName,
+									score: entry.points,
+								}))}
+							/>
+						)}
+						{(state.game.teamMode || state.game.quizType === "term_finale") && (
+							<Leaderboard
+								title="Team leaders"
+								entries={state.teamLeaderboard.map((entry) => ({
+									id: entry.id,
+									label: entry.name,
+									score: entry.averagePoints,
+								}))}
+							/>
+						)}
+						{state.game.quizType === "lesson_challenge" &&
+							!state.isHost &&
+							state.personalResult && (
+								<PersonalResult result={state.personalResult} />
+							)}
+					</CardContent>
+					{state.game.quizType === "term_finale" && (
+						<div className="px-6 pb-6 text-center">
+							<SoloReview quizId={state.game.quizId} />
+						</div>
+					)}
+				</Card>
+			)}
+			{state.game.status !== "lobby" && state.game.status !== "finished" && (
+				<div className="grid gap-4 md:grid-cols-2">
+					{showIndividualLeaderboard && (
 						<Leaderboard
-							title="Individual leaders"
+							title="Individual leaderboard"
 							entries={state.leaderboard.map((entry) => ({
 								id: entry.id,
 								label: entry.displayName,
 								score: entry.points,
 							}))}
 						/>
+					)}
+					{(state.game.teamMode || state.game.quizType === "term_finale") && (
 						<Leaderboard
-							title="Team leaders"
+							title="Team leaderboard (average)"
 							entries={state.teamLeaderboard.map((entry) => ({
 								id: entry.id,
 								label: entry.name,
 								score: entry.averagePoints,
 							}))}
 						/>
-					</CardContent>
-					<div className="px-6 pb-6 text-center">
-						<SoloReview quizId={state.game.quizId} />
-					</div>
-				</Card>
-			)}
-			{state.game.status !== "lobby" && (
-				<div className="grid gap-4 md:grid-cols-2">
-					<Leaderboard
-						title="Individual leaderboard"
-						entries={state.leaderboard.map((entry) => ({
-							id: entry.id,
-							label: entry.displayName,
-							score: entry.points,
-						}))}
-					/>
-					<Leaderboard
-						title="Team leaderboard (average)"
-						entries={state.teamLeaderboard.map((entry) => ({
-							id: entry.id,
-							label: entry.name,
-							score: entry.averagePoints,
-						}))}
-					/>
+					)}
 				</div>
 			)}
 		</div>
+	);
+}
+
+function PersonalResult({ result }: { result: PersonalLiveResult }) {
+	return (
+		<Card>
+			<CardHeader>
+				<CardTitle className="text-lg">Your private result</CardTitle>
+				<CardDescription>
+					Only you and the host can see this individual result.
+				</CardDescription>
+			</CardHeader>
+			<CardContent className="grid grid-cols-2 gap-3 text-center">
+				<div className="rounded-lg bg-muted/50 p-3">
+					<p className="text-xs text-muted-foreground">Rank</p>
+					<strong>#{result.rank}</strong>
+				</div>
+				<div className="rounded-lg bg-muted/50 p-3">
+					<p className="text-xs text-muted-foreground">Points</p>
+					<strong>{result.points}</strong>
+				</div>
+				<div className="rounded-lg bg-muted/50 p-3">
+					<p className="text-xs text-muted-foreground">Correct</p>
+					<strong>{result.correctAnswers}</strong>
+				</div>
+				<div className="rounded-lg bg-muted/50 p-3">
+					<p className="text-xs text-muted-foreground">Average time</p>
+					<strong>{Math.round(result.averageResponseMs / 1000)}s</strong>
+				</div>
+			</CardContent>
+		</Card>
 	);
 }
 

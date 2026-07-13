@@ -1,5 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server";
 import {
+	isTeamFirstGame,
+	personalLiveResult,
+	updatesLearningFromLiveGame,
+	visibleIndividualLeaderboard,
+} from "@/lib/quizzes/challenges";
+import {
 	answersMatch,
 	calculateLivePoints,
 	displayName,
@@ -27,12 +33,24 @@ async function load(code: string) {
 	if ("error" in context) return context;
 	const { data: game } = await context.db
 		.from("quiz_games")
-		.select("*, quizzes(id, title, course_id)")
+		.select(
+			"*, quizzes(id, title, quiz_type, course_id, lesson_id, lessons(course_id))",
+		)
 		.eq("code", code.toUpperCase())
 		.maybeSingle();
 	if (!game)
 		return {
 			error: NextResponse.json({ error: "Game not found" }, { status: 404 }),
+		};
+	const quiz = Array.isArray(game.quizzes) ? game.quizzes[0] : game.quizzes;
+	const lesson = Array.isArray(quiz?.lessons) ? quiz.lessons[0] : quiz?.lessons;
+	const courseId = quiz?.course_id || lesson?.course_id;
+	if (!quiz || !courseId)
+		return {
+			error: NextResponse.json(
+				{ error: "Game course is unavailable" },
+				{ status: 409 },
+			),
 		};
 	const isHost =
 		game.host_id === context.user.id && context.profile?.role === "admin";
@@ -42,11 +60,7 @@ async function load(code: string) {
 		.eq("game_id", game.id)
 		.eq("user_id", context.user.id)
 		.maybeSingle();
-	if (
-		!isHost &&
-		!player &&
-		!(await isCourseEnrolled(context.user.id, game.quizzes.course_id))
-	) {
+	if (!isHost && !(await isCourseEnrolled(context.user.id, courseId))) {
 		return {
 			error: NextResponse.json(
 				{ error: "You are not enrolled in this course" },
@@ -54,7 +68,7 @@ async function load(code: string) {
 			),
 		};
 	}
-	return { ...context, game, player, isHost };
+	return { ...context, game, quiz, player, isHost };
 }
 
 export async function GET(_request: NextRequest, { params }: Context) {
@@ -118,6 +132,23 @@ export async function GET(_request: NextRequest, { params }: Context) {
 			};
 		}),
 	);
+	const teamFirst = isTeamFirstGame(
+		loaded.quiz.quiz_type,
+		loaded.game.team_mode ? (teams || []).length : 0,
+	);
+	const publicLeaderboard = visibleIndividualLeaderboard({
+		leaderboard,
+		isHost: loaded.isHost,
+		teamFirst,
+	});
+	const publicPlayers =
+		teamFirst && !loaded.isHost
+			? (players || []).map((player) => ({
+					id: player.id,
+					team_id: player.team_id,
+					display_name: player.display_name,
+				}))
+			: players || [];
 	let review = null;
 	if (question && ["review", "finished"].includes(loaded.game.status)) {
 		const { data: answers } = await loaded.db
@@ -140,15 +171,22 @@ export async function GET(_request: NextRequest, { params }: Context) {
 			status: loaded.game.status,
 			currentQuestionIndex: loaded.game.current_question_index,
 			questionStartedAt: loaded.game.question_started_at,
-			title: loaded.game.quizzes.title,
+			title: loaded.quiz.title,
+			quizType: loaded.quiz.quiz_type,
+			powerupsEnabled: loaded.game.powerups_enabled,
+			teamMode: Boolean(loaded.game.team_mode),
 			totalQuestions: (questions || []).length,
 		},
 		isHost: loaded.isHost,
 		player: loaded.player,
-		players: players || [],
+		players: publicPlayers,
 		teams: teams || [],
-		leaderboard,
+		leaderboard: publicLeaderboard,
 		teamLeaderboard,
+		personalResult:
+			loaded.game.status === "finished"
+				? personalLiveResult(leaderboard, loaded.player?.id)
+				: null,
 		// Hints are a paid power-up in live games, so they never ride along on
 		// the question payload — the powerup action returns them after purchase.
 		question: question ? { ...sanitizeQuestion(question), hint: null } : null,
@@ -196,6 +234,11 @@ export async function POST(request: NextRequest, { params }: Context) {
 	if (!current || loaded.game.status !== "question")
 		return NextResponse.json({ error: "Answers are closed" }, { status: 409 });
 	if (body.action === "powerup") {
+		if (!loaded.game.powerups_enabled)
+			return NextResponse.json(
+				{ error: "Power-ups are disabled for this game" },
+				{ status: 409 },
+			);
 		const kind = body.kind as PowerUp;
 		const column =
 			kind === "fifty_fifty"
@@ -305,7 +348,8 @@ export async function POST(request: NextRequest, { params }: Context) {
 				{ error: "Answer already submitted" },
 				{ status: 409 },
 			);
-		await recordLearning(loaded.db, loaded.user.id, current.id, correct);
+		if (updatesLearningFromLiveGame(loaded.quiz.quiz_type))
+			await recordLearning(loaded.db, loaded.user.id, current.id, correct);
 		return NextResponse.json({
 			correct,
 			points,
@@ -325,6 +369,34 @@ export async function PATCH(request: NextRequest, { params }: Context) {
 	if (!loaded.isHost)
 		return NextResponse.json({ error: "Host only" }, { status: 403 });
 	const body = await request.json();
+	if (body.action === "set_powerups") {
+		if (loaded.game.status !== "lobby")
+			return NextResponse.json(
+				{ error: "Power-up settings are locked after the game starts" },
+				{ status: 409 },
+			);
+		const { error } = await loaded.db
+			.from("quiz_games")
+			.update({ powerups_enabled: Boolean(body.enabled) })
+			.eq("id", loaded.game.id);
+		return error
+			? NextResponse.json({ error: error.message }, { status: 500 })
+			: NextResponse.json({ ok: true });
+	}
+	if (body.action === "set_team_mode") {
+		if (loaded.game.status !== "lobby")
+			return NextResponse.json(
+				{ error: "Team settings are locked after the game starts" },
+				{ status: 409 },
+			);
+		const { error } = await loaded.db
+			.from("quiz_games")
+			.update({ team_mode: Boolean(body.enabled) })
+			.eq("id", loaded.game.id);
+		return error
+			? NextResponse.json({ error: error.message }, { status: 500 })
+			: NextResponse.json({ ok: true });
+	}
 	if (body.action === "create_team") {
 		const name = String(body.name || "")
 			.trim()
@@ -352,13 +424,35 @@ export async function PATCH(request: NextRequest, { params }: Context) {
 			: NextResponse.json({ ok: true });
 	}
 	const updates: Record<string, unknown> = {};
-	if (body.action === "start")
+	if (body.action === "start") {
+		const [{ count: teamCount }, { count: unassignedCount }] =
+			await Promise.all([
+				loaded.db
+					.from("quiz_game_teams")
+					.select("id", { count: "exact", head: true })
+					.eq("game_id", loaded.game.id),
+				loaded.db
+					.from("quiz_game_players")
+					.select("id", { count: "exact", head: true })
+					.eq("game_id", loaded.game.id)
+					.is("team_id", null),
+			]);
+		if (loaded.game.team_mode && (teamCount || 0) === 0)
+			return NextResponse.json(
+				{ error: "Create at least one team before starting team mode" },
+				{ status: 409 },
+			);
+		if (loaded.game.team_mode && (unassignedCount || 0) > 0)
+			return NextResponse.json(
+				{ error: "Assign every player to a team before starting" },
+				{ status: 409 },
+			);
 		Object.assign(updates, {
 			status: "question",
 			current_question_index: 0,
 			question_started_at: new Date().toISOString(),
 		});
-	else if (body.action === "next") {
+	} else if (body.action === "next") {
 		const { count } = await loaded.db
 			.from("quiz_questions")
 			.select("id", { count: "exact", head: true })

@@ -29,11 +29,14 @@ export async function PUT(request: NextRequest, { params }: Context) {
 			{ status: 400 },
 		);
 	const { questions, ...quiz } = parsed.data;
+	const publishChallenge =
+		quiz.quiz_type === "lesson_challenge" && quiz.status === "published";
 	const { error } = await context.db
 		.from("quizzes")
 		.update({
 			...quiz,
-			is_active: quiz.status === "published",
+			status: publishChallenge ? "draft" : quiz.status,
+			is_active: publishChallenge ? false : quiz.status === "published",
 			updated_at: new Date().toISOString(),
 		})
 		.eq("id", id);
@@ -51,9 +54,20 @@ export async function PUT(request: NextRequest, { params }: Context) {
 				quiz_id: id,
 			})),
 		);
-	return questionError
-		? NextResponse.json({ error: questionError.message }, { status: 500 })
-		: NextResponse.json({ id });
+	if (questionError)
+		return NextResponse.json({ error: questionError.message }, { status: 500 });
+	if (publishChallenge) {
+		const { data: published, error: publishError } = await context.db.rpc(
+			"publish_lesson_challenge",
+			{ p_quiz_id: id },
+		);
+		if (publishError || !published)
+			return NextResponse.json(
+				{ error: publishError?.message || "Could not publish challenge" },
+				{ status: 500 },
+			);
+	}
+	return NextResponse.json({ id });
 }
 
 export async function DELETE(_request: NextRequest, { params }: Context) {
