@@ -69,12 +69,12 @@ const posts = [
 export default function BlogPage() {
 	return (
 		<MainLayout>
-			<section className="container mx-auto px-4 py-20 lg:py-28">
+			<section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
 				<div className="max-w-3xl mx-auto text-center mb-16">
 					<Badge className="mb-4 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
 						Blog
 					</Badge>
-					<h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
+					<h1 className="mb-5 text-4xl font-semibold tracking-[-0.04em] text-foreground text-balance lg:text-5xl">
 						Stories & Insights from Kids Learn AI
 					</h1>
 					<p className="text-xl text-muted-foreground leading-relaxed text-pretty">

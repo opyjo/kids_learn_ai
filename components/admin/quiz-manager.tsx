@@ -429,10 +429,10 @@ export function QuizManager({
 	);
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-4">
 			<div className="flex flex-wrap items-center justify-between gap-3">
 				<div>
-					<h1 className="text-2xl font-semibold">Quizzes & Live Games</h1>
+					<h1 className="text-xl font-semibold">Quizzes & live games</h1>
 					<p className="text-sm text-muted-foreground">
 						Generate or write quizzes, review the drafts, publish — students
 						only ever see published quizzes.

@@ -49,7 +49,7 @@ export default async function AnalyticsPage() {
 	};
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-4">
 			<div>
 				<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
 					Analytics
@@ -59,7 +59,7 @@ export default async function AnalyticsPage() {
 				</p>
 			</div>
 
-			<div className="grid lg:grid-cols-2 gap-6">
+			<div className="grid gap-4 lg:grid-cols-2">
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
 					<CardHeader className="pb-4">
 						<CardTitle className="text-lg font-semibold">

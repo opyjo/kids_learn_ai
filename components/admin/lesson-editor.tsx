@@ -98,7 +98,7 @@ export function LessonEditor() {
 	};
 
 	return (
-		<div className="max-w-6xl mx-auto space-y-6">
+		<div className="mx-auto max-w-6xl space-y-4">
 			{/* Header */}
 			<div className="flex items-center justify-between">
 				<div>

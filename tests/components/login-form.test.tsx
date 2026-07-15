@@ -23,7 +23,13 @@ describe("LoginForm Component", () => {
 	});
 
 	describe("rendering", () => {
-		it("should render email input field", () => {
+		it("shows an authentication callback error", () => {
+			render(<LoginForm initialError="Invite link expired" />);
+
+			expect(screen.getByText("Invite link expired")).toBeInTheDocument();
+		});
+
+		it("should render email or username input field", () => {
 			render(<LoginForm />);
 			expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
 		});
@@ -56,10 +62,10 @@ describe("LoginForm Component", () => {
 	});
 
 	describe("input fields", () => {
-		it("should have email input with correct type", () => {
+		it("should accept either an email or username", () => {
 			render(<LoginForm />);
 			const emailInput = screen.getByLabelText(/email/i);
-			expect(emailInput).toHaveAttribute("type", "email");
+			expect(emailInput).toHaveAttribute("type", "text");
 		});
 
 		it("should have password input with correct type", () => {
@@ -80,10 +86,10 @@ describe("LoginForm Component", () => {
 			expect(passwordInput).toBeRequired();
 		});
 
-		it("should have correct placeholder for email", () => {
+		it("should explain both supported identifiers", () => {
 			render(<LoginForm />);
 			expect(
-				screen.getByPlaceholderText(/enter your email/i),
+				screen.getByPlaceholderText(/parent email or student username/i),
 			).toBeInTheDocument();
 		});
 
@@ -148,7 +154,7 @@ describe("LoginForm Component", () => {
 			const emailInput = screen.getByLabelText(/email/i);
 			const passwordInput = screen.getByPlaceholderText(/enter your password/i);
 
-			expect(emailInput).toHaveAttribute("id", "email");
+			expect(emailInput).toHaveAttribute("id", "identifier");
 			expect(passwordInput).toHaveAttribute("id", "password");
 		});
 
@@ -158,7 +164,7 @@ describe("LoginForm Component", () => {
 			const emailInput = screen.getByLabelText(/email/i);
 			const passwordInput = screen.getByPlaceholderText(/enter your password/i);
 
-			expect(emailInput).toHaveAttribute("name", "email");
+			expect(emailInput).toHaveAttribute("name", "identifier");
 			expect(passwordInput).toHaveAttribute("name", "password");
 		});
 	});

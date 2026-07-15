@@ -28,7 +28,7 @@ export function RecentFeedbackCard({ items }: RecentFeedbackCardProps) {
 	if (items.length === 0) return null;
 
 	return (
-		<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
+		<Card className="border-border shadow-sm">
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<MessageSquareText

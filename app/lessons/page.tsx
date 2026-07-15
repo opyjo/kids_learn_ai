@@ -88,15 +88,15 @@ export default async function LessonsPage() {
 	const totalLevels = coursesData?.length || 0;
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 dark:from-blue-600/8 dark:via-purple-600/8 dark:to-pink-600/8">
+		<div className="min-h-screen bg-background">
 			<SiteHeader />
 
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+			<div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 				{/* Header */}
-				<div className="mb-5">
+				<div className="mb-8">
 					<div className="flex items-start justify-between mb-4">
 						<div>
-							<h1 className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+							<h1 className="mb-2 text-3xl font-semibold tracking-[-0.03em] text-foreground">
 								Your Learning Journey
 							</h1>
 							<p className="text-muted-foreground">
@@ -176,12 +176,12 @@ export default async function LessonsPage() {
 				{/* Levels by Year */}
 				{Object.entries(coursesByYear).map(([yearGroup, courses]) => (
 					<div key={yearGroup} className="mb-10">
-						<h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+						<h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
 							<BookOpen className="h-5 w-5 text-primary" />
 							{yearGroup}
 						</h2>
 
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+						<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 							{courses?.map((course) => {
 								const isEnrolled = enrolledLevelIds.includes(course.id);
 								const lessonCount = lessonCountMap[course.id] || 0;
@@ -199,10 +199,8 @@ export default async function LessonsPage() {
 								return (
 									<Card
 										key={course.id}
-										className={`group relative overflow-hidden transition-all hover:shadow-lg ${
-											isEnrolled
-												? "border-green-200 dark:border-green-800 hover:scale-[1.02]"
-												: "hover:scale-[1.01]"
+										className={`group relative overflow-hidden transition-colors hover:border-primary/40 ${
+											isEnrolled ? "border-green-200 dark:border-green-800" : ""
 										} ${isComingSoon ? "opacity-70" : ""}`}
 									>
 										{/* Status Bar */}

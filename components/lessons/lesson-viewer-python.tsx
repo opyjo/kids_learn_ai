@@ -216,9 +216,9 @@ export function LessonViewer({
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+		<div className="min-h-screen bg-background">
 			<SiteHeader />
-			<div className="container mx-auto px-4 pt-3">
+			<div className="mx-auto max-w-7xl px-4 pt-3 sm:px-6 lg:px-8">
 				<LessonBreadcrumbs
 					courseSlug={courseSlug}
 					courseTitle={courseTitle}
@@ -663,7 +663,7 @@ export function LessonViewer({
 						}
 					>
 						{/* Lesson Content */}
-						<Card className="flex flex-col rounded-2xl border shadow-2xl max-h-[calc(100vh-140px)]">
+						<Card className="flex max-h-[calc(100vh-140px)] flex-col border shadow-sm">
 							<CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 rounded-t-2xl border-b-2 border-border flex-shrink-0 py-3">
 								<div className="flex items-start justify-between gap-3">
 									<div className="flex-1 min-w-0">

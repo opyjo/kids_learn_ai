@@ -14,16 +14,37 @@ export async function loginAction(
 	_prevState: ActionState,
 	formData: FormData,
 ): Promise<ActionState> {
-	const email = formData.get("email") as string;
+	const identifier = (formData.get("identifier") as string)?.trim();
 	const password = formData.get("password") as string;
 
 	// Validation
-	if (!email || !password) {
-		return { error: "Email and password are required" };
+	if (!identifier || !password) {
+		return { error: "Email or username and password are required" };
 	}
 
 	try {
 		const supabase = await getSupabaseServerClient();
+		let email = identifier.toLowerCase();
+
+		// Child accounts use an internal, non-deliverable email address so
+		// siblings can each authenticate without needing their own inbox.
+		if (!identifier.includes("@")) {
+			const adminClient = getSupabaseAdminClient();
+			if (!adminClient) {
+				return { error: "Student username login is not configured" };
+			}
+			const { data: studentProfile } = await adminClient
+				.from("profiles")
+				.select("email")
+				.eq("username", identifier.toLowerCase())
+				.eq("role", "student")
+				.maybeSingle();
+
+			if (!studentProfile?.email) {
+				return { error: "Invalid login credentials" };
+			}
+			email = studentProfile.email;
+		}
 
 		const { data: authData, error: authError } =
 			await supabase.auth.signInWithPassword({
@@ -76,8 +97,10 @@ export async function loginAction(
 		// Redirect based on role
 		if (profile.role === "admin") {
 			redirect("/admin");
+		} else if (profile.role === "parent") {
+			redirect("/family");
 		} else {
-			redirect("/");
+			redirect("/dashboard");
 		}
 	} catch (error) {
 		if (error instanceof Error && error.message === "NEXT_REDIRECT") {
@@ -154,8 +177,8 @@ export async function signupAction(
 		revalidatePath("/", "layout");
 		revalidatePath("/dashboard");
 
-		// Redirect to home page
-		redirect("/");
+		// Redirect to the student dashboard
+		redirect("/dashboard");
 	} catch (error) {
 		if (error instanceof Error && error.message === "NEXT_REDIRECT") {
 			throw error;
