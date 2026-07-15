@@ -145,7 +145,7 @@ export function UserMenu() {
 								}
 								className={
 									user.subscription_status === "premium"
-										? "bg-gradient-to-r from-yellow-400 to-yellow-600 text-white"
+										? "bg-amber-500 text-white"
 										: ""
 								}
 							>
@@ -163,9 +163,9 @@ export function UserMenu() {
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild className="cursor-pointer">
-					<Link href="/dashboard">
+					<Link href={user.role === "parent" ? "/family" : "/dashboard"}>
 						<LayoutDashboard className="mr-2 h-4 w-4" />
-						<span>Dashboard</span>
+						<span>{user.role === "parent" ? "My Family" : "Dashboard"}</span>
 					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild className="cursor-pointer">

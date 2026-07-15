@@ -28,10 +28,10 @@ export const metadata: Metadata = {
 
 export default function ApplyPage() {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5">
+		<div className="min-h-screen bg-background">
 			<SiteHeader />
 
-			<main className="container mx-auto px-4 py-8 lg:py-12">
+			<main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:py-12">
 				{/* Back Link */}
 				<div className="max-w-2xl mx-auto mb-8">
 					<Button variant="ghost" asChild className="group">
@@ -48,7 +48,7 @@ export default function ApplyPage() {
 						<Sparkles className="w-4 h-4" />
 						<span className="text-sm font-medium">Join Our Team</span>
 					</div>
-					<h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+					<h1 className="mb-4 text-3xl font-semibold tracking-tight text-foreground lg:text-4xl">
 						Become an Instructor
 					</h1>
 					<p className="text-lg text-muted-foreground">

@@ -74,12 +74,12 @@ export default async function TeacherNotesPage() {
 	);
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-4">
 			{/* Page Header */}
 			<div className="mb-6">
 				<div className="flex items-start justify-between mb-4">
 					<div>
-						<h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
+						<h1 className="mb-1 text-xl font-semibold tracking-tight text-foreground">
 							Teacher Lesson Notes
 						</h1>
 						<p className="text-sm text-muted-foreground">
@@ -166,7 +166,7 @@ export default async function TeacherNotesPage() {
 						{lessonsWithNotes.map((lesson: LessonWithNote) => (
 							<Card
 								key={lesson.id}
-								className="group relative overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02] border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-950/20"
+								className="group relative overflow-hidden border-green-200 bg-green-50/30 transition-colors hover:border-green-400 dark:border-green-800 dark:bg-green-950/20"
 							>
 								{/* Gradient Accent Bar */}
 								<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 to-emerald-500" />
@@ -282,7 +282,7 @@ export default async function TeacherNotesPage() {
 						{lessonsWithoutNotes.map((lesson: LessonWithNote) => (
 							<Card
 								key={lesson.id}
-								className="group relative overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02] border-dashed border-orange-200 dark:border-orange-800/50 bg-orange-50/20 dark:bg-orange-950/10"
+								className="group relative overflow-hidden border-dashed border-orange-200 bg-orange-50/20 transition-colors hover:border-orange-400 dark:border-orange-800/50 dark:bg-orange-950/10"
 							>
 								{/* Gradient Accent Bar */}
 								<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 to-amber-500" />

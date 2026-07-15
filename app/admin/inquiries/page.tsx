@@ -56,11 +56,21 @@ interface Inquiry {
 	notes: string | null;
 	created_at: string;
 	updated_at: string;
+	student_id: string | null;
+	parent_profile_id: string | null;
+	course_id: string | null;
+	onboarded_at: string | null;
 }
 
 export default async function InquiriesPage() {
 	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
+	const { data: coursesData } = await supabase
+		.from("courses")
+		.select("id, title")
+		.eq("is_coming_soon", false)
+		.order("order_index", { ascending: true });
+	const courses = coursesData || [];
 
 	// Fetch inquiries (most recent first). `count: exact` lets us detect when
 	// more rows exist than were returned (Supabase caps a SELECT at 1000) so the
@@ -93,7 +103,7 @@ export default async function InquiriesPage() {
 	);
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-4">
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -248,6 +258,9 @@ export default async function InquiriesPage() {
 												id={inquiry.id}
 												initialStatus={inquiry.status}
 												initialNotes={inquiry.notes}
+												initialCourseId={inquiry.course_id}
+												studentId={inquiry.student_id}
+												courses={courses}
 											/>
 										</div>
 									</div>

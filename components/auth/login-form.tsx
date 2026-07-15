@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, Mail } from "lucide-react";
+import { Loader2, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
@@ -30,10 +30,11 @@ const SubmitButton = () => {
 	);
 };
 
-export function LoginForm() {
+export function LoginForm({ initialError }: { initialError?: string }) {
 	const [state, formAction] = useActionState(loginAction, null);
 	const [googleLoading, setGoogleLoading] = useState(false);
 	const [googleError, setGoogleError] = useState("");
+	const displayedError = state?.error || googleError || initialError;
 
 	const handleGoogleSignIn = async () => {
 		setGoogleLoading(true);
@@ -67,30 +68,30 @@ export function LoginForm() {
 
 	return (
 		<form action={formAction} className="space-y-4">
-			{(state?.error || googleError) && (
+			{displayedError && (
 				<Alert variant="destructive">
-					<AlertDescription>{state?.error || googleError}</AlertDescription>
+					<AlertDescription>{displayedError}</AlertDescription>
 				</Alert>
 			)}
 
 			<div className="space-y-2">
-				<Label htmlFor="email">Email</Label>
+				<Label htmlFor="identifier">Email or student username</Label>
 				<div className="relative">
-					<Mail
+					<UserRound
 						className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none"
 						aria-hidden="true"
 					/>
 					<Input
-						id="email"
-						name="email"
-						type="email"
-						placeholder="Enter your email"
+						id="identifier"
+						name="identifier"
+						type="text"
+						placeholder="Parent email or student username"
 						className="pl-10 min-h-[44px]"
 						required
-						autoComplete="email"
+						autoComplete="username"
 						aria-required="true"
 						aria-invalid={state?.error ? "true" : "false"}
-						aria-describedby={state?.error ? "email-error" : undefined}
+						aria-describedby={state?.error ? "login-error" : undefined}
 					/>
 				</div>
 			</div>

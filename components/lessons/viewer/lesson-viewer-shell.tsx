@@ -62,10 +62,10 @@ export function LessonViewerShell({
 	}, []);
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+		<div className="min-h-screen bg-background">
 			<SiteHeader />
 
-			<div className="container mx-auto px-4 pt-2">
+			<div className="mx-auto max-w-7xl px-4 pt-2 sm:px-6 lg:px-8">
 				<div className="flex flex-wrap items-center justify-between gap-2">
 					<LessonBreadcrumbs
 						courseSlug={courseSlug}

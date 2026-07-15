@@ -252,9 +252,9 @@ export const SchedulesTab = () => {
 	}
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-4">
 			<div className="flex items-center justify-between">
-				<h3 className="text-2xl font-bold">Weekly Class Slots</h3>
+				<h2 className="text-lg font-semibold">Weekly class slots</h2>
 				<div className="flex gap-2">
 					<Button variant="outline" onClick={fetchData} className="gap-2">
 						<RefreshCw className="h-4 w-4" aria-hidden="true" />

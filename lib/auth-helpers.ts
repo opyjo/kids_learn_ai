@@ -58,6 +58,26 @@ export async function requireAdmin(): Promise<User> {
 	return user;
 }
 
+/** Require a parent/guardian account for family routes. */
+export async function requireParent(): Promise<User> {
+	const user = await requireAuth();
+	const supabase = await getSupabaseServerClient();
+	const { data: profile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user.id)
+		.single();
+
+	if (profile?.role === "admin") {
+		redirect("/admin");
+	}
+	if (profile?.role !== "parent") {
+		redirect("/dashboard");
+	}
+
+	return user;
+}
+
 /**
  * Check if a user is enrolled in a specific level (course).
  * Admins automatically have access to all levels.

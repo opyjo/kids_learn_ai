@@ -38,16 +38,16 @@ export default async function LabsPage() {
 	const completed = await completionCounts(user.id);
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+		<div className="min-h-screen bg-background">
 			<SiteHeader />
 
-			<div className="container mx-auto px-4 py-8 max-w-4xl">
+			<div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
 				<div className="text-center mb-8">
 					<div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-semibold text-primary mb-4">
 						<FlaskConical className="h-4 w-4" />
 						AI Labs
 					</div>
-					<h1 className="text-3xl font-bold text-foreground">
+					<h1 className="text-3xl font-semibold tracking-tight text-foreground">
 						Teach a Real AI — Yourself!
 					</h1>
 					<p className="mt-2 text-muted-foreground max-w-xl mx-auto">

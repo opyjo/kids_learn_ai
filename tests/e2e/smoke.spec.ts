@@ -95,8 +95,8 @@ test.describe("Critical UI Elements", () => {
 	test("login form is visible on login page", async ({ page }) => {
 		await page.goto("/login");
 
-		// Email and password inputs should be present
-		await expect(page.locator('input[type="email"]')).toBeVisible();
+		// Email/username and password inputs should be present
+		await expect(page.locator('input[name="identifier"]')).toBeVisible();
 		await expect(page.locator('input[type="password"]')).toBeVisible();
 	});
 });

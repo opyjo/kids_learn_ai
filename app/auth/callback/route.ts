@@ -49,6 +49,12 @@ export async function GET(request: Request) {
 		if (type === "recovery") {
 			return NextResponse.redirect(`${origin}/reset-password`);
 		}
+
+		// Invite and email-confirmation templates can use the token-hash flow too.
+		// Preserve the validated, same-origin destination after verification.
+		if (next) {
+			return NextResponse.redirect(`${origin}${next}`);
+		}
 	}
 
 	// Handle code exchange (used by OAuth, magic links, and password recovery with PKCE)
@@ -86,9 +92,12 @@ export async function GET(request: Request) {
 			if (profile?.role === "admin") {
 				return NextResponse.redirect(`${origin}/admin`);
 			}
+			if (profile?.role === "parent") {
+				return NextResponse.redirect(`${origin}/family`);
+			}
 		}
 	}
 
-	// Redirect regular users to home page
-	return NextResponse.redirect(`${origin}/`);
+	// Redirect regular students to their learning dashboard.
+	return NextResponse.redirect(`${origin}/dashboard`);
 }

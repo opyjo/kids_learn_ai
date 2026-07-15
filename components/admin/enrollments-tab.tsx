@@ -325,9 +325,9 @@ export const EnrollmentsTab = () => {
 	}
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-4">
 			<div className="flex items-center justify-between">
-				<h3 className="text-2xl font-bold">Student Enrollments</h3>
+				<h2 className="text-lg font-semibold">Student enrollments</h2>
 				<Button variant="outline" onClick={fetchData} className="gap-2">
 					<RefreshCw className="h-4 w-4" />
 					Refresh
@@ -416,7 +416,7 @@ export const EnrollmentsTab = () => {
 							{filteredStudents.map((student) => (
 								<div
 									key={student.id}
-									className="p-4 border rounded-lg hover:shadow-md transition-shadow"
+									className="rounded-lg border p-3 transition-colors hover:bg-muted/40"
 								>
 									<div className="flex items-start justify-between mb-3">
 										<div>

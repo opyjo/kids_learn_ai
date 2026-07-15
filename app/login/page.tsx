@@ -43,16 +43,16 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 								alt="BrightByte mascot welcoming you"
 								width={280}
 								height={280}
-								className="drop-shadow-2xl"
+								className="drop-shadow-sm"
 								priority
 							/>
 						</div>
 
 						{/* Welcome message */}
 						<div className="relative space-y-4 text-center">
-							<h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+							<h1 className="text-3xl font-semibold tracking-tight text-foreground">
 								Welcome back, coder!
-							</h2>
+							</h1>
 							<p className="text-lg text-gray-600 dark:text-gray-300">
 								Ready to continue your Python adventure?
 							</p>
@@ -97,7 +97,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 									</AlertDescription>
 								</Alert>
 							)}
-							<LoginForm />
+							<LoginForm initialError={params.error} />
 							<div className="mt-6 text-center">
 								<p className="text-sm text-gray-600 dark:text-gray-400">
 									Don&apos;t have an account?{" "}
