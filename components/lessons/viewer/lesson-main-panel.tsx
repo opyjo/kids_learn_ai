@@ -82,10 +82,10 @@ export function LessonMainPanel({
 					)}
 				</div>
 			</CardHeader>
-			<CardContent className="p-4 space-y-4 relative">
+			<CardContent className="p-3 space-y-3 relative">
 				{showConfetti && (
 					<div className="pointer-events-none absolute inset-0 flex items-start justify-center z-10">
-						<div className="mt-4 grid grid-cols-6 gap-2 text-xl">
+						<div className="mt-3 grid grid-cols-6 gap-2 text-xl">
 							<span className="animate-bounce">🎉</span>
 							<span className="animate-bounce [animation-delay:100ms]">🎈</span>
 							<span className="animate-bounce [animation-delay:200ms]">🌟</span>
@@ -98,7 +98,7 @@ export function LessonMainPanel({
 
 				{sections}
 
-				<div className="pt-4 border-t border-border flex flex-col gap-4">
+				<div className="pt-3 border-t border-border flex flex-col gap-3">
 					<div className="flex flex-col items-center gap-2">
 						<Button
 							onClick={isCompleted ? onUnmarkRequest : onMarkClick}

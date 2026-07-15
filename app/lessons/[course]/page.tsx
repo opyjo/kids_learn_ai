@@ -189,19 +189,19 @@ export default async function CoursePage({ params }: CoursePageProps) {
 		<div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 dark:from-blue-600/8 dark:via-purple-600/8 dark:to-pink-600/8">
 			<SiteHeader />
 
-			<div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+			<div className="lesson-page-shell max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
 				{/* Back Link */}
 				<Link
 					href="/lessons"
-					className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors"
+					className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors"
 				>
 					<ArrowLeft className="h-4 w-4" />
 					Back to All Levels
 				</Link>
 
 				{/* Header */}
-				<div className="mb-5">
-					<div className="flex items-start justify-between mb-4">
+				<div className="mb-3">
+					<div className="flex items-start justify-between mb-3">
 						<div>
 							<div className="flex items-center gap-3 mb-2">
 								<h1 className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -230,7 +230,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 						{/* Progress Badge - Only for enrolled users */}
 						{isEnrolled && lessons.length > 0 && (
-							<div className="flex items-center gap-3 bg-card rounded-full px-4 py-2 shadow-sm border border-border">
+							<div className="flex items-center gap-2 bg-card rounded-full px-3 py-1.5 shadow-sm border border-border">
 								<div className="flex items-center gap-2">
 									<div className="relative w-9 h-9">
 										<svg
@@ -283,9 +283,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 				{/* Not Enrolled Message */}
 				{!isEnrolled && (
-					<Card className="mb-8 border-2 border-dashed border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-950/20">
-						<CardContent className="p-6">
-							<div className="flex items-center gap-4">
+					<Card className="mb-5 border-2 border-dashed border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-950/20">
+						<CardContent className="p-4">
+							<div className="flex items-center gap-3">
 								<div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/50 flex items-center justify-center shrink-0">
 									<Lock className="h-6 w-6 text-orange-600 dark:text-orange-400" />
 								</div>
@@ -309,9 +309,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 				{/* Lessons Grid */}
 				{lessons.length === 0 ? (
-					<Card className="p-8 text-center">
-						<CardContent className="pt-6">
-							<BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+					<Card className="p-5 text-center">
+						<CardContent className="pt-3">
+							<BookOpen className="h-12 w-12 mx-auto mb-3 text-muted-foreground opacity-50" />
 							<h3 className="text-lg font-semibold text-foreground mb-2">
 								{lessonsError ? "Couldn't Load Lessons" : "No Lessons Yet"}
 							</h3>
@@ -323,7 +323,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 						</CardContent>
 					</Card>
 				) : (
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 						{lessons.map((lesson) => (
 							<Card
 								key={lesson.id}
@@ -350,7 +350,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 									}`}
 								/>
 
-								<CardContent className="p-5 flex flex-col gap-3 flex-1">
+								<CardContent className="p-4 flex flex-col gap-2.5 flex-1">
 									{/* Top row: number + status */}
 									<div className="flex items-center justify-between">
 										<div
@@ -462,12 +462,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 				{/* Enrollment CTA at bottom for non-enrolled */}
 				{!isEnrolled && lessons.length > 0 && (
-					<Card className="mt-8 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
-						<CardContent className="p-6 text-center">
+					<Card className="mt-5 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
+						<CardContent className="p-4 text-center">
 							<h3 className="text-lg font-bold text-foreground mb-2">
 								Ready to Start This Level?
 							</h3>
-							<p className="text-muted-foreground mb-4">
+							<p className="text-muted-foreground mb-3">
 								Get full access to all {lessons.length} lessons in{" "}
 								{course.title}.
 							</p>

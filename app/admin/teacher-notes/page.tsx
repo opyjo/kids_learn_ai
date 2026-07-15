@@ -74,12 +74,12 @@ export default async function TeacherNotesPage() {
 	);
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			{/* Page Header */}
-			<div className="mb-6">
-				<div className="flex items-start justify-between mb-4">
+			<div className="mb-3">
+				<div className="mb-3 flex items-start justify-between">
 					<div>
-						<h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
+						<h1 className="mb-1 text-xl font-semibold tracking-tight text-foreground">
 							Teacher Lesson Notes
 						</h1>
 						<p className="text-sm text-muted-foreground">
@@ -89,7 +89,7 @@ export default async function TeacherNotesPage() {
 					</div>
 
 					{/* Compact Stats Badge */}
-					<div className="flex items-center gap-3 bg-card dark:bg-card rounded-full px-4 py-2 shadow-sm border border-border">
+					<div className="flex items-center gap-3 bg-card dark:bg-card rounded-full px-3 py-2 shadow-sm border border-border">
 						<div className="flex items-center gap-2">
 							<div className="relative w-10 h-10">
 								<svg
@@ -158,20 +158,20 @@ export default async function TeacherNotesPage() {
 			{/* Lessons with Teacher Notes */}
 			{lessonsWithNotes && lessonsWithNotes.length > 0 && (
 				<>
-					<h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+					<h2 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
 						<FileText className="h-5 w-5 text-green-600" />
 						Lessons with Teacher Notes
 					</h2>
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+					<div className="mb-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
 						{lessonsWithNotes.map((lesson: LessonWithNote) => (
 							<Card
 								key={lesson.id}
-								className="group relative overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02] border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-950/20"
+								className="group relative overflow-hidden border-green-200 bg-green-50/30 transition-colors hover:border-green-400 dark:border-green-800 dark:bg-green-950/20"
 							>
 								{/* Gradient Accent Bar */}
 								<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 to-emerald-500" />
 
-								<CardContent className="p-4">
+								<CardContent className="p-3">
 									<div className="flex items-start gap-3">
 										{/* Status Icon */}
 										<div className="flex-shrink-0 mt-0.5">
@@ -274,20 +274,20 @@ export default async function TeacherNotesPage() {
 						<AlertCircle className="h-5 w-5 text-orange-600" />
 						Lessons Missing Teacher Notes
 					</h2>
-					<p className="text-sm text-muted-foreground mb-4">
+					<p className="text-sm text-muted-foreground mb-3">
 						These lessons do not have teacher notes yet. Teacher notes need to
 						be added through the backend/database.
 					</p>
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+					<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
 						{lessonsWithoutNotes.map((lesson: LessonWithNote) => (
 							<Card
 								key={lesson.id}
-								className="group relative overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02] border-dashed border-orange-200 dark:border-orange-800/50 bg-orange-50/20 dark:bg-orange-950/10"
+								className="group relative overflow-hidden border-dashed border-orange-200 bg-orange-50/20 transition-colors hover:border-orange-400 dark:border-orange-800/50 dark:bg-orange-950/10"
 							>
 								{/* Gradient Accent Bar */}
 								<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 to-amber-500" />
 
-								<CardContent className="p-4">
+								<CardContent className="p-3">
 									<div className="flex items-start gap-3">
 										{/* Status Icon */}
 										<div className="flex-shrink-0 mt-0.5">
@@ -359,8 +359,8 @@ export default async function TeacherNotesPage() {
 			{/* Empty State */}
 			{(!lessonsWithNotesData || lessonsWithNotesData.length === 0) && (
 				<Card>
-					<CardContent className="flex flex-col items-center justify-center py-12">
-						<BookOpen className="h-12 w-12 text-muted-foreground mb-4" />
+					<CardContent className="flex flex-col items-center justify-center py-5">
+						<BookOpen className="h-9 w-9 text-muted-foreground mb-3" />
 						<h3 className="text-xl font-semibold mb-2">No Lessons Found</h3>
 						<p className="text-muted-foreground text-center max-w-md">
 							There are no lessons in the system yet. Lessons need to be added

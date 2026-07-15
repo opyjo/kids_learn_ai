@@ -140,7 +140,7 @@ export function ConceptLabsReport() {
 	}, [load]);
 
 	return (
-		<div className="space-y-4">
+		<div className="space-y-3">
 			<div className="flex flex-wrap items-center justify-between gap-3">
 				<div className="flex items-center gap-2 text-sm text-muted-foreground">
 					<Badge variant={EXPERIMENT_ON ? "default" : "secondary"}>
@@ -180,7 +180,7 @@ export function ConceptLabsReport() {
 			)}
 
 			{loading && !data && (
-				<div className="flex items-center gap-2 py-8 text-sm text-muted-foreground">
+				<div className="flex items-center gap-2 py-4 text-sm text-muted-foreground">
 					<Loader2 className="h-4 w-4 animate-spin" />
 					Loading report…
 				</div>
@@ -191,8 +191,8 @@ export function ConceptLabsReport() {
 				(data.standaloneReport?.length ?? 0) === 0 &&
 				!loading && (
 					<Card>
-						<CardContent className="flex flex-col items-center gap-2 py-10 text-center">
-							<FlaskConical className="h-8 w-8 text-muted-foreground/50" />
+						<CardContent className="flex flex-col items-center gap-2 py-5 text-center">
+							<FlaskConical className="h-7 w-7 text-muted-foreground/50" />
 							<p className="text-sm font-medium">
 								No completed lab sessions yet
 							</p>

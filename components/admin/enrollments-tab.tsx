@@ -318,16 +318,16 @@ export const EnrollmentsTab = () => {
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center py-12">
-				<Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+			<div className="flex items-center justify-center py-5">
+				<Loader2 className="h-7 w-7 animate-spin text-muted-foreground" />
 			</div>
 		);
 	}
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			<div className="flex items-center justify-between">
-				<h3 className="text-2xl font-bold">Student Enrollments</h3>
+				<h2 className="text-lg font-semibold">Student enrollments</h2>
 				<Button variant="outline" onClick={fetchData} className="gap-2">
 					<RefreshCw className="h-4 w-4" />
 					Refresh
@@ -335,9 +335,9 @@ export const EnrollmentsTab = () => {
 			</div>
 
 			{/* Stats */}
-			<div className="grid grid-cols-3 gap-4">
+			<div className="grid grid-cols-3 gap-3">
 				<Card>
-					<CardContent className="pt-6">
+					<CardContent className="pt-0">
 						<div className="flex items-center justify-between">
 							<div>
 								<p className="text-sm text-muted-foreground">
@@ -347,12 +347,12 @@ export const EnrollmentsTab = () => {
 									{totalEnrollments}
 								</p>
 							</div>
-							<GraduationCap className="h-8 w-8 text-blue-200" />
+							<GraduationCap className="h-7 w-7 text-blue-200" />
 						</div>
 					</CardContent>
 				</Card>
 				<Card>
-					<CardContent className="pt-6">
+					<CardContent className="pt-0">
 						<div className="flex items-center justify-between">
 							<div>
 								<p className="text-sm text-muted-foreground">
@@ -362,12 +362,12 @@ export const EnrollmentsTab = () => {
 									{studentsWithEnrollments}
 								</p>
 							</div>
-							<CheckCircle className="h-8 w-8 text-green-200" />
+							<CheckCircle className="h-7 w-7 text-green-200" />
 						</div>
 					</CardContent>
 				</Card>
 				<Card>
-					<CardContent className="pt-6">
+					<CardContent className="pt-0">
 						<div className="flex items-center justify-between">
 							<div>
 								<p className="text-sm text-muted-foreground">No Enrollments</p>
@@ -375,7 +375,7 @@ export const EnrollmentsTab = () => {
 									{studentsWithoutEnrollments}
 								</p>
 							</div>
-							<Lock className="h-8 w-8 text-orange-200" />
+							<Lock className="h-7 w-7 text-orange-200" />
 						</div>
 					</CardContent>
 				</Card>
@@ -383,7 +383,7 @@ export const EnrollmentsTab = () => {
 
 			{/* Search */}
 			<Card>
-				<CardContent className="pt-6">
+				<CardContent className="pt-0">
 					<div className="relative">
 						<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 						<Input
@@ -407,16 +407,16 @@ export const EnrollmentsTab = () => {
 				</CardHeader>
 				<CardContent>
 					{filteredStudents.length === 0 ? (
-						<div className="text-center py-12 text-muted-foreground">
-							<Users className="h-12 w-12 mx-auto mb-3 opacity-50" />
+						<div className="py-5 text-center text-muted-foreground">
+							<Users className="h-9 w-9 mx-auto mb-3 opacity-50" />
 							<p>No students found</p>
 						</div>
 					) : (
-						<div className="space-y-4">
+						<div className="space-y-3">
 							{filteredStudents.map((student) => (
 								<div
 									key={student.id}
-									className="p-4 border rounded-lg hover:shadow-md transition-shadow"
+									className="rounded-lg border p-3 transition-colors hover:bg-muted/40"
 								>
 									<div className="flex items-start justify-between mb-3">
 										<div>
@@ -492,7 +492,7 @@ export const EnrollmentsTab = () => {
 					</DialogHeader>
 
 					{selectedStudent && (
-						<div className="space-y-6">
+						<div className="space-y-3">
 							{/* Student Info */}
 							<div className="p-3 bg-muted rounded-lg">
 								<p className="font-medium">

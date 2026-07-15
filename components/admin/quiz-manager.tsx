@@ -429,10 +429,10 @@ export function QuizManager({
 	);
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			<div className="flex flex-wrap items-center justify-between gap-3">
 				<div>
-					<h1 className="text-2xl font-semibold">Quizzes & Live Games</h1>
+					<h1 className="text-xl font-semibold">Quizzes & live games</h1>
 					<p className="text-sm text-muted-foreground">
 						Generate or write quizzes, review the drafts, publish — students
 						only ever see published quizzes.
@@ -463,9 +463,9 @@ export function QuizManager({
 				</TabsList>
 
 				{/* ── Overview: how the system works, coverage, results ── */}
-				<TabsContent value="overview" className="space-y-6 pt-4">
+				<TabsContent value="overview" className="space-y-3 pt-3">
 					<Card>
-						<CardContent className="grid gap-6 pt-5 sm:grid-cols-3">
+						<CardContent className="grid gap-3 pt-3 sm:grid-cols-3">
 							{[
 								{
 									step: "1",
@@ -484,7 +484,7 @@ export function QuizManager({
 								},
 							].map((item) => (
 								<div key={item.step} className="flex gap-3">
-									<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-purple-100 text-sm font-bold text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
+									<div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-purple-100 text-sm font-bold text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
 										{item.step}
 									</div>
 									<div>
@@ -676,13 +676,13 @@ export function QuizManager({
 					)}
 					{report && (
 						<>
-							<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+							<div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
 								<Card>
 									<CardContent className="pt-5">
 										<p className="text-sm text-muted-foreground">
 											Self-paced attempts
 										</p>
-										<p className="text-3xl font-bold">{report.participation}</p>
+										<p className="text-2xl font-bold">{report.participation}</p>
 									</CardContent>
 								</Card>
 								<Card>
@@ -690,7 +690,7 @@ export function QuizManager({
 										<p className="text-sm text-muted-foreground">
 											Lesson challenge participation
 										</p>
-										<p className="text-3xl font-bold">
+										<p className="text-2xl font-bold">
 											{report.lessonChallenges.participants}
 										</p>
 										<p className="text-xs text-muted-foreground">
@@ -704,7 +704,7 @@ export function QuizManager({
 										<p className="text-sm text-muted-foreground">
 											Mastery rate
 										</p>
-										<p className="text-3xl font-bold">{report.masteryRate}%</p>
+										<p className="text-2xl font-bold">{report.masteryRate}%</p>
 									</CardContent>
 								</Card>
 								<Card>
@@ -729,7 +729,7 @@ export function QuizManager({
 										course banks have at least 10 distinct approved variants.
 									</CardDescription>
 								</CardHeader>
-								<CardContent className="space-y-4">
+								<CardContent className="space-y-3">
 									<div className="grid gap-3 sm:grid-cols-4">
 										<div>
 											<p className="text-xs text-muted-foreground">
@@ -799,7 +799,7 @@ export function QuizManager({
 				</TabsContent>
 
 				{/* ── Builder: create or edit one quiz ── */}
-				<TabsContent value="builder" className="pt-4">
+				<TabsContent value="builder" className="pt-3">
 					<Card>
 						<CardHeader>
 							<CardTitle>{editingId ? "Edit quiz" : "Create a quiz"}</CardTitle>
@@ -809,12 +809,12 @@ export function QuizManager({
 									: "Pick a lesson, let AI draft the questions, then review and edit anything before publishing. Nothing reaches students until the status is Published."}
 							</CardDescription>
 						</CardHeader>
-						<CardContent className="space-y-5">
-							<div className="space-y-4 rounded-lg border bg-muted/20 p-4">
+						<CardContent className="space-y-3">
+							<div className="space-y-3 rounded-lg border bg-muted/20 p-3">
 								<p className="text-sm font-semibold">
 									Step 1 · Choose what to quiz
 								</p>
-								<div className="grid gap-4 md:grid-cols-2">
+								<div className="grid gap-3 md:grid-cols-2">
 									<div>
 										<Label>Type</Label>
 										<Select
@@ -910,7 +910,7 @@ export function QuizManager({
 											hints, and explanations are all editable.
 										</p>
 									</div>
-									<div className="grid gap-4 md:grid-cols-2">
+									<div className="grid gap-3 md:grid-cols-2">
 										<div>
 											<Label>Title</Label>
 											<Input
@@ -943,13 +943,13 @@ export function QuizManager({
 													{description || "Student quiz preview"}
 												</CardDescription>
 											</CardHeader>
-											<CardContent className="space-y-6">
+											<CardContent className="space-y-3">
 												{questions.map(
 													(question, index) =>
 														question.question && (
 															<div
 																key={`preview-${index}`}
-																className="space-y-3 border-t pt-4"
+																className="space-y-3 border-t pt-3"
 															>
 																<p className="font-semibold">
 																	{index + 1}. {question.question}
@@ -974,7 +974,7 @@ export function QuizManager({
 											</CardContent>
 										</Card>
 									)}
-									<div className="space-y-4">
+									<div className="space-y-3">
 										{questions.map((question, index) => (
 											<Card key={index} className="bg-muted/20">
 												<CardContent className="space-y-3 pt-5">
@@ -1160,9 +1160,9 @@ export function QuizManager({
 											</Card>
 										))}
 									</div>
-									<div className="space-y-4">
+									<div className="space-y-3">
 										<p className="text-sm font-semibold">Step 3 · Publish</p>
-										<div className="grid gap-4 md:grid-cols-2">
+										<div className="grid gap-3 md:grid-cols-2">
 											<div>
 												<Label>Status</Label>
 												<Select
@@ -1212,7 +1212,7 @@ export function QuizManager({
 				</TabsContent>
 
 				{/* ── All quizzes: the library of drafts and published quizzes ── */}
-				<TabsContent value="quizzes" className="space-y-4 pt-4">
+				<TabsContent value="quizzes" className="space-y-3 pt-3">
 					<div className="flex flex-wrap items-center justify-between gap-3">
 						<div className="flex flex-wrap gap-2">
 							<Button
@@ -1248,7 +1248,7 @@ export function QuizManager({
 							New quiz
 						</Button>
 					</div>
-					<div className="grid gap-4 lg:grid-cols-2">
+					<div className="grid gap-3 lg:grid-cols-2">
 						{filteredQuizzes.map((quiz) => (
 							<Card key={quiz.id}>
 								<CardHeader>
@@ -1283,7 +1283,7 @@ export function QuizManager({
 									</div>
 								</CardHeader>
 								<CardContent>
-									<p className="mb-4 text-sm text-muted-foreground">
+									<p className="mb-3 text-sm text-muted-foreground">
 										{quiz.quiz_questions?.[0]?.count || 0} questions ·{" "}
 										{quiz.quiz_attempts?.[0]?.count || 0} attempts
 									</p>
@@ -1326,7 +1326,7 @@ export function QuizManager({
 					</div>
 					{visibleQuizzes.length === 0 ? (
 						<Card>
-							<CardContent className="flex flex-col items-center py-12 text-center">
+							<CardContent className="flex flex-col items-center py-5 text-center">
 								<Bot className="mb-3 h-10 w-10 text-purple-500" />
 								<p className="font-medium">No quizzes yet</p>
 								<p className="text-sm text-muted-foreground">
@@ -1337,7 +1337,7 @@ export function QuizManager({
 						</Card>
 					) : (
 						filteredQuizzes.length === 0 && (
-							<p className="py-8 text-center text-sm text-muted-foreground">
+							<p className="py-5 text-center text-sm text-muted-foreground">
 								No {statusFilter === "draft" ? "drafts" : "published quizzes"}{" "}
 								right now.
 							</p>

@@ -18,6 +18,7 @@ const getStatusBadge = (status: string) => {
 		new: { variant: "default", label: "New" },
 		contacted: { variant: "secondary", label: "Contacted" },
 		trial_scheduled: { variant: "secondary", label: "Trial Scheduled" },
+		account_created: { variant: "default", label: "Account Created" },
 		enrolled: { variant: "default", label: "Enrolled" },
 		declined: { variant: "destructive", label: "Declined" },
 	};
@@ -65,12 +66,6 @@ interface Inquiry {
 export default async function InquiriesPage() {
 	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
-	const { data: coursesData } = await supabase
-		.from("courses")
-		.select("id, title")
-		.eq("is_coming_soon", false)
-		.order("order_index", { ascending: true });
-	const courses = coursesData || [];
 
 	// Fetch inquiries (most recent first). `count: exact` lets us detect when
 	// more rows exist than were returned (Supabase caps a SELECT at 1000) so the
@@ -103,10 +98,10 @@ export default async function InquiriesPage() {
 	);
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			<div className="flex items-center justify-between">
 				<div>
-					<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+					<h1 className="text-xl font-semibold text-gray-900 dark:text-white">
 						Course Inquiries
 					</h1>
 					<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -116,53 +111,54 @@ export default async function InquiriesPage() {
 			</div>
 
 			{/* Stats Grid */}
-			<div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+			<div className="grid grid-cols-2 gap-3 md:grid-cols-5">
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-6">
+					<CardContent className="px-3 py-1">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Total
 						</p>
-						<p className="mt-2 text-3xl font-semibold text-gray-900 dark:text-white">
+						<p className="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">
 							{inquiries.length}
 						</p>
 					</CardContent>
 				</Card>
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-6">
+					<CardContent className="px-3 py-1">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							New
 						</p>
-						<p className="mt-2 text-3xl font-semibold text-blue-600 dark:text-blue-400">
+						<p className="mt-1 text-2xl font-semibold text-blue-600 dark:text-blue-400">
 							{statusCounts.new || 0}
 						</p>
 					</CardContent>
 				</Card>
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-6">
+					<CardContent className="px-3 py-1">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Contacted
 						</p>
-						<p className="mt-2 text-3xl font-semibold text-yellow-600 dark:text-yellow-400">
+						<p className="mt-1 text-2xl font-semibold text-yellow-600 dark:text-yellow-400">
 							{statusCounts.contacted || 0}
 						</p>
 					</CardContent>
 				</Card>
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-6">
+					<CardContent className="px-3 py-1">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-							Enrolled
+							Accounts Created
 						</p>
-						<p className="mt-2 text-3xl font-semibold text-green-600 dark:text-green-400">
-							{statusCounts.enrolled || 0}
+						<p className="mt-1 text-2xl font-semibold text-green-600 dark:text-green-400">
+							{(statusCounts.account_created || 0) +
+								(statusCounts.enrolled || 0)}
 						</p>
 					</CardContent>
 				</Card>
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-6">
+					<CardContent className="px-3 py-1">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Declined
 						</p>
-						<p className="mt-2 text-3xl font-semibold text-red-600 dark:text-red-400">
+						<p className="mt-1 text-2xl font-semibold text-red-600 dark:text-red-400">
 							{statusCounts.declined || 0}
 						</p>
 					</CardContent>
@@ -171,7 +167,7 @@ export default async function InquiriesPage() {
 
 			{/* Inquiries List */}
 			<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-				<CardHeader className="pb-4">
+				<CardHeader className="px-3 py-3">
 					<CardTitle className="text-lg font-semibold">All Inquiries</CardTitle>
 					<CardDescription>
 						{isTruncated
@@ -179,9 +175,9 @@ export default async function InquiriesPage() {
 							: `${inquiries.length} inquir${inquiries.length !== 1 ? "ies" : "y"} total`}
 					</CardDescription>
 				</CardHeader>
-				<CardContent className="pt-0">
+				<CardContent className="px-3 pb-3 pt-0">
 					{inquiries.length === 0 ? (
-						<div className="text-center py-12 text-gray-500 dark:text-gray-400">
+						<div className="py-5 text-center text-gray-500 dark:text-gray-400">
 							<p>No inquiries yet.</p>
 							<p className="text-sm mt-2">
 								Inquiries submitted through the website will appear here.
@@ -192,7 +188,7 @@ export default async function InquiriesPage() {
 							{inquiries.map((inquiry) => (
 								<div
 									key={inquiry.id}
-									className="flex items-start justify-between py-4 first:pt-0 last:pb-0"
+									className="flex items-start justify-between py-3 first:pt-0 last:pb-0"
 								>
 									<div className="flex-1">
 										<div className="flex items-center gap-3 mb-2">
@@ -202,7 +198,7 @@ export default async function InquiriesPage() {
 											{getStatusBadge(inquiry.status)}
 										</div>
 										<div className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
-											<div className="flex items-center gap-4 flex-wrap">
+											<div className="flex items-center gap-3 flex-wrap">
 												<span>
 													<strong>Parent:</strong> {inquiry.parent_name}
 												</span>
@@ -227,7 +223,7 @@ export default async function InquiriesPage() {
 													</span>
 												)}
 											</div>
-											<div className="flex items-center gap-4 flex-wrap">
+											<div className="flex items-center gap-3 flex-wrap">
 												<span>
 													<strong>Age Group:</strong> {inquiry.age_group}
 												</span>
@@ -258,9 +254,7 @@ export default async function InquiriesPage() {
 												id={inquiry.id}
 												initialStatus={inquiry.status}
 												initialNotes={inquiry.notes}
-												initialCourseId={inquiry.course_id}
 												studentId={inquiry.student_id}
-												courses={courses}
 											/>
 										</div>
 									</div>

@@ -108,7 +108,7 @@ export const SyncLessonsButton = () => {
 					</DialogHeader>
 
 					{syncResult && (
-						<div className="space-y-4">
+						<div className="space-y-3">
 							{/* Summary badges */}
 							<div className="flex flex-wrap gap-2">
 								<Badge

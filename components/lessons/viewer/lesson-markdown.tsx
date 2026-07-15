@@ -48,12 +48,12 @@ const markdownComponents: Components = {
 		<tr className="hover:bg-muted/20 transition-colors">{children}</tr>
 	),
 	th: ({ children }) => (
-		<th className="px-4 py-2.5 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+		<th className="px-3 py-2 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wide">
 			{children}
 		</th>
 	),
 	td: ({ children }) => (
-		<td className="px-4 py-2.5 text-foreground">{children}</td>
+		<td className="px-3 py-2 text-foreground">{children}</td>
 	),
 };
 

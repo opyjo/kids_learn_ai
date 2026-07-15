@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import CTASection from "@/components/home/CTASection";
+import CurriculumPathSection from "@/components/home/CurriculumPathSection";
 import FAQTeaser from "@/components/home/FAQTeaser";
-import FeaturesSection from "@/components/home/FeaturesSection";
 import Hero from "@/components/home/Hero";
+import HowItWorksSection from "@/components/home/HowItWorksSection";
 import InteractiveCodeEditor from "@/components/home/InteractiveCodeEditor";
-import SampleLessonsSection from "@/components/home/SampleLessonsSection";
 import StatsSection from "@/components/home/StatsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import { MainLayout } from "@/components/layouts/main-layout";
@@ -25,10 +25,10 @@ const HomePage = () => {
 	return (
 		<MainLayout>
 			<Hero />
-			<StatsSection />
-			<FeaturesSection />
+			<HowItWorksSection />
 			<InteractiveCodeEditor />
-			<SampleLessonsSection />
+			<StatsSection />
+			<CurriculumPathSection />
 			<TestimonialsSection />
 			<FAQTeaser />
 			<CTASection />

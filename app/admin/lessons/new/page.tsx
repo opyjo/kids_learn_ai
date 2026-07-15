@@ -9,12 +9,12 @@ export default async function NewLessonPage() {
 	await requireAdmin();
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-violet-500/5 via-purple-500/5 to-fuchsia-500/5 dark:from-violet-600/8 dark:via-purple-600/8 dark:to-fuchsia-600/8">
+		<div className="min-h-screen bg-background">
 			{/* Header */}
 			<header className="bg-white dark:bg-gray-800 border-b">
-				<div className="container mx-auto px-4 py-4">
+				<div className="mx-auto max-w-6xl px-3 py-4">
 					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-4">
+						<div className="flex items-center gap-3">
 							<Button variant="ghost" size="sm" asChild>
 								<Link href="/admin">
 									<ArrowLeft className="h-4 w-4 mr-2" />
@@ -35,7 +35,7 @@ export default async function NewLessonPage() {
 				</div>
 			</header>
 
-			<div className="container mx-auto px-4 py-6">
+			<div className="mx-auto max-w-6xl">
 				<LessonEditor />
 			</div>
 		</div>

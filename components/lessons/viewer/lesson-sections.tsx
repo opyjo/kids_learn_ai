@@ -74,7 +74,7 @@ function AiMlActivities({ starterCode }: { starterCode: string }) {
 					return (
 						<div
 							key={line.key}
-							className="font-semibold text-primary mt-4 mb-2 first:mt-0"
+							className="font-semibold text-primary mt-3 mb-1.5 first:mt-0"
 						>
 							{line.text}
 						</div>
@@ -167,7 +167,7 @@ export function LessonSections({
 				label: "Activity",
 				icon: Sparkles,
 				content: (
-					<div className="rounded-xl border border-purple-200/60 bg-purple-50/70 dark:border-purple-900/60 dark:bg-purple-950/20 p-4">
+					<div className="rounded-xl border border-purple-200/60 bg-purple-50/70 dark:border-purple-900/60 dark:bg-purple-950/20 p-3">
 						<div className="flex items-center gap-2.5 mb-3">
 							<Sparkles className="h-4 w-4 text-purple-600" />
 							<h3 className="text-sm font-semibold text-purple-800 dark:text-purple-200">
@@ -190,7 +190,7 @@ export function LessonSections({
 				label: "AI Lab",
 				icon: BrainCircuit,
 				content: (
-					<div className="rounded-xl border border-emerald-200/60 bg-emerald-50/70 dark:border-emerald-900/60 dark:bg-emerald-950/20 p-4">
+					<div className="rounded-xl border border-emerald-200/60 bg-emerald-50/70 dark:border-emerald-900/60 dark:bg-emerald-950/20 p-3">
 						<div className="flex items-center gap-2.5 mb-3">
 							<BrainCircuit className="h-4 w-4 text-emerald-600" />
 							<h3 className="text-sm font-semibold text-emerald-800 dark:text-emerald-200">
@@ -213,7 +213,7 @@ export function LessonSections({
 				label: "Homework",
 				icon: BookOpen,
 				content: (
-					<div className="rounded-xl border border-blue-200/60 bg-blue-50/70 dark:border-blue-900/60 dark:bg-blue-950/20 p-4">
+					<div className="rounded-xl border border-blue-200/60 bg-blue-50/70 dark:border-blue-900/60 dark:bg-blue-950/20 p-3">
 						<div className="flex items-center gap-2.5 mb-3">
 							<BookOpen className="h-4 w-4 text-blue-600" />
 							<h3 className="text-sm font-semibold text-blue-800 dark:text-blue-200">
@@ -227,7 +227,7 @@ export function LessonSections({
 						/>
 
 						{userId ? (
-							<div className="mt-5 pt-4 border-t border-blue-200/60 dark:border-blue-900/60">
+							<div className="mt-3 pt-3 border-t border-blue-200/60 dark:border-blue-900/60">
 								<div className="flex items-center gap-2 mb-3">
 									<Upload className="h-4 w-4 text-blue-600" />
 									<h4 className="text-sm font-semibold text-blue-800 dark:text-blue-200">
@@ -236,7 +236,7 @@ export function LessonSections({
 								</div>
 
 								{!submission ? (
-									<div className="flex flex-col items-start gap-3">
+									<div className="flex flex-col items-start gap-2">
 										<p className="text-xs text-blue-700 dark:text-blue-300">
 											Complete your assignment on Trinket, then submit it here.
 										</p>
@@ -247,8 +247,8 @@ export function LessonSections({
 										/>
 									</div>
 								) : (
-									<div className="space-y-4">
-										<div className="flex items-center justify-between flex-wrap gap-3">
+									<div className="space-y-3">
+										<div className="flex items-center justify-between flex-wrap gap-2">
 											<div className="flex items-center gap-2">
 												{submission.status === "graded" ? (
 													<Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-100 gap-1">
@@ -313,7 +313,7 @@ export function LessonSections({
 								)}
 							</div>
 						) : (
-							<div className="mt-5 pt-4 border-t border-blue-200/60 dark:border-blue-900/60">
+							<div className="mt-3 pt-3 border-t border-blue-200/60 dark:border-blue-900/60">
 								<p className="text-xs text-blue-700 dark:text-blue-300 text-center">
 									Sign in to submit homework and receive teacher feedback.
 								</p>
@@ -364,9 +364,9 @@ export function LessonSections({
 				))}
 			</TabsList>
 			{sections.map((section) => (
-				<TabsContent key={section.id} value={section.id} className="mt-4">
+				<TabsContent key={section.id} value={section.id} className="mt-2">
 					<Card className="border shadow-sm">
-						<CardContent className="p-4">{section.content}</CardContent>
+						<CardContent className="p-3">{section.content}</CardContent>
 					</Card>
 				</TabsContent>
 			))}

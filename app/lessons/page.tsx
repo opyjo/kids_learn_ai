@@ -91,10 +91,10 @@ export default async function LessonsPage() {
 		<div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 dark:from-blue-600/8 dark:via-purple-600/8 dark:to-pink-600/8">
 			<SiteHeader />
 
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+			<div className="lesson-page-shell max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
 				{/* Header */}
-				<div className="mb-5">
-					<div className="flex items-start justify-between mb-4">
+				<div className="mb-3">
+					<div className="flex items-start justify-between mb-3">
 						<div>
 							<h1 className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
 								Your Learning Journey
@@ -108,7 +108,7 @@ export default async function LessonsPage() {
 
 						{/* Enrollment Status Badge */}
 						{user && totalEnrolled > 0 && (
-							<div className="flex items-center gap-2 bg-card rounded-full px-4 py-2 shadow-sm border border-border">
+							<div className="flex items-center gap-2 bg-card rounded-full px-3 py-1.5 shadow-sm border border-border">
 								<GraduationCap className="h-5 w-5 text-primary" />
 								<span className="text-sm font-medium">
 									{totalEnrolled} Level{totalEnrolled !== 1 ? "s" : ""} Enrolled
@@ -120,9 +120,9 @@ export default async function LessonsPage() {
 
 				{/* No Enrollments Message for Logged-in Users */}
 				{user && totalEnrolled === 0 && (
-					<Card className="mb-8 border-2 border-dashed border-primary/30 bg-primary/5">
-						<CardContent className="p-6">
-							<div className="flex items-center gap-4">
+					<Card className="mb-5 border-2 border-dashed border-primary/30 bg-primary/5">
+						<CardContent className="p-4">
+							<div className="flex items-center gap-3">
 								<div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
 									<GraduationCap className="h-6 w-6 text-primary" />
 								</div>
@@ -145,9 +145,9 @@ export default async function LessonsPage() {
 
 				{/* Error / empty state when levels can't be loaded */}
 				{coursesError && (
-					<Card className="mb-8 p-8 text-center">
-						<CardContent className="pt-6">
-							<BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+					<Card className="mb-5 p-5 text-center">
+						<CardContent className="pt-3">
+							<BookOpen className="h-12 w-12 mx-auto mb-3 text-muted-foreground opacity-50" />
 							<h3 className="text-lg font-semibold text-foreground mb-2">
 								Couldn't Load Levels
 							</h3>
@@ -160,9 +160,9 @@ export default async function LessonsPage() {
 				)}
 
 				{!coursesError && totalLevels === 0 && (
-					<Card className="mb-8 p-8 text-center">
-						<CardContent className="pt-6">
-							<BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+					<Card className="mb-5 p-5 text-center">
+						<CardContent className="pt-3">
+							<BookOpen className="h-12 w-12 mx-auto mb-3 text-muted-foreground opacity-50" />
 							<h3 className="text-lg font-semibold text-foreground mb-2">
 								No Levels Yet
 							</h3>
@@ -175,13 +175,13 @@ export default async function LessonsPage() {
 
 				{/* Levels by Year */}
 				{Object.entries(coursesByYear).map(([yearGroup, courses]) => (
-					<div key={yearGroup} className="mb-10">
-						<h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+					<div key={yearGroup} className="mb-6">
+						<h2 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
 							<BookOpen className="h-5 w-5 text-primary" />
 							{yearGroup}
 						</h2>
 
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 							{courses?.map((course) => {
 								const isEnrolled = enrolledLevelIds.includes(course.id);
 								const lessonCount = lessonCountMap[course.id] || 0;
@@ -216,8 +216,8 @@ export default async function LessonsPage() {
 											}`}
 										/>
 
-										<CardContent className="p-5">
-											<div className="flex items-start gap-4">
+										<CardContent className="p-4">
+											<div className="flex items-start gap-3">
 												{/* Status Icon */}
 												<div className="flex-shrink-0">
 													{isComingSoon ? (
@@ -287,7 +287,7 @@ export default async function LessonsPage() {
 											</div>
 
 											{/* Action */}
-											<div className="mt-4 pt-4 border-t border-border">
+											<div className="mt-3 pt-3 border-t border-border">
 												{isComingSoon ? (
 													<Button
 														variant="outline"
@@ -337,12 +337,12 @@ export default async function LessonsPage() {
 
 				{/* CTA for non-enrolled users */}
 				{user && totalEnrolled === 0 && (
-					<Card className="mt-8 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
-						<CardContent className="p-6 text-center">
+					<Card className="mt-5 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
+						<CardContent className="p-4 text-center">
 							<h3 className="text-lg font-bold text-foreground mb-2">
 								Start Your Coding Journey Today!
 							</h3>
-							<p className="text-muted-foreground mb-4">
+							<p className="text-muted-foreground mb-3">
 								Book a free trial class and discover the joy of learning to
 								code.
 							</p>
@@ -355,16 +355,16 @@ export default async function LessonsPage() {
 
 				{/* Sign in prompt for guests */}
 				{!user && (
-					<Card className="mt-8 border-primary/30 bg-gradient-to-r from-primary/5 to-accent/5">
-						<CardContent className="p-6 text-center">
+					<Card className="mt-5 border-primary/30 bg-gradient-to-r from-primary/5 to-accent/5">
+						<CardContent className="p-4 text-center">
 							<h3 className="text-lg font-bold text-foreground mb-2">
 								Track Your Progress
 							</h3>
-							<p className="text-muted-foreground mb-4">
+							<p className="text-muted-foreground mb-3">
 								Sign in to track your learning progress and access your enrolled
 								levels.
 							</p>
-							<div className="flex gap-3 justify-center">
+							<div className="flex gap-2 justify-center">
 								<Button asChild variant="outline">
 									<Link href="/login">Sign In</Link>
 								</Button>

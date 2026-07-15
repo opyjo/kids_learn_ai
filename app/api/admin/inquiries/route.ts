@@ -1,13 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
-const ALLOWED_STATUSES = [
-	"new",
-	"contacted",
-	"trial_scheduled",
-	"enrolled",
-	"declined",
-];
+const ALLOWED_STATUSES = ["new", "contacted", "trial_scheduled", "declined"];
 
 // PATCH /api/admin/inquiries — update an inquiry's status and/or notes.
 // Re-verifies admin role server-side (defense in depth beyond RLS).
