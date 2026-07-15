@@ -56,10 +56,10 @@ export default async function LessonsPage() {
 	);
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			<div className="flex items-center justify-between">
 				<div>
-					<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+					<h1 className="text-xl font-semibold text-gray-900 dark:text-white">
 						Lesson Management
 					</h1>
 					<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -75,16 +75,16 @@ export default async function LessonsPage() {
 			</div>
 
 			<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-				<CardHeader className="pb-4">
+				<CardHeader className="px-3 py-3">
 					<CardTitle className="text-lg font-semibold">All Lessons</CardTitle>
 					<CardDescription>
 						{lessons.length} lesson{lessons.length !== 1 ? "s" : ""} total
 					</CardDescription>
 				</CardHeader>
-				<CardContent className="pt-0">
+				<CardContent className="px-3 pb-3 pt-0">
 					{lessons.length === 0 ? (
-						<div className="text-center py-12">
-							<p className="text-gray-500 dark:text-gray-400 mb-4">
+						<div className="py-5 text-center">
+							<p className="text-gray-500 dark:text-gray-400 mb-3">
 								No lessons created yet
 							</p>
 							<Button asChild>
@@ -96,9 +96,9 @@ export default async function LessonsPage() {
 							{lessons.map((lesson) => (
 								<div
 									key={lesson.id}
-									className="flex items-center justify-between py-4 first:pt-0 last:pb-0"
+									className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
 								>
-									<div className="flex items-center gap-4">
+									<div className="flex items-center gap-3">
 										<div className="h-10 w-10 rounded-lg bg-purple-50 dark:bg-purple-950 flex items-center justify-center text-purple-600 dark:text-purple-400 font-semibold text-sm">
 											{lesson.orderIndex}
 										</div>

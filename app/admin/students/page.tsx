@@ -66,9 +66,9 @@ export default async function StudentsPage({
 	const rangeEnd = from + students.length;
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			<div>
-				<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+				<h1 className="text-xl font-semibold text-gray-900 dark:text-white">
 					Student Management
 				</h1>
 				<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -76,33 +76,33 @@ export default async function StudentsPage({
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+			<div className="grid grid-cols-1 gap-3 md:grid-cols-3">
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-6">
+					<CardContent className="px-3 py-1">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Total Students
 						</p>
-						<p className="mt-2 text-3xl font-semibold text-gray-900 dark:text-white">
+						<p className="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">
 							{total}
 						</p>
 					</CardContent>
 				</Card>
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-6">
+					<CardContent className="px-3 py-1">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Enrolled
 						</p>
-						<p className="mt-2 text-3xl font-semibold text-green-600 dark:text-green-400">
+						<p className="mt-1 text-2xl font-semibold text-green-600 dark:text-green-400">
 							{enrolledCount}
 						</p>
 					</CardContent>
 				</Card>
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-6">
+					<CardContent className="px-3 py-1">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Not Enrolled
 						</p>
-						<p className="mt-2 text-3xl font-semibold text-gray-600 dark:text-gray-400">
+						<p className="mt-1 text-2xl font-semibold text-gray-600 dark:text-gray-400">
 							{Math.max(0, total - enrolledCount)}
 						</p>
 					</CardContent>
@@ -110,7 +110,7 @@ export default async function StudentsPage({
 			</div>
 
 			<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-				<CardHeader className="pb-4">
+				<CardHeader className="px-3 py-3">
 					<CardTitle className="text-lg font-semibold">All Students</CardTitle>
 					<CardDescription>
 						{total === 0
@@ -118,15 +118,15 @@ export default async function StudentsPage({
 							: `Showing ${rangeStart}–${rangeEnd} of ${total} student${total !== 1 ? "s" : ""}`}
 					</CardDescription>
 				</CardHeader>
-				<CardContent className="pt-0">
+				<CardContent className="px-3 pb-3 pt-0">
 					<div className="divide-y divide-gray-100 dark:divide-gray-800">
 						{students.map((student) => (
 							<div
 								key={student.id}
-								className="flex items-center justify-between py-4 first:pt-0 last:pb-0"
+								className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
 							>
-								<div className="flex items-center gap-4">
-									<div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium">
+								<div className="flex items-center gap-3">
+									<div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
 										{student.name.charAt(0).toUpperCase()}
 									</div>
 									<div>
@@ -159,7 +159,7 @@ export default async function StudentsPage({
 					</div>
 
 					{totalPages > 1 && (
-						<div className="flex items-center justify-between border-t border-gray-100 dark:border-gray-800 pt-4 mt-4">
+						<div className="flex items-center justify-between border-t border-gray-100 dark:border-gray-800 pt-3 mt-3">
 							<p className="text-sm text-gray-500 dark:text-gray-400">
 								Page {page} of {totalPages}
 							</p>

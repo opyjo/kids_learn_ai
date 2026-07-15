@@ -49,9 +49,9 @@ export default async function AnalyticsPage() {
 	};
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			<div>
-				<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+				<h1 className="text-xl font-semibold text-gray-900 dark:text-white">
 					Analytics
 				</h1>
 				<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -59,9 +59,9 @@ export default async function AnalyticsPage() {
 				</p>
 			</div>
 
-			<div className="grid lg:grid-cols-2 gap-6">
+			<div className="grid gap-3 lg:grid-cols-2">
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardHeader className="pb-4">
+					<CardHeader className="px-3 py-3">
 						<CardTitle className="text-lg font-semibold">
 							Student Metrics
 						</CardTitle>
@@ -69,8 +69,8 @@ export default async function AnalyticsPage() {
 							User engagement and conversion data
 						</CardDescription>
 					</CardHeader>
-					<CardContent className="pt-0 space-y-4">
-						<div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800">
+					<CardContent className="space-y-1 px-3 pb-3 pt-0">
+						<div className="flex items-center justify-between border-b border-gray-100 py-2 dark:border-gray-800">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Total Students
 							</span>
@@ -78,7 +78,7 @@ export default async function AnalyticsPage() {
 								{stats.totalStudents}
 							</span>
 						</div>
-						<div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800">
+						<div className="flex items-center justify-between border-b border-gray-100 py-2 dark:border-gray-800">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Enrolled Students
 							</span>
@@ -86,7 +86,7 @@ export default async function AnalyticsPage() {
 								{stats.enrolledStudents}
 							</span>
 						</div>
-						<div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800">
+						<div className="flex items-center justify-between border-b border-gray-100 py-2 dark:border-gray-800">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Not Enrolled
 							</span>
@@ -94,7 +94,7 @@ export default async function AnalyticsPage() {
 								{stats.totalStudents - stats.enrolledStudents}
 							</span>
 						</div>
-						<div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800">
+						<div className="flex items-center justify-between border-b border-gray-100 py-2 dark:border-gray-800">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Enrollment Rate
 							</span>
@@ -107,7 +107,7 @@ export default async function AnalyticsPage() {
 								%
 							</span>
 						</div>
-						<div className="flex items-center justify-between py-3">
+						<div className="flex items-center justify-between py-2">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Total Level Enrollments
 							</span>
@@ -119,7 +119,7 @@ export default async function AnalyticsPage() {
 				</Card>
 
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardHeader className="pb-4">
+					<CardHeader className="px-3 py-3">
 						<CardTitle className="text-lg font-semibold">
 							Lesson Metrics
 						</CardTitle>
@@ -127,8 +127,8 @@ export default async function AnalyticsPage() {
 							Content performance and completion rates
 						</CardDescription>
 					</CardHeader>
-					<CardContent className="pt-0 space-y-4">
-						<div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800">
+					<CardContent className="space-y-1 px-3 pb-3 pt-0">
+						<div className="flex items-center justify-between border-b border-gray-100 py-2 dark:border-gray-800">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Total Lessons
 							</span>
@@ -136,7 +136,7 @@ export default async function AnalyticsPage() {
 								{stats.totalLessons}
 							</span>
 						</div>
-						<div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800">
+						<div className="flex items-center justify-between border-b border-gray-100 py-2 dark:border-gray-800">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Total Completions
 							</span>
@@ -144,7 +144,7 @@ export default async function AnalyticsPage() {
 								{stats.completedLessons}
 							</span>
 						</div>
-						<div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800">
+						<div className="flex items-center justify-between border-b border-gray-100 py-2 dark:border-gray-800">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Avg Completions/Lesson
 							</span>
@@ -154,7 +154,7 @@ export default async function AnalyticsPage() {
 									: 0}
 							</span>
 						</div>
-						<div className="flex items-center justify-between py-3">
+						<div className="flex items-center justify-between py-2">
 							<span className="text-sm text-gray-600 dark:text-gray-300">
 								Pending Submissions
 							</span>

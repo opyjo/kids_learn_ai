@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { CheckCircle, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import LiveClassMockup from "@/components/home/LiveClassMockup";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FadeIn, SlideInRight } from "@/components/ui/motion";
@@ -27,18 +28,15 @@ const Hero = () => {
 					</FadeIn>
 					<FadeIn delay={0.1}>
 						<h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-[1.1]">
-							AI Literacy Starts Here.{" "}
-							<span className="text-primary">
-								Live Classes That Build Real Skills.
-							</span>
+							Real Coding Skills, Taught Live.{" "}
+							<span className="text-primary">Python & AI for Kids 9-13.</span>
 						</h1>
 					</FadeIn>
 					<FadeIn delay={0.2}>
 						<p className="text-xl lg:text-2xl text-muted-foreground mb-8 text-pretty leading-relaxed">
-							Join expert-led live classes where kids aged 9-13 learn Python
-							fundamentals together, then explore how AI actually works. Build
-							confidence, understanding, and real skills in a supportive
-							community—preparing for an AI-driven future.
+							Your child codes along with a live instructor in a small group —
+							real Python, real projects, and a first class that's completely
+							free.
 						</p>
 					</FadeIn>
 					<FadeIn delay={0.3}>
@@ -101,31 +99,13 @@ const Hero = () => {
 					</FadeIn>
 				</div>
 
-				{/* Video Container - Soft Blend Style */}
+				{/* Live-class mockup card */}
 				<SlideInRight
 					delay={0.2}
-					className="relative h-[400px] lg:h-[600px] w-full flex items-center justify-center lg:justify-end"
+					className="relative w-full flex items-center justify-center py-8 px-6 sm:px-10"
 				>
-					<div className="relative w-full h-full lg:w-[120%] lg:-mr-[20%]">
-						{/* The Video with Masking */}
-						<div className="absolute inset-0 z-0 opacity-90 mix-blend-normal">
-							<video
-								autoPlay
-								loop
-								muted
-								playsInline
-								tabIndex={-1}
-								aria-hidden="true"
-								className="w-full h-full object-cover [mask-image:radial-gradient(circle_at_center,black_40%,transparent_80%)] lg:[mask-image:linear-gradient(to_left,black_20%,transparent_95%)]"
-								poster="/images/student-focused.png"
-							>
-								<source src="/hero-video.mp4" type="video/mp4" />
-							</video>
-						</div>
-
-						{/* Decorative Glows */}
-						<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-accent/20 blur-3xl rounded-full -z-10 mix-blend-screen animate-pulse" />
-					</div>
+					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-accent/20 blur-3xl rounded-full -z-10 mix-blend-screen motion-safe:animate-pulse" />
+					<LiveClassMockup />
 				</SlideInRight>
 			</div>
 		</section>

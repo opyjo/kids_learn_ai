@@ -98,11 +98,11 @@ export function LessonEditor() {
 	};
 
 	return (
-		<div className="max-w-6xl mx-auto space-y-6">
+		<div className="mx-auto max-w-6xl space-y-3">
 			{/* Header */}
 			<div className="flex items-center justify-between">
 				<div>
-					<h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+					<h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
 						Create New Lesson
 					</h2>
 					<p className="text-gray-600 dark:text-gray-400">
@@ -133,7 +133,7 @@ export function LessonEditor() {
 				</Alert>
 			)}
 
-			<Tabs defaultValue="basic" className="space-y-6">
+			<Tabs defaultValue="basic" className="space-y-3">
 				<TabsList className="grid w-full grid-cols-3">
 					<TabsTrigger value="basic">Basic Info</TabsTrigger>
 					<TabsTrigger value="content">Content</TabsTrigger>
@@ -149,8 +149,8 @@ export function LessonEditor() {
 								Basic information about the lesson
 							</CardDescription>
 						</CardHeader>
-						<CardContent className="space-y-6">
-							<div className="grid md:grid-cols-2 gap-6">
+						<CardContent className="space-y-3">
+							<div className="grid gap-3 md:grid-cols-2">
 								<div className="space-y-2">
 									<Label htmlFor="title">Lesson Title *</Label>
 									<Input
@@ -193,7 +193,7 @@ export function LessonEditor() {
 								/>
 							</div>
 
-							<div className="grid md:grid-cols-2 gap-6">
+							<div className="grid gap-3 md:grid-cols-2">
 								<div className="space-y-2">
 									<Label htmlFor="difficulty">Difficulty Level</Label>
 									<Select
@@ -261,7 +261,7 @@ export function LessonEditor() {
 									className="font-mono text-sm"
 								/>
 							</div>
-							<div className="mt-4 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg">
+							<div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
 								<h4 className="font-medium mb-2">Markdown Tips:</h4>
 								<ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
 									<li>• Use # for main headings, ## for subheadings</li>
@@ -276,7 +276,7 @@ export function LessonEditor() {
 
 				{/* Code Tab */}
 				<TabsContent value="code">
-					<div className="grid lg:grid-cols-2 gap-6">
+					<div className="grid gap-3 lg:grid-cols-2">
 						<Card>
 							<CardHeader>
 								<CardTitle>Starter Code</CardTitle>

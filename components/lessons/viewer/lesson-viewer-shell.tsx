@@ -65,7 +65,7 @@ export function LessonViewerShell({
 		<div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
 			<SiteHeader />
 
-			<div className="container mx-auto px-4 pt-2">
+			<div className="lesson-page-shell container mx-auto px-4 pt-2">
 				<div className="flex flex-wrap items-center justify-between gap-2">
 					<LessonBreadcrumbs
 						courseSlug={courseSlug}
@@ -78,7 +78,7 @@ export function LessonViewerShell({
 				</div>
 			</div>
 
-			<div className="mx-auto max-w-[1600px] px-4 pb-5">
+			<div className="lesson-page-shell mx-auto max-w-[1600px] px-4 pb-3">
 				<div
 					className={cn(
 						"grid gap-3 items-start",
@@ -99,10 +99,10 @@ export function LessonViewerShell({
 											Code
 										</TabsTrigger>
 									</TabsList>
-									<TabsContent value="learn" className="mt-4">
+									<TabsContent value="learn" className="mt-2">
 										{mainPanel}
 									</TabsContent>
-									<TabsContent value="code" className="mt-4">
+									<TabsContent value="code" className="mt-2 lesson-code-panel">
 										{codePanel}
 									</TabsContent>
 								</Tabs>
@@ -115,7 +115,7 @@ export function LessonViewerShell({
 					{hasCodePanel && isWideDesktop && (
 						<aside
 							className={cn(
-								"hidden xl:block sticky self-start min-w-0 transition-[top] duration-300",
+								"lesson-code-panel hidden xl:block sticky self-start min-w-0 transition-[top] duration-300",
 								isHeaderHidden ? "top-4" : "top-20",
 							)}
 						>

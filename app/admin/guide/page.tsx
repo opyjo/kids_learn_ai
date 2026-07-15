@@ -5,6 +5,7 @@ import {
 	FlaskConical,
 	Lightbulb,
 	Trophy,
+	UserPlus,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,42 @@ import {
 import { requireAdmin } from "@/lib/auth-helpers";
 
 const guideSections = [
+	{
+		id: "parent-enrollment",
+		icon: UserPlus,
+		iconColor: "text-teal-600",
+		title: "Parent & Student Enrollment",
+		description:
+			"Turn a parent inquiry into linked parent and student accounts, then assign course access",
+		href: "/admin/inquiries",
+		linkLabel: "Go to Inquiries",
+		steps: [
+			{
+				title: "Parent submits the free-trial form",
+				text: "The parent enters their contact details and their child's information on the Book a Free Trial page. The submission appears automatically in Admin → Inquiries with a New status.",
+			},
+			{
+				title: "Contact the family and run the trial",
+				text: "Open the inquiry, contact the parent, add any useful notes, and move the status through Contacted and Trial Scheduled. Do not complete enrollment until the parent confirms they want to continue.",
+			},
+			{
+				title: "Approve and create the family accounts",
+				text: "When the parent confirms they want to continue, click Create family accounts. No course is selected at this stage, and the child does not receive course access yet.",
+			},
+			{
+				title: "The system creates and links the accounts",
+				text: "If the parent is new, the system emails an invitation to the address from the inquiry. It also creates a separate child account, links it to the parent, and marks the inquiry Account Created. Existing parent and student links are reused instead of duplicated.",
+			},
+			{
+				title: "Parent sets up both logins",
+				text: "A new parent opens the invitation email and follows the link to Family Setup. They create their parent password and confirm the child's username and password. An existing parent signs in with their email and opens My Family → Set or reset logins.",
+			},
+			{
+				title: "Assign course access",
+				text: "Open Admin → Enrollments, select the child, and assign the appropriate course. The parent manages linked children in My Family; the child signs in with their username and password and sees assigned courses on the student dashboard.",
+			},
+		],
+	},
 	{
 		id: "quizzes",
 		icon: Trophy,
@@ -124,19 +161,18 @@ export default async function AdminGuidePage() {
 	await requireAdmin();
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			<div>
-				<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+				<h1 className="text-xl font-semibold text-gray-900 dark:text-white">
 					Setup Guide
 				</h1>
 				<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-					How to set up Quizzes & Games, Concept Labs, Teacher Notes, and Class
-					Schedules
+					How to enroll families and configure the main teaching tools
 				</p>
 			</div>
 
 			<Card className="border-purple-200 bg-purple-50/50 dark:border-purple-900 dark:bg-purple-950/20">
-				<CardContent className="flex gap-3 pt-5">
+				<CardContent className="flex gap-3 p-3">
 					<Lightbulb className="h-5 w-5 shrink-0 text-purple-500" />
 					<p className="text-sm text-gray-700 dark:text-gray-300">
 						This page is only visible to admins. Each section below walks
@@ -150,7 +186,7 @@ export default async function AdminGuidePage() {
 				const Icon = section.icon;
 				return (
 					<Card key={section.id}>
-						<CardHeader>
+						<CardHeader className="px-3 py-3">
 							<div className="flex flex-wrap items-center justify-between gap-3">
 								<div>
 									<CardTitle className="flex items-center gap-2">
@@ -167,15 +203,17 @@ export default async function AdminGuidePage() {
 								</Button>
 							</div>
 						</CardHeader>
-						<CardContent className="space-y-4">
+						<CardContent className="space-y-3 px-3 pb-3 pt-0">
 							{section.steps.map((step, index) => (
 								<div key={step.title} className="flex gap-3">
-									<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-purple-100 text-sm font-bold text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
+									<div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-purple-100 text-xs font-bold text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
 										{index + 1}
 									</div>
 									<div>
 										<p className="font-medium">{step.title}</p>
-										<p className="text-sm text-muted-foreground">{step.text}</p>
+										<p className="text-sm leading-5 text-muted-foreground">
+											{step.text}
+										</p>
 									</div>
 								</div>
 							))}

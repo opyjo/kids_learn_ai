@@ -245,16 +245,16 @@ export const SchedulesTab = () => {
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center py-12">
-				<Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+			<div className="flex items-center justify-center py-5">
+				<Loader2 className="h-7 w-7 animate-spin text-muted-foreground" />
 			</div>
 		);
 	}
 
 	return (
-		<div className="space-y-6">
+		<div className="space-y-3">
 			<div className="flex items-center justify-between">
-				<h3 className="text-2xl font-bold">Weekly Class Slots</h3>
+				<h2 className="text-lg font-semibold">Weekly class slots</h2>
 				<div className="flex gap-2">
 					<Button variant="outline" onClick={fetchData} className="gap-2">
 						<RefreshCw className="h-4 w-4" aria-hidden="true" />
@@ -269,12 +269,12 @@ export const SchedulesTab = () => {
 
 			{schedules.length === 0 ? (
 				<Card>
-					<CardContent className="py-12 text-center text-muted-foreground">
+					<CardContent className="py-5 text-center text-muted-foreground">
 						<CalendarClock
-							className="h-12 w-12 mx-auto mb-3 opacity-50"
+							className="h-9 w-9 mx-auto mb-3 opacity-50"
 							aria-hidden="true"
 						/>
-						<p className="mb-4">No class schedules yet</p>
+						<p className="mb-3">No class schedules yet</p>
 						<Button onClick={openCreateDialog} className="gap-2">
 							<Plus className="h-4 w-4" aria-hidden="true" />
 							Add your first schedule
@@ -291,13 +291,13 @@ export const SchedulesTab = () => {
 								weekly slot(s)
 							</CardDescription>
 						</CardHeader>
-						<CardContent className="space-y-3">
+						<CardContent className="space-y-2">
 							{schedules
 								.filter((s) => s.course_id === courseId)
 								.map((schedule) => (
 									<div
 										key={schedule.id}
-										className="flex flex-wrap items-center justify-between gap-3 p-4 border rounded-lg"
+										className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-3"
 									>
 										<div className="min-w-0">
 											<div className="flex items-center gap-2 flex-wrap">
@@ -311,7 +311,7 @@ export const SchedulesTab = () => {
 													<Badge variant="outline">Inactive</Badge>
 												)}
 											</div>
-											<div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
+											<div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
 												<span>{schedule.duration_minutes} min</span>
 												<span>{schedule.timezone}</span>
 												{schedule.meeting_link ? (
@@ -365,7 +365,7 @@ export const SchedulesTab = () => {
 						</DialogDescription>
 					</DialogHeader>
 
-					<div className="space-y-4">
+					<div className="space-y-3">
 						<div className="space-y-2">
 							<Label htmlFor="schedule-course">Course</Label>
 							<Select
@@ -399,7 +399,7 @@ export const SchedulesTab = () => {
 							/>
 						</div>
 
-						<div className="grid grid-cols-2 gap-4">
+						<div className="grid grid-cols-2 gap-3">
 							<div className="space-y-2">
 								<Label htmlFor="schedule-day">Day</Label>
 								<Select
@@ -433,7 +433,7 @@ export const SchedulesTab = () => {
 							</div>
 						</div>
 
-						<div className="grid grid-cols-2 gap-4">
+						<div className="grid grid-cols-2 gap-3">
 							<div className="space-y-2">
 								<Label htmlFor="schedule-duration">Duration (minutes)</Label>
 								<Input
