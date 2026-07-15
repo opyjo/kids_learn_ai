@@ -16,7 +16,7 @@ export const AuthLayout = ({
 	return (
 		<div
 			className={cn(
-				"flex min-h-screen flex-col bg-background",
+				"flex min-h-screen flex-col bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800",
 				backgroundClassName,
 			)}
 		>

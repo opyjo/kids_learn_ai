@@ -1,151 +1,259 @@
-import { ArrowRight, Check, Clock3, ShieldCheck, Users } from "lucide-react";
+import {
+	ArrowRight,
+	Calendar,
+	CheckCircle,
+	Clock,
+	GraduationCap,
+	Shield,
+	Sparkles,
+	Star,
+	Users,
+} from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-	title: "Free Trial Class — Kids Learn AI",
+	title: "Free Trial Class & Program Details — Kids Learn AI",
 	description:
-		"Book a free live Python and AI class for your child. No payment and no commitment required.",
+		"Try your child's first live Python & AI class free. See our 8-10 week program for ages 9-13, small class sizes, founding rate, and answers to common questions.",
+	openGraph: {
+		title: "Free Trial Class & Program Details — Kids Learn AI",
+		description:
+			"Try your child's first live Python & AI class free. See our 8-10 week program for ages 9-13, small class sizes, founding rate, and answers to common questions.",
+		type: "website",
+	},
 };
-
-const steps = [
-	[
-		"Tell us about your child",
-		"Share their age, experience, and the best way to reach you.",
-	],
-	[
-		"We confirm the class",
-		"We contact you within 24 hours with the available group and time.",
-	],
-	[
-		"Join the free lesson",
-		"Your child takes part in a complete live class before you make a decision.",
-	],
-];
 
 export default function InquiryPage() {
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-linear-to-br from-primary/5 via-accent/5 to-secondary/10">
 			<SiteHeader />
-			<main>
-				<section className="border-b border-border bg-card">
-					<div className="mx-auto max-w-5xl px-4 py-14 text-center sm:px-6 sm:py-20">
-						<span className="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
-							No payment required
-						</span>
-						<h1 className="mx-auto mt-5 max-w-3xl text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">
-							Try one real class. See if it clicks.
-						</h1>
-						<p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
-							Your child joins a small live group, meets an instructor, and
-							builds something with Python. You decide what happens next.
-						</p>
-						<Button asChild size="lg" className="mt-8 h-12 px-6 text-base">
-							<Link href="/inquiry/book">
-								Book the free class <ArrowRight />
-							</Link>
-						</Button>
-						<div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-							<span className="flex items-center gap-2">
-								<Users className="size-4 text-primary" />
-								Small live groups
-							</span>
-							<span className="flex items-center gap-2">
-								<Clock3 className="size-4 text-primary" />
-								Reply within 24 hours
-							</span>
-							<span className="flex items-center gap-2">
-								<ShieldCheck className="size-4 text-primary" />
-								Safe and moderated
-							</span>
-						</div>
-					</div>
-				</section>
 
-				<section className="py-14 sm:py-20">
-					<div className="mx-auto max-w-5xl px-4 sm:px-6">
-						<div className="grid gap-10 lg:grid-cols-[0.7fr_1fr]">
-							<div>
-								<p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">
-									What happens next
-								</p>
-								<h2 className="mt-3 text-3xl font-semibold tracking-tight">
-									A simple start for families
-								</h2>
-								<p className="mt-4 leading-7 text-muted-foreground">
-									No complicated enrollment process and no pressure to purchase
-									before your child has experienced the class.
-								</p>
-							</div>
-							<ol className="divide-y divide-border border-y border-border">
-								{steps.map(([title, copy], index) => (
-									<li
-										key={title}
-										className="grid grid-cols-[36px_1fr] gap-4 py-5"
-									>
-										<span className="font-mono text-sm text-primary">
-											0{index + 1}
-										</span>
-										<div>
-											<h3 className="font-semibold">{title}</h3>
-											<p className="mt-1 text-sm leading-6 text-muted-foreground">
-												{copy}
-											</p>
+			<main className="container mx-auto px-4 py-12 lg:py-20">
+				{/* Hero Section */}
+				<div className="text-center mb-12">
+					<Badge className="mb-4 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
+						<Sparkles className="w-4 h-4 inline mr-2" />
+						Limited Spots Available
+					</Badge>
+					<h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4">
+						Try Your First Class <span className="text-primary">FREE</span>
+					</h1>
+					<p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+						See if our live Python & AI classes are the right fit for your
+						child. No commitment required.
+					</p>
+					<Button asChild size="lg" className="group">
+						<Link href="/inquiry/book">
+							Book Free Trial
+							<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+						</Link>
+					</Button>
+				</div>
+
+				<div className="max-w-4xl mx-auto space-y-8">
+					{/* Program Details Card */}
+					<Card className="border-2 border-primary/20 shadow-xl">
+						<CardContent className="p-6 lg:p-8">
+							<h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+								<GraduationCap className="h-6 w-6 text-primary" />
+								Program Details
+							</h2>
+
+							<div className="space-y-4">
+								{/* Age Groups */}
+								<div className="grid grid-cols-2 gap-4">
+									<div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
+										<div className="flex items-center gap-2 mb-2">
+											<Calendar className="h-4 w-4 text-primary" />
+											<span className="font-semibold text-sm">Ages 9-10</span>
 										</div>
+										<p className="text-2xl font-bold text-primary">Mondays</p>
+										<p className="text-sm text-muted-foreground">
+											Weekly classes
+										</p>
+									</div>
+									<div className="bg-accent/5 rounded-xl p-4 border border-accent/20">
+										<div className="flex items-center gap-2 mb-2">
+											<Calendar className="h-4 w-4 text-accent" />
+											<span className="font-semibold text-sm">Ages 11-13</span>
+										</div>
+										<p className="text-2xl font-bold text-accent">Wednesdays</p>
+										<p className="text-sm text-muted-foreground">
+											Weekly classes
+										</p>
+									</div>
+								</div>
+
+								{/* Program Features */}
+								<div className="space-y-3 pt-4">
+									<div className="flex items-center gap-3">
+										<Clock className="h-5 w-5 text-primary shrink-0" />
+										<span>8-10 week structured program</span>
+									</div>
+									<div className="flex items-center gap-3">
+										<Users className="h-5 w-5 text-primary shrink-0" />
+										<span>Small class sizes for personalized attention</span>
+									</div>
+									<div className="flex items-center gap-3">
+										<CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
+										<span className="font-semibold text-green-700 dark:text-green-400">
+											First class is FREE - no commitment
+										</span>
+									</div>
+								</div>
+
+								{/* Pricing */}
+								<div className="bg-linear-to-r from-primary/10 to-accent/10 rounded-xl p-6 mt-6">
+									<Badge className="mb-3 bg-amber-100 text-amber-700 border-amber-300 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-700">
+										🎉 Founding Student Rate
+									</Badge>
+									<div className="flex items-baseline gap-2 mb-2">
+										<span className="text-xl text-muted-foreground line-through">
+											$199.99
+										</span>
+										<span className="text-4xl font-bold text-primary">
+											$159.99
+										</span>
+										<span className="text-muted-foreground">CAD</span>
+									</div>
+									<p className="text-sm text-muted-foreground">
+										One-time payment for the full 8-10 week program
+									</p>
+									<p className="text-sm font-medium text-primary mt-2">
+										✨ Try your first class free before paying
+									</p>
+								</div>
+							</div>
+						</CardContent>
+					</Card>
+
+					{/* What They'll Learn */}
+					<Card>
+						<CardContent className="p-6 lg:p-8">
+							<h2 className="text-xl font-bold mb-4">
+								What Your Child Will Learn
+							</h2>
+							<ul className="grid sm:grid-cols-2 gap-3">
+								{[
+									"Python programming fundamentals",
+									"Problem-solving and logical thinking",
+									"Introduction to AI concepts",
+									"Building real projects together",
+									"Collaboration with peers in live classes",
+									"Safe and responsible AI usage",
+								].map((item) => (
+									<li key={item} className="flex items-start gap-3">
+										<CheckCircle className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+										<span>{item}</span>
 									</li>
 								))}
-							</ol>
-						</div>
+							</ul>
+						</CardContent>
+					</Card>
 
-						<div className="mt-14 rounded-2xl border border-border bg-card p-6 sm:p-8">
-							<div className="grid gap-8 lg:grid-cols-2">
-								<div>
-									<h2 className="text-xl font-semibold">
-										What your child will experience
-									</h2>
-									<ul className="mt-5 space-y-3">
-										{[
-											"A welcoming introduction to Python",
-											"A guided hands-on coding activity",
-											"Time to ask questions and share ideas",
-											"A clear recommendation for the right learning level",
-										].map((item) => (
-											<li key={item} className="flex gap-3 text-sm">
-												<span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
-													<Check className="size-3.5" />
-												</span>
-												{item}
-											</li>
-										))}
-									</ul>
-								</div>
-								<div className="rounded-xl bg-slate-950 p-6 text-white">
-									<p className="text-sm text-slate-400">After the free class</p>
-									<p className="mt-2 text-3xl font-semibold">
-										$159.99{" "}
-										<span className="text-sm font-normal text-slate-400">
-											CAD
-										</span>
-									</p>
-									<p className="mt-3 text-sm leading-6 text-slate-400">
-										One payment for the complete 8–10 week program. Only if you
-										choose to continue.
-									</p>
-									<Link
-										href="/pricing"
-										className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-300"
-									>
-										See full pricing <ArrowRight className="size-4" />
-									</Link>
-								</div>
-							</div>
+					{/* Trust Signals */}
+					<div className="flex flex-wrap gap-4 justify-center">
+						<div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full border">
+							<Shield className="h-4 w-4 text-green-600" />
+							<span className="text-sm">Safe & Moderated</span>
+						</div>
+						<div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full border">
+							<Star className="h-4 w-4 text-yellow-500" />
+							<span className="text-sm">Expert Instructors</span>
+						</div>
+						<div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full border">
+							<Users className="h-4 w-4 text-primary" />
+							<span className="text-sm">Small Classes</span>
 						</div>
 					</div>
-				</section>
+
+					{/* FAQ */}
+					<Card>
+						<CardContent className="p-6 lg:p-8">
+							<h2 className="text-xl font-bold mb-4">
+								Frequently Asked Questions
+							</h2>
+							<Accordion type="single" collapsible className="w-full">
+								<AccordionItem value="trial">
+									<AccordionTrigger>
+										How does the free trial class work?
+									</AccordionTrigger>
+									<AccordionContent>
+										Your child can attend their first class completely free with
+										no commitment. This lets you and your child experience the
+										program before deciding to enroll. If you love it, you can
+										then pay for the full program.
+									</AccordionContent>
+								</AccordionItem>
+								<AccordionItem value="experience">
+									<AccordionTrigger>
+										Does my child need prior coding experience?
+									</AccordionTrigger>
+									<AccordionContent>
+										No! Our program is designed for beginners. We start from the
+										basics and build up gradually. Kids with some experience
+										will also find the content engaging with more advanced
+										projects.
+									</AccordionContent>
+								</AccordionItem>
+								<AccordionItem value="schedule">
+									<AccordionTrigger>What if we miss a class?</AccordionTrigger>
+									<AccordionContent>
+										Life happens! If your child misses a class, we provide
+										recordings and materials so they can catch up. Our
+										instructors are also available to help during the next
+										session.
+									</AccordionContent>
+								</AccordionItem>
+								<AccordionItem value="equipment">
+									<AccordionTrigger>What equipment is needed?</AccordionTrigger>
+									<AccordionContent>
+										Just a computer (Windows, Mac, or Chromebook) with internet
+										access and a webcam/microphone for participating in live
+										classes. We'll help you set up any free software needed.
+									</AccordionContent>
+								</AccordionItem>
+								<AccordionItem value="payment">
+									<AccordionTrigger>When do I pay?</AccordionTrigger>
+									<AccordionContent>
+										Only after your child's free trial class! If you decide to
+										continue, you'll pay the one-time fee of $159.99 CAD for the
+										full 8-10 week program via e-Transfer.
+									</AccordionContent>
+								</AccordionItem>
+							</Accordion>
+						</CardContent>
+					</Card>
+
+					{/* CTA Section */}
+					<div className="text-center py-8">
+						<h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
+						<p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+							Book your child's free trial class today. No payment required
+							until you decide to continue.
+						</p>
+						<Button asChild size="lg" className="group">
+							<Link href="/inquiry/book">
+								Book Free Trial
+								<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+							</Link>
+						</Button>
+					</div>
+				</div>
 			</main>
+
 			<Footer />
 		</div>
 	);

@@ -26,75 +26,63 @@ import { cn } from "@/lib/utils";
 
 const adminNavItems = [
 	{
-		section: "Workspace",
 		href: "/admin",
 		label: "Overview",
 		icon: LayoutDashboard,
 		exact: true,
 	},
 	{
-		section: "Workspace",
 		href: "/admin/enrollments",
 		label: "Enrollments",
 		icon: GraduationCap,
 	},
 	{
-		section: "Workspace",
 		href: "/admin/schedules",
 		label: "Class Schedules",
 		icon: CalendarClock,
 	},
 	{
-		section: "Workspace",
 		href: "/admin/submissions",
 		label: "Submissions",
 		icon: FileCode,
 		showBadge: true,
 	},
 	{
-		section: "People",
 		href: "/admin/students",
 		label: "Students",
 		icon: Users,
 	},
 	{
-		section: "People",
 		href: "/admin/inquiries",
 		label: "Inquiries",
 		icon: Mail,
 	},
 	{
-		section: "Content",
 		href: "/admin/lessons",
 		label: "Lessons",
 		icon: BookOpen,
 	},
 	{
-		section: "Content",
 		href: "/admin/quizzes",
 		label: "Quizzes & Games",
 		icon: Trophy,
 	},
 	{
-		section: "Content",
 		href: "/admin/teacher-notes",
 		label: "Teacher Notes",
 		icon: FileText,
 	},
 	{
-		section: "Insights",
 		href: "/admin/analytics",
 		label: "Analytics",
 		icon: BarChart3,
 	},
 	{
-		section: "Insights",
 		href: "/admin/concept-labs",
 		label: "Concept Labs",
 		icon: FlaskConical,
 	},
 	{
-		section: "Insights",
 		href: "/admin/guide",
 		label: "Setup Guide",
 		icon: HelpCircle,
@@ -127,60 +115,50 @@ export function AdminLayoutShell({ children }: { children: React.ReactNode }) {
 	};
 
 	return (
-		<div className="admin-shell min-h-screen bg-slate-50 dark:bg-gray-950">
+		<div className="min-h-screen bg-gray-50 dark:bg-gray-950">
 			{/* Main Site Header */}
 			<SiteHeader />
 
 			{/* Main layout with sidebar */}
 			<div className="flex">
 				{/* Sidebar - Desktop */}
-				<aside className="hidden lg:flex lg:flex-col lg:w-60 lg:flex-shrink-0 lg:border-r lg:border-slate-200 dark:lg:border-gray-800 lg:bg-white dark:lg:bg-gray-900 lg:min-h-[calc(100vh-88px)]">
+				<aside className="hidden lg:flex lg:flex-col lg:w-64 lg:flex-shrink-0 lg:border-r lg:border-gray-200 dark:lg:border-gray-800 lg:bg-white dark:lg:bg-gray-900 lg:min-h-[calc(100vh-88px)]">
 					{/* Navigation */}
-					<div className="flex-1 flex flex-col py-4 overflow-y-auto sticky top-[88px]">
-						<nav className="flex-1 px-3">
+					<div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto sticky top-[88px]">
+						<nav className="flex-1 px-3 space-y-1">
 							{adminNavItems.map((item) => {
 								const Icon = item.icon;
 								const active = isActive(item.href, item.exact);
-								const itemIndex = adminNavItems.indexOf(item);
-								const showSection =
-									itemIndex === 0 ||
-									adminNavItems[itemIndex - 1].section !== item.section;
 
 								return (
-									<div key={item.href}>
-										{showSection && (
-											<p className="mb-1 mt-4 px-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 first:mt-0">
-												{item.section}
-											</p>
+									<Link
+										key={item.href}
+										href={item.href}
+										className={cn(
+											"flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors",
+											active
+												? "bg-primary/10 text-primary"
+												: "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800",
 										)}
-										<Link
-											href={item.href}
-											className={cn(
-												"mb-0.5 flex items-center gap-2.5 rounded-md px-2 py-2 text-sm font-medium transition-colors",
-												active
-													? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
-													: "text-slate-600 hover:bg-slate-100 hover:text-slate-950 dark:text-gray-300 dark:hover:bg-gray-800",
-											)}
-										>
-											<Icon className="h-4 w-4 flex-shrink-0" />
-											<span className="flex-1">{item.label}</span>
-											{item.showBadge && pendingSubmissions > 0 && (
-												<Badge
-													variant="secondary"
-													className="h-5 px-1.5 text-xs bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300"
-												>
-													{pendingSubmissions}
-												</Badge>
-											)}
-										</Link>
-									</div>
+									>
+										<Icon className="h-5 w-5 flex-shrink-0" />
+										<span className="flex-1">{item.label}</span>
+										{item.showBadge && pendingSubmissions > 0 && (
+											<Badge
+												variant="secondary"
+												className="h-5 px-1.5 text-xs bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300"
+											>
+												{pendingSubmissions}
+											</Badge>
+										)}
+									</Link>
 								);
 							})}
 						</nav>
 
 						{/* Quick Actions */}
-						<div className="px-3 pt-4">
-							<Button asChild size="sm" className="w-full gap-2">
+						<div className="px-3 mt-6">
+							<Button asChild className="w-full gap-2">
 								<Link href="/admin/lessons/new">
 									<Plus className="h-4 w-4" />
 									New Lesson
@@ -193,7 +171,7 @@ export function AdminLayoutShell({ children }: { children: React.ReactNode }) {
 				{/* Main content area */}
 				<div className="flex-1 flex flex-col min-h-[calc(100vh-88px)]">
 					{/* Page content */}
-					<main className="flex-1 p-4 lg:p-6 xl:p-7">{children}</main>
+					<main className="flex-1 p-4 lg:p-8">{children}</main>
 				</div>
 			</div>
 		</div>

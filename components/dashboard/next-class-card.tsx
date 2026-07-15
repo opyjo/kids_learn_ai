@@ -47,13 +47,15 @@ export function NextClassCard({ classes }: NextClassCardProps) {
 	const happeningNow = occursAt.getTime() <= now.getTime();
 
 	return (
-		<Card className="border-border bg-card shadow-sm">
+		<Card className="border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-accent/5">
 			<CardHeader className="pb-2">
 				<CardTitle className="flex items-center gap-2 text-lg">
 					<CalendarClock className="h-5 w-5 text-primary" aria-hidden="true" />
 					Next Live Class
 					{happeningNow && (
-						<Badge className="bg-green-600 text-white">Live now</Badge>
+						<Badge className="bg-green-500 text-white animate-pulse">
+							Live now
+						</Badge>
 					)}
 				</CardTitle>
 				<CardDescription>
@@ -86,7 +88,11 @@ export function NextClassCard({ classes }: NextClassCardProps) {
 
 				{next.meetingLink &&
 					(joinable ? (
-						<Button asChild size="lg" className="w-full">
+						<Button
+							asChild
+							size="lg"
+							className="w-full bg-gradient-to-r from-primary to-accent text-white"
+						>
 							<a
 								href={next.meetingLink}
 								target="_blank"

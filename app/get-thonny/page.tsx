@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 const GetThonnyPage = () => {
 	return (
 		<MainLayout>
-			<div className="min-h-screen bg-background">
-				<main className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+			<div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-sky-500/5 to-orange-500/5 dark:from-blue-600/8 dark:via-sky-600/8 dark:to-orange-600/8">
+				<main className="container mx-auto px-4 py-12 max-w-5xl">
 					{/* Hero Section */}
 					<div className="text-center mb-16">
 						<div className="inline-block bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
@@ -36,7 +36,7 @@ const GetThonnyPage = () => {
 					</div>
 
 					{/* What is Thonny */}
-					<Card className="mb-12 border-border bg-card p-8">
+					<Card className="p-8 mb-12 bg-gradient-to-br from-blue-50 to-purple-50 border-2">
 						<div className="flex items-start gap-6">
 							<div className="text-6xl">🐍</div>
 							<div>
@@ -228,7 +228,7 @@ const GetThonnyPage = () => {
 					</Card>
 
 					{/* Need Help Section */}
-					<Card className="mb-12 border-border bg-card p-8">
+					<Card className="p-8 mb-12 bg-gradient-to-br from-orange-50 to-pink-50 border-2">
 						<div className="text-center">
 							<div className="text-4xl mb-4">🤔</div>
 							<h2 className="text-2xl font-bold mb-3">Need Help?</h2>
@@ -250,7 +250,7 @@ const GetThonnyPage = () => {
 					</Card>
 
 					{/* What's Next */}
-					<Card className="border-slate-800 bg-slate-950 p-8 text-white">
+					<Card className="p-8 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
 						<div className="text-center">
 							<div className="text-4xl mb-4">🎉</div>
 							<h2 className="text-3xl font-bold mb-4">What's Next?</h2>

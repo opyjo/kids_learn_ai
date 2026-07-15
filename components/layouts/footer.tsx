@@ -1,96 +1,161 @@
-import { ArrowRight } from "lucide-react";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const footerGroups = [
-	{
-		title: "Learn",
-		links: [
-			["Programs", "/lessons"],
-			["AI labs", "/labs"],
-			["Code playground", "/playground"],
-			["Games", "/games"],
-		],
-	},
-	{
-		title: "Families",
-		links: [
-			["Pricing", "/pricing"],
-			["Book a free trial", "/inquiry"],
-			["Common questions", "/faq"],
-			["Contact", "/contact"],
-		],
-	},
-	{
-		title: "Company",
-		links: [
-			["About", "/about"],
-			["Articles", "/blog"],
-			["Become an instructor", "/careers"],
-			["Privacy", "/privacy"],
-		],
-	},
-];
-
-export const Footer = () => (
-	<footer className="border-t border-border bg-slate-950 text-slate-200">
-		<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-			<div className="grid gap-10 lg:grid-cols-[1.25fr_2fr]">
-				<div className="max-w-sm">
-					<Link href="/" className="flex items-center gap-2.5">
-						<Image
-							src="/Logo.png"
-							alt=""
-							width={38}
-							height={38}
-							className="size-9 rounded-lg"
-						/>
-						<span className="font-semibold text-white">Kids Learn AI</span>
-					</Link>
-					<p className="mt-4 text-sm leading-6 text-slate-400">
-						Live Python and AI classes that help young people become capable,
-						thoughtful creators.
-					</p>
-					<Link
-						href="/inquiry"
-						className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-300 hover:text-blue-200"
-					>
-						Book a free trial <ArrowRight className="size-4" />
-					</Link>
-				</div>
-				<div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-					{footerGroups.map((group) => (
-						<div key={group.title}>
-							<h2 className="text-sm font-semibold text-white">
-								{group.title}
-							</h2>
-							<ul className="mt-4 space-y-3">
-								{group.links.map(([label, href]) => (
-									<li key={href}>
-										<Link
-											href={href}
-											className="text-sm text-slate-400 transition-colors hover:text-white"
-										>
-											{label}
-										</Link>
-									</li>
-								))}
-							</ul>
+export const Footer = () => {
+	return (
+		<footer className="bg-muted text-foreground py-16 border-t border-border">
+			<div className="container mx-auto px-4">
+				<div className="grid md:grid-cols-4 gap-12 mb-12">
+					<div>
+						<div className="flex items-center gap-2 mb-4">
+							<Image
+								src="/Logo.png"
+								alt="Kids Learn AI Logo"
+								width={48}
+								height={48}
+								className="rounded-xl"
+							/>
+							<span className="text-xl font-bold">Kids Learn AI</span>
 						</div>
-					))}
+						<p className="text-muted-foreground leading-relaxed">
+							Helping kids build a rock-solid Python foundation so they can grow
+							into confident AI creators.
+						</p>
+					</div>
+
+					<div>
+						<h3 className="font-semibold mb-4 text-lg">Learn</h3>
+						<ul className="space-y-3 text-muted-foreground">
+							<li>
+								<Link
+									href="/lessons?course=level-1-python-foundations-1"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									All Lessons
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/playground"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									Code Playground
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/blog"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									Blog
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/about"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									About Us
+								</Link>
+							</li>
+						</ul>
+					</div>
+
+					<div>
+						<h3 className="font-semibold mb-4 text-lg">Account</h3>
+						<ul className="space-y-3 text-muted-foreground">
+							<li>
+								<Link
+									href="/signup"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									Sign Up Free
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/login"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									Sign In
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/dashboard"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									My Dashboard
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/settings"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									My Profile
+								</Link>
+							</li>
+						</ul>
+					</div>
+
+					<div>
+						<h3 className="font-semibold mb-4 text-lg">Support</h3>
+						<ul className="space-y-3 text-muted-foreground">
+							<li>
+								<Link
+									href="/faq"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									FAQ
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/contact"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									Contact Us
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/careers"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									Become an Instructor
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/privacy"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									Privacy Policy
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/terms"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									Terms of Service
+								</Link>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+					<p className="text-muted-foreground text-sm">
+						&copy; {new Date().getFullYear()} Kids Learn AI. All rights
+						reserved. Made with{" "}
+						<Heart className="inline h-4 w-4 text-red-400 fill-red-400" /> for
+						young coders.
+					</p>
 				</div>
 			</div>
-			<div className="mt-12 flex flex-col gap-3 border-t border-slate-800 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-				<p>© {new Date().getFullYear()} Kids Learn AI. All rights reserved.</p>
-				<div className="flex gap-5">
-					<Link href="/terms" className="hover:text-slate-300">
-						Terms
-					</Link>
-					<Link href="/privacy" className="hover:text-slate-300">
-						Privacy
-					</Link>
-				</div>
-			</div>
-		</div>
-	</footer>
-);
+		</footer>
+	);
+};

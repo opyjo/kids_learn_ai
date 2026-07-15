@@ -22,19 +22,23 @@ interface ContinueLearningCardProps {
 
 export function ContinueLearningCard({ lesson }: ContinueLearningCardProps) {
 	return (
-		<Card className="border-primary/25 bg-card shadow-sm">
+		<Card className="border-2 border-accent/30 bg-gradient-to-br from-accent/5 to-primary/5">
 			<CardHeader className="pb-2">
 				<CardTitle className="flex items-center gap-2 text-lg">
 					<Play className="h-5 w-5 text-accent" aria-hidden="true" />
-					Continue learning
+					Pick Up Where You Left Off
 				</CardTitle>
 				<CardDescription>{lesson.courseTitle}</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-3">
-				<p className="text-lg font-semibold">
+				<p className="text-xl font-semibold">
 					Week {lesson.weekNumber}: {lesson.lessonTitle}
 				</p>
-				<Button asChild size="lg" className="w-full">
+				<Button
+					asChild
+					size="lg"
+					className="w-full bg-gradient-to-r from-accent to-primary text-white"
+				>
 					<Link href={lesson.href}>
 						Continue learning
 						<ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />

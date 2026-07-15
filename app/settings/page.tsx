@@ -28,9 +28,9 @@ export default async function SettingsPage() {
 	if (!profile) {
 		// If profile doesn't exist, show error message
 		return (
-			<div className="min-h-screen bg-background">
+			<div className="min-h-screen bg-gradient-to-br from-rose-500/5 via-purple-500/5 to-blue-500/5 dark:from-rose-600/8 dark:via-purple-600/8 dark:to-blue-600/8">
 				<SiteHeader />
-				<div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+				<div className="container mx-auto px-4 py-8">
 					<div className="max-w-2xl mx-auto">
 						<Card>
 							<CardHeader>
@@ -57,10 +57,10 @@ export default async function SettingsPage() {
 	};
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-gradient-to-br from-rose-500/5 via-purple-500/5 to-blue-500/5 dark:from-rose-600/8 dark:via-purple-600/8 dark:to-blue-600/8">
 			<SiteHeader />
 
-			<div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+			<div className="container mx-auto px-4 py-8">
 				<div className="max-w-2xl mx-auto">
 					{/* Header */}
 					<div className="mb-8">
@@ -69,7 +69,7 @@ export default async function SettingsPage() {
 								<Settings className="h-6 w-6 text-blue-600 dark:text-blue-400" />
 							</div>
 							<div>
-								<h1 className="text-2xl font-semibold tracking-tight text-foreground">
+								<h1 className="text-3xl font-bold text-gray-900 dark:text-white">
 									Account Settings
 								</h1>
 								<p className="text-gray-600 dark:text-gray-400">

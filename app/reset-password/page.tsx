@@ -34,16 +34,16 @@ export default function ResetPasswordPage() {
 								alt="BrightByte mascot guiding you"
 								width={280}
 								height={280}
-								className="drop-shadow-sm"
+								className="drop-shadow-2xl"
 								priority
 							/>
 						</div>
 
 						{/* Message */}
 						<div className="relative space-y-4 text-center">
-							<h1 className="text-3xl font-semibold tracking-tight text-foreground">
+							<h2 className="text-3xl font-bold text-gray-900 dark:text-white">
 								Almost there!
-							</h1>
+							</h2>
 							<p className="text-lg text-gray-600 dark:text-gray-300">
 								Create a new password to secure your account
 							</p>

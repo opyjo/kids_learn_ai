@@ -28,12 +28,12 @@ export const metadata: Metadata = {
 
 export default function BookTrialPage() {
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5">
 			<SiteHeader />
 
-			<main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:py-12">
+			<main className="container mx-auto px-4 py-8 lg:py-12">
 				{/* Back Link */}
-				<div className="mx-auto mb-7 max-w-2xl">
+				<div className="max-w-2xl mx-auto mb-8">
 					<Button variant="ghost" asChild className="group">
 						<Link href="/inquiry">
 							<ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
@@ -43,22 +43,22 @@ export default function BookTrialPage() {
 				</div>
 
 				{/* Hero Section */}
-				<div className="mx-auto mb-8 max-w-2xl text-center">
-					<div className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+				<div className="text-center mb-10 max-w-2xl mx-auto">
+					<div className="inline-flex items-center gap-2 bg-accent/10 text-accent rounded-full px-4 py-2 mb-6">
 						<Gift className="w-4 h-4" />
 						<span className="text-sm font-medium">First Class FREE</span>
 					</div>
-					<h1 className="mb-3 text-3xl font-semibold tracking-[-0.03em] text-foreground lg:text-4xl">
+					<h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
 						Book Your Free Trial Class
 					</h1>
-					<p className="text-base leading-7 text-muted-foreground sm:text-lg">
+					<p className="text-lg text-muted-foreground">
 						Fill out the form below and we'll contact you within 24 hours to
 						schedule your child's free trial class.
 					</p>
 				</div>
 
 				{/* Benefits Quick View */}
-				<div className="mx-auto mb-8 grid max-w-2xl grid-cols-2 overflow-hidden rounded-xl border border-border bg-card md:grid-cols-4 md:divide-x md:divide-border">
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-10">
 					{[
 						{ icon: Calendar, label: "8-10 Week Program" },
 						{ icon: Users, label: "Small Classes" },
@@ -67,7 +67,7 @@ export default function BookTrialPage() {
 					].map((item) => (
 						<div
 							key={item.label}
-							className="flex flex-col items-center gap-2 border-b border-border p-4 text-center last:border-b-0 md:border-b-0"
+							className="flex flex-col items-center gap-2 p-4 rounded-xl bg-card border border-border/50"
 						>
 							<item.icon className="h-5 w-5 text-primary" />
 							<span className="text-sm font-medium text-center">
@@ -78,8 +78,8 @@ export default function BookTrialPage() {
 				</div>
 
 				{/* Inquiry Form Card */}
-				<Card className="mx-auto max-w-2xl border-border shadow-sm">
-					<CardContent className="p-5 sm:p-7 lg:p-8">
+				<Card className="max-w-2xl mx-auto border-2 border-primary/20 shadow-xl">
+					<CardContent className="p-6 lg:p-10">
 						<div className="mb-8">
 							<h2 className="text-xl font-semibold mb-2">Inquiry Form</h2>
 							<p className="text-sm text-muted-foreground">

@@ -66,7 +66,7 @@ export default async function StudentsPage({
 	const rangeEnd = from + students.length;
 
 	return (
-		<div className="space-y-4">
+		<div className="space-y-6">
 			<div>
 				<h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
 					Student Management
@@ -78,7 +78,7 @@ export default async function StudentsPage({
 
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-4">
+					<CardContent className="p-6">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Total Students
 						</p>
@@ -88,7 +88,7 @@ export default async function StudentsPage({
 					</CardContent>
 				</Card>
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-4">
+					<CardContent className="p-6">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Enrolled
 						</p>
@@ -98,7 +98,7 @@ export default async function StudentsPage({
 					</CardContent>
 				</Card>
 				<Card className="border-0 shadow-sm bg-white dark:bg-gray-900">
-					<CardContent className="p-4">
+					<CardContent className="p-6">
 						<p className="text-sm font-medium text-gray-500 dark:text-gray-400">
 							Not Enrolled
 						</p>
@@ -126,7 +126,7 @@ export default async function StudentsPage({
 								className="flex items-center justify-between py-4 first:pt-0 last:pb-0"
 							>
 								<div className="flex items-center gap-4">
-									<div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+									<div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium">
 										{student.name.charAt(0).toUpperCase()}
 									</div>
 									<div>

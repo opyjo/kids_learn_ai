@@ -91,10 +91,10 @@ export const TeacherNotesViewer = ({
 	};
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
 			<SiteHeader />
 
-			<div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+			<div className="container mx-auto px-4 py-6">
 				{/* Table of Contents */}
 				{teacherNote && tableOfContents.length > 0 && (
 					<Card className="mb-6 rounded-2xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20">
@@ -158,7 +158,7 @@ export const TeacherNotesViewer = ({
 				{/* Main Content */}
 				<div className="max-w-6xl mx-auto">
 					{/* Teacher Notes Content */}
-					<Card className="flex flex-col border shadow-sm">
+					<Card className="flex flex-col rounded-2xl border shadow-2xl">
 						<CardHeader className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 dark:from-primary/10 dark:via-accent/10 dark:to-primary/10 rounded-t-2xl border-b-2 border-border flex-shrink-0 py-4">
 							<div className="flex items-center justify-between">
 								<div>

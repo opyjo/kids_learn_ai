@@ -95,14 +95,14 @@ const commitments = [
 export default function AboutPage() {
 	return (
 		<MainLayout>
-			<article className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+			<article className="container mx-auto px-4 py-20 lg:py-28">
 				{/* Hero */}
 				<section className="max-w-4xl mx-auto text-center mb-20">
 					<Badge className="mb-6 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
 						<Sparkles className="w-4 h-4 inline mr-2" />
 						About Kids Learn AI
 					</Badge>
-					<h1 className="mb-5 text-4xl font-semibold tracking-[-0.04em] text-foreground text-balance lg:text-5xl">
+					<h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
 						Every child deserves a seat in the future of AI.
 					</h1>
 					<p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed text-pretty">
@@ -115,7 +115,7 @@ export default function AboutPage() {
 				{/* Mission | Vision | Promise */}
 				<section className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto mb-20">
 					{pillars.map((pillar) => (
-						<Card key={pillar.title} className="h-full border-border">
+						<Card key={pillar.title} className="border-2 rounded-3xl h-full">
 							<CardHeader className="flex flex-col items-center text-center gap-4">
 								<div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
 									<pillar.icon className="h-7 w-7 text-primary" />
@@ -133,7 +133,7 @@ export default function AboutPage() {
 
 				{/* Our Story */}
 				<section className="max-w-4xl mx-auto mb-20">
-					<h2 className="mb-4 text-3xl font-semibold tracking-tight text-foreground lg:text-4xl">
+					<h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
 						We started with one question: who gets to build tomorrow?
 					</h2>
 					<p className="text-muted-foreground text-lg leading-relaxed mb-6">
@@ -155,7 +155,7 @@ export default function AboutPage() {
 				{/* Impact Highlights */}
 				<section className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto mb-20">
 					{impactHighlights.map((item) => (
-						<Card key={item.label} className="h-full border-border">
+						<Card key={item.label} className="rounded-3xl border-2 h-full">
 							<CardContent className="p-6 text-center space-y-3">
 								<div className="text-5xl font-bold text-primary">
 									{item.stat}
@@ -172,7 +172,7 @@ export default function AboutPage() {
 				</section>
 
 				{/* Why AI matters for kids */}
-				<section className="mb-16 rounded-2xl border border-border bg-card p-8 sm:p-10">
+				<section className="bg-secondary/40 border border-secondary/60 rounded-3xl p-10 mb-20">
 					<div className="flex flex-col gap-6">
 						<div className="flex items-center gap-3">
 							<GraduationCap className="h-6 w-6 text-primary" />
@@ -206,7 +206,7 @@ export default function AboutPage() {
 
 				{/* Commitments */}
 				<section className="max-w-5xl mx-auto mb-20">
-					<h2 className="mb-6 text-3xl font-semibold tracking-tight text-foreground text-balance">
+					<h2 className="text-3xl font-bold text-foreground mb-6 text-balance">
 						How we turn this mission into daily practice
 					</h2>
 					<div className="grid gap-6 md:grid-cols-2">
@@ -229,9 +229,9 @@ export default function AboutPage() {
 				</section>
 
 				{/* Join Us CTA */}
-				<section className="rounded-2xl bg-slate-950 p-10 text-center text-white lg:p-14">
+				<section className="bg-gradient-to-br from-primary via-primary/90 to-accent rounded-3xl p-12 lg:p-16 text-center text-primary-foreground shadow-2xl">
 					<div className="text-6xl mb-6">🌟</div>
-					<h2 className="mb-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+					<h2 className="text-4xl font-bold mb-4 text-balance">
 						Together, we can write a new story for the next generation.
 					</h2>
 					<p className="text-lg mb-8 leading-relaxed text-primary-foreground/90 max-w-3xl mx-auto">
