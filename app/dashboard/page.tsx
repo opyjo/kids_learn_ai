@@ -1,4 +1,13 @@
-import { BookOpen, CalendarClock, ChevronRight, Gamepad2 } from "lucide-react";
+import {
+	BookOpen,
+	CalendarClock,
+	ChevronRight,
+	Code,
+	GraduationCap,
+	Lock,
+	Play,
+	Trophy,
+} from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ContinueLearningCard } from "@/components/dashboard/continue-learning-card";
@@ -15,6 +24,7 @@ import {
 } from "@/components/dashboard/quick-checks-card";
 import { RecentFeedbackCard } from "@/components/dashboard/recent-feedback-card";
 import { SiteHeader } from "@/components/site-header";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -363,6 +373,8 @@ export default async function DashboardPage() {
 		authUser.email?.split("@")[0] ||
 		"Student";
 
+	const userEmail = profile?.email || authUser.email || "Not provided";
+
 	const progressPercentage =
 		totalLessonsInEnrolledLevels > 0
 			? Math.min(
@@ -372,146 +384,231 @@ export default async function DashboardPage() {
 			: 0;
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-orange-500/5 dark:from-purple-600/8 dark:via-pink-600/8 dark:to-orange-600/8">
 			<SiteHeader />
 
-			<div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-				<div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-					<div>
-						<p className="text-sm font-medium text-primary">Student home</p>
-						<h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">
-							Welcome back, {userName}
-						</h1>
-						<p className="mt-1 text-sm text-muted-foreground">
-							{enrolledLevelIds.length > 0
-								? "Here is your next step and everything waiting for you."
-								: "Start with a free live class and find the right learning level."}
-						</p>
-					</div>
-					{enrolledLevelIds.length > 0 && (
-						<Button asChild variant="outline" size="sm">
-							<Link href="/quiz/join">
-								<Gamepad2 />
-								Join a live game
-							</Link>
-						</Button>
-					)}
+			<div className="mx-auto w-full max-w-6xl px-4 py-4 xl:py-8">
+				{/* Welcome Section */}
+				<div className="mb-5">
+					<h2 className="text-2xl xl:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+						Welcome back, {userName}! 👋
+					</h2>
+					<p className="text-gray-600 dark:text-gray-400">
+						{enrolledLevelIds.length > 0
+							? "Ready to continue your coding journey?"
+							: "Get started on your coding journey today!"}
+					</p>
 				</div>
 
+				{/* No Enrollments Message */}
 				{enrolledLevelIds.length === 0 && (
-					<div className="mb-6 rounded-xl border border-primary/20 bg-card p-6 sm:flex sm:items-center sm:justify-between sm:gap-8">
-						<div>
-							<h2 className="text-lg font-semibold">Ready to begin?</h2>
-							<p className="mt-1 max-w-2xl text-sm leading-6 text-muted-foreground">
-								Book one free live class to meet an instructor, try a coding
-								activity, and choose the right program.
-							</p>
-						</div>
-						<div className="mt-4 flex gap-2 sm:mt-0">
-							<Button asChild>
-								<Link href="/inquiry">Book free trial</Link>
-							</Button>
-							<Button asChild variant="outline">
-								<Link href="/pricing">Pricing</Link>
-							</Button>
-						</div>
-					</div>
+					<Card className="mb-8 border-2 border-dashed border-primary/30 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl">
+						<CardContent className="p-8">
+							<div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+								<div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+									<GraduationCap className="h-10 w-10 text-primary" />
+								</div>
+								<div className="flex-1">
+									<h3 className="font-semibold text-foreground text-xl mb-2">
+										You Haven't Enrolled Yet
+									</h3>
+									<p className="text-muted-foreground mb-4">
+										Book a free trial class to start learning Python and AI with
+										us! No commitment required - try your first class completely
+										free.
+									</p>
+									<div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
+										<Button
+											asChild
+											size="lg"
+											className="rounded-full min-h-[44px]"
+										>
+											<Link href="/inquiry">Book Free Trial →</Link>
+										</Button>
+										<Button
+											asChild
+											variant="outline"
+											size="lg"
+											className="rounded-full min-h-[44px]"
+										>
+											<Link href="/pricing">View Pricing</Link>
+										</Button>
+									</div>
+								</div>
+							</div>
+						</CardContent>
+					</Card>
 				)}
 
+				{/* Next Class + Continue Learning */}
 				{(nextClasses.length > 0 || continueLesson) && (
-					<section aria-labelledby="next-up-heading" className="mb-5">
-						<h2
-							id="next-up-heading"
-							className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground"
-						>
-							Next up
-						</h2>
-						<div className="grid gap-4 lg:grid-cols-2">
-							<NextClassCard classes={nextClasses} />
-							{continueLesson && (
-								<ContinueLearningCard lesson={continueLesson} />
-							)}
-						</div>
-					</section>
+					<div className="grid lg:grid-cols-2 gap-4 mb-8">
+						<NextClassCard classes={nextClasses} />
+						{continueLesson && <ContinueLearningCard lesson={continueLesson} />}
+					</div>
 				)}
 
-				<div className="mb-5 grid grid-cols-3 overflow-hidden rounded-xl border border-border bg-card">
-					<div className="border-r border-border p-4">
-						<p className="text-xs text-muted-foreground">Lessons complete</p>
-						<p className="mt-1 text-2xl font-semibold">
-							{completedLessonsCount}
-							<span className="ml-1 text-sm font-normal text-muted-foreground">
-								/ {totalLessonsInEnrolledLevels}
-							</span>
-						</p>
+				{/* Homework Due */}
+				{enrolledLevelIds.length > 0 && (
+					<div className="mb-8">
+						<HomeworkDueCard items={homeworkDue} />
 					</div>
-					<div className="border-r border-border p-4">
-						<p className="text-xs text-muted-foreground">Overall progress</p>
-						<p className="mt-1 text-2xl font-semibold">
-							{Math.round(progressPercentage)}%
-						</p>
-						<Progress value={progressPercentage} className="mt-2 h-1.5" />
-					</div>
-					<div className="p-4">
-						<p className="text-xs text-muted-foreground">Enrolled levels</p>
-						<p className="mt-1 text-2xl font-semibold">
-							{enrolledLevelIds.length}
-						</p>
-					</div>
+				)}
+
+				{/* Stats Cards */}
+				<div className="grid lg:grid-cols-3 gap-4 mb-8">
+					<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
+						<CardHeader className="space-y-2">
+							<CardTitle className="text-sm font-medium">
+								Your Profile
+							</CardTitle>
+							<CardDescription>Quick snapshot of your account</CardDescription>
+						</CardHeader>
+						<CardContent className="space-y-3 text-sm">
+							<div>
+								<p className="text-xs text-muted-foreground uppercase tracking-wide">
+									Name
+								</p>
+								<p className="font-medium text-gray-900 dark:text-gray-100">
+									{userName}
+								</p>
+							</div>
+							<div>
+								<p className="text-xs text-muted-foreground uppercase tracking-wide">
+									Email
+								</p>
+								<p className="font-medium text-gray-900 dark:text-gray-100 break-all">
+									{userEmail}
+								</p>
+							</div>
+							<div>
+								<p className="text-xs text-muted-foreground uppercase tracking-wide">
+									Enrolled Levels
+								</p>
+								{enrolledLevelIds.length > 0 ? (
+									<Badge
+										variant="outline"
+										className="rounded-full bg-green-50 text-green-700 dark:bg-green-500/20 dark:text-green-200"
+									>
+										<GraduationCap className="h-3 w-3 mr-1" />
+										{enrolledLevelIds.length} Level
+										{enrolledLevelIds.length !== 1 ? "s" : ""}
+									</Badge>
+								) : (
+									<Badge
+										variant="outline"
+										className="rounded-full bg-gray-50 text-gray-500"
+									>
+										<Lock className="h-3 w-3 mr-1" />
+										No Enrollments
+									</Badge>
+								)}
+							</div>
+						</CardContent>
+					</Card>
+
+					<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
+						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+							<CardTitle className="text-sm font-medium">
+								Lessons Completed
+							</CardTitle>
+							<div className="p-2 bg-green-100 rounded-full">
+								<Trophy className="h-4 w-4 text-green-600" />
+							</div>
+						</CardHeader>
+						<CardContent>
+							<div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+								{completedLessonsCount}
+							</div>
+							<p className="text-xs text-muted-foreground mt-1">
+								{totalLessonsInEnrolledLevels > 0
+									? `out of ${totalLessonsInEnrolledLevels} lessons in enrolled levels`
+									: "Enroll in a level to start learning!"}
+							</p>
+						</CardContent>
+					</Card>
+
+					<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
+						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+							<CardTitle className="text-sm font-medium">Progress</CardTitle>
+							<div className="p-2 bg-indigo-100 rounded-full">
+								<Code className="h-4 w-4 text-indigo-600" />
+							</div>
+						</CardHeader>
+						<CardContent>
+							<div className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+								{Math.round(progressPercentage)}%
+							</div>
+							<Progress
+								value={progressPercentage}
+								className="mt-2 h-3 rounded-full transition-all duration-500"
+							/>
+							<p className="text-xs text-muted-foreground mt-2">
+								{progressPercentage > 0
+									? "Keep going! You're doing great! 🎉"
+									: "Start a lesson to track your progress!"}
+							</p>
+						</CardContent>
+					</Card>
 				</div>
 
-				<div className="grid gap-4 xl:grid-cols-[1fr_0.85fr]">
-					<div>
-						{enrolledLevelIds.length > 0 && (
-							<div className="mb-4">
-								<HomeworkDueCard items={homeworkDue} />
-							</div>
-						)}
-						<LearningProgressCard />
-						<QuickChecksCard items={quickChecks} />
-					</div>
+				{/* Learning Map (spaced review) */}
+				<LearningProgressCard />
 
-					<div>
-						{enrolledCourses && enrolledCourses.length > 0 && (
-							<Card className="mb-4">
-								<CardHeader>
-									<CardTitle className="text-base">Your programs</CardTitle>
-									<CardDescription>
-										Progress across enrolled levels
-									</CardDescription>
-								</CardHeader>
-								<CardContent>
-									<div className="divide-y divide-border">
-										{enrolledCourses.map((course) => {
-											const lessonsCount = lessonsPerCourse[course.id] || 0;
-											// Clamp so stale/duplicate completions can't show >100% or "12/9".
-											const completed = Math.min(
-												completionsPerCourse[course.id] || 0,
-												lessonsCount,
-											);
-											const progress =
-												lessonsCount > 0
-													? Math.round((completed / lessonsCount) * 100)
-													: 0;
+				{/* Lesson quizzes to take or retry */}
+				<QuickChecksCard items={quickChecks} />
 
-											return (
-												<Link
-													key={course.id}
-													href={`/lessons/${course.slug}`}
-													className="group block py-4 first:pt-0 last:pb-0"
-												>
-													<div className="mb-2 flex items-center justify-between">
+				{/* Enrolled Levels */}
+				{enrolledCourses && enrolledCourses.length > 0 && (
+					<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10 mb-5">
+						<CardHeader>
+							<CardTitle className="flex items-center gap-2">
+								<GraduationCap className="h-5 w-5 text-primary" />
+								My Enrolled Levels
+							</CardTitle>
+							<CardDescription>
+								Continue learning from where you left off
+							</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+								{enrolledCourses.map((course) => {
+									const lessonsCount = lessonsPerCourse[course.id] || 0;
+									// Clamp so stale/duplicate completions can't show >100% or "12/9".
+									const completed = Math.min(
+										completionsPerCourse[course.id] || 0,
+										lessonsCount,
+									);
+									const progress =
+										lessonsCount > 0
+											? Math.round((completed / lessonsCount) * 100)
+											: 0;
+
+									return (
+										<Link
+											key={course.id}
+											href={`/lessons/${course.slug}`}
+											className="group"
+										>
+											<Card className="h-full transition-all hover:shadow-md hover:scale-[1.02] border-green-100 dark:border-green-900/50">
+												<CardContent className="p-4">
+													<div className="flex items-start justify-between mb-2">
 														<div className="flex items-center gap-2">
-															<BookOpen className="size-4 text-primary" />
-															<h3 className="text-sm font-semibold group-hover:text-primary">
+															<div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+																<BookOpen className="h-4 w-4 text-green-600 dark:text-green-400" />
+															</div>
+															<h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">
 																{course.title}
-															</h3>
+															</h4>
 														</div>
-														<ChevronRight className="size-4 text-muted-foreground" />
+														<ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
 													</div>
+													<p className="text-sm text-muted-foreground mb-3 line-clamp-1">
+														{course.description}
+													</p>
 													{(scheduleLinesByCourse[course.id] || []).length >
 														0 && (
-														<p className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground">
+														<p className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
 															<CalendarClock
 																className="h-3.5 w-3.5 shrink-0"
 																aria-hidden="true"
@@ -522,7 +619,7 @@ export default async function DashboardPage() {
 													)}
 													<div className="flex items-center gap-3">
 														<div className="flex-1">
-															<div className="h-1.5 overflow-hidden rounded-full bg-muted">
+															<div className="h-2 bg-muted rounded-full overflow-hidden">
 																<div
 																	className="h-full bg-green-500 rounded-full transition-all"
 																	style={{ width: `${progress}%` }}
@@ -533,21 +630,66 @@ export default async function DashboardPage() {
 															{completed}/{lessonsCount} lessons
 														</span>
 													</div>
-												</Link>
-											);
-										})}
-									</div>
-								</CardContent>
-							</Card>
-						)}
+												</CardContent>
+											</Card>
+										</Link>
+									);
+								})}
+							</div>
+						</CardContent>
+					</Card>
+				)}
 
-						{recentFeedback.length > 0 && (
-							<RecentFeedbackCard items={recentFeedback} />
-						)}
+				{/* Recent Teacher Feedback */}
+				{recentFeedback.length > 0 && (
+					<div className="mb-5">
+						<RecentFeedbackCard items={recentFeedback} />
 					</div>
-				</div>
+				)}
 
-				<div className="mt-6">
+				{/* Quick Actions */}
+				<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
+					<CardHeader>
+						<CardTitle>Quick Actions</CardTitle>
+						<CardDescription>What would you like to do today?</CardDescription>
+					</CardHeader>
+					<CardContent className="flex flex-wrap gap-4">
+						<Button
+							className="justify-start rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 hover:from-indigo-600 hover:to-fuchsia-600"
+							asChild
+						>
+							<Link href="/lessons">
+								<BookOpen className="mr-2 h-4 w-4" />
+								Browse All Levels
+							</Link>
+						</Button>
+						<Button
+							variant="outline"
+							className="justify-start bg-transparent rounded-full"
+							asChild
+						>
+							<Link href="/playground">
+								<Play className="mr-2 h-4 w-4" />
+								Python Playground
+							</Link>
+						</Button>
+						{enrolledLevelIds.length === 0 && (
+							<Button
+								variant="outline"
+								className="justify-start rounded-full border-primary text-primary hover:bg-primary hover:text-white"
+								asChild
+							>
+								<Link href="/inquiry">
+									<GraduationCap className="mr-2 h-4 w-4" />
+									Book Free Trial
+								</Link>
+							</Button>
+						)}
+					</CardContent>
+				</Card>
+
+				{/* My Assignments Section */}
+				<div className="mt-8">
 					<MyAssignmentsSection initialSubmissions={submissions} />
 				</div>
 			</div>

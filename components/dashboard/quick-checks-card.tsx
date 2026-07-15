@@ -24,7 +24,7 @@ export function QuickChecksCard({ items }: { items: QuickCheckItem[] }) {
 	const passedCount = items.filter((item) => item.passed).length;
 	const todo = items.filter((item) => !item.passed).slice(0, 5);
 	return (
-		<Card className="mb-4 border-border bg-card shadow-sm">
+		<Card className="mb-5 border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30">
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<ClipboardCheck className="h-5 w-5 text-amber-600" />
@@ -42,7 +42,7 @@ export function QuickChecksCard({ items }: { items: QuickCheckItem[] }) {
 					{todo.map((item) => (
 						<div
 							key={item.href}
-							className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border px-3 py-2"
+							className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-card/60 px-3 py-2"
 						>
 							<div className="min-w-0">
 								<p className="truncate text-sm font-medium">

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		siteName: "Kids Learn AI",
 		type: "website",
-		images: [{ url: "/og.png", width: 1731, height: 909 }],
+		images: [{ url: "/Logo.png", width: 1024, height: 1024 }],
 	},
 	icons: {
 		icon: "/Logo.png",
@@ -33,12 +33,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html
-			lang="en"
-			className={`${GeistSans.variable} ${GeistMono.variable}`}
-			suppressHydrationWarning
-		>
-			<body className="font-sans">
+		<html lang="en" suppressHydrationWarning>
+			<body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"

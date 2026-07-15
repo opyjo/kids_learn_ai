@@ -12,10 +12,8 @@ export default function TermsOfServicePage() {
 	return (
 		<div className="min-h-screen bg-background">
 			<SiteHeader />
-			<main className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-				<h1 className="mb-2 text-3xl font-semibold tracking-tight">
-					Terms of service
-				</h1>
+			<main className="container mx-auto px-4 py-12 max-w-3xl">
+				<h1 className="text-3xl font-bold mb-2">Terms of Service</h1>
 				<p className="text-sm text-muted-foreground mb-10">
 					Last updated: July 5, 2026
 				</p>

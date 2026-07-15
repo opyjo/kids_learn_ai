@@ -35,16 +35,16 @@ export default function SignupPage() {
 								alt="BrightByte mascot excited to meet you"
 								width={280}
 								height={280}
-								className="drop-shadow-sm"
+								className="drop-shadow-2xl"
 								priority
 							/>
 						</div>
 
 						{/* Welcome message */}
 						<div className="relative space-y-4 text-center">
-							<h1 className="text-3xl font-semibold tracking-tight text-foreground">
+							<h2 className="text-3xl font-bold text-gray-900 dark:text-white">
 								Start your coding journey!
-							</h1>
+							</h2>
 							<p className="text-lg text-gray-600 dark:text-gray-300">
 								Learn Python with fun, interactive lessons
 							</p>

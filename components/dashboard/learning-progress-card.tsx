@@ -28,7 +28,7 @@ export function LearningProgressCard() {
 		(item) => item.status === "mastered",
 	).length;
 	return (
-		<Card className="mb-4 border-border bg-card shadow-sm">
+		<Card className="mb-5 border-purple-200 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30">
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<Brain className="h-5 w-5 text-purple-600" />

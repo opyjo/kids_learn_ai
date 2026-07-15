@@ -50,10 +50,10 @@ export const MyAssignmentsSection = ({
 	).length;
 
 	return (
-		<section className="space-y-4">
+		<div className="space-y-4">
 			<div className="flex items-center justify-between">
 				<div>
-					<h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+					<h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
 						<FileCode className="h-5 w-5" />
 						My Assignments
 						{newFeedbackCount > 0 && (
@@ -61,7 +61,7 @@ export const MyAssignmentsSection = ({
 								{newFeedbackCount} new
 							</span>
 						)}
-					</h2>
+					</h3>
 					<p className="text-sm text-muted-foreground mt-1">
 						Submit your Trinket code and view teacher feedback
 					</p>
@@ -86,7 +86,7 @@ export const MyAssignmentsSection = ({
 					onRefresh={handleRefresh}
 				/>
 			) : (
-				<Card className="border-border shadow-sm">
+				<Card className="rounded-2xl border-0 shadow-xl ring-1 ring-gray-200/60 dark:ring-white/10">
 					<CardHeader>
 						<CardTitle className="flex items-center gap-2">
 							<FileCode className="h-5 w-5" />
@@ -98,7 +98,7 @@ export const MyAssignmentsSection = ({
 					</CardHeader>
 					<CardContent>
 						<div className="text-center py-8">
-							<div className="mb-5 inline-flex size-14 items-center justify-center rounded-xl bg-primary/10">
+							<div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 mb-6">
 								<FileCode className="h-10 w-10 text-primary" />
 							</div>
 							<h4 className="text-lg font-semibold text-foreground mb-2">
@@ -121,6 +121,6 @@ export const MyAssignmentsSection = ({
 					</CardContent>
 				</Card>
 			)}
-		</section>
+		</div>
 	);
 };

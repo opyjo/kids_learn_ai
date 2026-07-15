@@ -31,10 +31,10 @@ export default async function StandaloneLabPage({ params }: LabPageProps) {
 	}
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
 			<SiteHeader />
 
-			<div className="mx-auto max-w-2xl px-4 py-6 sm:px-6">
+			<div className="container mx-auto px-4 py-6 max-w-2xl">
 				<Link
 					href="/labs"
 					className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-4"

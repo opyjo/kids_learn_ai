@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function GamesPage() {
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-gradient-to-br from-green-500/5 via-cyan-500/5 to-blue-500/5 dark:from-green-600/8 dark:via-cyan-600/8 dark:to-blue-600/8">
 			<SiteHeader />
 			<main className="max-w-6xl mx-auto px-4 py-12">
 				{/* Hero Section */}
@@ -22,7 +22,7 @@ export default function GamesPage() {
 						<Sparkles className="w-4 h-4" />
 						Build Amazing Games
 					</div>
-					<h1 className="mb-4 text-3xl font-semibold tracking-tight text-balance md:text-4xl">
+					<h1 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
 						Create Your Own Python Games! 🎮
 					</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
@@ -55,7 +55,7 @@ export default function GamesPage() {
 				</div>
 
 				{/* CTA Section */}
-				<div className="mt-14 rounded-2xl bg-slate-950 p-10 text-center text-white">
+				<div className="mt-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl p-12 text-center text-white">
 					<h2 className="text-3xl font-bold mb-4">Ready to Start Building?</h2>
 					<p className="text-xl mb-8 text-blue-50">
 						Get Thonny and start creating these amazing games today!

@@ -35,17 +35,17 @@ export const metadata: Metadata = {
 
 export default function CareersPage() {
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-linear-to-br from-primary/5 via-accent/5 to-secondary/10">
 			<SiteHeader />
 
-			<main className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+			<main className="container mx-auto px-4 py-12 lg:py-20">
 				{/* Hero Section */}
 				<div className="text-center mb-16">
 					<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
 						<Sparkles className="w-4 h-4 inline mr-2" />
 						Now Hiring
 					</Badge>
-					<h1 className="mb-5 text-4xl font-semibold tracking-[-0.04em] text-foreground lg:text-5xl">
+					<h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-6">
 						Teach Kids to Code.{" "}
 						<span className="text-primary">Make a Difference.</span>
 					</h1>

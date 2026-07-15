@@ -295,9 +295,9 @@ export const SubmissionsTab = () => {
 	}
 
 	return (
-		<div className="space-y-4">
+		<div className="space-y-6">
 			<div className="flex items-center justify-between">
-				<h2 className="text-lg font-semibold">Student submissions</h2>
+				<h3 className="text-2xl font-bold">Student Submissions</h3>
 				<Button variant="outline" onClick={fetchSubmissions} className="gap-2">
 					<RefreshCw className="h-4 w-4" />
 					Refresh
@@ -414,7 +414,7 @@ export const SubmissionsTab = () => {
 							{pagedSubmissions.map((submission) => (
 								<div
 									key={submission.id}
-									className="flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-muted/40"
+									className="flex items-center justify-between p-4 border rounded-lg hover:shadow-md transition-shadow"
 								>
 									<div className="flex-1 min-w-0">
 										<div className="flex items-center gap-2 mb-1">

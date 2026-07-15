@@ -145,7 +145,7 @@ export function UserMenu() {
 								}
 								className={
 									user.subscription_status === "premium"
-										? "bg-amber-500 text-white"
+										? "bg-gradient-to-r from-yellow-400 to-yellow-600 text-white"
 										: ""
 								}
 							>
