@@ -8,6 +8,7 @@ import {
 	FileText,
 	FlaskConical,
 	GraduationCap,
+	HelpCircle,
 	LayoutDashboard,
 	Mail,
 	Plus,
@@ -80,6 +81,11 @@ const adminNavItems = [
 		href: "/admin/concept-labs",
 		label: "Concept Labs",
 		icon: FlaskConical,
+	},
+	{
+		href: "/admin/guide",
+		label: "Setup Guide",
+		icon: HelpCircle,
 	},
 ];
 
