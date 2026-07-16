@@ -1,118 +1,120 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
-/**
- * Hook to manage Pyodide (Python in the browser) initialization and execution.
- */
+const PYODIDE_BASE_URL = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/";
+
+interface PyodideRuntime {
+	runPythonAsync: (code: string) => Promise<unknown>;
+}
+
+declare global {
+	interface Window {
+		loadPyodide?: (options: { indexURL: string }) => Promise<PyodideRuntime>;
+	}
+}
+
+let sharedRuntime: PyodideRuntime | null = null;
+let sharedLoadPromise: Promise<PyodideRuntime> | null = null;
+
+function loadPyodideScript(): Promise<void> {
+	if (window.loadPyodide) return Promise.resolve();
+
+	const src = `${PYODIDE_BASE_URL}pyodide.js`;
+	const existingScript = document.querySelector<HTMLScriptElement>(
+		`script[src="${src}"]`,
+	);
+
+	return new Promise((resolve, reject) => {
+		const script = existingScript ?? document.createElement("script");
+		script.addEventListener("load", () => resolve(), { once: true });
+		script.addEventListener(
+			"error",
+			() => reject(new Error("Failed to download the Python environment")),
+			{ once: true },
+		);
+
+		if (!existingScript) {
+			script.src = src;
+			script.async = true;
+			document.head.appendChild(script);
+		}
+	});
+}
+
+async function getSharedRuntime(): Promise<PyodideRuntime> {
+	if (sharedRuntime) return sharedRuntime;
+	if (sharedLoadPromise) return sharedLoadPromise;
+
+	sharedLoadPromise = (async () => {
+		await loadPyodideScript();
+		if (!window.loadPyodide) {
+			throw new Error("Python environment loaded incorrectly");
+		}
+
+		const runtime = await window.loadPyodide({ indexURL: PYODIDE_BASE_URL });
+		sharedRuntime = runtime;
+		return runtime;
+	})().catch((error) => {
+		sharedLoadPromise = null;
+		throw error;
+	});
+
+	return sharedLoadPromise;
+}
+
+/** Manage lazy, shared Pyodide initialization and Python execution. */
 export function usePyodide() {
-    const [isReady, setIsReady] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const pyodideRef = useRef<any>(null);
-    const mountedRef = useRef(true);
+	const [isReady, setIsReady] = useState(sharedRuntime !== null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+	const runtimeRef = useRef<PyodideRuntime | null>(sharedRuntime);
 
-    const initPyodide = useCallback(async () => {
-        if (typeof window === "undefined") return;
+	const initialize = useCallback(async () => {
+		if (runtimeRef.current) return runtimeRef.current;
 
-        // Check if already loaded
-        if ((window as any).loadPyodide && pyodideRef.current) {
-            setIsReady(true);
-            setIsLoading(false);
-            return;
-        }
+		setIsLoading(true);
+		setError(null);
+		try {
+			const runtime = await getSharedRuntime();
+			runtimeRef.current = runtime;
+			setIsReady(true);
+			return runtime;
+		} catch (err) {
+			console.error("Pyodide initialization failed:", err);
+			setError("Failed to load Python environment");
+			throw err;
+		} finally {
+			setIsLoading(false);
+		}
+	}, []);
 
-        setIsLoading(true);
-        setError(null);
+	const retry = useCallback(async () => {
+		try {
+			await initialize();
+		} catch {
+			// The error state is displayed by the editor.
+		}
+	}, [initialize]);
 
-        try {
-            // 1. Add Pyodide script
-            if (!(window as any).loadPyodide) {
-                const script = document.createElement("script");
-                script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js";
-                script.async = true;
-
-                const loadPromise = new Promise((resolve, reject) => {
-                    script.onload = resolve;
-                    script.onerror = reject;
-                });
-
-                document.head.appendChild(script);
-                await loadPromise;
-            }
-
-            if (!mountedRef.current) return;
-
-            // 2. Initialize Pyodide
-            const { loadPyodide } = window as any;
-            const pyodide = await loadPyodide({
-                indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
-            });
-
-            if (!mountedRef.current) return;
-
-            pyodideRef.current = pyodide;
-            setIsReady(true);
-            setIsLoading(false);
-        } catch (err) {
-            console.error("Pyodide initialization failed:", err);
-            if (mountedRef.current) {
-                setError("Failed to load Python environment");
-                setIsLoading(false);
-            }
-        }
-    }, []);
-
-    useEffect(() => {
-        mountedRef.current = true;
-        initPyodide();
-
-        return () => {
-            mountedRef.current = false;
-        };
-    }, [initPyodide]);
-
-    /**
-     * Retries initialization after a failure (e.g. CDN blocked/offline).
-     */
-    const retry = useCallback(() => {
-        initPyodide();
-    }, [initPyodide]);
-
-    /**
-     * Runs Python code and returns the captured stdout.
-     */
-    const runCode = useCallback(async (code: string) => {
-        if (!pyodideRef.current || !isReady) {
-            throw new Error("Python environment is not ready");
-        }
-
-        try {
-            // Redirect stdout to a StringIO object
-            await pyodideRef.current.runPythonAsync(`
+	const runCode = useCallback(
+		async (code: string) => {
+			const runtime = await initialize();
+			try {
+				await runtime.runPythonAsync(`
         import sys
         from io import StringIO
         sys.stdout = StringIO()
       `);
+				await runtime.runPythonAsync(code);
+				return (await runtime.runPythonAsync("sys.stdout.getvalue()")) as string;
+			} catch (err) {
+				const message = err instanceof Error ? err.message : String(err);
+				throw new Error(message);
+			}
+		},
+		[initialize],
+	);
 
-            // Execute user code
-            await pyodideRef.current.runPythonAsync(code);
-
-            // Extract stdout content
-            const stdout = await pyodideRef.current.runPythonAsync("sys.stdout.getvalue()");
-            return stdout as string;
-        } catch (err: any) {
-            // Format Python error messages for better readability
-            const message = err.message || String(err);
-            throw new Error(message);
-        }
-    }, [isReady]);
-
-    return {
-        isReady,
-        isLoading,
-        error,
-        runCode,
-        retry,
-    };
+	return { isReady, isLoading, error, runCode, retry };
 }

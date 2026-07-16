@@ -110,11 +110,6 @@ export function PythonEditor({
 	};
 
 	const handleRunCode = async () => {
-		if (!pyodideReady) {
-			setOutput("Python environment is still loading...");
-			return;
-		}
-
 		if (codeCallsInput(code)) {
 			setOutput(
 				"Heads up: input() isn't supported in the browser editor.\n" +
@@ -200,10 +195,15 @@ export function PythonEditor({
 								className="w-2.5 h-2.5 bg-red-500 rounded-full"
 								title="Python failed to load"
 							/>
+						) : pyodideLoading ? (
+							<div className="w-2.5 h-2.5 bg-amber-400 rounded-full animate-pulse" />
 						) : pyodideReady ? (
 							<div className="w-2.5 h-2.5 bg-green-500 rounded-full" />
 						) : (
-							<div className="w-2.5 h-2.5 bg-amber-400 rounded-full animate-pulse" />
+							<div
+								className="w-2.5 h-2.5 bg-gray-400 rounded-full"
+								title="Python loads when you run code"
+							/>
 						)}
 						<span className="font-semibold tracking-tight text-sm">
 							Python Code Editor
@@ -252,7 +252,7 @@ export function PythonEditor({
 						</Button>
 						<Button
 							onClick={handleRunCode}
-							disabled={isRunning || !pyodideReady}
+							disabled={isRunning || pyodideLoading}
 							className="rounded-full bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 h-7 w-7 p-0"
 							aria-label={isRunning ? "Running code" : "Run code"}
 						>
@@ -311,7 +311,7 @@ export function PythonEditor({
 					basicSetup={{
 						lineNumbers: true,
 						highlightActiveLine: true,
-						autocompletion: true,
+						autocompletion: false,
 						bracketMatching: true,
 						closeBrackets: true,
 						foldGutter: false,
