@@ -24,15 +24,25 @@ starter_code: |
 
   # Try your own!
 class_activities: |
-  ## 🎮 Class Activity: Math Power Challenge!
+  ## 🎮 Activity: Power Missions — Solo Edition!
 
-  1. Your teacher puts you in a breakout room with a partner
-  2. Take turns creating math problems using ** (exponents), sharing your screen as you type
-  3. Try to make the BIGGEST number you can!
-  4. Example: Who can calculate 2 ** 10? 3 ** 5?
-  5. Then try modulo: "What's the remainder when you divide 25 by 7?"
+  Work through these missions on your own, in YOUR own Trinket. Go at your own pace!
 
-  **Challenge:** Create a problem that uses BOTH exponents and modulo, then post your biggest number in the Zoom chat!
+  **Mission 1:** Make Python solve `2 ** 10`
+
+  **Mission 2:** Make Python solve `3 ** 5`
+
+  **Mission 3:** Use `**` to make the BIGGEST number you can!
+
+  **Mission 4:** Find the remainder: `25 % 7`
+
+  **Mission 5:** Try `100 % 10` — why is the answer 0?
+
+  **Mission 6:** Create ONE problem that uses BOTH `**` and `%`
+
+  When you finish all 6 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat so your teacher can check your work.
+
+  **Bonus Mission:** Can you make a number so big it fills your whole screen?
 take_home_assignment: |
   ## 📚 Homework: The Math Wizard Challenge
 

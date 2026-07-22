@@ -30,21 +30,31 @@ starter_code: |
   # Fix each bug one at a time and run the code!
   # Remember: Read the error message for clues!
 class_activities: |
-  ## 🎮 Class Activity: Math Bug Hunt!
+  ## 🎮 Activity: Bug Hunt Missions — Solo Edition!
 
-  **Part 1: Partner Bug Challenge**
-  1. Your teacher puts you in a breakout room with a partner
-  2. Person A writes a calculator with ONE bug hidden on purpose
-  3. Person A shares their Trinket link in the room; Person B tries to find and fix the bug
-  4. Switch roles and repeat!
+  Time to become a Bug Detective — on your own, in YOUR own Trinket!
 
-  **Part 2: Debug Dance Practice**
-  When you see a bug, do the Debug Dance:
-  STOP → READ → FIND → THINK → FIX → TEST
+  Remember the Debug Dance: STOP → READ → FIND → THINK → FIX → TEST
 
-  **Part 3: Bug Detective Challenge**
-  Your teacher shares the buggy calculator code on their screen.
-  Race to spot the fix — the first student to paste the corrected line in the Zoom chat wins!
+  Type each buggy line into your Trinket, run it, read the error, and fix it!
+
+  **Mission 1:** Fix this bug: `prnit("Hello, detective!")`
+
+  **Mission 2:** Fix this bug: `print(6 x 7)`
+
+  **Mission 3:** Fix this bug: `print(10 + 5`
+
+  **Mission 4:** Fix this bug — the variable names don't match:
+  `total = 5 + 5` then `print(Total)`
+
+  **Mission 5:** Fix this bug — something is missing before the math works:
+  `age = input("How old are you? ")` then `print(age + 1)`
+
+  **Mission 6:** Write a calculator with ONE bug hidden on purpose — then fix it like a real detective!
+
+  When you finish all 6 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat so your teacher can check your work.
+
+  **Bonus Mission:** The starter code has 4 more bugs waiting for you — hunt them all down!
 take_home_assignment: |
   ## 📚 Homework: Debug Detective Challenge
 
