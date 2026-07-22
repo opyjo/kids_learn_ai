@@ -42,29 +42,21 @@ starter_code: |
   print("Thanks for using My Calculator!")
   print("=" * 40)
 class_activities: |
-  ## 🎮 Class Activity: Calculator Workshop!
+  ## 🎮 Activity: Calculator Project Missions — Solo Edition!
 
-  **Part 1: Planning (10 min)**
-  - Review the requirements
-  - Plan your calculator's features
-  - Think about how to make it special
+  Today you build YOUR calculator — all on your own, in YOUR own Trinket!
 
-  **Part 2: Building (30 min)**
-  - Start building your calculator
-  - Test frequently as you go
-  - Ask for help in the Zoom chat or raise your virtual hand (share your screen so your teacher can see the bug)
-  - Add your personal touches!
+  **Mission 1: Plan (10 min)** — Review the requirements and decide what will make YOUR calculator special
 
-  **Part 3: Testing & Polish (15 min)**
-  - Test with different numbers
-  - Fix any bugs
-  - Add decorations and messages
-  - Make it yours!
+  **Mission 2: Build (30 min)** — Build your calculator, testing as you go. Stuck? Raise your virtual hand or post in the Zoom chat, and share your screen so your teacher can help!
 
-  **Part 4: Preview (5 min)**
-  - Run your complete program
-  - Make final adjustments
-  - Get ready to showcase next week!
+  **Mission 3: Test & Polish (15 min)** — Test with different numbers, fix any bugs, and add decorations and messages to make it yours
+
+  **Mission 4: Final Run (5 min)** — Run your complete program from start to finish and get ready to showcase next week!
+
+  Post "Mission 1 Complete! 🚀" (then 2, 3, 4...) in the Zoom chat as you go, so your teacher can follow your progress.
+
+  **Bonus Mission:** Add a surprise feature nobody expects — a joke, a secret message, or fancy borders!
 take_home_assignment: |
   ## 📚 Homework: Complete Your Calculator
 

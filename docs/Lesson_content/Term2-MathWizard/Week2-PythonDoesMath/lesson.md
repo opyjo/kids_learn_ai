@@ -18,15 +18,29 @@ starter_code: |
 
   # Now try your own!
 class_activities: |
-  ## 🎮 Class Activity: Math Race!
+  ## 🎮 Activity: Math Missions — Solo Edition!
 
-  1. Your teacher puts you in a breakout room with a partner (or play with the whole class in the Zoom chat)
-  2. One person says a math problem out loud (like "15 + 27")
-  3. The other person types it into their Trinket, shares their screen, and runs it
-  4. Check together if the answer is correct!
-  5. Switch roles after 5 problems
+  Work through these missions on your own, in YOUR own Trinket. Go at your own pace!
 
-  **Challenge:** Who can solve 10 problems the fastest (correctly)? Post your winning time in the Zoom chat!
+  **Mission 1:** Make Python solve `15 + 27`
+
+  **Mission 2:** Make Python solve `100 - 64`
+
+  **Mission 3:** Make Python solve `12 * 12` (remember: STAR for multiplication!)
+
+  **Mission 4:** Make Python solve `144 / 6` (why does the answer have a `.0`?)
+
+  **Mission 5:** Make Python solve `847 * 293` — way too big for your head, easy for Python!
+
+  **Mission 6:** Print your age times 12 — that's your age in months!
+
+  **Mission 7:** Figure out how many minutes are in a day (hint: `24 * 60`)
+
+  **Mission 8:** Create two variables with numbers in them, add them together, and print the result
+
+  When you finish all 8 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat so your teacher can check your work.
+
+  **Bonus Mission:** Invent the BIGGEST math problem you can think of and let Python solve it!
 take_home_assignment: |
   ## 📚 Homework: My Math Story
 

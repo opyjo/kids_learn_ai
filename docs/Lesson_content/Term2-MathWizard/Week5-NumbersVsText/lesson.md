@@ -21,15 +21,25 @@ starter_code: |
 
   # Try your own conversions!
 class_activities: |
-  ## 🎮 Class Activity: The Age Calculator Challenge!
+  ## 🎮 Activity: Age Calculator Missions — Solo Edition!
 
-  1. Your teacher puts you in a breakout room with a partner
-  2. Create a program that asks for someone's age
-  3. Convert it to a number using int()
-  4. Calculate: How old will they be in 5 years? 10 years? 20 years?
-  5. Share your screen and show all the results to your partner!
+  Build your own age calculator, on your own, in YOUR own Trinket. Go at your own pace!
 
-  **Challenge:** Add a birth year calculator - if someone is 10 years old, what year were they born?
+  **Mission 1:** Ask for someone's age with `input()`
+
+  **Mission 2:** Convert the answer to a number using `int()`
+
+  **Mission 3:** Print how old they'll be in 5 years
+
+  **Mission 4:** Print how old they'll be in 10 years
+
+  **Mission 5:** Print how old they'll be in 20 years
+
+  **Mission 6:** Test your program with YOUR age — then try a parent's or grandparent's age!
+
+  When you finish all 6 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat so your teacher can check your work.
+
+  **Bonus Mission:** Add a birth year calculator — if someone is 10 years old, what year were they born?
 take_home_assignment: |
   ## 📚 Homework: My First Calculator
 

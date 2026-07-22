@@ -20,15 +20,25 @@ starter_code: |
 
   # Try asking your own questions!
 class_activities: |
-  ## 🎮 Class Activity: Interview Game!
+  ## 🎮 Activity: Robot Interviewer Missions — Solo Edition!
 
-  1. Your teacher puts you in a breakout room with a partner
-  2. Create a program that asks 5 questions about your partner
-  3. Questions can be: favorite color, favorite food, favorite number, etc.
-  4. Interview your partner over Zoom, share your screen, and run the program with their answers
-  5. Switch roles and try your partner's program!
+  Build your own Robot Interviewer — a program that asks YOU questions! Work on your own, in YOUR own Trinket.
 
-  **Challenge:** Make your program use the answers in a fun way (like a story or joke)!
+  **Mission 1:** Make your program ask for a name with `input()` and store it in a variable
+
+  **Mission 2:** Add a question about a favorite color
+
+  **Mission 3:** Add a question about a favorite food
+
+  **Mission 4:** Add a question about a favorite number
+
+  **Mission 5:** Add one more question that YOU invent!
+
+  **Mission 6:** Make your program print a message that uses ALL the answers
+
+  Run your finished program and answer the questions yourself — try silly answers, then try real ones! When you're done, raise your hand or post "Missions Complete! 🚀" in the Zoom chat.
+
+  **Bonus Mission:** Make your program use the answers to tell a funny story or joke!
 take_home_assignment: |
   ## 📚 Homework: My Interactive Story
 

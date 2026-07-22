@@ -17,27 +17,19 @@ starter_code: |
   print("")
   print("🎉" * 20)
 class_activities: |
-  ## 🎮 Class Activity: Showcase Party!
+  ## 🎮 Activity: Showcase Missions — Solo Edition!
 
-  **Part 1: Calculator Presentations (30 min)**
-  - Each student shares their screen and presents their calculator
-  - Show what it does
-  - Share what you're proud of
-  - Celebrate each other's work in the Zoom chat!
+  It's your big day! Complete these missions to earn your badge.
 
-  **Part 2: Badge Ceremony (10 min)**
-  - Receive your "Python Beginner" badge
-  - Celebrate your achievements
-  - Take a screenshot with your badge on screen!
+  **Mission 1: Final Check** — Run your calculator one last time in YOUR own Trinket to make sure everything works
 
-  **Part 3: Celebration & Reflection (15 min)**
-  - Share favorite moments from Term 2
-  - What was your favorite thing to learn?
-  - What are you excited to learn next?
+  **Mission 2: Present** — When it's your turn, share your screen, demo your calculator, and tell everyone ONE thing you're proud of
 
-  **Part 4: Preview Term 3 (5 min)**
-  - Get excited for Term 3: Decision Maker!
-  - Preview what's coming next!
+  **Mission 3: Badge Time** — Receive your "Python Beginner" badge and take a screenshot with it on screen!
+
+  **Mission 4: Reflect** — Post in the Zoom chat: your favorite thing you learned in Term 2, and one thing you're excited to learn next
+
+  **Bonus Mission:** Get ready for Term 3: Decision Maker — where your programs learn to make choices!
 take_home_assignment: |
   ## 📚 No Homework This Week!
 

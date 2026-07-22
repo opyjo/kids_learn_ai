@@ -24,22 +24,25 @@ starter_code: |
 
   # Now change the values above and Run again!
 class_activities: |
-  ## 🎮 Class Activity: Skill Relay!
+  ## 🎮 Activity: Skill Missions — Solo Edition!
 
-  Let's prove our brains remember Term 1 — as a team!
+  Prove YOUR brain remembers Term 1! Work through these missions on your own, in YOUR own Trinket. Go at your own pace!
 
-  1. Your teacher shares a Trinket on Zoom
-  2. Each student adds **one line** that uses a different Term 1 skill:
-     - a `print()`
-     - a variable
-     - a string joined with `+`
-     - a pattern with `*` (like `"⭐" * 10`)
-     - a string method (`.upper()`, `.lower()`, `.title()`)
-     - an f-string
-  3. Call out which skill your line uses in the Zoom chat
-  4. When the whole class has added a line — run it together!
+  **Mission 1:** Print a welcome-back message with `print()`
 
-  **Challenge:** Can the class use all 6 skills without repeating one twice in a row?
+  **Mission 2:** Create a variable with your name in it and print it
+
+  **Mission 3:** Join two strings together with `+` (like your first name and last name)
+
+  **Mission 4:** Make a pattern with `*` (like `"⭐" * 10`)
+
+  **Mission 5:** Use a string method on your name — `.upper()`, `.lower()`, or `.title()`
+
+  **Mission 6:** Write an f-string that uses one of your variables inside `{ }`
+
+  When you finish all 6 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat so your teacher can check your work.
+
+  **Bonus Mission:** Combine ALL 6 skills into one mini-program that introduces you!
 take_home_assignment: |
   ## 📚 Homework: My Term 1 Skills Showcase
 

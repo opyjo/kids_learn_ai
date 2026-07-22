@@ -17,15 +17,25 @@ starter_code: |
 
   # Try creating your own calculator!
 class_activities: |
-  ## 🎮 Class Activity: Calculator Challenge!
+  ## 🎮 Activity: Calculator Builder Missions — Solo Edition!
 
-  1. Your teacher puts you in a breakout room with a partner
-  2. Choose a real-world problem to solve (age, money, distance, etc.)
-  3. Build a calculator program together in a shared Trinket (one person shares their screen)
-  4. Test it with different numbers
-  5. Back in the main room, share your screen and present your calculator to the class!
+  Build your own real-world calculator, on your own, in YOUR own Trinket. Go at your own pace!
 
-  **Challenge:** Can you build a calculator that solves a problem YOU face in real life?
+  **Mission 1:** Pick a real-world problem to solve (age, money, distance, pizza slices — anything!)
+
+  **Mission 2:** Ask the user for the numbers you need with `input()`
+
+  **Mission 3:** Convert the answers to numbers using `int()`
+
+  **Mission 4:** Do the math and print the answer with a friendly message
+
+  **Mission 5:** Test your calculator with 3 different sets of numbers
+
+  **Mission 6:** Add a title and welcome message so it feels like a real app!
+
+  When you finish all 6 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat — your teacher may ask you to demo your calculator for everyone!
+
+  **Bonus Mission:** Build a calculator that solves a problem YOU face in real life!
 take_home_assignment: |
   ## 📚 Homework: My Real-World Calculator
 
