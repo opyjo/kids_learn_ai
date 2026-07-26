@@ -175,6 +175,7 @@ export async function GET(_request: NextRequest, { params }: Context) {
 			quizType: loaded.quiz.quiz_type,
 			powerupsEnabled: loaded.game.powerups_enabled,
 			teamMode: Boolean(loaded.game.team_mode),
+			autoReveal: Boolean(loaded.game.auto_reveal),
 			totalQuestions: (questions || []).length,
 		},
 		isHost: loaded.isHost,
@@ -378,6 +379,18 @@ export async function PATCH(request: NextRequest, { params }: Context) {
 		const { error } = await loaded.db
 			.from("quiz_games")
 			.update({ powerups_enabled: Boolean(body.enabled) })
+			.eq("id", loaded.game.id);
+		return error
+			? NextResponse.json({ error: error.message }, { status: 500 })
+			: NextResponse.json({ ok: true });
+	}
+	// Deliberately not locked to the lobby like the settings around it: this
+	// only changes pacing, never scoring, so a host can flip it between
+	// questions once they see how the class is keeping up.
+	if (body.action === "set_auto_reveal") {
+		const { error } = await loaded.db
+			.from("quiz_games")
+			.update({ auto_reveal: Boolean(body.enabled) })
 			.eq("id", loaded.game.id);
 		return error
 			? NextResponse.json({ error: error.message }, { status: 500 })

@@ -232,6 +232,14 @@ const NAV_ITEMS = {
 			description: "Join our teaching team",
 		},
 	],
+	// Signed-in students only: appended to "Tools & Activities" once we know the
+	// visitor is authenticated, so nobody is sent to a login wall from the menu.
+	joinLiveGame: {
+		href: "/quiz/join",
+		label: "Join Live Game",
+		Icon: Gamepad2,
+		description: "Enter your teacher's code to play",
+	},
 	admin: {
 		href: "/admin",
 		label: "Admin",
@@ -451,8 +459,15 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	const isActive = (href: string) =>
 		pathname === href || pathname.startsWith(`${href}/`);
 
+	// Gate the live-game entry on a confirmed session. `mounted` stays false on
+	// the server pass, so the first client render matches the server markup.
+	const learnItems =
+		mounted && isAuthenticated
+			? [...NAV_ITEMS.learn, NAV_ITEMS.joinLiveGame]
+			: NAV_ITEMS.learn;
+
 	const isLearnActive =
-		NAV_ITEMS.learn.some((item) => isActive(item.href)) ||
+		learnItems.some((item) => isActive(item.href)) ||
 		NAV_ITEMS.year1Terms1to4.some((item) => isActive(item.href)) ||
 		NAV_ITEMS.year1Terms5to8.some((item) => isActive(item.href)) ||
 		NAV_ITEMS.year2Terms1to4.some((item) => isActive(item.href)) ||
@@ -752,7 +767,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 													<MegaMenuSection
 														title="Tools & Activities"
 														icon={Sparkles}
-														items={NAV_ITEMS.learn}
+														items={learnItems}
 														isActive={isActive}
 														iconColor="text-amber-600 dark:text-amber-400"
 													/>
@@ -974,7 +989,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 														<div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-4 border-t border-border pt-4">
 															Tools & Activities
 														</div>
-														{NAV_ITEMS.learn.map((navItem) => (
+														{learnItems.map((navItem) => (
 															<MobileNavLink
 																key={navItem.href}
 																item={navItem}
