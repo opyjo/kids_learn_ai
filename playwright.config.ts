@@ -1,8 +1,21 @@
 import { defineConfig, devices } from "@playwright/test";
 
+<<<<<<< HEAD
 const playwrightPort = process.env.PLAYWRIGHT_PORT ?? "3000";
 const playwrightBaseUrl =
 	process.env.PLAYWRIGHT_BASE_URL ?? `http://localhost:${playwrightPort}`;
+=======
+const e2eSupabaseEnvironment =
+	process.env.E2E_SUPABASE_URL &&
+	process.env.E2E_SUPABASE_ANON_KEY &&
+	process.env.E2E_SUPABASE_SERVICE_ROLE_KEY
+		? {
+				NEXT_PUBLIC_SUPABASE_URL: process.env.E2E_SUPABASE_URL,
+				NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.E2E_SUPABASE_ANON_KEY,
+				SUPABASE_SERVICE_ROLE_KEY: process.env.E2E_SUPABASE_SERVICE_ROLE_KEY,
+			}
+		: undefined;
+>>>>>>> origin/main
 
 /**
  * Playwright configuration for smoke E2E tests
@@ -63,5 +76,6 @@ export default defineConfig({
 		url: playwrightBaseUrl,
 		reuseExistingServer: !process.env.CI,
 		timeout: 120000,
+		...(e2eSupabaseEnvironment ? { env: e2eSupabaseEnvironment } : {}),
 	},
 });

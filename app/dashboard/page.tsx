@@ -12,6 +12,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ContinueLearningCard } from "@/components/dashboard/continue-learning-card";
 import { HomeworkDueCard } from "@/components/dashboard/homework-due-card";
+import { JoinLiveGameCard } from "@/components/dashboard/join-live-game-card";
 import { LearningProgressCard } from "@/components/dashboard/learning-progress-card";
 import { MyAssignmentsSection } from "@/components/dashboard/my-assignments-section";
 import {
@@ -447,6 +448,9 @@ export default async function DashboardPage() {
 						{continueLesson && <ContinueLearningCard lesson={continueLesson} />}
 					</div>
 				)}
+
+				{/* Join a live challenge the teacher is hosting right now */}
+				{enrolledLevelIds.length > 0 && <JoinLiveGameCard />}
 
 				{/* Homework Due */}
 				{enrolledLevelIds.length > 0 && (
