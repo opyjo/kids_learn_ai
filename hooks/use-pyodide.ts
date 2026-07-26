@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { normalizePythonRuntimeError } from "@/lib/python-debug";
 
 const PYODIDE_BASE_URL = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/";
 
@@ -16,6 +17,16 @@ declare global {
 
 let sharedRuntime: PyodideRuntime | null = null;
 let sharedLoadPromise: Promise<PyodideRuntime> | null = null;
+let sharedExecutionQueue: Promise<void> = Promise.resolve();
+
+function enqueueExecution<T>(operation: () => Promise<T>): Promise<T> {
+	const result = sharedExecutionQueue.then(operation, operation);
+	sharedExecutionQueue = result.then(
+		() => undefined,
+		() => undefined,
+	);
+	return result;
+}
 
 function loadPyodideScript(): Promise<void> {
 	if (window.loadPyodide) return Promise.resolve();
@@ -100,18 +111,21 @@ export function usePyodide() {
 	const runCode = useCallback(
 		async (code: string) => {
 			const runtime = await initialize();
-			try {
-				await runtime.runPythonAsync(`
+			return enqueueExecution(async () => {
+				try {
+					await runtime.runPythonAsync(`
         import sys
         from io import StringIO
         sys.stdout = StringIO()
       `);
-				await runtime.runPythonAsync(code);
-				return (await runtime.runPythonAsync("sys.stdout.getvalue()")) as string;
-			} catch (err) {
-				const message = err instanceof Error ? err.message : String(err);
-				throw new Error(message);
-			}
+					await runtime.runPythonAsync(code);
+					return (await runtime.runPythonAsync(
+						"sys.stdout.getvalue()",
+					)) as string;
+				} catch (err) {
+					throw new Error(normalizePythonRuntimeError(err));
+				}
+			});
 		},
 		[initialize],
 	);

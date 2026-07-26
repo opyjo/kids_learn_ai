@@ -9,6 +9,7 @@ import {
 	AlertCircle,
 	CheckCircle,
 	History,
+	Lightbulb,
 	Loader2,
 	MessageSquare,
 	Play,
@@ -22,6 +23,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { usePersistedCode } from "@/hooks/use-persisted-code";
 import { usePyodide } from "@/hooks/use-pyodide";
+import { buildPythonDebugInfo, type PythonDebugInfo } from "@/lib/python-debug";
 
 interface PythonEditorProps {
 	initialCode?: string;
@@ -96,6 +98,9 @@ export function PythonEditor({
 	const [isRunning, setIsRunning] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [error, setError] = useState("");
+	const [debugInfo, setDebugInfo] = useState<PythonDebugInfo | null>(null);
+	const [hintIndex, setHintIndex] = useState(-1);
+	const activeRunIdRef = useRef(0);
 	const {
 		isReady: pyodideReady,
 		isLoading: pyodideLoading,
@@ -105,17 +110,28 @@ export function PythonEditor({
 	} = usePyodide();
 
 	const handleCodeChange = (newCode: string) => {
+		activeRunIdRef.current += 1;
 		setCode(newCode);
+		setDebugInfo(null);
+		setHintIndex(-1);
+		setIsRunning(false);
 		onCodeChange?.(newCode);
 	};
 
 	const handleRunCode = async () => {
-		if (codeCallsInput(code)) {
+		const submittedCode = code;
+		const runId = activeRunIdRef.current + 1;
+		activeRunIdRef.current = runId;
+
+		if (codeCallsInput(submittedCode)) {
 			setOutput(
 				"Heads up: input() isn't supported in the browser editor.\n" +
 					'Give your variables values directly (e.g. name = "Ada"), or run this program in Trinket or Thonny instead.',
 			);
 			setError("");
+			setDebugInfo(null);
+			setHintIndex(-1);
+			setIsRunning(false);
 			setIsSuccess(false);
 			return;
 		}
@@ -123,22 +139,31 @@ export function PythonEditor({
 		setIsRunning(true);
 		setOutput("");
 		setError("");
+		setDebugInfo(null);
+		setHintIndex(-1);
 		setIsSuccess(false);
 
 		try {
-			const stdout = await runCode(code);
+			const stdout = await runCode(submittedCode);
+			if (activeRunIdRef.current !== runId) return;
 			setOutput(stdout || "Code executed successfully (no output)");
 			setIsSuccess(true);
 			onRunComplete?.(stdout || "Code executed successfully (no output)", true);
 		} catch (err) {
+			if (activeRunIdRef.current !== runId) return;
+			const debug = buildPythonDebugInfo(submittedCode, err);
 			const errorMessage =
-				err instanceof Error ? err.message : "Unknown error occurred";
+				err instanceof Error && err.message.trim()
+					? err.message
+					: "The Python runner returned an unclear error.";
 			setOutput(`Error: ${errorMessage}`);
 			setError(errorMessage);
+			setDebugInfo(debug);
+			setHintIndex(-1);
 			setIsSuccess(false);
 			onRunComplete?.(errorMessage, false);
 		} finally {
-			setIsRunning(false);
+			if (activeRunIdRef.current === runId) setIsRunning(false);
 		}
 	};
 
@@ -169,18 +194,26 @@ export function PythonEditor({
 	);
 
 	const handleReset = () => {
+		activeRunIdRef.current += 1;
 		setCode(initialCode);
 		clearSaved();
 		setOutput("");
 		setError("");
+		setDebugInfo(null);
+		setHintIndex(-1);
+		setIsRunning(false);
 		setIsSuccess(false);
 		onCodeChange?.(initialCode);
 	};
 
 	const handleClear = () => {
+		activeRunIdRef.current += 1;
 		setCode("");
 		setOutput("");
 		setError("");
+		setDebugInfo(null);
+		setHintIndex(-1);
+		setIsRunning(false);
 		setIsSuccess(false);
 		onCodeChange?.("");
 	};
@@ -387,6 +420,67 @@ export function PythonEditor({
 						)}
 					</div>
 				</div>
+
+				{debugInfo && (
+					<section
+						aria-label="BrightByte debugging help"
+						className="border-t border-amber-200 bg-amber-50 p-4 text-amber-950 dark:border-amber-900/70 dark:bg-amber-950/40 dark:text-amber-100"
+					>
+						<div className="flex items-start gap-3">
+							<div
+								className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-200 dark:bg-amber-900"
+								aria-hidden="true"
+							>
+								🐞
+							</div>
+							<div className="min-w-0 flex-1 space-y-2">
+								<div>
+									<p className="font-semibold">BrightByte spotted a clue</p>
+									<p className="text-sm">
+										{debugInfo.explanation}{" "}
+										{debugInfo.lineNumber && (
+											<span className="font-medium">
+												Focus on line {debugInfo.lineNumber}.
+											</span>
+										)}
+									</p>
+								</div>
+
+								{hintIndex >= 0 && debugInfo.hints[hintIndex] && (
+									<div
+										aria-live="polite"
+										className="rounded-lg border border-amber-300 bg-white/70 p-3 text-sm dark:border-amber-800 dark:bg-black/20"
+									>
+										<p className="flex items-start gap-2">
+											<Lightbulb
+												className="mt-0.5 h-4 w-4 shrink-0"
+												aria-hidden="true"
+											/>
+											<span>{debugInfo.hints[hintIndex]}</span>
+										</p>
+										<p className="mt-1 text-xs text-amber-800 dark:text-amber-300">
+											Try one change, then run your code again. Your code was
+											not changed.
+										</p>
+									</div>
+								)}
+
+								{hintIndex < debugInfo.hints.length - 1 && (
+									<Button
+										type="button"
+										variant="outline"
+										size="sm"
+										onClick={() => setHintIndex((current) => current + 1)}
+										className="rounded-full border-amber-400 bg-white/70 text-amber-950 hover:bg-amber-100 dark:border-amber-700 dark:bg-black/20 dark:text-amber-100"
+									>
+										<Lightbulb className="h-3.5 w-3.5" aria-hidden="true" />
+										{hintIndex < 0 ? "Help me debug" : "Show another hint"}
+									</Button>
+								)}
+							</div>
+						</div>
+					</section>
+				)}
 			</CardContent>
 		</Card>
 	);

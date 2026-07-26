@@ -1,4 +1,5 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { QuizManager } from "@/components/admin/quiz-manager";
 
@@ -103,8 +104,74 @@ describe("QuizManager lesson challenge dashboard", () => {
 			view.getByText("Outdated", { selector: "span" }),
 		).toBeInTheDocument();
 		expect(view.getByRole("button", { name: "Run" })).toBeInTheDocument();
+		expect(
+			view.getByRole("combobox", { name: "Question difficulty" }),
+		).toHaveTextContent("Standard");
 		expect(view.getAllByRole("button", { name: "Host current" })).toHaveLength(
 			2,
 		);
+	});
+
+	it("sends the selected challenge difficulty to the admin endpoint", async () => {
+		const user = userEvent.setup();
+		HTMLElement.prototype.scrollIntoView = vi.fn();
+		const requests: { url: string; body?: string }[] = [];
+		vi.spyOn(globalThis, "fetch").mockImplementation(async (input, init) => {
+			const url = String(input);
+			requests.push({
+				url,
+				body: typeof init?.body === "string" ? init.body : undefined,
+			});
+			if (url.endsWith("/api/admin/quizzes/report"))
+				return new Response(
+					JSON.stringify({
+						participation: 0,
+						livePlayers: 0,
+						masteryRate: 0,
+						misconceptions: [],
+						lessonChallenges: { games: 0, participants: 0, accuracy: 0 },
+						adaptive: {
+							publishedQuestions: 0,
+							coverageGaps: [],
+							insufficientCourses: [],
+							fallbacks: 0,
+							sessionErrors: 0,
+							remediationRate: 0,
+						},
+					}),
+					{ status: 200 },
+				);
+			if (url.endsWith("/api/admin/quizzes/generate-challenge"))
+				return new Response(JSON.stringify({ error: "Test stop" }), {
+					status: 500,
+				});
+			return new Response(JSON.stringify({ quizzes: [] }), { status: 200 });
+		});
+
+		render(
+			<QuizManager
+				courses={[{ id: "course-1", title: "Level 1" }]}
+				lessons={[lessons[0]]}
+			/>,
+		);
+
+		const difficulty = await screen.findByRole("combobox", {
+			name: "Question difficulty",
+		});
+		difficulty.focus();
+		await user.keyboard("{Enter}{End}{Enter}");
+		expect(difficulty).toHaveTextContent("Very challenging");
+		await user.click(screen.getByRole("button", { name: "Run" }));
+
+		await waitFor(() => {
+			const generationRequest = requests.find((entry) =>
+				entry.url.endsWith("/api/admin/quizzes/generate-challenge"),
+			);
+			expect(JSON.parse(generationRequest?.body || "{}")).toMatchObject({
+				lessonId: "lesson-1",
+				regenerate: false,
+				difficulty: "very_challenging",
+			});
+		});
 	});
 });

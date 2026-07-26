@@ -140,8 +140,10 @@ describe("inquiry account approval API", () => {
 		expect(admin.createUser).toHaveBeenCalledWith(
 			expect.objectContaining({
 				email_confirm: true,
-				user_metadata: expect.objectContaining({
+				user_metadata: {
 					full_name: "Ada",
+				},
+				app_metadata: expect.objectContaining({
 					account_type: "student",
 				}),
 			}),

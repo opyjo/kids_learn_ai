@@ -21,10 +21,10 @@ const SubmitButton = () => {
 			{pending ? (
 				<>
 					<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-					Creating Account...
+					Creating Parent Account...
 				</>
 			) : (
-				"Create Account"
+				"Create Parent Account"
 			)}
 		</Button>
 	);
@@ -71,8 +71,8 @@ export function SignupForm() {
 				<Mail className="h-4 w-4" aria-hidden="true" />
 				<AlertDescription>
 					<strong>Almost there — check your email!</strong> We've sent a
-					confirmation link to finish creating your account. Click it, then come
-					back and log in.
+					confirmation link to finish creating your parent account. Open it to
+					continue with your child&apos;s account setup.
 				</AlertDescription>
 			</Alert>
 		);
@@ -87,7 +87,7 @@ export function SignupForm() {
 			)}
 
 			<div className="space-y-2">
-				<Label htmlFor="fullName">Full Name</Label>
+				<Label htmlFor="fullName">Parent or guardian name</Label>
 				<div className="relative">
 					<User
 						className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none"
@@ -97,7 +97,7 @@ export function SignupForm() {
 						id="fullName"
 						name="fullName"
 						type="text"
-						placeholder="Enter your full name"
+						placeholder="Enter your name"
 						className="pl-10 min-h-[44px]"
 						required
 						autoComplete="name"
@@ -108,7 +108,7 @@ export function SignupForm() {
 			</div>
 
 			<div className="space-y-2">
-				<Label htmlFor="email">Email</Label>
+				<Label htmlFor="email">Parent email</Label>
 				<div className="relative">
 					<Mail
 						className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none"
@@ -210,6 +210,10 @@ export function SignupForm() {
 					</>
 				)}
 			</Button>
+			<p className="text-center text-xs text-muted-foreground">
+				You&apos;ll create your child&apos;s username and password next. Your
+				child does not need an email address.
+			</p>
 		</form>
 	);
 }

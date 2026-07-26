@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/card";
 
 export const metadata = {
-	title: "Sign Up — Kids Learn AI",
+	title: "Parent Sign Up — Kids Learn AI",
 	description:
-		"Create a free Kids Learn AI account and start learning Python and AI with hands-on projects made for kids.",
+		"Create a parent or guardian account, then set up your child's secure Kids Learn AI login.",
 };
 
 export default function SignupPage() {
@@ -43,10 +43,10 @@ export default function SignupPage() {
 						{/* Welcome message */}
 						<div className="relative space-y-4 text-center">
 							<h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-								Start your coding journey!
+								Set up learning together
 							</h2>
 							<p className="text-lg text-gray-600 dark:text-gray-300">
-								Learn Python with fun, interactive lessons
+								A parent-led start, then a simple child login
 							</p>
 
 							{/* Benefits list */}
@@ -93,10 +93,10 @@ export default function SignupPage() {
 					<Card className="border-0 shadow-xl dark:bg-gray-800/50 dark:backdrop-blur-sm">
 						<CardHeader className="space-y-1 pb-4 text-center">
 							<CardTitle className="text-2xl font-bold">
-								Start Your Coding Journey!
+								Create a parent account
 							</CardTitle>
 							<CardDescription className="text-base">
-								Create your account and begin learning Python today
+								Use your email first; you&apos;ll set up your child next
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="pb-6">
@@ -119,7 +119,7 @@ export default function SignupPage() {
 					<div className="mt-6 space-y-2 lg:hidden">
 						<div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
 							<Shield className="h-3 w-3 text-green-500" />
-							<span>Safe & secure for kids ages 9-13</span>
+							<span>Parent-led setup for kids ages 9-13</span>
 						</div>
 					</div>
 				</div>

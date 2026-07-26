@@ -170,6 +170,8 @@ export async function POST(request: NextRequest) {
 					email_confirm: true,
 					user_metadata: {
 						full_name: inquiry.child_name,
+					},
+					app_metadata: {
 						account_type: "student",
 					},
 				});

@@ -1,7 +1,9 @@
-import { CheckCircle2, KeyRound, Users } from "lucide-react";
+import { KeyRound, Users } from "lucide-react";
 import Link from "next/link";
+import { ChildPasswordResetForm } from "@/components/family/child-password-reset-form";
+import { FamilyLoginReady } from "@/components/family/family-login-ready";
+import { ParentChecklist } from "@/components/family/parent-checklist";
 import { SiteHeader } from "@/components/site-header";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +19,7 @@ import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 export const metadata = { title: "My family — Kids Learn AI" };
 
 type FamilyPageProps = {
-	searchParams: Promise<{ setup?: string }>;
+	searchParams: Promise<{ setup?: string; child?: string }>;
 };
 
 export default async function FamilyPage({ searchParams }: FamilyPageProps) {
@@ -53,6 +55,16 @@ export default async function FamilyPage({ searchParams }: FamilyPageProps) {
 		coursesByChild.set(enrollment.student_id, titles);
 	}
 
+	const hasChildLogin = Boolean(
+		children?.length && children.every((child) => Boolean(child.username)),
+	);
+	const hasCourse = Boolean(enrollments?.length);
+	const readyChild =
+		params.setup === "success"
+			? children?.find((child) => child.id === params.child) ||
+				(children?.length === 1 ? children[0] : undefined)
+			: undefined;
+
 	return (
 		<div className="min-h-screen bg-muted/30">
 			<SiteHeader />
@@ -72,14 +84,11 @@ export default async function FamilyPage({ searchParams }: FamilyPageProps) {
 					</Button>
 				</div>
 
-				{params.setup === "success" && (
-					<Alert className="border-green-200 bg-green-50">
-						<CheckCircle2 className="h-4 w-4 text-green-600" />
-						<AlertDescription>
-							The parent and student login details are ready.
-						</AlertDescription>
-					</Alert>
+				{readyChild?.username && (
+					<FamilyLoginReady username={readyChild.username} />
 				)}
+
+				<ParentChecklist hasChildLogin={hasChildLogin} hasCourse={hasCourse} />
 
 				{children?.length ? (
 					<div className="grid gap-4 md:grid-cols-2">
@@ -115,14 +124,32 @@ export default async function FamilyPage({ searchParams }: FamilyPageProps) {
 					<Card>
 						<CardContent className="flex flex-col items-center py-12 text-center">
 							<Users className="mb-4 h-10 w-10 text-muted-foreground" />
-							<p className="font-medium">No children are linked yet</p>
+							<p className="font-medium">Create your child&apos;s login</p>
 							<p className="mt-1 text-sm text-muted-foreground">
-								A child appears here after an administrator completes their
-								enrolment.
+								Add their name, a unique username, and a password. You can
+								assign course access separately after the account is ready.
 							</p>
+							<Button asChild className="mt-4">
+								<Link href="/family/setup">Start child setup</Link>
+							</Button>
 						</CardContent>
 					</Card>
 				)}
+
+				{children?.length ? (
+					<Card>
+						<CardHeader>
+							<CardTitle>Reset a child password</CardTitle>
+							<CardDescription>
+								Choose one of your linked children and set a new password.
+								Passwords are never displayed or emailed.
+							</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<ChildPasswordResetForm childOptions={children} />
+						</CardContent>
+					</Card>
+				) : null}
 			</main>
 		</div>
 	);

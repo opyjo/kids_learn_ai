@@ -1,5 +1,6 @@
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 /**
@@ -93,7 +94,17 @@ export async function GET(request: Request) {
 				return NextResponse.redirect(`${origin}/admin`);
 			}
 			if (profile?.role === "parent") {
-				return NextResponse.redirect(`${origin}/family`);
+				const admin = getSupabaseAdminClient();
+				const { count: childCount } = admin
+					? await admin
+							.from("profiles")
+							.select("id", { count: "exact", head: true })
+							.eq("parent_id", sessionData.user.id)
+							.eq("role", "student")
+					: { count: 0 };
+				return NextResponse.redirect(
+					`${origin}${childCount ? "/family" : "/family/setup"}`,
+				);
 			}
 		}
 	}

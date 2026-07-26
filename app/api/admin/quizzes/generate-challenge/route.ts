@@ -5,6 +5,10 @@ import {
 	lessonChallengeSource,
 	lessonSourceHash,
 } from "@/lib/quizzes/challenges";
+import {
+	DEFAULT_QUIZ_GENERATION_DIFFICULTY,
+	QUIZ_GENERATION_DIFFICULTIES,
+} from "@/lib/quizzes/difficulty";
 import { generateQuizQuestions } from "@/lib/quizzes/generation";
 import { getApiContext } from "@/lib/quizzes/server";
 import { createRateLimiter } from "@/lib/rate-limit";
@@ -15,6 +19,9 @@ const limiter = createRateLimiter({ windowMs: 60_000, maxRequests: 5 });
 const requestSchema = z.object({
 	lessonId: z.string().uuid(),
 	regenerate: z.boolean().default(false),
+	difficulty: z
+		.enum(QUIZ_GENERATION_DIFFICULTIES)
+		.default(DEFAULT_QUIZ_GENERATION_DIFFICULTY),
 });
 
 export async function POST(request: NextRequest) {
@@ -37,7 +44,9 @@ export async function POST(request: NextRequest) {
 			.single(),
 		context.db
 			.from("quizzes")
-			.select("id, status, generation_source_hash, created_at")
+			.select(
+				"id, status, generation_source_hash, requested_difficulty, created_at",
+			)
 			.eq("lesson_id", parsed.data.lessonId)
 			.eq("quiz_type", "lesson_challenge")
 			.neq("status", "archived")
@@ -55,6 +64,10 @@ export async function POST(request: NextRequest) {
 	const result = await generateQuizQuestions(
 		source,
 		LESSON_CHALLENGE_QUESTION_COUNT,
+		{
+			difficulty: parsed.data.difficulty,
+			enforceDifficultyProfile: true,
+		},
 	);
 	if ("error" in result)
 		return NextResponse.json(
@@ -80,6 +93,7 @@ export async function POST(request: NextRequest) {
 			generation_source_hash: sourceHash,
 			generated_at: new Date().toISOString(),
 			supersedes_quiz_id: superseded?.id || null,
+			requested_difficulty: parsed.data.difficulty,
 		})
 		.select("id")
 		.single();
@@ -120,6 +134,7 @@ export async function POST(request: NextRequest) {
 			id: quiz.id,
 			questionCount: result.questions.length,
 			status: "draft",
+			requestedDifficulty: parsed.data.difficulty,
 		},
 		{ status: 201 },
 	);

@@ -96,4 +96,62 @@ describe("lesson challenge AI validation", () => {
 			status: 503,
 		});
 	});
+
+	it("puts the requested level and grounding boundary into the model request", async () => {
+		const difficulties = [3, 4, 4, 4, 5, 5, 5, 5];
+		createMessage.mockResolvedValue(
+			responseWith(
+				difficulties.map((difficulty, index) => ({
+					...question(index),
+					adaptive_difficulty: difficulty,
+				})),
+			),
+		);
+
+		const result = await generateQuizQuestions(
+			"Lesson about loops and print()",
+			8,
+			{
+				difficulty: "very_challenging",
+				enforceDifficultyProfile: true,
+			},
+		);
+
+		expect("questions" in result && result.questions).toHaveLength(8);
+		expect(createMessage).toHaveBeenCalledWith(
+			expect.objectContaining({
+				system: expect.stringMatching(
+					/VERY CHALLENGING:[\s\S]*multi-step reasoning[\s\S]*only concepts[\s\S]*lesson source/i,
+				),
+				messages: [
+					expect.objectContaining({
+						content: expect.stringMatching(
+							/requested very_challenging level[\s\S]*<lesson_source>[\s\S]*Lesson about loops and print\(\)[\s\S]*<\/lesson_source>/i,
+						),
+					}),
+				],
+			}),
+		);
+	});
+
+	it("rejects a draft outside an explicitly enforced difficulty profile", async () => {
+		createMessage.mockResolvedValue(
+			responseWith(
+				Array.from({ length: 8 }, (_, index) => ({
+					...question(index),
+					adaptive_difficulty: 1,
+				})),
+			),
+		);
+
+		expect(
+			await generateQuizQuestions("Lesson about loops", 8, {
+				difficulty: "challenging",
+				enforceDifficultyProfile: true,
+			}),
+		).toMatchObject({
+			status: 422,
+			error: expect.stringMatching(/requested difficulty/i),
+		});
+	});
 });

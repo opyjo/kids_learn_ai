@@ -55,4 +55,48 @@ describe("usePyodide", () => {
 		await waitFor(() => expect(first.result.current.isReady).toBe(true));
 		await waitFor(() => expect(second.result.current.isReady).toBe(true));
 	});
+
+	it("serializes rapid runs so shared stdout cannot overlap", async () => {
+		let releaseFirst!: () => void;
+		const firstGate = new Promise<void>((resolve) => {
+			releaseFirst = resolve;
+		});
+		const calls: string[] = [];
+		let activeCode = "";
+		const runtime = {
+			runPythonAsync: vi.fn(async (code: string) => {
+				calls.push(code);
+				if (code === "first") {
+					activeCode = code;
+					await firstGate;
+					return;
+				}
+				if (code === "second") {
+					activeCode = code;
+					return;
+				}
+				if (code === "sys.stdout.getvalue()") return `${activeCode}-output`;
+			}),
+		};
+		window.loadPyodide = vi.fn().mockResolvedValue(runtime);
+		const { usePyodide } = await import("@/hooks/use-pyodide");
+		const runner = renderHook(() => usePyodide());
+
+		let firstRun!: Promise<string>;
+		let secondRun!: Promise<string>;
+		act(() => {
+			firstRun = runner.result.current.runCode("first");
+			secondRun = runner.result.current.runCode("second");
+		});
+
+		await waitFor(() => expect(calls).toContain("first"));
+		expect(calls).not.toContain("second");
+
+		releaseFirst();
+		await expect(firstRun).resolves.toBe("first-output");
+		await expect(secondRun).resolves.toBe("second-output");
+		expect(calls.indexOf("second")).toBeGreaterThan(
+			calls.indexOf("sys.stdout.getvalue()"),
+		);
+	});
 });
