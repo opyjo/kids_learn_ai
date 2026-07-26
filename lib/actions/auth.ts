@@ -98,7 +98,14 @@ export async function loginAction(
 		if (profile.role === "admin") {
 			redirect("/admin");
 		} else if (profile.role === "parent") {
-			redirect("/family");
+			const { count: childCount } = adminClient
+				? await adminClient
+						.from("profiles")
+						.select("id", { count: "exact", head: true })
+						.eq("parent_id", authData.user.id)
+						.eq("role", "student")
+				: { count: 0 };
+			redirect(childCount ? "/family" : "/family/setup");
 		} else {
 			redirect("/dashboard");
 		}
@@ -134,8 +141,13 @@ export async function signupAction(
 
 	try {
 		const supabase = await getSupabaseServerClient();
+		const siteUrl = (
+			process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+		).replace(/\/$/, "");
 
-		// Create auth user
+		// Public sign-up creates a parent/guardian. The database trigger defaults
+		// public Auth users to parent; only trusted server-side admin calls can
+		// mark a newly created Auth user as a student.
 		const { data: authData, error: authError } = await supabase.auth.signUp({
 			email,
 			password,
@@ -143,6 +155,7 @@ export async function signupAction(
 				data: {
 					full_name: fullName,
 				},
+				emailRedirectTo: `${siteUrl}/auth/callback?next=/family/setup`,
 			},
 		});
 
@@ -177,8 +190,8 @@ export async function signupAction(
 		revalidatePath("/", "layout");
 		revalidatePath("/dashboard");
 
-		// Redirect to the student dashboard
-		redirect("/dashboard");
+		// Guide the signed-in parent directly into child account setup.
+		redirect("/family/setup");
 	} catch (error) {
 		if (error instanceof Error && error.message === "NEXT_REDIRECT") {
 			throw error;

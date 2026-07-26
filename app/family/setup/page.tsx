@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import { ChildAccountSetupForm } from "@/components/family/child-account-setup-form";
+import { NewChildAccountForm } from "@/components/family/new-child-account-form";
 import {
 	Card,
 	CardContent,
@@ -26,8 +26,6 @@ export default async function FamilySetupPage() {
 		.eq("role", "student")
 		.order("created_at", { ascending: true });
 
-	if (!children?.length) redirect("/family");
-
 	return (
 		<main className="min-h-screen bg-muted/30 px-4 py-12">
 			<div className="mx-auto max-w-xl space-y-6">
@@ -39,7 +37,23 @@ export default async function FamilySetupPage() {
 					</p>
 				</div>
 
-				{children.map((child) => (
+				<Card>
+					<CardHeader>
+						<CardTitle>
+							{children?.length
+								? "Add another child"
+								: "Create your child’s login"}
+						</CardTitle>
+						<CardDescription>
+							Enter the name and login details your child will use.
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<NewChildAccountForm />
+					</CardContent>
+				</Card>
+
+				{children?.map((child) => (
 					<Card key={child.id}>
 						<CardHeader>
 							<CardTitle>{child.full_name || "Student"}</CardTitle>

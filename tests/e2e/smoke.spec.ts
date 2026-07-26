@@ -1,5 +1,8 @@
 import { expect, test } from "@playwright/test";
 
+const selectAllShortcut =
+	process.platform === "darwin" ? "Meta+A" : "Control+A";
+
 /**
  * Smoke E2E Tests
  *
@@ -98,6 +101,60 @@ test.describe("Critical UI Elements", () => {
 		// Email/username and password inputs should be present
 		await expect(page.locator('input[name="identifier"]')).toBeVisible();
 		await expect(page.locator('input[type="password"]')).toBeVisible();
+	});
+});
+
+test.describe("Python playground debugging", () => {
+	test.beforeEach(async ({ page }) => {
+		await page.addInitScript(() => {
+			window.loadPyodide = async () => {
+				let output = "";
+				return {
+					runPythonAsync: async (code: string) => {
+						if (code.includes("sys.stdout = StringIO")) {
+							output = "";
+							return;
+						}
+						if (code === "sys.stdout.getvalue()") return output;
+						if (code.includes("missing_score")) {
+							throw new Error(
+								"Traceback (most recent call last):\n  File \"<exec>\", line 1, in <module>\nNameError: name 'missing_score' is not defined",
+							);
+						}
+						output = "Everything works!\\n";
+					},
+				};
+			};
+		});
+	});
+
+	test("shows grounded help for an error and hides it after a successful run", async ({
+		page,
+	}) => {
+		await page.goto("/playground");
+		const editor = page.locator(".cm-content").first();
+		await editor.click();
+		await page.keyboard.press(selectAllShortcut);
+		await page.keyboard.insertText("print(missing_score)");
+		await page.getByRole("button", { name: "Run code" }).click();
+
+		const debugHelp = page.getByRole("region", {
+			name: "BrightByte debugging help",
+		});
+		await expect(debugHelp).toContainText(
+			"could not find a value named “missing_score”",
+		);
+		await expect(debugHelp).toContainText("Focus on line 1");
+		await page.getByRole("button", { name: "Help me debug" }).click();
+		await expect(debugHelp).toContainText("first value");
+
+		await editor.click();
+		await page.keyboard.press(selectAllShortcut);
+		await page.keyboard.insertText('print("Everything works!")');
+		await page.getByRole("button", { name: "Run code" }).click();
+
+		await expect(page.locator("pre")).toContainText("Everything works!");
+		await expect(debugHelp).toBeHidden();
 	});
 });
 

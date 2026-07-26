@@ -1,5 +1,6 @@
 "use server";
 
+import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -7,7 +8,117 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export type FamilySetupState = {
 	error?: string;
+	success?: boolean;
+	username?: string;
 } | null;
+
+const usernamePattern = /^[a-z0-9][a-z0-9_-]{2,29}$/;
+
+export async function createChildAccount(
+	_prevState: FamilySetupState,
+	formData: FormData,
+): Promise<FamilySetupState> {
+	const childName = String(formData.get("childName") || "").trim();
+	const username = String(formData.get("username") || "")
+		.trim()
+		.toLowerCase();
+	const childPassword = String(formData.get("childPassword") || "");
+
+	if (!childName || !username || !childPassword) {
+		return { error: "All fields are required" };
+	}
+	if (childName.length > 100) {
+		return { error: "Child name must be 100 characters or fewer" };
+	}
+	if (!usernamePattern.test(username)) {
+		return {
+			error:
+				"Username must be 3–30 characters using lowercase letters, numbers, hyphens, or underscores",
+		};
+	}
+	if (childPassword.length < 8) {
+		return { error: "Child password must be at least 8 characters" };
+	}
+
+	const supabase = await getSupabaseServerClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) return { error: "Please sign in as a parent to add a child." };
+
+	const { data: parentProfile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user.id)
+		.single();
+	if (parentProfile?.role !== "parent") {
+		return { error: "Only a parent account can add a child" };
+	}
+
+	const admin = getSupabaseAdminClient();
+	if (!admin) return { error: "Family account setup is not configured" };
+
+	const { data: usernameOwner } = await admin
+		.from("profiles")
+		.select("id")
+		.eq("username", username)
+		.maybeSingle();
+	if (usernameOwner) {
+		return { error: "That username is already taken. Please choose another." };
+	}
+
+	const internalEmail = `student-${randomUUID()}@accounts.kidslearnai.ca`;
+	const { data: childAccount, error: childError } =
+		await admin.auth.admin.createUser({
+			email: internalEmail,
+			password: childPassword,
+			email_confirm: true,
+			user_metadata: {
+				full_name: childName,
+			},
+			app_metadata: {
+				account_type: "student",
+			},
+		});
+
+	if (childError || !childAccount.user) {
+		return {
+			error: childError?.message || "Could not create the child account",
+		};
+	}
+
+	const { data: linkedProfile, error: linkError } = await admin
+		.from("profiles")
+		.update({
+			parent_id: user.id,
+			username,
+			updated_at: new Date().toISOString(),
+		})
+		.eq("id", childAccount.user.id)
+		.eq("role", "student")
+		.select("id")
+		.single();
+
+	if (linkError || !linkedProfile) {
+		await admin.auth.admin.deleteUser(childAccount.user.id);
+		if (linkError?.code === "23505") {
+			return {
+				error: "That username is already taken. Please choose another.",
+			};
+		}
+		return {
+			error: `Could not link the child account: ${
+				linkError?.message || "student profile was not created"
+			}`,
+		};
+	}
+
+	revalidatePath("/family");
+	revalidatePath("/family/setup");
+	redirect(
+		`/family?setup=success&child=${encodeURIComponent(childAccount.user.id)}`,
+	);
+}
 
 export async function setupChildAccount(
 	_prevState: FamilySetupState,
@@ -23,7 +134,7 @@ export async function setupChildAccount(
 	if (!childId || !username || !childPassword || !parentPassword) {
 		return { error: "All fields are required" };
 	}
-	if (!/^[a-z0-9][a-z0-9_-]{2,29}$/.test(username)) {
+	if (!usernamePattern.test(username)) {
 		return {
 			error:
 				"Username must be 3–30 characters using lowercase letters, numbers, hyphens, or underscores",
@@ -107,5 +218,74 @@ export async function setupChildAccount(
 	}
 
 	revalidatePath("/family");
-	redirect("/family?setup=success");
+	redirect(`/family?setup=success&child=${encodeURIComponent(childId)}`);
+}
+
+export async function resetChildPassword(
+	_prevState: FamilySetupState,
+	formData: FormData,
+): Promise<FamilySetupState> {
+	const childId = String(formData.get("childId") || "");
+	const newPassword = String(formData.get("newPassword") || "");
+	const confirmPassword = String(formData.get("confirmPassword") || "");
+
+	if (!childId || !newPassword || !confirmPassword) {
+		return { error: "Select a child and complete both password fields" };
+	}
+	if (newPassword !== confirmPassword) {
+		return { error: "Passwords do not match" };
+	}
+	if (newPassword.length < 8) {
+		return { error: "Child password must be at least 8 characters" };
+	}
+
+	const supabase = await getSupabaseServerClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user)
+		return { error: "Please sign in as a parent to reset a password." };
+
+	const { data: parentProfile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user.id)
+		.single();
+	if (parentProfile?.role !== "parent") {
+		return { error: "Only a parent account can reset child passwords" };
+	}
+
+	const admin = getSupabaseAdminClient();
+	if (!admin) return { error: "Family account setup is not configured" };
+
+	const { data: child } = await admin
+		.from("profiles")
+		.select("id, role, username")
+		.eq("id", childId)
+		.eq("parent_id", user.id)
+		.eq("role", "student")
+		.maybeSingle();
+
+	if (!child || child.role !== "student") {
+		return { error: "That child account does not belong to your family" };
+	}
+	if (!child.username) {
+		return {
+			error: "Set a username for this child before resetting their password",
+		};
+	}
+
+	const { error: passwordError } = await admin.auth.admin.updateUserById(
+		child.id,
+		{ password: newPassword },
+	);
+	if (passwordError) {
+		return { error: "Could not reset the child password. Please try again." };
+	}
+
+	revalidatePath("/family");
+	return {
+		success: true,
+		username: child.username,
+	};
 }

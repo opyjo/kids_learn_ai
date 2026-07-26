@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { QUIZ_GENERATION_DIFFICULTIES } from "@/lib/quizzes/difficulty";
 import { QUESTION_TYPES } from "@/lib/quizzes/types";
 
 export const quizQuestionInputSchema = z
@@ -60,6 +61,7 @@ export const quizInputSchema = z
 		quiz_type: z.enum(["quick_check", "term_finale", "lesson_challenge"]),
 		status: z.enum(["draft", "published", "archived"]).default("draft"),
 		passing_score: z.number().int().min(0).max(100).default(67),
+		requested_difficulty: z.enum(QUIZ_GENERATION_DIFFICULTIES).optional(),
 		questions: z.array(quizQuestionInputSchema).min(1).max(50),
 	})
 	.superRefine((value, context) => {

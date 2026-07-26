@@ -100,12 +100,12 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 							<LoginForm />
 							<div className="mt-6 text-center">
 								<p className="text-sm text-gray-600 dark:text-gray-400">
-									Don&apos;t have an account?{" "}
+									New family?{" "}
 									<Link
 										href="/signup"
 										className="font-semibold text-blue-600 transition-colors hover:text-blue-700 hover:underline"
 									>
-										Sign up here
+										Create a parent account
 									</Link>
 								</p>
 							</div>

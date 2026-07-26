@@ -40,6 +40,12 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import {
+	DEFAULT_QUIZ_GENERATION_DIFFICULTY,
+	QUIZ_GENERATION_DIFFICULTIES,
+	QUIZ_GENERATION_DIFFICULTY_LABELS,
+	type QuizGenerationDifficulty,
+} from "@/lib/quizzes/difficulty";
 import type { QuizQuestionInput } from "@/lib/quizzes/schemas";
 import type { QuestionType, QuizType } from "@/lib/quizzes/types";
 
@@ -58,6 +64,7 @@ interface QuizRow {
 	source_outdated?: boolean;
 	generated_at?: string | null;
 	supersedes_quiz_id?: string | null;
+	requested_difficulty?: QuizGenerationDifficulty;
 }
 interface Course {
 	id: string;
@@ -116,6 +123,8 @@ export function QuizManager({
 	const [batchBusy, setBatchBusy] = useState(false);
 	const [batchNote, setBatchNote] = useState("");
 	const [challengeBusyId, setChallengeBusyId] = useState<string | null>(null);
+	const [challengeDifficulty, setChallengeDifficulty] =
+		useState<QuizGenerationDifficulty>(DEFAULT_QUIZ_GENERATION_DIFFICULTY);
 	const [tab, setTab] = useState("overview");
 	const [statusFilter, setStatusFilter] = useState<
 		"all" | "draft" | "published"
@@ -147,6 +156,12 @@ export function QuizManager({
 		setTitle(quiz.title);
 		setDescription(quiz.description || "");
 		setType(quiz.quiz_type);
+		if (
+			quiz.quiz_type === "lesson_challenge" &&
+			QUIZ_GENERATION_DIFFICULTIES.includes(quiz.requested_difficulty)
+		) {
+			setChallengeDifficulty(quiz.requested_difficulty);
+		}
 		setScopeId(quiz.lesson_id || quiz.course_id);
 		setStatus(quiz.status === "published" ? "published" : "draft");
 		setQuestions(
@@ -166,6 +181,8 @@ export function QuizManager({
 			quiz_type: type,
 			status,
 			passing_score: 67,
+			requested_difficulty:
+				type === "lesson_challenge" ? challengeDifficulty : undefined,
 			lesson_id: type === "term_finale" ? null : scopeId,
 			course_id: type === "term_finale" ? scopeId : null,
 			questions: questions.map((question, index) => ({
@@ -300,7 +317,11 @@ export function QuizManager({
 		const response = await fetch("/api/admin/quizzes/generate-challenge", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ lessonId: lesson.id, regenerate }),
+			body: JSON.stringify({
+				lessonId: lesson.id,
+				regenerate,
+				difficulty: challengeDifficulty,
+			}),
 		});
 		const data = await response.json().catch(() => ({}));
 		setChallengeBusyId(null);
@@ -308,7 +329,9 @@ export function QuizManager({
 			return toast.error(data.error || "Challenge generation failed", {
 				description: "Nothing was replaced. You can safely try again.",
 			});
-		toast.success("Eight-question challenge draft ready for review");
+		toast.success(
+			`${QUIZ_GENERATION_DIFFICULTY_LABELS[challengeDifficulty]} eight-question challenge draft ready for review`,
+		);
 		await load();
 		await edit(data.id);
 	};
@@ -588,20 +611,60 @@ export function QuizManager({
 					{lessons.length > 0 && (
 						<Card>
 							<CardHeader>
-								<CardTitle className="flex items-center gap-2">
-									<Gamepad2 className="h-5 w-5 text-purple-500" />
-									Live Lesson Challenges
-								</CardTitle>
-								<CardDescription>
-									Run AI for one lesson, review the eight-question draft, then
-									publish and host it with a game code.
-								</CardDescription>
+								<div className="flex flex-wrap items-end justify-between gap-3">
+									<div>
+										<CardTitle className="flex items-center gap-2">
+											<Gamepad2 className="h-5 w-5 text-purple-500" />
+											Live Lesson Challenges
+										</CardTitle>
+										<CardDescription>
+											Choose a difficulty, run AI for one lesson, review the
+											eight-question draft, then publish and host it with a game
+											code.
+										</CardDescription>
+									</div>
+									<div className="w-full space-y-1 sm:w-52">
+										<Label htmlFor="challenge-difficulty">
+											Question difficulty
+										</Label>
+										<Select
+											value={challengeDifficulty}
+											onValueChange={(value) =>
+												setChallengeDifficulty(
+													value as QuizGenerationDifficulty,
+												)
+											}
+											disabled={challengeBusyId !== null}
+										>
+											<SelectTrigger
+												id="challenge-difficulty"
+												aria-label="Question difficulty"
+												className="w-full"
+											>
+												<SelectValue />
+											</SelectTrigger>
+											<SelectContent>
+												{QUIZ_GENERATION_DIFFICULTIES.map((difficulty) => (
+													<SelectItem key={difficulty} value={difficulty}>
+														{QUIZ_GENERATION_DIFFICULTY_LABELS[difficulty]}
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
+										<p className="text-xs text-muted-foreground">
+											Applied to the next Run or Regenerate.
+										</p>
+									</div>
+								</div>
 							</CardHeader>
 							<CardContent>
 								<div className="max-h-[32rem] space-y-2 overflow-y-auto pr-1">
 									{challengeCoverage.map(
 										({ lesson, draft, published, challengeStatus }) => {
 											const running = challengeBusyId === lesson.id;
+											const requestedDifficulty =
+												draft?.requested_difficulty ??
+												published?.requested_difficulty;
 											return (
 												<div
 													key={lesson.id}
@@ -625,6 +688,15 @@ export function QuizManager({
 													>
 														{challengeStatus}
 													</Badge>
+													{requestedDifficulty && (
+														<Badge variant="secondary">
+															{
+																QUIZ_GENERATION_DIFFICULTY_LABELS[
+																	requestedDifficulty
+																]
+															}
+														</Badge>
+													)}
 													{draft ? (
 														<Button
 															type="button"
@@ -1279,6 +1351,17 @@ export function QuizManager({
 											{quiz.source_outdated && (
 												<Badge variant="destructive">Outdated</Badge>
 											)}
+											{quiz.quiz_type === "lesson_challenge" &&
+												quiz.requested_difficulty && (
+													<Badge variant="secondary">
+														Requested{" "}
+														{
+															QUIZ_GENERATION_DIFFICULTY_LABELS[
+																quiz.requested_difficulty
+															]
+														}
+													</Badge>
+												)}
 										</div>
 									</div>
 								</CardHeader>

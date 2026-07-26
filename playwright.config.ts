@@ -1,5 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const playwrightPort = process.env.PLAYWRIGHT_PORT ?? "3000";
+const playwrightBaseUrl =
+	process.env.PLAYWRIGHT_BASE_URL ?? `http://localhost:${playwrightPort}`;
+
 /**
  * Playwright configuration for smoke E2E tests
  * @see https://playwright.dev/docs/test-configuration
@@ -33,7 +37,7 @@ export default defineConfig({
 	// Shared settings for all the projects below
 	use: {
 		// Base URL to use in actions like `await page.goto('/')`
-		baseURL: "http://localhost:3000",
+		baseURL: playwrightBaseUrl,
 
 		// Collect trace when retrying the failed test
 		trace: "on-first-retry",
@@ -55,8 +59,8 @@ export default defineConfig({
 
 	// Run your local dev server before starting the tests
 	webServer: {
-		command: "pnpm dev",
-		url: "http://localhost:3000",
+		command: `pnpm dev --port ${playwrightPort}`,
+		url: playwrightBaseUrl,
 		reuseExistingServer: !process.env.CI,
 		timeout: 120000,
 	},
