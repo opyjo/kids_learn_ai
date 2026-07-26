@@ -1,5 +1,16 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const e2eSupabaseEnvironment =
+	process.env.E2E_SUPABASE_URL &&
+	process.env.E2E_SUPABASE_ANON_KEY &&
+	process.env.E2E_SUPABASE_SERVICE_ROLE_KEY
+		? {
+				NEXT_PUBLIC_SUPABASE_URL: process.env.E2E_SUPABASE_URL,
+				NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.E2E_SUPABASE_ANON_KEY,
+				SUPABASE_SERVICE_ROLE_KEY: process.env.E2E_SUPABASE_SERVICE_ROLE_KEY,
+			}
+		: undefined;
+
 /**
  * Playwright configuration for smoke E2E tests
  * @see https://playwright.dev/docs/test-configuration
@@ -59,5 +70,6 @@ export default defineConfig({
 		url: "http://localhost:3000",
 		reuseExistingServer: !process.env.CI,
 		timeout: 120000,
+		...(e2eSupabaseEnvironment ? { env: e2eSupabaseEnvironment } : {}),
 	},
 });

@@ -4,12 +4,19 @@ import {
 	Clock,
 	Gamepad2,
 	Lightbulb,
+	LockKeyhole,
 	Medal,
+	Pause,
 	Play,
 	Plus,
+	RefreshCcw,
 	RotateCcw,
 	ShieldCheck,
+	SkipForward,
+	TimerReset,
 	Users,
+	Wifi,
+	WifiOff,
 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -26,6 +33,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
 import {
 	Select,
 	SelectContent,
@@ -34,6 +42,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { LIVE_PRESENCE_INTERVAL_MS } from "@/lib/quizzes/live-game";
 import type {
 	LeaderboardEntry,
 	PersonalLiveResult,
@@ -47,6 +56,7 @@ interface Player {
 	team_id: string | null;
 	display_name: string;
 	score?: number;
+	last_seen_at?: string;
 	fifty_fifty_available?: boolean;
 	hint_available?: boolean;
 	second_chance_available?: boolean;
@@ -63,6 +73,9 @@ interface GameState {
 		status: string;
 		currentQuestionIndex: number;
 		questionStartedAt: string | null;
+		questionDeadlineAt: string | null;
+		pausedRemainingMs: number | null;
+		stateVersion: number;
 		title: string;
 		totalQuestions: number;
 		quizType: "term_finale" | "lesson_challenge";
@@ -83,6 +96,13 @@ interface GameState {
 		answers: { answer: string | string[]; correct: boolean }[];
 	} | null;
 	personalResult: PersonalLiveResult | null;
+	hostMetrics: {
+		totalPlayers: number;
+		connectedPlayers: number;
+		answeredCount: number;
+		distribution: { answer: string; count: number }[];
+		hostLastSeenAt: string | null;
+	} | null;
 }
 
 export function LiveQuizGame({ code }: { code: string }) {
@@ -104,6 +124,11 @@ export function LiveQuizGame({ code }: { code: string }) {
 	>(null);
 	const [teamName, setTeamName] = useState("");
 	const [clockNow, setClockNow] = useState(Date.now());
+	const [realtimeStatus, setRealtimeStatus] = useState<
+		"connecting" | "live" | "reconnecting"
+	>("connecting");
+	const [heartbeatHealthy, setHeartbeatHealthy] = useState(true);
+	const [pendingAction, setPendingAction] = useState<string | null>(null);
 	const startedAt = useRef(Date.now());
 	const load = useCallback(async () => {
 		try {
@@ -133,6 +158,7 @@ export function LiveQuizGame({ code }: { code: string }) {
 	useEffect(() => {
 		if (!state?.game.id) return;
 		const supabase = getSupabaseBrowserClient();
+		setRealtimeStatus("connecting");
 		const channel = supabase
 			.channel(`quiz-${state.game.id}`)
 			.on(
@@ -165,11 +191,47 @@ export function LiveQuizGame({ code }: { code: string }) {
 				},
 				load,
 			)
-			.subscribe();
+			.subscribe((status: string) => {
+				setRealtimeStatus(
+					status === "SUBSCRIBED"
+						? "live"
+						: status === "CHANNEL_ERROR" || status === "TIMED_OUT"
+							? "reconnecting"
+							: "connecting",
+				);
+			});
 		return () => {
 			void supabase.removeChannel(channel);
 		};
 	}, [state?.game.id, load]);
+	const presenceEligible = Boolean(state?.isHost || state?.player?.id);
+	useEffect(() => {
+		if (!presenceEligible) return;
+		let active = true;
+		const heartbeat = async () => {
+			try {
+				const response = await fetch(`/api/quiz/live/${code}`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ action: "heartbeat" }),
+				});
+				if (active) setHeartbeatHealthy(response.ok);
+			} catch {
+				if (active) setHeartbeatHealthy(false);
+			}
+		};
+		void heartbeat();
+		const timer = setInterval(heartbeat, LIVE_PRESENCE_INTERVAL_MS);
+		const onVisibility = () => {
+			if (document.visibilityState === "visible") void heartbeat();
+		};
+		document.addEventListener("visibilitychange", onVisibility);
+		return () => {
+			active = false;
+			clearInterval(timer);
+			document.removeEventListener("visibilitychange", onVisibility);
+		};
+	}, [code, presenceEligible]);
 	// biome-ignore lint/correctness/useExhaustiveDependencies: question identity is the reset signal
 	useEffect(() => {
 		setAnswer("");
@@ -200,48 +262,52 @@ export function LiveQuizGame({ code }: { code: string }) {
 		action: string,
 		extra: Record<string, unknown> = {},
 	) => {
-		const response = await fetch(`/api/quiz/live/${code}`, {
-			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ action, ...extra }),
-		});
-		if (!response.ok) toast.error((await response.json()).error);
-		await load();
+		if (pendingAction) return false;
+		setPendingAction(action);
+		try {
+			const response = await fetch(`/api/quiz/live/${code}`, {
+				method: "PATCH",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					action,
+					version: state?.game.stateVersion,
+					...extra,
+				}),
+			});
+			const data = await response.json().catch(() => ({}));
+			if (!response.ok) toast.error(data.error || "Action failed");
+			await load();
+			return response.ok;
+		} catch {
+			toast.error("Could not reach the game. Please try again.");
+			setHeartbeatHealthy(false);
+			return false;
+		} finally {
+			setPendingAction(null);
+		}
 	};
-	// Seconds left on the current question. Computed above the early returns so
-	// the host's auto-reveal effect can watch it alongside the countdown.
 	const remainingSeconds =
-		state?.question && state.game.questionStartedAt
-			? Math.max(
-					0,
-					Math.ceil(
-						(new Date(state.game.questionStartedAt).getTime() +
-							state.question.time_limit_seconds * 1000 -
-							clockNow) /
-							1000,
-					),
-				)
-			: (state?.question?.time_limit_seconds ?? 0);
-	// Only the host drives state transitions, so only the host's tab fires this.
-	// The ref keeps the 2.5s poll from re-sending "review" for a question that
-	// has already been revealed, and resets naturally when the index moves on.
-	const autoRevealedIndex = useRef<number | null>(null);
-	// biome-ignore lint/correctness/useExhaustiveDependencies: hostAction is redefined every render; the countdown reaching zero is the real signal
-	useEffect(() => {
-		if (!state?.isHost || !state.game.autoReveal) return;
-		if (state.game.status !== "question" || !state.question) return;
-		if (remainingSeconds > 0) return;
-		if (autoRevealedIndex.current === state.game.currentQuestionIndex) return;
-		autoRevealedIndex.current = state.game.currentQuestionIndex;
-		void hostAction("review");
-	}, [
-		state?.isHost,
-		state?.game.autoReveal,
-		state?.game.status,
-		state?.game.currentQuestionIndex,
-		state?.question,
-		remainingSeconds,
-	]);
+		state?.game.status === "paused"
+			? Math.max(0, Math.ceil((state.game.pausedRemainingMs || 0) / 1000))
+			: state?.game.questionDeadlineAt
+				? Math.max(
+						0,
+						Math.ceil(
+							(new Date(state.game.questionDeadlineAt).getTime() - clockNow) /
+								1000,
+						),
+					)
+				: state?.question && state.game.questionStartedAt
+					? Math.max(
+							0,
+							Math.ceil(
+								(new Date(state.game.questionStartedAt).getTime() +
+									state.question.time_limit_seconds * 1000 -
+									clockNow) /
+									1000,
+							),
+						)
+					: (state?.question?.time_limit_seconds ?? 0);
 	const activatePowerUp = async (
 		kind: "fifty_fifty" | "hint" | "second_chance",
 	) => {
@@ -304,6 +370,14 @@ export function LiveQuizGame({ code }: { code: string }) {
 	const teamFirst =
 		state.game.quizType === "lesson_challenge" && state.game.teamMode;
 	const showIndividualLeaderboard = !teamFirst || state.isHost;
+	const liveConnectionHealthy =
+		realtimeStatus === "live" && heartbeatHealthy && !error;
+	const responseProgress = state.hostMetrics?.totalPlayers
+		? Math.round(
+				(state.hostMetrics.answeredCount / state.hostMetrics.totalPlayers) *
+					100,
+			)
+		: 0;
 
 	return (
 		<div className="space-y-6">
@@ -317,6 +391,20 @@ export function LiveQuizGame({ code }: { code: string }) {
 									: "Live Term Finale"}
 							</CardDescription>
 							<CardTitle className="text-2xl">{state.game.title}</CardTitle>
+							{state.isHost && (
+								<div className="mt-2 flex items-center gap-2 text-sm text-purple-50">
+									{liveConnectionHealthy ? (
+										<Wifi className="h-4 w-4" aria-hidden="true" />
+									) : (
+										<WifiOff className="h-4 w-4" aria-hidden="true" />
+									)}
+									<span aria-live="polite">
+										{liveConnectionHealthy
+											? "Live connection healthy"
+											: "Reconnecting — polling keeps the game recoverable"}
+									</span>
+								</div>
+							)}
 						</div>
 						<div className="rounded-xl bg-white/15 px-5 py-3 text-center">
 							<div className="text-xs uppercase">Game code</div>
@@ -437,6 +525,7 @@ export function LiveQuizGame({ code }: { code: string }) {
 										</div>
 										<Switch
 											checked={state.game.teamMode}
+											disabled={Boolean(pendingAction)}
 											onCheckedChange={(enabled) =>
 												void hostAction("set_team_mode", { enabled })
 											}
@@ -452,6 +541,7 @@ export function LiveQuizGame({ code }: { code: string }) {
 										</div>
 										<Switch
 											checked={state.game.powerupsEnabled}
+											disabled={Boolean(pendingAction)}
 											onCheckedChange={(enabled) =>
 												void hostAction("set_powerups", { enabled })
 											}
@@ -467,6 +557,7 @@ export function LiveQuizGame({ code }: { code: string }) {
 										</div>
 										<Switch
 											checked={state.game.autoReveal}
+											disabled={Boolean(pendingAction)}
 											onCheckedChange={(enabled) =>
 												void hostAction("set_auto_reveal", { enabled })
 											}
@@ -483,6 +574,7 @@ export function LiveQuizGame({ code }: { code: string }) {
 									<Button
 										className="w-full"
 										disabled={
+											Boolean(pendingAction) ||
 											!state.players.length ||
 											requiresTeamAssignments ||
 											needsTeam
@@ -625,7 +717,11 @@ export function LiveQuizGame({ code }: { code: string }) {
 										</p>
 									</div>
 								) : (
-									<p className="text-muted-foreground">Waiting for answers…</p>
+									<p className="text-muted-foreground">
+										{state.game.status === "paused"
+											? "Question paused. Your answers are safe."
+											: "Waiting for answers…"}
+									</p>
 								)}
 							</CardContent>
 						</Card>
@@ -639,6 +735,58 @@ export function LiveQuizGame({ code }: { code: string }) {
 							<CardContent className="space-y-2">
 								{state.isHost ? (
 									<>
+										<div className="space-y-3 rounded-lg border p-3">
+											<div className="flex items-center justify-between text-sm">
+												<span className="font-medium">Class progress</span>
+												<span aria-live="polite">
+													{state.hostMetrics?.answeredCount || 0}/
+													{state.hostMetrics?.totalPlayers || 0} answered
+												</span>
+											</div>
+											<Progress
+												value={responseProgress}
+												aria-label={`${responseProgress}% of students answered`}
+											/>
+											<div className="flex items-center justify-between text-xs text-muted-foreground">
+												<span>
+													{state.hostMetrics?.connectedPlayers || 0} of{" "}
+													{state.hostMetrics?.totalPlayers || 0} connected
+												</span>
+												<span>{remainingSeconds}s remaining</span>
+											</div>
+										</div>
+										{Boolean(state.hostMetrics?.distribution.length) && (
+											<div className="space-y-2 rounded-lg border p-3">
+												<p className="text-sm font-medium">Anonymous answers</p>
+												{state.hostMetrics?.distribution
+													.slice(0, 5)
+													.map((item) => {
+														const percentage = state.hostMetrics?.answeredCount
+															? Math.round(
+																	(item.count /
+																		state.hostMetrics.answeredCount) *
+																		100,
+																)
+															: 0;
+														return (
+															<div key={item.answer} className="space-y-1">
+																<div className="flex justify-between gap-3 text-xs">
+																	<span
+																		className="truncate"
+																		title={item.answer}
+																	>
+																		{item.answer}
+																	</span>
+																	<span>
+																		{item.count} · {percentage}%
+																	</span>
+																</div>
+																<Progress value={percentage} />
+															</div>
+														);
+													})}
+											</div>
+										)}
 										<div className="flex items-center justify-between rounded-lg border p-3">
 											<div>
 												<p className="text-sm font-medium">Auto-reveal</p>
@@ -648,39 +796,114 @@ export function LiveQuizGame({ code }: { code: string }) {
 											</div>
 											<Switch
 												checked={state.game.autoReveal}
+												disabled={Boolean(pendingAction)}
 												onCheckedChange={(enabled) =>
 													void hostAction("set_auto_reveal", { enabled })
 												}
 												aria-label="Reveal the answer automatically when the timer ends"
 											/>
 										</div>
-										<Button
-											className="w-full"
-											variant="outline"
-											disabled={state.game.status === "review"}
-											onClick={() => hostAction("review")}
-										>
-											Reveal answer
-										</Button>
-										<Button
-											className="w-full"
-											onClick={() => hostAction("next")}
-										>
-											{state.game.currentQuestionIndex + 1 >=
-											state.game.totalQuestions
-												? "Show final podium"
-												: "Next question"}
-										</Button>
-										<Button
-											className="w-full"
-											variant="secondary"
-											onClick={() => hostAction("pause")}
-										>
-											Pause
-										</Button>
+										{state.game.status === "question" && (
+											<>
+												<div className="grid grid-cols-2 gap-2">
+													<Button
+														variant="outline"
+														disabled={Boolean(pendingAction)}
+														onClick={() =>
+															hostAction("add_time", { seconds: 10 })
+														}
+													>
+														<TimerReset className="mr-2 h-4 w-4" />
+														+10 seconds
+													</Button>
+													<Button
+														variant="secondary"
+														disabled={Boolean(pendingAction)}
+														onClick={() => hostAction("pause")}
+													>
+														<Pause className="mr-2 h-4 w-4" />
+														Pause
+													</Button>
+												</div>
+												<Button
+													className="w-full"
+													disabled={Boolean(pendingAction)}
+													onClick={() => hostAction("review")}
+												>
+													<LockKeyhole className="mr-2 h-4 w-4" />
+													Lock and reveal
+												</Button>
+												<Button
+													className="w-full"
+													variant="outline"
+													disabled={Boolean(pendingAction)}
+													onClick={() => hostAction("skip")}
+												>
+													<SkipForward className="mr-2 h-4 w-4" />
+													Skip question
+												</Button>
+											</>
+										)}
+										{state.game.status === "paused" && (
+											<>
+												<Button
+													className="w-full"
+													disabled={Boolean(pendingAction)}
+													onClick={() => hostAction("resume")}
+												>
+													<Play className="mr-2 h-4 w-4" />
+													Resume question
+												</Button>
+												<Button
+													className="w-full"
+													variant="outline"
+													disabled={Boolean(pendingAction)}
+													onClick={() =>
+														hostAction("add_time", { seconds: 10 })
+													}
+												>
+													<TimerReset className="mr-2 h-4 w-4" />
+													Add 10 seconds
+												</Button>
+												<Button
+													className="w-full"
+													variant="outline"
+													disabled={Boolean(pendingAction)}
+													onClick={() => hostAction("skip")}
+												>
+													<SkipForward className="mr-2 h-4 w-4" />
+													Skip question
+												</Button>
+											</>
+										)}
+										{state.game.status === "review" && (
+											<>
+												<Button
+													className="w-full"
+													variant="outline"
+													disabled={Boolean(pendingAction)}
+													onClick={() => hostAction("reopen", { seconds: 10 })}
+												>
+													<RefreshCcw className="mr-2 h-4 w-4" />
+													Reopen for 10 seconds
+												</Button>
+												<Button
+													className="w-full"
+													disabled={Boolean(pendingAction)}
+													onClick={() => hostAction("next")}
+												>
+													<Play className="mr-2 h-4 w-4" />
+													{state.game.currentQuestionIndex + 1 >=
+													state.game.totalQuestions
+														? "Show final podium"
+														: "Next question"}
+												</Button>
+											</>
+										)}
 										<Button
 											className="w-full"
 											variant="destructive"
+											disabled={Boolean(pendingAction)}
 											onClick={() => hostAction("finish")}
 										>
 											End game
