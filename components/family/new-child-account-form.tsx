@@ -63,9 +63,9 @@ export function NewChildAccountForm() {
 			</div>
 
 			<div className="space-y-2">
-				<Label htmlFor="newChildPassword">Child&apos;s password</Label>
+				<Label htmlFor="child-login-field">Child&apos;s password</Label>
 				<PasswordInput
-					id="newChildPassword"
+					id="child-login-field"
 					name="childPassword"
 					minLength={8}
 					autoComplete="new-password"
