@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
 				code,
 				powerups_enabled: true,
 				team_mode: false,
+				auto_reveal: true,
 			})
 			.select("id, code")
 			.single();

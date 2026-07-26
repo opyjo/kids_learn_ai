@@ -11,6 +11,7 @@ import {
 	ShieldCheck,
 	Users,
 } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { QuestionInput } from "@/components/quizzes/question-input";
@@ -67,6 +68,7 @@ interface GameState {
 		quizType: "term_finale" | "lesson_challenge";
 		powerupsEnabled: boolean;
 		teamMode: boolean;
+		autoReveal: boolean;
 	};
 	isHost: boolean;
 	player: Player | null;
@@ -86,6 +88,9 @@ interface GameState {
 export function LiveQuizGame({ code }: { code: string }) {
 	const [state, setState] = useState<GameState | null>(null);
 	const [error, setError] = useState("");
+	// A bad code or a course the student is not enrolled in never becomes
+	// playable, so stop polling. Everything else stays on the retry loop.
+	const [fatal, setFatal] = useState(false);
 	const [answer, setAnswer] = useState<string | string[]>("");
 	const [answerResult, setAnswerResult] = useState<{
 		correct: boolean;
@@ -101,18 +106,30 @@ export function LiveQuizGame({ code }: { code: string }) {
 	const [clockNow, setClockNow] = useState(Date.now());
 	const startedAt = useRef(Date.now());
 	const load = useCallback(async () => {
-		const response = await fetch(`/api/quiz/live/${code}`);
-		const data = await response.json();
-		if (response.ok) {
-			setState(data);
-			setError("");
-		} else setError(data.error || "Could not load game");
+		try {
+			const response = await fetch(`/api/quiz/live/${code}`);
+			const data = await response.json().catch(() => ({}));
+			if (response.ok) {
+				setState(data);
+				setError("");
+				setFatal(false);
+			} else {
+				setError(data.error || "Could not load game");
+				setFatal(response.status === 403 || response.status === 404);
+			}
+		} catch {
+			// Network blip: keep polling and keep the game on screen if we have it.
+			setError("Could not reach the game. Retrying…");
+		}
 	}, [code]);
 	useEffect(() => {
 		void load();
+	}, [load]);
+	useEffect(() => {
+		if (fatal) return;
 		const timer = setInterval(load, 2500);
 		return () => clearInterval(timer);
-	}, [load]);
+	}, [load, fatal]);
 	useEffect(() => {
 		if (!state?.game.id) return;
 		const supabase = getSupabaseBrowserClient();
@@ -191,6 +208,40 @@ export function LiveQuizGame({ code }: { code: string }) {
 		if (!response.ok) toast.error((await response.json()).error);
 		await load();
 	};
+	// Seconds left on the current question. Computed above the early returns so
+	// the host's auto-reveal effect can watch it alongside the countdown.
+	const remainingSeconds =
+		state?.question && state.game.questionStartedAt
+			? Math.max(
+					0,
+					Math.ceil(
+						(new Date(state.game.questionStartedAt).getTime() +
+							state.question.time_limit_seconds * 1000 -
+							clockNow) /
+							1000,
+					),
+				)
+			: (state?.question?.time_limit_seconds ?? 0);
+	// Only the host drives state transitions, so only the host's tab fires this.
+	// The ref keeps the 2.5s poll from re-sending "review" for a question that
+	// has already been revealed, and resets naturally when the index moves on.
+	const autoRevealedIndex = useRef<number | null>(null);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: hostAction is redefined every render; the countdown reaching zero is the real signal
+	useEffect(() => {
+		if (!state?.isHost || !state.game.autoReveal) return;
+		if (state.game.status !== "question" || !state.question) return;
+		if (remainingSeconds > 0) return;
+		if (autoRevealedIndex.current === state.game.currentQuestionIndex) return;
+		autoRevealedIndex.current = state.game.currentQuestionIndex;
+		void hostAction("review");
+	}, [
+		state?.isHost,
+		state?.game.autoReveal,
+		state?.game.status,
+		state?.game.currentQuestionIndex,
+		state?.question,
+		remainingSeconds,
+	]);
 	const activatePowerUp = async (
 		kind: "fifty_fifty" | "hint" | "second_chance",
 	) => {
@@ -218,27 +269,34 @@ export function LiveQuizGame({ code }: { code: string }) {
 		});
 		if (result.ok) setAnswerResult(result.data);
 	};
-	if (error)
+	// Keep a running game on screen through transient errors — the poll heals it.
+	if (error && (fatal || !state))
 		return (
 			<Card>
-				<CardContent className="py-12 text-center">
-					<p className="text-destructive">{error}</p>
+				<CardContent className="space-y-4 py-12 text-center">
+					<Gamepad2
+						className="mx-auto h-10 w-10 text-muted-foreground"
+						aria-hidden="true"
+					/>
+					<div>
+						<p className="font-medium text-destructive">{error}</p>
+						<p className="mt-1 text-sm text-muted-foreground">
+							Double-check the code on your teacher's screen — it is six letters
+							or numbers.
+						</p>
+					</div>
+					<div className="flex flex-wrap justify-center gap-2">
+						<Button asChild>
+							<Link href="/quiz/join">Try another code</Link>
+						</Button>
+						<Button asChild variant="outline">
+							<Link href="/dashboard">Back to dashboard</Link>
+						</Button>
+					</div>
 				</CardContent>
 			</Card>
 		);
 	if (!state) return <p className="py-12 text-center">Loading game…</p>;
-	const remainingSeconds =
-		state.question && state.game.questionStartedAt
-			? Math.max(
-					0,
-					Math.ceil(
-						(new Date(state.game.questionStartedAt).getTime() +
-							state.question.time_limit_seconds * 1000 -
-							clockNow) /
-							1000,
-					),
-				)
-			: (state.question?.time_limit_seconds ?? 0);
 	const requiresTeamAssignments =
 		state.game.teamMode &&
 		state.players.some((player) => player.team_id === null);
@@ -398,6 +456,21 @@ export function LiveQuizGame({ code }: { code: string }) {
 												void hostAction("set_powerups", { enabled })
 											}
 											aria-label="Allow power-ups in this game"
+										/>
+									</div>
+									<div className="flex items-center justify-between rounded-lg border p-3">
+										<div>
+											<p className="text-sm font-medium">Auto-reveal answer</p>
+											<p className="text-xs text-muted-foreground">
+												Show the answer as soon as the timer runs out.
+											</p>
+										</div>
+										<Switch
+											checked={state.game.autoReveal}
+											onCheckedChange={(enabled) =>
+												void hostAction("set_auto_reveal", { enabled })
+											}
+											aria-label="Reveal the answer automatically when the timer ends"
 										/>
 									</div>
 									{(requiresTeamAssignments || needsTeam) && (
@@ -566,9 +639,25 @@ export function LiveQuizGame({ code }: { code: string }) {
 							<CardContent className="space-y-2">
 								{state.isHost ? (
 									<>
+										<div className="flex items-center justify-between rounded-lg border p-3">
+											<div>
+												<p className="text-sm font-medium">Auto-reveal</p>
+												<p className="text-xs text-muted-foreground">
+													Reveal when the timer ends.
+												</p>
+											</div>
+											<Switch
+												checked={state.game.autoReveal}
+												onCheckedChange={(enabled) =>
+													void hostAction("set_auto_reveal", { enabled })
+												}
+												aria-label="Reveal the answer automatically when the timer ends"
+											/>
+										</div>
 										<Button
 											className="w-full"
 											variant="outline"
+											disabled={state.game.status === "review"}
 											onClick={() => hostAction("review")}
 										>
 											Reveal answer
