@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { ArticleShell } from "@/components/blog/article-shell";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"A practical guide for parents and caregivers who want to encourage a child learning to code, even without technical experience.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "You Don’t Need to Code to Support a Young Coder | Kids Learn AI",
-	description:
-		"A practical guide for parents and caregivers who want to encourage a child learning to code, even without technical experience.",
-	openGraph: {
-		title: "You Don’t Need to Code to Support a Young Coder",
-		description:
-			"How parents and caregivers can build curiosity, confidence, and healthy learning habits without becoming the tech expert.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/parents-guide-supporting-young-coders",
+	type: "article",
+});
 
 const betterQuestions = [
 	"Can you show me the part you are most proud of?",
@@ -25,9 +24,11 @@ export default function ParentsGuideSupportingYoungCodersPage() {
 	return (
 		<ArticleShell
 			category="For Families"
+			slug="parents-guide-supporting-young-coders"
 			title="You Don’t Need to Code to Support a Young Coder"
+			description={description}
 			intro="A parent’s most useful tools are not Python commands. They are patience, good questions, and a home where mistakes are treated as part of making something new."
-			date="July 4, 2026"
+			datePublished="2026-07-04"
 			readingTime="7 min read"
 			takeaways={[
 				"Questions that help a child think without giving away the answer.",

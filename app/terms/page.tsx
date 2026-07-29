@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = publicMetadata({
 	title: "Terms of Service - Kids Learn AI",
 	description:
 		"The terms that apply when you use Kids Learn AI's lessons, live classes, and learning tools.",
-};
+	path: "/terms",
+});
 
 export default function TermsOfServicePage() {
 	return (

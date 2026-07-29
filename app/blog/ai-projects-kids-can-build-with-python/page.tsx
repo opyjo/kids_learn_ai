@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { ArticleShell } from "@/components/blog/article-shell";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"Seven creative, beginner-friendly AI projects that help kids turn Python fundamentals into practical experiments.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "7 AI Projects Kids Can Build with Python | Kids Learn AI",
-	description:
-		"Seven creative, beginner-friendly AI projects that help kids turn Python fundamentals into practical experiments.",
-	openGraph: {
-		title: "7 AI Projects Kids Can Build with Python",
-		description:
-			"Creative, beginner-friendly projects that turn Python fundamentals into practical AI experiments.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/ai-projects-kids-can-build-with-python",
+	type: "article",
+});
 
 const projects = [
 	{
@@ -62,9 +61,11 @@ export default function AiProjectsKidsCanBuildWithPythonPage() {
 	return (
 		<ArticleShell
 			category="Projects"
+			slug="ai-projects-kids-can-build-with-python"
 			title="7 AI Projects Kids Can Build with Python"
+			description={description}
 			intro="The best first AI project is not the most advanced one. It is the project a young learner understands well enough to question, improve, and proudly explain."
-			date="July 18, 2026"
+			datePublished="2026-07-18"
 			readingTime="9 min read"
 			takeaways={[
 				"Seven projects that grow naturally from beginner Python skills.",

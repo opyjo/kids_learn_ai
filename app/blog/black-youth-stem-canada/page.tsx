@@ -1,38 +1,47 @@
 import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { ArticleByline, ArticleSeo } from "@/components/seo/article-seo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"Canadian evidence on barriers affecting Black youth and practical steps families, schools, and communities can take to strengthen STEM pathways.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "Supporting Black Youth in Canadian STEM — Kids Learn AI",
-	description:
-		"The data behind Black youth underrepresentation in Canadian STEM, the barriers they face, and practical steps families and schools can take to help.",
-	openGraph: {
-		title: "Supporting Black Youth in Canadian STEM — Kids Learn AI",
-		description:
-			"The data behind Black youth underrepresentation in Canadian STEM, the barriers they face, and practical steps families and schools can take to help.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/black-youth-stem-canada",
+	type: "article",
+});
 
 const stats = [
 	{
-		stat: "9%",
-		label: "Share of Black Canadians in STEM jobs",
+		stat: "94%",
+		label: "Aspire to a university degree",
 		detail:
-			"Statistics Canada (2021) shows Black Canadians represent roughly 4% of the population but only 9% of STEM roles, compared to 22% for non-visible minorities.",
+			"Among Black youth ages 15-25 surveyed in 2016, 94% wanted a bachelor’s degree or higher.",
+		source:
+			"https://www.canada.ca/en/public-health/services/health-promotion/population-health/what-determines-health/social-determinants-inequities-black-canadians-snapshot.html",
+		sourceLabel: "Public Health Agency of Canada",
 	},
 	{
-		stat: "3x",
-		label: "Likelihood of facing hiring bias",
+		stat: "60%",
+		label: "Expected to reach that goal",
 		detail:
-			"Research by the Conference Board of Canada indicates Black job seekers are nearly three times more likely to perceive bias during STEM recruitment cycles.",
+			"In the same evidence snapshot, only 60% expected to attain that level of education—an important aspiration gap.",
+		source:
+			"https://www.canada.ca/en/public-health/services/health-promotion/population-health/what-determines-health/social-determinants-inequities-black-canadians-snapshot.html",
+		sourceLabel: "Public Health Agency of Canada",
 	},
 	{
-		stat: "64%",
-		label: "Teachers who want more culturally relevant resources",
+		stat: "$0.76",
+		label: "Employment income per dollar",
 		detail:
-			"A STEM Teaching Canada survey found almost two-thirds of K-12 educators want materials that better reflect Black student experiences.",
+			"Statistics Canada found Canadian-born Black adults earned 76 cents for every dollar earned by Canadian-born non-racialized adults despite similar bachelor’s-degree attainment.",
+		source:
+			"https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00009-eng.htm",
+		sourceLabel: "Statistics Canada, 2021 Census analysis",
 	},
 ];
 
@@ -58,6 +67,13 @@ const callsToAction = [
 export default function BlackYouthStemCanadaPage() {
 	return (
 		<MainLayout>
+			<ArticleSeo
+				slug="black-youth-stem-canada"
+				title="Closing the Gap: Supporting Black Youth in Canadian STEM"
+				description={description}
+				datePublished="2025-02-28"
+				dateModified="2026-07-29"
+			/>
 			<article className="container mx-auto px-4 py-20 lg:py-28">
 				<div className="max-w-3xl mx-auto">
 					<Badge className="mb-4 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
@@ -71,6 +87,13 @@ export default function BlackYouthStemCanadaPage() {
 						underrepresented in STEM classrooms and careers. Understanding the
 						reasons, and taking action together, can help us change the story.
 					</p>
+					<div className="mb-10">
+						<ArticleByline
+							datePublished="2025-02-28"
+							dateModified="2026-07-29"
+							readingTime="9 min read"
+						/>
+					</div>
 
 					<section className="grid gap-6 md:grid-cols-3 mb-16">
 						{stats.map((item) => (
@@ -85,6 +108,14 @@ export default function BlackYouthStemCanadaPage() {
 									<p className="text-xs text-muted-foreground leading-relaxed">
 										{item.detail}
 									</p>
+									<a
+										href={item.source}
+										target="_blank"
+										rel="noreferrer"
+										className="inline-flex text-xs font-medium text-primary underline underline-offset-4"
+									>
+										Source: {item.sourceLabel}
+									</a>
 								</CardContent>
 							</Card>
 						))}

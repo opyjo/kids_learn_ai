@@ -11,12 +11,15 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = publicMetadata({
 	title: "Log In — Kids Learn AI",
 	description:
 		"Log in to Kids Learn AI to continue your Python and AI learning adventure.",
-};
+	path: "/login",
+	noIndex: true,
+});
 
 type LoginPageProps = {
 	searchParams: Promise<{ reset?: string; error?: string }>;

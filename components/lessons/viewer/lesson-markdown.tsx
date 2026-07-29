@@ -96,6 +96,7 @@ export function ThemedMarkdown({
 			<ReactMarkdown
 				remarkPlugins={[remarkGfm]}
 				components={{
+					...markdownComponents,
 					p: ({ children }) => (
 						<p className="mb-2.5 leading-relaxed">{children}</p>
 					),
@@ -129,6 +130,11 @@ export function ThemedMarkdown({
 						<h3 className="text-sm font-semibold mt-2.5 mb-1.5 first:mt-0">
 							{children}
 						</h3>
+					),
+					blockquote: ({ children }) => (
+						<blockquote className="my-3 border-l-4 border-current/30 pl-3 italic">
+							{children}
+						</blockquote>
 					),
 					a: ({ href, children }) => (
 						<a

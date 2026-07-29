@@ -8,18 +8,14 @@ import InteractiveCodeEditor from "@/components/home/InteractiveCodeEditor";
 import StatsSection from "@/components/home/StatsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "Live Python & AI Classes for Kids — Kids Learn AI",
 	description:
-		"Fun, live online Python and AI classes for kids ages 8-16. Build real projects, explore AI safely, and start with a free trial class, no experience needed.",
-	openGraph: {
-		title: "Live Python & AI Classes for Kids — Kids Learn AI",
-		description:
-			"Fun, live online Python and AI classes for kids ages 8-16. Build real projects, explore AI safely, and start with a free trial class, no experience needed.",
-		type: "website",
-	},
-};
+		"Fun, live online Python and AI classes for kids ages 9-13. Build real projects, explore AI safely, and start with a free trial class—no experience needed.",
+	path: "/",
+});
 
 const HomePage = () => {
 	return (

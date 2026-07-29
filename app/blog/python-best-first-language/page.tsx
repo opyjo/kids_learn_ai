@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { ArticleByline, ArticleSeo } from "@/components/seo/article-seo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"Discover how Python's readable syntax, versatility, and broad community make it a welcoming first programming language for young learners.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "Why Python is the Best First Language — Kids Learn AI",
-	description:
-		"Discover how Python's English-like readability, versatility, and huge community make it the ideal first programming language for young learners.",
-	openGraph: {
-		title: "Why Python is the Best First Language — Kids Learn AI",
-		description:
-			"Discover how Python's English-like readability, versatility, and huge community make it the ideal first programming language for young learners.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/python-best-first-language",
+	type: "article",
+});
 
 const keyTakeaways = [
 	{
@@ -36,6 +36,13 @@ const keyTakeaways = [
 export default function PythonBestFirstLanguagePage() {
 	return (
 		<MainLayout>
+			<ArticleSeo
+				slug="python-best-first-language"
+				title="Why Python is the Best First Language for Young Learners"
+				description={description}
+				datePublished="2025-03-18"
+				dateModified="2026-07-29"
+			/>
 			<article className="container mx-auto px-4 py-20 lg:py-28">
 				<div className="max-w-3xl mx-auto">
 					<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
@@ -50,6 +57,13 @@ export default function PythonBestFirstLanguagePage() {
 						computers think. Python stands out as the ideal bridge between
 						curiosity and creation.
 					</p>
+					<div className="mb-10">
+						<ArticleByline
+							datePublished="2025-03-18"
+							dateModified="2026-07-29"
+							readingTime="6 min read"
+						/>
+					</div>
 
 					<section className="space-y-6 mb-12">
 						<h2 className="text-2xl font-semibold">The Power of Readability</h2>

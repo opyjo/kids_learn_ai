@@ -4,6 +4,44 @@ import { withSentryConfig } from "@sentry/nextjs";
 const nextConfig = {
 	// Empty turbopack config to silence the warning
 	turbopack: {},
+	async redirects() {
+		return [
+			{
+				source: "/:path*",
+				has: [{ type: "host", value: "kidslearnai.ca" }],
+				destination: "https://www.kidslearnai.ca/:path*",
+				permanent: true,
+			},
+		];
+	},
+	async headers() {
+		const privateRoutes = [
+			"/admin/:path*",
+			"/dashboard/:path*",
+			"/family/:path*",
+			"/labs/:path*",
+			"/quiz/:path*",
+			"/review/:path*",
+			"/settings/:path*",
+			"/teacher-notes/:path*",
+			"/tutor/:path*",
+			"/lessons/:course/:id",
+			"/login",
+			"/signup",
+			"/forgot-password",
+			"/reset-password",
+		];
+
+		return privateRoutes.map((source) => ({
+			source,
+			headers: [
+				{
+					key: "X-Robots-Tag",
+					value: "noindex, nofollow, noarchive, nosnippet",
+				},
+			],
+		}));
+	},
 	webpack: (config, { isServer }) => {
 		if (!isServer) {
 			// Ignore Node.js modules when building for the client

@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { ArticleShell } from "@/components/blog/article-shell";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"Practical ways educators can make AI projects, examples, teamwork, feedback, and classroom participation more inclusive.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "Building an AI Classroom Where Every Child Belongs | Kids Learn AI",
-	description:
-		"Practical ways educators can make AI projects, examples, teamwork, feedback, and classroom participation more inclusive.",
-	openGraph: {
-		title: "Building an AI Classroom Where Every Child Belongs",
-		description:
-			"Concrete choices that make AI learning more welcoming, relevant, and inclusive for every child.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/building-inclusive-ai-classrooms",
+	type: "article",
+});
 
 const classroomMoves = [
 	{
@@ -36,9 +35,11 @@ export default function BuildingInclusiveAiClassroomsPage() {
 	return (
 		<ArticleShell
 			category="For Educators"
+			slug="building-inclusive-ai-classrooms"
 			title="Building an AI Classroom Where Every Child Belongs"
+			description={description}
 			intro="Inclusion is not a special activity added after the technical lesson. It lives in the examples we choose, the roles we value, and the many ways students are allowed to show what they know."
-			date="June 27, 2026"
+			datePublished="2026-06-27"
 			readingTime="8 min read"
 			takeaways={[
 				"Four classroom choices that widen participation immediately.",

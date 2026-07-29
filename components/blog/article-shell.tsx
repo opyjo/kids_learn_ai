@@ -1,21 +1,18 @@
-import {
-	ArrowLeft,
-	ArrowRight,
-	CalendarDays,
-	CheckCircle2,
-	Clock3,
-	Sparkles,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { ArticleByline, ArticleSeo } from "@/components/seo/article-seo";
 import { Badge } from "@/components/ui/badge";
 
 type ArticleShellProps = {
 	category: string;
+	slug: string;
 	title: string;
+	description: string;
 	intro: string;
-	date: string;
+	datePublished: string;
+	dateModified?: string;
 	readingTime: string;
 	takeaways: string[];
 	children: ReactNode;
@@ -23,15 +20,25 @@ type ArticleShellProps = {
 
 export function ArticleShell({
 	category,
+	slug,
 	title,
+	description,
 	intro,
-	date,
+	datePublished,
+	dateModified,
 	readingTime,
 	takeaways,
 	children,
 }: ArticleShellProps) {
 	return (
 		<MainLayout>
+			<ArticleSeo
+				slug={slug}
+				title={title}
+				description={description}
+				datePublished={datePublished}
+				dateModified={dateModified}
+			/>
 			<article>
 				<header className="relative isolate overflow-hidden border-b border-border/70">
 					<div
@@ -57,15 +64,12 @@ export function ArticleShell({
 							<p className="mt-6 max-w-3xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
 								{intro}
 							</p>
-							<div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-								<span className="inline-flex items-center gap-2">
-									<CalendarDays className="h-4 w-4" />
-									{date}
-								</span>
-								<span className="inline-flex items-center gap-2">
-									<Clock3 className="h-4 w-4" />
-									{readingTime}
-								</span>
+							<div className="mt-8">
+								<ArticleByline
+									datePublished={datePublished}
+									dateModified={dateModified}
+									readingTime={readingTime}
+								/>
 							</div>
 						</div>
 					</div>

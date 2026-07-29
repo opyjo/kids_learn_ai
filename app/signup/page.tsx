@@ -10,12 +10,15 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = publicMetadata({
 	title: "Parent Sign Up — Kids Learn AI",
 	description:
 		"Create a parent or guardian account, then set up your child's secure Kids Learn AI login.",
-};
+	path: "/signup",
+	noIndex: true,
+});
 
 export default function SignupPage() {
 	return (

@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { ArticleShell } from "@/components/blog/article-shell";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"Practical family routines for privacy, fact-checking, healthy boundaries, and asking adults for help when children use AI tools.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "A Family Guide to Safe, Smart AI Use at Home | Kids Learn AI",
-	description:
-		"Practical family routines for privacy, fact-checking, healthy boundaries, and asking adults for help when children use AI tools.",
-	openGraph: {
-		title: "A Family Guide to Safe, Smart AI Use at Home",
-		description:
-			"Simple routines that help children use AI tools with privacy, judgement, and healthy boundaries.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/safe-ai-use-at-home",
+	type: "article",
+});
 
 const familyRules = [
 	{
@@ -36,9 +35,11 @@ export default function SafeAiUseAtHomePage() {
 	return (
 		<ArticleShell
 			category="AI Safety"
+			slug="safe-ai-use-at-home"
 			title="A Family Guide to Safe, Smart AI Use at Home"
+			description={description}
 			intro="Children do not need a long rulebook to use AI thoughtfully. They need a few memorable habits, regular conversation, and the confidence to ask for help."
-			date="July 11, 2026"
+			datePublished="2026-07-11"
 			readingTime="8 min read"
 			takeaways={[
 				"Four simple rules children can remember while using AI.",

@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { ArticleByline, ArticleSeo } from "@/components/seo/article-seo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"How AI can grow from a simple answer tool into a learning coach—and what thoughtful adoption could mean for students and teachers.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "The Future of AI in Education — Kids Learn AI",
-	description:
-		"How AI is shifting from an answer machine into a personalized 24/7 learning coach that empowers teachers and prepares students for the 2030 workplace.",
-	openGraph: {
-		title: "The Future of AI in Education — Kids Learn AI",
-		description:
-			"How AI is shifting from an answer machine into a personalized 24/7 learning coach that empowers teachers and prepares students for the 2030 workplace.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/future-of-ai-in-education",
+	type: "article",
+});
 
 const futureTrends = [
 	{
@@ -36,6 +36,13 @@ const futureTrends = [
 export default function FutureOfAIInEducationPage() {
 	return (
 		<MainLayout>
+			<ArticleSeo
+				slug="future-of-ai-in-education"
+				title="The Future of AI in Education: Beyond the Homework Bot"
+				description={description}
+				datePublished="2025-03-31"
+				dateModified="2026-07-29"
+			/>
 			<article className="container mx-auto px-4 py-20 lg:py-28">
 				<div className="max-w-3xl mx-auto">
 					<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
@@ -49,6 +56,13 @@ export default function FutureOfAIInEducationPage() {
 						But as the dust settles, we're seeing a far more exciting reality:
 						AI as a superpower for both teachers and students.
 					</p>
+					<div className="mb-10">
+						<ArticleByline
+							datePublished="2025-03-31"
+							dateModified="2026-07-29"
+							readingTime="7 min read"
+						/>
+					</div>
 
 					<section className="space-y-6 mb-12">
 						<h2 className="text-2xl font-semibold">

@@ -59,11 +59,73 @@ take_home_assignment: |
 
   **Submit:** Share your Trinket link with your instructor.
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: Turn Several Clues into One Useful Number
 
-  Every calculator app on your phone, every shopping cart total, every fitness tracker - they all use the same math operations you're learning! AI systems use these calculations millions of times per second to solve problems. When you solve math challenges and find patterns in numbers, you're doing exactly what AI does - recognizing patterns! AI is really good at finding patterns in data, just like you're finding patterns in math problems.
+  ### The big idea
 
-  You're building the same type of programs that power real-world applications!
+  A **feature** is a clue a computer uses to describe something. AI often combines several features with math to create a summary, such as a total, average, distance, or score.
+
+  Imagine a study helper looking at three practice results:
+
+  ```python
+  spelling_score = 8
+  reading_score = 6
+  maths_score = 10
+
+  total_score = spelling_score + reading_score + maths_score
+  average_score = total_score / 3
+
+  print("Total:", total_score)
+  print("Average:", average_score)
+  ```
+
+  Work it out:
+
+  - Total: `8 + 6 + 10 = 24`
+  - Average: `24 / 3 = 8.0`
+
+  The average turns three clues into one summary number.
+
+  ### Giving one clue more weight
+
+  Sometimes a program treats one clue as more important. This is called giving it more **weight**.
+
+  ```python
+  weighted_score = spelling_score + reading_score + maths_score * 2
+  print("Weighted score:", weighted_score)
+  ```
+
+  Python follows the order of operations, so it doubles `maths_score` first:
+
+  - `10 * 2 = 20`
+  - `8 + 6 + 20 = 34`
+
+  This does not mean math truly matters twice as much. A human chose that rule. AI builders must be able to explain and test choices like this.
+
+  ### Solve a prediction challenge
+
+  A simple game helper estimates how many points a player might earn:
+
+  ```python
+  coins = int(input("How many coins did you collect? "))
+  stars = int(input("How many stars did you collect? "))
+
+  predicted_points = coins * 10 + stars * 50
+  print(f"Estimated points: {predicted_points}")
+  ```
+
+  Try `12` coins and `3` stars. Predict the result before running the code.
+
+  ### Your experiment
+
+  1. Change the value of a coin from 10 points to 20.
+  2. Keep the same inputs and compare the answer.
+  3. Invent a third feature, such as gems.
+  4. Write a comment explaining your scoring rule.
+
+  ### Think like an AI builder
+
+  A number can summarize information, but it cannot tell the whole story. Two students can have the same average while having different strengths. Responsible AI keeps important context instead of judging a person from one score.
 ---
 # Term 2, Lesson 6: Math Challenges! 🎯
 
@@ -452,4 +514,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
-

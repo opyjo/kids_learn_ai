@@ -59,11 +59,58 @@ take_home_assignment: |
 
   **Submit:** Share your Trinket link with your instructor.
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: Good Questions Create Useful Data
 
-  Every time you talk to Siri, Alexa, or a chatbot, they're using input() just like you're learning! AI systems ask questions, get your answers, and respond based on what you say. When you collect answers from classmates using input(), you're creating a dataset - the same kind of data that AI uses to learn! AI learns from millions of answers just like you're collecting answers today.
+  ### The big idea
 
-  You're learning the same interaction pattern that powers every AI conversation in the world!
+  A program uses `input()` to collect an answer. A group of collected examples is called a **dataset**. AI systems look for patterns in datasets, so the questions used to collect data matter.
+
+  A clear question usually produces clearer answers.
+
+  - Unclear: `Tell me something:`
+  - Clearer: `How many minutes did you read today?`
+
+  ### Build a tiny reading survey
+
+  ```python
+  name = input("Choose a nickname: ")
+  book = input("What book are you reading? ")
+  minutes = input("How many minutes did you read today? ")
+
+  print(f"{name} read {book} for {minutes} minutes.")
+  ```
+
+  If three learners run the survey, you could write their answers as rows:
+
+  | Nickname | Book | Minutes |
+  | --- | --- | --- |
+  | Star | Space Quest | 20 |
+  | Panda | Big Forest | 15 |
+  | Pixel | Space Quest | 30 |
+
+  Each row is one **example**. Each column is one **feature**, or fact we recorded. An AI could later use many examples to look for patterns, such as popular books or common reading times.
+
+  ### Make the question better
+
+  Compare these questions:
+
+  1. `Do you read a lot?`
+  2. `How many minutes did you read today?`
+
+  The first answer could mean something different to every person. The second answer is easier to compare because everyone reports minutes.
+
+  ### Your experiment
+
+  Create a safe three-question survey about a favourite game, animal, or school subject. Then:
+
+  1. Ask a classmate to answer it.
+  2. Check whether any question was confusing.
+  3. Rewrite one question to make it clearer.
+  4. Use an f-string to summarize the answers.
+
+  ### Think like an AI builder
+
+  A dataset should not collect information it does not need. Never ask for a password, home address, phone number, or full name in a classroom project. Useful AI questions are **clear, relevant, and safe**.
 ---
 # Term 2, Lesson 4: Asking Questions! 🗣️
 
@@ -457,4 +504,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
-

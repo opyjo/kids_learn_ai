@@ -15,20 +15,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Badge } from "@/components/ui/badge";
+import { publicMetadata } from "@/lib/seo";
 import type { BlogPost } from "./blog-posts";
 import { posts } from "./blog-posts";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "Blog | Practical AI & Python Guides for Young Learners",
 	description:
 		"Clear, practical ideas for raising thoughtful AI creators—from first Python projects and online safety to inclusive classrooms.",
-	openGraph: {
-		title: "Kids Learn AI Blog",
-		description:
-			"Practical ideas for helping young people learn Python, understand AI, and create technology responsibly.",
-		type: "website",
-	},
-};
+	path: "/blog",
+});
 
 const icons = {
 	brain: BrainCircuit,
@@ -156,7 +152,9 @@ export default function BlogPage() {
 							>
 								{featuredPost.category}
 							</Badge>
-							<span>{featuredPost.date}</span>
+							<time dateTime={featuredPost.publishedAt}>
+								{featuredPost.date}
+							</time>
 							<span aria-hidden="true">·</span>
 							<span>{featuredPost.readingTime}</span>
 						</div>
@@ -214,7 +212,12 @@ export default function BlogPage() {
 									{post.description}
 								</p>
 								<div className="mt-auto flex items-center justify-between gap-4 pt-6 text-sm">
-									<span className="text-muted-foreground">{post.date}</span>
+									<time
+										dateTime={post.publishedAt}
+										className="text-muted-foreground"
+									>
+										{post.date}
+									</time>
 									<ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
 								</div>
 							</div>

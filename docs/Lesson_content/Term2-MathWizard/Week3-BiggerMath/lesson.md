@@ -64,11 +64,69 @@ take_home_assignment: |
 
   **Submit:** Share your Trinket link with your instructor.
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: Huge Choices, Leftovers, and Calculation Order
 
-  Exponents are SUPER important in AI! When AI processes images, it might need to calculate 2^24 (that's 16,777,216!) different color combinations. And modulo helps AI organize data into groups and find patterns.
+  ### The big idea
 
-  The order of operations (PEMDAS) is exactly how AI calculates everything - from simple math to complex neural networks!
+  AI programs work with lots of numbers. Three tools from today's lesson help:
+
+  - **Exponents (`**`)** describe numbers that grow very quickly.
+  - **Modulo (`%`)** finds a remainder and helps organize items into repeating groups.
+  - **Parentheses** make the order of a calculation clear.
+
+  ### Example 1: How quickly choices grow
+
+  Imagine four switches. Each switch can be either OFF or ON, so each one has 2 choices.
+
+  ```python
+  possible_patterns = 2 ** 4
+  print(possible_patterns)
+  ```
+
+  The answer is `16`. With eight switches, there are many more patterns:
+
+  ```python
+  print(2 ** 8)
+  ```
+
+  The answer is `256`. AI can compare huge numbers of possible patterns, so exponents help us describe how quickly the number of choices grows.
+
+  ### Example 2: Putting examples into teams
+
+  Suppose an AI activity has 17 picture examples and each team should receive 5.
+
+  ```python
+  pictures = 17
+  team_size = 5
+
+  leftovers = pictures % team_size
+  print("Pictures left over:", leftovers)
+  ```
+
+  The answer is `2`, because 15 pictures make three complete groups of 5 and 2 remain.
+
+  ### Example 3: Parentheses change the answer
+
+  ```python
+  score_without_brackets = 2 + 3 * 4
+  score_with_brackets = (2 + 3) * 4
+
+  print(score_without_brackets)
+  print(score_with_brackets)
+  ```
+
+  The answers are `14` and `20`. Python multiplies before adding unless parentheses tell it to add first. AI calculations must use the intended order, or their scores can be wrong.
+
+  ### Your experiment
+
+  1. Predict `2 ** 6`.
+  2. Predict the remainder from `23 % 4`.
+  3. Compare `5 + 2 * 3` with `(5 + 2) * 3`.
+  4. Run each expression and explain why Python gave that answer.
+
+  ### Think like an AI builder
+
+  Computers calculate exactly what we write—not what we meant to write. Clear parentheses and careful testing help humans check that an AI system's math matches its real goal.
 ---
 # Term 2, Lesson 3: Bigger Math! 🚀
 
@@ -557,4 +615,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
-

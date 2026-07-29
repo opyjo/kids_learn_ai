@@ -20,18 +20,14 @@ import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "Careers: Coding Instructor — Kids Learn AI",
 	description:
 		"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
-	openGraph: {
-		title: "Careers: Coding Instructor — Kids Learn AI",
-		description:
-			"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
-		type: "website",
-	},
-};
+	path: "/careers",
+});
 
 export default function CareersPage() {
 	return (

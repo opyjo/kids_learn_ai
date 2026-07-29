@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
+import { publicMetadata } from "@/lib/seo";
 import { FaqContent } from "./faq-content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "FAQ — Kids Learn AI",
 	description:
-		"Answers to common parent questions about Kids Learn AI: no coding experience needed, 5-15 min lessons, works on tablet or computer, free plan, ages 8-16, progress tracking.",
-	openGraph: {
-		title: "FAQ — Kids Learn AI",
-		description:
-			"Answers to common parent questions about Kids Learn AI: no coding experience needed, 5-15 min lessons, works on tablet or computer, free plan, ages 8-16, progress tracking.",
-		type: "website",
-	},
-};
+		"Answers about Kids Learn AI live classes, age groups, schedules, pricing, equipment, missed classes, and the free trial for kids ages 9-13.",
+	path: "/faq",
+});
 
 export default function FAQPage() {
 	return <FaqContent />;

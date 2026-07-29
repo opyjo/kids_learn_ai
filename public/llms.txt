@@ -1,0 +1,26 @@
+# Kids Learn AI
+
+> Kids Learn AI provides live online Python and age-appropriate AI classes for children ages 9–13 in Canada. Students learn through instructor-led projects, small-group collaboration, and responsible AI activities.
+
+## Primary pages
+
+- [Home](https://www.kidslearnai.ca/): Program overview and learning approach
+- [Program details](https://www.kidslearnai.ca/inquiry): Age groups, schedules, curriculum, pricing, and free trial
+- [Pricing](https://www.kidslearnai.ca/pricing): Current founding rate and included services
+- [Curriculum](https://www.kidslearnai.ca/lessons): Python and AI course sequence
+- [Blog](https://www.kidslearnai.ca/blog): Practical guides for families and educators
+- [About](https://www.kidslearnai.ca/about): Mission and teaching principles
+- [FAQ](https://www.kidslearnai.ca/faq): Answers to common family questions
+- [Contact](https://www.kidslearnai.ca/contact): Contact information
+
+## Editorial information
+
+Blog articles are authored and reviewed by the Kids Learn AI Education Team. Where an article makes factual or statistical claims, primary sources are linked in the article.
+
+## Policies
+
+- [Privacy](https://www.kidslearnai.ca/privacy)
+- [Terms](https://www.kidslearnai.ca/terms)
+- [Sitemap](https://www.kidslearnai.ca/sitemap.xml)
+
+Authenticated student, family, tutor, quiz, lab, settings, teacher-notes, and administrative areas are private and should not be indexed or summarized.

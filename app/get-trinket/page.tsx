@@ -3,18 +3,14 @@ import Link from "next/link";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "Get Started with Trinket.io — Kids Learn AI",
 	description:
 		"Learn how to set up a free Trinket.io account so your child can write and run Python code in any browser, no downloads needed, for our graphics lessons.",
-	openGraph: {
-		title: "Get Started with Trinket.io — Kids Learn AI",
-		description:
-			"Learn how to set up a free Trinket.io account so your child can write and run Python code in any browser, no downloads needed, for our graphics lessons.",
-		type: "website",
-	},
-};
+	path: "/get-trinket",
+});
 
 const GetTrinketPage = () => {
 	return (

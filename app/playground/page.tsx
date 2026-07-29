@@ -57,9 +57,9 @@ export default function PlaygroundPage() {
 			<div className="max-w-6xl mx-auto px-4 py-6 flex flex-col min-h-[calc(100vh-200px)]">
 				{/* Page Header */}
 				<div className="mb-6">
-					<h2 className="text-3xl font-bold text-foreground mb-2">
+					<h1 className="text-3xl font-bold text-foreground mb-2">
 						Python Playground
-					</h2>
+					</h1>
 					<p className="text-muted-foreground">
 						Experiment with Python code in a safe environment. Try new ideas and
 						practice what you've learned!

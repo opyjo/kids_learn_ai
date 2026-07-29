@@ -80,11 +80,80 @@ take_home_assignment: |
 
   **Submit:** Share your fixed code on Trinket with your instructor.
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: Test the Rule, Not Just the Code
 
-  Even AI systems have bugs! When a calculator app gives the wrong answer, or a navigation app calculates the wrong route, those are bugs. AI programmers spend lots of time debugging and testing their code.
+  ### The big idea
 
-  You're learning a skill every programmer needs - finding and fixing mistakes!
+  An AI-powered program can fail in two different ways:
+
+  1. The **code has a bug**, so Python cannot run or calculates the wrong thing.
+  2. The **idea has a problem**, so the code runs but the result is not useful or fair.
+
+  Good AI builders test both.
+
+  ### Debug this score program
+
+  This program should add quiz points and practice points:
+
+  ```python
+  quiz_text = input("Quiz points: ")
+  practice_text = input("Practice points: ")
+
+  quiz_points = int(quiz_text)
+  practice_points = int(practice_text)
+
+  total = quiz_points * practice_points
+  print(f"Total learning points: {total}")
+  ```
+
+  The program runs, but the rule is wrong. It **multiplies** instead of adding.
+
+  ```python
+  total = quiz_points + practice_points
+  ```
+
+  This is a **logic bug**: Python understood the instruction, but the instruction did not match our goal.
+
+  ### Use test cases
+
+  A **test case** is one planned input with an expected answer.
+
+  | Quiz points | Practice points | Expected total |
+  | --- | --- | --- |
+  | 5 | 3 | 8 |
+  | 0 | 4 | 4 |
+  | 10 | 10 | 20 |
+
+  Run all three tests. Testing only `5` and `3` is not enough because another input might reveal a different problem.
+
+  ### Check the idea too
+
+  Suppose the program says a student with the biggest total is “the best learner.” The addition may be correct, but the conclusion is not fair. Points cannot measure creativity, effort, teamwork, improvement, or the help a student gave someone else.
+
+  ### Your debugging mission
+
+  Find and fix every problem:
+
+  ```python
+  games_text = input("Games completed: ")
+  stars_text = input("Stars earned: ")
+
+  games = int(games_text)
+  stars = stars_text
+
+  progress = games + stars * 5
+  print(f"Progress score: {progres}")
+  ```
+
+  **Hints:**
+
+  - Is every value the right type?
+  - Is every variable name spelled the same way?
+  - Does the scoring rule match the comment you would write?
+
+  ### Think like an AI builder
+
+  Never assume a program is correct because it ran once. Test normal values, zero, large values, and unexpected input. Then ask a second question: **Should this result be used to make a decision about a person?**
 ---
 # Term 2, Lesson 7: Practice & Debug! 🔍
 
@@ -407,4 +476,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
-
