@@ -115,7 +115,7 @@ export default function BlogPage() {
 						</div>
 						<div className="px-4 py-5 text-center">
 							<p className="font-mono text-2xl font-semibold text-foreground">
-								8–16
+								9–13
 							</p>
 							<p className="mt-1 text-xs text-muted-foreground">Ages</p>
 						</div>

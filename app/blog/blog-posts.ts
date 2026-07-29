@@ -1,3 +1,5 @@
+import { expandedArticles } from "@/lib/blog/expanded-articles";
+
 export type BlogPost = {
 	slug: string;
 	title: string;
@@ -21,7 +23,7 @@ export type BlogPost = {
 	tone: "blue" | "coral" | "green" | "indigo" | "purple" | "yellow";
 };
 
-export const posts: BlogPost[] = [
+const existingPosts: BlogPost[] = [
 	{
 		slug: "ai-projects-kids-can-build-with-python",
 		title: "7 AI Projects Kids Can Build with Python",
@@ -141,3 +143,7 @@ export const posts: BlogPost[] = [
 		tone: "purple",
 	},
 ];
+
+export const posts: BlogPost[] = [...expandedArticles, ...existingPosts].sort(
+	(a, b) => b.publishedAt.localeCompare(a.publishedAt),
+);
