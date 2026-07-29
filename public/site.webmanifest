@@ -1,21 +1,24 @@
 {
-	"name": "MyWebSite",
-	"short_name": "MySite",
+	"name": "Kids Learn AI",
+	"short_name": "Kids Learn AI",
+	"description": "Live online Python and AI classes for kids ages 9-13, with hands-on projects and supportive instructors.",
+	"start_url": "/",
+	"lang": "en-CA",
 	"icons": [
 		{
 			"src": "/web-app-manifest-192x192.png",
 			"sizes": "192x192",
 			"type": "image/png",
-			"purpose": "maskable"
+			"purpose": "any"
 		},
 		{
 			"src": "/web-app-manifest-512x512.png",
 			"sizes": "512x512",
 			"type": "image/png",
-			"purpose": "maskable"
+			"purpose": "any"
 		}
 	],
-	"theme_color": "#ffffff",
+	"theme_color": "#4f46e5",
 	"background_color": "#ffffff",
 	"display": "standalone"
 }

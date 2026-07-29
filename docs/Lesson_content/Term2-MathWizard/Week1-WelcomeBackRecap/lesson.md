@@ -60,11 +60,55 @@ take_home_assignment: |
 
   **Submit:** Save your Trinket, click **Share**, and send the link to your instructor.
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: How a Chatbot Handles a Message
 
-  Everything you reviewed today — storing information in variables, formatting text with f-strings, and reading input from a user — is exactly what a chatbot like BrightByte does every second! When an AI reads your message and writes a reply, it's juggling variables and strings, just like you.
+  ### The big idea
 
-  This term you'll add **math** to your toolkit — and math is what lets AI count, measure, and make decisions. You're building the real thing!
+  A chatbot needs to do three simple jobs:
+
+  1. **Receive information** from a person.
+  2. **Store information** while it works.
+  3. **Show a reply** that a person can read.
+
+  You already know Python tools for all three jobs! `input()` receives a message, a variable stores it, and `print()` or an f-string shows a reply.
+
+  ### Follow one message through the program
+
+  ```python
+  name = input("What is your name? ")
+  favourite_subject = input("What subject do you enjoy? ")
+
+  reply = f"Hi {name}! {favourite_subject.title()} is a great subject to explore."
+  print(reply)
+  ```
+
+  If Maya types `science`, Python follows these steps:
+
+  - `name` stores the text `"Maya"`.
+  - `favourite_subject` stores the text `"science"`.
+  - The f-string puts both pieces into one friendly sentence.
+  - `print()` displays the finished reply.
+
+  This program can **sound** like a tiny chatbot, but it is not learning yet. It follows the exact instructions you wrote. Later, you will learn how an AI uses many examples to find patterns and choose useful replies.
+
+  ### Try it yourself
+
+  Add one more question:
+
+  ```python
+  hobby = input("What do you like doing after school? ")
+  print(f"{hobby.title()} sounds fun, {name}!")
+  ```
+
+  Before you run the code, point to the line that **collects**, **stores**, and **shows** the hobby.
+
+  ### Think like an AI builder
+
+  - What would happen if the user typed their name in lowercase?
+  - Which string method could make it look neat?
+  - Why should a chatbot avoid asking a child for private details such as an address or password?
+
+  **Remember:** Helpful AI starts with clear instructions and safe information. Never type private information into a classroom chatbot or coding project.
 ---
 
 # Term 2, Lesson 1: Welcome Back — Term 1 Recap! 🔁

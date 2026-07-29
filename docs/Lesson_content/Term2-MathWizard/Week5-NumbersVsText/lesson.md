@@ -65,11 +65,70 @@ take_home_assignment: |
 
   **Submit:** Share your Trinket link with your instructor.
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: Computers Need the Right Type of Data
 
-  AI systems constantly convert between text and numbers! When you type "25" in a calculator app, it converts that text to the number 25 so it can do math. When AI reads your messages, it converts text into numbers to understand them.
+  ### The big idea
 
-  You're learning the same data conversion that powers every AI system!
+  Humans can look at `"25"` and quickly understand that it can represent the number twenty-five. Python sees two different data types:
+
+  - `"25"` is a **string** because it has quotation marks.
+  - `25` is an **integer** because it is a whole number without quotation marks.
+
+  AI systems also need information in the right type before they can calculate with it.
+
+  ### Watch what Python does
+
+  ```python
+  text_score = "7"
+
+  print(text_score + text_score)
+  print(int(text_score) + int(text_score))
+  ```
+
+  The first answer is `77` because Python joins two strings. The second answer is `14` because `int()` converts both strings into numbers before adding.
+
+  ### A tiny feedback example
+
+  Imagine a learning app asks a student to rate two activities from 1 to 5:
+
+  ```python
+  puzzle_text = input("Rate the puzzle from 1 to 5: ")
+  story_text = input("Rate the story from 1 to 5: ")
+
+  puzzle_score = int(puzzle_text)
+  story_score = int(story_text)
+
+  total = puzzle_score + story_score
+  average = total / 2
+
+  print(f"Your total score is {total}.")
+  print(f"Your average score is {average}.")
+  ```
+
+  Follow the data:
+
+  1. `input()` collects text.
+  2. `int()` converts the text into whole numbers.
+  3. Python adds and divides the numbers.
+  4. An f-string turns the result into a readable message.
+
+  ### How text can become numbers in AI
+
+  For bigger AI systems, words may be matched with number codes so the computer can calculate patterns. For example, a tiny pretend codebook could say:
+
+  - `"happy"` → `1`
+  - `"okay"` → `2`
+  - `"sad"` → `3`
+
+  The number is only a code; it does not mean one feeling is “better” than another.
+
+  ### Your experiment
+
+  Run the feedback example with ratings `4` and `5`. Predict the total and average first. Then change one `int()` to `str()` and explain why the calculation no longer works as planned.
+
+  ### Think like an AI builder
+
+  Converting data does not guarantee that the data is correct. A person might type `ten` instead of `10`, or choose a rating by mistake. AI builders check both the **data type** and the **quality of the information**.
 ---
 # Term 2, Lesson 5: Numbers vs Text! 🔢
 
@@ -447,4 +506,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
-

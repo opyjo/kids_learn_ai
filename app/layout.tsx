@@ -3,27 +3,37 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import type React from "react";
+import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { absoluteUrl, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
-	metadataBase: new URL(
-		process.env.NEXT_PUBLIC_SITE_URL ?? "https://kidslearnai.ca",
-	),
+	metadataBase: new URL(SITE_URL),
 	title: "Kids Learn AI — Python Foundations for Future Innovators",
-	description:
-		"Kids Learn AI helps kids ages 8-16 master Python fundamentals and explore beginner-friendly AI concepts through hands-on projects and supportive instructors.",
+	description: SITE_DESCRIPTION,
 	generator: "Kids Learn AI",
 	openGraph: {
-		siteName: "Kids Learn AI",
+		siteName: SITE_NAME,
 		type: "website",
-		images: [{ url: "/Logo.png", width: 1024, height: 1024 }],
 	},
+	twitter: { card: "summary_large_image" },
 	icons: {
-		icon: "/Logo.png",
-		shortcut: "/Logo.png",
-		apple: "/Logo.png",
+		icon: [
+			{ url: "/favicon.ico", sizes: "48x48" },
+			{ url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+			{ url: "/favicon.svg", type: "image/svg+xml" },
+		],
+		shortcut: "/favicon.ico",
+		apple: "/apple-touch-icon.png",
+	},
+	manifest: "/manifest.webmanifest",
+	verification: {
+		google: process.env.GOOGLE_SITE_VERIFICATION,
+		other: process.env.BING_SITE_VERIFICATION
+			? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+			: undefined,
 	},
 };
 
@@ -44,6 +54,30 @@ export default function RootLayout({
 					{children}
 					<Toaster />
 				</ThemeProvider>
+				<JsonLd
+					data={{
+						"@context": "https://schema.org",
+						"@type": "EducationalOrganization",
+						"@id": `${SITE_URL}/#organization`,
+						name: SITE_NAME,
+						url: absoluteUrl("/"),
+						logo: absoluteUrl("/web-app-manifest-512x512.png"),
+						email: "hello@kidslearnai.ca",
+						description: SITE_DESCRIPTION,
+						areaServed: "Canada",
+					}}
+				/>
+				<JsonLd
+					data={{
+						"@context": "https://schema.org",
+						"@type": "WebSite",
+						"@id": `${SITE_URL}/#website`,
+						name: SITE_NAME,
+						url: absoluteUrl("/"),
+						publisher: { "@id": `${SITE_URL}/#organization` },
+						inLanguage: "en-CA",
+					}}
+				/>
 				<Analytics />
 			</body>
 		</html>

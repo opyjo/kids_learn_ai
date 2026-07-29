@@ -236,13 +236,16 @@ const InteractiveCodeEditor = () => {
 											<div className="font-medium text-foreground mb-1">
 												Ready to train bigger ideas?
 											</div>
-											<p className="text-sm text-muted-foreground mb-3">
-												This demo shows a tiny slice of KidsLearn AI. In live
-												classes, kids build 60+ guided projects with instructor
-												feedback — try a full lesson free.
+											<p className="mb-3 text-sm text-foreground/90">
+												This demo shows a tiny slice of Kids Learn AI. In live
+												classes, kids build guided projects with instructor
+												feedback — try a full class free.
 											</p>
 											<Link href="/inquiry">
-												<Button size="sm" className="rounded-full">
+												<Button
+													size="sm"
+													className="rounded-full bg-[#1565a8] text-white hover:bg-[#0f538d]"
+												>
 													Book a Free Trial Class
 												</Button>
 											</Link>

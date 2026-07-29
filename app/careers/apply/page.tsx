@@ -13,18 +13,14 @@ import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "Apply to Become an Instructor — Kids Learn AI",
 	description:
 		"Apply to teach live Python and AI classes to kids and gain valuable teaching experience. Complete our instructor application form; we respond in 2-3 business days.",
-	openGraph: {
-		title: "Apply to Become an Instructor — Kids Learn AI",
-		description:
-			"Apply to teach live Python and AI classes to kids and gain valuable teaching experience. Complete our instructor application form; we respond in 2-3 business days.",
-		type: "website",
-	},
-};
+	path: "/careers/apply",
+});
 
 export default function ApplyPage() {
 	return (

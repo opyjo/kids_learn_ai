@@ -1,6 +1,6 @@
 /**
  * Content Safety Utilities for Kids Learning Platform
- * Ensures all chat interactions are safe for children ages 8-16
+ * Ensures all chat interactions are safe for children ages 9-13
  */
 
 export interface SafetyCheckResult {
@@ -230,7 +230,7 @@ export const isRequestingCompleteSolution = (message: string): boolean => {
 
 export const SAFETY_CHECK_PROMPT = `Analyze this message and determine if it's:
 1. A Python programming question (YES/NO)
-2. Safe and appropriate for children ages 8-16 (YES/NO)
+2. Safe and appropriate for children ages 9-13 (YES/NO)
 3. Requesting a complete solution vs. help/guidance (SOLUTION/HELP)
 
 Message: "{user_message}"

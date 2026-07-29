@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { ArticleByline, ArticleSeo } from "@/components/seo/article-seo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"Practical strategies for talking to kids about AI bias and fairness, spotting bias in everyday technology, and raising responsible creators.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "Teaching AI Ethics to Kids — Kids Learn AI",
-	description:
-		"Practical strategies for talking to kids about AI bias and fairness, spotting bias in everyday tech, and raising responsible, critical AI creators.",
-	openGraph: {
-		title: "Teaching AI Ethics to Kids — Kids Learn AI",
-		description:
-			"Practical strategies for talking to kids about AI bias and fairness, spotting bias in everyday tech, and raising responsible, critical AI creators.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/teaching-ai-ethics-to-kids",
+	type: "article",
+});
 
 const ethicalPillars = [
 	{
@@ -36,6 +36,13 @@ const ethicalPillars = [
 export default function TeachingAIEthicsPage() {
 	return (
 		<MainLayout>
+			<ArticleSeo
+				slug="teaching-ai-ethics-to-kids"
+				title="Teaching AI Ethics: How to Talk to Kids About Bias and Fairness"
+				description={description}
+				datePublished="2025-03-25"
+				dateModified="2026-07-29"
+			/>
 			<article className="container mx-auto px-4 py-20 lg:py-28">
 				<div className="max-w-3xl mx-auto">
 					<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
@@ -49,6 +56,13 @@ export default function TeachingAIEthicsPage() {
 						skill alone isn't enough. We must also equip them with the ethical
 						compass to navigate a world of algorithmic decisions.
 					</p>
+					<div className="mb-10">
+						<ArticleByline
+							datePublished="2025-03-25"
+							dateModified="2026-07-29"
+							readingTime="10 min read"
+						/>
+					</div>
 
 					<section className="space-y-6 mb-12">
 						<h2 className="text-2xl font-semibold">

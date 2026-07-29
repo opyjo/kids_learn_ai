@@ -517,7 +517,7 @@ export const POST = async (req: NextRequest) => {
 				model: CLAUDE_MODEL,
 				max_tokens: 800,
 				temperature: 0.6,
-				system: `${systemPrompt}${contextSection}\n\nCRITICAL SAFETY REMINDER: You are chatting with a child (8-16).`,
+				system: `${systemPrompt}${contextSection}\n\nCRITICAL SAFETY REMINDER: You are chatting with a child (9-13).`,
 				messages: [
 					...cappedHistory,
 					{ role: "user", content: sanitizedContent },

@@ -1,46 +1,45 @@
-"use client";
-
-import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 import { MainLayout } from "@/components/layouts/main-layout";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const FaqContent = () => {
-	const [openIndex, setOpenIndex] = React.useState<number | null>(0);
-
 	const faqs = [
 		{
-			question: "Do I need any coding experience?",
+			question: "Does my child need coding experience?",
 			answer:
-				"Not at all! Our lessons are designed for complete beginners. We start from the very basics and guide you step-by-step. If you can read and follow instructions, you can learn to code with us!",
+				"No. The program starts with Python fundamentals and builds gradually. Children who already have some experience can extend the projects with additional challenges.",
 		},
 		{
-			question: "How long are the lessons?",
+			question: "What ages and schedules are available?",
 			answer:
-				"Most lessons take 5-15 minutes to complete. They're designed to be short and fun so you can learn at your own pace without getting overwhelmed. You can do one lesson a day or binge through several - it's up to you!",
+				"Our current live program serves ages 9-13, with an ages 9-10 cohort on Mondays and an ages 11-13 cohort on Wednesdays. Contact us if you need help choosing the right group.",
 		},
 		{
-			question: "Can I learn on a tablet or phone?",
+			question: "How does the free trial work?",
 			answer:
-				"Yes! Our platform works on tablets, phones, and computers. However, we recommend using a computer or tablet with a keyboard for the best coding experience, especially when typing longer programs.",
+				"Your child can attend the first live class free with no commitment. If the program is a good fit, the founding rate is a one-time payment of $159.99 CAD for the full 8-10 week program.",
 		},
 		{
-			question: "Is it really free?",
+			question: "What equipment does my child need?",
 			answer:
-				"Yes! Our free plan includes 5 beginner lessons, the code playground, and progress tracking - completely free forever. You can upgrade to Premium anytime to unlock all 50+ lessons and advanced projects.",
+				"A computer running Windows, macOS, or ChromeOS, a stable internet connection, and a webcam and microphone for live participation. We will help your family set up any free software used in class.",
 		},
 		{
-			question: "What age is this for?",
+			question: "What happens if my child misses a class?",
 			answer:
-				"Kids Learn AI is perfect for kids ages 8-16. Our lessons use simple language, playful challenges, and AI-friendly examples. Younger kids (6-7) can also try with parent help!",
+				"We provide the lesson materials needed to catch up, and the instructor can help your child get oriented at the next session. Contact us about the specific class if you know your child will be away.",
 		},
 		{
-			question: "Can parents track my progress?",
+			question: "What will my child learn?",
 			answer:
-				"Yes! Parents can see which lessons you've completed, view your projects, and track your achievements. We also send weekly progress reports to keep parents in the loop about your coding journey.",
+				"Students learn Python fundamentals, problem-solving, project building, and age-appropriate AI concepts including data, predictions, bias, safety, and responsible use.",
 		},
 	];
 
@@ -60,35 +59,27 @@ export const FaqContent = () => {
 						</p>
 					</div>
 
-					<div className="space-y-4">
+					<Accordion
+						type="single"
+						defaultValue="faq-0"
+						collapsible
+						className="space-y-4"
+					>
 						{faqs.map((faq, index) => (
-							<Card
+							<AccordionItem
 								key={faq.question}
-								className="border-2 hover:border-primary/50 transition-all rounded-2xl overflow-hidden cursor-pointer"
-								onClick={() => setOpenIndex(openIndex === index ? null : index)}
+								value={`faq-${index}`}
+								className="overflow-hidden rounded-2xl border-2 px-6 transition-colors hover:border-primary/50"
 							>
-								<CardHeader className="pb-4">
-									<div className="flex items-center justify-between gap-4">
-										<CardTitle className="text-xl text-left">
-											{faq.question}
-										</CardTitle>
-										<ChevronDown
-											className={`h-5 w-5 text-muted-foreground flex-shrink-0 transition-transform ${
-												openIndex === index ? "rotate-180" : ""
-											}`}
-										/>
-									</div>
-								</CardHeader>
-								{openIndex === index && (
-									<CardContent className="pt-0">
-										<p className="text-muted-foreground leading-relaxed">
-											{faq.answer}
-										</p>
-									</CardContent>
-								)}
-							</Card>
+								<AccordionTrigger className="py-6 text-lg font-semibold hover:no-underline">
+									{faq.question}
+								</AccordionTrigger>
+								<AccordionContent className="pb-6 text-base leading-relaxed text-muted-foreground">
+									{faq.answer}
+								</AccordionContent>
+							</AccordionItem>
 						))}
-					</div>
+					</Accordion>
 
 					<div className="mt-12 text-center p-8 bg-secondary/30 rounded-2xl">
 						<p className="text-lg text-foreground mb-4">

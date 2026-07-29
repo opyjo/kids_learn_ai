@@ -1,3 +1,5 @@
+import { expandedArticles } from "@/lib/blog/expanded-articles";
+
 export type BlogPost = {
 	slug: string;
 	title: string;
@@ -5,6 +7,8 @@ export type BlogPost = {
 	category: string;
 	readingTime: string;
 	date: string;
+	publishedAt: string;
+	updatedAt: string;
 	featured?: boolean;
 	visual:
 		| "brain"
@@ -19,7 +23,7 @@ export type BlogPost = {
 	tone: "blue" | "coral" | "green" | "indigo" | "purple" | "yellow";
 };
 
-export const posts: BlogPost[] = [
+const existingPosts: BlogPost[] = [
 	{
 		slug: "ai-projects-kids-can-build-with-python",
 		title: "7 AI Projects Kids Can Build with Python",
@@ -28,6 +32,8 @@ export const posts: BlogPost[] = [
 		category: "Projects",
 		readingTime: "9 min read",
 		date: "July 18, 2026",
+		publishedAt: "2026-07-18",
+		updatedAt: "2026-07-18",
 		featured: true,
 		visual: "lightbulb",
 		tone: "yellow",
@@ -40,6 +46,8 @@ export const posts: BlogPost[] = [
 		category: "AI Safety",
 		readingTime: "8 min read",
 		date: "July 11, 2026",
+		publishedAt: "2026-07-11",
+		updatedAt: "2026-07-11",
 		visual: "shield",
 		tone: "green",
 	},
@@ -51,6 +59,8 @@ export const posts: BlogPost[] = [
 		category: "For Families",
 		readingTime: "7 min read",
 		date: "July 4, 2026",
+		publishedAt: "2026-07-04",
+		updatedAt: "2026-07-04",
 		visual: "family",
 		tone: "coral",
 	},
@@ -62,6 +72,8 @@ export const posts: BlogPost[] = [
 		category: "For Educators",
 		readingTime: "8 min read",
 		date: "June 27, 2026",
+		publishedAt: "2026-06-27",
+		updatedAt: "2026-06-27",
 		visual: "users",
 		tone: "purple",
 	},
@@ -73,6 +85,8 @@ export const posts: BlogPost[] = [
 		category: "AI Literacy",
 		readingTime: "8 min read",
 		date: "February 24, 2025",
+		publishedAt: "2025-02-24",
+		updatedAt: "2026-07-29",
 		visual: "brain",
 		tone: "blue",
 	},
@@ -84,6 +98,8 @@ export const posts: BlogPost[] = [
 		category: "Python",
 		readingTime: "6 min read",
 		date: "March 18, 2025",
+		publishedAt: "2025-03-18",
+		updatedAt: "2026-07-29",
 		visual: "code",
 		tone: "indigo",
 	},
@@ -95,6 +111,8 @@ export const posts: BlogPost[] = [
 		category: "AI Ethics",
 		readingTime: "10 min read",
 		date: "March 25, 2025",
+		publishedAt: "2025-03-25",
+		updatedAt: "2026-07-29",
 		visual: "compass",
 		tone: "coral",
 	},
@@ -106,6 +124,8 @@ export const posts: BlogPost[] = [
 		category: "Education",
 		readingTime: "7 min read",
 		date: "March 31, 2025",
+		publishedAt: "2025-03-31",
+		updatedAt: "2026-07-29",
 		visual: "future",
 		tone: "blue",
 	},
@@ -117,7 +137,13 @@ export const posts: BlogPost[] = [
 		category: "Community",
 		readingTime: "9 min read",
 		date: "February 28, 2025",
+		publishedAt: "2025-02-28",
+		updatedAt: "2026-07-29",
 		visual: "sparkles",
 		tone: "purple",
 	},
 ];
+
+export const posts: BlogPost[] = [...expandedArticles, ...existingPosts].sort(
+	(a, b) => b.publishedAt.localeCompare(a.publishedAt),
+);

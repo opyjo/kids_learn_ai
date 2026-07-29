@@ -13,13 +13,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getUserEnrollments } from "@/lib/auth-helpers";
+import { publicMetadata } from "@/lib/seo";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
-export const metadata = {
+export const metadata = publicMetadata({
 	title: "Python & AI Lessons — Kids Learn AI",
 	description:
 		"Browse the full Kids Learn AI curriculum — term-by-term Python and AI lessons with hands-on projects for kids.",
-};
+	path: "/lessons",
+});
 
 export default async function LessonsPage() {
 	const supabase = await getSupabaseServerClient();

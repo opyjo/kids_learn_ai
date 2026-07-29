@@ -43,11 +43,77 @@ take_home_assignment: |
 
   **Optional:** Create a "reflection journal" about what you learned in Term 2!
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: Your Term 2 AI Skills Map
 
-  You've learned the foundation that every AI system uses! When AI calculates, processes data, or interacts with users, it uses the same math operations, input/output, and programming concepts you just mastered.
+  ### The big idea
 
-  You're building the skills that power AI!
+  This term did not turn your calculator into AI. Instead, it gave you important building blocks that AI programmers also use:
+
+  1. **Input** collects information.
+  2. **Variables** store information.
+  3. **Data types** tell Python whether information is text or a number.
+  4. **Math** combines numbers into totals, averages, or scores.
+  5. **Output** explains a result to the user.
+  6. **Testing** helps humans find mistakes.
+
+  ### Follow the whole path
+
+  ```python
+  name = input("Choose a nickname: ")
+  puzzle_text = input("Puzzle points: ")
+  bonus_text = input("Bonus points: ")
+
+  puzzle_points = int(puzzle_text)
+  bonus_points = int(bonus_text)
+  total_points = puzzle_points + bonus_points
+
+  print(f"{name}, your total is {total_points} points.")
+  ```
+
+  Can you label each line as **input**, **storage**, **conversion**, **math**, or **output**?
+
+  ### Calculator or AI?
+
+  Use this comparison:
+
+  | Calculator program | AI system |
+  | --- | --- |
+  | Follows an exact math rule | Finds patterns in examples |
+  | Gives a calculated answer | Often gives a prediction |
+  | Should give the same answer for the same numbers | May make mistakes or be uncertain |
+  | Tested by checking the calculation | Tested with many examples and people |
+
+  Both need clear code, useful data, careful testing, and human responsibility.
+
+  ### Showcase your thinking
+
+  When you present your calculator, explain:
+
+  1. What information your program asks for.
+  2. Where text is converted into numbers.
+  3. Which math operations it performs.
+  4. How you tested the answers.
+  5. One future AI feature you could add—and how a user would check it.
+
+  ### Mini design challenge
+
+  Imagine a future study helper that suggests the next practice question. On paper, complete these sentences:
+
+  - It would collect examples of...
+  - It would use the examples to predict...
+  - A learner could check the suggestion by...
+  - It should never collect...
+
+  There is no single perfect answer. The goal is to connect your Python skills to thoughtful AI design.
+
+  ### Final reflection
+
+  - Which Term 2 skill was hardest at first?
+  - Which test helped you find a bug?
+  - Why is an AI prediction different from a calculator answer?
+  - What should a human check before trusting a computer's result?
+
+  **BrightByte's reminder:** Building AI is not only about making computers calculate. It is also about asking good questions, protecting people, testing carefully, and explaining results clearly.
 ---
 # Term 2, Lesson 9: Showcase Party + Badge! 🎉
 
@@ -349,4 +415,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Congratulations on completing Term 2! You're amazing! 🎉_
-

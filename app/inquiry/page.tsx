@@ -22,18 +22,14 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "Free Trial Class & Program Details — Kids Learn AI",
 	description:
 		"Try your child's first live Python & AI class free. See our 8-10 week program for ages 9-13, small class sizes, founding rate, and answers to common questions.",
-	openGraph: {
-		title: "Free Trial Class & Program Details — Kids Learn AI",
-		description:
-			"Try your child's first live Python & AI class free. See our 8-10 week program for ages 9-13, small class sizes, founding rate, and answers to common questions.",
-		type: "website",
-	},
-};
+	path: "/inquiry",
+});
 
 export default function InquiryPage() {
 	return (

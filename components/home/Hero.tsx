@@ -7,7 +7,7 @@ import Link from "next/link";
 import LiveClassMockup from "@/components/home/LiveClassMockup";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FadeIn, SlideInRight } from "@/components/ui/motion";
+import { SlideInRight } from "@/components/ui/motion";
 
 const Hero = () => {
 	const shouldReduceMotion = useReducedMotion();
@@ -20,26 +20,26 @@ const Hero = () => {
 			<div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
 				{/* Text Content */}
 				<div className="text-center lg:text-left z-10 relative">
-					<FadeIn>
+					<div>
 						<Badge className="mb-6 bg-accent/10 text-accent hover:bg-accent/20 border-accent/20 rounded-full px-4 py-2 text-sm font-medium cursor-pointer relative z-10">
 							<Sparkles className="w-4 h-4 inline mr-2" aria-hidden="true" />
 							Live Classes with Expert Instructors
 						</Badge>
-					</FadeIn>
-					<FadeIn delay={0.1}>
+					</div>
+					<div>
 						<h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-[1.1]">
 							Real Coding Skills, Taught Live.{" "}
 							<span className="text-primary">Python & AI for Kids 9-13.</span>
 						</h1>
-					</FadeIn>
-					<FadeIn delay={0.2}>
+					</div>
+					<div>
 						<p className="text-xl lg:text-2xl text-muted-foreground mb-8 text-pretty leading-relaxed">
 							Your child codes along with a live instructor in a small group —
 							real Python, real projects, and a first class that's completely
 							free.
 						</p>
-					</FadeIn>
-					<FadeIn delay={0.3}>
+					</div>
+					<div>
 						<div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
 							{/* Brightbyte pointing toward the CTA button */}
 							<motion.div
@@ -68,7 +68,7 @@ const Hero = () => {
 							<Link href="/inquiry">
 								<Button
 									size="lg"
-									className="text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
+									className="rounded-full bg-[#1565a8] px-8 py-6 text-lg text-white shadow-lg shadow-primary/30 transition-all hover:bg-[#0f538d] hover:shadow-xl hover:shadow-primary/40"
 								>
 									<Sparkles className="mr-2 h-5 w-5" aria-hidden="true" />
 									Book a FREE Trial Class
@@ -78,8 +78,8 @@ const Hero = () => {
 								No commitment required
 							</span>
 						</div>
-					</FadeIn>
-					<FadeIn delay={0.4}>
+					</div>
+					<div>
 						<div className="mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center lg:justify-start text-sm text-muted-foreground relative">
 							<div className="flex items-center gap-2">
 								<CheckCircle
@@ -96,7 +96,7 @@ const Hero = () => {
 								<span>Ages 9-10 (Mon) & 11-13 (Wed)</span>
 							</div>
 						</div>
-					</FadeIn>
+					</div>
 				</div>
 
 				{/* Live-class mockup card */}

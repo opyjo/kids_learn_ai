@@ -81,11 +81,77 @@ take_home_assignment: |
 
   **Submit:** Share your Trinket link. Be ready to present at the Week 9 Showcase!
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: Is Your Calculator an AI?
 
-  Every calculator app on your phone uses the same concepts you're learning! When you type numbers and press operations, the app uses input(), converts to numbers, and performs calculations - just like your program! But what if your calculator could LEARN your favorite calculations? AI-powered calculators can remember patterns, suggest shortcuts, and even predict what you'll calculate next - all by learning from how you use them!
+  ### The big idea
 
-  You're building something that works like real-world applications!
+  Your calculator is a smart and useful program, but it is **not an AI system**. It follows exact rules:
+
+  - When it sees `+`, it adds.
+  - When it sees `*`, it multiplies.
+  - The same input always gives the same correct result.
+
+  An AI system usually uses patterns from examples to make a **prediction**. A prediction can be useful, but it can also be wrong.
+
+  ### Compare rules and predictions
+
+  **Calculator rule:**
+
+  ```python
+  first_number = 7
+  second_number = 5
+  answer = first_number + second_number
+  print(answer)
+  ```
+
+  The answer must be `12`.
+
+  **Prediction idea:**
+
+  A learning app notices that a student often practises multiplication after addition. It might predict, “You may want a multiplication challenge next.” That suggestion is based on a pattern, not a guaranteed fact.
+
+  ### Make your calculator explain itself
+
+  Clear output helps a person check the program:
+
+  ```python
+  first_text = input("First number: ")
+  second_text = input("Second number: ")
+
+  first_number = int(first_text)
+  second_number = int(second_text)
+
+  addition_answer = first_number + second_number
+  print(f"I added {first_number} and {second_number}.")
+  print(f"The answer is {addition_answer}.")
+  ```
+
+  This is a simple form of **explanation**. Instead of showing only `12`, the program also shows which numbers and operation it used. AI systems should also give people useful information for checking important results.
+
+  ### Test your complete calculator
+
+  Use this checklist:
+
+  1. Try two positive numbers, such as `8` and `2`.
+  2. Try zero, such as `9` and `0`.
+  3. Try a negative number, such as `-3` and `4`.
+  4. Check each answer by hand.
+  5. Read the labels. Can another person tell which operation was used?
+
+  Be careful with division by zero: Python cannot calculate `9 / 0`. If your calculator includes division, use a non-zero second number until you learn how to handle this special case.
+
+  ### Design a future AI feature
+
+  Imagine one optional AI feature for your calculator. It might suggest a practice problem or explain a math step. Write:
+
+  - What examples would it learn from?
+  - What would it predict or suggest?
+  - How could the user check its answer?
+  - What information should it never collect?
+
+  ### Think like an AI builder
+
+  Exact calculation and AI prediction are different tools. A trustworthy app tells the user which one it is using and makes important answers easy to check.
 ---
 # Term 2, Lesson 8: Project - My Calculator! 🧮
 
@@ -401,4 +467,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor for help. This is your project—make it amazing!_ 🧮
-

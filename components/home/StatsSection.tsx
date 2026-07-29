@@ -9,9 +9,9 @@ const StatsSection = () => {
 
 	const stats = [
 		{ value: "Live", label: "Expert-Led Interactive Sessions" },
-		{ value: "300+", label: "Active Learning Community" },
-		{ value: "1,000+", label: "Hours of Live Instruction" },
-		{ value: "500+", label: "Student Projects Built Together" },
+		{ value: "9–13", label: "Current Student Age Range" },
+		{ value: "8–10", label: "Weeks of Guided Learning" },
+		{ value: "Free", label: "First Live Trial Class" },
 	];
 
 	return (
@@ -25,7 +25,6 @@ const StatsSection = () => {
 						aria-hidden="true"
 						fill
 						className="object-cover"
-						priority
 						onError={() => setImageError(true)}
 					/>
 				) : null}

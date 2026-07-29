@@ -8,8 +8,10 @@ import {
 	Play,
 	Sparkles,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/seo/json-ld";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,6 +21,7 @@ import {
 	type ClassScheduleSlot,
 	formatScheduleLine,
 } from "@/lib/schedule-utils";
+import { absoluteUrl, publicMetadata } from "@/lib/seo";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -28,18 +31,25 @@ interface CoursePageProps {
 	}>;
 }
 
-export async function generateMetadata({ params }: CoursePageProps) {
+export async function generateMetadata({
+	params,
+}: CoursePageProps): Promise<Metadata> {
 	const { course } = await params;
 	// Slug-derived title ("term-5-ai-sneak-peek" → "Term 5 Ai Sneak Peek") —
 	// good enough for tabs/search without a second DB round-trip.
 	const name = course
 		.split("-")
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.map((word) =>
+			word.toLowerCase() === "ai"
+				? "AI"
+				: word.charAt(0).toUpperCase() + word.slice(1),
+		)
 		.join(" ");
-	return {
+	return publicMetadata({
 		title: `${name} — Kids Learn AI`,
 		description: `Lessons and projects in the ${name} course on Kids Learn AI.`,
-	};
+		path: `/lessons/${course}`,
+	});
 }
 
 export default async function CoursePage({ params }: CoursePageProps) {
@@ -187,6 +197,28 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 dark:from-blue-600/8 dark:via-purple-600/8 dark:to-pink-600/8">
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "Course",
+					name: course.title,
+					description: course.description,
+					url: absoluteUrl(`/lessons/${course.slug}`),
+					provider: {
+						"@type": "EducationalOrganization",
+						name: "Kids Learn AI",
+						url: absoluteUrl("/"),
+					},
+					inLanguage: "en-CA",
+					educationalLevel: "Beginner to intermediate",
+					typicalAgeRange: "9-13",
+					audience: {
+						"@type": "EducationalAudience",
+						educationalRole: "student",
+						audienceType: "Children ages 9-13",
+					},
+				}}
+			/>
 			<SiteHeader />
 
 			<div className="lesson-page-shell max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">

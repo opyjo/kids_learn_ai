@@ -1,40 +1,51 @@
 import type { MetadataRoute } from "next";
+import { posts } from "@/app/blog/blog-posts";
+import { absoluteUrl } from "@/lib/seo";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kidslearnai.ca";
+const UPDATED_AT = new Date("2026-07-29T00:00:00.000Z");
 
-/** Public, indexable routes. Authed app areas (dashboard, lessons content,
- * labs, admin) are intentionally excluded — they redirect to /login. */
 const PUBLIC_ROUTES = [
-	"",
+	"/",
 	"/about",
 	"/blog",
-	"/blog/ai-projects-kids-can-build-with-python",
-	"/blog/black-youth-stem-canada",
-	"/blog/building-inclusive-ai-classrooms",
-	"/blog/future-of-ai-in-education",
-	"/blog/parents-guide-supporting-young-coders",
-	"/blog/python-best-first-language",
-	"/blog/safe-ai-use-at-home",
-	"/blog/teaching-ai-ethics-to-kids",
-	"/blog/why-learning-ai-young-matters",
 	"/careers",
+	"/careers/apply",
 	"/contact",
 	"/faq",
 	"/games",
 	"/get-thonny",
 	"/get-trinket",
 	"/inquiry",
-	"/login",
+	"/inquiry/book",
+	"/lessons",
+	"/lessons/term-1-hello-python",
+	"/lessons/term-2-math-wizard",
+	"/lessons/term-3-decision-maker",
+	"/lessons/term-4-more-choices",
+	"/lessons/term-5-ai-sneak-peek",
+	"/lessons/term-6-loop-magic",
+	"/lessons/term-7-game-builder",
+	"/lessons/term-8-ai-explorer",
+	"/playground",
 	"/pricing",
 	"/privacy",
-	"/signup",
 	"/terms",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	return PUBLIC_ROUTES.map((route) => ({
-		url: `${SITE_URL}${route}`,
-		changeFrequency: route.startsWith("/blog") ? "monthly" : "weekly",
-		priority: route === "" ? 1 : 0.7,
+	const publicPages: MetadataRoute.Sitemap = PUBLIC_ROUTES.map((route) => ({
+		url: absoluteUrl(route),
+		lastModified: UPDATED_AT,
+		changeFrequency: route === "/" ? "weekly" : "monthly",
+		priority: route === "/" ? 1 : route === "/inquiry" ? 0.9 : 0.7,
 	}));
+
+	const articles: MetadataRoute.Sitemap = posts.map((post) => ({
+		url: absoluteUrl(`/blog/${post.slug}`),
+		lastModified: new Date(`${post.updatedAt}T00:00:00.000Z`),
+		changeFrequency: "monthly",
+		priority: 0.8,
+	}));
+
+	return [...publicPages, ...articles];
 }

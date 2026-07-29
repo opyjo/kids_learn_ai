@@ -18,18 +18,14 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "About Us — Kids Learn AI",
 	description:
 		"Our mission to help every child master Python and understand AI through warm, culturally aware teaching that turns kids into thoughtful creators, not passive users.",
-	openGraph: {
-		title: "About Us — Kids Learn AI",
-		description:
-			"Our mission to help every child master Python and understand AI through warm, culturally aware teaching that turns kids into thoughtful creators, not passive users.",
-		type: "website",
-	},
-};
+	path: "/about",
+});
 
 const pillars = [
 	{

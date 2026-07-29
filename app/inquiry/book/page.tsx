@@ -13,18 +13,14 @@ import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = publicMetadata({
 	title: "Book Your Free Trial Class — Kids Learn AI",
 	description:
 		"Fill out our quick form to book your child's free trial Python & AI class. We'll contact you within 24 hours to schedule a convenient time. No commitment.",
-	openGraph: {
-		title: "Book Your Free Trial Class — Kids Learn AI",
-		description:
-			"Fill out our quick form to book your child's free trial Python & AI class. We'll contact you within 24 hours to schedule a convenient time. No commitment.",
-		type: "website",
-	},
-};
+	path: "/inquiry/book",
+});
 
 export default function BookTrialPage() {
 	return (

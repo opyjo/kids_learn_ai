@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { ArticleByline, ArticleSeo } from "@/components/seo/article-seo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const description =
+	"Nine reasons kids should learn AI concepts early, plus an age-by-age Python learning path and practical tips for parents and educators.";
+
+export const metadata: Metadata = publicMetadata({
 	title: "Why Learning AI Young Matters — Kids Learn AI",
-	description:
-		"Nine reasons kids should learn AI concepts early, plus an age-by-age Python learning path for ages 8-16 and tips for parents and educators.",
-	openGraph: {
-		title: "Why Learning AI Young Matters — Kids Learn AI",
-		description:
-			"Nine reasons kids should learn AI concepts early, plus an age-by-age Python learning path for ages 8-16 and tips for parents and educators.",
-		type: "article",
-	},
-};
+	description,
+	path: "/blog/why-learning-ai-young-matters",
+	type: "article",
+});
 
 const keyTakeaways = [
 	{
@@ -60,6 +60,13 @@ const milestones = [
 export default function WhyLearningAIYoungMattersPage() {
 	return (
 		<MainLayout>
+			<ArticleSeo
+				slug="why-learning-ai-young-matters"
+				title="9 Reasons Kids Should Learn AI Concepts Early (and How Python Helps)"
+				description={description}
+				datePublished="2025-02-24"
+				dateModified="2026-07-29"
+			/>
 			<article className="container mx-auto px-4 py-20 lg:py-28">
 				<div className="max-w-3xl mx-auto">
 					<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
@@ -75,16 +82,22 @@ export default function WhyLearningAIYoungMattersPage() {
 						children grow from consumers of technology into confident,
 						thoughtful creators.
 					</p>
+					<div className="mb-10">
+						<ArticleByline
+							datePublished="2025-02-24"
+							dateModified="2026-07-29"
+							readingTime="8 min read"
+						/>
+					</div>
 
 					<section className="space-y-6 mb-12">
 						<h2 className="text-2xl font-semibold">Why start early?</h2>
 						<p className="text-muted-foreground leading-relaxed">
-							Neuroscience tells us that middle childhood is a prime window for
-							developing metacognition—thinking about thinking. Coding in Python
-							gives kids a structured playground for planning, testing ideas,
-							and learning from mistakes. Layering gentle AI concepts onto those
-							routines shows them how real-world systems make decisions and
-							where human judgement still matters.
+							Children can practise planning, testing ideas, explaining
+							decisions, and learning from mistakes through small Python
+							projects. Layering age-appropriate AI concepts onto those routines
+							shows them how real-world systems make decisions and where human
+							judgement still matters.
 						</p>
 					</section>
 
@@ -107,20 +120,29 @@ export default function WhyLearningAIYoungMattersPage() {
 						</h2>
 						<ul className="list-disc pl-6 text-muted-foreground space-y-3">
 							<li>
-								The OECD reports that students who engage with computational
-								thinking activities before age 12 score higher in
-								problem-solving and resilience metrics later in high school.
+								A federal evaluation of Canada&apos;s CanCode program found that
+								98% of teacher survey respondents agreed the training
+								contributed to student and teacher knowledge and confidence in
+								coding and digital skills.{" "}
+								<a
+									href="https://ised-isde.canada.ca/site/audits-evaluations/en/evaluation/evaluation-report-cancode"
+									target="_blank"
+									rel="noreferrer"
+									className="font-medium text-primary underline underline-offset-4"
+								>
+									Read the CanCode evaluation
+								</a>
+								.
 							</li>
 							<li>
-								Waterloo&apos;s Centre for Education in Mathematics and
-								Computing found that early exposure to Python improved
-								confidence across demographic groups, especially for students
-								from underrepresented communities.
+								The same evaluation identified uneven access to coding curricula
+								and teacher confidence as ongoing barriers, which is why
+								supported, beginner-friendly instruction matters.
 							</li>
 							<li>
-								Classrooms that blend coding with social impact projects see a
-								20–30% increase in student retention, according to Canada Learns
-								Code instructors.
+								Projects work best when learners can connect code to a question
+								they care about, explain their choices, and revise a small
+								working program rather than copy a finished solution.
 							</li>
 						</ul>
 					</section>
@@ -197,14 +219,36 @@ export default function WhyLearningAIYoungMattersPage() {
 						</h2>
 						<ul className="list-disc pl-6 text-muted-foreground space-y-2">
 							<li>
-								UNESCO: <em>AI and Education: Guidance for Policy-makers</em>
+								<a
+									href="https://unesdoc.unesco.org/ark:/48223/pf0000376709"
+									target="_blank"
+									rel="noreferrer"
+									className="text-primary underline underline-offset-4"
+								>
+									UNESCO: <em>AI and Education: Guidance for Policy-makers</em>
+								</a>
 							</li>
 							<li>
-								University of Waterloo CEMC:{" "}
-								<em>Kids and Code Research Brief</em>
+								<a
+									href="https://ised-isde.canada.ca/site/audits-evaluations/en/evaluation/evaluation-report-cancode"
+									target="_blank"
+									rel="noreferrer"
+									className="text-primary underline underline-offset-4"
+								>
+									Innovation, Science and Economic Development Canada:{" "}
+									<em>Evaluation of CanCode</em>
+								</a>
 							</li>
 							<li>
-								Canada Learning Code: <em>Computational Thinking in Schools</em>
+								<a
+									href="https://www.canada.ca/en/employment-social-development/programs/supports-student-learning.html"
+									target="_blank"
+									rel="noreferrer"
+									className="text-primary underline underline-offset-4"
+								>
+									Employment and Social Development Canada:{" "}
+									<em>Supports for Student Learning</em>
+								</a>
 							</li>
 						</ul>
 					</section>

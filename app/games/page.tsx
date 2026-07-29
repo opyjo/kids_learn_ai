@@ -4,12 +4,14 @@ import { GameCard } from "@/components/games/game-card";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { games } from "@/lib/games-data";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = publicMetadata({
 	title: "Python Games for Kids — Kids Learn AI",
 	description:
 		"Build and play real Python games — from guessing games to adventures — designed for kids learning to code.",
-};
+	path: "/games",
+});
 
 export default function GamesPage() {
 	return (

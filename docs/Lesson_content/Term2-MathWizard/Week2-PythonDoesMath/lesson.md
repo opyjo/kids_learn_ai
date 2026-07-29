@@ -60,11 +60,69 @@ take_home_assignment: |
 
   **Submit:** Share your Trinket link with your instructor.
 ai_activities: |
-  ## 🤖 Did You Know? AI Connection
+  ## 🤖 AI Lab: Math Helps AI Make a Score
 
-  Every time Siri calculates a tip, or Google Maps figures out your travel time, or a video game adds up your score - that's math just like you're learning! Regular calculators follow exact rules you program, but AI calculators can also learn patterns and estimate answers - they use the same math operations, but can get smarter over time!
+  ### The big idea
 
-  You're learning the same math operations that power every AI in the world!
+  AI often compares several clues by turning them into a **score**. A bigger score can mean “this choice matches better.” The score is built with the same addition, subtraction, multiplication, and division you learned today.
+
+  Imagine a kid-friendly movie helper. It has three clues about a movie:
+
+  - `adventure_points`: how much adventure it has
+  - `funny_points`: how funny it is
+  - `scary_points`: how scary it is
+
+  ### Work through an example
+
+  ```python
+  adventure_points = 8
+  funny_points = 6
+  scary_points = 2
+
+  total_points = adventure_points + funny_points
+  comfort_score = total_points - scary_points
+
+  print("Adventure and funny points:", total_points)
+  print("Final comfort score:", comfort_score)
+  ```
+
+  Python calculates:
+
+  - `8 + 6 = 14`
+  - `14 - 2 = 12`
+
+  The final score is `12`. The computer did not decide what a “good movie” is by itself. A human chose the clues and the math rule.
+
+  ### Why multiplication and division matter
+
+  Multiplication can give one clue extra importance:
+
+  ```python
+  match_score = adventure_points * 2 + funny_points
+  print("Match score:", match_score)
+  ```
+
+  Adventure counts twice, so this score is `8 * 2 + 6 = 22`.
+
+  Division can share or average a total:
+
+  ```python
+  average_points = (adventure_points + funny_points) / 2
+  print("Average:", average_points)
+  ```
+
+  The average is `7.0`.
+
+  ### Your experiment
+
+  1. Predict the three outputs before running the code.
+  2. Change `funny_points` from `6` to `10`.
+  3. Run it again and explain which answers changed.
+  4. Make a second movie with different points and compare its score.
+
+  ### Think like an AI builder
+
+  Is a higher score always a better movie? No. Different people enjoy different things. Good AI builders check whether the clues and math are useful and fair instead of trusting a number just because a computer produced it.
 ---
 
 # Term 2, Lesson 2: Python Does Math! 🧮

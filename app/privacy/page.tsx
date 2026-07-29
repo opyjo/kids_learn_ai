@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
+import { publicMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = publicMetadata({
 	title: "Privacy Policy - Kids Learn AI",
 	description:
 		"How Kids Learn AI collects, uses, and protects information about students and families.",
-};
+	path: "/privacy",
+});
 
 export default function PrivacyPolicyPage() {
 	return (
