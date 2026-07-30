@@ -2,8 +2,6 @@ import type { MetadataRoute } from "next";
 import { posts } from "@/app/blog/blog-posts";
 import { absoluteUrl } from "@/lib/seo";
 
-const UPDATED_AT = new Date("2026-07-29T00:00:00.000Z");
-
 const PUBLIC_ROUTES = [
 	"/",
 	"/about",
@@ -18,6 +16,13 @@ const PUBLIC_ROUTES = [
 	"/inquiry",
 	"/inquiry/book",
 	"/lessons",
+	"/playground",
+	"/pricing",
+	"/privacy",
+	"/terms",
+];
+
+export const PUBLIC_COURSE_ROUTES = [
 	"/lessons/term-1-hello-python",
 	"/lessons/term-2-math-wizard",
 	"/lessons/term-3-decision-maker",
@@ -26,16 +31,24 @@ const PUBLIC_ROUTES = [
 	"/lessons/term-6-loop-magic",
 	"/lessons/term-7-game-builder",
 	"/lessons/term-8-ai-explorer",
-	"/playground",
-	"/pricing",
-	"/privacy",
-	"/terms",
+	"/lessons/year2-term-1-python-accelerated",
+	"/lessons/year2-term-2-loops-mastery",
+	"/lessons/year2-term-3-functions",
+	"/lessons/year2-term-4-data-structures",
+	"/lessons/year2-term-5-ai-deep-dive",
+	"/lessons/year2-term-6-apis",
+	"/lessons/year2-term-7-data-visualization",
+	"/lessons/year2-term-8-capstone",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	const publicPages: MetadataRoute.Sitemap = PUBLIC_ROUTES.map((route) => ({
+	const publicPages: MetadataRoute.Sitemap = [
+		...PUBLIC_ROUTES,
+		...PUBLIC_COURSE_ROUTES,
+	].map((route) => ({
 		url: absoluteUrl(route),
-		lastModified: UPDATED_AT,
+		// Static pages intentionally omit lastModified rather than claiming that
+		// unrelated pages changed on the same release date.
 		changeFrequency: route === "/" ? "weekly" : "monthly",
 		priority: route === "/" ? 1 : route === "/inquiry" ? 0.9 : 0.7,
 	}));

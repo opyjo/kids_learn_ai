@@ -72,3 +72,40 @@ export const privateMetadata: Metadata = {
 		nosnippet: true,
 	},
 };
+
+type CourseMetadataDescriptionOptions = {
+	description?: string | null;
+	ageRange?: string | null;
+	projectName?: string | null;
+};
+
+function truncateAtWord(value: string, maxLength: number) {
+	if (value.length <= maxLength) {
+		return value;
+	}
+
+	const shortened = value.slice(0, maxLength - 1);
+	const lastSpace = shortened.lastIndexOf(" ");
+	const boundary = lastSpace >= maxLength * 0.75 ? lastSpace : shortened.length;
+
+	return `${shortened.slice(0, boundary).replace(/[.,;:!?-]+$/u, "")}…`;
+}
+
+export function courseMetadataDescription({
+	description,
+	ageRange,
+	projectName,
+}: CourseMetadataDescriptionOptions) {
+	const audience = ageRange?.trim() || "9-13";
+	const overview =
+		description?.trim() ||
+		"Build practical Python projects and develop responsible AI skills.";
+	const project = projectName?.trim()
+		? ` Create a ${projectName.trim()} project.`
+		: "";
+
+	return truncateAtWord(
+		`Live online coding course for kids ages ${audience}. ${overview}${project}`,
+		160,
+	);
+}
