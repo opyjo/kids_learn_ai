@@ -11,6 +11,7 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
@@ -21,7 +22,11 @@ import {
 	type ClassScheduleSlot,
 	formatScheduleLine,
 } from "@/lib/schedule-utils";
-import { absoluteUrl, publicMetadata } from "@/lib/seo";
+import {
+	absoluteUrl,
+	courseMetadataDescription,
+	publicMetadata,
+} from "@/lib/seo";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -31,13 +36,31 @@ interface CoursePageProps {
 	}>;
 }
 
-export async function generateMetadata({
-	params,
-}: CoursePageProps): Promise<Metadata> {
-	const { course } = await params;
-	// Slug-derived title ("term-5-ai-sneak-peek" → "Term 5 Ai Sneak Peek") —
-	// good enough for tabs/search without a second DB round-trip.
-	const name = course
+type PublicCourse = {
+	id: string;
+	slug: string;
+	title: string;
+	description: string | null;
+	age_range: string | null;
+	project_name: string | null;
+};
+
+const getCourseBySlug = cache(async (slug: string) => {
+	const supabase = await getSupabaseServerClient();
+	const { data, error } = await supabase
+		.from("courses")
+		.select("id, slug, title, description, age_range, project_name")
+		.eq("slug", slug)
+		.single();
+
+	return {
+		course: data as PublicCourse | null,
+		error,
+	};
+});
+
+function courseNameFromSlug(slug: string) {
+	return slug
 		.split("-")
 		.map((word) =>
 			word.toLowerCase() === "ai"
@@ -45,10 +68,23 @@ export async function generateMetadata({
 				: word.charAt(0).toUpperCase() + word.slice(1),
 		)
 		.join(" ");
+}
+
+export async function generateMetadata({
+	params,
+}: CoursePageProps): Promise<Metadata> {
+	const { course: courseSlug } = await params;
+	const { course } = await getCourseBySlug(courseSlug);
+	const name = course?.title || courseNameFromSlug(courseSlug);
+
 	return publicMetadata({
 		title: `${name} — Kids Learn AI`,
-		description: `Lessons and projects in the ${name} course on Kids Learn AI.`,
-		path: `/lessons/${course}`,
+		description: courseMetadataDescription({
+			description: course?.description,
+			ageRange: course?.age_range,
+			projectName: course?.project_name,
+		}),
+		path: `/lessons/${courseSlug}`,
 	});
 }
 
@@ -56,17 +92,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
 	const supabase = await getSupabaseServerClient();
 	const { course: courseSlug } = await params;
 
-	// Check if user is authenticated
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-
-	// Fetch the course by slug
-	const { data: course, error: courseError } = await supabase
-		.from("courses")
-		.select("*")
-		.eq("slug", courseSlug)
-		.single();
+	const [
+		{
+			data: { user },
+		},
+		{ course, error: courseError },
+	] = await Promise.all([supabase.auth.getUser(), getCourseBySlug(courseSlug)]);
 
 	if (courseError || !course) {
 		notFound();
@@ -211,11 +242,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
 					},
 					inLanguage: "en-CA",
 					educationalLevel: "Beginner to intermediate",
-					typicalAgeRange: "9-13",
+					typicalAgeRange: course.age_range || "9-13",
 					audience: {
 						"@type": "EducationalAudience",
 						educationalRole: "student",
-						audienceType: "Children ages 9-13",
+						audienceType: `Children ages ${course.age_range || "9-13"}`,
 					},
 				}}
 			/>

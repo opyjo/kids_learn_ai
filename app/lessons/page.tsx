@@ -99,7 +99,7 @@ export default async function LessonsPage() {
 					<div className="flex items-start justify-between mb-3">
 						<div>
 							<h1 className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-								Your Learning Journey
+								Python &amp; AI Curriculum for Kids Ages 9–13
 							</h1>
 							<p className="text-muted-foreground">
 								{user
