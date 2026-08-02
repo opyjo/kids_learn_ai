@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { trackGoogleAnalyticsEvent } from "@/components/analytics/google-analytics-events";
 import { Button } from "@/components/ui/button";
 import {
 	Form,
@@ -111,6 +112,9 @@ export const CourseInquiryForm = () => {
 			}
 
 			setIsSuccess(true);
+			trackGoogleAnalyticsEvent("generate_lead", {
+				lead_source: "free_trial_inquiry",
+			});
 			toast.success("Inquiry submitted! We'll contact you soon.");
 			form.reset();
 

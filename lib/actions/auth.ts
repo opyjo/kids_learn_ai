@@ -10,6 +10,15 @@ type ActionState = {
 	success?: boolean;
 } | null;
 
+function withAnalyticsEvent(
+	path: string,
+	event: "login" | "sign_up",
+	method: "password" | "email",
+) {
+	const separator = path.includes("?") ? "&" : "?";
+	return `${path}${separator}analytics_event=${event}&analytics_method=${method}`;
+}
+
 export async function loginAction(
 	_prevState: ActionState,
 	formData: FormData,
@@ -96,7 +105,7 @@ export async function loginAction(
 
 		// Redirect based on role
 		if (profile.role === "admin") {
-			redirect("/admin");
+			redirect(withAnalyticsEvent("/admin", "login", "password"));
 		} else if (profile.role === "parent") {
 			const { count: childCount } = adminClient
 				? await adminClient
@@ -105,9 +114,15 @@ export async function loginAction(
 						.eq("parent_id", authData.user.id)
 						.eq("role", "student")
 				: { count: 0 };
-			redirect(childCount ? "/family" : "/family/setup");
+			redirect(
+				withAnalyticsEvent(
+					childCount ? "/family" : "/family/setup",
+					"login",
+					"password",
+				),
+			);
 		} else {
-			redirect("/dashboard");
+			redirect(withAnalyticsEvent("/dashboard", "login", "password"));
 		}
 	} catch (error) {
 		if (error instanceof Error && error.message === "NEXT_REDIRECT") {
@@ -191,7 +206,7 @@ export async function signupAction(
 		revalidatePath("/dashboard");
 
 		// Guide the signed-in parent directly into child account setup.
-		redirect("/family/setup");
+		redirect(withAnalyticsEvent("/family/setup", "sign_up", "email"));
 	} catch (error) {
 		if (error instanceof Error && error.message === "NEXT_REDIRECT") {
 			throw error;
