@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -42,6 +43,8 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
@@ -79,6 +82,9 @@ export default function RootLayout({
 					}}
 				/>
 				<Analytics />
+				{googleAnalyticsId ? (
+					<GoogleAnalytics gaId={googleAnalyticsId} />
+				) : null}
 			</body>
 		</html>
 	);
