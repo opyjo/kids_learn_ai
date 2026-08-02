@@ -171,7 +171,7 @@ describe("parent sign-up", () => {
 
 		await expect(signupAction(null, signupFormData())).rejects.toMatchObject({
 			message: "NEXT_REDIRECT",
-			path: "/family/setup",
+			path: "/family/setup?analytics_event=sign_up&analytics_method=email",
 		});
 	});
 });
@@ -187,7 +187,7 @@ describe("legacy login routing", () => {
 
 		await expect(loginAction(null, loginFormData())).rejects.toMatchObject({
 			message: "NEXT_REDIRECT",
-			path: "/dashboard",
+			path: "/dashboard?analytics_event=login&analytics_method=password",
 		});
 	});
 
@@ -203,7 +203,7 @@ describe("legacy login routing", () => {
 			loginAction(null, loginFormData("parent@example.com")),
 		).rejects.toMatchObject({
 			message: "NEXT_REDIRECT",
-			path: "/family",
+			path: "/family?analytics_event=login&analytics_method=password",
 		});
 	});
 
@@ -219,7 +219,7 @@ describe("legacy login routing", () => {
 			loginAction(null, loginFormData("new-parent@example.com")),
 		).rejects.toMatchObject({
 			message: "NEXT_REDIRECT",
-			path: "/family/setup",
+			path: "/family/setup?analytics_event=login&analytics_method=password",
 		});
 	});
 });

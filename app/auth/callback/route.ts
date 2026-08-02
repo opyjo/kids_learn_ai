@@ -22,12 +22,31 @@ function safeNextPath(next: string | null): string | null {
 	return next;
 }
 
+function redirectWithAnalytics(
+	origin: string,
+	path: string,
+	event: string | null,
+	method: string | null,
+) {
+	const destination = new URL(path, origin);
+	if (
+		(event === "login" || event === "sign_up") &&
+		(method === "password" || method === "email" || method === "google")
+	) {
+		destination.searchParams.set("analytics_event", event);
+		destination.searchParams.set("analytics_method", method);
+	}
+	return destination;
+}
+
 export async function GET(request: Request) {
 	const requestUrl = new URL(request.url);
 	const code = requestUrl.searchParams.get("code");
 	const token_hash = requestUrl.searchParams.get("token_hash");
 	const type = requestUrl.searchParams.get("type") as EmailOtpType | null;
 	const next = safeNextPath(requestUrl.searchParams.get("next"));
+	const analyticsEvent = requestUrl.searchParams.get("analytics_event");
+	const analyticsMethod = requestUrl.searchParams.get("analytics_method");
 	const origin = requestUrl.origin;
 
 	const supabase = await getSupabaseServerClient();
@@ -54,7 +73,9 @@ export async function GET(request: Request) {
 		// Invite and email-confirmation templates can use the token-hash flow too.
 		// Preserve the validated, same-origin destination after verification.
 		if (next) {
-			return NextResponse.redirect(`${origin}${next}`);
+			return NextResponse.redirect(
+				redirectWithAnalytics(origin, next, analyticsEvent, analyticsMethod),
+			);
 		}
 	}
 
@@ -78,7 +99,9 @@ export async function GET(request: Request) {
 
 		// If there's a next parameter, redirect there (e.g., /reset-password)
 		if (next) {
-			return NextResponse.redirect(`${origin}${next}`);
+			return NextResponse.redirect(
+				redirectWithAnalytics(origin, next, analyticsEvent, analyticsMethod),
+			);
 		}
 
 		// Check user role and redirect accordingly
@@ -91,7 +114,14 @@ export async function GET(request: Request) {
 
 			// Redirect admin users to admin dashboard
 			if (profile?.role === "admin") {
-				return NextResponse.redirect(`${origin}/admin`);
+				return NextResponse.redirect(
+					redirectWithAnalytics(
+						origin,
+						"/admin",
+						analyticsEvent,
+						analyticsMethod,
+					),
+				);
 			}
 			if (profile?.role === "parent") {
 				const admin = getSupabaseAdminClient();
@@ -103,12 +133,24 @@ export async function GET(request: Request) {
 							.eq("role", "student")
 					: { count: 0 };
 				return NextResponse.redirect(
-					`${origin}${childCount ? "/family" : "/family/setup"}`,
+					redirectWithAnalytics(
+						origin,
+						childCount ? "/family" : "/family/setup",
+						analyticsEvent,
+						analyticsMethod,
+					),
 				);
 			}
 		}
 	}
 
 	// Redirect regular students to their learning dashboard.
-	return NextResponse.redirect(`${origin}/dashboard`);
+	return NextResponse.redirect(
+		redirectWithAnalytics(
+			origin,
+			"/dashboard",
+			analyticsEvent,
+			analyticsMethod,
+		),
+	);
 }

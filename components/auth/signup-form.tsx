@@ -1,8 +1,9 @@
 "use client";
 
 import { Loader2, Mail, User } from "lucide-react";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { trackGoogleAnalyticsEvent } from "@/components/analytics/google-analytics-events";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,9 +33,17 @@ const SubmitButton = () => {
 
 export function SignupForm() {
 	const [state, formAction] = useActionState(signupAction, null);
+	const hasTrackedEmailSignup = useRef(false);
 	const [googleLoading, setGoogleLoading] = useState(false);
 	const [googleError, setGoogleError] = useState<string | null>(null);
 	const [password, setPassword] = useState("");
+
+	useEffect(() => {
+		if (state?.success && !hasTrackedEmailSignup.current) {
+			trackGoogleAnalyticsEvent("sign_up", { method: "email" });
+			hasTrackedEmailSignup.current = true;
+		}
+	}, [state?.success]);
 
 	const handleGoogleSignUp = async () => {
 		setGoogleError(null);
@@ -46,7 +55,7 @@ export function SignupForm() {
 			const { error } = await supabase.auth.signInWithOAuth({
 				provider: "google",
 				options: {
-					redirectTo: `${window.location.origin}/auth/callback`,
+					redirectTo: `${window.location.origin}/auth/callback?analytics_event=sign_up&analytics_method=google`,
 					queryParams: {
 						access_type: "offline",
 						prompt: "consent",
