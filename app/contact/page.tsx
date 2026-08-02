@@ -3,12 +3,12 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
 import { Card, CardContent } from "@/components/ui/card";
+import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 import { publicMetadata } from "@/lib/seo";
 
 export const metadata = publicMetadata({
 	title: "Contact Us - Kids Learn AI",
-	description:
-		"Get in touch with Kids Learn AI. We're here to help answer your questions about our Python and AI learning programs for kids.",
+	description: PARENT_FACING_PROMISE,
 	path: "/contact",
 });
 
@@ -27,8 +27,8 @@ export default function ContactPage() {
 						Contact Kids Learn AI
 					</h1>
 					<p className="text-lg text-gray-600 max-w-2xl mx-auto">
-						Have questions about our programs? We'd love to hear from you. Send
-						us a message and we'll respond as soon as possible.
+						{PARENT_FACING_PROMISE} Have a question? Send us a message and we'll
+						respond as soon as possible.
 					</p>
 				</div>
 

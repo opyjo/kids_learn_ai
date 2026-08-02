@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 
 export const FaqContent = () => {
 	const faqs = [
@@ -55,7 +56,7 @@ export const FaqContent = () => {
 							Frequently Asked Questions
 						</h1>
 						<p className="text-xl text-muted-foreground text-pretty leading-relaxed">
-							Everything you need to know about learning Python with us
+							{PARENT_FACING_PROMISE}
 						</p>
 					</div>
 

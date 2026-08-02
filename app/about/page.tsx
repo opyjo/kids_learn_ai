@@ -18,12 +18,12 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 import { publicMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = publicMetadata({
 	title: "About Us — Kids Learn AI",
-	description:
-		"Our mission to help every child master Python and understand AI through warm, culturally aware teaching that turns kids into thoughtful creators, not passive users.",
+	description: PARENT_FACING_PROMISE,
 	path: "/about",
 });
 
@@ -102,9 +102,7 @@ export default function AboutPage() {
 						Every child deserves a seat in the future of AI.
 					</h1>
 					<p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed text-pretty">
-						We combine warm teaching, rigorous Python foundations, and honest
-						conversations about artificial intelligence to help curious kids
-						become thoughtful creators—not passive users—of technology.
+						{PARENT_FACING_PROMISE}
 					</p>
 				</section>
 

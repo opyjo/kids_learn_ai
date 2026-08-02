@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import type React from "react";
+import { CampaignAttributionCapture } from "@/components/analytics/campaign-attribution-capture";
 import { GoogleAnalyticsEvents } from "@/components/analytics/google-analytics-events";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -50,6 +51,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+				<CampaignAttributionCapture />
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"

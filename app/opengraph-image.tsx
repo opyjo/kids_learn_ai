@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-	"Kids Learn AI — live Python and AI classes for kids ages 9 to 13";
+	"Kids Learn AI — live online Python and responsible AI classes for Canadian kids ages 9 to 13";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -91,7 +91,7 @@ export default function OpenGraphImage() {
 							letterSpacing: -2,
 						}}
 					>
-						Real Python skills. Thoughtful AI learning.
+						Live Python & responsible AI classes.
 					</div>
 					<div
 						style={{
@@ -102,7 +102,8 @@ export default function OpenGraphImage() {
 							color: "rgb(73, 82, 108)",
 						}}
 					>
-						Live online classes for kids ages 9–13.
+						Canadian kids ages 9–13 · Small groups · Real projects · First class
+						free
 					</div>
 				</div>
 				<div

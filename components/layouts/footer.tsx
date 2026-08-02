@@ -1,6 +1,7 @@
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 
 export const Footer = () => {
 	return (
@@ -19,8 +20,7 @@ export const Footer = () => {
 							<span className="text-xl font-bold">Kids Learn AI</span>
 						</div>
 						<p className="text-muted-foreground leading-relaxed">
-							Helping kids build a rock-solid Python foundation so they can grow
-							into confident AI creators.
+							{PARENT_FACING_PROMISE}
 						</p>
 					</div>
 

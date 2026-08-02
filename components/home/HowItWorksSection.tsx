@@ -8,7 +8,7 @@ import { StaggerContainer, StaggerItem } from "@/components/ui/motion";
 const STEPS = [
 	{
 		number: 1,
-		title: "Book a free trial",
+		title: "Book a free first class",
 		icon: CalendarCheck,
 		description:
 			"Pick a class time on our inquiry form. No card, no commitment.",
