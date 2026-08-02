@@ -12,6 +12,7 @@ import {
 	LayoutDashboard,
 	Mail,
 	Plus,
+	Target,
 	Trophy,
 	Users,
 } from "lucide-react";
@@ -80,6 +81,12 @@ const adminNavItems = [
 		href: "/admin/teacher-notes",
 		label: "Teacher Notes",
 		icon: FileText,
+	},
+	{
+		section: "Insights",
+		href: "/admin/marketing",
+		label: "Growth Plan",
+		icon: Target,
 	},
 	{
 		section: "Insights",
