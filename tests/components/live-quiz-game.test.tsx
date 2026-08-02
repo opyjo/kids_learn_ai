@@ -136,6 +136,14 @@ function hostGame(status: "question" | "paused" | "review" = "question") {
 						answers: [],
 					}
 				: null,
+		hostAnswerKey: {
+			correctAnswer: "The length",
+			explanation: "len() counts items.",
+		},
+		hostNextQuestion: {
+			question: "Which loop repeats while a condition is true?",
+			questionType: "multiple_choice",
+		},
 		personalResult: null,
 		hostMetrics: {
 			totalPlayers: 3,
@@ -208,7 +216,140 @@ describe("LiveQuizGame resilient host controls", () => {
 		expect(
 			screen.getByRole("button", { name: "Add 10 seconds" }),
 		).toBeVisible();
-		expect(screen.getByText(/answers are safe/i)).toBeInTheDocument();
+		expect(
+			screen.getByText(/students cannot answer until you resume/i),
+		).toBeInTheDocument();
+	});
+
+	it("shows the host the live question with the correct answer highlighted", async () => {
+		mockHostFetch();
+
+		render(<LiveQuizGame code="ABC123" />);
+
+		expect(
+			await screen.findByText("What does len() return?"),
+		).toBeInTheDocument();
+		// Options also appear in the anonymous-answer distribution, so match all.
+		expect(screen.getAllByText("The length").length).toBeGreaterThan(0);
+		expect(screen.getAllByText("The last item").length).toBeGreaterThan(0);
+		expect(screen.getByText("len() counts items.")).toBeInTheDocument();
+		expect(
+			screen.getByText(/only you can see the answer key/i),
+		).toBeInTheDocument();
+		// The host reads the question — they must not be able to answer it.
+		expect(
+			screen.queryByRole("button", { name: "Lock answer" }),
+		).not.toBeInTheDocument();
+	});
+
+	it("hides the answer key and distribution in projector mode", async () => {
+		mockHostFetch();
+
+		render(<LiveQuizGame code="ABC123" />);
+
+		expect(await screen.findByText("len() counts items.")).toBeInTheDocument();
+		expect(screen.getByText("Anonymous answers")).toBeInTheDocument();
+
+		fireEvent.click(
+			screen.getByRole("switch", { name: /hide the answer key/i }),
+		);
+
+		expect(screen.queryByText("len() counts items.")).not.toBeInTheDocument();
+		expect(screen.queryByText("Anonymous answers")).not.toBeInTheDocument();
+		expect(screen.queryByText("Up next")).not.toBeInTheDocument();
+		expect(
+			screen.getByText(/answer key is hidden from this screen/i),
+		).toBeInTheDocument();
+		// Options stay visible so the class can read them from the shared screen.
+		expect(screen.getByText("The length")).toBeInTheDocument();
+		expect(screen.getByText("The last item")).toBeInTheDocument();
+	});
+
+	it("previews the next question for the host", async () => {
+		mockHostFetch();
+
+		render(<LiveQuizGame code="ABC123" />);
+
+		expect(await screen.findByText("Up next")).toBeInTheDocument();
+		expect(
+			screen.getByText("Which loop repeats while a condition is true?"),
+		).toBeInTheDocument();
+	});
+
+	it("signals the host when every student has answered", async () => {
+		const game = hostGame();
+		game.hostMetrics.answeredCount = 3;
+		vi.spyOn(globalThis, "fetch").mockResolvedValue(
+			new Response(JSON.stringify(game), { status: 200 }),
+		);
+
+		render(<LiveQuizGame code="ABC123" />);
+
+		expect(await screen.findByText("All 3 answered!")).toBeInTheDocument();
+		expect(
+			screen.getByRole("button", {
+				name: /everyone answered — lock and reveal/i,
+			}),
+		).toBeVisible();
+	});
+
+	it("asks for confirmation before ending the game", async () => {
+		const fetchMock = mockHostFetch();
+
+		render(<LiveQuizGame code="ABC123" />);
+
+		fireEvent.click(await screen.findByRole("button", { name: "End game" }));
+		expect(patchBodies(fetchMock)).not.toContainEqual(
+			expect.objectContaining({ action: "finish" }),
+		);
+
+		fireEvent.click(
+			await screen.findByRole("button", { name: "Yes, end the game" }),
+		);
+		await waitFor(() =>
+			expect(patchBodies(fetchMock)).toContainEqual({
+				action: "finish",
+				version: 4,
+			}),
+		);
+	});
+});
+
+describe("LiveQuizGame student question states", () => {
+	it("tells the student time is up instead of showing disabled inputs", async () => {
+		const base = hostGame();
+		const game = {
+			...base,
+			game: {
+				...base.game,
+				questionDeadlineAt: new Date(Date.now() - 5_000).toISOString(),
+			},
+			isHost: false,
+			hostMetrics: null,
+			hostAnswerKey: null,
+			hostNextQuestion: null,
+			player: {
+				id: "player-1",
+				team_id: null,
+				display_name: "Ada L.",
+				fifty_fifty_available: true,
+				hint_available: true,
+				second_chance_available: true,
+			},
+		};
+		vi.spyOn(globalThis, "fetch").mockResolvedValue(
+			new Response(JSON.stringify(game), { status: 200 }),
+		);
+
+		render(<LiveQuizGame code="ABC123" />);
+
+		expect(await screen.findByText("Time's up!")).toBeInTheDocument();
+		expect(
+			screen.getByText(/your teacher will reveal the answer/i),
+		).toBeInTheDocument();
+		expect(
+			screen.queryByRole("button", { name: "Lock answer" }),
+		).not.toBeInTheDocument();
 	});
 });
 

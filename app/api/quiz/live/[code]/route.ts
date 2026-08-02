@@ -133,6 +133,9 @@ export async function GET(_request: NextRequest, { params }: Context) {
 	const question = (questions || [])[loaded.game.current_question_index] as
 		| QuizQuestionRecord
 		| undefined;
+	const nextQuestion = (questions || [])[
+		loaded.game.current_question_index + 1
+	] as QuizQuestionRecord | undefined;
 	let firstAnswers: {
 		player_id: string;
 		answer: string | string[];
@@ -253,6 +256,23 @@ export async function GET(_request: NextRequest, { params }: Context) {
 		// Hints are a paid power-up in live games, so they never ride along on
 		// the question payload — the powerup action returns them after purchase.
 		question: question ? { ...sanitizeQuestion(question), hint: null } : null,
+		// The host steers the class while answers are still hidden from
+		// students, so only they receive the answer key.
+		hostAnswerKey:
+			loaded.isHost && question
+				? {
+						correctAnswer: question.correct_answer,
+						explanation: question.explanation,
+					}
+				: null,
+		// A one-line preview so the host can set up context before advancing.
+		hostNextQuestion:
+			loaded.isHost && nextQuestion
+				? {
+						question: nextQuestion.question,
+						questionType: nextQuestion.question_type,
+					}
+				: null,
 		review,
 		hostMetrics,
 	});

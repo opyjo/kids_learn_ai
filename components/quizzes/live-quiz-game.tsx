@@ -1,6 +1,7 @@
 "use client";
 
 import {
+	CheckCircle2,
 	Clock,
 	Gamepad2,
 	Lightbulb,
@@ -9,6 +10,7 @@ import {
 	Pause,
 	Play,
 	Plus,
+	Projector,
 	RefreshCcw,
 	RotateCcw,
 	ShieldCheck,
@@ -23,6 +25,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { QuestionInput } from "@/components/quizzes/question-input";
 import { SoloReview } from "@/components/quizzes/solo-review";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -95,6 +108,14 @@ interface GameState {
 		explanation: string;
 		answers: { answer: string | string[]; correct: boolean }[];
 	} | null;
+	hostAnswerKey: {
+		correctAnswer: string | string[];
+		explanation: string | null;
+	} | null;
+	hostNextQuestion: {
+		question: string;
+		questionType: string;
+	} | null;
 	personalResult: PersonalLiveResult | null;
 	hostMetrics: {
 		totalPlayers: number;
@@ -129,6 +150,9 @@ export function LiveQuizGame({ code }: { code: string }) {
 	>("connecting");
 	const [heartbeatHealthy, setHeartbeatHealthy] = useState(true);
 	const [pendingAction, setPendingAction] = useState<string | null>(null);
+	// Projector mode hides the answer key so the host can share their screen
+	// with the class. Local state only — it never changes what the server sends.
+	const [projectorMode, setProjectorMode] = useState(false);
 	const startedAt = useRef(Date.now());
 	const load = useCallback(async () => {
 		try {
@@ -378,6 +402,15 @@ export function LiveQuizGame({ code }: { code: string }) {
 					100,
 			)
 		: 0;
+	const everyoneAnswered =
+		state.game.status === "question" &&
+		(state.hostMetrics?.totalPlayers || 0) > 0 &&
+		(state.hostMetrics?.answeredCount || 0) >=
+			(state.hostMetrics?.totalPlayers || 0);
+	const timerUrgent =
+		state.game.status === "question" &&
+		remainingSeconds > 0 &&
+		remainingSeconds <= 5;
 
 	return (
 		<div className="space-y-6">
@@ -402,6 +435,15 @@ export function LiveQuizGame({ code }: { code: string }) {
 										{liveConnectionHealthy
 											? "Live connection healthy"
 											: "Reconnecting — polling keeps the game recoverable"}
+									</span>
+								</div>
+							)}
+							{!state.isHost && state.player && !liveConnectionHealthy && (
+								<div className="mt-2 flex items-center gap-2 text-sm text-purple-50">
+									<WifiOff className="h-4 w-4" aria-hidden="true" />
+									<span aria-live="polite">
+										Reconnecting — hang tight, your game will catch up on its
+										own.
 									</span>
 								</div>
 							)}
@@ -601,20 +643,47 @@ export function LiveQuizGame({ code }: { code: string }) {
 						<Card>
 							<CardHeader>
 								<div className="flex items-center justify-between">
-									<Badge>Question {state.game.currentQuestionIndex + 1}</Badge>
-									<span className="flex items-center gap-1 text-sm text-muted-foreground">
-										<Clock className="h-4 w-4" />
+									<Badge>
+										Question {state.game.currentQuestionIndex + 1} of{" "}
+										{state.game.totalQuestions}
+									</Badge>
+									<span
+										className={
+											timerUrgent
+												? "flex animate-pulse items-center gap-1 text-2xl font-bold text-red-600"
+												: projectorMode
+													? "flex items-center gap-1 text-2xl font-bold"
+													: "flex items-center gap-1 text-sm text-muted-foreground"
+										}
+									>
+										<Clock
+											className={
+												projectorMode || timerUrgent ? "h-6 w-6" : "h-4 w-4"
+											}
+										/>
 										{remainingSeconds}s
 									</span>
 								</div>
-								<CardTitle className="pt-3 text-xl">
+								<CardTitle
+									className={projectorMode ? "pt-3 text-3xl" : "pt-3 text-xl"}
+								>
 									{state.question.question}
 								</CardTitle>
 							</CardHeader>
 							<CardContent className="space-y-4">
 								{state.game.status === "question" &&
 								state.player &&
-								!answerResult ? (
+								!answerResult &&
+								remainingSeconds === 0 ? (
+									<div className="rounded-xl bg-muted p-6 text-center">
+										<p className="text-2xl font-bold">Time's up!</p>
+										<p className="mt-1 text-muted-foreground">
+											Watch the board — your teacher will reveal the answer.
+										</p>
+									</div>
+								) : state.game.status === "question" &&
+									state.player &&
+									!answerResult ? (
 									<>
 										<QuestionInput
 											question={state.question}
@@ -678,10 +747,21 @@ export function LiveQuizGame({ code }: { code: string }) {
 									state.player &&
 									answerResult ? (
 									<div className="rounded-xl bg-muted p-6 text-center">
-										<p className="text-2xl font-bold">
+										{answerResult.correct && (
+											<p className="animate-bounce text-4xl" aria-hidden="true">
+												🎉
+											</p>
+										)}
+										<p
+											className={
+												answerResult.correct
+													? "text-2xl font-bold text-green-600"
+													: "text-2xl font-bold"
+											}
+										>
 											{answerResult.correct
 												? `Correct! +${answerResult.points}`
-												: "Not quite"}
+												: "Not quite — the answer is coming up!"}
 										</p>
 										{state.game.powerupsEnabled &&
 											answerResult.canSecondChance &&
@@ -698,6 +778,15 @@ export function LiveQuizGame({ code }: { code: string }) {
 												</Button>
 											)}
 									</div>
+								) : state.isHost &&
+									state.hostAnswerKey &&
+									["question", "paused"].includes(state.game.status) ? (
+									<HostAnswerKey
+										question={state.question}
+										answerKey={state.hostAnswerKey}
+										paused={state.game.status === "paused"}
+										projector={projectorMode}
+									/>
 								) : state.review ? (
 									<div className="space-y-3">
 										<p className="text-xl font-semibold">
@@ -738,9 +827,17 @@ export function LiveQuizGame({ code }: { code: string }) {
 										<div className="space-y-3 rounded-lg border p-3">
 											<div className="flex items-center justify-between text-sm">
 												<span className="font-medium">Class progress</span>
-												<span aria-live="polite">
-													{state.hostMetrics?.answeredCount || 0}/
-													{state.hostMetrics?.totalPlayers || 0} answered
+												<span
+													aria-live="polite"
+													className={
+														everyoneAnswered
+															? "font-semibold text-green-600"
+															: undefined
+													}
+												>
+													{everyoneAnswered
+														? `All ${state.hostMetrics?.totalPlayers} answered!`
+														: `${state.hostMetrics?.answeredCount || 0}/${state.hostMetrics?.totalPlayers || 0} answered`}
 												</span>
 											</div>
 											<Progress
@@ -755,38 +852,58 @@ export function LiveQuizGame({ code }: { code: string }) {
 												<span>{remainingSeconds}s remaining</span>
 											</div>
 										</div>
-										{Boolean(state.hostMetrics?.distribution.length) && (
-											<div className="space-y-2 rounded-lg border p-3">
-												<p className="text-sm font-medium">Anonymous answers</p>
-												{state.hostMetrics?.distribution
-													.slice(0, 5)
-													.map((item) => {
-														const percentage = state.hostMetrics?.answeredCount
-															? Math.round(
-																	(item.count /
-																		state.hostMetrics.answeredCount) *
-																		100,
-																)
-															: 0;
-														return (
-															<div key={item.answer} className="space-y-1">
-																<div className="flex justify-between gap-3 text-xs">
-																	<span
-																		className="truncate"
-																		title={item.answer}
-																	>
-																		{item.answer}
-																	</span>
-																	<span>
-																		{item.count} · {percentage}%
-																	</span>
-																</div>
-																<Progress value={percentage} />
-															</div>
-														);
-													})}
+										<div className="flex items-center justify-between rounded-lg border p-3">
+											<div>
+												<p className="flex items-center gap-2 text-sm font-medium">
+													<Projector className="h-4 w-4" aria-hidden="true" />
+													Projector mode
+												</p>
+												<p className="text-xs text-muted-foreground">
+													Hide the answer key while sharing this screen.
+												</p>
 											</div>
-										)}
+											<Switch
+												checked={projectorMode}
+												onCheckedChange={setProjectorMode}
+												aria-label="Hide the answer key while sharing this screen"
+											/>
+										</div>
+										{!projectorMode &&
+											Boolean(state.hostMetrics?.distribution.length) && (
+												<div className="space-y-2 rounded-lg border p-3">
+													<p className="text-sm font-medium">
+														Anonymous answers
+													</p>
+													{state.hostMetrics?.distribution
+														.slice(0, 5)
+														.map((item) => {
+															const percentage = state.hostMetrics
+																?.answeredCount
+																? Math.round(
+																		(item.count /
+																			state.hostMetrics.answeredCount) *
+																			100,
+																	)
+																: 0;
+															return (
+																<div key={item.answer} className="space-y-1">
+																	<div className="flex justify-between gap-3 text-xs">
+																		<span
+																			className="truncate"
+																			title={item.answer}
+																		>
+																			{item.answer}
+																		</span>
+																		<span>
+																			{item.count} · {percentage}%
+																		</span>
+																	</div>
+																	<Progress value={percentage} />
+																</div>
+															);
+														})}
+												</div>
+											)}
 										<div className="flex items-center justify-between rounded-lg border p-3">
 											<div>
 												<p className="text-sm font-medium">Auto-reveal</p>
@@ -803,6 +920,16 @@ export function LiveQuizGame({ code }: { code: string }) {
 												aria-label="Reveal the answer automatically when the timer ends"
 											/>
 										</div>
+										{!projectorMode && state.hostNextQuestion && (
+											<div className="rounded-lg border p-3">
+												<p className="text-xs font-medium uppercase text-muted-foreground">
+													Up next
+												</p>
+												<p className="mt-1 text-sm">
+													{state.hostNextQuestion.question}
+												</p>
+											</div>
+										)}
 										{state.game.status === "question" && (
 											<>
 												<div className="grid grid-cols-2 gap-2">
@@ -826,12 +953,18 @@ export function LiveQuizGame({ code }: { code: string }) {
 													</Button>
 												</div>
 												<Button
-													className="w-full"
+													className={
+														everyoneAnswered
+															? "w-full animate-pulse bg-green-600 hover:bg-green-700"
+															: "w-full"
+													}
 													disabled={Boolean(pendingAction)}
 													onClick={() => hostAction("review")}
 												>
 													<LockKeyhole className="mr-2 h-4 w-4" />
-													Lock and reveal
+													{everyoneAnswered
+														? "Everyone answered — lock and reveal"
+														: "Lock and reveal"}
 												</Button>
 												<Button
 													className="w-full"
@@ -900,14 +1033,36 @@ export function LiveQuizGame({ code }: { code: string }) {
 												</Button>
 											</>
 										)}
-										<Button
-											className="w-full"
-											variant="destructive"
-											disabled={Boolean(pendingAction)}
-											onClick={() => hostAction("finish")}
-										>
-											End game
-										</Button>
+										<AlertDialog>
+											<AlertDialogTrigger asChild>
+												<Button
+													className="w-full"
+													variant="destructive"
+													disabled={Boolean(pendingAction)}
+												>
+													End game
+												</Button>
+											</AlertDialogTrigger>
+											<AlertDialogContent>
+												<AlertDialogHeader>
+													<AlertDialogTitle>
+														End the game for everyone?
+													</AlertDialogTitle>
+													<AlertDialogDescription>
+														All students go straight to the final podium with
+														the scores as they stand. This cannot be undone.
+													</AlertDialogDescription>
+												</AlertDialogHeader>
+												<AlertDialogFooter>
+													<AlertDialogCancel>Keep playing</AlertDialogCancel>
+													<AlertDialogAction
+														onClick={() => hostAction("finish")}
+													>
+														Yes, end the game
+													</AlertDialogAction>
+												</AlertDialogFooter>
+											</AlertDialogContent>
+										</AlertDialog>
 									</>
 								) : (
 									<p className="text-sm text-muted-foreground">
@@ -933,6 +1088,7 @@ export function LiveQuizGame({ code }: { code: string }) {
 						{showIndividualLeaderboard && (
 							<Leaderboard
 								title="Individual leaders"
+								podium
 								entries={state.leaderboard.map((entry) => ({
 									id: entry.id,
 									label: entry.displayName,
@@ -943,6 +1099,7 @@ export function LiveQuizGame({ code }: { code: string }) {
 						{(state.game.teamMode || state.game.quizType === "term_finale") && (
 							<Leaderboard
 								title="Team leaders"
+								podium
 								entries={state.teamLeaderboard.map((entry) => ({
 									id: entry.id,
 									label: entry.name,
@@ -991,6 +1148,95 @@ export function LiveQuizGame({ code }: { code: string }) {
 	);
 }
 
+function HostAnswerKey({
+	question,
+	answerKey,
+	paused,
+	projector,
+}: {
+	question: StudentQuestion;
+	answerKey: { correctAnswer: string | string[]; explanation: string | null };
+	paused: boolean;
+	projector: boolean;
+}) {
+	const correctAnswers = Array.isArray(answerKey.correctAnswer)
+		? answerKey.correctAnswer
+		: [answerKey.correctAnswer];
+	// On a shared screen the lines stay in the scrambled order students see;
+	// numbering them would give away the solution.
+	const codeLines = projector ? question.options : correctAnswers;
+	return (
+		<div className="space-y-3">
+			{question.question_type === "code_ordering" ? (
+				<ol
+					className="space-y-2"
+					aria-label={projector ? "Code lines to order" : "Correct code order"}
+				>
+					{codeLines.map((line, index) => (
+						<li
+							key={line}
+							className={`flex items-center gap-2 rounded-lg border p-2 ${
+								projector ? "bg-muted/30" : "border-green-200 bg-green-50"
+							}`}
+						>
+							{!projector && (
+								<span className="w-5 text-center text-xs font-semibold text-green-700">
+									{index + 1}
+								</span>
+							)}
+							<code
+								className={`min-w-0 flex-1 whitespace-pre-wrap ${
+									projector ? "text-base" : "text-sm"
+								}`}
+							>
+								{line}
+							</code>
+						</li>
+					))}
+				</ol>
+			) : (
+				<div className="grid gap-2 sm:grid-cols-2">
+					{question.options.map((option) => {
+						const correct = !projector && correctAnswers.includes(option);
+						return (
+							<div
+								key={option}
+								className={`flex min-h-12 items-center gap-2 rounded-lg border p-3 ${
+									projector ? "text-base" : "text-sm"
+								} ${
+									correct
+										? "border-green-300 bg-green-50 font-medium text-green-900"
+										: "bg-muted/30"
+								}`}
+							>
+								{correct && (
+									<CheckCircle2
+										className="h-4 w-4 shrink-0 text-green-600"
+										aria-hidden="true"
+									/>
+								)}
+								<span className="whitespace-normal">{option}</span>
+							</div>
+						);
+					})}
+				</div>
+			)}
+			{!projector && answerKey.explanation && (
+				<p className="rounded-lg bg-muted/50 p-3 text-sm text-muted-foreground">
+					{answerKey.explanation}
+				</p>
+			)}
+			<p className="text-xs text-muted-foreground">
+				{paused
+					? "Question paused — students cannot answer until you resume."
+					: projector
+						? "Projector mode is on — the answer key is hidden from this screen."
+						: "Only you can see the answer key. Students see the options without the highlight."}
+			</p>
+		</div>
+	);
+}
+
 function PersonalResult({ result }: { result: PersonalLiveResult }) {
 	return (
 		<Card>
@@ -1022,12 +1268,16 @@ function PersonalResult({ result }: { result: PersonalLiveResult }) {
 	);
 }
 
+const PODIUM_MEDALS = ["🥇", "🥈", "🥉"];
+
 function Leaderboard({
 	title,
 	entries,
+	podium = false,
 }: {
 	title: string;
 	entries: { id: string; label: string; score: number }[];
+	podium?: boolean;
 }) {
 	return (
 		<Card>
@@ -1039,17 +1289,31 @@ function Leaderboard({
 			</CardHeader>
 			<CardContent className="space-y-2">
 				{entries.length ? (
-					entries.slice(0, 10).map((entry, index) => (
-						<div
-							key={entry.id}
-							className="flex justify-between rounded-lg bg-muted/50 p-2"
-						>
-							<span>
-								{index + 1}. {entry.label}
-							</span>
-							<strong>{entry.score}</strong>
-						</div>
-					))
+					entries.slice(0, 10).map((entry, index) => {
+						const medal = podium ? PODIUM_MEDALS[index] : undefined;
+						return (
+							<div
+								key={entry.id}
+								className={
+									medal
+										? "flex justify-between rounded-lg border border-amber-200 bg-amber-50 p-3 text-base font-medium"
+										: "flex justify-between rounded-lg bg-muted/50 p-2"
+								}
+							>
+								<span>
+									{medal ? (
+										<span className="mr-1" aria-hidden="true">
+											{medal}
+										</span>
+									) : (
+										`${index + 1}. `
+									)}
+									{entry.label}
+								</span>
+								<strong>{entry.score}</strong>
+							</div>
+						);
+					})
 				) : (
 					<p className="text-sm text-muted-foreground">No scores yet.</p>
 				)}
