@@ -13,12 +13,12 @@ import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 import { publicMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = publicMetadata({
-	title: "Book Your Free Trial Class — Kids Learn AI",
-	description:
-		"Fill out our quick form to book your child's free trial Python & AI class. We'll contact you within 24 hours to schedule a convenient time. No commitment.",
+	title: "Book Your Free First Class — Kids Learn AI",
+	description: PARENT_FACING_PROMISE,
 	path: "/inquiry/book",
 });
 
@@ -42,14 +42,14 @@ export default function BookTrialPage() {
 				<div className="text-center mb-10 max-w-2xl mx-auto">
 					<div className="inline-flex items-center gap-2 bg-accent/10 text-accent rounded-full px-4 py-2 mb-6">
 						<Gift className="w-4 h-4" />
-						<span className="text-sm font-medium">First Class FREE</span>
+						<span className="text-sm font-medium">Free First Class</span>
 					</div>
 					<h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-						Book Your Free Trial Class
+						Book Your Free First Class
 					</h1>
 					<p className="text-lg text-muted-foreground">
-						Fill out the form below and we'll contact you within 24 hours to
-						schedule your child's free trial class.
+						{PARENT_FACING_PROMISE} Fill out the form and we'll contact you
+						within 24 hours to schedule it.
 					</p>
 				</div>
 
@@ -81,7 +81,7 @@ export default function BookTrialPage() {
 							<p className="text-sm text-muted-foreground">
 								All fields marked with <span className="text-red-500">*</span>{" "}
 								are required. We'll reach out to schedule a convenient time for
-								your child's free trial.
+								your child's free first class.
 							</p>
 						</div>
 						<CourseInquiryForm />

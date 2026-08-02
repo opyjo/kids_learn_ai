@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 
 export const SITE_NAME = "Kids Learn AI";
 // Canonical search URLs intentionally stay fixed even when local or preview
 // environments use a different callback/origin URL.
 export const SITE_URL = "https://www.kidslearnai.ca";
-export const SITE_DESCRIPTION =
-	"Kids Learn AI offers live online Python and AI classes for kids ages 9-13 through hands-on projects and supportive instructors.";
+export const SITE_DESCRIPTION = PARENT_FACING_PROMISE;
 export const ORGANIZATION_AUTHOR = "Kids Learn AI Education Team";
 export const SOCIAL_IMAGE_PATH = "/opengraph-image";
 
@@ -51,7 +51,7 @@ export function publicMetadata({
 					url: absoluteUrl(SOCIAL_IMAGE_PATH),
 					width: 1200,
 					height: 630,
-					alt: "Kids Learn AI — live Python and AI classes for kids ages 9 to 13",
+					alt: "Kids Learn AI — live online Python and responsible AI classes for Canadian kids ages 9 to 13",
 				},
 			],
 		},

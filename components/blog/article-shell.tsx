@@ -140,7 +140,7 @@ export function ArticleShell({
 								href="/inquiry"
 								className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold text-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-background focus-visible:ring-offset-4 focus-visible:ring-offset-foreground"
 							>
-								Book a free trial
+								Book a free first class
 								<ArrowRight className="h-4 w-4" />
 							</Link>
 						</div>

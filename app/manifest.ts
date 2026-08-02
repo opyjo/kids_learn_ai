@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
+import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {
 		name: "Kids Learn AI",
 		short_name: "Kids Learn AI",
-		description:
-			"Live online Python and AI classes for kids ages 9-13, with hands-on projects and supportive instructors.",
+		description: PARENT_FACING_PROMISE,
 		start_url: "/",
 		display: "standalone",
 		background_color: "#ffffff",

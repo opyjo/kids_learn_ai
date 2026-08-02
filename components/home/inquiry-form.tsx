@@ -26,6 +26,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { getCampaignAttributionForInquiry } from "@/lib/marketing/campaign-attribution-client";
 
 const inquiryFormSchema = z.object({
 	parentName: z
@@ -86,7 +87,10 @@ export const CourseInquiryForm = () => {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(data),
+				body: JSON.stringify({
+					...data,
+					attribution: getCampaignAttributionForInquiry(),
+				}),
 			});
 
 			const result = await response.json();
@@ -351,7 +355,7 @@ export const CourseInquiryForm = () => {
 					) : (
 						<>
 							<Sparkles className="mr-2 h-5 w-5" />
-							Book My Free Trial Class
+							Book My Free First Class
 						</>
 					)}
 				</Button>
@@ -362,7 +366,7 @@ export const CourseInquiryForm = () => {
 						<p className="font-medium">Thank you for your interest!</p>
 						<p className="mt-1">
 							We've received your inquiry and will contact you within 24 hours
-							to schedule your child's free trial class.
+							to schedule your child's free first class.
 						</p>
 					</div>
 				)}

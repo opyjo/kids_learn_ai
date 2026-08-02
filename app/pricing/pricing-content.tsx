@@ -26,6 +26,11 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import {
+	FREE_FIRST_CLASS_CTA,
+	PARENT_FACING_HEADLINE,
+	PARENT_FACING_SUPPORTING_COPY,
+} from "@/lib/marketing/positioning";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { PaymentInstructions } from "./payment-instructions";
 
@@ -65,14 +70,13 @@ export function PricingContent() {
 				<div className="text-center mb-16">
 					<Badge className="mb-4 bg-green-100 text-green-700 border-green-300 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700 rounded-full px-4 py-2">
 						<Sparkles className="w-4 h-4 inline mr-2" />
-						First Class FREE - No Commitment
+						Free First Class—No Commitment
 					</Badge>
 					<h1 className="text-4xl sm:text-5xl font-bold mb-4">
-						Live Python & AI Classes for Kids
+						{PARENT_FACING_HEADLINE}
 					</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-						Expert-led 8-10 week program. Try your first class free, then decide
-						if it's right for your child.
+						{PARENT_FACING_SUPPORTING_COPY}
 					</p>
 				</div>
 
@@ -161,7 +165,7 @@ export function PricingContent() {
 								<Button asChild size="lg" className="flex-1">
 									<Link href="/inquiry">
 										<Sparkles className="mr-2 h-5 w-5" />
-										Book Free Trial Class
+										{FREE_FIRST_CLASS_CTA}
 									</Link>
 								</Button>
 								<Button
@@ -184,7 +188,7 @@ export function PricingContent() {
 				{/* Free vs Paid Comparison */}
 				<div className="max-w-4xl mx-auto mb-16">
 					<h2 className="text-3xl font-bold text-center mb-8">
-						Free Trial vs Full Program
+						Free First Class vs Full Program
 					</h2>
 					<Card>
 						<CardContent className="p-0">
@@ -195,7 +199,7 @@ export function PricingContent() {
 											<tr className="border-b">
 												<th className="text-left p-4 font-semibold">Feature</th>
 												<th className="text-center p-4 font-semibold">
-													Free Trial
+													Free First Class
 												</th>
 												<th className="text-center p-4 font-semibold bg-primary/5">
 													Full Program (
@@ -311,7 +315,7 @@ export function PricingContent() {
 						<Card>
 							<CardHeader>
 								<CardTitle className="text-lg">
-									How does the free trial work?
+									How does the free first class work?
 								</CardTitle>
 							</CardHeader>
 							<CardContent>
@@ -362,7 +366,7 @@ export function PricingContent() {
 							</CardHeader>
 							<CardContent>
 								<p className="text-muted-foreground">
-									That's why we offer the free trial! Try before you pay. If
+									That's why the first class is free! Try before you pay. If
 									after paying you have concerns within the first 2 weeks,
 									contact us and we'll work with you to find a solution.
 								</p>
@@ -375,12 +379,12 @@ export function PricingContent() {
 				<div className="text-center mt-16 mb-12 p-8 bg-gradient-to-r from-primary/10 to-accent/10 rounded-3xl max-w-3xl mx-auto">
 					<h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
 					<p className="text-xl text-muted-foreground mb-6">
-						Book your child's free trial class today
+						Book your child's free first class today
 					</p>
 					<Button asChild size="lg">
 						<Link href="/inquiry">
 							<Sparkles className="mr-2 h-5 w-5" />
-							Book Free Trial Class
+							{FREE_FIRST_CLASS_CTA}
 						</Link>
 					</Button>
 				</div>
