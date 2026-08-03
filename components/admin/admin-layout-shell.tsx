@@ -12,6 +12,7 @@ import {
 	LayoutDashboard,
 	Mail,
 	Plus,
+	Presentation,
 	Target,
 	Trophy,
 	Users,
@@ -81,6 +82,12 @@ const adminNavItems = [
 		href: "/admin/teacher-notes",
 		label: "Teacher Notes",
 		icon: FileText,
+	},
+	{
+		section: "Insights",
+		href: "/admin/investor-deck",
+		label: "Investor Deck",
+		icon: Presentation,
 	},
 	{
 		section: "Insights",
