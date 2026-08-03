@@ -1,5 +1,6 @@
 import {
 	Compass,
+	ExternalLink,
 	GraduationCap,
 	Heart,
 	Rocket,
@@ -7,8 +8,10 @@ import {
 	Sparkles,
 } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +22,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
-import { publicMetadata } from "@/lib/seo";
+import { absoluteUrl, publicMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = publicMetadata({
 	title: "About Us — Kids Learn AI",
@@ -91,6 +94,18 @@ const commitments = [
 export default function AboutPage() {
 	return (
 		<MainLayout>
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "Person",
+					"@id": `${SITE_URL}/about#opeyemi-ojo`,
+					name: "Opeyemi Ojo",
+					jobTitle: "Founder & Lead Instructor",
+					image: absoluteUrl("/images/opeyemi-ojo-founder.jpg"),
+					url: absoluteUrl("/about"),
+					worksFor: { "@id": `${SITE_URL}/#organization` },
+				}}
+			/>
 			<article className="container mx-auto px-4 py-20 lg:py-28">
 				{/* Hero */}
 				<section className="max-w-4xl mx-auto text-center mb-20">
@@ -144,6 +159,80 @@ export default function AboutPage() {
 						like a friend cheering you on, backed by curriculum rigour and
 						real-world relevance.
 					</p>
+				</section>
+
+				{/* Founder note */}
+				<section
+					aria-labelledby="founder-heading"
+					className="relative max-w-5xl mx-auto mb-20 overflow-hidden rounded-3xl border-2 bg-card shadow-xl"
+				>
+					<div
+						aria-hidden="true"
+						className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/10 blur-3xl"
+					/>
+					<div className="grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+						<div className="relative min-h-[24rem] overflow-hidden bg-primary/10 sm:min-h-[30rem] lg:min-h-[34rem]">
+							<Image
+								src="/images/opeyemi-ojo-founder.jpg"
+								alt="Opeyemi Ojo, founder and lead instructor at Kids Learn AI"
+								fill
+								sizes="(max-width: 1023px) 100vw, 42vw"
+								className="object-cover object-[50%_30%]"
+							/>
+							<div
+								aria-hidden="true"
+								className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/25 to-transparent lg:hidden"
+							/>
+						</div>
+
+						<div className="relative flex flex-col justify-center p-8 sm:p-10 lg:p-12">
+							<Badge className="mb-6 w-fit rounded-full border-primary/20 bg-primary/10 px-4 py-2 text-primary">
+								A note from the founder
+							</Badge>
+							<span
+								aria-hidden="true"
+								className="mb-1 font-serif text-7xl leading-none text-primary/20"
+							>
+								&ldquo;
+							</span>
+							<h2
+								id="founder-heading"
+								className="text-3xl font-bold leading-tight text-foreground text-balance lg:text-4xl"
+							>
+								Children should understand the technology shaping their world.
+							</h2>
+							<div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+								<p>
+									I created Kids Learn AI to give young learners a welcoming
+									place to build real Python skills, explore AI safely, and grow
+									from curious users into thoughtful creators.
+								</p>
+								<p>
+									As a builder and lead instructor, I bring a practical,
+									child-first approach to every lesson: explain ideas clearly,
+									make space for questions, and help each student turn small
+									wins into lasting confidence.
+								</p>
+							</div>
+
+							<div className="mt-8 border-t border-border pt-6">
+								<p className="text-lg font-bold text-foreground">Opeyemi Ojo</p>
+								<p className="mt-1 text-sm font-medium text-primary">
+									Founder &amp; Lead Instructor
+								</p>
+								<a
+									href="https://brightwick.ca"
+									target="_blank"
+									rel="noreferrer"
+									className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-foreground underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4"
+								>
+									Also creator of Brightwick, a Grades 3–8 learning app
+									<ExternalLink className="h-4 w-4" aria-hidden="true" />
+									<span className="sr-only"> (opens in a new tab)</span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</section>
 
 				{/* Impact Highlights */}
