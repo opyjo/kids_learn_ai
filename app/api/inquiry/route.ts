@@ -1,6 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import {
+	campaignAttributionSchema,
+	campaignAttributionToInquiryColumns,
+	fallbackInquiryAttribution,
+} from "@/lib/marketing/campaign-attribution";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -32,6 +37,7 @@ const inquirySchema = z.object({
 	}),
 	howHeard: z.string().trim().max(200).optional(),
 	questions: z.string().trim().max(1000).optional(),
+	attribution: campaignAttributionSchema.optional(),
 });
 
 // Rate limiting map
@@ -106,6 +112,9 @@ export const POST = async (request: NextRequest) => {
 		// Parse and validate request body
 		const body = await request.json();
 		const validatedData = inquirySchema.parse(body);
+		const attribution =
+			validatedData.attribution ??
+			fallbackInquiryAttribution(request.headers.get("referer"));
 
 		const ageGroupDetails = getAgeGroupDetails(validatedData.ageGroup);
 		const experienceLabel = getExperienceLabel(validatedData.experience);
@@ -114,27 +123,35 @@ export const POST = async (request: NextRequest) => {
 		const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 		const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-		if (supabaseUrl && supabaseAnonKey) {
-			const { createClient } = await import("@supabase/supabase-js");
-			const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-			const { error: dbError } = await supabase.from("inquiries").insert({
-				parent_name: validatedData.parentName,
-				parent_email: validatedData.parentEmail,
-				child_name: validatedData.childName,
-				age_group: validatedData.ageGroup,
-				experience: validatedData.experience,
-				how_heard: validatedData.howHeard || null,
-				questions: validatedData.questions || null,
-			});
-
-			if (dbError) {
-				console.error("Database error saving inquiry:", dbError);
-				// Continue to send email even if DB save fails
-			}
-		} else {
+		if (!supabaseUrl || !supabaseAnonKey) {
 			console.error(
-				"Missing Supabase environment variables - skipping database save",
+				"Missing Supabase environment variables - inquiry cannot be saved",
+			);
+			return NextResponse.json(
+				{ error: "We couldn't save your inquiry. Please try again later." },
+				{ status: 500 },
+			);
+		}
+
+		const { createClient } = await import("@supabase/supabase-js");
+		const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+		const { error: dbError } = await supabase.from("inquiries").insert({
+			parent_name: validatedData.parentName,
+			parent_email: validatedData.parentEmail,
+			child_name: validatedData.childName,
+			age_group: validatedData.ageGroup,
+			experience: validatedData.experience,
+			how_heard: validatedData.howHeard || null,
+			questions: validatedData.questions || null,
+			...campaignAttributionToInquiryColumns(attribution),
+		});
+
+		if (dbError) {
+			console.error("Database error saving inquiry:", dbError);
+			return NextResponse.json(
+				{ error: "We couldn't save your inquiry. Please try again later." },
+				{ status: 500 },
 			);
 		}
 

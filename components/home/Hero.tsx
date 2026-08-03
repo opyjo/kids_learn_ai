@@ -8,6 +8,11 @@ import LiveClassMockup from "@/components/home/LiveClassMockup";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SlideInRight } from "@/components/ui/motion";
+import {
+	FREE_FIRST_CLASS_CTA,
+	PARENT_FACING_HEADLINE,
+	PARENT_FACING_SUPPORTING_COPY,
+} from "@/lib/marketing/positioning";
 
 const Hero = () => {
 	const shouldReduceMotion = useReducedMotion();
@@ -28,15 +33,12 @@ const Hero = () => {
 					</div>
 					<div>
 						<h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-[1.1]">
-							Real Coding Skills, Taught Live.{" "}
-							<span className="text-primary">Python & AI for Kids 9-13.</span>
+							{PARENT_FACING_HEADLINE}
 						</h1>
 					</div>
 					<div>
 						<p className="text-xl lg:text-2xl text-muted-foreground mb-8 text-pretty leading-relaxed">
-							Your child codes along with a live instructor in a small group —
-							real Python, real projects, and a first class that's completely
-							free.
+							{PARENT_FACING_SUPPORTING_COPY}
 						</p>
 					</div>
 					<div>
@@ -59,7 +61,7 @@ const Hero = () => {
 							>
 								<Image
 									src="/brightbyte/pointing.png"
-									alt="Brightbyte pointing to the Book a FREE Trial Class button"
+									alt="Brightbyte pointing to the free first class button"
 									width={72}
 									height={72}
 									className="object-contain drop-shadow-lg"
@@ -71,7 +73,7 @@ const Hero = () => {
 									className="rounded-full bg-[#1565a8] px-8 py-6 text-lg text-white shadow-lg shadow-primary/30 transition-all hover:bg-[#0f538d] hover:shadow-xl hover:shadow-primary/40"
 								>
 									<Sparkles className="mr-2 h-5 w-5" aria-hidden="true" />
-									Book a FREE Trial Class
+									{FREE_FIRST_CLASS_CTA}
 								</Button>
 							</Link>
 							<span className="text-sm text-muted-foreground">
@@ -86,7 +88,7 @@ const Hero = () => {
 									className="h-5 w-5 text-green-600"
 									aria-hidden="true"
 								/>
-								<span>First class FREE - try before you commit</span>
+								<span>Your first class is free—try before you commit</span>
 							</div>
 							<div className="flex items-center gap-2">
 								<CheckCircle

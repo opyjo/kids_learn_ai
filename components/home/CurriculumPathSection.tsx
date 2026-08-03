@@ -151,10 +151,10 @@ const CurriculumPathSection = () => {
 
 				<div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
 					<p className="text-sm text-muted-foreground">
-						New students start with a free trial in Term 1.
+						New students start with a free first class in Term 1.
 					</p>
 					<Button asChild variant="outline" className="rounded-full">
-						<Link href="/inquiry">Book a Free Trial Class</Link>
+						<Link href="/inquiry">Book a Free First Class</Link>
 					</Button>
 				</div>
 			</div>

@@ -22,12 +22,15 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+	FREE_FIRST_CLASS_CTA,
+	PARENT_FACING_PROMISE,
+} from "@/lib/marketing/positioning";
 import { publicMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = publicMetadata({
-	title: "Free Trial Class & Program Details — Kids Learn AI",
-	description:
-		"Try your child's first live Python & AI class free. See our 8-10 week program for ages 9-13, small class sizes, founding rate, and answers to common questions.",
+	title: "Free First Class & Program Details — Kids Learn AI",
+	description: PARENT_FACING_PROMISE,
 	path: "/inquiry",
 });
 
@@ -47,12 +50,11 @@ export default function InquiryPage() {
 						Try Your First Class <span className="text-primary">FREE</span>
 					</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-						See if our live Python & AI classes are the right fit for your
-						child. No commitment required.
+						{PARENT_FACING_PROMISE}
 					</p>
 					<Button asChild size="lg" className="group">
 						<Link href="/inquiry/book">
-							Book Free Trial
+							{FREE_FIRST_CLASS_CTA}
 							<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
 						</Link>
 					</Button>
@@ -184,7 +186,7 @@ export default function InquiryPage() {
 							<Accordion type="single" collapsible className="w-full">
 								<AccordionItem value="trial">
 									<AccordionTrigger>
-										How does the free trial class work?
+										How does the free first class work?
 									</AccordionTrigger>
 									<AccordionContent>
 										Your child can attend their first class completely free with
@@ -224,7 +226,7 @@ export default function InquiryPage() {
 								<AccordionItem value="payment">
 									<AccordionTrigger>When do I pay?</AccordionTrigger>
 									<AccordionContent>
-										Only after your child's free trial class! If you decide to
+										Only after your child's free first class! If you decide to
 										continue, you'll pay the one-time fee of $159.99 CAD for the
 										full 8-10 week program via e-Transfer.
 									</AccordionContent>
@@ -237,12 +239,12 @@ export default function InquiryPage() {
 					<div className="text-center py-8">
 						<h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
 						<p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-							Book your child's free trial class today. No payment required
+							Book your child's free first class today. No payment required
 							until you decide to continue.
 						</p>
 						<Button asChild size="lg" className="group">
 							<Link href="/inquiry/book">
-								Book Free Trial
+								{FREE_FIRST_CLASS_CTA}
 								<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
 							</Link>
 						</Button>

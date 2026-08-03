@@ -79,7 +79,7 @@ const CTASection = () => {
 											className="text-lg px-8 py-6 rounded-full shadow-xl hover:scale-105 transition-transform w-full sm:w-auto"
 										>
 											<Sparkles className="mr-2 h-5 w-5" aria-hidden="true" />
-											Book Free Trial Class
+											Book a Free First Class
 										</Button>
 									</Link>
 									<span className="text-primary-foreground/80 text-sm">

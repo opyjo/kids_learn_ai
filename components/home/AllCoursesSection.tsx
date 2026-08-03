@@ -265,11 +265,11 @@ export const AllCoursesSection = async () => {
 								Start Your Coding Journey Today!
 							</h3>
 							<p className="text-muted-foreground mb-4">
-								Book a free trial class and discover the joy of learning to
+								Book a free first class and discover the joy of learning to
 								code.
 							</p>
 							<Button asChild size="lg" className="rounded-full">
-								<Link href="/inquiry">Book Free Trial Class →</Link>
+								<Link href="/inquiry">Book a Free First Class →</Link>
 							</Button>
 						</CardContent>
 					</Card>
@@ -291,7 +291,7 @@ export const AllCoursesSection = async () => {
 									<Link href="/login">Sign In</Link>
 								</Button>
 								<Button asChild>
-									<Link href="/inquiry">Book Free Trial</Link>
+									<Link href="/inquiry">Book a Free First Class</Link>
 								</Button>
 							</div>
 						</CardContent>

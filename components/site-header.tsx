@@ -866,7 +866,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 										>
 											<Link href="/inquiry" className="flex items-center gap-2">
 												<Sparkles className="h-4 w-4" />
-												Free Trial
+												Free First Class
 											</Link>
 										</Button>
 									</>
@@ -1129,7 +1129,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 																className="flex items-center gap-2 justify-center"
 															>
 																<Sparkles className="h-4 w-4" />
-																Free Trial
+																Free First Class
 															</Link>
 														</Button>
 													</>

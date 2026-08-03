@@ -43,6 +43,14 @@ const getExperienceLabel = (experience: string): string => {
 	}
 };
 
+const getReferrerLabel = (referrer: string) => {
+	try {
+		return new URL(referrer).hostname;
+	} catch {
+		return referrer;
+	}
+};
+
 interface Inquiry {
 	id: string;
 	parent_name: string;
@@ -61,6 +69,14 @@ interface Inquiry {
 	parent_profile_id: string | null;
 	course_id: string | null;
 	onboarded_at: string | null;
+	utm_source: string | null;
+	utm_medium: string | null;
+	utm_campaign: string | null;
+	utm_content: string | null;
+	utm_term: string | null;
+	landing_page: string | null;
+	referrer: string | null;
+	partner_code: string | null;
 }
 
 export default async function InquiriesPage() {
@@ -105,7 +121,7 @@ export default async function InquiriesPage() {
 						Course Inquiries
 					</h1>
 					<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-						View and manage all parent inquiries for free trial classes
+						View parent inquiries, campaign attribution, and follow-up status
 					</p>
 				</div>
 			</div>
@@ -233,7 +249,8 @@ export default async function InquiriesPage() {
 												</span>
 												{inquiry.how_heard && (
 													<span>
-														<strong>Source:</strong> {inquiry.how_heard}
+														<strong>Parent-reported:</strong>{" "}
+														{inquiry.how_heard}
 													</span>
 												)}
 												<span className="text-xs text-gray-400">
@@ -242,6 +259,42 @@ export default async function InquiriesPage() {
 														"en-CA",
 													)}
 												</span>
+											</div>
+											<div className="mt-2 rounded-md border border-gray-200 bg-gray-50 p-2 text-xs dark:border-gray-700 dark:bg-gray-800/50">
+												<div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+													<strong className="text-gray-700 dark:text-gray-200">
+														Attribution
+													</strong>
+													<span>
+														Source: {inquiry.utm_source || "Direct / untagged"}
+													</span>
+													{inquiry.utm_medium && (
+														<span>Medium: {inquiry.utm_medium}</span>
+													)}
+													{inquiry.utm_campaign && (
+														<span>Campaign: {inquiry.utm_campaign}</span>
+													)}
+													{inquiry.partner_code && (
+														<span>Partner: {inquiry.partner_code}</span>
+													)}
+												</div>
+												<div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-gray-500 dark:text-gray-400">
+													<span>
+														Landing:{" "}
+														{inquiry.landing_page || "Legacy / unknown"}
+													</span>
+													{inquiry.referrer && (
+														<span>
+															Referrer: {getReferrerLabel(inquiry.referrer)}
+														</span>
+													)}
+													{inquiry.utm_content && (
+														<span>Content: {inquiry.utm_content}</span>
+													)}
+													{inquiry.utm_term && (
+														<span>Term: {inquiry.utm_term}</span>
+													)}
+												</div>
 											</div>
 											{inquiry.questions && (
 												<div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
