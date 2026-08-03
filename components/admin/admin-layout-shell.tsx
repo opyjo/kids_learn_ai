@@ -8,6 +8,7 @@ import {
 	FileText,
 	FlaskConical,
 	GraduationCap,
+	HandCoins,
 	HelpCircle,
 	LayoutDashboard,
 	Mail,
@@ -88,6 +89,12 @@ const adminNavItems = [
 		href: "/admin/investor-deck",
 		label: "Investor Deck",
 		icon: Presentation,
+	},
+	{
+		section: "Insights",
+		href: "/admin/funding-partnerships",
+		label: "Funding & Partnerships",
+		icon: HandCoins,
 	},
 	{
 		section: "Insights",
