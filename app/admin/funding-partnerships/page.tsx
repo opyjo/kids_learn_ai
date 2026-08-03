@@ -19,6 +19,7 @@ import {
 	Sparkles,
 	UsersRound,
 } from "lucide-react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireAdmin } from "@/lib/auth-helpers";
@@ -38,6 +39,7 @@ type Opportunity = {
 	fit: string;
 	nextStep: string;
 	href: string;
+	workspaceHref?: string;
 };
 
 type LinkItem = {
@@ -57,17 +59,19 @@ const opportunities: Opportunity[] = [
 		nextStep:
 			"Join an existing submission as a curriculum, platform, instructor-training or delivery partner; do not apply as the commercial lead.",
 		href: "https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/cancode/cancode-program-2026-2028-applicant-guide",
+		workspaceHref: "/admin/funding-applications#partner-kits",
 	},
 	{
 		title: "OCI Digital Modernization and Adoption Plan",
 		status: "Apply now",
-		deadline: "Current intake opens August 10, 2026",
+		deadline: "First-come, first-served · while funds last",
 		value: "Up to $15,000",
 		eligibility: "Ontario for-profit company with 1–499 employees.",
 		fit: "Strong fit for CRM, analytics, automation, cybersecurity and the operating systems needed to grow cohorts.",
 		nextStep:
-			"Prepare the company information and a short modernization problem statement before the first-come intake opens.",
+			"Confirm Ontario SME eligibility, document the current tool stack and operational baselines, then submit the prepared intake promptly.",
 		href: "https://www.oc-innovation.ca/programs/digital-competence-centre/",
+		workspaceHref: "/admin/funding-applications#oci-dmap",
 	},
 	{
 		title: "DMZ Black Innovation Summit",
@@ -78,8 +82,9 @@ const opportunities: Opportunity[] = [
 			"Founder must meet the program's Black-founder criteria and have a functional MVP.",
 		fit: "Strong match if eligible: KidsLearnAI has a working product, a clear mission and an investable growth story.",
 		nextStep:
-			"Confirm founder eligibility, then reuse the investor-deck story and September validation plan in the application.",
+			"Confirm founder eligibility and in-person availability, add verified traction, then tailor the prepared answer bank to the portal questions.",
 		href: "https://dmz.torontomu.ca/black-innovation-summit-2026",
+		workspaceHref: "/admin/dmz-application",
 	},
 	{
 		title: "Ontario Trillium Foundation Seed Grant",
@@ -91,6 +96,7 @@ const opportunities: Opportunity[] = [
 		nextStep:
 			"Find a mission-aligned nonprofit lead and define a pilot with specific learners, locations, outcomes and partner responsibilities.",
 		href: "https://otf.ca/our-grants/community-investments-grants/seed-grant",
+		workspaceHref: "/admin/funding-applications#partner-kits",
 	},
 	{
 		title: "NRC IRAP Technology Innovation Funding",
@@ -103,6 +109,7 @@ const opportunities: Opportunity[] = [
 		nextStep:
 			"Prepare a concise technical problem, the uncertainty involved, the experiments required, the commercial opportunity and an R&D work plan.",
 		href: "https://nrc.canada.ca/en/support-technology-innovation/financial-support-technology-innovation",
+		workspaceHref: "/admin/funding-applications#irap",
 	},
 	{
 		title: "NSERC PromoScience",
@@ -115,6 +122,7 @@ const opportunities: Opportunity[] = [
 		nextStep:
 			"Approach a nonprofit or university outreach unit with a co-designed, multi-year AI-literacy program and a complete funding mix.",
 		href: "https://www.nserc-crsng.gc.ca/Promoter-Promotion/PromoScience-PromoScience/CallApplication-AppelDemande_eng.asp",
+		workspaceHref: "/admin/funding-applications#partner-kits",
 	},
 	{
 		title: "Student Work Placement Program",
@@ -127,6 +135,7 @@ const opportunities: Opportunity[] = [
 		nextStep:
 			"Define a paid role with meaningful learning outcomes, then identify the appropriate SWPP delivery partner before hiring.",
 		href: "https://www.canada.ca/en/employment-social-development/services/student-work-placements-wage-subsidies.html",
+		workspaceHref: "/admin/funding-applications#workback",
 	},
 ];
 
@@ -428,15 +437,26 @@ export default async function FundingPartnershipsPage() {
 										</span>
 									</div>
 								</div>
-								<a
-									href={opportunity.href}
-									target="_blank"
-									rel="noreferrer"
-									className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:underline dark:text-blue-300"
-								>
-									Official details
-									<ExternalLink className="h-3 w-3" />
-								</a>
+								<div className="flex flex-wrap items-center gap-3">
+									{opportunity.workspaceHref && (
+										<Link
+											href={opportunity.workspaceHref}
+											className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:underline dark:text-emerald-300"
+										>
+											Open application kit
+											<ArrowRight className="h-3 w-3" />
+										</Link>
+									)}
+									<a
+										href={opportunity.href}
+										target="_blank"
+										rel="noreferrer"
+										className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:underline dark:text-blue-300"
+									>
+										Official details
+										<ExternalLink className="h-3 w-3" />
+									</a>
+								</div>
 							</div>
 							<div className="mt-3 grid gap-3 text-sm leading-6 md:grid-cols-3">
 								<div>
@@ -804,9 +824,9 @@ export default async function FundingPartnershipsPage() {
 				<CardContent className="px-4 sm:px-5">
 					<ol className="grid gap-2 md:grid-cols-2">
 						{[
-							"Prepare the DMAP application before the August 10 intake.",
+							"Confirm DMAP eligibility and submit the prepared OCI intake while first-come funding remains.",
 							"Send a one-page CanCode partner offer before August 6.",
-							"Apply to the DMZ Black Innovation Summit if founder eligibility is confirmed.",
+							"Complete the DMZ application kit and submit by August 22 if both founder eligibility gates are confirmed.",
 							"Contact NRC IRAP and apply to Vector FastLane with a defined technical project.",
 							"Recruit a nonprofit lead for OTF by August 19 and PromoScience by September 15.",
 							"Submit a free, non-soliciting Toronto Public Library workshop proposal.",
