@@ -20,6 +20,7 @@ export type SeoCampaignTask = {
 	category: SeoTaskCategory;
 	phase: 1 | 2 | 3;
 	priority: "High" | "Medium";
+	campaign?: "September 2026 cohort";
 	href?: string;
 	linkLabel?: string;
 };
@@ -52,6 +53,100 @@ export const SEO_PHASES = [
 ] as const;
 
 export const SEO_CAMPAIGN_TASKS: SeoCampaignTask[] = [
+	{
+		key: "september-cohort-offer",
+		title: "Publish the specific September cohort offer",
+		description:
+			"Replace the generic 8–10 week message with exact start and end dates, class times and time zone, instructor, maximum seats, three project outcomes, family showcase, and the $159.99 founding-rate deadline.",
+		successMeasure:
+			"A parent can understand the complete September offer and decide whether the schedule fits without contacting us.",
+		category: "Conversion",
+		phase: 1,
+		priority: "High",
+		campaign: "September 2026 cohort",
+		href: "/inquiry",
+		linkLabel: "Review program page",
+	},
+	{
+		key: "september-instant-trial-booking",
+		title: "Launch instant trial scheduling",
+		description:
+			"Let parents select an available trial time immediately after choosing an age group, then send confirmation, a calendar invitation, an equipment checklist, and 24-hour and one-hour reminders.",
+		successMeasure:
+			"A parent can reserve a trial and receive every confirmation without waiting for a manual reply.",
+		category: "Conversion",
+		phase: 1,
+		priority: "High",
+		campaign: "September 2026 cohort",
+		href: "/inquiry/book",
+		linkLabel: "Review booking flow",
+	},
+	{
+		key: "september-trust-proof",
+		title: "Publish real parent and instructor proof",
+		description:
+			"Add the instructor's name, photo, relevant experience, teaching and safety credentials, two or three consented parent quotes, student project examples, a short class preview, and the exact class-size maximum.",
+		successMeasure:
+			"The program page identifies who teaches the cohort and shows authentic evidence of the learner experience.",
+		category: "Trust",
+		phase: 1,
+		priority: "High",
+		campaign: "September 2026 cohort",
+		href: "/",
+		linkLabel: "Review homepage",
+	},
+	{
+		key: "september-free-workshop",
+		title: "Run the free Python AI Helper workshop",
+		description:
+			"Schedule and promote a 45–60 minute Build Your First Python AI Helper workshop for August 15–20. End with a short parent presentation and a direct invitation to reserve the September cohort.",
+		successMeasure:
+			"The workshop has a registration page, reminders, a reusable lesson, a parent close, and tracked follow-up.",
+		category: "Partnerships",
+		phase: 1,
+		priority: "High",
+		campaign: "September 2026 cohort",
+	},
+	{
+		key: "september-warm-outreach",
+		title: "Personally invite every warm family",
+		description:
+			"Contact previous families, inquiries, and relevant personal connections with a concise September invitation, then ask enrolled families for one introduction and offer a simple $20–$25 program credit when a referral enrolls.",
+		successMeasure:
+			"Every eligible warm contact has a recorded outcome and referrals are attributable to the referring family.",
+		category: "Retention",
+		phase: 1,
+		priority: "High",
+		campaign: "September 2026 cohort",
+		href: "/admin/inquiries",
+		linkLabel: "Open inquiries",
+	},
+	{
+		key: "september-partner-outreach",
+		title: "Pitch 30 aligned community partners",
+		description:
+			"Build a focused list of libraries, school parent councils, homeschool groups, and community organizations, then send personalized, permission-based proposals for the free workshop.",
+		successMeasure:
+			"Thirty partners are contacted, at least five conversations begin, and two workshop opportunities are scheduled.",
+		category: "Partnerships",
+		phase: 1,
+		priority: "High",
+		campaign: "September 2026 cohort",
+	},
+	{
+		key: "september-enrollment-scorecard",
+		title: "Review the September enrollment scorecard weekly",
+		description:
+			"Use 15 paid students as the working goal and plan around 50 trial reservations, 35 attended trials, and 14–18 paid enrollments. Review reservations by source, attendance, trial-to-paid conversion, acquisition cost, and remaining seats every Friday.",
+		successMeasure:
+			"Each active channel receives a weekly keep, improve, or stop decision based on attended trials and paid enrollments.",
+		category: "Measurement",
+		phase: 1,
+		priority: "High",
+		campaign: "September 2026 cohort",
+		href: "/admin/analytics",
+		linkLabel: "Open analytics",
+	},
 	{
 		key: "positioning",
 		title: "Lock the parent-facing positioning",

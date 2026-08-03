@@ -93,6 +93,12 @@ export function SeoCampaignChecklist({
 	const getStatus = (taskKey: string): SeoTaskStatus =>
 		progressByKey[taskKey]?.status || "todo";
 
+	const septemberCohortTasks = tasks.filter(
+		(task) => task.campaign === "September 2026 cohort",
+	);
+	const septemberCohortCompleted = septemberCohortTasks.filter(
+		(task) => getStatus(task.key) === "done",
+	).length;
 	const completedCount = tasks.filter(
 		(task) => getStatus(task.key) === "done",
 	).length;
@@ -196,6 +202,71 @@ export function SeoCampaignChecklist({
 						tasks are visible, but updates are disabled.
 					</AlertDescription>
 				</Alert>
+			)}
+
+			{septemberCohortTasks.length > 0 && (
+				<Card className="overflow-hidden border-indigo-200 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 shadow-sm dark:border-indigo-900 dark:from-indigo-950/40 dark:via-slate-950 dark:to-emerald-950/30">
+					<CardContent className="p-5">
+						<div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+							<div>
+								<div className="flex flex-wrap items-center gap-2">
+									<Badge className="bg-indigo-600 text-white hover:bg-indigo-600">
+										September 2026
+									</Badge>
+									<span className="text-xs font-semibold uppercase tracking-wider text-indigo-700 dark:text-indigo-300">
+										Enrollment sprint
+									</span>
+								</div>
+								<h2 className="mt-2 text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
+									Fill the next Kids Learn AI cohort
+								</h2>
+								<p className="mt-1 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+									Working goal: 15 paid students from approximately 50 trial
+									reservations, 35 attended trials, and 14–18 enrollments.
+								</p>
+							</div>
+							<Badge
+								variant="outline"
+								className="w-fit bg-white/70 px-3 py-1.5 dark:bg-slate-950/60"
+							>
+								{septemberCohortCompleted} of {septemberCohortTasks.length}{" "}
+								complete
+							</Badge>
+						</div>
+
+						<div className="mt-4 grid gap-2 sm:grid-cols-2">
+							{septemberCohortTasks.map((task) => {
+								const status = getStatus(task.key);
+								return (
+									<a
+										key={task.key}
+										href={`#task-${task.key}`}
+										className="flex items-start gap-2 rounded-lg border border-white/80 bg-white/70 px-3 py-2.5 text-sm text-slate-700 transition-colors hover:border-indigo-200 hover:bg-white dark:border-slate-800 dark:bg-slate-950/50 dark:text-slate-200 dark:hover:border-indigo-900"
+									>
+										{status === "done" ? (
+											<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+										) : (
+											<Circle
+												className={cn(
+													"mt-0.5 h-4 w-4 shrink-0 text-slate-400",
+													status === "in_progress" &&
+														"fill-amber-100 text-amber-500 dark:fill-amber-950",
+												)}
+											/>
+										)}
+										<span
+											className={cn(
+												status === "done" && "text-slate-500 line-through",
+											)}
+										>
+											{task.title}
+										</span>
+									</a>
+								);
+							})}
+						</div>
+					</CardContent>
+				</Card>
 			)}
 
 			<Card className="overflow-hidden border-slate-200 shadow-sm dark:border-slate-800">
@@ -321,8 +392,9 @@ export function SeoCampaignChecklist({
 								return (
 									<Card
 										key={task.key}
+										id={`task-${task.key}`}
 										className={cn(
-											"border-slate-200 shadow-none transition-colors dark:border-slate-800",
+											"scroll-mt-4 border-slate-200 shadow-none transition-colors dark:border-slate-800",
 											status === "done" &&
 												"border-emerald-200 bg-emerald-50/30 dark:border-emerald-900 dark:bg-emerald-950/10",
 										)}

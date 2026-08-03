@@ -133,4 +133,16 @@ describe("SEO campaign task definitions", () => {
 		);
 		expect(SEO_CAMPAIGN_TASKS.length).toBeGreaterThanOrEqual(20);
 	});
+
+	it("keeps the September cohort sprint visible and actionable", () => {
+		const septemberTasks = SEO_CAMPAIGN_TASKS.filter(
+			(task) => task.campaign === "September 2026 cohort",
+		);
+
+		expect(septemberTasks).toHaveLength(7);
+		expect(septemberTasks.every((task) => task.priority === "High")).toBe(true);
+		expect(septemberTasks.map((task) => task.key)).toContain(
+			"september-enrollment-scorecard",
+		);
+	});
 });
