@@ -16,49 +16,6 @@ export type FundingDraft = {
 	warning?: string;
 };
 
-export const FUNDING_PROGRAM_LANES = [
-	{
-		name: "OCI DMAP",
-		status: "Direct application",
-		timing: "First-come, first-served while funds last",
-		value: "Up to $15,000 in support",
-		anchor: "#oci-dmap",
-		fit: "Prepare a consultant-led digital modernization plan for growth operations.",
-	},
-	{
-		name: "NRC IRAP",
-		status: "Direct, eligibility-gated",
-		timing: "Relationship-led and project-specific",
-		value: "Project-dependent support",
-		anchor: "#irap",
-		fit: "Use only for a genuine technical R&D project with measurable uncertainty.",
-	},
-	{
-		name: "CanCode",
-		status: "Nonprofit lead required",
-		timing: "August 6, 2026 at noon Pacific",
-		value: "Partner delivery opportunity",
-		anchor: "#partner-kits",
-		fit: "Urgent delivery-partner offer for no-cost K–12 digital-skills programming.",
-	},
-	{
-		name: "OTF Seed",
-		status: "Eligible community lead required",
-		timing: "August 19, 2026 at 5:00 p.m. ET",
-		value: "$10,000–$100,000",
-		anchor: "#partner-kits",
-		fit: "A local Ontario lead can pilot a community AI-learning program.",
-	},
-	{
-		name: "NSERC PromoScience",
-		status: "Nonprofit or institution lead required",
-		timing: "September 15, 2026 at 8:00 p.m. ET",
-		value: "Up to $200,000/year for 3 years",
-		anchor: "#partner-kits",
-		fit: "Best for ongoing, hands-on STEM programming with broad or targeted reach.",
-	},
-] as const;
-
 export const SHARED_FUNDING_EVIDENCE: FundingEvidenceItem[] = [
 	{
 		category: "Company",
@@ -159,11 +116,6 @@ export const SHARED_FUNDING_EVIDENCE: FundingEvidenceItem[] = [
 ];
 
 export const OCI_DMAP_DETAILS = {
-	name: "OCI Digital Modernization & Adoption Plan",
-	value: "Up to $15,000 in support",
-	timing: "First-come, first-served while funds last",
-	officialUrl:
-		"https://www.oc-innovation.ca/programs/digital-competence-centre/",
 	applyUrl: "https://oce.formstack.com/forms/intake_form",
 	fitGate:
 		"Confirm that KidsLearnAI is an Ontario-based, for-profit SME with 1–499 employees before submitting the intake.",
@@ -230,10 +182,6 @@ export const OCI_DMAP_ANSWERS: FundingDraft[] = [
 ];
 
 export const IRAP_DETAILS = {
-	name: "NRC IRAP technology innovation support",
-	timing: "Relationship-led; funding is project-specific",
-	officialUrl:
-		"https://nrc.canada.ca/en/support-technology-innovation/financial-support-technology-innovation",
 	contact: "A senior executive starts by calling 1-877-994-4727.",
 	fitGate:
 		"Confirm incorporation, for-profit Canadian operations, no more than 500 FTEs, technical capacity and a genuine commercial R&D uncertainty.",
@@ -322,10 +270,6 @@ export const PARTNER_PROGRAM_ADAPTATIONS = [
 	{
 		id: "cancode",
 		name: "CanCode 2026–2028",
-		deadline: "August 6, 2026 at noon Pacific",
-		value: "Up to $30 million across the program",
-		officialUrl:
-			"https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/cancode/cancode-program-2026-2028-applicant-guide",
 		gate: "Lead must be a Canadian incorporated nonprofit with the required documents; the lead or a partner needs three consecutive years of digital-skills delivery experience.",
 		requirements: [
 			"Application form, quantitative workbook, proof of nonprofit incorporation and two years of audited financial statements",
@@ -335,16 +279,10 @@ export const PARTNER_PROGRAM_ADAPTATIONS = [
 		],
 		adaptation:
 			"Position KidsLearnAI as a ready delivery system inside the lead's larger proposal: interactive K–12 Python and AI training, curriculum resources, instructor enablement, platform workflows and quarterly outcome data. Do not pitch a standalone commercial cohort or charge participants. The lead should decide immediately whether KidsLearnAI can strengthen an application already underway; starting a new national submission this close to the deadline is unlikely to be realistic.",
-		nextMove:
-			"Today: send the outreach email to qualified leads that are already preparing a CanCode submission and offer a same-day scope call.",
 	},
 	{
 		id: "otf",
 		name: "Ontario Trillium Foundation Seed Grant",
-		deadline: "August 19, 2026 at 5:00 p.m. ET",
-		value: "$10,000–$100,000 over 6 or 12 months",
-		officialUrl:
-			"https://otf.ca/our-grants/community-investments-grants/seed-grant",
 		gate: "An eligible Ontario community organization must lead, demonstrate direct local benefit in one OTF catchment, and pass governance and financial review.",
 		requirements: [
 			"Select one local catchment, funding priority and project objective",
@@ -355,16 +293,10 @@ export const PARTNER_PROGRAM_ADAPTATIONS = [
 		],
 		adaptation:
 			"Use the objective 'Design and/or pilot an innovative program or service to address a community need.' A plausible priority is supporting youth social, emotional and leadership skills through collaborative technical creation, but the lead must validate the fit with its mandate and local evidence. Define one local community, a free pilot, specific participants, accessible recruitment, a family showcase and an evaluation report. Avoid describing a province-wide technology rollout or a subsidy for KidsLearnAI's commercial operations.",
-		nextMove:
-			"By August 5: identify one eligible local lead, confirm catchment and community need, then book OTF coaching before finalizing the concept.",
 	},
 	{
 		id: "promoscience",
 		name: "NSERC PromoScience",
-		deadline: "September 15, 2026 at 8:00 p.m. ET",
-		value: "Up to $200,000 per year for up to 3 years",
-		officialUrl:
-			"https://nserc-crsng.canada.ca/en/funding-opportunity/promoscience",
 		gate: "Lead must be a Canadian registered nonprofit, eligible post-secondary institution, or non-federal museum/science centre already delivering ongoing youth NSE promotion.",
 		requirements: [
 			"Ongoing, interactive and hands-on programming rather than a one-time project",
@@ -375,8 +307,6 @@ export const PARTNER_PROGRAM_ADAPTATIONS = [
 		],
 		adaptation:
 			"Position KidsLearnAI as the technical and delivery partner in a multi-year, ongoing hands-on program. The lead must supply organizational continuity, existing-program evidence, non-federal funding and reach. Use the two-year curriculum as a progression pathway, not a one-time workshop. Emphasize deep participant interaction, responsible engineering practice, inclusive access, evaluation and transferability. Local-only delivery should be tied to targeted programming for an underrepresented group.",
-		nextMove:
-			"By August 12: secure a lead with ongoing eligible programming, agree on three-year reach and funding mix, and request support or commitment letters.",
 	},
 ] as const;
 
@@ -389,75 +319,4 @@ export const PARTNER_DUE_DILIGENCE = [
 	"Curriculum and platform intellectual property, licence boundaries and data rights",
 	"Outcome definitions, data-collection burden, reporting cadence and publication permissions",
 	"Termination, substitution, non-performance and funder-recovery responsibilities",
-] as const;
-
-export const DEFERRED_FUNDING_CHECKLISTS = [
-	{
-		name: "Hiring and wage support",
-		trigger:
-			"Activate only after a paid role, supervisor, hours, wage and start date are approved.",
-		items: [
-			"Write the role and learning outcomes before selecting a program.",
-			"Confirm candidate and employer eligibility before issuing an offer.",
-			"Do not represent a subsidy as secured until written approval is received.",
-		],
-	},
-	{
-		name: "SR&ED and tax credits",
-		trigger:
-			"Maintain evidence now; assess claims with a qualified specialist after eligible work and costs exist.",
-		items: [
-			"Record technical uncertainty, hypotheses, experiments, failures and conclusions contemporaneously.",
-			"Track employee and contractor time and costs to defined projects.",
-			"Keep routine development, sales and content work separate from experimental work.",
-		],
-	},
-	{
-		name: "Watchlist programs",
-		trigger:
-			"Review monthly or when company thresholds change; do not prepare full applications early.",
-		items: [
-			"Record eligibility gaps and the evidence that would close each gap.",
-			"Set a specific review date and owner.",
-			"Archive stale copy when official rules change.",
-		],
-	},
-] as const;
-
-export const FUNDING_WORKBACK_PLAN = [
-	{
-		date: "August 3–4",
-		action:
-			"Complete shared company facts; send the CanCode partner offer only to eligible leads already preparing a submission.",
-	},
-	{
-		date: "August 4–5",
-		action:
-			"Confirm OCI eligibility, current tool stack and operational baselines; submit the DMAP intake while funds remain.",
-	},
-	{
-		date: "August 5–7",
-		action:
-			"Choose one OTF lead and catchment, validate the community need, agree on roles and book an OTF coaching call.",
-	},
-	{
-		date: "August 8–14",
-		action:
-			"Build the OTF project plan, budget, quote and collaborative agreement; identify a qualified PromoScience lead.",
-	},
-	{
-		date: "August 15–17",
-		action:
-			"Complete the OTF claim, policy and document audit; lead submits by August 17 for a two-day buffer.",
-	},
-	{
-		date: "August 18–September 12",
-		action:
-			"Develop the PromoScience five-page case, three-year budget, evidence and letters; submit by September 12.",
-	},
-	{
-		date: "After company and technical gates are confirmed",
-		action:
-			"Use the IRAP call script, then build a costed experimental plan with a technical lead if NRC confirms fit.",
-	},
 ] as const;

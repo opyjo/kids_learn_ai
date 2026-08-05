@@ -5,9 +5,7 @@ import {
 	BookOpen,
 	BriefcaseBusiness,
 	CalendarClock,
-	ClipboardCheck,
 	FileCode,
-	Files,
 	FileText,
 	FlaskConical,
 	GraduationCap,
@@ -92,18 +90,6 @@ const adminNavItems = [
 		href: "/admin/investor-deck",
 		label: "Investor Deck",
 		icon: Presentation,
-	},
-	{
-		section: "Insights",
-		href: "/admin/funding-applications",
-		label: "Funding Workspace",
-		icon: Files,
-	},
-	{
-		section: "Insights",
-		href: "/admin/dmz-application",
-		label: "DMZ Application",
-		icon: ClipboardCheck,
 	},
 	{
 		section: "Insights",

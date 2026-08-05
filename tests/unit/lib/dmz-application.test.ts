@@ -44,9 +44,10 @@ describe("DMZ application workspace", () => {
 		expect(DMZ_NINETY_SECOND_PITCH.length).toBeGreaterThan(700);
 	});
 
-	it("builds in a submission buffer before the official deadline", () => {
+	it("tracks the internal workback without duplicating hub metadata", () => {
 		expect(DMZ_APPLICATION_DETAILS.internalSubmitDate).toBe("August 22, 2026");
-		expect(DMZ_APPLICATION_DETAILS.deadline).toBe("August 24, 2026");
+		expect("deadline" in DMZ_APPLICATION_DETAILS).toBe(false);
+		expect("value" in DMZ_APPLICATION_DETAILS).toBe(false);
 		expect(DMZ_WORKBACK_PLAN.at(-1)?.date).toBe("August 22");
 	});
 });

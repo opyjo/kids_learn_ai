@@ -79,11 +79,9 @@ export default async function DmzApplicationPage() {
 				</div>
 			</header>
 
-			<div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+			<div className="grid gap-3 sm:grid-cols-2">
 				{[
-					["Official deadline", DMZ_APPLICATION_DETAILS.deadline],
 					["Summit", DMZ_APPLICATION_DETAILS.eventDate],
-					["Competition", DMZ_APPLICATION_DETAILS.value],
 					["Internal target", DMZ_APPLICATION_DETAILS.internalSubmitDate],
 				].map(([label, value]) => (
 					<Card
@@ -112,15 +110,13 @@ export default async function DmzApplicationPage() {
 					Open DMZ application portal
 					<ExternalLink className="h-3.5 w-3.5" />
 				</a>
-				<a
-					href={DMZ_APPLICATION_DETAILS.officialUrl}
-					target="_blank"
-					rel="noreferrer"
+				<Link
+					href="/admin/funding-partnerships"
 					className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 dark:border-gray-800 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800"
 				>
-					Official 2026 details
-					<ExternalLink className="h-3.5 w-3.5" />
-				</a>
+					Current program details
+					<ArrowRight className="h-3.5 w-3.5" />
+				</Link>
 				<Link
 					href="/admin/investor-deck"
 					className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 dark:border-gray-800 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800"

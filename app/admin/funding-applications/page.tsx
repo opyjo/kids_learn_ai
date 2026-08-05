@@ -2,21 +2,18 @@ import {
 	AlertTriangle,
 	ArrowRight,
 	BadgeCheck,
-	CalendarClock,
 	CheckCircle2,
 	CircleHelp,
 	ExternalLink,
 	FileCheck2,
 	FileStack,
 	FlaskConical,
-	HandCoins,
 	Handshake,
 	LibraryBig,
 	ListChecks,
 	Rocket,
 	ShieldCheck,
 	Sparkles,
-	Target,
 } from "lucide-react";
 import Link from "next/link";
 import { ApplicationCopyButton } from "@/components/admin/application-copy-button";
@@ -24,9 +21,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireAdmin } from "@/lib/auth-helpers";
 import {
-	DEFERRED_FUNDING_CHECKLISTS,
-	FUNDING_PROGRAM_LANES,
-	FUNDING_WORKBACK_PLAN,
 	type FundingDraft,
 	type FundingEvidenceStatus,
 	IRAP_CALL_SCRIPT,
@@ -116,13 +110,18 @@ export default async function FundingApplicationsPage() {
 				</div>
 			</header>
 
-			<div className="flex gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm leading-6 text-amber-950 dark:border-amber-900 dark:bg-amber-950/20 dark:text-amber-100">
-				<AlertTriangle className="mt-1 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" />
+			<div className="flex gap-2 rounded-xl border border-blue-200 bg-blue-50 p-3 text-sm leading-6 text-blue-950 dark:border-blue-900 dark:bg-blue-950/20 dark:text-blue-100">
+				<ArrowRight className="mt-1 h-4 w-4 shrink-0 text-blue-700 dark:text-blue-300" />
 				<p>
-					<strong>OCI timing correction:</strong> DMAP is first-come,
-					first-served while funds last. August 10 is the current Technology
-					Demonstration Program date, not a DMAP opening date. Confirm company
-					eligibility and submit the DMAP intake promptly.
+					Program deadlines, amounts, eligibility and official links live in{" "}
+					<Link
+						href="/admin/funding-partnerships"
+						className="font-semibold underline underline-offset-2"
+					>
+						Funding &amp; Partnerships
+					</Link>
+					. This workspace contains only reusable evidence and application
+					drafts.
 				</p>
 			</div>
 
@@ -135,7 +134,6 @@ export default async function FundingApplicationsPage() {
 					["OCI DMAP", "#oci-dmap"],
 					["NRC IRAP", "#irap"],
 					["Partner kits", "#partner-kits"],
-					["Workback", "#workback"],
 				].map(([label, href]) => (
 					<a
 						key={href}
@@ -152,32 +150,6 @@ export default async function FundingApplicationsPage() {
 					DMZ kit
 				</Link>
 			</nav>
-
-			<div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-				{FUNDING_PROGRAM_LANES.map((program) => (
-					<a
-						key={program.name}
-						href={program.anchor}
-						className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50/40 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-800 dark:hover:bg-blue-950/20"
-					>
-						<p className="text-sm font-semibold text-slate-950 group-hover:text-blue-700 dark:text-white dark:group-hover:text-blue-300">
-							{program.name}
-						</p>
-						<p className="mt-1 text-[11px] font-medium text-blue-700 dark:text-blue-300">
-							{program.status}
-						</p>
-						<p className="mt-3 text-xs font-semibold text-slate-800 dark:text-slate-100">
-							{program.timing}
-						</p>
-						<p className="mt-1 text-xs text-emerald-700 dark:text-emerald-300">
-							{program.value}
-						</p>
-						<p className="mt-2 text-xs leading-5 text-slate-500 dark:text-slate-400">
-							{program.fit}
-						</p>
-					</a>
-				))}
-			</div>
 
 			<Card
 				id="evidence-library"
@@ -245,18 +217,10 @@ export default async function FundingApplicationsPage() {
 								</Badge>
 								<CardTitle className="flex items-center gap-2 text-xl">
 									<Rocket className="h-5 w-5 text-emerald-700 dark:text-emerald-300" />
-									{OCI_DMAP_DETAILS.name}
+									OCI DMAP application kit
 								</CardTitle>
 								<p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-200">
 									{OCI_DMAP_DETAILS.fitGate}
-								</p>
-							</div>
-							<div className="text-right text-xs">
-								<p className="font-semibold text-emerald-800 dark:text-emerald-300">
-									{OCI_DMAP_DETAILS.value}
-								</p>
-								<p className="mt-1 text-slate-500 dark:text-slate-400">
-									{OCI_DMAP_DETAILS.timing}
 								</p>
 							</div>
 						</div>
@@ -271,15 +235,13 @@ export default async function FundingApplicationsPage() {
 							Open OCI intake
 							<ExternalLink className="h-3.5 w-3.5" />
 						</a>
-						<a
-							href={OCI_DMAP_DETAILS.officialUrl}
-							target="_blank"
-							rel="noreferrer"
+						<Link
+							href="/admin/funding-partnerships"
 							className="inline-flex items-center gap-1.5 rounded-md border border-emerald-200 bg-white px-3 py-2 text-xs font-semibold text-emerald-800 hover:bg-emerald-50 dark:border-emerald-900 dark:bg-gray-950 dark:text-emerald-300"
 						>
-							Official guidance
-							<ExternalLink className="h-3.5 w-3.5" />
-						</a>
+							Program details
+							<ArrowRight className="h-3.5 w-3.5" />
+						</Link>
 					</CardContent>
 				</Card>
 
@@ -327,21 +289,19 @@ export default async function FundingApplicationsPage() {
 								</Badge>
 								<CardTitle className="flex items-center gap-2 text-xl">
 									<FlaskConical className="h-5 w-5 text-purple-700 dark:text-purple-300" />
-									{IRAP_DETAILS.name}
+									NRC IRAP technical application kit
 								</CardTitle>
 								<p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-200">
 									{IRAP_DETAILS.fitGate}
 								</p>
 							</div>
-							<a
-								href={IRAP_DETAILS.officialUrl}
-								target="_blank"
-								rel="noreferrer"
+							<Link
+								href="/admin/funding-partnerships"
 								className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-800 hover:underline dark:text-purple-300"
 							>
-								Official guidance
-								<ExternalLink className="h-3.5 w-3.5" />
-							</a>
+								Program details
+								<ArrowRight className="h-3.5 w-3.5" />
+							</Link>
 						</div>
 					</CardHeader>
 				</Card>
@@ -435,7 +395,13 @@ export default async function FundingApplicationsPage() {
 								obligations.
 							</p>
 						</div>
-						<HandCoins className="h-8 w-8 text-blue-200" />
+						<Link
+							href="/admin/funding-partnerships"
+							className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-100 hover:underline"
+						>
+							Current program details
+							<ArrowRight className="h-3.5 w-3.5" />
+						</Link>
 					</div>
 				</div>
 
@@ -521,25 +487,7 @@ export default async function FundingApplicationsPage() {
 							className="gap-4 border-slate-200 bg-white py-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
 						>
 							<CardHeader className="px-4 py-0">
-								<div className="flex items-start justify-between gap-3">
-									<div>
-										<CardTitle className="text-base">{program.name}</CardTitle>
-										<p className="mt-1 text-xs font-semibold text-rose-700 dark:text-rose-300">
-											{program.deadline}
-										</p>
-									</div>
-									<a
-										href={program.officialUrl}
-										target="_blank"
-										rel="noreferrer"
-										aria-label={`Open official ${program.name} guidance`}
-									>
-										<ExternalLink className="h-4 w-4 text-blue-700" />
-									</a>
-								</div>
-								<p className="mt-2 text-xs font-medium text-emerald-700 dark:text-emerald-300">
-									{program.value}
-								</p>
+								<CardTitle className="text-base">{program.name}</CardTitle>
 							</CardHeader>
 							<CardContent className="space-y-3 px-4">
 								<div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs leading-5 text-amber-950 dark:border-amber-900 dark:bg-amber-950/20 dark:text-amber-100">
@@ -559,82 +507,11 @@ export default async function FundingApplicationsPage() {
 								<div className="rounded-lg bg-slate-50 p-3 text-xs leading-5 text-slate-700 dark:bg-gray-950 dark:text-slate-200">
 									<strong>Tailoring:</strong> {program.adaptation}
 								</div>
-								<div className="flex gap-2 rounded-lg bg-blue-50 p-3 text-xs leading-5 text-blue-950 dark:bg-blue-950/20 dark:text-blue-100">
-									<ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-									<span>{program.nextMove}</span>
-								</div>
 							</CardContent>
 						</Card>
 					))}
 				</div>
 			</section>
-
-			<div className="grid gap-4 xl:grid-cols-3">
-				{DEFERRED_FUNDING_CHECKLISTS.map((group) => (
-					<Card
-						key={group.name}
-						className="gap-4 border-slate-200 bg-white py-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-					>
-						<CardHeader className="px-4 py-0">
-							<CardTitle className="flex items-center gap-2 text-base">
-								<CalendarClock className="h-4 w-4 text-slate-500" />
-								{group.name}
-							</CardTitle>
-							<p className="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">
-								{group.trigger}
-							</p>
-						</CardHeader>
-						<CardContent className="px-4">
-							<ul className="space-y-2">
-								{group.items.map((item) => (
-									<li
-										key={item}
-										className="flex gap-2 text-xs leading-5 text-slate-600 dark:text-slate-300"
-									>
-										<Target className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />
-										<span>{item}</span>
-									</li>
-								))}
-							</ul>
-						</CardContent>
-					</Card>
-				))}
-			</div>
-
-			<Card
-				id="workback"
-				className="scroll-mt-24 gap-4 border-slate-950 bg-slate-950 py-5 text-white shadow-sm dark:border-slate-800"
-			>
-				<CardHeader className="px-4 py-0 sm:px-5">
-					<div className="flex flex-wrap items-center justify-between gap-2">
-						<CardTitle className="flex items-center gap-2 text-lg">
-							<CalendarClock className="h-5 w-5 text-emerald-300" />
-							Cross-program workback plan
-						</CardTitle>
-						<Badge className="border-white/15 bg-white/10 text-slate-100 hover:bg-white/10">
-							Deadline-aware
-						</Badge>
-					</div>
-				</CardHeader>
-				<CardContent className="px-4 sm:px-5">
-					<ol className="grid gap-2 lg:grid-cols-2">
-						{FUNDING_WORKBACK_PLAN.map((item, index) => (
-							<li
-								key={item.date}
-								className="flex gap-3 rounded-xl bg-white/5 p-3 text-sm leading-6 text-slate-200"
-							>
-								<span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-400/15 text-xs font-semibold text-emerald-200">
-									{index + 1}
-								</span>
-								<span>
-									<strong className="block text-white">{item.date}</strong>
-									{item.action}
-								</span>
-							</li>
-						))}
-					</ol>
-				</CardContent>
-			</Card>
 
 			<div className="flex gap-2 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm leading-6 text-blue-950 dark:border-blue-900 dark:bg-blue-950/20 dark:text-blue-100">
 				<Sparkles className="mt-1 h-4 w-4 shrink-0 text-blue-700 dark:text-blue-300" />

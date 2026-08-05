@@ -1,10 +1,6 @@
 export const DMZ_APPLICATION_DETAILS = {
-	name: "DMZ Black Innovation Summit 2026",
-	deadline: "August 24, 2026",
 	internalSubmitDate: "August 22, 2026",
 	eventDate: "October 28, 2026",
-	value: "$150,000+ in investments and grants",
-	officialUrl: "https://dmz.torontomu.ca/black-innovation-summit-2026",
 	applicationUrl:
 		"https://mydmz.torontomu.ca/portal/apply/bis-startup-showcase",
 } as const;

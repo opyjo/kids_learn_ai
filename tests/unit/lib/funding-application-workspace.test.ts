@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import {
-	FUNDING_PROGRAM_LANES,
 	IRAP_EXCLUDED_WORK,
 	IRAP_PROJECT_BRIEF,
 	OCI_DMAP_ANSWERS,
@@ -11,9 +10,9 @@ import {
 } from "@/lib/funding/application-workspace";
 
 describe("funding application workspace", () => {
-	it("keeps DMAP timing separate from the TDP deadline", () => {
-		expect(OCI_DMAP_DETAILS.timing).toContain("First-come, first-served");
-		expect(OCI_DMAP_DETAILS.timing).not.toContain("August 10");
+	it("keeps canonical program facts out of the application kit", () => {
+		expect("timing" in OCI_DMAP_DETAILS).toBe(false);
+		expect("value" in OCI_DMAP_DETAILS).toBe(false);
 		expect(OCI_DMAP_ANSWERS.length).toBeGreaterThanOrEqual(6);
 	});
 
@@ -43,6 +42,14 @@ describe("funding application workspace", () => {
 			),
 		).toBe(true);
 		expect(PARTNER_MASTER_ONE_PAGER).toContain("[ELIGIBLE ORGANIZATION]");
+		expect(
+			PARTNER_PROGRAM_ADAPTATIONS.every(
+				(program) =>
+					!("deadline" in program) &&
+					!("value" in program) &&
+					!("officialUrl" in program),
+			),
+		).toBe(true);
 	});
 
 	it("keeps IRAP focused on experimental work", () => {
@@ -55,15 +62,5 @@ describe("funding application workspace", () => {
 		expect(IRAP_EXCLUDED_WORK).toContain(
 			"Routine platform maintenance or ordinary feature development",
 		);
-	});
-
-	it("shows every active lane in the workspace overview", () => {
-		expect(FUNDING_PROGRAM_LANES.map((program) => program.name)).toEqual([
-			"OCI DMAP",
-			"NRC IRAP",
-			"CanCode",
-			"OTF Seed",
-			"NSERC PromoScience",
-		]);
 	});
 });

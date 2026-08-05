@@ -135,7 +135,7 @@ const opportunities: Opportunity[] = [
 		nextStep:
 			"Define a paid role with meaningful learning outcomes, then identify the appropriate SWPP delivery partner before hiring.",
 		href: "https://www.canada.ca/en/employment-social-development/services/student-work-placements-wage-subsidies.html",
-		workspaceHref: "/admin/funding-applications#workback",
+		workspaceHref: "/admin/vfc-internship",
 	},
 ];
 
@@ -438,15 +438,15 @@ export default async function FundingPartnershipsPage() {
 									</div>
 								</div>
 								<div className="flex flex-wrap items-center gap-3">
-									{opportunity.workspaceHref && (
+									{opportunity.workspaceHref ? (
 										<Link
 											href={opportunity.workspaceHref}
 											className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:underline dark:text-emerald-300"
 										>
-											Open application kit
+											Open workspace
 											<ArrowRight className="h-3 w-3" />
 										</Link>
-									)}
+									) : null}
 									<a
 										href={opportunity.href}
 										target="_blank"
@@ -826,7 +826,7 @@ export default async function FundingPartnershipsPage() {
 						{[
 							"Confirm DMAP eligibility and submit the prepared OCI intake while first-come funding remains.",
 							"Send a one-page CanCode partner offer before August 6.",
-							"Complete the DMZ application kit and submit by August 22 if both founder eligibility gates are confirmed.",
+							"Open the DMZ application workspace if both founder eligibility gates are confirmed.",
 							"Contact NRC IRAP and apply to Vector FastLane with a defined technical project.",
 							"Recruit a nonprofit lead for OTF by August 19 and PromoScience by September 15.",
 							"Submit a free, non-soliciting Toronto Public Library workshop proposal.",
