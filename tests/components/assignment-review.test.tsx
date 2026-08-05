@@ -16,7 +16,10 @@ describe("assignment review", () => {
 		const user = userEvent.setup();
 		render(<AssignmentReview review={review} />);
 
-		expect(screen.getByText(/review previous assignment/i)).toBeInTheDocument();
+		expect(screen.getByText(/opening review/i)).toBeInTheDocument();
+		expect(
+			screen.getByRole("heading", { name: /previous assignment/i }),
+		).toBeInTheDocument();
 		expect(screen.getByText(/lesson 2: python does math/i)).toBeInTheDocument();
 		expect(screen.queryByText(/model answer/i)).not.toBeInTheDocument();
 		expect(
@@ -31,5 +34,32 @@ describe("assignment review", () => {
 		expect(
 			screen.getByText(/why does division return a decimal/i),
 		).toBeInTheDocument();
+	});
+
+	it("connects each disclosure button to its hidden content", async () => {
+		const user = userEvent.setup();
+		render(<AssignmentReview review={review} idPrefix="term-two-review" />);
+
+		const assignmentButton = screen.getByRole("button", {
+			name: /show assignment/i,
+		});
+		const solutionButton = screen.getByRole("button", {
+			name: /reveal solution/i,
+		});
+
+		expect(assignmentButton).toHaveAttribute(
+			"aria-controls",
+			"term-two-review-prompt",
+		);
+		expect(solutionButton).toHaveAttribute(
+			"aria-controls",
+			"term-two-review-solution",
+		);
+
+		await user.click(assignmentButton);
+		await user.click(solutionButton);
+
+		expect(document.querySelector("#term-two-review-prompt")).not.toBeNull();
+		expect(document.querySelector("#term-two-review-solution")).not.toBeNull();
 	});
 });
