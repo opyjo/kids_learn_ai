@@ -1,4 +1,4 @@
-import { Eye, Plus } from "lucide-react";
+import { ChevronDown, Eye, Plus } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -104,12 +104,14 @@ export default async function LessonsPage() {
 						</div>
 					) : (
 						<div className="space-y-5">
-							{lessonGroups.map((group) => (
-								<section
+							{lessonGroups.map((group, groupIndex) => (
+								<details
 									key={group.key}
+									open={groupIndex === 0}
+									className="group/course overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
 									aria-labelledby={`course-${group.key}`}
 								>
-									<div className="flex items-center justify-between border-b border-gray-200 pb-2 dark:border-gray-700">
+									<summary className="flex cursor-pointer list-none items-center justify-between gap-3 bg-gray-50 px-3 py-2.5 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset dark:bg-gray-800/60 dark:hover:bg-gray-800 [&::-webkit-details-marker]:hidden">
 										<div>
 											<h3
 												id={`course-${group.key}`}
@@ -121,13 +123,16 @@ export default async function LessonsPage() {
 												{group.course?.slug ?? "Not attached to a course"}
 											</p>
 										</div>
-										<Badge variant="secondary">
-											{group.lessons.length} lesson
-											{group.lessons.length === 1 ? "" : "s"}
-										</Badge>
-									</div>
+										<div className="flex items-center gap-2">
+											<Badge variant="secondary">
+												{group.lessons.length} lesson
+												{group.lessons.length === 1 ? "" : "s"}
+											</Badge>
+											<ChevronDown className="h-4 w-4 text-gray-500 transition-transform group-open/course:rotate-180" />
+										</div>
+									</summary>
 
-									<div className="divide-y divide-gray-100 dark:divide-gray-800">
+									<div className="divide-y divide-gray-100 px-3 dark:divide-gray-800">
 										{group.lessons.map((lesson) => {
 											const previewHref = getStudentLessonHref(
 												lesson.course?.slug,
@@ -190,7 +195,7 @@ export default async function LessonsPage() {
 											);
 										})}
 									</div>
-								</section>
+								</details>
 							))}
 						</div>
 					)}
