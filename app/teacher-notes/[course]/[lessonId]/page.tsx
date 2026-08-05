@@ -63,12 +63,42 @@ export default async function TeacherNotesPage({
 		notFound();
 	}
 
-	// Fetch teacher notes for this lesson
-	const { data: teacherNote } = await supabase
-		.from("teacher_notes")
-		.select("*")
-		.eq("lesson_id", lesson.id)
-		.maybeSingle();
+	// Fetch the current lesson notes and the previous lesson in parallel. The
+	// previous lesson owns the assignment that is reviewed before this class.
+	const [{ data: teacherNote }, { data: previousLesson }] = await Promise.all([
+		supabase
+			.from("teacher_notes")
+			.select("*")
+			.eq("lesson_id", lesson.id)
+			.maybeSingle(),
+		parsedOrderIndex > 1
+			? supabase
+					.from("lessons")
+					.select("id, title, order_index, take_home_assignment")
+					.eq("course_id", course.id)
+					.eq("order_index", parsedOrderIndex - 1)
+					.maybeSingle()
+			: Promise.resolve({ data: null }),
+	]);
+
+	const { data: assignmentSolution } = previousLesson
+		? await supabase
+				.from("assignment_solutions")
+				.select("solution_code, review_notes")
+				.eq("lesson_id", previousLesson.id)
+				.maybeSingle()
+		: { data: null };
+
+	const assignmentReview =
+		previousLesson?.take_home_assignment && assignmentSolution
+			? {
+					lessonOrderIndex: previousLesson.order_index,
+					lessonTitle: previousLesson.title,
+					assignment: previousLesson.take_home_assignment,
+					solutionCode: assignmentSolution.solution_code,
+					reviewNotes: assignmentSolution.review_notes,
+				}
+			: null;
 
 	// Transform the lesson data to match the expected format
 	const transformedLesson = {
@@ -85,6 +115,7 @@ export default async function TeacherNotesPage({
 			lesson={transformedLesson}
 			teacherNote={teacherNote}
 			courseSlug={lesson.courses?.slug}
+			assignmentReview={assignmentReview}
 		/>
 	);
 }

@@ -6,6 +6,10 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
+import {
+	AssignmentReview,
+	type AssignmentReviewData,
+} from "@/components/lessons/assignment-review";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,6 +43,7 @@ interface TeacherNotesViewerProps {
 	lesson: Lesson;
 	teacherNote: TeacherNote | null;
 	courseSlug?: string;
+	assignmentReview?: AssignmentReviewData | null;
 }
 
 interface TableOfContentsItem {
@@ -51,6 +56,7 @@ export const TeacherNotesViewer = ({
 	lesson,
 	teacherNote,
 	courseSlug,
+	assignmentReview,
 }: Readonly<TeacherNotesViewerProps>) => {
 	const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>(
 		[],
@@ -95,6 +101,8 @@ export const TeacherNotesViewer = ({
 			<SiteHeader />
 
 			<div className="container mx-auto px-4 py-6">
+				{assignmentReview && <AssignmentReview review={assignmentReview} />}
+
 				{/* Table of Contents */}
 				{teacherNote && tableOfContents.length > 0 && (
 					<Card className="mb-6 rounded-2xl border-0 shadow-lg ring-1 ring-primary/10 dark:ring-primary/20">

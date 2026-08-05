@@ -12,6 +12,10 @@ interface SyncResult {
 		synced: string[];
 		errors: string[];
 	};
+	assignmentSolutions: {
+		synced: string[];
+		errors: string[];
+	};
 }
 
 export async function POST(_request: NextRequest) {
@@ -43,6 +47,7 @@ export async function POST(_request: NextRequest) {
 			errors: [],
 			skipped: [],
 			teacherNotes: { synced: [], errors: [] },
+			assignmentSolutions: { synced: [], errors: [] },
 		};
 
 		// Check if lessons directory exists
@@ -237,6 +242,60 @@ export async function POST(_request: NextRequest) {
 								);
 							}
 						}
+
+						const assignmentSolutionFile = path.join(
+							coursePath,
+							lessonFolder,
+							"assignment-solution.md",
+						);
+
+						if (fs.existsSync(assignmentSolutionFile)) {
+							try {
+								const solutionFileContent = fs.readFileSync(
+									assignmentSolutionFile,
+									"utf-8",
+								);
+								const { data: solutionFrontmatter, content: reviewNotes } =
+									matter(solutionFileContent);
+								const solutionCode = solutionFrontmatter.solution_code;
+
+								if (typeof solutionCode !== "string" || !solutionCode.trim()) {
+									results.assignmentSolutions.errors.push(
+										`${courseFolder}/${lessonFolder}: assignment-solution.md is missing solution_code`,
+									);
+								} else {
+									const { error: solutionError } = await supabase
+										.from("assignment_solutions")
+										.upsert(
+											{
+												lesson_id: lessonId,
+												solution_code: solutionCode.trim(),
+												review_notes: reviewNotes.trim(),
+												updated_at: new Date().toISOString(),
+											},
+											{ onConflict: "lesson_id" },
+										);
+
+									if (solutionError) {
+										results.assignmentSolutions.errors.push(
+											`${courseFolder}/${lessonFolder}: ${solutionError.message}`,
+										);
+									} else {
+										results.assignmentSolutions.synced.push(
+											`${courseFolder}/${lessonFolder} (upserted)`,
+										);
+									}
+								}
+							} catch (solutionErr: unknown) {
+								const solutionErrorMessage =
+									solutionErr instanceof Error
+										? solutionErr.message
+										: "Unknown error";
+								results.assignmentSolutions.errors.push(
+									`${courseFolder}/${lessonFolder}: ${solutionErrorMessage}`,
+								);
+							}
+						}
 					}
 				} catch (err: unknown) {
 					const errorMessage =
@@ -250,7 +309,7 @@ export async function POST(_request: NextRequest) {
 
 		return NextResponse.json({
 			success: true,
-			message: `Synced ${results.synced.length} lessons and ${results.teacherNotes.synced.length} teacher notes`,
+			message: `Synced ${results.synced.length} lessons, ${results.teacherNotes.synced.length} teacher notes, and ${results.assignmentSolutions.synced.length} assignment solutions`,
 			...results,
 		});
 	} catch (error: unknown) {

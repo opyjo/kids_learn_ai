@@ -5,6 +5,7 @@ import {
 	BookOpen,
 	Check,
 	FileText,
+	KeyRound,
 	RefreshCw,
 } from "lucide-react";
 import { useState } from "react";
@@ -30,6 +31,10 @@ interface SyncResult {
 		synced: string[];
 		errors: string[];
 	};
+	assignmentSolutions: {
+		synced: string[];
+		errors: string[];
+	};
 }
 
 export const SyncLessonsButton = () => {
@@ -51,8 +56,9 @@ export const SyncLessonsButton = () => {
 				setSyncResult(data);
 				setShowResults(true);
 				const notesCount = data.teacherNotes?.synced?.length || 0;
+				const solutionsCount = data.assignmentSolutions?.synced?.length || 0;
 				toast.success("Sync Complete! ✅", {
-					description: `${data.synced.length} lesson${data.synced.length !== 1 ? "s" : ""} and ${notesCount} teacher note${notesCount !== 1 ? "s" : ""} synced.`,
+					description: `${data.synced.length} lesson${data.synced.length !== 1 ? "s" : ""}, ${notesCount} teacher note${notesCount !== 1 ? "s" : ""}, and ${solutionsCount} assignment solution${solutionsCount !== 1 ? "s" : ""} synced.`,
 				});
 			} else {
 				toast.error("Sync Failed", {
@@ -252,6 +258,45 @@ export const SyncLessonsButton = () => {
 												</ul>
 											</ScrollArea>
 										</div>
+									)}
+								</>
+							)}
+
+							{syncResult.assignmentSolutions && (
+								<>
+									<div className="flex items-center gap-2 border-t pt-2">
+										<KeyRound
+											className="h-4 w-4 text-amber-600"
+											aria-hidden="true"
+										/>
+										<span className="text-sm font-medium">
+											Assignment Solutions
+										</span>
+										<Badge className="bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
+											{syncResult.assignmentSolutions.synced.length} Synced
+										</Badge>
+										{syncResult.assignmentSolutions.errors.length > 0 && (
+											<Badge variant="destructive">
+												{syncResult.assignmentSolutions.errors.length} Errors
+											</Badge>
+										)}
+									</div>
+
+									{syncResult.assignmentSolutions.errors.length > 0 && (
+										<ScrollArea className="h-24 rounded-md border border-red-200 p-3 dark:border-red-800">
+											<ul className="space-y-1 text-sm">
+												{syncResult.assignmentSolutions.errors.map(
+													(item, index) => (
+														<li
+															key={`solutions-error-${index}`}
+															className="text-red-600 dark:text-red-400"
+														>
+															✗ {item}
+														</li>
+													),
+												)}
+											</ul>
+										</ScrollArea>
 									)}
 								</>
 							)}

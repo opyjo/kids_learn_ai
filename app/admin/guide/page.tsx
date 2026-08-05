@@ -122,6 +122,10 @@ const guideSections = [
 				text: "Each lesson folder in the project (docs/Lesson_content) can hold a teacher-notes.md file. Copy the _TEMPLATE_teacher-notes.md file as a starting point and fill it in.",
 			},
 			{
+				title: "Add the assignment model solution",
+				text: "Add assignment-solution.md beside lesson.md. After syncing, its teacher-only worked answer appears at the top of the following lesson's notes under Review Previous Assignment.",
+			},
+			{
 				title: "Run Sync Lessons",
 				text: "On the Lessons page, click the Sync Lessons button. This reads the markdown files and loads any new teacher notes into the site.",
 			},
