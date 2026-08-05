@@ -17,19 +17,19 @@ starter_code: |
   print("")
   print("🎉" * 20)
 class_activities: |
-  ## 🎮 Activity: Showcase Missions — Solo Edition!
+  ## Showcase, Explain, and Celebrate
 
-  It's your big day! Complete these missions to earn your badge.
+  **Final evidence check:** Run one required test and confirm that your test table, peer feedback, revision, and known limitation are ready.
 
-  **Mission 1: Final Check** — Run your calculator one last time in YOUR own Trinket to make sure everything works
+  **Present:** In 60–90 seconds, show one interesting calculation, explain one design choice, describe one test, and name one improvement you made.
 
-  **Mission 2: Present** — When it's your turn, share your screen, demo your calculator, and tell everyone ONE thing you're proud of
+  **Audience role:** Every listener records one strength and asks one respectful question about the builder's reasoning.
 
-  **Mission 3: Badge Time** — Receive your "Python Beginner" badge and take a screenshot with it on screen!
+  **Gallery test:** If time allows, operate a classmate's calculator using a new pair of valid numbers and verify one result by hand.
 
-  **Mission 4: Reflect** — Post in the Zoom chat: your favorite thing you learned in Term 2, and one thing you're excited to learn next
+  **Reflect:** Name the skill that grew most this term: predicting, building, testing, debugging, explaining, or revising.
 
-  **Bonus Mission:** Get ready for Term 3: Decision Maker — where your programs learn to make choices!
+  **Celebrate:** Receive the Python Beginner badge and preview Term 3 decisions.
 take_home_assignment: |
   ## 📚 No Homework This Week!
 
@@ -185,19 +185,19 @@ Then run your calculator with some numbers!
 
 You've earned it! This badge represents:
 - ✅ Learning all the basic math operations
-- ✅ Learning to use input() and int()
-- ✅ Building interactive programs
-- ✅ Creating a complete calculator project
+- ✅ Converting whole-number and decimal input with `int()` and `float()`
+- ✅ Building and peer-testing interactive programs
+- ✅ Creating, testing, and explaining a complete calculator project
 - ✅ Becoming a real programmer!
 
 ### What the Badge Means
 
 You're now a **Python Beginner**! You can:
 - Do math with Python
-- Get information from users
-- Build interactive programs
-- Create useful calculators
-- Debug your code
+- Get and convert information from users
+- Build and improve interactive programs
+- Create useful, decimal-capable calculators
+- Test and debug with evidence
 
 **That's AMAZING!** 🎉
 
@@ -236,9 +236,9 @@ What are you excited to learn in Term 3?
 
 Let's look back at everything you learned:
 
-**Week 1:** Welcome Back — Term 1 Recap
-- Reviewed `print()`, variables, strings, and f-strings
-- Warmed up with a mixed-skills challenge
+**Week 1:** Welcome Back — Term 1 Skills Relay
+- Predicted, repaired, transformed, and built with Term 1 skills
+- Peer-tested and improved a Term 2 Passport
 
 **Week 2:** Python Does Math
 - Addition, subtraction, multiplication, division
@@ -249,25 +249,25 @@ Let's look back at everything you learned:
 - Modulo (`%`)
 - Order of operations (PEMDAS)
 
-**Week 4:** Asking Questions
-- Using `input()` to get user information
-- Making programs interactive
+**Week 4:** Numbers from Users
+- Converting number-shaped text with `int()`
+- Following the collect–convert–calculate–communicate pipeline
 
-**Week 5:** Numbers vs Text
-- Understanding the difference
-- Using `int()` to convert text to numbers
+**Week 5:** Decimals & Clean Answers
+- Choosing `int()` or `float()` based on meaning
+- Using `round()` and `:.2f` for readable results
 
-**Week 6:** Math Challenges
-- Solving real-world problems
-- Building useful calculators
+**Week 6:** Math Problem-Solving Lab
+- Planning and building one useful tool
+- Peer-testing and revising from feedback
 
-**Week 7:** Practice & Debug
-- Finding and fixing bugs
-- Using the Debug Dance
+**Week 7:** The Math Bug Clinic
+- Classifying syntax, runtime, logic, and usability problems
+- Proving repairs with planned tests
 
 **Week 8:** Project - My Calculator
-- Building your term project
-- Putting it all together!
+- Independently planning and building your term project
+- Testing, improving, and explaining your decisions
 
 **Week 9:** Showcase & Badge
 - Celebrating your achievements
@@ -275,12 +275,14 @@ Let's look back at everything you learned:
 
 ### Your Journey
 
-You started Term 2 knowing basic print() and variables. Now you can:
+You started Term 2 knowing basic output, variables, and text input. Now you can:
 - ✅ Do complex math calculations
-- ✅ Build interactive programs
-- ✅ Create useful calculators
-- ✅ Debug your code
-- ✅ Build complete projects
+- ✅ Convert whole-number and decimal input
+- ✅ Design and build useful tools
+- ✅ Predict and record test results
+- ✅ Diagnose different kinds of bugs
+- ✅ Improve programs after feedback
+- ✅ Explain your design choices and limitations
 
 **That's INCREDIBLE progress!** 🚀
 
@@ -292,16 +294,19 @@ You started Term 2 knowing basic print() and variables. Now you can:
 
 - Math operations: `+`, `-`, `*`, `/`, `**`, `%`
 - Getting user input: `input()`
-- Converting data: `int()`
-- Building calculators
-- Debugging code
-- Creating projects
+- Converting data: `int()` and `float()`
+- Cleaning results: `round()` and `:.2f`
+- Planning and building tools
+- Testing and debugging with evidence
+- Revising after peer feedback
 
 ### Projects You've Built
 
-- Math story programs
-- Interactive calculators
-- Real-world problem solvers
+- A connected math model
+- A Fair Share Planner
+- A Number Machine and Mini Shop Receipt
+- A real-world problem-solving tool
+- Bug Clinic case reports
 - Your term project calculator!
 
 ### Badge You've Earned
