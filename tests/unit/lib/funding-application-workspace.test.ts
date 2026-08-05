@@ -17,17 +17,16 @@ describe("funding application workspace", () => {
 	});
 
 	it("tracks reusable facts without treating missing evidence as ready", () => {
-		const labelsByStatus = Object.groupBy(
-			SHARED_FUNDING_EVIDENCE,
-			(item) => item.status,
-		);
+		const evidenceForStatus = (
+			status: (typeof SHARED_FUNDING_EVIDENCE)[number]["status"],
+		) => SHARED_FUNDING_EVIDENCE.filter((item) => item.status === status);
 
-		expect(labelsByStatus.Ready?.length).toBeGreaterThan(0);
-		expect(labelsByStatus.Confirm?.length).toBeGreaterThan(0);
-		expect(labelsByStatus["Add evidence"]?.length).toBeGreaterThan(0);
-		expect(labelsByStatus["Add evidence"]?.map((item) => item.label)).toContain(
-			"Historical results",
-		);
+		expect(evidenceForStatus("Ready").length).toBeGreaterThan(0);
+		expect(evidenceForStatus("Confirm").length).toBeGreaterThan(0);
+		expect(evidenceForStatus("Add evidence").length).toBeGreaterThan(0);
+		expect(
+			evidenceForStatus("Add evidence").map((item) => item.label),
+		).toContain("Historical results");
 	});
 
 	it("creates distinct partner adaptations for each lead program", () => {
