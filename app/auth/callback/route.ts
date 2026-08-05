@@ -1,5 +1,7 @@
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { LEGAL_CONSENT_VERSIONS } from "@/lib/legal/consent";
+import { recordLegalConsent } from "@/lib/legal/consent-server";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -47,6 +49,7 @@ export async function GET(request: Request) {
 	const next = safeNextPath(requestUrl.searchParams.get("next"));
 	const analyticsEvent = requestUrl.searchParams.get("analytics_event");
 	const analyticsMethod = requestUrl.searchParams.get("analytics_method");
+	const parentConsentVersion = requestUrl.searchParams.get("parent_consent");
 	const origin = requestUrl.origin;
 
 	const supabase = await getSupabaseServerClient();
@@ -125,6 +128,37 @@ export async function GET(request: Request) {
 			}
 			if (profile?.role === "parent") {
 				const admin = getSupabaseAdminClient();
+				if (analyticsEvent === "sign_up" && analyticsMethod === "google") {
+					if (parentConsentVersion !== LEGAL_CONSENT_VERSIONS.parentAccount) {
+						await supabase.auth.signOut();
+						return NextResponse.redirect(
+							`${origin}/signup?error=parent-consent-required`,
+						);
+					}
+
+					const consentResult = await recordLegalConsent(
+						{
+							parentUserId: sessionData.user.id,
+							subjectUserId: sessionData.user.id,
+							consentType: "parent_account",
+							consentVersion: LEGAL_CONSENT_VERSIONS.parentAccount,
+							source: "google_oauth_signup",
+						},
+						admin || undefined,
+					);
+
+					if (consentResult.error) {
+						console.error(
+							"Failed to record Google parent signup consent:",
+							consentResult.error,
+						);
+						await supabase.auth.signOut();
+						return NextResponse.redirect(
+							`${origin}/signup?error=consent-storage-failed`,
+						);
+					}
+				}
+
 				const { count: childCount } = admin
 					? await admin
 							.from("profiles")

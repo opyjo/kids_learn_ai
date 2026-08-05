@@ -1,24 +1,31 @@
 "use client";
 
 import { Loader2, Mail, User } from "lucide-react";
+import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { trackGoogleAnalyticsEvent } from "@/components/analytics/google-analytics-events";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/password-input";
 import { PasswordStrength } from "@/components/ui/password-strength";
 import { Separator } from "@/components/ui/separator";
 import { signupAction } from "@/lib/actions/auth";
+import { LEGAL_CONSENT_VERSIONS } from "@/lib/legal/consent";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
-const SubmitButton = () => {
+const SubmitButton = ({ consentComplete }: { consentComplete: boolean }) => {
 	const { pending } = useFormStatus();
 
 	return (
-		<Button type="submit" className="w-full" disabled={pending}>
+		<Button
+			type="submit"
+			className="w-full"
+			disabled={pending || !consentComplete}
+		>
 			{pending ? (
 				<>
 					<Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -31,12 +38,15 @@ const SubmitButton = () => {
 	);
 };
 
-export function SignupForm() {
+export function SignupForm({ initialError }: { initialError?: string }) {
 	const [state, formAction] = useActionState(signupAction, null);
 	const hasTrackedEmailSignup = useRef(false);
 	const [googleLoading, setGoogleLoading] = useState(false);
 	const [googleError, setGoogleError] = useState<string | null>(null);
 	const [password, setPassword] = useState("");
+	const [guardianConfirmed, setGuardianConfirmed] = useState(false);
+	const [legalAccepted, setLegalAccepted] = useState(false);
+	const consentComplete = guardianConfirmed && legalAccepted;
 
 	useEffect(() => {
 		if (state?.success && !hasTrackedEmailSignup.current) {
@@ -47,6 +57,12 @@ export function SignupForm() {
 
 	const handleGoogleSignUp = async () => {
 		setGoogleError(null);
+		if (!consentComplete) {
+			setGoogleError(
+				"Confirm your parent or guardian status and accept the legal terms before continuing.",
+			);
+			return;
+		}
 		setGoogleLoading(true);
 
 		try {
@@ -55,7 +71,7 @@ export function SignupForm() {
 			const { error } = await supabase.auth.signInWithOAuth({
 				provider: "google",
 				options: {
-					redirectTo: `${window.location.origin}/auth/callback?analytics_event=sign_up&analytics_method=google`,
+					redirectTo: `${window.location.origin}/auth/callback?analytics_event=sign_up&analytics_method=google&parent_consent=${encodeURIComponent(LEGAL_CONSENT_VERSIONS.parentAccount)}`,
 					queryParams: {
 						access_type: "offline",
 						prompt: "consent",
@@ -89,9 +105,11 @@ export function SignupForm() {
 
 	return (
 		<form action={formAction} className="space-y-4">
-			{(state?.error || googleError) && (
+			{(state?.error || googleError || initialError) && (
 				<Alert variant="destructive">
-					<AlertDescription>{state?.error || googleError}</AlertDescription>
+					<AlertDescription>
+						{state?.error || googleError || initialError}
+					</AlertDescription>
 				</Alert>
 			)}
 
@@ -169,7 +187,62 @@ export function SignupForm() {
 				/>
 			</div>
 
-			<SubmitButton />
+			<fieldset className="space-y-3 rounded-lg border p-4">
+				<legend className="px-1 text-sm font-semibold">
+					Parent or guardian consent
+				</legend>
+
+				<div className="flex items-start gap-3">
+					<Checkbox
+						id="guardianConfirmed"
+						name="guardianConfirmed"
+						required
+						checked={guardianConfirmed}
+						onCheckedChange={(checked) =>
+							setGuardianConfirmed(checked === true)
+						}
+						aria-describedby="guardian-confirmation-description"
+					/>
+					<Label
+						htmlFor="guardianConfirmed"
+						id="guardian-confirmation-description"
+						className="text-sm font-normal leading-5"
+					>
+						I confirm that I am at least 18 years old and am the parent, legal
+						guardian, or authorized caregiver of the child who will use Kids
+						Learn AI.
+					</Label>
+				</div>
+
+				<div className="flex items-start gap-3">
+					<Checkbox
+						id="legalAccepted"
+						name="legalAccepted"
+						required
+						checked={legalAccepted}
+						onCheckedChange={(checked) => setLegalAccepted(checked === true)}
+						aria-describedby="legal-acceptance-description"
+					/>
+					<Label
+						htmlFor="legalAccepted"
+						id="legal-acceptance-description"
+						className="text-sm font-normal leading-5"
+					>
+						I have read and agree to the{" "}
+						<Link href="/terms" className="text-primary underline">
+							Terms of Service
+						</Link>{" "}
+						and consent to the collection, use, and disclosure of my and my
+						child&apos;s information as described in the{" "}
+						<Link href="/privacy" className="text-primary underline">
+							Privacy Policy
+						</Link>
+						.
+					</Label>
+				</div>
+			</fieldset>
+
+			<SubmitButton consentComplete={consentComplete} />
 
 			<div className="relative">
 				<div className="absolute inset-0 flex items-center">
@@ -187,7 +260,7 @@ export function SignupForm() {
 				variant="outline"
 				className="w-full min-h-[44px]"
 				onClick={handleGoogleSignUp}
-				disabled={googleLoading}
+				disabled={googleLoading || !consentComplete}
 				aria-label="Sign up with Google"
 			>
 				{googleLoading ? (

@@ -273,7 +273,7 @@ For premium live classes:
 - Timezone-aware scheduling
 - Add to calendar integration
 - Session reminders
-- Recording access
+- Catch-up materials access
 
 ---
 
@@ -1290,5 +1290,4 @@ For each feature, track:
 
 *Last Updated: December 2025*
 *Document Version: 1.0.0*
-
 

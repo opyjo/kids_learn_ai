@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { isCheckedConsent, LEGAL_CONSENT_VERSIONS } from "@/lib/legal/consent";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -140,6 +141,8 @@ export async function signupAction(
 	const email = formData.get("email") as string;
 	const password = formData.get("password") as string;
 	const confirmPassword = formData.get("confirmPassword") as string;
+	const guardianConfirmed = isCheckedConsent(formData.get("guardianConfirmed"));
+	const legalAccepted = isCheckedConsent(formData.get("legalAccepted"));
 
 	// Validation
 	if (!fullName || !email || !password || !confirmPassword) {
@@ -152,6 +155,13 @@ export async function signupAction(
 
 	if (password.length < 8) {
 		return { error: "Password must be at least 8 characters long" };
+	}
+
+	if (!guardianConfirmed || !legalAccepted) {
+		return {
+			error:
+				"Confirm your parent or guardian status and accept the Terms and Privacy Policy to create an account.",
+		};
 	}
 
 	try {
@@ -169,6 +179,10 @@ export async function signupAction(
 			options: {
 				data: {
 					full_name: fullName,
+					parent_guardian_confirmed: true,
+					terms_version: LEGAL_CONSENT_VERSIONS.terms,
+					privacy_version: LEGAL_CONSENT_VERSIONS.privacy,
+					parent_consent_version: LEGAL_CONSENT_VERSIONS.parentAccount,
 				},
 				emailRedirectTo: `${siteUrl}/auth/callback?next=/family/setup`,
 			},

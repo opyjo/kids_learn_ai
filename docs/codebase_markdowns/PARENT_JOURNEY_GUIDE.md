@@ -69,7 +69,7 @@ You'll always know how your child is progressing:
 - **Start anytime:** New beginner cohorts start every 8 weeks
 - **Skill-based placement:** Kids with coding experience can start at an appropriate level
 - **Flexible pacing:** Students advance when ready, not on a fixed schedule
-- **Catch-up support:** Missed a class? Recordings and extra help are available
+- **Catch-up support:** Missed a class? Lesson materials and extra help are available
 
 ---
 
@@ -85,7 +85,7 @@ You'll always know how your child is progressing:
 ### What's Included in Every Term
 
 - 8 live, interactive 60-minute classes
-- Access to recorded sessions for review
+- Lesson materials and catch-up support
 - Digital learning materials and resources
 - Progress tracking and parent updates
 - Term-end project and showcase
@@ -143,7 +143,7 @@ No! Our program is designed for complete beginners. We start from scratch and bu
 
 **What if my child misses a class?**
 
-All sessions are recorded. Your child can watch the replay and catch up before the next class. We also offer extra help sessions for students who need additional support.
+Live classes are not recorded. Your child can review the lesson materials before the next class, and we offer catch-up support for students who need additional help.
 
 **What if my child isn't ready to advance?**
 

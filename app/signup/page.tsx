@@ -20,7 +20,21 @@ export const metadata = publicMetadata({
 	noIndex: true,
 });
 
-export default function SignupPage() {
+type SignupPageProps = {
+	searchParams: Promise<{ error?: string }>;
+};
+
+const consentErrors: Record<string, string> = {
+	"parent-consent-required":
+		"Confirm the parent or guardian requirements before continuing with Google.",
+	"consent-storage-failed":
+		"We could not securely record your consent. Please try again.",
+};
+
+export default async function SignupPage({ searchParams }: SignupPageProps) {
+	const params = await searchParams;
+	const initialError = params.error ? consentErrors[params.error] : undefined;
+
 	return (
 		<AuthLayout>
 			<div className="flex w-full max-w-5xl items-center gap-12 px-4">
@@ -103,7 +117,7 @@ export default function SignupPage() {
 							</CardDescription>
 						</CardHeader>
 						<CardContent className="pb-6">
-							<SignupForm />
+							<SignupForm initialError={initialError} />
 							<div className="mt-6 text-center">
 								<p className="text-sm text-gray-600 dark:text-gray-400">
 									Already have an account?{" "}
