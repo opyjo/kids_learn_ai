@@ -351,9 +351,8 @@ export function PricingContent() {
 							</CardHeader>
 							<CardContent>
 								<p className="text-muted-foreground">
-									Life happens! We provide recordings and materials for any
-									missed sessions. Our instructors are also available to help
-									your child catch up during the next class.
+									Life happens! We provide lesson materials and catch-up support
+									for missed sessions. Live classes are not recorded.
 								</p>
 							</CardContent>
 						</Card>
@@ -381,9 +380,13 @@ export function PricingContent() {
 							</CardHeader>
 							<CardContent>
 								<p className="text-muted-foreground">
-									That's why the first class is free! Try before you pay. If
-									after paying you have concerns within the first 2 weeks,
-									contact us and we'll work with you to find a solution.
+									That's why the first class is free: families can decide before
+									paying. Once the first paid class has begun, program fees are
+									non-refundable if a student withdraws, misses a class, or
+									cannot attend. If we cancel the remainder of the program and
+									do not provide a replacement, we refund the amount paid for
+									the classes we do not provide. Statutory consumer rights still
+									apply.
 								</p>
 							</CardContent>
 						</Card>

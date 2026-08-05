@@ -229,9 +229,8 @@ export default function InquiryPage() {
 									<AccordionTrigger>What if we miss a class?</AccordionTrigger>
 									<AccordionContent>
 										Life happens! If your child misses a class, we provide
-										recordings and materials so they can catch up. Our
-										instructors are also available to help during the next
-										session.
+										lesson materials and catch-up support. Live classes are not
+										recorded.
 									</AccordionContent>
 								</AccordionItem>
 								<AccordionItem value="equipment">

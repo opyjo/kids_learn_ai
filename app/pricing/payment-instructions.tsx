@@ -164,6 +164,21 @@ export function PaymentInstructions({ userEmail }: PaymentInstructionsProps) {
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-4">
+					<div className="rounded-lg border bg-muted/40 p-4 text-sm">
+						<p className="font-semibold">Supplier information</p>
+						<p>Opyjo Consulting Inc., operating as Kids Learn AI</p>
+						<address className="mt-1 not-italic text-muted-foreground">
+							82 Bradbury Road, Stoney Creek, Ontario L8J 0E4, Canada
+							<br />
+							<a href="tel:+14377785339" className="underline">
+								(437) 778-5339
+							</a>{" "}
+							·{" "}
+							<a href="mailto:hello@kidslearnai.ca" className="underline">
+								hello@kidslearnai.ca
+							</a>
+						</address>
+					</div>
 					<ol className="space-y-5">
 						{steps.map((step, index) => (
 							<li key={step.title} className="flex items-start gap-4">

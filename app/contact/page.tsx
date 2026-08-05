@@ -124,13 +124,22 @@ export default function ContactPage() {
 				{/* Additional Contact Methods */}
 				<div className="mt-12 text-center">
 					<p className="text-gray-600">
-						Prefer email? Reach us directly at{" "}
+						Reach us by email at{" "}
 						<a
 							href="mailto:hello@kidslearnai.ca"
 							className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
 						>
 							hello@kidslearnai.ca
+						</a>{" "}
+						or by phone at{" "}
+						<a
+							href="tel:+14377785339"
+							className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+						>
+							(437) 778-5339
 						</a>
+						. Our business address is 82 Bradbury Road, Stoney Creek, Ontario
+						L8J 0E4, Canada.
 					</p>
 				</div>
 			</main>
