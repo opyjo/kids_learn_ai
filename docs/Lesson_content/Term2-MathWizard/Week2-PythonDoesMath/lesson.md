@@ -1,128 +1,66 @@
 ---
 title: "Python Does Math!"
-description: "Discover Python's super-calculator powers - learn addition, subtraction, multiplication, and division"
+description: "Use variables and the four arithmetic operators to build and test a useful score tracker."
 difficulty: "beginner"
 order_index: 2
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
 starter_code: |
-  # Python Does Math!
-  # Let's turn Python into a super-calculator!
+  # Score Tracker — predict before running
+  round_one = 12
+  round_two = 8
 
-  # Try these math problems:
-  print(5 + 3)
-  print(10 - 4)
-  print(6 * 7)
-  print(20 / 5)
+  total = round_one + round_two
+  difference = round_one - round_two
 
-  # Now try your own!
+  # TODO: calculate double the round_one score
+  # TODO: calculate the average of the two rounds
+  # TODO: show each result with a clear label
 class_activities: |
-  ## 🎮 Activity: Math Missions — Solo Edition!
+  ## Scoreboard Studio
 
-  Work through these missions on your own, in YOUR own Trinket. Go at your own pace!
+  **Predict:** Use `round_one = 12` and `round_two = 8` to predict the total, difference, doubled score, and average.
 
-  **Mission 1:** Make Python solve `15 + 27`
+  **Build:** Complete a score tracker using variables and all four operators: `+`, `-`, `*`, and `/`.
 
-  **Mission 2:** Make Python solve `100 - 64`
+  **Test:** Change only the two starting variables and test these score pairs: `10 and 6`, `5 and 5`, and `0 and 8`. Record expected and actual answers.
 
-  **Mission 3:** Make Python solve `12 * 12` (remember: STAR for multiplication!)
+  **Exchange:** A partner invents a new pair of scores for your program. They check whether every label makes sense.
 
-  **Mission 4:** Make Python solve `144 / 6` (why does the answer have a `.0`?)
+  **Improve:** Rename unclear variables or add one useful calculation of your own.
 
-  **Mission 5:** Make Python solve `847 * 293` — way too big for your head, easy for Python!
-
-  **Mission 6:** Print your age times 12 — that's your age in months!
-
-  **Mission 7:** Figure out how many minutes are in a day (hint: `24 * 60`)
-
-  **Mission 8:** Create two variables with numbers in them, add them together, and print the result
-
-  When you finish all 8 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat so your teacher can check your work.
-
-  **Bonus Mission:** Invent the BIGGEST math problem you can think of and let Python solve it!
+  The goal is not a page of unrelated answers. It is one small program whose values work together.
 take_home_assignment: |
-  ## 📚 Homework: My Math Story
+  ## Homework: Event Planner
 
-  **Assignment:** Create a Python program that solves at least 8 different math problems and tells a story!
+  Plan an imaginary party, tournament, or club event with number variables such as guests, tables, tickets, points, or snacks.
 
-  **Requirements:**
-  1. Use all 4 operations: +, -, *, /
-  2. Include at least 8 print statements with math
-  3. Add comments to explain what each calculation is about
-  4. Make it tell a fun story (like counting cookies, scoring points, etc.)
-  5. Code must run without errors
+  Build one connected program that:
 
-  **Example theme ideas:**
-  - A birthday party (counting candles, slices of cake, guests)
-  - A video game (scoring points, losing lives, collecting coins)
-  - A pet shop (counting animals, calculating food)
+  1. stores at least four numbers in clearly named variables;
+  2. uses `+`, `-`, `*`, and `/` meaningfully;
+  3. saves calculations in result variables;
+  4. displays four labelled facts about the event;
+  5. includes a comment explaining each calculation; and
+  6. is tested by changing the starting numbers twice.
 
-  **Submit:** Share your Trinket link with your instructor.
+  Submit your Trinket link and state one thing that changed when you used the second set of values.
 ai_activities: |
-  ## 🤖 AI Lab: Math Helps AI Make a Score
+  ## AI Lab: Humans Design the Score
 
-  ### The big idea
-
-  AI often compares several clues by turning them into a **score**. A bigger score can mean “this choice matches better.” The score is built with the same addition, subtraction, multiplication, and division you learned today.
-
-  Imagine a kid-friendly movie helper. It has three clues about a movie:
-
-  - `adventure_points`: how much adventure it has
-  - `funny_points`: how funny it is
-  - `scary_points`: how scary it is
-
-  ### Work through an example
+  A computer can combine clues into a score:
 
   ```python
-  adventure_points = 8
-  funny_points = 6
-  scary_points = 2
-
-  total_points = adventure_points + funny_points
-  comfort_score = total_points - scary_points
-
-  print("Adventure and funny points:", total_points)
-  print("Final comfort score:", comfort_score)
+  adventure = 8
+  humour = 6
+  scary = 2
+  match_score = adventure * 2 + humour - scary
   ```
 
-  Python calculates:
+  Predict the result, run it, then change one clue. Which part of the result changed?
 
-  - `8 + 6 = 14`
-  - `14 - 2 = 12`
-
-  The final score is `12`. The computer did not decide what a “good movie” is by itself. A human chose the clues and the math rule.
-
-  ### Why multiplication and division matter
-
-  Multiplication can give one clue extra importance:
-
-  ```python
-  match_score = adventure_points * 2 + funny_points
-  print("Match score:", match_score)
-  ```
-
-  Adventure counts twice, so this score is `8 * 2 + 6 = 22`.
-
-  Division can share or average a total:
-
-  ```python
-  average_points = (adventure_points + funny_points) / 2
-  print("Average:", average_points)
-  ```
-
-  The average is `7.0`.
-
-  ### Your experiment
-
-  1. Predict the three outputs before running the code.
-  2. Change `funny_points` from `6` to `10`.
-  3. Run it again and explain which answers changed.
-  4. Make a second movie with different points and compare its score.
-
-  ### Think like an AI builder
-
-  Is a higher score always a better movie? No. Different people enjoy different things. Good AI builders check whether the clues and math are useful and fair instead of trusting a number just because a computer produced it.
+  The computer follows the formula exactly, but a human chose the clues and decided that adventure counts twice. Discuss why a calculated score is not automatically fair or useful.
 ---
 
 # Term 2, Lesson 2: Python Does Math! 🧮
@@ -133,503 +71,165 @@ ai_activities: |
 
 ---
 
-## 🎯 What You'll Learn Today
+## Your Mission
 
-By the end of this lesson, you will be able to:
+Today you will turn variables into a working model: one program where several numbers describe the same situation.
 
-- Use Python as a super-powerful calculator
-- Perform addition, subtraction, multiplication, and division
-- Do math with numbers directly and with variables
-- Understand why computers are so fast at math
-- Create programs that calculate and display results
+You will:
 
----
+- use `+`, `-`, `*`, and `/`;
+- store calculations in variables;
+- predict results before running code;
+- test the same program with different starting values; and
+- improve labels so another person can understand the results.
 
-## 🤖 Welcome Back from BrightByte!
+## 1. Operator Match-Up
 
-> _"Hey there, Math Wizard! 🧙‍♂️ Welcome to Term 2! Remember all those cool print() statements we made? Well, get ready because we're about to discover Python's SECRET SUPERPOWER—it's an AMAZING calculator! Seriously, Python can do math faster than the fastest human mathematician. And today, YOU get to unlock that power!"_
+Match each story to an operator before opening Trinket:
 
-### What's Special About Term 2?
+| Story | Operator |
+| --- | --- |
+| Combine points from two rounds | `+` |
+| Find how many more points one player has | `-` |
+| Award five points for every star | `*` |
+| Share a total equally | `/` |
 
-In Term 1, you learned how to:
+Python uses `*` for multiplication and `/` for division.
 
-- Make Python talk using `print()`
-- Store information in variables
-- Create fun text-based programs
+## 2. Predict, Then Check
 
-Now in Term 2, we're going to:
-
-- Turn Python into a super-calculator
-- Get information FROM users
-- Build interactive programs that do REAL math
-
-> _BrightByte says: "By the end of Term 2, you'll build your very own calculator app! How cool is that? Let's start by learning the basics of Python math!"_
-
----
-
-## 🔢 Python: The Super-Calculator
-
-### Why Is Python So Good at Math?
-
-Computers were INVENTED to do math! The very first computers were just giant calculators. That's why programming languages like Python are incredibly fast at math—it's what computers do best!
-
-**Fun Fact:** Your computer can do about 1,000,000,000 (one BILLION) math calculations per second! That's faster than you can blink! 😮
-
-### The Four Basic Operations
-
-Python uses special symbols for math. Here they are:
-
-| Operation      | Symbol | Example  | Result |
-| -------------- | ------ | -------- | ------ |
-| Addition       | `+`    | `5 + 3`  | `8`    |
-| Subtraction    | `-`    | `10 - 4` | `6`    |
-| Multiplication | `*`    | `6 * 7`  | `42`   |
-| Division       | `/`    | `20 / 5` | `4.0`  |
-
-**Important Notes:**
-
-- For multiplication, we use `*` (the asterisk), NOT `x`
-- For division, we use `/` (the forward slash)
-- Division always gives a decimal answer (like `4.0` instead of `4`)
-
----
-
-## ➕ Addition: Putting Things Together
-
-Addition is just like in regular math. Use the `+` sign!
-
-### Example 1: Simple Addition
+Use these starting values:
 
 ```python
-print(5 + 3)
+red_points = 18
+blue_points = 6
 ```
 
-**Output:** `8`
-
-Python added 5 and 3 and showed us the answer!
-
-### Example 2: Adding Bigger Numbers
+Predict each answer on paper:
 
 ```python
-print(100 + 250)
+combined = red_points + blue_points
+lead = red_points - blue_points
+triple_blue = blue_points * 3
+equal_share = red_points / blue_points
 ```
 
-**Output:** `350`
+Now type and run the code. If a prediction differs from Python, explain why before changing anything.
 
-Python doesn't care how big the numbers are—it calculates instantly!
+## 3. Values, Calculations, Results
 
-### Example 3: Adding Many Numbers
+A useful math program usually separates three jobs:
 
 ```python
-print(10 + 20 + 30 + 40)
+# Starting values
+games = 4
+points_per_game = 25
+
+# Calculation
+total_points = games * points_per_game
+
+# Communication
+print(f"Total points: {total_points}")
 ```
 
-**Output:** `100`
+This structure makes testing easy: change the starting values and the calculation updates automatically.
 
-You can add as many numbers as you want in one line!
+### Improve the model
 
-### Example 4: Addition with a Message
+Add a `bonus_points` variable. Update the total so it includes the bonus. Predict the new answer before running.
+
+## 4. Division Creates Decimals
+
+Python's `/` produces a decimal value:
 
 ```python
-print("I have", 5 + 3, "apples!")
+total = 15
+players = 3
+share = total / players
 ```
 
-**Output:** `I have 8 apples!`
+The result is `5.0`. Python calls a decimal number a **float**. You will learn how to collect decimal input and clean long answers in Lesson 5.
 
-Python does the math first, then shows it with your message!
+For today, notice what `/` does and use values that are safe to divide. Never divide by zero.
 
----
+## 5. Build: Scoreboard Studio
 
-## ➖ Subtraction: Taking Things Away
+Your score tracker needs:
 
-Subtraction uses the `-` sign (the minus sign).
+- two starting score variables;
+- a total;
+- a difference;
+- one multiplied score;
+- an average using division; and
+- clear output labels.
 
-### Example 1: Simple Subtraction
+Plan before coding:
+
+| Result | Formula in words | Expected answer for 12 and 8 |
+| --- | --- | --- |
+| Total | first plus second | |
+| Difference | first minus second | |
+| Doubled first score | first times two | |
+| Average | total divided by two | |
+
+Complete the table, then build from the starter.
+
+## 6. Test the Model
+
+Change only the input variables for each test:
+
+| Scores | Expected total | Expected difference | Expected average | Pass? |
+| --- | ---: | ---: | ---: | --- |
+| 10 and 6 | | | | |
+| 5 and 5 | | | | |
+| 0 and 8 | | | | |
+
+Do not rewrite the formulas for each test. A strong model works when its starting values change.
+
+## 7. Partner Review
+
+Let a partner choose a fourth score pair. Ask them:
+
+- Can you tell what every result means?
+- Do the variable names describe their values?
+- Which calculation would make the tracker more useful?
+
+Make one improvement based on the feedback.
+
+## Challenge Ladder
+
+### Level 1: Team Total ⭐
+
+Model points for three players and calculate the team total.
+
+### Level 2: Snack Budget ⭐⭐
+
+Store a budget, number of snacks, and price per snack. Calculate the cost and money remaining using fixed values.
+
+### Level 3: Design a Model ⭐⭐⭐
+
+Invent a connected scenario that uses all four operators. Write the expected answers before running it.
+
+## Common Bugs
+
+| Symptom | Check |
+| --- | --- |
+| Multiplication error | Use `*`, not `x` |
+| Division error | Use `/` and ensure the divisor is not zero |
+| `NameError` | Check variable spelling and capitals |
+| Correct number, unclear meaning | Add a label and unit |
+
+## Exit Ticket
+
+Given:
 
 ```python
-print(10 - 4)
+round_one = 9
+round_two = 7
 ```
 
-**Output:** `6`
+Write one line that saves the average in a variable. Then explain why changing the starting variables is a better test than rewriting the entire program.
 
-### Example 2: Bigger Subtraction
+## Next Lesson
 
-```python
-print(1000 - 750)
-```
-
-**Output:** `250`
-
-### Example 3: Going Negative!
-
-```python
-print(5 - 10)
-```
-
-**Output:** `-5`
-
-Python handles negative numbers perfectly! If you subtract a bigger number from a smaller number, you get a negative result.
-
-### Example 4: Subtraction Story
-
-```python
-print("I had 20 cookies.")
-print("I ate 8 cookies.")
-print("Now I have", 20 - 8, "cookies left!")
-```
-
-**Output:**
-
-```
-I had 20 cookies.
-I ate 8 cookies.
-Now I have 12 cookies left!
-```
-
----
-
-## ✖️ Multiplication: Groups of Things
-
-Multiplication uses the `*` symbol (asterisk). You can find it by pressing Shift + 8.
-
-### Example 1: Simple Multiplication
-
-```python
-print(6 * 7)
-```
-
-**Output:** `42`
-
-### Example 2: Times Tables!
-
-```python
-print("5 times table:")
-print("5 x 1 =", 5 * 1)
-print("5 x 2 =", 5 * 2)
-print("5 x 3 =", 5 * 3)
-print("5 x 4 =", 5 * 4)
-print("5 x 5 =", 5 * 5)
-```
-
-**Output:**
-
-```
-5 times table:
-5 x 1 = 5
-5 x 2 = 10
-5 x 3 = 15
-5 x 4 = 20
-5 x 5 = 25
-```
-
-### Example 3: Real World Multiplication
-
-```python
-# If there are 4 tables and 6 chairs at each table...
-print("Total chairs:", 4 * 6)
-```
-
-**Output:** `Total chairs: 24`
-
-> _BrightByte says: "Remember: in Python, we use * for multiplication, NOT x. The x is used for other things in programming, so we use * instead!"_
-
----
-
-## ➗ Division: Sharing Equally
-
-Division uses the `/` symbol (forward slash).
-
-### Example 1: Simple Division
-
-```python
-print(20 / 5)
-```
-
-**Output:** `4.0`
-
-Notice the `.0` at the end? Division in Python always gives a decimal number (called a "float"), even when it divides evenly!
-
-### Example 2: Sharing Cookies
-
-```python
-# 24 cookies shared among 6 friends
-print("Each friend gets", 24 / 6, "cookies!")
-```
-
-**Output:** `Each friend gets 4.0 cookies!`
-
-### Example 3: Division with Remainders
-
-```python
-print(10 / 3)
-```
-
-**Output:** `3.3333333333333335`
-
-When division doesn't come out even, Python gives you the full decimal answer!
-
-### Example 4: Pizza Slices
-
-```python
-# 1 pizza has 8 slices, shared among 3 friends
-print("Each person gets", 8 / 3, "slices")
-```
-
-**Output:** `Each person gets 2.6666666666666665 slices`
-
-(Don't worry—we'll learn how to round numbers later!)
-
----
-
-## 🎯 Math with Variables
-
-Remember variables from Term 1? They're like labeled boxes that hold information. We can put numbers in variables and do math with them!
-
-### Example 1: Storing Numbers
-
-```python
-apples = 5
-oranges = 3
-total_fruit = apples + oranges
-print("Total fruit:", total_fruit)
-```
-
-**Output:** `Total fruit: 8`
-
-### Example 2: Game Score
-
-```python
-level1_score = 100
-level2_score = 150
-level3_score = 200
-total_score = level1_score + level2_score + level3_score
-print("Your total score is:", total_score)
-```
-
-**Output:** `Your total score is: 450`
-
-### Example 3: Changing Variables
-
-```python
-coins = 50
-print("You have", coins, "coins")
-
-# You find a treasure chest!
-coins = coins + 100
-print("After finding treasure:", coins, "coins!")
-
-# You buy a power-up
-coins = coins - 25
-print("After buying power-up:", coins, "coins!")
-```
-
-**Output:**
-
-```
-You have 50 coins
-After finding treasure: 150 coins!
-After buying power-up: 125 coins!
-```
-
-### Example 4: Calculating Area
-
-```python
-# Calculate the area of a rectangle
-length = 10
-width = 5
-area = length * width
-print("The rectangle is", length, "by", width)
-print("The area is", area, "square units")
-```
-
-**Output:**
-
-```
-The rectangle is 10 by 5
-The area is 50 square units
-```
-
-> _BrightByte says: "Using variables for math is SUPER powerful! You can change the numbers once and the whole calculation updates. Real programmers use this all the time!"_
-
----
-
-## 🔄 Order of Operations (Sneak Peek!)
-
-Python follows the same order of operations you learn in math class! Here's a quick preview:
-
-### Multiplication and Division First
-
-```python
-print(2 + 3 * 4)
-```
-
-**Output:** `14`
-
-**Why?** Python does `3 * 4 = 12` first, then `2 + 12 = 14`.
-
-### Use Parentheses to Change Order
-
-```python
-print((2 + 3) * 4)
-```
-
-**Output:** `20`
-
-**Why?** Parentheses first! `(2 + 3) = 5`, then `5 * 4 = 20`.
-
-We'll learn MUCH more about this next week!
-
----
-
-## 🎮 Practice Time!
-
-### Challenge 1: The Candy Store
-
-Write code to figure out the total:
-
-- 12 lollipops
-- 8 chocolate bars
-- 15 gummy bears
-
-```python
-lollipops = 12
-chocolate = 8
-gummy_bears = 15
-total_candy = lollipops + chocolate + gummy_bears
-print("Total candy pieces:", total_candy)
-```
-
-### Challenge 2: The Pizza Party
-
-You're ordering pizza for a party!
-
-- 3 pizzas
-- Each pizza has 8 slices
-- How many total slices?
-
-```python
-pizzas = 3
-slices_per_pizza = 8
-total_slices = pizzas * slices_per_pizza
-print("Total pizza slices:", total_slices)
-```
-
-### Challenge 3: Fair Sharing
-
-You have 100 stickers to share equally among 4 friends. How many does each friend get?
-
-```python
-stickers = 100
-friends = 4
-each_gets = stickers / friends
-print("Each friend gets", each_gets, "stickers!")
-```
-
-### Challenge 4: Video Game Stats
-
-Create your own video game score tracker:
-
-```python
-# My Video Game Score
-player_name = "SuperCoder"
-enemies_defeated = 25
-points_per_enemy = 10
-bonus_points = 50
-
-total_points = (enemies_defeated * points_per_enemy) + bonus_points
-
-print("Player:", player_name)
-print("Enemies defeated:", enemies_defeated)
-print("Total points:", total_points)
-```
-
----
-
-## 📝 Key Takeaways
-
-### The Four Math Operators
-
-| What You Want | Symbol | Example         | Remember                  |
-| ------------- | ------ | --------------- | ------------------------- |
-| Add           | `+`    | `print(5 + 3)`  | Same as regular math!     |
-| Subtract      | `-`    | `print(10 - 4)` | Same as regular math!     |
-| Multiply      | `*`    | `print(6 * 7)`  | Use \*, NOT x             |
-| Divide        | `/`    | `print(20 / 5)` | Always gives decimal (.0) |
-
-### Important Things to Remember
-
-1. **Use \* for multiplication** — NOT the letter x
-2. **Division gives decimals** — Even 10/2 gives 5.0
-3. **Variables work in math** — `apples + oranges` works great!
-4. **Python calculates first** — In `print(5 + 3)`, Python does the math, then prints
-
-### Vocabulary Words
-
-| Word           | Definition                                 | Example               |
-| -------------- | ------------------------------------------ | --------------------- |
-| **Operator**   | A symbol that tells Python what math to do | `+`, `-`, `*`, `/`    |
-| **Expression** | A math problem Python can solve            | `5 + 3`               |
-| **Float**      | A number with a decimal point              | `4.0`, `3.5`          |
-| **Integer**    | A whole number (no decimal)                | `4`, `10`, `100`      |
-| **Calculate**  | To figure out the answer to a math problem | Python calculates 5+3 |
-
----
-
-## 🌟 Next Lesson Preview
-
-**Week 3: Bigger Math!**
-
-Next week, you'll discover even MORE math powers:
-
-- **Exponents** — Making numbers HUGE with `**`
-- **Modulo** — Finding remainders with `%`
-- **PEMDAS** — The secret order of operations
-
-**Sneak peek:**
-
-```python
-# Exponents - powers!
-print(2 ** 10)  # 2 to the power of 10 = 1024!
-
-# Modulo - remainders!
-print(17 % 5)   # 17 divided by 5 has remainder 2!
-```
-
-Get ready to become a REAL Math Wizard! 🧙‍♂️
-
----
-
-## 🎉 Great Job, Math Wizard!
-
-You just learned how to turn Python into your personal calculator!
-
-**What you accomplished today:**
-
-- ✅ Learned the four math operators: `+`, `-`, `*`, `/`
-- ✅ Did addition, subtraction, multiplication, and division
-- ✅ Used variables to store and calculate numbers
-- ✅ Combined math with print() statements
-- ✅ Got a preview of order of operations
-
-> _BrightByte says: "WOW! You just unlocked Python's calculator superpowers! 🦸 From now on, you never need to do math by hand again—just ask Python! But here's the cool part: this is just the beginning. Next week, we're going to learn even MORE powerful math tricks. You're doing AMAZING! Keep practicing, and I'll see you next week!"_
-
----
-
-## 📚 Extra Practice Ideas
-
-Want to practice more? Try these fun challenges:
-
-1. **Times Table Generator:** Print out your favorite times table (like 7x1, 7x2, 7x3...)
-2. **Money Calculator:** If you have $20 and each toy costs $3, how many toys can you buy? How much money is left?
-3. **Sports Stats:** Track points scored in different quarters of a game
-4. **Recipe Doubler:** If a recipe uses 3 eggs and 2 cups of flour, what would you need to double it?
-
----
-
-_KidsLearnAI - Empowering the Next Generation with AI Education_  
-_www.kidslearnai.ca_  
-_Instagram: @kids_learn_ai_
-
----
-
-_Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
+Next you will add exponents, equal groups, leftovers, and parentheses to your math toolbox.

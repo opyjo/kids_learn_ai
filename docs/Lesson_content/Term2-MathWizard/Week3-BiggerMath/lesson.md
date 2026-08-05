@@ -1,133 +1,70 @@
 ---
 title: "Bigger Math!"
-description: "Discover exponents, modulo, and the order of operations - Python's advanced math powers"
+description: "Use powers, equal groups, leftovers, and parentheses to solve a fair-sharing challenge."
 difficulty: "beginner"
 order_index: 3
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
 starter_code: |
-  # Bigger Math!
-  # Let's explore Python's advanced math powers!
+  # Fair Share Planner
+  items = 23
+  teams = 5
 
-  # Exponents - making numbers HUGE!
-  print(2 ** 3)
-  print(5 ** 2)
+  # Predict both answers before writing code.
+  equal_share = 0  # TODO: use //
+  leftovers = 0   # TODO: use %
 
-  # Modulo - finding remainders!
-  print(17 % 5)
-  print(20 % 6)
+  print(f"Each team gets {equal_share} items.")
+  print(f"Items left over: {leftovers}")
 
-  # Order of operations
-  print(2 + 3 * 4)
-  print((2 + 3) * 4)
-
-  # Try your own!
+  # Power prediction: what is 2 ** 6?
 class_activities: |
-  ## 🎮 Activity: Power Missions — Solo Edition!
+  ## Fair Share Lab
 
-  Work through these missions on your own, in YOUR own Trinket. Go at your own pace!
+  **Model it:** Use 23 counters, drawings, or marks and split them among 5 teams. Record the equal share and leftovers.
 
-  **Mission 1:** Make Python solve `2 ** 10`
+  **Build it:** Complete the Fair Share Planner using `//` and `%`.
 
-  **Mission 2:** Make Python solve `3 ** 5`
+  **Test it:** Try `20 and 5`, `24 and 5`, and `7 and 10`. Predict every result before running.
 
-  **Mission 3:** Use `**` to make the BIGGEST number you can!
+  **Investigate powers:** Start at 1 point and double it for six rounds. Predict `2 ** 6`, then check with Python.
 
-  **Mission 4:** Find the remainder: `25 % 7`
+  **Solve a parentheses puzzle:** Compare `5 + 2 * 3` with `(5 + 2) * 3` and explain why the answers differ.
 
-  **Mission 5:** Try `100 % 10` — why is the answer 0?
-
-  **Mission 6:** Create ONE problem that uses BOTH `**` and `%`
-
-  When you finish all 6 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat so your teacher can check your work.
-
-  **Bonus Mission:** Can you make a number so big it fills your whole screen?
+  **Exchange and improve:** A partner invents a fair-sharing scenario for your program and checks its labels.
 take_home_assignment: |
-  ## 📚 Homework: The Math Wizard Challenge
+  ## Homework: Theme Park Planner
 
-  **Assignment:** Create a Python program that demonstrates your mastery of ALL math operations!
+  Create one connected program about a theme park, sports day, space crew, or another theme.
 
-  **Requirements:**
-  1. Use all 6 operations: +, -, *, /, **, %
-  2. Include at least 3 examples of exponents
-  3. Include at least 3 examples of modulo (and try `//` for a bonus!)
-  4. Show order of operations with and without parentheses
-  5. Add comments explaining what each calculation does
-  6. Make it tell a story or solve a real problem
-  7. Code must run without errors
+  It must:
 
-  **Example themes:**
-  - A space mission (calculating distances, fuel, time)
-  - A sports tournament (points, rounds, remainders)
-  - A treasure hunt (steps, groups, leftovers)
+  1. use `//` to calculate complete groups;
+  2. use `%` to calculate leftovers;
+  3. use `**` to model repeated doubling or possible combinations;
+  4. compare one expression with and without parentheses;
+  5. store results in named variables;
+  6. include expected answers for three tests; and
+  7. explain the results with clear labels.
 
-  **Submit:** Share your Trinket link with your instructor.
+  Submit the Trinket link and one sentence explaining when `%` is more useful than `/`.
 ai_activities: |
-  ## 🤖 AI Lab: Huge Choices, Leftovers, and Calculation Order
+  ## AI Lab: Calculation Rules Must Be Checkable
 
-  ### The big idea
+  Powers can describe fast-growing possibilities, `//` and `%` can organize examples into batches, and parentheses control scoring formulas.
 
-  AI programs work with lots of numbers. Three tools from today's lesson help:
-
-  - **Exponents (`**`)** describe numbers that grow very quickly.
-  - **Modulo (`%`)** finds a remainder and helps organize items into repeating groups.
-  - **Parentheses** make the order of a calculation clear.
-
-  ### Example 1: How quickly choices grow
-
-  Imagine four switches. Each switch can be either OFF or ON, so each one has 2 choices.
+  Investigate:
 
   ```python
-  possible_patterns = 2 ** 4
-  print(possible_patterns)
+  possible_patterns = 2 ** 8
+  complete_batches = 67 // 10
+  leftover_examples = 67 % 10
   ```
 
-  The answer is `16`. With eight switches, there are many more patterns:
-
-  ```python
-  print(2 ** 8)
-  ```
-
-  The answer is `256`. AI can compare huge numbers of possible patterns, so exponents help us describe how quickly the number of choices grows.
-
-  ### Example 2: Putting examples into teams
-
-  Suppose an AI activity has 17 picture examples and each team should receive 5.
-
-  ```python
-  pictures = 17
-  team_size = 5
-
-  leftovers = pictures % team_size
-  print("Pictures left over:", leftovers)
-  ```
-
-  The answer is `2`, because 15 pictures make three complete groups of 5 and 2 remain.
-
-  ### Example 3: Parentheses change the answer
-
-  ```python
-  score_without_brackets = 2 + 3 * 4
-  score_with_brackets = (2 + 3) * 4
-
-  print(score_without_brackets)
-  print(score_with_brackets)
-  ```
-
-  The answers are `14` and `20`. Python multiplies before adding unless parentheses tell it to add first. AI calculations must use the intended order, or their scores can be wrong.
-
-  ### Your experiment
-
-  1. Predict `2 ** 6`.
-  2. Predict the remainder from `23 % 4`.
-  3. Compare `5 + 2 * 3` with `(5 + 2) * 3`.
-  4. Run each expression and explain why Python gave that answer.
-
-  ### Think like an AI builder
-
-  Computers calculate exactly what we write—not what we meant to write. Clear parentheses and careful testing help humans check that an AI system's math matches its real goal.
+  Predict all three results. A computer follows the written rules exactly, so humans must check that a formula matches its intended purpose.
 ---
+
 # Term 2, Lesson 3: Bigger Math! 🚀
 
 **Course:** Term 2: Math Wizard  
@@ -136,482 +73,167 @@ ai_activities: |
 
 ---
 
-## 🎯 What You'll Learn Today
+## Your Mission
 
-By the end of this lesson, you will be able to:
+Today you will solve problems where ordinary division does not tell the whole story.
 
-- Use exponents (`**`) to make numbers HUGE
-- Use modulo (`%`) to find remainders
-- Understand the order of operations (PEMDAS)
-- Combine all math operations in complex expressions
-- Use parentheses to control calculation order
+You will:
 
----
+- use `**` for powers;
+- use `//` for complete groups;
+- use `%` for leftovers;
+- control calculation order with parentheses; and
+- build and test a Fair Share Planner.
 
-## 🤖 Welcome from BrightByte!
+## 1. Start with a Real Sharing Problem
 
-> _"Wow! You mastered addition, subtraction, multiplication, and division! That's AMAZING! But guess what? Python has EVEN MORE math superpowers! Today, we're going to learn about EXPONENTS (making numbers grow super fast!) and MODULO (finding leftovers when you divide). Plus, we'll discover Python's secret order of operations - the same rules you learn in math class!"_
+There are 23 game cards and 5 teams.
 
-### What's New This Week?
+Before coding, use counters or draw marks to answer:
 
-Last week you learned:
-- The four basic operations: `+`, `-`, `*`, `/`
-- How to do math with variables
-- Combining math with print()
+- How many complete cards can each team receive?
+- How many cards remain?
 
-This week you'll discover:
-- **Exponents** — Making numbers grow exponentially!
-- **Modulo** — Finding remainders (super useful!)
-- **Order of Operations** — Python follows PEMDAS just like math class!
+Ordinary division gives `4.6`, but a team cannot receive 0.6 of a card. Python provides two operators for the two useful answers.
 
-> _BrightByte says: "These are the same math operations that AI uses millions of times per second! You're learning REAL programming math!"_
+## 2. Complete Groups with `//`
 
----
-
-## 🔢 Exponents: Making Numbers HUGE!
-
-### What Are Exponents?
-
-Exponents are a way to multiply a number by itself multiple times. In Python, we use `**` (two asterisks).
-
-**Fun Fact:** Exponents make numbers grow SUPER fast! 2^10 = 1,024, but 2^20 = 1,048,576!
-
-### Example 1: Simple Exponents
+Floor division answers “how many complete groups?”
 
 ```python
-print(2 ** 3)
+items = 23
+teams = 5
+equal_share = items // teams
 ```
 
-**Output:** `8`
+`equal_share` is `4`.
 
-**Why?** `2 ** 3` means 2 × 2 × 2 = 8
+The operator does not round to the nearest whole number. It keeps only the number of complete groups.
 
-### Example 2: Powers of 2
+## 3. Leftovers with `%`
+
+Modulo answers “what remains?”
 
 ```python
-print("Powers of 2:")
-print("2^1 =", 2 ** 1)
-print("2^2 =", 2 ** 2)
-print("2^3 =", 2 ** 3)
-print("2^4 =", 2 ** 4)
-print("2^5 =", 2 ** 5)
+leftovers = items % teams
 ```
 
-**Output:**
-```
-Powers of 2:
-2^1 = 2
-2^2 = 4
-2^3 = 8
-2^4 = 16
-2^5 = 32
-```
+`leftovers` is `3`.
 
-### Example 3: Bigger Exponents
+Together, the results tell the whole sharing story:
 
 ```python
-print(5 ** 2)   # 5 squared = 25
-print(3 ** 4)   # 3 to the 4th power = 81
-print(10 ** 3)  # 10 cubed = 1000
+print(f"Each team gets {equal_share} cards.")
+print(f"Cards left over: {leftovers}")
 ```
 
-**Output:**
-```
-25
-81
-1000
-```
+### Check the relationship
 
-### Example 4: Real-World Exponents
+Use the values to verify:
+
+`teams × equal share + leftovers = original items`
+
+For 23 items and 5 teams: `5 × 4 + 3 = 23`.
+
+## 4. Build: Fair Share Planner
+
+Complete the starter, then give the numbers meaning. Choose cards, stickers, players, snacks, or another countable item.
+
+Your program must report:
+
+- the original number of items;
+- the number of teams;
+- the equal share; and
+- the leftovers.
+
+Test it:
+
+| Items | Teams | Expected share | Expected leftovers | Pass? |
+| ---: | ---: | ---: | ---: | --- |
+| 20 | 5 | | | |
+| 24 | 5 | | | |
+| 7 | 10 | | | |
+
+Explain the surprising third test to a partner.
+
+## 5. Powers: Repeated Multiplication
+
+`**` means “raise to a power”:
 
 ```python
-# If you double something 10 times...
-doubles = 2 ** 10
-print("After 10 doublings:", doubles)
+possible_patterns = 2 ** 6
 ```
 
-**Output:** `After 10 doublings: 1024`
+This represents six binary choices, each with two possibilities.
 
-> _BrightByte says: "Exponents are everywhere! When you see 'squared' or 'cubed' in math, that's exponents! 5² = 5 ** 2 = 25!"_
+Try an unplugged doubling experiment:
 
----
+| Round | Amount |
+| ---: | ---: |
+| 0 | 1 |
+| 1 | 2 |
+| 2 | 4 |
+| 3 | |
+| 4 | |
+| 5 | |
+| 6 | |
 
-## 🔄 Modulo: Finding Remainders
+Complete the table before asking Python to calculate `2 ** 6`.
 
-### What Is Modulo?
+## 6. Parentheses Communicate Intent
 
-Modulo (`%`) finds the **remainder** when you divide one number by another. It's super useful for:
-- Checking if numbers are even or odd
-- Organizing things into groups
-- Creating patterns
-
-### Example 1: Simple Modulo
+Predict both results:
 
 ```python
-print(17 % 5)
+score_a = 5 + 2 * 3
+score_b = (5 + 2) * 3
 ```
 
-**Output:** `2`
+Python performs powers first, then multiplication and division, then addition and subtraction. Parentheses tell Python—and the reader—to calculate a chosen part first.
 
-**Why?** 17 ÷ 5 = 3 with a remainder of 2. The modulo gives us the remainder!
+Do not merely memorize an acronym. Trace the calculation in stages and explain which part happens first.
 
-### Example 2: Even or Odd?
+## 7. Partner Scenario Test
 
-```python
-print("Is 10 even?", 10 % 2)  # 0 means even!
-print("Is 7 even?", 7 % 2)     # 1 means odd!
-print("Is 15 even?", 15 % 2)   # 1 means odd!
-```
+A partner gives your Fair Share Planner a new situation and values. They should be able to tell:
 
-**Output:**
-```
-Is 10 even? 0
-Is 7 even? 1
-Is 15 even? 1
-```
+- what to change;
+- what each result means; and
+- whether the two results recombine into the original total.
 
-**Rule:** If a number % 2 equals 0, it's even. If it equals 1, it's odd!
+Improve one variable name or output label after their test.
 
-### Example 3: Sharing with Remainders
+## Challenge Ladder
 
-```python
-# You have 25 stickers to share among 6 friends
-stickers = 25
-friends = 6
-each_gets = stickers // friends  # // = whole-number division (see below!)
-leftovers = stickers % friends
+### Level 1: Sharing Checker ⭐
 
-print("Each friend gets:", each_gets, "stickers")
-print("Leftovers:", leftovers, "stickers")
-```
+Complete and pass all three required tests.
 
-**Output:**
-```
-Each friend gets: 4 stickers
-Leftovers: 1 stickers
-```
+### Level 2: Boxes and Shelves ⭐⭐
 
-### Example 4: Creating Patterns
+Calculate how many full boxes can be filled, how many items remain, and how many shelves are needed for the complete boxes.
 
-```python
-# Check what day of the week it is (if days are numbered 0-6)
-day_number = 15
-day_of_week = day_number % 7
-print("Day", day_number, "is day", day_of_week, "of the week")
-```
+### Level 3: Power Story ⭐⭐⭐
 
-**Output:** `Day 15 is day 1 of the week`
+Create a short story where something doubles each round. Build a variable-based model and test at least three different numbers of rounds by changing one starting variable.
 
-> _BrightByte says: "Modulo is like asking 'What's left over?' after sharing! Programmers use it ALL the time!"_
+## Common Bugs
 
----
+| Symptom | Check |
+| --- | --- |
+| Decimal share | You probably used `/` instead of `//` |
+| Share and leftovers are reversed | Check which variable uses `%` |
+| Unexpected expression result | Trace order and add intentional parentheses |
+| `^` gives a strange answer | Powers use `**`, not `^` |
 
-## ➗ Floor Division: Whole Numbers Only
+## Exit Ticket
 
-Normal division `/` always gives a decimal answer:
+For 31 students placed into teams of 4, write expressions for:
 
-```python
-print(25 / 6)   # 4.166666666666667
-```
+- the number of complete teams;
+- the students left over; and
+- a check that recombines the values into 31.
 
-But often you only care about the **whole-number** part — like "how many full teams can I make?" That's **floor division**, written with two slashes `//`:
+## Next Lesson
 
-```python
-print(25 // 6)  # 4  (drops the decimal — it does NOT round up!)
-```
-
-**Floor division and modulo make a perfect team:**
-
-- `//` tells you **how many** fit evenly
-- `%` tells you **what's left over**
-
-```python
-stickers = 25
-friends = 6
-print("Each friend gets:", stickers // friends, "stickers")  # 4
-print("Left over:", stickers % friends, "stickers")          # 1
-```
-
-> _BrightByte says: "Use `/` when you want the exact decimal, and `//` when you just want whole groups. Together with `%`, you can share ANYTHING fairly!"_
-
----
-
-## 📐 Order of Operations: PEMDAS
-
-### What Is PEMDAS?
-
-Python follows the same order of operations you learn in math class:
-- **P**arentheses
-- **E**xponents
-- **M**ultiplication & **D**ivision
-- **A**ddition & **S**ubtraction
-
-### Example 1: Multiplication Before Addition
-
-```python
-print(2 + 3 * 4)
-```
-
-**Output:** `14`
-
-**Why?** Python does `3 * 4 = 12` first, then `2 + 12 = 14`
-
-### Example 2: Using Parentheses
-
-```python
-print((2 + 3) * 4)
-```
-
-**Output:** `20`
-
-**Why?** Parentheses first! `(2 + 3) = 5`, then `5 * 4 = 20`
-
-### Example 3: Complex Expression
-
-```python
-result = 10 + 2 * 3 ** 2
-print(result)
-```
-
-**Output:** `28`
-
-**Step by step:**
-1. Exponents first: `3 ** 2 = 9`
-2. Multiplication: `2 * 9 = 18`
-3. Addition: `10 + 18 = 28`
-
-### Example 4: Parentheses Control Everything
-
-```python
-# Without parentheses
-print(20 - 4 / 2)
-
-# With parentheses
-print((20 - 4) / 2)
-```
-
-**Output:**
-```
-18.0
-8.0
-```
-
-**First expression:** `4 / 2 = 2`, then `20 - 2 = 18`  
-**Second expression:** `(20 - 4) = 16`, then `16 / 2 = 8`
-
-### Example 5: Real-World PEMDAS
-
-```python
-# Calculate total cost: 3 items at $5 each, plus $2 shipping
-items = 3
-price_per_item = 5
-shipping = 2
-total = items * price_per_item + shipping
-print("Total cost: $", total)
-```
-
-**Output:** `Total cost: $ 17`
-
-**Why?** `3 * 5 = 15` first, then `15 + 2 = 17`
-
-> _BrightByte says: "PEMDAS is Python's secret rule! Always remember: Parentheses are your friends when you want to control the order!"_
-
----
-
-## 🎯 Combining Everything!
-
-### Example 1: The Ultimate Math Expression
-
-```python
-# A complex calculation
-result = (10 + 5) * 2 ** 3 - 20 % 6
-print("Result:", result)
-```
-
-**Output:** `Result: 118`
-
-**Step by step:**
-1. Parentheses: `(10 + 5) = 15`
-2. Exponents: `2 ** 3 = 8`
-3. Multiplication: `15 * 8 = 120`
-4. Modulo: `20 % 6 = 2`
-5. Subtraction: `120 - 2 = 118`
-
-Try changing the numbers and predicting the answer before you run it!
-
-### Example 2: Game Score with All Operations
-
-```python
-# Video game score calculation
-base_score = 100
-multiplier = 2
-bonus_points = 50
-penalty = 7
-
-# Calculate: (base * multiplier^2) + bonus - penalty % 5
-final_score = (base_score * multiplier ** 2) + bonus_points - penalty % 5
-print("Final score:", final_score)
-```
-
-**Output:** `Final score: 448`
-
-**Why?** `2 ** 2 = 4`, so `100 * 4 = 400`; then `7 % 5 = 2`; then `400 + 50 - 2 = 448`.
-
----
-
-## 🎮 Practice Time!
-
-### Challenge 1: Powers Challenge
-
-Calculate these exponents:
-- 3 to the power of 4
-- 2 to the power of 8
-- 10 to the power of 3
-
-```python
-print("3^4 =", 3 ** 4)
-print("2^8 =", 2 ** 8)
-print("10^3 =", 10 ** 3)
-```
-
-### Challenge 2: Remainder Detective
-
-Find the remainders:
-- 25 divided by 7
-- 100 divided by 3
-- 50 divided by 4
-
-```python
-print("25 % 7 =", 25 % 7)
-print("100 % 3 =", 100 % 3)
-print("50 % 4 =", 50 % 4)
-```
-
-### Challenge 3: PEMDAS Puzzle
-
-What does this equal? `(10 - 2) * 3 + 5 ** 2`
-
-```python
-result = (10 - 2) * 3 + 5 ** 2
-print("Answer:", result)
-```
-
-**Output:** `Answer: 49`
-
-### Challenge 4: The Birthday Party
-
-You're planning a birthday party:
-- 5 friends
-- Each friend brings 2 friends
-- You have 47 balloons total
-- How many balloons per person? How many left over?
-
-```python
-friends = 5
-friends_per_friend = 2
-total_people = friends * (1 + friends_per_friend)  # You + 5 friends + their friends
-balloons = 47
-
-balloons_per_person = balloons // total_people
-leftovers = balloons % total_people
-
-print("Total people:", total_people)
-print("Balloons per person:", balloons_per_person)
-print("Leftovers:", leftovers)
-```
-
----
-
-## 📝 Key Takeaways
-
-### The Seven Math Operators
-
-| Operation      | Symbol | Example         | What It Does                    |
-| -------------- | ------ | --------------- | ------------------------------- |
-| Addition       | `+`    | `5 + 3`         | Adds numbers                    |
-| Subtraction    | `-`    | `10 - 4`        | Subtracts numbers               |
-| Multiplication | `*`    | `6 * 7`         | Multiplies numbers              |
-| Division       | `/`    | `20 / 5`        | Divides numbers (gives decimal) |
-| Floor Division | `//`   | `25 // 6`       | Whole-number part, no decimal   |
-| Exponent       | `**`   | `2 ** 3`        | Raises to a power (2³ = 8)      |
-| Modulo         | `%`    | `17 % 5`        | Finds remainder (17 ÷ 5 = 2)    |
-
-### PEMDAS Order
-
-1. **P**arentheses — Do these first!
-2. **E**xponents — Powers next!
-3. **M**ultiplication & **D**ivision — Left to right
-4. **A**ddition & **S**ubtraction — Left to right
-
-### Important Things to Remember
-
-1. **Two asterisks for exponents** — `**` not `^`
-2. **Modulo finds remainders** — Super useful for even/odd, grouping
-3. **Parentheses control order** — Use them when you want a specific order
-4. **Python follows PEMDAS** — Just like math class!
-
-### Vocabulary Words
-
-| Word           | Definition                                    | Example              |
-| -------------- | --------------------------------------------- | -------------------- |
-| **Exponent**   | A number showing how many times to multiply   | `2 ** 3` means 2³    |
-| **Modulo**     | The remainder after division                  | `17 % 5` = 2         |
-| **Floor Division** | Division that keeps only the whole number | `25 // 6` = 4        |
-| **PEMDAS**     | Order of operations rule                      | Parentheses first!   |
-| **Remainder**  | What's left over after dividing               | 17 ÷ 5 = 3 remainder 2 |
-| **Power**      | Another word for exponent                     | 2 to the power of 3  |
-
----
-
-## 🌟 Next Lesson Preview
-
-**Week 4: Asking Questions!**
-
-Next week, you'll learn how to make your programs INTERACTIVE! You'll use `input()` to ask users for information, then use that information in your calculations.
-
-**Sneak peek:**
-
-```python
-# Ask the user for their age
-age = input("How old are you? ")
-print("You are", age, "years old!")
-```
-
-Get ready to build programs that TALK to users! 🗣️
-
----
-
-## 🎉 Great Job, Math Wizard!
-
-You just learned Python's advanced math operations!
-
-**What you accomplished today:**
-
-- ✅ Learned exponents (`**`) to make numbers grow fast
-- ✅ Learned modulo (`%`) to find remainders
-- ✅ Understood PEMDAS and order of operations
-- ✅ Combined all operations in complex expressions
-- ✅ Used parentheses to control calculation order
-
-> _BrightByte says: "WOW! You now know ALL the basic math operations in Python! That's exactly what professional programmers use every day. Next week, we're going to make your programs INTERACTIVE - they'll ask questions and respond! You're becoming a real programmer! Keep up the amazing work!"_
-
----
-
-## 📚 Extra Practice Ideas
-
-Want to practice more? Try these fun challenges:
-
-1. **Exponent Explorer:** Calculate powers of 2 from 2¹ to 2¹⁰. Notice how fast they grow!
-2. **Even/Odd Checker:** Write a program that checks if numbers are even or odd using modulo
-3. **PEMDAS Puzzles:** Create math expressions and predict the answer before running
-4. **Remainder Riddles:** If you have 100 items and groups of 7, how many full groups? How many left over?
-
----
-
-_KidsLearnAI - Empowering the Next Generation with AI Education_  
-_www.kidslearnai.ca_  
-_Instagram: @kids_learn_ai_
-
----
-
-_Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
+You already know how to ask questions with `input()`. Next lesson you will convert those answers into whole numbers so other people can operate your math tools.

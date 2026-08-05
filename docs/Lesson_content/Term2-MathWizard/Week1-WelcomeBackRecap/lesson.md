@@ -1,117 +1,68 @@
 ---
-title: "Welcome Back — Term 1 Recap!"
-description: "Warm up for Term 2 by reviewing everything you learned in Term 1 — print(), variables, strings, string methods, f-strings, and input()"
+title: "Welcome Back — Term 1 Skills Relay!"
+description: "Reactivate variables, strings, f-strings, methods, and input() by building and peer-testing a Term 2 passport."
 difficulty: "beginner"
 order_index: 1
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
 starter_code: |
-  # 🎮 Welcome Back! Let's warm up our Python skills.
-  # Fill in the blanks with your own answers, then click Run!
-
-  # A variable stores information (Term 1!)
+  # Term 2 Passport
   name = "YOUR NAME"
-  favourite_thing = "YOUR FAVOURITE THING"
-  weeks_of_python = 9
+  favourite_subject = "YOUR SUBJECT"
+  weeks_coding = 9
 
-  # An f-string drops variables right into your text (Term 1!)
-  print(f"Hi, I'm {name} and I love {favourite_thing}!")
-  print(f"I already survived {weeks_of_python} weeks of Python. 💪")
+  print(f"Coder: {name.title()}")
+  print(f"Favourite subject: {favourite_subject}")
+  print(f"Weeks of coding: {weeks_coding}")
 
-  # A string method gives your text a superpower (Term 1!)
-  print(f"Shouting my name: {name.upper()}")
-
-  # Now change the values above and Run again!
+  # TODO: ask for a goal using input()
+  # TODO: include the goal in a final f-string
+  # TODO: personalize and improve the passport
 class_activities: |
-  ## 🎮 Activity: Skill Missions — Solo Edition!
+  ## Term 1 Skills Relay
 
-  Prove YOUR brain remembers Term 1! Work through these missions on your own, in YOUR own Trinket. Go at your own pace!
+  Complete five short stations with a partner:
 
-  **Mission 1:** Print a welcome-back message with `print()`
+  **1. Predict:** Explain the difference between `"2" + "2"` and `2 + 2` before running either.
 
-  **Mission 2:** Create a variable with your name in it and print it
+  **2. Repair:** Fix mismatched variable names and a missing `f` in a short program.
 
-  **Mission 3:** Join two strings together with `+` (like your first name and last name)
+  **3. Transform:** Use `.title()`, `.upper()`, or `len()` to answer a partner's challenge.
 
-  **Mission 4:** Make a pattern with `*` (like `"⭐" * 10`)
+  **4. Build:** Turn the starter into a personalized Term 2 Passport that asks for one safe goal with `input()`.
 
-  **Mission 5:** Use a string method on your name — `.upper()`, `.lower()`, or `.title()`
+  **5. Exchange:** A partner runs the passport, checks whether the prompts and results are clear, and suggests one improvement.
 
-  **Mission 6:** Write an f-string that uses one of your variables inside `{ }`
-
-  When you finish all 6 missions, raise your hand or post "Missions Complete! 🚀" in the Zoom chat so your teacher can check your work.
-
-  **Bonus Mission:** Combine ALL 6 skills into one mini-program that introduces you!
+  Finish by recording one skill you remember confidently and one skill you want to strengthen.
 take_home_assignment: |
-  ## 📚 Homework: My Term 1 Skills Showcase
+  ## Homework: My Skills Snapshot
 
-  Write ONE program that shows off everything you remember from Term 1!
+  Improve your Term 2 Passport so it:
 
-  **Requirements:**
-  1. At least **3 variables** (mix of text and numbers)
-  2. At least **1 f-string** with a variable inside `{ }`
-  3. At least **1 string method** (`.upper()`, `.lower()`, `.title()`, etc.)
-  4. At least **1 pattern** made with `*` (a border or row of emojis)
-  5. At least **2 comments** using `#` to explain your code
-  6. Code must run without errors
+  1. uses at least three clearly named variables;
+  2. asks two safe, non-private questions using `input()`;
+  3. uses an f-string;
+  4. uses one string method;
+  5. includes one calculation using fixed number variables;
+  6. contains two explanatory comments; and
+  7. is tested by two different users or with two different answer sets.
 
-  **Bonus:** Use `input()` to ask the user a question and greet them by name!
-
-  **Submit:** Save your Trinket, click **Share**, and send the link to your instructor.
+  Submit the Trinket link and name the Term 1 skill that needed the most review.
 ai_activities: |
-  ## 🤖 AI Lab: How a Chatbot Handles a Message
+  ## AI Lab: Input, Memory, Process, Output
 
-  ### The big idea
+  Label the stages in your passport:
 
-  A chatbot needs to do three simple jobs:
+  - `input()` collects a message;
+  - variables remember information;
+  - a string method processes text; and
+  - an f-string communicates a result.
 
-  1. **Receive information** from a person.
-  2. **Store information** while it works.
-  3. **Show a reply** that a person can read.
-
-  You already know Python tools for all three jobs! `input()` receives a message, a variable stores it, and `print()` or an f-string shows a reply.
-
-  ### Follow one message through the program
-
-  ```python
-  name = input("What is your name? ")
-  favourite_subject = input("What subject do you enjoy? ")
-
-  reply = f"Hi {name}! {favourite_subject.title()} is a great subject to explore."
-  print(reply)
-  ```
-
-  If Maya types `science`, Python follows these steps:
-
-  - `name` stores the text `"Maya"`.
-  - `favourite_subject` stores the text `"science"`.
-  - The f-string puts both pieces into one friendly sentence.
-  - `print()` displays the finished reply.
-
-  This program can **sound** like a tiny chatbot, but it is not learning yet. It follows the exact instructions you wrote. Later, you will learn how an AI uses many examples to find patterns and choose useful replies.
-
-  ### Try it yourself
-
-  Add one more question:
-
-  ```python
-  hobby = input("What do you like doing after school? ")
-  print(f"{hobby.title()} sounds fun, {name}!")
-  ```
-
-  Before you run the code, point to the line that **collects**, **stores**, and **shows** the hobby.
-
-  ### Think like an AI builder
-
-  - What would happen if the user typed their name in lowercase?
-  - Which string method could make it look neat?
-  - Why should a chatbot avoid asking a child for private details such as an address or password?
-
-  **Remember:** Helpful AI starts with clear instructions and safe information. Never type private information into a classroom chatbot or coding project.
+  AI applications use much larger versions of these stages. Classroom programs should collect only information they genuinely need—never passwords, addresses, phone numbers, or full legal names.
 ---
 
-# Term 2, Lesson 1: Welcome Back — Term 1 Recap! 🔁
+# Term 2, Lesson 1: Welcome Back — Term 1 Skills Relay! 🔁
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
@@ -119,277 +70,124 @@ ai_activities: |
 
 ---
 
-## 🎯 What You'll Do Today
+## Your Mission
 
-Welcome back, coder! Before we unlock Python's math superpowers, let's dust off everything you learned in Term 1. By the end of today you will have:
+This lesson is a fast, active check of the skills you need for Math Wizard. You will predict, repair, transform, build, test, and reflect.
 
-- Refreshed the `print()` command and text patterns
-- Remembered how **variables** store information
-- Reviewed **strings vs numbers**
-- Practised **string methods**, `len()`, and `str()`
-- Rewritten messy code with **f-strings**
-- Warmed up `input()` for asking questions
-- Gotten ready for **Term 2: Math Wizard!**
+By the end, you will have:
 
----
+- reactivated variables, strings, f-strings, methods, comments, and `input()`;
+- built a Term 2 Passport;
+- improved it after someone else uses it; and
+- identified one skill that needs more practice.
 
-## 🤖 Welcome Back from BrightByte!
+## Station 1: Predict
 
-> _"HELLO AGAIN, PROGRAMMER! 🤖💙 I missed you! Can you believe it — you already finished a WHOLE term of Python. You wrote programs, built a game, and squashed real bugs. Today we're not learning anything brand-new. Instead, we're going to wake up your Python brain and remember all the amazing things you already know. Think of it as stretching before a race. Ready? Let's warm up!"_
-
-### How This Lesson Works
-
-This is a **review lesson**. We'll move quickly through each Term 1 skill with a tiny example and a "Your Turn" challenge. Don't just read — type every example into Trinket and run it. Your fingers remember more than your eyes!
-
-> 💡 **Zoom Tip:** Keep Zoom and Trinket side by side, just like last term.
-
----
-
-## 📣 Skill 1: `print()` and Patterns
-
-`print()` is how Python talks. Remember the megaphone? 📣
+Do not run these yet:
 
 ```python
-print("I'm back and ready to code!")
-print("⭐" * 15)
-print("=" * 25)
+text_answer = "2" + "2"
+number_answer = 2 + 2
 ```
 
-- `"⭐" * 15` **repeats** a string 15 times (great for borders and rows!)
-- `"a" + "b"` **joins** two strings together
+Write both predictions and explain why quotation marks matter.
 
-**Your Turn:** Print your name inside a border made of `-` characters.
+Now run them using one labelled output for each answer. This difference becomes important when programs collect numbers from users later in the term.
 
----
+## Station 2: Repair
 
-## 📦 Skill 2: Variables Are Boxes
-
-A **variable** is a labeled box that stores a value so you can use it again.
+This program has two bugs:
 
 ```python
-player = "Ama"
-score = 100
-print(player)
-print(score)
+coder_name = "Maya"
+favourite_game = "chess"
+
+print("Coder: {coder_name}")
+print(f"Game: {favorite_game}")
 ```
 
-Remember the rules:
+Reproduce the symptom, fix the smallest necessary parts, and explain each repair to a partner.
 
-- `=` means **"store this value"**, NOT "equals" like in maths
-- Use **snake_case** for names: `high_score`, not `HighScore` or `high score`
-- You can **change** a variable any time: `score = score + 50`
+## Station 3: Transform Text
 
-**Your Turn:** Make a variable called `favourite_food` and print it.
-
----
-
-## 🔤 Skill 3: Strings vs Numbers
-
-This one matters a LOT this term! Python treats **text** and **numbers** differently.
-
-| Value  | What it is | Example        |
-| ------ | ---------- | -------------- |
-| `"10"` | a string (text, has quotes) | `age = "10"` |
-| `10`   | an integer (a number, no quotes) | `age = 10` |
+Start with:
 
 ```python
-print("10" + "5")   # Joins text → 105
-print(10 + 5)       # Adds numbers → 15
+team_name = "pixel explorers"
 ```
 
-😲 See the difference? Quotes turn a number into text. Keep this in your back pocket — in a few weeks it will be the key to making calculators work!
+Complete three partner challenges:
 
-**Your Turn:** Predict the output of `print("2" + "2")` before you run it. Were you right?
+- display the name in title case;
+- display it in uppercase; and
+- calculate the number of characters with `len()`.
 
----
+Your partner predicts each result before you run it.
 
-## ✨ Skill 4: String Methods, `len()`, and `str()`
+## Station 4: Build a Term 2 Passport
 
-Strings have built-in **superpowers** you call with a dot:
+Use the starter to create a small program another student can operate.
 
-```python
-name = "brightbyte"
-print(name.upper())        # BRIGHTBYTE
-print(name.title())        # Brightbyte
-print(len(name))           # 10  (counts the letters)
-```
+Requirements:
 
-And when you want to glue a **number** onto text with `+`, wrap it in `str()`:
+- personalize three starting variables;
+- ask for one safe Term 2 goal using `input()`;
+- use at least two f-strings;
+- apply one string method;
+- include one comment explaining a design choice; and
+- make the output easy to understand.
 
-```python
-age = 11
-print("I am " + str(age) + " years old")
-```
+Do not ask for private information. A nickname, favourite subject, or learning goal is enough.
 
-**Your Turn:** Print your name in ALL CAPS, then print how many letters it has.
+## Station 5: Exchange and Improve
 
----
+Give the program to a partner without coaching them.
 
-## 🧹 Skill 5: Comments and F-Strings (Clean Code!)
+The partner checks:
 
-**Comments** start with `#`. Python ignores them — they're notes for humans:
+- Was the question clear?
+- Did the program use the answer?
+- Were the labels useful?
+- Did any output look unfinished?
 
-```python
-# This line greets the player
-print("Welcome!")
-```
+Make one improvement and run the program again.
 
-**F-strings** are the cleanest way to mix text and variables. Put an `f` before the quotes and drop variables inside `{ }`:
+## Skills Check
 
-```python
-name = "Kwame"
-age = 11
-print(f"Hi {name}, you are {age} years old!")
-```
+Mark each skill honestly:
 
-Compare that to the old `+` way:
+| Skill | Confident | Needs a reminder |
+| --- | :---: | :---: |
+| Create and change a variable | | |
+| Tell text from a number | | |
+| Write an f-string | | |
+| Use a string method | | |
+| Ask and store a text answer | | |
+| Add a helpful comment | | |
 
-```python
-print("Hi " + name + ", you are " + str(age) + " years old!")
-```
+This is not a grade. It helps you and your teacher decide where support is needed.
 
-Same result — but the f-string is shorter and easier to read. You can even do work inside the braces:
+## Challenge Ladder
 
-```python
-print(f"Your name in caps is {name.upper()} ({len(name)} letters)")
-```
+### Level 1: Working Passport ⭐
 
-> _BrightByte says: "F-strings are my favourite! Whenever you're combining words and variables, reach for an f-string first."_
+Complete the required build and partner test.
 
-**Your Turn:** Write an f-string that says `"[your name] is learning Python!"` using a variable.
+### Level 2: Profile Summary ⭐⭐
 
----
+Ask for a second safe answer and combine both answers into one well-written summary.
 
-## 💬 Skill 6: `input()` — Asking Questions
+### Level 3: Skills Coach ⭐⭐⭐
 
-Near the end of Term 1 you learned how to make programs **interactive** with `input()`. It pauses the program and waits for the user to type:
+Write one short broken example for a partner to repair. Prepare a hint and the expected corrected result.
 
-```python
-favourite = input("What's your favourite animal? ")
-print(f"Cool! I like {favourite} too. 🐾")
-```
+## Exit Ticket
 
-⚠️ **Remember:** `input()` always gives you back **text (a string)** — even if the user types a number. That will matter a LOT this term when we start doing math with what people type!
+Complete both statements:
 
-**Your Turn:** Ask the user for their name, then greet them with an f-string.
+- “The Term 1 skill I remember best is…”
+- “The skill I want to strengthen before the calculator project is…”
 
----
+## Next Lesson
 
-## 🎯 Warm-Up Challenges
-
-Try these to prove your Python brain is fully awake!
-
-### Challenge 1: About Me 2.0
-
-```python
-name = "Your Name"
-age = 11
-hobby = "coding"
-
-print("=" * 30)
-print(f"  All About {name.upper()}")
-print("=" * 30)
-print(f"Age: {age}")
-print(f"Hobby: {hobby.title()}")
-print("⭐" * 30)
-```
-
-### Challenge 2: The Greeter
-
-```python
-# Ask two questions and reply nicely
-first = input("What's your first name? ")
-mood = input("How are you feeling today? ")
-
-print(f"Nice to meet you, {first.title()}!")
-print(f"I hope your {mood} day gets even better. 😊")
-```
-
-### Challenge 3: Fix the Bug 🐛
-
-This code has a mistake. Can you spot and fix it?
-
-```python
-age = 12
-print("Next year you will be " + age + 1)
-```
-
-<details>
-<summary>Need a hint?</summary>
-
-You can't add a number onto text with `+`. Either use `str()` around the number, or (better!) use an f-string:
-`print(f"Next year you will be {age + 1}")`
-
-</details>
-
----
-
-## 📝 Key Points to Remember
-
-### Your Term 1 Toolbox
-
-| Skill            | Example                              |
-| ---------------- | ------------------------------------ |
-| Print            | `print("Hi!")`                       |
-| Pattern          | `"⭐" * 10`                           |
-| Join text        | `"a" + "b"`                          |
-| Variable         | `score = 100`                        |
-| String method    | `name.upper()`, `name.title()`       |
-| Count characters | `len(name)`                          |
-| Number → text    | `str(age)`                           |
-| Comment          | `# a note for humans`                |
-| F-string         | `f"Hi {name}!"`                      |
-| Ask a question   | `input("Your name? ")`               |
-
-### Vocabulary Refresher
-
-| Word          | Meaning                                          |
-| ------------- | ------------------------------------------------ |
-| **Variable**  | A labeled box that stores a value                |
-| **String**    | Text, written inside quotes                      |
-| **Integer**   | A whole number, no quotes                        |
-| **Method**    | A built-in action you call with a dot, like `.upper()` |
-| **F-string**  | Text starting with `f` that holds variables in `{ }` |
-
----
-
-## 🌟 Next Lesson Preview
-
-**Week 2: Python Does Math!**
-
-Now that your Python brain is warmed up, next week we unlock Python's **secret superpower** — it's an incredible calculator!
-
-**Sneak peek:**
-
-```python
-print(5 + 3)      # 8
-print(6 * 7)      # 42
-print(100 / 4)    # 25.0
-```
-
-You'll turn Python into a super-calculator and start building toward your very own calculator app. Get ready, Math Wizard! 🧙‍♂️
-
----
-
-## 🎉 Great Warm-Up, Coder!
-
-Look how much you remembered:
-
-- ✅ `print()` and patterns with `*` and `+`
-- ✅ Variables and snake_case naming
-- ✅ Strings vs integers
-- ✅ String methods, `len()`, and `str()`
-- ✅ Comments and f-strings
-- ✅ `input()` for interactive programs
-
-> _BrightByte says: "See? It's all still in there! Your Term 1 skills are the foundation for EVERYTHING we build in Term 2. Now that we're warmed up, let's go discover Python's math superpowers. I'll see you next week, Math Wizard! 🚀"_
-
----
-
-_KidsLearnAI - Empowering the Next Generation with AI Education_  
-_www.kidslearnai.ca_  
-_Instagram: @kids_learn_ai_
-
----
-
-_Welcome back — this term is going to be amazing! 🐍✨_
+Next you will use number variables and the four arithmetic operators to build and test a connected score model.
