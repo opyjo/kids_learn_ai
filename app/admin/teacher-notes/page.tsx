@@ -1,4 +1,4 @@
-import { AlertCircle, BookOpen, FileText } from "lucide-react";
+import { AlertCircle, BookOpen, ChevronDown, FileText } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -294,17 +294,19 @@ export default async function TeacherNotesPage() {
 			</div>
 
 			{lessons.length ? (
-				lessonGroups.map((group) => {
+				lessonGroups.map((group, groupIndex) => {
 					const groupNotes = group.lessons.filter(
 						(lesson) => lesson.teacherNote,
 					).length;
 
 					return (
-						<section
+						<details
 							key={group.key}
+							open={groupIndex === 0}
+							className="group/course overflow-hidden rounded-xl border border-border bg-card"
 							aria-labelledby={`notes-course-${group.key}`}
 						>
-							<div className="mb-3 flex items-end justify-between gap-3 border-b border-border pb-2">
+							<summary className="flex cursor-pointer list-none items-center justify-between gap-3 bg-muted/40 px-4 py-3 transition-colors hover:bg-muted/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset [&::-webkit-details-marker]:hidden">
 								<div>
 									<h2
 										id={`notes-course-${group.key}`}
@@ -316,17 +318,20 @@ export default async function TeacherNotesPage() {
 										{group.course?.slug ?? "Not attached to a course"}
 									</p>
 								</div>
-								<Badge variant="secondary">
-									{groupNotes}/{group.lessons.length} with notes
-								</Badge>
-							</div>
+								<div className="flex items-center gap-2">
+									<Badge variant="secondary">
+										{groupNotes}/{group.lessons.length} with notes
+									</Badge>
+									<ChevronDown className="h-4 w-4 text-muted-foreground transition-transform group-open/course:rotate-180" />
+								</div>
+							</summary>
 
-							<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+							<div className="grid grid-cols-1 gap-3 p-3 lg:grid-cols-2">
 								{group.lessons.map((lesson) => (
 									<TeacherNoteCard key={lesson.id} lesson={lesson} />
 								))}
 							</div>
-						</section>
+						</details>
 					);
 				})
 			) : (
