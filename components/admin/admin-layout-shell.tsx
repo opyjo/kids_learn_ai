@@ -3,6 +3,7 @@
 import {
 	BarChart3,
 	BookOpen,
+	BriefcaseBusiness,
 	CalendarClock,
 	ClipboardCheck,
 	FileCode,
@@ -109,6 +110,12 @@ const adminNavItems = [
 		href: "/admin/funding-partnerships",
 		label: "Funding & Partnerships",
 		icon: HandCoins,
+	},
+	{
+		section: "Insights",
+		href: "/admin/vfc-internship",
+		label: "VFC Internship",
+		icon: BriefcaseBusiness,
 	},
 	{
 		section: "Insights",
