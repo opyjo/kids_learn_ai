@@ -4,15 +4,15 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { StaggerContainer, StaggerItem } from "@/components/ui/motion";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 
 const STEPS = [
 	{
 		number: 1,
-		title: "Book a free first class",
+		title: "Request a free trial spot",
 		icon: CalendarCheck,
-		description:
-			"Pick a class time on our inquiry form. No card, no commitment.",
-		link: { href: "/inquiry", label: "Book yours →" },
+		description: `Submit the short form for ${FALL_2026_OFFER.trialDate}. We confirm the exact time within 24 hours.`,
+		link: { href: "/inquiry", label: "Request yours →" },
 	},
 	{
 		number: 2,
@@ -25,8 +25,7 @@ const STEPS = [
 		number: 3,
 		title: "Enroll in the term",
 		icon: GraduationCap,
-		description:
-			"Loved it? Continue the 8-week term and follow a clear learning path.",
+		description: `Loved it? Join the Monday beginner cohort starting ${FALL_2026_OFFER.cohortStartDateShort} and follow a clear ${FALL_2026_OFFER.programLength} learning path.`,
 	},
 ];
 

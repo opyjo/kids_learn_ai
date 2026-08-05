@@ -151,7 +151,7 @@ export const SEO_CAMPAIGN_TASKS: SeoCampaignTask[] = [
 		key: "positioning",
 		title: "Lock the parent-facing positioning",
 		description:
-			"Use one promise everywhere: live online Python and responsible AI classes for Canadian kids ages 9–13, with small groups, real projects, and a free first class.",
+			"Use one offer everywhere: a free live trial on August 17 for the new ages 9–13 Monday beginner cohort starting September 14, with a maximum of six students.",
 		successMeasure:
 			"Homepage, inquiry page, social bios, and campaign copy use the same offer.",
 		category: "Conversion",
@@ -188,9 +188,9 @@ export const SEO_CAMPAIGN_TASKS: SeoCampaignTask[] = [
 	},
 	{
 		key: "instant-trial-booking",
-		title: "Let parents reserve a trial immediately",
+		title: "Automate trial confirmation once the time is set",
 		description:
-			"Replace the 24-hour follow-up step with available Monday and Wednesday trial times, confirmation, and a calendar invitation.",
+			"Once the August 17 trial time is finalized, replace the 24-hour manual confirmation with an immediate spot confirmation and calendar invitation.",
 		successMeasure:
 			"A parent can reserve a trial without waiting for a manual reply.",
 		category: "Conversion",

@@ -6,6 +6,10 @@ import {
 	campaignAttributionToInquiryColumns,
 	fallbackInquiryAttribution,
 } from "@/lib/marketing/campaign-attribution";
+import {
+	FALL_2026_OFFER,
+	getBeginnerCohortDetails,
+} from "@/lib/marketing/cohort-offer";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -78,19 +82,6 @@ const getExperienceLabel = (experience: string): string => {
 	}
 };
 
-const getAgeGroupDetails = (
-	ageGroup: string,
-): { label: string; day: string } => {
-	switch (ageGroup) {
-		case "9-10":
-			return { label: "Ages 9-10", day: "Mondays" };
-		case "11-13":
-			return { label: "Ages 11-13", day: "Wednesdays" };
-		default:
-			return { label: ageGroup, day: "TBD" };
-	}
-};
-
 export const POST = async (request: NextRequest) => {
 	try {
 		// Get IP address for rate limiting
@@ -116,7 +107,7 @@ export const POST = async (request: NextRequest) => {
 			validatedData.attribution ??
 			fallbackInquiryAttribution(request.headers.get("referer"));
 
-		const ageGroupDetails = getAgeGroupDetails(validatedData.ageGroup);
+		const ageGroupDetails = getBeginnerCohortDetails(validatedData.ageGroup);
 		const experienceLabel = getExperienceLabel(validatedData.experience);
 
 		// Save inquiry to database using anon key (RLS allows public inserts)
@@ -307,11 +298,9 @@ export const POST = async (request: NextRequest) => {
 
               <!-- Schedule -->
               <div class="schedule-box">
-                <div style="font-size: 14px; color: #166534; margin-bottom: 5px;">📅 Recommended Class Day</div>
+                <div style="font-size: 14px; color: #166534; margin-bottom: 5px;">📅 New Beginner Cohort</div>
                 <div class="schedule-day">${ageGroupDetails.day}</div>
-                <div style="font-size: 12px; color: #166534; margin-top: 5px;">${
-									ageGroupDetails.label
-								} classes</div>
+                <div style="font-size: 12px; color: #166534; margin-top: 5px;">Starts ${FALL_2026_OFFER.cohortStartDate} · ${ageGroupDetails.label}</div>
               </div>
 
               ${
@@ -379,7 +368,7 @@ export const POST = async (request: NextRequest) => {
 		const parentEmailResult = await resend.emails.send({
 			from: "Kids Learn AI <hello@kidslearnai.ca>",
 			to: validatedData.parentEmail,
-			subject: `🎉 Free Trial Confirmed - ${validatedData.childName} is on the list!`,
+			subject: `Free Trial Request Received - ${validatedData.childName}`,
 			html: `
         <!DOCTYPE html>
         <html>
@@ -573,7 +562,7 @@ export const POST = async (request: NextRequest) => {
           <body>
             <div class="container">
               <div class="header">
-                <div class="header-badge">🎉 YOU'RE ALL SET!</div>
+                <div class="header-badge">REQUEST RECEIVED</div>
                 <h1>Free Trial Request Received</h1>
                 <p>We're excited to meet ${validatedData.childName}!</p>
               </div>
@@ -594,8 +583,16 @@ export const POST = async (request: NextRequest) => {
                     <span class="detail-value">${ageGroupDetails.label}</span>
                   </div>
                   <div class="detail-row">
-                    <span class="detail-label">Class Day</span>
-                    <span class="detail-value">${ageGroupDetails.day}</span>
+                    <span class="detail-label">Free Trial</span>
+                    <span class="detail-value">${FALL_2026_OFFER.trialDate}</span>
+                  </div>
+                  <div class="detail-row">
+					<span class="detail-label">Trial Time</span>
+					<span class="detail-value">${FALL_2026_OFFER.trialTimeConfirmation}</span>
+                  </div>
+                  <div class="detail-row">
+                    <span class="detail-label">Beginner Cohort</span>
+					<span class="detail-value">${ageGroupDetails.day}, starting ${FALL_2026_OFFER.cohortStartDateShort}</span>
                   </div>
                   <div class="detail-row">
                     <span class="detail-label">Experience Level</span>
@@ -607,15 +604,15 @@ export const POST = async (request: NextRequest) => {
                   <div class="next-steps-title">⏰ What Happens Next?</div>
                   <div class="step">
                     <div class="step-number">1</div>
-                    <div class="step-text">Our team will contact you within <strong>24 hours</strong></div>
+									<div class="step-text">We will confirm whether a trial spot is available within <strong>24 hours</strong></div>
                   </div>
                   <div class="step">
                     <div class="step-number">2</div>
-                    <div class="step-text">We'll schedule ${validatedData.childName}'s free trial class</div>
+									<div class="step-text">You will receive the exact class time and Zoom joining instructions</div>
                   </div>
                   <div class="step">
                     <div class="step-number">3</div>
-                    <div class="step-text">${validatedData.childName} joins a live online session with other kids</div>
+									<div class="step-text">${validatedData.childName} joins the one-hour live group trial on ${FALL_2026_OFFER.trialDateShort}</div>
                   </div>
                   <div class="step">
                     <div class="step-number">4</div>
@@ -626,8 +623,8 @@ export const POST = async (request: NextRequest) => {
                 <div class="trial-info">
                   <div class="trial-info-title">💡 What to Expect in the Trial</div>
                   <ul>
-                    <li>1-hour live online class via Zoom</li>
-                    <li>Small group (max 6 kids) with a real instructor</li>
+									<li>${FALL_2026_OFFER.trialDuration} live online class via Zoom on ${FALL_2026_OFFER.trialDate}</li>
+									<li>Small group (max ${FALL_2026_OFFER.maximumStudents} kids) with a real instructor</li>
                     <li>Fun, hands-on introduction to Python coding</li>
                     <li>No prior experience needed!</li>
                   </ul>

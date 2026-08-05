@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 
 export const FaqContent = () => {
@@ -19,13 +20,11 @@ export const FaqContent = () => {
 		},
 		{
 			question: "What ages and schedules are available?",
-			answer:
-				"Our current live program serves ages 9-13, with an ages 9-10 cohort on Mondays and an ages 11-13 cohort on Wednesdays. Contact us if you need help choosing the right group.",
+			answer: `The new beginner cohort is for ${FALL_2026_OFFER.ageRange.toLowerCase()} and meets weekly on Mondays starting ${FALL_2026_OFFER.cohortStartDate}. Class size is limited to ${FALL_2026_OFFER.maximumStudents} students.`,
 		},
 		{
 			question: "How does the free trial work?",
-			answer:
-				"Your child can attend the first live class free with no commitment. If the program is a good fit, the founding rate is a one-time payment of $159.99 CAD for the full 8-10 week program.",
+			answer: `The free trial is a one-hour live group class on ${FALL_2026_OFFER.trialDate}. Submit the request form and we will confirm availability, the exact class time, and joining instructions within 24 hours. If the program is a good fit, the founding rate is a one-time payment of ${FALL_2026_OFFER.foundingRate} for the full ${FALL_2026_OFFER.programLength} program.`,
 		},
 		{
 			question: "What equipment does my child need?",

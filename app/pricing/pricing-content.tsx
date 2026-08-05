@@ -26,6 +26,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import {
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_HEADLINE,
@@ -80,17 +81,21 @@ export function PricingContent() {
 					</p>
 				</div>
 
-				{/* Schedule Cards — hardcoded for now; the class_schedules table is the
-				    future source of truth for days/times shown here */}
+				{/* Fall 2026 enrolment dates */}
 				<div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
 					<Card className="border-2 border-primary/20">
 						<CardContent className="p-6 text-center">
 							<div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
 								<Calendar className="h-8 w-8 text-primary" />
 							</div>
-							<h3 className="text-2xl font-bold mb-2">Ages 9-10</h3>
-							<p className="text-3xl font-bold text-primary mb-2">Mondays</p>
-							<p className="text-muted-foreground">Weekly live classes</p>
+							<h3 className="text-2xl font-bold mb-2">Free Group Trial</h3>
+							<p className="text-2xl font-bold text-primary mb-2">
+								{FALL_2026_OFFER.trialDateShort}
+							</p>
+							<p className="text-muted-foreground">
+								{FALL_2026_OFFER.trialDuration} ·{" "}
+								{FALL_2026_OFFER.trialTimeConfirmation}
+							</p>
 						</CardContent>
 					</Card>
 					<Card className="border-2 border-accent/20">
@@ -98,9 +103,14 @@ export function PricingContent() {
 							<div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
 								<Calendar className="h-8 w-8 text-accent" />
 							</div>
-							<h3 className="text-2xl font-bold mb-2">Ages 11-13</h3>
-							<p className="text-3xl font-bold text-accent mb-2">Wednesdays</p>
-							<p className="text-muted-foreground">Weekly live classes</p>
+							<h3 className="text-2xl font-bold mb-2">Beginner Cohort</h3>
+							<p className="text-2xl font-bold text-accent mb-2">
+								Starts {FALL_2026_OFFER.cohortStartDateShort}
+							</p>
+							<p className="text-muted-foreground">
+								{FALL_2026_OFFER.ageRange} · Weekly Mondays · Max{" "}
+								{FALL_2026_OFFER.maximumStudents}
+							</p>
 						</CardContent>
 					</Card>
 				</div>
@@ -145,7 +155,10 @@ export function PricingContent() {
 							<div className="grid sm:grid-cols-2 gap-4">
 								{[
 									{ icon: BookOpen, text: "8-10 weekly live classes" },
-									{ icon: Users, text: "Small class sizes" },
+									{
+										icon: Users,
+										text: `Maximum ${FALL_2026_OFFER.maximumStudents} students`,
+									},
 									{ icon: Code, text: "Hands-on coding projects" },
 									{ icon: Sparkles, text: "AI concepts & ethics" },
 									{ icon: Shield, text: "Safe, moderated environment" },
@@ -320,10 +333,12 @@ export function PricingContent() {
 							</CardHeader>
 							<CardContent>
 								<p className="text-muted-foreground">
-									Your child attends their first class completely free with no
-									commitment. This lets you both experience the program before
-									deciding. If you love it, pay $159.99 to continue with the
-									remaining 7-9 classes.
+									Request a spot in the one-hour group trial on{" "}
+									{FALL_2026_OFFER.trialDate}. We will confirm availability, the
+									exact time, and joining instructions within 24 hours. If you
+									love it, pay {FALL_2026_OFFER.foundingRate} to join the Monday
+									beginner cohort starting{" "}
+									{FALL_2026_OFFER.cohortStartDateShort}.
 								</p>
 							</CardContent>
 						</Card>
@@ -379,7 +394,8 @@ export function PricingContent() {
 				<div className="text-center mt-16 mb-12 p-8 bg-gradient-to-r from-primary/10 to-accent/10 rounded-3xl max-w-3xl mx-auto">
 					<h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
 					<p className="text-xl text-muted-foreground mb-6">
-						Book your child's free first class today
+						Request one of {FALL_2026_OFFER.maximumStudents} spots in the{" "}
+						{FALL_2026_OFFER.trialDateShort} trial
 					</p>
 					<Button asChild size="lg">
 						<Link href="/inquiry">

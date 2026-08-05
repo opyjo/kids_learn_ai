@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FadeIn, ScaleIn } from "@/components/ui/motion";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
+import { FREE_FIRST_CLASS_CTA } from "@/lib/marketing/positioning";
 
 const CTASection = () => {
 	const [imageError, setImageError] = useState(false);
@@ -59,15 +61,16 @@ const CTASection = () => {
 							</FadeIn>
 							<FadeIn delay={0.1}>
 								<h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-foreground mb-6 text-balance">
-									Try Your First Class FREE
+									Try a Live Class Free
 								</h2>
 							</FadeIn>
 							<FadeIn delay={0.2}>
 								<p className="text-lg lg:text-xl text-primary-foreground/90 mb-8 text-pretty leading-relaxed">
-									Join a thriving community of young learners mastering Python
-									with expert instructors. See if our live classes are the right
-									fit for your child - no commitment required. Ages 9-10 on
-									Mondays, Ages 11-13 on Wednesdays.
+									Your child can try a one-hour live Python class before joining
+									the new {FALL_2026_OFFER.ageRange.toLowerCase()} beginner
+									cohort. Weekly classes begin {FALL_2026_OFFER.cohortStartDate}
+									, with no more than {FALL_2026_OFFER.maximumStudents}{" "}
+									students.
 								</p>
 							</FadeIn>
 							<FadeIn delay={0.3}>
@@ -79,12 +82,13 @@ const CTASection = () => {
 											className="text-lg px-8 py-6 rounded-full shadow-xl hover:scale-105 transition-transform w-full sm:w-auto"
 										>
 											<Sparkles className="mr-2 h-5 w-5" aria-hidden="true" />
-											Book a Free First Class
+											{FREE_FIRST_CLASS_CTA}
 										</Button>
 									</Link>
 									<span className="text-primary-foreground/80 text-sm">
 										<span className="line-through opacity-70">$199.99</span>{" "}
-										<span className="font-semibold">$159.99</span> Founding Rate
+										<span className="font-semibold">$159.99</span> CAD Founding
+										Rate
 									</span>
 								</div>
 							</FadeIn>
