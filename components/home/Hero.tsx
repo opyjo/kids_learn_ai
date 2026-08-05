@@ -8,6 +8,7 @@ import LiveClassMockup from "@/components/home/LiveClassMockup";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SlideInRight } from "@/components/ui/motion";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import {
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_HEADLINE,
@@ -28,7 +29,7 @@ const Hero = () => {
 					<div>
 						<Badge className="mb-6 bg-accent/10 text-accent hover:bg-accent/20 border-accent/20 rounded-full px-4 py-2 text-sm font-medium cursor-pointer relative z-10">
 							<Sparkles className="w-4 h-4 inline mr-2" aria-hidden="true" />
-							Live Classes with Expert Instructors
+							September Beginner Cohort · 6 Spots
 						</Badge>
 					</div>
 					<div>
@@ -88,14 +89,14 @@ const Hero = () => {
 									className="h-5 w-5 text-green-600"
 									aria-hidden="true"
 								/>
-								<span>Your first class is free—try before you commit</span>
+								<span>Free group trial: {FALL_2026_OFFER.trialDate}</span>
 							</div>
 							<div className="flex items-center gap-2">
 								<CheckCircle
 									className="h-5 w-5 text-primary"
 									aria-hidden="true"
 								/>
-								<span>Ages 9-10 (Mon) & 11-13 (Wed)</span>
+								<span>{FALL_2026_OFFER.ageRange} · Weekly Mondays</span>
 							</div>
 						</div>
 					</div>

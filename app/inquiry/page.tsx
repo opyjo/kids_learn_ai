@@ -22,6 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import {
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_PROMISE,
@@ -44,10 +45,11 @@ export default function InquiryPage() {
 				<div className="text-center mb-12">
 					<Badge className="mb-4 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
 						<Sparkles className="w-4 h-4 inline mr-2" />
-						Limited Spots Available
+						{FALL_2026_OFFER.trialDateShort} Trial · Limited to{" "}
+						{FALL_2026_OFFER.maximumStudents} Students
 					</Badge>
 					<h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4">
-						Try Your First Class <span className="text-primary">FREE</span>
+						Try a Live Class <span className="text-primary">FREE</span>
 					</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
 						{PARENT_FACING_PROMISE}
@@ -70,26 +72,35 @@ export default function InquiryPage() {
 							</h2>
 
 							<div className="space-y-4">
-								{/* Age Groups */}
-								<div className="grid grid-cols-2 gap-4">
+								{/* Trial and cohort dates */}
+								<div className="grid gap-4 sm:grid-cols-2">
 									<div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
 										<div className="flex items-center gap-2 mb-2">
 											<Calendar className="h-4 w-4 text-primary" />
-											<span className="font-semibold text-sm">Ages 9-10</span>
+											<span className="font-semibold text-sm">
+												Free Group Trial
+											</span>
 										</div>
-										<p className="text-2xl font-bold text-primary">Mondays</p>
+										<p className="text-xl font-bold text-primary">
+											{FALL_2026_OFFER.trialDateShort}
+										</p>
 										<p className="text-sm text-muted-foreground">
-											Weekly classes
+											{FALL_2026_OFFER.trialDuration} · Time confirmed after
+											booking
 										</p>
 									</div>
 									<div className="bg-accent/5 rounded-xl p-4 border border-accent/20">
 										<div className="flex items-center gap-2 mb-2">
 											<Calendar className="h-4 w-4 text-accent" />
-											<span className="font-semibold text-sm">Ages 11-13</span>
+											<span className="font-semibold text-sm">
+												New Beginner Cohort
+											</span>
 										</div>
-										<p className="text-2xl font-bold text-accent">Wednesdays</p>
+										<p className="text-xl font-bold text-accent">
+											Starts {FALL_2026_OFFER.cohortStartDateShort}
+										</p>
 										<p className="text-sm text-muted-foreground">
-											Weekly classes
+											{FALL_2026_OFFER.ageRange} · Weekly Mondays
 										</p>
 									</div>
 								</div>
@@ -98,16 +109,22 @@ export default function InquiryPage() {
 								<div className="space-y-3 pt-4">
 									<div className="flex items-center gap-3">
 										<Clock className="h-5 w-5 text-primary shrink-0" />
-										<span>8-10 week structured program</span>
+										<span>
+											{FALL_2026_OFFER.programLength} structured program
+										</span>
 									</div>
 									<div className="flex items-center gap-3">
 										<Users className="h-5 w-5 text-primary shrink-0" />
-										<span>Small class sizes for personalized attention</span>
+										<span>
+											Maximum {FALL_2026_OFFER.maximumStudents} students for
+											personalized attention
+										</span>
 									</div>
 									<div className="flex items-center gap-3">
 										<CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
 										<span className="font-semibold text-green-700 dark:text-green-400">
-											First class is FREE - no commitment
+											{FALL_2026_OFFER.trialDateShort} trial is FREE - no
+											commitment
 										</span>
 									</div>
 								</div>
@@ -127,7 +144,8 @@ export default function InquiryPage() {
 										<span className="text-muted-foreground">CAD</span>
 									</div>
 									<p className="text-sm text-muted-foreground">
-										One-time payment for the full 8-10 week program
+										One-time payment for the full{" "}
+										{FALL_2026_OFFER.programLength} program
 									</p>
 									<p className="text-sm font-medium text-primary mt-2">
 										✨ Try your first class free before paying
@@ -189,10 +207,11 @@ export default function InquiryPage() {
 										How does the free first class work?
 									</AccordionTrigger>
 									<AccordionContent>
-										Your child can attend their first class completely free with
-										no commitment. This lets you and your child experience the
-										program before deciding to enroll. If you love it, you can
-										then pay for the full program.
+										The free trial is a one-hour live group class on{" "}
+										{FALL_2026_OFFER.trialDate}. Submit the form to request a
+										spot; we will email the exact class time and joining
+										instructions within 24 hours. No payment is required for the
+										trial.
 									</AccordionContent>
 								</AccordionItem>
 								<AccordionItem value="experience">
@@ -227,8 +246,10 @@ export default function InquiryPage() {
 									<AccordionTrigger>When do I pay?</AccordionTrigger>
 									<AccordionContent>
 										Only after your child's free first class! If you decide to
-										continue, you'll pay the one-time fee of $159.99 CAD for the
-										full 8-10 week program via e-Transfer.
+										continue into the Monday beginner cohort starting September
+										14, you'll pay the one-time fee of{" "}
+										{FALL_2026_OFFER.foundingRate} for the full{" "}
+										{FALL_2026_OFFER.programLength} program via e-Transfer.
 									</AccordionContent>
 								</AccordionItem>
 							</Accordion>
@@ -239,8 +260,9 @@ export default function InquiryPage() {
 					<div className="text-center py-8">
 						<h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
 						<p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-							Book your child's free first class today. No payment required
-							until you decide to continue.
+							Request one of {FALL_2026_OFFER.maximumStudents} spots in the{" "}
+							{FALL_2026_OFFER.trialDateShort} trial. We will confirm the exact
+							time and joining instructions within 24 hours.
 						</p>
 						<Button asChild size="lg" className="group">
 							<Link href="/inquiry/book">
