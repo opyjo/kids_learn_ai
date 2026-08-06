@@ -47,6 +47,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { UserMenu } from "@/components/user/user-menu";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
@@ -278,14 +279,14 @@ const AnnouncementBar = ({
 								<div className="flex items-center gap-1.5 sm:gap-2">
 									<Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-pulse shrink-0" />
 									<span className="truncate sm:truncate-none">
-										Try your first class FREE!
+										Free trial · {FALL_2026_OFFER.trialDateShort}
 									</span>
 								</div>
 								<Link
 									href="/inquiry"
 									className="inline-flex items-center gap-1 bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-full text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap"
 								>
-									Book Now
+									Request a Spot
 									<span className="hidden sm:inline">→</span>
 								</Link>
 							</div>

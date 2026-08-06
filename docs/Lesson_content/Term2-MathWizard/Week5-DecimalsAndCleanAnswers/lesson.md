@@ -80,8 +80,10 @@ ai_activities: |
 
 # Term 2, Lesson 5: Decimals & Clean Answers! ✨
 
-**Course:** Term 2: Math Wizard  
-**Duration:** 60 minutes  
+**Course:** Term 2: Math Wizard
+
+**Duration:** 60 minutes
+
 **Term:** 2 of 8 | **Week:** 5 of 9
 
 ---

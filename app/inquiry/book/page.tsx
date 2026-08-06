@@ -13,10 +13,7 @@ import { Footer } from "@/components/layouts/footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-	FALL_2026_COHORT,
-	FALL_2026_TRIAL_TIME_NOTE,
-} from "@/lib/marketing/cohort-offer";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 import { publicMetadata } from "@/lib/seo";
 
@@ -46,26 +43,29 @@ export default function BookTrialPage() {
 				<div className="text-center mb-10 max-w-2xl mx-auto">
 					<div className="inline-flex items-center gap-2 bg-accent/10 text-accent rounded-full px-4 py-2 mb-6">
 						<Gift className="w-4 h-4" />
-						<span className="text-sm font-medium">August 17 Group Trial</span>
+						<span className="text-sm font-medium">
+							Free Trial · {FALL_2026_OFFER.trialDateShort}
+						</span>
 					</div>
 					<h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-						Reserve the August 17 Trial
+						Request a Spot in the {FALL_2026_OFFER.trialDateShort} Trial
 					</h1>
 					<p className="text-lg text-muted-foreground">
-						{PARENT_FACING_PROMISE} {FALL_2026_TRIAL_TIME_NOTE}
+						{PARENT_FACING_PROMISE} Complete the form to request a place; we'll
+						confirm the exact time and joining instructions within 24 hours.
 					</p>
 				</div>
 
 				{/* Benefits Quick View */}
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-10">
 					{[
-						{ icon: Calendar, label: "Monday, August 17" },
-						{ icon: Users, label: FALL_2026_COHORT.ageRange },
+						{ icon: Calendar, label: FALL_2026_OFFER.trialDate },
 						{
-							icon: Shield,
-							label: `Maximum ${FALL_2026_COHORT.maxStudents} learners`,
+							icon: Users,
+							label: `Maximum ${FALL_2026_OFFER.maximumStudents} Students`,
 						},
-						{ icon: Sparkles, label: "No Commitment" },
+						{ icon: Shield, label: "Safe & Moderated" },
+						{ icon: Sparkles, label: "1 Hour · No Commitment" },
 					].map((item) => (
 						<div
 							key={item.label}
@@ -83,11 +83,14 @@ export default function BookTrialPage() {
 				<Card className="max-w-2xl mx-auto border-2 border-primary/20 shadow-xl">
 					<CardContent className="p-6 lg:p-10">
 						<div className="mb-8">
-							<h2 className="text-xl font-semibold mb-2">Inquiry Form</h2>
+							<h2 className="text-xl font-semibold mb-2">
+								Free Trial Request Form
+							</h2>
 							<p className="text-sm text-muted-foreground">
 								All fields marked with <span className="text-red-500">*</span>{" "}
-								are required. We'll confirm the one-hour August 17 trial time
-								and joining instructions within 24 hours.
+								are required. This requests a spot for{" "}
+								{FALL_2026_OFFER.trialDate}; your spot is confirmed when you
+								receive the exact time and joining instructions.
 							</p>
 						</div>
 						<CourseInquiryForm />

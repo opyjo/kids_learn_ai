@@ -1,10 +1,12 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
 import {
 	BarChart3,
 	BookOpen,
 	BriefcaseBusiness,
 	CalendarClock,
+	ChartNoAxesCombined,
 	FileCode,
 	FileText,
 	FlaskConical,
@@ -12,23 +14,50 @@ import {
 	HandCoins,
 	HelpCircle,
 	LayoutDashboard,
+	LibraryBig,
 	Mail,
 	Plus,
 	Presentation,
 	Target,
 	Trophy,
 	Users,
+	UsersRound,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
-const adminNavItems = [
+type AdminSectionName = "Workspace" | "People" | "Content" | "Insights";
+
+interface AdminNavItem {
+	section: AdminSectionName;
+	href: string;
+	label: string;
+	icon: LucideIcon;
+	exact?: boolean;
+	showBadge?: boolean;
+}
+
+interface AdminNavSection {
+	section: AdminSectionName;
+	label: string;
+	description: string;
+	icon: LucideIcon;
+	items: AdminNavItem[];
+}
+
+const adminNavItems: AdminNavItem[] = [
 	{
 		section: "Workspace",
 		href: "/admin",
@@ -129,9 +158,60 @@ const adminNavItems = [
 	},
 ];
 
+const adminNavSections: AdminNavSection[] = [
+	{
+		section: "Workspace",
+		label: "Workspace",
+		description: "Classes and daily operations",
+		icon: LayoutDashboard,
+		items: adminNavItems.filter((item) => item.section === "Workspace"),
+	},
+	{
+		section: "People",
+		label: "People",
+		description: "Students and new inquiries",
+		icon: UsersRound,
+		items: adminNavItems.filter((item) => item.section === "People"),
+	},
+	{
+		section: "Content",
+		label: "Learning content",
+		description: "Lessons, quizzes, and guides",
+		icon: LibraryBig,
+		items: adminNavItems.filter((item) => item.section === "Content"),
+	},
+	{
+		section: "Insights",
+		label: "Insights and planning",
+		description: "Reports, growth, and resources",
+		icon: ChartNoAxesCombined,
+		items: adminNavItems.filter((item) => item.section === "Insights"),
+	},
+];
+
+function isAdminPathActive(
+	pathname: string,
+	{ href, exact }: Pick<AdminNavItem, "href" | "exact">,
+): boolean {
+	if (exact) return pathname === href;
+	return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function getActiveAdminSection(pathname: string): AdminSectionName {
+	return (
+		adminNavSections.find((section) =>
+			section.items.some((item) => isAdminPathActive(pathname, item)),
+		)?.section ?? "Workspace"
+	);
+}
+
 export function AdminLayoutShell({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const [pendingSubmissions, setPendingSubmissions] = useState(0);
+	const activeSection = getActiveAdminSection(pathname);
+	const [openSection, setOpenSection] = useState<AdminSectionName | "">(
+		activeSection,
+	);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -147,12 +227,9 @@ export function AdminLayoutShell({ children }: { children: React.ReactNode }) {
 		fetchData();
 	}, []);
 
-	const isActive = (href: string, exact?: boolean) => {
-		if (exact) {
-			return pathname === href;
-		}
-		return pathname === href || pathname.startsWith(`${href}/`);
-	};
+	useEffect(() => {
+		setOpenSection(activeSection);
+	}, [activeSection]);
 
 	return (
 		<div className="admin-shell min-h-screen bg-slate-50 dark:bg-gray-950">
@@ -162,48 +239,113 @@ export function AdminLayoutShell({ children }: { children: React.ReactNode }) {
 			{/* Main layout with sidebar */}
 			<div className="flex">
 				{/* Sidebar - Desktop */}
-				<aside className="hidden lg:flex lg:flex-col lg:w-56 lg:flex-shrink-0 lg:border-r lg:border-slate-200 dark:lg:border-gray-800 lg:bg-white dark:lg:bg-gray-900 lg:min-h-[calc(100vh-88px)]">
+				<aside className="hidden lg:flex lg:min-h-[calc(100vh-88px)] lg:w-64 lg:flex-shrink-0 lg:flex-col lg:border-r lg:border-slate-200 lg:bg-white dark:lg:border-gray-800 dark:lg:bg-gray-900">
 					{/* Navigation */}
 					<div className="sticky top-[88px] flex flex-1 flex-col overflow-y-auto py-3">
-						<nav className="flex-1 px-3">
-							{adminNavItems.map((item) => {
-								const Icon = item.icon;
-								const active = isActive(item.href, item.exact);
-								const itemIndex = adminNavItems.indexOf(item);
-								const showSection =
-									itemIndex === 0 ||
-									adminNavItems[itemIndex - 1].section !== item.section;
+						<nav className="flex-1 px-3" aria-label="Admin navigation">
+							<div className="mb-3 px-2">
+								<p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
+									Admin menu
+								</p>
+							</div>
 
-								return (
-									<div key={item.href}>
-										{showSection && (
-											<p className="mb-1 mt-3 px-2 text-[9px] font-semibold uppercase tracking-widest text-slate-400 first:mt-0">
-												{item.section}
-											</p>
-										)}
-										<Link
-											href={item.href}
-											className={cn(
-												"mb-0.5 flex items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors",
-												active
-													? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
-													: "text-slate-600 hover:bg-slate-100 hover:text-slate-950 dark:text-gray-300 dark:hover:bg-gray-800",
-											)}
+							<Accordion
+								type="single"
+								collapsible
+								value={openSection}
+								onValueChange={(value) =>
+									setOpenSection(value as AdminSectionName | "")
+								}
+								className="space-y-1.5"
+							>
+								{adminNavSections.map((section) => {
+									const SectionIcon = section.icon;
+									const sectionIsActive = section.section === activeSection;
+									const sectionPendingCount = section.items.some(
+										(item) => item.showBadge,
+									)
+										? pendingSubmissions
+										: 0;
+
+									return (
+										<AccordionItem
+											key={section.section}
+											value={section.section}
+											className="overflow-hidden rounded-lg border border-transparent data-[state=open]:border-slate-200 data-[state=open]:bg-slate-50/70 dark:data-[state=open]:border-gray-700 dark:data-[state=open]:bg-gray-800/40"
 										>
-											<Icon className="h-4 w-4 flex-shrink-0" />
-											<span className="flex-1">{item.label}</span>
-											{item.showBadge && pendingSubmissions > 0 && (
-												<Badge
-													variant="secondary"
-													className="h-5 px-1.5 text-xs bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300"
-												>
-													{pendingSubmissions}
-												</Badge>
-											)}
-										</Link>
-									</div>
-								);
-							})}
+											<AccordionTrigger
+												className={cn(
+													"rounded-lg px-2.5 py-2.5 hover:bg-slate-100 hover:no-underline dark:hover:bg-gray-800",
+													sectionIsActive && "text-slate-950 dark:text-white",
+												)}
+											>
+												<span className="flex min-w-0 flex-1 items-center gap-2.5">
+													<span
+														className={cn(
+															"flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-slate-100 text-slate-500 dark:bg-gray-800 dark:text-gray-400",
+															sectionIsActive &&
+																"bg-slate-900 text-white dark:bg-white dark:text-slate-900",
+														)}
+													>
+														<SectionIcon
+															className="h-4 w-4"
+															aria-hidden="true"
+														/>
+													</span>
+													<span className="min-w-0 text-left">
+														<span className="block truncate text-xs font-semibold">
+															{section.label}
+														</span>
+														<span className="block truncate text-[0.68rem] font-normal text-muted-foreground">
+															{section.description}
+														</span>
+													</span>
+													{sectionPendingCount > 0 ? (
+														<Badge className="ml-auto h-5 bg-orange-100 px-1.5 text-[0.65rem] text-orange-700 hover:bg-orange-100 dark:bg-orange-900 dark:text-orange-200">
+															{sectionPendingCount}
+														</Badge>
+													) : null}
+												</span>
+											</AccordionTrigger>
+
+											<AccordionContent className="space-y-1 px-2 pb-2">
+												{section.items.map((item) => {
+													const Icon = item.icon;
+													const active = isAdminPathActive(pathname, item);
+
+													return (
+														<Link
+															key={item.href}
+															href={item.href}
+															aria-current={active ? "page" : undefined}
+															className={cn(
+																"flex items-center gap-2 rounded-md px-2.5 py-2 text-xs font-medium transition-colors",
+																active
+																	? "bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900"
+																	: "text-slate-600 hover:bg-white hover:text-slate-950 dark:text-gray-300 dark:hover:bg-gray-800",
+															)}
+														>
+															<Icon
+																className="h-4 w-4 flex-shrink-0"
+																aria-hidden="true"
+															/>
+															<span className="flex-1">{item.label}</span>
+															{item.showBadge && pendingSubmissions > 0 ? (
+																<Badge
+																	variant="secondary"
+																	className="h-5 bg-orange-100 px-1.5 text-xs text-orange-700 dark:bg-orange-900 dark:text-orange-300"
+																>
+																	{pendingSubmissions}
+																</Badge>
+															) : null}
+														</Link>
+													);
+												})}
+											</AccordionContent>
+										</AccordionItem>
+									);
+								})}
+							</Accordion>
 						</nav>
 
 						{/* Quick Actions */}

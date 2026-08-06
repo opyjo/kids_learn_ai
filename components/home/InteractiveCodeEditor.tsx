@@ -246,7 +246,7 @@ const InteractiveCodeEditor = () => {
 													size="sm"
 													className="rounded-full bg-[#1565a8] text-white hover:bg-[#0f538d]"
 												>
-													Book a Free First Class
+													Request a Free Trial Spot
 												</Button>
 											</Link>
 										</div>

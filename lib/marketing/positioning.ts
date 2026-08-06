@@ -1,10 +1,10 @@
-export const PARENT_FACING_PROMISE =
-	"Live online Python and responsible AI classes for Canadian kids ages 9–13. The new beginner cohort starts September 14, with a free group trial on August 17.";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
+
+export const PARENT_FACING_PROMISE = `Live online Python and responsible AI classes for Canadian kids ages 9–13, with real projects and no more than ${FALL_2026_OFFER.maximumStudents} students per class.`;
 
 export const PARENT_FACING_HEADLINE =
 	"Live Online Python & Responsible AI Classes for Canadian Kids Ages 9–13";
 
-export const PARENT_FACING_SUPPORTING_COPY =
-	"A small Monday beginner cohort, real projects, and a free one-hour group trial on August 17.";
+export const PARENT_FACING_SUPPORTING_COPY = `Free live trial on ${FALL_2026_OFFER.trialDate}. The next beginner cohort starts ${FALL_2026_OFFER.cohortStartDate}.`;
 
-export const FREE_FIRST_CLASS_CTA = "Book a Free First Class";
+export const FREE_FIRST_CLASS_CTA = "Request a Free Trial Spot";

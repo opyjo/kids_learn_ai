@@ -72,8 +72,10 @@ ai_activities: |
 
 # Term 2, Lesson 7: The Math Bug Clinic! 🕵️
 
-**Course:** Term 2: Math Wizard  
-**Duration:** 60 minutes  
+**Course:** Term 2: Math Wizard
+
+**Duration:** 60 minutes
+
 **Term:** 2 of 8 | **Week:** 7 of 9
 
 ---

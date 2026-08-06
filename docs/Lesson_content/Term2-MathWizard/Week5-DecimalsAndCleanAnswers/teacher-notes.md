@@ -2,8 +2,10 @@
 
 ## Teacher's Guide
 
-**Course:** Term 2: Math Wizard  
-**Duration:** 60 minutes  
+**Course:** Term 2: Math Wizard
+
+**Duration:** 60 minutes
+
 **Term:** 2 of 8 | **Week:** 5 of 9
 
 ---

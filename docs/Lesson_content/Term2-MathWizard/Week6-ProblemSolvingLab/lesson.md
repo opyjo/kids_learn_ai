@@ -69,8 +69,10 @@ ai_activities: |
 
 # Term 2, Lesson 6: Math Problem-Solving Lab! 🛠️
 
-**Course:** Term 2: Math Wizard  
-**Duration:** 60 minutes  
+**Course:** Term 2: Math Wizard
+
+**Duration:** 60 minutes
+
 **Term:** 2 of 8 | **Week:** 6 of 9
 
 ---
