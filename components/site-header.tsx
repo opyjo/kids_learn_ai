@@ -61,6 +61,7 @@ type NavItem = {
 	Icon: LucideIcon;
 	description?: string;
 	comingSoon?: boolean;
+	badge?: string;
 };
 
 // Navigation data
@@ -73,6 +74,13 @@ const NAV_ITEMS = {
 	about: { href: "/about", label: "About", Icon: Info },
 	blog: { href: "/blog", label: "Blog", Icon: Newspaper },
 	pricing: { href: "/pricing", label: "Pricing", Icon: DollarSign },
+	storyClub: {
+		href: "/stories",
+		label: "Story Club",
+		Icon: BookOpen,
+		description: "A new illustrated AI mystery every week",
+		badge: "New",
+	},
 	// Year 1: Terms 1-4
 	year1Terms1to4: [
 		{
@@ -182,12 +190,6 @@ const NAV_ITEMS = {
 		},
 	],
 	learn: [
-		{
-			href: "/stories",
-			label: "AI Story Club",
-			Icon: BookOpen,
-			description: "A new illustrated AI mystery every week",
-		},
 		{
 			href: "/playground",
 			label: "Playground",
@@ -330,6 +332,11 @@ const NavLink = ({ item, isActive }: { item: NavItem; isActive: boolean }) => (
 	>
 		<item.Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
 		<span>{item.label}</span>
+		{item.badge && (
+			<Badge className="hidden h-5 rounded-full bg-orange-500 px-1.5 text-[10px] font-bold uppercase tracking-wide text-white hover:bg-orange-500 xl:inline-flex">
+				{item.badge}
+			</Badge>
+		)}
 		{/* Animated underline */}
 		<span
 			className={cn(
@@ -442,6 +449,11 @@ const MobileNavLink = ({
 					aria-label="Coming soon"
 				>
 					Coming Soon
+				</Badge>
+			)}
+			{item.badge && (
+				<Badge className="rounded-full bg-orange-500 px-2 py-0 text-[10px] font-bold uppercase tracking-wide text-white hover:bg-orange-500">
+					{item.badge}
 				</Badge>
 			)}
 		</Link>
@@ -681,7 +693,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 
 						{/* Desktop Navigation - only render after mount to prevent hydration mismatch */}
 						{mounted && (
-							<NavigationMenu className="hidden lg:flex bg-background/80 backdrop-blur-sm px-2 py-1 rounded-full border border-border/50 shadow-lg my-0.5 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
+							<NavigationMenu className="hidden xl:flex bg-background/80 backdrop-blur-sm px-2 py-1 rounded-full border border-border/50 shadow-lg my-0.5 **:data-[slot=navigation-menu-viewport]:border-0 **:data-[slot=navigation-menu-viewport]:shadow-none **:data-[slot=navigation-menu-viewport]:bg-transparent">
 								<NavigationMenuList className="gap-1">
 									{/* Learn Mega Menu */}
 									<NavigationMenuItem>
@@ -783,6 +795,14 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 										</NavigationMenuContent>
 									</NavigationMenuItem>
 
+									{/* Story Club - prominent weekly destination for kids */}
+									<NavigationMenuItem>
+										<NavLink
+											item={NAV_ITEMS.storyClub}
+											isActive={isActive(NAV_ITEMS.storyClub.href)}
+										/>
+									</NavigationMenuItem>
+
 									{/* Dashboard - only render after mount to prevent hydration mismatch */}
 									{mounted && isAuthenticated && (
 										<NavigationMenuItem>
@@ -858,7 +878,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 						{/* Right side actions */}
 						<div className="flex items-center gap-3">
 							<ThemeToggle />
-							<div className="hidden lg:flex items-center gap-2">
+							<div className="hidden xl:flex items-center gap-2">
 								{/* Only render auth-dependent UI after mount to prevent hydration mismatch */}
 								{mounted && isAuthenticated ? (
 									<UserMenu />
@@ -889,7 +909,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 											size="icon"
 											aria-label="Open navigation menu"
 											aria-expanded={mobileMenuOpen}
-											className="lg:hidden min-h-[44px] min-w-[44px]"
+											className="xl:hidden min-h-[44px] min-w-[44px]"
 										>
 											<Menu className="h-5 w-5" aria-hidden="true" />
 										</Button>
@@ -1006,6 +1026,13 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 														))}
 													</CollapsibleContent>
 												</Collapsible>
+
+												{/* Story Club stays visible without opening a submenu */}
+												<MobileNavLink
+													item={NAV_ITEMS.storyClub}
+													isActive={isActive(NAV_ITEMS.storyClub.href)}
+													onClick={closeMobileMenu}
+												/>
 
 												{/* Dashboard - only render after mount */}
 												{mounted && isAuthenticated && (

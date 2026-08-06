@@ -29,6 +29,14 @@ export const Footer = () => {
 						<ul className="space-y-3 text-muted-foreground">
 							<li>
 								<Link
+									href="/stories"
+									className="hover:text-foreground transition-colors cursor-pointer"
+								>
+									AI Story Club
+								</Link>
+							</li>
+							<li>
+								<Link
 									href="/lessons?course=level-1-python-foundations-1"
 									className="hover:text-foreground transition-colors cursor-pointer"
 								>
