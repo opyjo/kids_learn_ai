@@ -8,6 +8,7 @@ import {
 	MAX_CHILD_TURNS,
 	openingQuestion,
 } from "@/lib/concept-labs/explain";
+import { handPoseDetectiveLab } from "@/lib/concept-labs/labs/hand-pose-detective";
 import { howAiLearnsLab } from "@/lib/concept-labs/labs/how-ai-learns";
 import { nextWordGuesserLab } from "@/lib/concept-labs/labs/next-word-guesser";
 import { shapeSorterLab } from "@/lib/concept-labs/labs/shape-sorter";
@@ -32,6 +33,12 @@ describe("openingQuestion", () => {
 	it("asks about word choice for next-word labs, not drawings", () => {
 		const q = openingQuestion(nextWordGuesserLab);
 		expect(q).toMatch(/word/i);
+		expect(q).not.toMatch(/drawing/i);
+	});
+
+	it("asks about landmarks for hand-pose labs, not drawings", () => {
+		const q = openingQuestion(handPoseDetectiveLab);
+		expect(q).toMatch(/hand|point/i);
 		expect(q).not.toMatch(/drawing/i);
 	});
 });
@@ -92,6 +99,12 @@ describe("buildRubricSystemPrompt", () => {
 		expect(prompt).toMatch(/next word/i);
 		expect(prompt).not.toMatch(/drawing/i);
 	});
+
+	it("describes hand landmarks for hand-pose labs", () => {
+		const prompt = buildRubricSystemPrompt(handPoseDetectiveLab);
+		expect(prompt).toMatch(/hand landmark/i);
+		expect(prompt).not.toMatch(/drawing/i);
+	});
 });
 
 describe("buildSocraticSystemPrompt for next-word labs", () => {
@@ -103,6 +116,20 @@ describe("buildSocraticSystemPrompt for next-word labs", () => {
 			childTurnsSoFar: 0,
 		});
 		expect(prompt).toMatch(/sentence/i);
+		expect(prompt).not.toMatch(/drawing examples/i);
+	});
+});
+
+describe("buildSocraticSystemPrompt for hand-pose labs", () => {
+	it("describes landmark detection, not drawing examples", () => {
+		const prompt = buildSocraticSystemPrompt({
+			definition: handPoseDetectiveLab,
+			stats,
+			misconceptionTags: ["ai-identity-awareness"],
+			childTurnsSoFar: 0,
+		});
+		expect(prompt).toMatch(/landmark/i);
+		expect(prompt).toMatch(/identity|thought/i);
 		expect(prompt).not.toMatch(/drawing examples/i);
 	});
 });
@@ -144,5 +171,11 @@ describe("fallbackSocraticReply", () => {
 	it("returns a question and never indexes out of range", () => {
 		expect(fallbackSocraticReply(0)).toMatch(/\?$/);
 		expect(fallbackSocraticReply(99)).toMatch(/\?$/);
+	});
+
+	it("uses camera-and-landmark questions for hand-pose labs", () => {
+		const reply = fallbackSocraticReply(0, "hand-pose");
+		expect(reply).toMatch(/point|landmark|hand/i);
+		expect(reply).not.toMatch(/drawing/i);
 	});
 });

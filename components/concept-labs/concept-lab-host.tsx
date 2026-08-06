@@ -6,6 +6,7 @@ import {
 	ExplainDialogue,
 	type ExplainOutcome,
 } from "@/components/concept-labs/explain-dialogue";
+import { HandPoseLab } from "@/components/concept-labs/hand-pose-lab";
 import { NextWordLab } from "@/components/concept-labs/next-word-lab";
 import { ProbeRunner } from "@/components/concept-labs/probe-runner";
 import { TrainableClassifierLab } from "@/components/concept-labs/trainable-classifier-lab";
@@ -86,6 +87,7 @@ export function ConceptLabHost({
 	const steps = cohort === "baseline" ? BASELINE_STEPS : STEPS;
 	const stepIndex = steps.findIndex((s) => s.phase === phase);
 	const live = recorderRef.current.summary();
+	const isHandPoseLab = definition.primitive === "hand-pose";
 
 	const handleAction = useCallback((action: LabAction) => {
 		recorderRef.current.recordAction(action);
@@ -234,9 +236,17 @@ export function ConceptLabHost({
 			{phase === "play" && (
 				<div className="space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
 					<p className="text-xs font-semibold uppercase tracking-wide text-primary">
-						Step 2 · Teach the machine
+						{isHandPoseLab
+							? "Step 2 · Try a pre-trained AI"
+							: "Step 2 · Teach the machine"}
 					</p>
-					{definition.primitive === "next-word-guesser" ? (
+					{isHandPoseLab ? (
+						<HandPoseLab
+							key={attempt}
+							onAction={handleAction}
+							onCanContinueChange={setCanContinuePlay}
+						/>
+					) : definition.primitive === "next-word-guesser" ? (
 						<NextWordLab
 							key={attempt}
 							definition={definition}
@@ -261,7 +271,9 @@ export function ConceptLabHost({
 						>
 							{canContinuePlay
 								? "Continue →"
-								: "Train, then test the machine to continue"}
+								: isHandPoseLab
+									? "Capture one detected hand to continue"
+									: "Finish one test and answer Yes or No to continue"}
 						</Button>
 					</div>
 				</div>
@@ -316,9 +328,9 @@ export function ConceptLabHost({
 							: "You taught a machine and used what you learned in a brand-new situation. 🌟"}
 					</p>
 					<p className="text-xs text-emerald-800/80 dark:text-emerald-200/80">
-						You taught {summary.trainedSampleCount} examples and tested the
-						machine {summary.testCount} time
-						{summary.testCount === 1 ? "" : "s"}.
+						{isHandPoseLab
+							? `You captured what the hand model saw ${summary.testCount} time${summary.testCount === 1 ? "" : "s"}.`
+							: `You taught ${summary.trainedSampleCount} examples and tested the machine ${summary.testCount} time${summary.testCount === 1 ? "" : "s"}.`}
 					</p>
 					<div className="flex flex-wrap justify-center gap-2">
 						<Button
