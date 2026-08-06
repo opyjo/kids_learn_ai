@@ -16,7 +16,44 @@ export type StoryChoice = {
 	id: string;
 	label: string;
 	feedback: string;
+	/** Short scene shown after choosing, so the pick visibly shapes the story. */
+	bridge: string;
 	isBest: boolean;
+};
+
+export type StoryClueHotspot = {
+	id: string;
+	label: string;
+	feedback: string;
+	/** Center of the tap target, as percentages of the image width/height. */
+	x: number;
+	y: number;
+};
+
+export type StoryClueHunt = {
+	prompt: string;
+	image: string;
+	imageAlt: string;
+	hotspots: StoryClueHotspot[];
+	successMessage: string;
+};
+
+export type AskPixelQuestion = {
+	id: string;
+	label: string;
+	scriptedReply: string;
+};
+
+export type AskPixelConfig = {
+	intro: string;
+	claim: string;
+	questions: AskPixelQuestion[];
+	verdictPrompt: string;
+	verdict: {
+		isTrue: boolean;
+		correctFeedback: string;
+		incorrectFeedback: string;
+	};
 };
 
 export type StoryChallengeOption = {
@@ -43,8 +80,10 @@ export type PublishedStoryIssue = StoryIssueBase & {
 	coverImage: string;
 	coverAlt: string;
 	panels: StoryPanel[];
+	clueHunt?: StoryClueHunt;
 	choicePrompt: string;
 	choices: StoryChoice[];
+	askPixel?: AskPixelConfig;
 	detectiveSteps: Array<{ label: string; description: string }>;
 	challenge: {
 		question: string;
@@ -136,6 +175,41 @@ export const storyIssues: StoryIssue[] = [
 				],
 			},
 		],
+		clueHunt: {
+			prompt:
+				"Look closely at Pixel's projection. Tap the three details that should make a detective suspicious.",
+			image: "/images/story-club/homework-bot-cover.jpg",
+			imageAlt:
+				"Pixel projects a picture of a crowned penguin standing in a sunny desert while Maya and Leo watch",
+			hotspots: [
+				{
+					id: "crown",
+					label: "A golden crown and royal cape",
+					feedback:
+						"“Emperor” is just the species name—real emperor penguins never wear crowns or capes.",
+					x: 78,
+					y: 14,
+				},
+				{
+					id: "desert",
+					label: "Desert sand and a cactus",
+					feedback:
+						"Emperor penguins live on Antarctic ice and swim in freezing oceans—not on hot sand.",
+					x: 91.5,
+					y: 33,
+				},
+				{
+					id: "sun",
+					label: "A blazing hot sun",
+					feedback:
+						"Antarctica is one of the coldest places on Earth. A scorching sun is a giant red flag.",
+					x: 93,
+					y: 9,
+				},
+			],
+			successMessage:
+				"Case notes updated! You spotted every suspicious detail before trusting the picture.",
+		},
 		choicePrompt:
 			"Pixel's answer sounds confident. What should Maya and Leo do next?",
 		choices: [
@@ -144,6 +218,8 @@ export const storyIssues: StoryIssue[] = [
 				label: "Copy it onto the poster",
 				feedback:
 					"Fast—but risky. An AI answer can sound polished even when a detail is invented.",
+				bridge:
+					"Leo grabbed a marker and copied the desert fact straight onto the poster. Ten minutes later Ms. Rivera stopped, raised one eyebrow, and asked where the evidence came from. The whole team suddenly wished they had checked first.",
 				isBest: false,
 			},
 			{
@@ -151,6 +227,8 @@ export const storyIssues: StoryIssue[] = [
 				label: "Ask Pixel if it is really sure",
 				feedback:
 					"A useful clue, but the same AI might repeat the same mistake just as confidently.",
+				bridge:
+					"“Pixel, are you absolutely sure?” Leo asked. Pixel blinked cheerfully. “Confidence level: 99 percent!” But a confident repeat is still just a repeat—the team realized they needed real evidence, not a louder answer.",
 				isBest: false,
 			},
 			{
@@ -158,9 +236,46 @@ export const storyIssues: StoryIssue[] = [
 				label: "Check two trusted science sources",
 				feedback:
 					"Excellent detective work. Comparing reliable sources gives the team evidence, not just confidence.",
+				bridge:
+					"Maya opened the library's science encyclopedia while Leo pulled up the aquarium's penguin page. Two trusted sources, one matching answer—and it did not match Pixel's.",
 				isBest: true,
 			},
 		],
+		askPixel: {
+			intro:
+				"Detective practice time! I just remembered a brand-new fact. Want to test your F.A.C.T. skills on me?",
+			claim:
+				"Goldfish can only remember things for three seconds. That is why they are always surprised by their own fish tank!",
+			questions: [
+				{
+					id: "source",
+					label: "Where did you learn that?",
+					scriptedReply:
+						"Hmm. Searching my memory banks... I do not actually have a source saved. It is just something I have heard many, many times!",
+				},
+				{
+					id: "sure",
+					label: "Are you really sure?",
+					scriptedReply:
+						"I sound sure, do I not? But careful, detective—my confident voice works exactly the same whether I am right or wrong.",
+				},
+				{
+					id: "evidence",
+					label: "What evidence do you have?",
+					scriptedReply:
+						"Evidence... loading... zero files found! If you want real evidence, a trusted science source knows more than my hard drive does.",
+				},
+			],
+			verdictPrompt:
+				"Time for your detective verdict. Is Pixel's goldfish fact true?",
+			verdict: {
+				isTrue: false,
+				correctFeedback:
+					"Case cracked! The three-second story is a famous myth—scientists have trained goldfish to remember feeding routes for months. You froze, asked, and compared instead of trusting a confident voice.",
+				incorrectFeedback:
+					"That is what most people guess—which is exactly why detectives check! Scientists have trained goldfish to remember things for months. The myth spreads because it gets repeated, not because it has evidence.",
+			},
+		},
 		detectiveSteps: [
 			{
 				label: "Freeze",
@@ -251,8 +366,18 @@ export const storyIssues: StoryIssue[] = [
 	},
 ];
 
-export const currentStory = storyIssues.find(
+export const publishedStories = storyIssues.filter(
 	(issue): issue is PublishedStoryIssue => issue.status === "published",
+);
+
+// The most recent published issue, so the "this week" surfaces stay fresh
+// once later issues ship without touching every component.
+export const currentStory = publishedStories.reduce<
+	PublishedStoryIssue | undefined
+>(
+	(latest, issue) =>
+		!latest || issue.issueNumber > latest.issueNumber ? issue : latest,
+	undefined,
 );
 
 export function getPublishedStory(slug: string) {
