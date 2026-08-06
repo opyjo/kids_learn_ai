@@ -27,6 +27,10 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import {
+	FALL_2026_COHORT,
+	FALL_2026_TRIAL_TIME_NOTE,
+} from "@/lib/marketing/cohort-offer";
+import {
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_HEADLINE,
 	PARENT_FACING_SUPPORTING_COPY,
@@ -80,17 +84,18 @@ export function PricingContent() {
 					</p>
 				</div>
 
-				{/* Schedule Cards — hardcoded for now; the class_schedules table is the
-				    future source of truth for days/times shown here */}
+				{/* Fall 2026 intake schedule */}
 				<div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
 					<Card className="border-2 border-primary/20">
 						<CardContent className="p-6 text-center">
 							<div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
 								<Calendar className="h-8 w-8 text-primary" />
 							</div>
-							<h3 className="text-2xl font-bold mb-2">Ages 9-10</h3>
-							<p className="text-3xl font-bold text-primary mb-2">Mondays</p>
-							<p className="text-muted-foreground">Weekly live classes</p>
+							<h3 className="text-2xl font-bold mb-2">Free Group Trial</h3>
+							<p className="text-3xl font-bold text-primary mb-2">August 17</p>
+							<p className="text-muted-foreground">
+								One-hour live online session · {FALL_2026_COHORT.ageRange}
+							</p>
 						</CardContent>
 					</Card>
 					<Card className="border-2 border-accent/20">
@@ -98,12 +103,19 @@ export function PricingContent() {
 							<div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
 								<Calendar className="h-8 w-8 text-accent" />
 							</div>
-							<h3 className="text-2xl font-bold mb-2">Ages 11-13</h3>
-							<p className="text-3xl font-bold text-accent mb-2">Wednesdays</p>
-							<p className="text-muted-foreground">Weekly live classes</p>
+							<h3 className="text-2xl font-bold mb-2">
+								{FALL_2026_COHORT.name}
+							</h3>
+							<p className="text-3xl font-bold text-accent mb-2">Mondays</p>
+							<p className="text-muted-foreground">
+								Starts September 14 · Maximum {FALL_2026_COHORT.maxStudents}
+							</p>
 						</CardContent>
 					</Card>
 				</div>
+				<p className="-mt-8 mb-12 text-center text-sm text-muted-foreground">
+					{FALL_2026_TRIAL_TIME_NOTE}
+				</p>
 
 				{/* Main Pricing Card */}
 				<div className="max-w-3xl mx-auto mb-16">
@@ -321,9 +333,10 @@ export function PricingContent() {
 							<CardContent>
 								<p className="text-muted-foreground">
 									Your child attends their first class completely free with no
-									commitment. This lets you both experience the program before
-									deciding. If you love it, pay $159.99 to continue with the
-									remaining 7-9 classes.
+									commitment at the August 17 group trial. We confirm the exact
+									time within 24 hours after booking. If you love it, pay
+									$159.99 to join the Monday beginner cohort starting September
+									14.
 								</p>
 							</CardContent>
 						</Card>
@@ -336,9 +349,8 @@ export function PricingContent() {
 							</CardHeader>
 							<CardContent>
 								<p className="text-muted-foreground">
-									Life happens! We provide recordings and materials for any
-									missed sessions. Our instructors are also available to help
-									your child catch up during the next class.
+									Life happens! We provide lesson materials and catch-up support
+									for missed sessions. Live classes are not recorded.
 								</p>
 							</CardContent>
 						</Card>
@@ -366,9 +378,13 @@ export function PricingContent() {
 							</CardHeader>
 							<CardContent>
 								<p className="text-muted-foreground">
-									That's why the first class is free! Try before you pay. If
-									after paying you have concerns within the first 2 weeks,
-									contact us and we'll work with you to find a solution.
+									That's why the first class is free: families can decide before
+									paying. Once the first paid class has begun, program fees are
+									non-refundable if a student withdraws, misses a class, or
+									cannot attend. If we cancel the remainder of the program and
+									do not provide a replacement, we refund the amount paid for
+									the classes we do not provide. Statutory consumer rights still
+									apply.
 								</p>
 							</CardContent>
 						</Card>
@@ -379,7 +395,7 @@ export function PricingContent() {
 				<div className="text-center mt-16 mb-12 p-8 bg-gradient-to-r from-primary/10 to-accent/10 rounded-3xl max-w-3xl mx-auto">
 					<h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
 					<p className="text-xl text-muted-foreground mb-6">
-						Book your child's free first class today
+						Reserve your child's August 17 trial today
 					</p>
 					<Button asChild size="lg">
 						<Link href="/inquiry">

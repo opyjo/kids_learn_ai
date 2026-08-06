@@ -6,6 +6,7 @@ import {
 	campaignAttributionToInquiryColumns,
 	fallbackInquiryAttribution,
 } from "@/lib/marketing/campaign-attribution";
+import { FALL_2026_COHORT } from "@/lib/marketing/cohort-offer";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -83,9 +84,9 @@ const getAgeGroupDetails = (
 ): { label: string; day: string } => {
 	switch (ageGroup) {
 		case "9-10":
-			return { label: "Ages 9-10", day: "Mondays" };
+			return { label: "Ages 9-10", day: FALL_2026_COHORT.day };
 		case "11-13":
-			return { label: "Ages 11-13", day: "Wednesdays" };
+			return { label: "Ages 11-13", day: FALL_2026_COHORT.day };
 		default:
 			return { label: ageGroup, day: "TBD" };
 	}
@@ -307,11 +308,9 @@ export const POST = async (request: NextRequest) => {
 
               <!-- Schedule -->
               <div class="schedule-box">
-                <div style="font-size: 14px; color: #166534; margin-bottom: 5px;">📅 Recommended Class Day</div>
-                <div class="schedule-day">${ageGroupDetails.day}</div>
-                <div style="font-size: 12px; color: #166534; margin-top: 5px;">${
-									ageGroupDetails.label
-								} classes</div>
+				<div style="font-size: 14px; color: #166534; margin-bottom: 5px;">📅 New Beginner Cohort Day</div>
+				<div class="schedule-day">${ageGroupDetails.day}</div>
+				<div style="font-size: 12px; color: #166534; margin-top: 5px;">Free trial August 17 · Cohort starts September 14</div>
               </div>
 
               ${
@@ -379,7 +378,7 @@ export const POST = async (request: NextRequest) => {
 		const parentEmailResult = await resend.emails.send({
 			from: "Kids Learn AI <hello@kidslearnai.ca>",
 			to: validatedData.parentEmail,
-			subject: `🎉 Free Trial Confirmed - ${validatedData.childName} is on the list!`,
+			subject: `🎉 Free Trial Request Received - ${validatedData.childName}`,
 			html: `
         <!DOCTYPE html>
         <html>
@@ -593,9 +592,13 @@ export const POST = async (request: NextRequest) => {
                     <span class="detail-label">Age Group</span>
                     <span class="detail-value">${ageGroupDetails.label}</span>
                   </div>
-                  <div class="detail-row">
-                    <span class="detail-label">Class Day</span>
-                    <span class="detail-value">${ageGroupDetails.day}</span>
+				  <div class="detail-row">
+					<span class="detail-label">Trial Date</span>
+					<span class="detail-value">${FALL_2026_COHORT.trialDate}</span>
+				  </div>
+				  <div class="detail-row">
+					<span class="detail-label">New Cohort</span>
+					<span class="detail-value">${FALL_2026_COHORT.startDate} · Weekly Mondays</span>
                   </div>
                   <div class="detail-row">
                     <span class="detail-label">Experience Level</span>
@@ -611,7 +614,7 @@ export const POST = async (request: NextRequest) => {
                   </div>
                   <div class="step">
                     <div class="step-number">2</div>
-                    <div class="step-text">We'll schedule ${validatedData.childName}'s free trial class</div>
+					<div class="step-text">We'll confirm the August 17 trial time and joining instructions</div>
                   </div>
                   <div class="step">
                     <div class="step-number">3</div>
@@ -626,8 +629,8 @@ export const POST = async (request: NextRequest) => {
                 <div class="trial-info">
                   <div class="trial-info-title">💡 What to Expect in the Trial</div>
                   <ul>
-                    <li>1-hour live online class via Zoom</li>
-                    <li>Small group (max 6 kids) with a real instructor</li>
+					<li>${FALL_2026_COHORT.trialDuration} live online class via Zoom</li>
+					<li>Small group (max ${FALL_2026_COHORT.maxStudents} kids) with a real instructor</li>
                     <li>Fun, hands-on introduction to Python coding</li>
                     <li>No prior experience needed!</li>
                   </ul>

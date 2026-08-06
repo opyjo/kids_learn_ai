@@ -23,6 +23,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
+	FALL_2026_COHORT,
+	FALL_2026_TRIAL_TIME_NOTE,
+} from "@/lib/marketing/cohort-offer";
+import {
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_PROMISE,
 } from "@/lib/marketing/positioning";
@@ -44,7 +48,7 @@ export default function InquiryPage() {
 				<div className="text-center mb-12">
 					<Badge className="mb-4 bg-accent/10 text-accent border-accent/20 rounded-full px-4 py-2">
 						<Sparkles className="w-4 h-4 inline mr-2" />
-						Limited Spots Available
+						August 17 Group Trial · Limited Spots
 					</Badge>
 					<h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4">
 						Try Your First Class <span className="text-primary">FREE</span>
@@ -70,29 +74,38 @@ export default function InquiryPage() {
 							</h2>
 
 							<div className="space-y-4">
-								{/* Age Groups */}
+								{/* Trial and cohort schedule */}
 								<div className="grid grid-cols-2 gap-4">
 									<div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
 										<div className="flex items-center gap-2 mb-2">
 											<Calendar className="h-4 w-4 text-primary" />
-											<span className="font-semibold text-sm">Ages 9-10</span>
+											<span className="font-semibold text-sm">
+												Free Group Trial
+											</span>
 										</div>
-										<p className="text-2xl font-bold text-primary">Mondays</p>
+										<p className="text-xl font-bold text-primary">August 17</p>
 										<p className="text-sm text-muted-foreground">
-											Weekly classes
+											One-hour live online session
 										</p>
 									</div>
 									<div className="bg-accent/5 rounded-xl p-4 border border-accent/20">
 										<div className="flex items-center gap-2 mb-2">
 											<Calendar className="h-4 w-4 text-accent" />
-											<span className="font-semibold text-sm">Ages 11-13</span>
+											<span className="font-semibold text-sm">
+												{FALL_2026_COHORT.ageRange}
+											</span>
 										</div>
-										<p className="text-2xl font-bold text-accent">Wednesdays</p>
+										<p className="text-xl font-bold text-accent">
+											Weekly Mondays
+										</p>
 										<p className="text-sm text-muted-foreground">
-											Weekly classes
+											Starts September 14
 										</p>
 									</div>
 								</div>
+								<p className="text-sm text-muted-foreground">
+									{FALL_2026_TRIAL_TIME_NOTE}
+								</p>
 
 								{/* Program Features */}
 								<div className="space-y-3 pt-4">
@@ -102,7 +115,10 @@ export default function InquiryPage() {
 									</div>
 									<div className="flex items-center gap-3">
 										<Users className="h-5 w-5 text-primary shrink-0" />
-										<span>Small class sizes for personalized attention</span>
+										<span>
+											Maximum {FALL_2026_COHORT.maxStudents} students for
+											personalized support
+										</span>
 									</div>
 									<div className="flex items-center gap-3">
 										<CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
@@ -189,10 +205,20 @@ export default function InquiryPage() {
 										How does the free first class work?
 									</AccordionTrigger>
 									<AccordionContent>
-										Your child can attend their first class completely free with
-										no commitment. This lets you and your child experience the
-										program before deciding to enroll. If you love it, you can
-										then pay for the full program.
+										The August 17 trial is a one-hour, beginner-friendly live
+										group session for ages 9–13. We confirm the exact time and
+										joining instructions within 24 hours after you book. No
+										payment or prior coding experience is required.
+									</AccordionContent>
+								</AccordionItem>
+								<AccordionItem value="cohort-start">
+									<AccordionTrigger>
+										When does the beginner cohort start?
+									</AccordionTrigger>
+									<AccordionContent>
+										The new beginner cohort starts Monday, September 14, 2026
+										and meets weekly on Mondays. It is a separate Term 1 group
+										for a maximum of six learners ages 9–13.
 									</AccordionContent>
 								</AccordionItem>
 								<AccordionItem value="experience">
@@ -210,9 +236,8 @@ export default function InquiryPage() {
 									<AccordionTrigger>What if we miss a class?</AccordionTrigger>
 									<AccordionContent>
 										Life happens! If your child misses a class, we provide
-										recordings and materials so they can catch up. Our
-										instructors are also available to help during the next
-										session.
+										lesson materials and catch-up support. Live classes are not
+										recorded.
 									</AccordionContent>
 								</AccordionItem>
 								<AccordionItem value="equipment">
@@ -239,8 +264,8 @@ export default function InquiryPage() {
 					<div className="text-center py-8">
 						<h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
 						<p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-							Book your child's free first class today. No payment required
-							until you decide to continue.
+							Reserve your child's August 17 trial. No payment is required until
+							you decide to continue into the September cohort.
 						</p>
 						<Button asChild size="lg" className="group">
 							<Link href="/inquiry/book">

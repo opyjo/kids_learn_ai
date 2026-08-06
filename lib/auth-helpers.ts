@@ -1,5 +1,7 @@
 import type { User } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
+import { hasCurrentParentAccountConsent } from "@/lib/legal/consent-server";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 /**
@@ -73,6 +75,14 @@ export async function requireParent(): Promise<User> {
 	}
 	if (profile?.role !== "parent") {
 		redirect("/dashboard");
+	}
+
+	const hasCurrentConsent = await hasCurrentParentAccountConsent(
+		user.id,
+		getSupabaseAdminClient() || undefined,
+	);
+	if (!hasCurrentConsent) {
+		redirect("/parent-consent");
 	}
 
 	return user;

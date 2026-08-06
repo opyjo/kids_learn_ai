@@ -114,8 +114,8 @@ const getExperienceLabel = (experience: string): string => {
 
 const getAvailabilityText = (monday: boolean, wednesday: boolean): string => {
 	if (monday && wednesday) return "Both Mondays & Wednesdays";
-	if (monday) return "Mondays only (Ages 9-10)";
-	if (wednesday) return "Wednesdays only (Ages 11-13)";
+	if (monday) return "Mondays only (September beginner cohort, ages 9-13)";
+	if (wednesday) return "Wednesdays only (continuing Term 2, ages 9-13)";
 	return "Not specified";
 };
 

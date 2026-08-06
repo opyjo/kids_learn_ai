@@ -537,7 +537,7 @@ Take any final questions (via unmute or Zoom chat), then end on a high note. Sta
 |---|---|
 | Trinket won't load | Paste repl.it link in Zoom chat as backup; continue demo |
 | Students can't log in | Paste shared teacher login in Zoom chat; fix accounts after class |
-| Student's internet drops | Continue for the rest of class; DM them the recording/catch-up plan |
+| Student's internet drops | Continue for the rest of class; send the parent the lesson materials and catch-up plan |
 | Your internet drops | Reconnect quickly; students continue working in Trinket independently |
 | Zoom screen share lags | Share just the browser window (not whole screen); reduce video quality |
 | Screen share fails entirely | Paste a direct Trinket link in chat; students follow written steps |

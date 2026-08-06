@@ -3,6 +3,8 @@
 import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { isCheckedConsent, LEGAL_CONSENT_VERSIONS } from "@/lib/legal/consent";
+import { recordLegalConsent } from "@/lib/legal/consent-server";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -23,6 +25,7 @@ export async function createChildAccount(
 		.trim()
 		.toLowerCase();
 	const childPassword = String(formData.get("childPassword") || "");
+	const childConsent = isCheckedConsent(formData.get("childConsent"));
 
 	if (!childName || !username || !childPassword) {
 		return { error: "All fields are required" };
@@ -38,6 +41,12 @@ export async function createChildAccount(
 	}
 	if (childPassword.length < 8) {
 		return { error: "Child password must be at least 8 characters" };
+	}
+	if (!childConsent) {
+		return {
+			error:
+				"Confirm that you authorize this child account and consent to the Privacy Policy.",
+		};
 	}
 
 	const supabase = await getSupabaseServerClient();
@@ -113,6 +122,29 @@ export async function createChildAccount(
 		};
 	}
 
+	const consentResult = await recordLegalConsent(
+		{
+			parentUserId: user.id,
+			subjectUserId: childAccount.user.id,
+			consentType: "child_account",
+			consentVersion: LEGAL_CONSENT_VERSIONS.childAccount,
+			source: "child_account_creation",
+		},
+		admin,
+	);
+
+	if (consentResult.error) {
+		console.error(
+			"Failed to record child account consent:",
+			consentResult.error,
+		);
+		await admin.auth.admin.deleteUser(childAccount.user.id);
+		return {
+			error:
+				"Could not securely record your authorization. No child account was created. Please try again.",
+		};
+	}
+
 	revalidatePath("/family");
 	revalidatePath("/family/setup");
 	redirect(
@@ -130,6 +162,7 @@ export async function setupChildAccount(
 		.toLowerCase();
 	const childPassword = String(formData.get("childPassword") || "");
 	const parentPassword = String(formData.get("parentPassword") || "");
+	const childConsent = isCheckedConsent(formData.get("childConsent"));
 
 	if (!childId || !username || !childPassword || !parentPassword) {
 		return { error: "All fields are required" };
@@ -142,6 +175,12 @@ export async function setupChildAccount(
 	}
 	if (childPassword.length < 8 || parentPassword.length < 8) {
 		return { error: "Both passwords must be at least 8 characters" };
+	}
+	if (!childConsent) {
+		return {
+			error:
+				"Confirm that you authorize this child account and consent to the Privacy Policy.",
+		};
 	}
 	if (childPassword === parentPassword) {
 		return { error: "Use a different password for the child account" };
@@ -185,6 +224,27 @@ export async function setupChildAccount(
 	}
 	if (usernameOwner) {
 		return { error: "That username is already taken. Please choose another." };
+	}
+
+	const consentResult = await recordLegalConsent(
+		{
+			parentUserId: user.id,
+			subjectUserId: childId,
+			consentType: "child_account",
+			consentVersion: LEGAL_CONSENT_VERSIONS.childAccount,
+			source: "child_account_setup",
+		},
+		admin,
+	);
+	if (consentResult.error) {
+		console.error(
+			"Failed to record child account consent:",
+			consentResult.error,
+		);
+		return {
+			error:
+				"Could not securely record your authorization. Please try again before setting the child login.",
+		};
 	}
 
 	const { error: usernameError } = await admin

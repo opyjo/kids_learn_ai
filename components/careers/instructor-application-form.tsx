@@ -424,7 +424,9 @@ export const InstructorApplicationForm = () => {
 										/>
 									</FormControl>
 									<div className="space-y-1 leading-none">
-										<FormLabel>Mondays (Ages 9-10 class)</FormLabel>
+										<FormLabel>
+											Mondays (September beginner cohort, ages 9-13)
+										</FormLabel>
 									</div>
 								</FormItem>
 							)}
@@ -442,7 +444,9 @@ export const InstructorApplicationForm = () => {
 										/>
 									</FormControl>
 									<div className="space-y-1 leading-none">
-										<FormLabel>Wednesdays (Ages 11-13 class)</FormLabel>
+										<FormLabel>
+											Wednesdays (continuing Term 2 cohort, ages 9-13)
+										</FormLabel>
 									</div>
 								</FormItem>
 							)}

@@ -64,10 +64,9 @@ const CTASection = () => {
 							</FadeIn>
 							<FadeIn delay={0.2}>
 								<p className="text-lg lg:text-xl text-primary-foreground/90 mb-8 text-pretty leading-relaxed">
-									Join a thriving community of young learners mastering Python
-									with expert instructors. See if our live classes are the right
-									fit for your child - no commitment required. Ages 9-10 on
-									Mondays, Ages 11-13 on Wednesdays.
+									Reserve a place in our one-hour group trial on Monday, August
+									17. The new beginner cohort welcomes ages 9–13 on Mondays,
+									starting September 14, with only six seats available.
 								</p>
 							</FadeIn>
 							<FadeIn delay={0.3}>
@@ -79,7 +78,7 @@ const CTASection = () => {
 											className="text-lg px-8 py-6 rounded-full shadow-xl hover:scale-105 transition-transform w-full sm:w-auto"
 										>
 											<Sparkles className="mr-2 h-5 w-5" aria-hidden="true" />
-											Book a Free First Class
+											Reserve the August 17 Trial
 										</Button>
 									</Link>
 									<span className="text-primary-foreground/80 text-sm">

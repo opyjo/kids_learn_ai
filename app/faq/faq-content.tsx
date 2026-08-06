@@ -20,12 +20,12 @@ export const FaqContent = () => {
 		{
 			question: "What ages and schedules are available?",
 			answer:
-				"Our current live program serves ages 9-13, with an ages 9-10 cohort on Mondays and an ages 11-13 cohort on Wednesdays. Contact us if you need help choosing the right group.",
+				"The new beginner cohort welcomes ages 9-13 and starts Monday, September 14, 2026. It meets weekly on Mondays with a maximum of six learners. The existing Wednesday group is continuing Term 2 and is not the new beginner intake.",
 		},
 		{
 			question: "How does the free trial work?",
 			answer:
-				"Your child can attend the first live class free with no commitment. If the program is a good fit, the founding rate is a one-time payment of $159.99 CAD for the full 8-10 week program.",
+				"The next free trial is a one-hour live group session on Monday, August 17, 2026. After you book, we confirm the exact time and joining instructions within 24 hours. If the program is a good fit, the founding rate is a one-time payment of $159.99 CAD for the full 8-10 week program.",
 		},
 		{
 			question: "What equipment does my child need?",

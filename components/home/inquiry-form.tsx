@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { getCampaignAttributionForInquiry } from "@/lib/marketing/campaign-attribution-client";
+import { FALL_2026_COHORT } from "@/lib/marketing/cohort-offer";
 
 const inquiryFormSchema = z.object({
 	parentName: z
@@ -228,7 +229,7 @@ export const CourseInquiryForm = () => {
 										<span className="flex items-center gap-2">
 											<span>Ages 9-10</span>
 											<span className="text-muted-foreground text-xs">
-												(Mondays)
+												(Monday beginner cohort)
 											</span>
 										</span>
 									</SelectItem>
@@ -236,7 +237,7 @@ export const CourseInquiryForm = () => {
 										<span className="flex items-center gap-2">
 											<span>Ages 11-13</span>
 											<span className="text-muted-foreground text-xs">
-												(Wednesdays)
+												(Monday beginner cohort)
 											</span>
 										</span>
 									</SelectItem>
@@ -244,9 +245,7 @@ export const CourseInquiryForm = () => {
 							</Select>
 							{selectedAgeGroup && (
 								<FormDescription>
-									{selectedAgeGroup === "9-10"
-										? "📅 Classes are on Mondays"
-										: "📅 Classes are on Wednesdays"}
+									📅 Free trial August 17 · New cohort starts September 14
 								</FormDescription>
 							)}
 							<FormMessage />
@@ -355,7 +354,7 @@ export const CourseInquiryForm = () => {
 					) : (
 						<>
 							<Sparkles className="mr-2 h-5 w-5" />
-							Book My Free First Class
+							Reserve the August 17 Trial
 						</>
 					)}
 				</Button>
@@ -365,8 +364,9 @@ export const CourseInquiryForm = () => {
 					<div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 rounded-lg p-4 text-sm">
 						<p className="font-medium">Thank you for your interest!</p>
 						<p className="mt-1">
-							We've received your inquiry and will contact you within 24 hours
-							to schedule your child's free first class.
+							We've received your request for {FALL_2026_COHORT.trialDate} and
+							will confirm the exact time and joining instructions within 24
+							hours.
 						</p>
 					</div>
 				)}

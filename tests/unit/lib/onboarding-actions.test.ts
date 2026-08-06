@@ -37,6 +37,8 @@ function signupFormData() {
 	formData.set("email", "parent@example.com");
 	formData.set("password", "parent-password");
 	formData.set("confirmPassword", "parent-password");
+	formData.set("guardianConfirmed", "on");
+	formData.set("legalAccepted", "on");
 	return formData;
 }
 
@@ -52,6 +54,7 @@ function childFormData() {
 	formData.set("childName", "Ada Learner");
 	formData.set("username", "Ada-Codes");
 	formData.set("childPassword", "child-password");
+	formData.set("childConsent", "on");
 	return formData;
 }
 
@@ -143,11 +146,34 @@ describe("parent sign-up", () => {
 			email: "parent@example.com",
 			password: "parent-password",
 			options: {
-				data: { full_name: "Grace Parent" },
+				data: {
+					full_name: "Grace Parent",
+					parent_guardian_confirmed: true,
+					terms_version: "2026-08-05",
+					privacy_version: "2026-08-05",
+					parent_consent_version: "2026-08-05",
+				},
 				emailRedirectTo:
 					"https://www.kidslearnai.ca/auth/callback?next=/family/setup",
 			},
 		});
+	});
+
+	it("rejects a parent signup when legal consent is missing", async () => {
+		const formData = signupFormData();
+		formData.delete("legalAccepted");
+		const signUp = vi.fn();
+		vi.mocked(getSupabaseServerClient).mockResolvedValue({
+			auth: { signUp },
+		} as never);
+
+		const result = await signupAction(null, formData);
+
+		expect(result).toEqual({
+			error:
+				"Confirm your parent or guardian status and accept the Terms and Privacy Policy to create an account.",
+		});
+		expect(signUp).not.toHaveBeenCalled();
 	});
 
 	it("sends an already verified parent directly to child setup", async () => {
@@ -266,12 +292,17 @@ describe("trusted child creation", () => {
 			error: null,
 		}));
 		const deleteUser = vi.fn();
+		const consentChain = {
+			upsert: vi.fn(async () => ({ error: null })),
+		};
 		let profilesCall = 0;
 		vi.mocked(getSupabaseAdminClient).mockReturnValue({
 			auth: { admin: { createUser, deleteUser } },
 			from: vi.fn(() => {
 				profilesCall += 1;
-				return profilesCall === 1 ? usernameChain : linkChain;
+				if (profilesCall === 1) return usernameChain;
+				if (profilesCall === 2) return linkChain;
+				return consentChain;
 			}),
 		} as never);
 
@@ -300,6 +331,38 @@ describe("trusted child creation", () => {
 			}),
 		);
 		expect(deleteUser).not.toHaveBeenCalled();
+		expect(consentChain.upsert).toHaveBeenCalledWith(
+			expect.objectContaining({
+				parent_user_id: parentId,
+				subject_user_id: childId,
+				consent_type: "child_account",
+				consent_version: "2026-08-05",
+				source: "child_account_creation",
+			}),
+			expect.objectContaining({ ignoreDuplicates: true }),
+		);
+	});
+
+	it("rejects child creation before any account work when consent is missing", async () => {
+		const formData = childFormData();
+		formData.delete("childConsent");
+		const getUser = vi.fn();
+		const createUser = vi.fn();
+		vi.mocked(getSupabaseServerClient).mockResolvedValue({
+			auth: { getUser },
+		} as never);
+		vi.mocked(getSupabaseAdminClient).mockReturnValue({
+			auth: { admin: { createUser } },
+		} as never);
+
+		const result = await createChildAccount(null, formData);
+
+		expect(result).toEqual({
+			error:
+				"Confirm that you authorize this child account and consent to the Privacy Policy.",
+		});
+		expect(getUser).not.toHaveBeenCalled();
+		expect(createUser).not.toHaveBeenCalled();
 	});
 
 	it("rejects child creation from a student account", async () => {

@@ -127,41 +127,44 @@ _"Turn Python into your personal calculator"_
 
 ### What Students Learn
 
-Students discover that Python is amazing at math. They learn to get information from users with input() and create interactive programs that calculate things.
+Students turn maths into useful programs. They predict before running, build connected models, convert user input into whole and decimal numbers, test expected results, improve tools after peer feedback, and finish with an independently built calculator.
 
 ### Weekly Breakdown
 
-| Week | Topic                  | What We Do                                                        |
-| ---- | ---------------------- | ----------------------------------------------------------------- |
-| 1    | Python Does Math       | Addition, subtraction, multiplication, division with Python.      |
-| 2    | Bigger Math            | Exponents, remainder (modulo), order of operations.               |
-| 3    | Asking Questions       | Use input() to get information from users.                        |
-| 4    | Numbers vs Text        | Converting input to numbers (int). Why it matters.                |
-| 5    | Math Challenges        | Solve fun problems: age calculator, tip calculator, etc.          |
-| 6    | Practice & Debug       | More practice, finding errors, building confidence.               |
-| 7    | Project: My Calculator | Build a personal calculator that asks for numbers and calculates. |
-| 8    | Showcase + Badge!      | Present calculators, earn "Python Beginner" badge!                |
+| Week | Topic                       | What We Do                                                               |
+| ---- | --------------------------- | ------------------------------------------------------------------------ |
+| 1    | Term 1 Skills Relay         | Predict, repair, build, and peer-test a passport using Term 1 skills.    |
+| 2    | Python Does Math            | Build and test a connected model with `+`, `-`, `*`, and `/`.            |
+| 3    | Bigger Math                 | Solve sharing and growth problems with `//`, `%`, `**`, and parentheses. |
+| 4    | Numbers from Users          | Convert `input()` text with `int()` and build a whole-number tool.        |
+| 5    | Decimals & Clean Answers    | Use `float()`, `round()`, and `:.2f` in a tested mini receipt.            |
+| 6    | Math Problem-Solving Lab    | Plan, build, peer-test, and improve one real-world tool.                  |
+| 7    | The Math Bug Clinic         | Reproduce, classify, repair, and verify short debugging cases.           |
+| 8    | Project: My Calculator      | Independently plan, build, test, and polish the term calculator.          |
+| 9    | Showcase + Badge!           | Demonstrate the project and explain design, testing, and improvement.     |
 
 ### Term 2 Project: Personal Calculator
 
 A program that:
 
-- Asks the user for two numbers
+- Asks the user for two whole or decimal numbers
+- Converts the inputs with `float()`
 - Adds, subtracts, multiplies, and divides them
-- Shows all the results nicely
+- Saves and displays clearly formatted results
+- Includes a test record and one peer-driven improvement
 
 **Example Output:**
 
 ```
 Welcome to My Calculator!
-Enter your first number: 15
+Enter your first number: 15.5
 Enter your second number: 4
 
 Here are your results:
-15 + 4 = 19
-15 - 4 = 11
-15 × 4 = 60
-15 ÷ 4 = 3.75
+15.5 + 4 = 19.50
+15.5 - 4 = 11.50
+15.5 × 4 = 62.00
+15.5 ÷ 4 = 3.88
 
 Thanks for calculating with me!
 ```

@@ -1,8 +1,16 @@
-import { AlertCircle, BookOpen, FileText } from "lucide-react";
+import { AlertCircle, BookOpen, ChevronDown, FileText } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+	type AdminCourse,
+	type AdminCourseRelation,
+	getStudentLessonHref,
+	getTeacherNotesHref,
+	groupAdminLessonsByCourse,
+	normalizeAdminCourse,
+} from "@/lib/admin/lesson-catalog";
 import { requireAdmin } from "@/lib/auth-helpers";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -13,358 +21,327 @@ interface TeacherNote {
 	updated_at: string;
 }
 
-interface LessonWithNote {
+interface LessonRow {
 	id: string;
 	title: string;
 	description: string;
 	difficulty_level: string;
 	order_index: number;
 	is_premium: boolean;
-	courses: { slug: string }[] | null;
-	teacher_note: TeacherNote | null;
+	courses: AdminCourseRelation;
+}
+
+interface LessonWithNote {
+	id: string;
+	title: string;
+	description: string;
+	difficulty: string;
+	orderIndex: number;
+	isPremium: boolean;
+	course: AdminCourse | null;
+	teacherNote: TeacherNote | null;
+}
+
+function getDifficultyColor(difficulty: string) {
+	switch (difficulty) {
+		case "beginner":
+			return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
+		case "intermediate":
+			return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
+		case "advanced":
+			return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300";
+		default:
+			return "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300";
+	}
+}
+
+function TeacherNoteCard({ lesson }: Readonly<{ lesson: LessonWithNote }>) {
+	const hasNotes = Boolean(lesson.teacherNote);
+	const studentHref = getStudentLessonHref(
+		lesson.course?.slug,
+		lesson.orderIndex,
+	);
+	const notesHref = getTeacherNotesHref(lesson.course?.slug, lesson.orderIndex);
+
+	return (
+		<Card
+			className={
+				hasNotes
+					? "group relative overflow-hidden border-green-200 bg-green-50/30 transition-colors hover:border-green-400 dark:border-green-800 dark:bg-green-950/20"
+					: "group relative overflow-hidden border-dashed border-orange-200 bg-orange-50/20 transition-colors hover:border-orange-400 dark:border-orange-800/50 dark:bg-orange-950/10"
+			}
+		>
+			<div
+				className={
+					hasNotes
+						? "absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-green-500 to-emerald-500"
+						: "absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-orange-400 to-amber-500"
+				}
+			/>
+
+			<CardContent className="p-3">
+				<div className="flex items-start gap-3">
+					<div className="mt-0.5 shrink-0">
+						<div
+							className={
+								hasNotes
+									? "flex h-8 w-8 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/50"
+									: "flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 dark:bg-orange-900/30"
+							}
+						>
+							{hasNotes ? (
+								<FileText className="h-5 w-5 text-green-600 dark:text-green-400" />
+							) : (
+								<AlertCircle className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+							)}
+						</div>
+					</div>
+
+					<div className="min-w-0 flex-1">
+						<div className="mb-1.5 flex items-start justify-between gap-2">
+							<div>
+								<p className="mb-1 text-xs font-medium text-muted-foreground">
+									{lesson.course?.title ?? "Unassigned lesson"}
+								</p>
+								<h3 className="text-base font-semibold leading-tight text-foreground">
+									Lesson {lesson.orderIndex}: {lesson.title}
+								</h3>
+							</div>
+							<div className="flex shrink-0 items-center gap-1">
+								<Badge
+									variant="outline"
+									className={`px-1.5 py-0 text-xs ${getDifficultyColor(lesson.difficulty)}`}
+								>
+									{lesson.difficulty}
+								</Badge>
+								{lesson.isPremium ? (
+									<Badge
+										variant="outline"
+										className="border-yellow-200 bg-yellow-100 px-1.5 py-0 text-xs text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-500"
+									>
+										Pro
+									</Badge>
+								) : null}
+							</div>
+						</div>
+
+						<p className="mb-3 line-clamp-2 text-sm text-muted-foreground">
+							{lesson.description}
+						</p>
+
+						{lesson.teacherNote ? (
+							<p className="mb-3 text-xs text-muted-foreground">
+								Last updated:{" "}
+								{new Date(lesson.teacherNote.updated_at).toLocaleDateString(
+									"en-CA",
+									{ year: "numeric", month: "long", day: "numeric" },
+								)}
+							</p>
+						) : null}
+
+						<div className="flex flex-wrap items-center justify-between gap-2">
+							<Badge
+								className={
+									hasNotes
+										? "bg-green-100 px-2 py-0 text-xs text-green-700 dark:bg-green-900/50 dark:text-green-300"
+										: "bg-orange-100 px-2 py-0 text-xs text-orange-700 dark:bg-orange-900/50 dark:text-orange-300"
+								}
+							>
+								{hasNotes ? "✓ Has Notes" : "⚠ No Notes"}
+							</Badge>
+
+							<div className="flex items-center gap-2">
+								{hasNotes && notesHref ? (
+									<Button
+										asChild
+										size="sm"
+										className="h-7 rounded-full bg-gradient-to-r from-green-600 to-emerald-600 text-xs hover:opacity-90"
+									>
+										<Link
+											href={notesHref}
+											aria-label={`View teacher notes for ${lesson.course?.title}, lesson ${lesson.orderIndex}: ${lesson.title}`}
+										>
+											View Notes →
+										</Link>
+									</Button>
+								) : null}
+
+								{studentHref ? (
+									<Button
+										variant="outline"
+										asChild
+										size="sm"
+										className="h-7 rounded-full text-xs"
+									>
+										<Link
+											href={studentHref}
+											aria-label={`View student lesson for ${lesson.course?.title}, lesson ${lesson.orderIndex}: ${lesson.title}`}
+										>
+											<BookOpen className="mr-1 h-3 w-3" />
+											Student
+										</Link>
+									</Button>
+								) : (
+									<Button
+										size="sm"
+										disabled
+										className="h-7 rounded-full text-xs"
+									>
+										Course unavailable
+									</Button>
+								)}
+							</div>
+						</div>
+					</div>
+				</div>
+			</CardContent>
+		</Card>
+	);
 }
 
 export default async function TeacherNotesPage() {
 	await requireAdmin();
 	const supabase = await getSupabaseServerClient();
 
-	// Fetch all lessons
-	const { data: lessons } = await supabase
-		.from("lessons")
-		.select(
-			"id, title, description, difficulty_level, order_index, is_premium, courses(slug)",
-		)
-		.order("order_index", { ascending: true });
+	const [lessonsResult, teacherNotesResult] = await Promise.all([
+		supabase
+			.from("lessons")
+			.select(
+				"id, title, description, difficulty_level, order_index, is_premium, courses(id, title, slug, order_index)",
+			),
+		supabase
+			.from("teacher_notes")
+			.select("id, lesson_id, created_at, updated_at"),
+	]);
 
-	// Fetch all teacher notes
-	const { data: teacherNotes } = await supabase
-		.from("teacher_notes")
-		.select("id, lesson_id, created_at, updated_at");
-
-	// Create a map of lesson_id to teacher note
-	const notesMap = new Map();
-	teacherNotes?.forEach((note) => {
-		notesMap.set(note.lesson_id, note);
-	});
-
-	// Add teacher notes to lessons
-	const lessonsWithNotesData = lessons?.map((lesson) => ({
-		...lesson,
-		teacher_note: notesMap.get(lesson.id) || null,
+	const lessonRows = (lessonsResult.data ?? []) as unknown as LessonRow[];
+	const teacherNotes = teacherNotesResult.data ?? [];
+	const notesByLessonId = new Map(
+		teacherNotes.map((note) => [note.lesson_id, note]),
+	);
+	const lessons: LessonWithNote[] = lessonRows.map((lesson) => ({
+		id: lesson.id,
+		title: lesson.title,
+		description: lesson.description,
+		difficulty: lesson.difficulty_level,
+		orderIndex: lesson.order_index,
+		isPremium: lesson.is_premium,
+		course: normalizeAdminCourse(lesson.courses),
+		teacherNote: notesByLessonId.get(lesson.id) ?? null,
 	}));
-
-	const getDifficultyColor = (difficulty: string) => {
-		switch (difficulty) {
-			case "beginner":
-				return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
-			case "intermediate":
-				return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
-			case "advanced":
-				return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300";
-			default:
-				return "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300";
-		}
-	};
-
-	const lessonsWithNotes = lessonsWithNotesData?.filter(
-		(lesson: LessonWithNote) => lesson.teacher_note !== null,
-	);
-	const lessonsWithoutNotes = lessonsWithNotesData?.filter(
-		(lesson: LessonWithNote) => lesson.teacher_note === null,
-	);
+	const lessonGroups = groupAdminLessonsByCourse(lessons);
+	const lessonsWithNotes = lessons.filter(
+		(lesson) => lesson.teacherNote,
+	).length;
+	const coverage = lessons.length
+		? Math.round((lessonsWithNotes / lessons.length) * 100)
+		: 0;
 
 	return (
-		<div className="space-y-3">
-			{/* Page Header */}
-			<div className="mb-3">
-				<div className="mb-3 flex items-start justify-between">
-					<div>
-						<h1 className="mb-1 text-xl font-semibold tracking-tight text-foreground">
-							Teacher Lesson Notes
-						</h1>
-						<p className="text-sm text-muted-foreground">
-							Access teaching guides, lesson plans, and instructional resources
-							for each lesson
-						</p>
-					</div>
+		<div className="space-y-5">
+			<div className="flex items-start justify-between gap-4">
+				<div>
+					<h1 className="mb-1 text-xl font-semibold tracking-tight text-foreground">
+						Teacher Lesson Notes
+					</h1>
+					<p className="text-sm text-muted-foreground">
+						Teaching guides grouped with the exact course and student lesson
+					</p>
+				</div>
 
-					{/* Compact Stats Badge */}
-					<div className="flex items-center gap-3 bg-card dark:bg-card rounded-full px-3 py-2 shadow-sm border border-border">
-						<div className="flex items-center gap-2">
-							<div className="relative w-10 h-10">
-								<svg
-									className="transform -rotate-90 w-10 h-10"
-									role="img"
-									aria-label="Progress indicator showing percentage of lessons with notes"
-								>
-									<circle
-										cx="20"
-										cy="20"
-										r="16"
-										stroke="currentColor"
-										strokeWidth="3"
-										fill="none"
-										className="text-muted"
-									/>
-									<circle
-										cx="20"
-										cy="20"
-										r="16"
-										stroke="currentColor"
-										strokeWidth="3"
-										fill="none"
-										strokeDasharray={`${2 * Math.PI * 16}`}
-										strokeDashoffset={`${
-											2 *
-											Math.PI *
-											16 *
-											(1 -
-												(lessonsWithNotesData?.length
-													? ((lessonsWithNotes?.length || 0) /
-															lessonsWithNotesData.length) *
-														100
-													: 0) /
-													100)
-										}`}
-										className="text-primary transition-all duration-500"
-										strokeLinecap="round"
-									/>
-								</svg>
-								<div className="absolute inset-0 flex items-center justify-center">
-									<span className="text-xs font-bold text-primary">
-										{lessonsWithNotesData?.length
-											? Math.round(
-													((lessonsWithNotes?.length || 0) /
-														lessonsWithNotesData.length) *
-														100,
-												)
-											: 0}
-										%
-									</span>
-								</div>
-							</div>
-							<div className="text-left">
-								<div className="text-xs font-medium text-foreground">
-									{lessonsWithNotes?.length || 0}/
-									{lessonsWithNotesData?.length || 0}
-								</div>
-								<div className="text-xs text-muted-foreground">With Notes</div>
-							</div>
+				<div className="flex items-center gap-3 rounded-full border border-border bg-card px-3 py-2 shadow-sm">
+					<div className="relative h-10 w-10">
+						<svg
+							className="h-10 w-10 -rotate-90 transform"
+							role="img"
+							aria-label={`${coverage}% of lessons have teacher notes`}
+						>
+							<circle
+								cx="20"
+								cy="20"
+								r="16"
+								stroke="currentColor"
+								strokeWidth="3"
+								fill="none"
+								className="text-muted"
+							/>
+							<circle
+								cx="20"
+								cy="20"
+								r="16"
+								stroke="currentColor"
+								strokeWidth="3"
+								fill="none"
+								strokeDasharray={2 * Math.PI * 16}
+								strokeDashoffset={2 * Math.PI * 16 * (1 - coverage / 100)}
+								className="text-primary transition-all duration-500"
+								strokeLinecap="round"
+							/>
+						</svg>
+						<div className="absolute inset-0 flex items-center justify-center">
+							<span className="text-xs font-bold text-primary">
+								{coverage}%
+							</span>
 						</div>
+					</div>
+					<div className="text-left">
+						<div className="text-xs font-medium text-foreground">
+							{lessonsWithNotes}/{lessons.length}
+						</div>
+						<div className="text-xs text-muted-foreground">With Notes</div>
 					</div>
 				</div>
 			</div>
 
-			{/* Lessons with Teacher Notes */}
-			{lessonsWithNotes && lessonsWithNotes.length > 0 && (
-				<>
-					<h2 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
-						<FileText className="h-5 w-5 text-green-600" />
-						Lessons with Teacher Notes
-					</h2>
-					<div className="mb-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
-						{lessonsWithNotes.map((lesson: LessonWithNote) => (
-							<Card
-								key={lesson.id}
-								className="group relative overflow-hidden border-green-200 bg-green-50/30 transition-colors hover:border-green-400 dark:border-green-800 dark:bg-green-950/20"
-							>
-								{/* Gradient Accent Bar */}
-								<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 to-emerald-500" />
+			{lessons.length ? (
+				lessonGroups.map((group, groupIndex) => {
+					const groupNotes = group.lessons.filter(
+						(lesson) => lesson.teacherNote,
+					).length;
 
-								<CardContent className="p-3">
-									<div className="flex items-start gap-3">
-										{/* Status Icon */}
-										<div className="flex-shrink-0 mt-0.5">
-											<div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
-												<FileText className="h-5 w-5 text-green-600 dark:text-green-400" />
-											</div>
-										</div>
+					return (
+						<details
+							key={group.key}
+							open={groupIndex === 0}
+							className="group/course overflow-hidden rounded-xl border border-border bg-card"
+							aria-labelledby={`notes-course-${group.key}`}
+						>
+							<summary className="flex cursor-pointer list-none items-center justify-between gap-3 bg-muted/40 px-4 py-3 transition-colors hover:bg-muted/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset [&::-webkit-details-marker]:hidden">
+								<div>
+									<h2
+										id={`notes-course-${group.key}`}
+										className="text-lg font-semibold text-foreground"
+									>
+										{group.course?.title ?? "Unassigned lessons"}
+									</h2>
+									<p className="text-xs text-muted-foreground">
+										{group.course?.slug ?? "Not attached to a course"}
+									</p>
+								</div>
+								<div className="flex items-center gap-2">
+									<Badge variant="secondary">
+										{groupNotes}/{group.lessons.length} with notes
+									</Badge>
+									<ChevronDown className="h-4 w-4 text-muted-foreground transition-transform group-open/course:rotate-180" />
+								</div>
+							</summary>
 
-										{/* Lesson Content */}
-										<div className="flex-1 min-w-0">
-											<div className="flex items-start justify-between gap-2 mb-1.5">
-												<h3 className="text-base font-semibold text-foreground leading-tight">
-													{lesson.order_index}. {lesson.title}
-												</h3>
-												<div className="flex items-center gap-1 flex-shrink-0">
-													<Badge
-														variant="outline"
-														className={`text-xs px-1.5 py-0 ${getDifficultyColor(
-															lesson.difficulty_level,
-														)}`}
-													>
-														{lesson.difficulty_level}
-													</Badge>
-													{lesson.is_premium && (
-														<Badge
-															variant="outline"
-															className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500"
-														>
-															Pro
-														</Badge>
-													)}
-												</div>
-											</div>
-
-											<p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-												{lesson.description}
-											</p>
-
-											{lesson.teacher_note && (
-												<p className="text-xs text-muted-foreground mb-3">
-													Last updated:{" "}
-													{new Date(
-														lesson.teacher_note.updated_at,
-													).toLocaleDateString("en-CA", {
-														year: "numeric",
-														month: "long",
-														day: "numeric",
-													})}
-												</p>
-											)}
-
-											<div className="flex items-center justify-between gap-2">
-												<Badge className="text-xs px-2 py-0 bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300">
-													✓ Has Notes
-												</Badge>
-
-												{/* Action Buttons */}
-												<div className="flex items-center gap-2">
-													<Button
-														asChild
-														size="sm"
-														className="text-xs h-7 rounded-full bg-gradient-to-r from-green-600 to-emerald-600 hover:opacity-90"
-													>
-														<Link
-															href={`/teacher-notes/${lesson.courses?.[0]?.slug || "term-1-hello-python"}/${lesson.order_index}`}
-															aria-label={`View teacher notes for ${lesson.title}`}
-														>
-															View Notes →
-														</Link>
-													</Button>
-													<Button
-														variant="outline"
-														asChild
-														size="sm"
-														className="text-xs h-7 rounded-full"
-													>
-														<Link
-															href={`/lessons/${lesson.courses?.[0]?.slug || "python-foundations"}/${lesson.order_index}`}
-															aria-label={`View student lesson for ${lesson.title}`}
-														>
-															<BookOpen className="mr-1 h-3 w-3" />
-															Student
-														</Link>
-													</Button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</CardContent>
-							</Card>
-						))}
-					</div>
-				</>
-			)}
-
-			{/* Lessons without Teacher Notes */}
-			{lessonsWithoutNotes && lessonsWithoutNotes.length > 0 && (
-				<>
-					<h2 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-						<AlertCircle className="h-5 w-5 text-orange-600" />
-						Lessons Missing Teacher Notes
-					</h2>
-					<p className="text-sm text-muted-foreground mb-3">
-						These lessons do not have teacher notes yet. Teacher notes need to
-						be added through the backend/database.
-					</p>
-					<div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-						{lessonsWithoutNotes.map((lesson: LessonWithNote) => (
-							<Card
-								key={lesson.id}
-								className="group relative overflow-hidden border-dashed border-orange-200 bg-orange-50/20 transition-colors hover:border-orange-400 dark:border-orange-800/50 dark:bg-orange-950/10"
-							>
-								{/* Gradient Accent Bar */}
-								<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 to-amber-500" />
-
-								<CardContent className="p-3">
-									<div className="flex items-start gap-3">
-										{/* Status Icon */}
-										<div className="flex-shrink-0 mt-0.5">
-											<div className="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-												<AlertCircle className="h-5 w-5 text-orange-600 dark:text-orange-400" />
-											</div>
-										</div>
-
-										{/* Lesson Content */}
-										<div className="flex-1 min-w-0">
-											<div className="flex items-start justify-between gap-2 mb-1.5">
-												<h3 className="text-base font-semibold text-foreground leading-tight">
-													{lesson.order_index}. {lesson.title}
-												</h3>
-												<div className="flex items-center gap-1 flex-shrink-0">
-													<Badge
-														variant="outline"
-														className={`text-xs px-1.5 py-0 ${getDifficultyColor(
-															lesson.difficulty_level,
-														)}`}
-													>
-														{lesson.difficulty_level}
-													</Badge>
-													{lesson.is_premium && (
-														<Badge
-															variant="outline"
-															className="text-xs px-1.5 py-0 bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-500"
-														>
-															Pro
-														</Badge>
-													)}
-												</div>
-											</div>
-
-											<p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-												{lesson.description}
-											</p>
-
-											<div className="flex items-center justify-between gap-2">
-												<Badge className="text-xs px-2 py-0 bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300">
-													⚠ No Notes
-												</Badge>
-
-												{/* Action Button */}
-												<Button
-													variant="outline"
-													asChild
-													size="sm"
-													className="text-xs h-7 rounded-full"
-												>
-													<Link
-														href={`/lessons/${lesson.courses?.[0]?.slug || "python-foundations"}/${lesson.order_index}`}
-														aria-label={`View student lesson for ${lesson.title}`}
-													>
-														<BookOpen className="mr-1 h-3 w-3" />
-														View Student Lesson
-													</Link>
-												</Button>
-											</div>
-										</div>
-									</div>
-								</CardContent>
-							</Card>
-						))}
-					</div>
-				</>
-			)}
-
-			{/* Empty State */}
-			{(!lessonsWithNotesData || lessonsWithNotesData.length === 0) && (
+							<div className="grid grid-cols-1 gap-3 p-3 lg:grid-cols-2">
+								{group.lessons.map((lesson) => (
+									<TeacherNoteCard key={lesson.id} lesson={lesson} />
+								))}
+							</div>
+						</details>
+					);
+				})
+			) : (
 				<Card>
 					<CardContent className="flex flex-col items-center justify-center py-5">
-						<BookOpen className="h-9 w-9 text-muted-foreground mb-3" />
-						<h3 className="text-xl font-semibold mb-2">No Lessons Found</h3>
-						<p className="text-muted-foreground text-center max-w-md">
-							There are no lessons in the system yet. Lessons need to be added
-							through the backend.
+						<BookOpen className="mb-3 h-9 w-9 text-muted-foreground" />
+						<h2 className="mb-2 text-xl font-semibold">No Lessons Found</h2>
+						<p className="max-w-md text-center text-muted-foreground">
+							There are no lessons in the system yet. Sync the curriculum files
+							to add them.
 						</p>
 					</CardContent>
 				</Card>

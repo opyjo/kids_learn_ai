@@ -458,8 +458,8 @@ When your child is ready for the next level:
 
 Life happens! If your child misses a class:
 
-- All sessions are recorded and available within 24 hours
-- Watch the replay before the next class
+- Live classes are not recorded
+- Review the lesson materials before the next class
 - Extra help sessions available if needed
 - No penalty for occasional absences
 
@@ -478,7 +478,7 @@ Life happens! If your child misses a class:
 ### What's Included
 
 - Weekly 60-minute live class
-- Access to recorded sessions
+- Lesson materials and catch-up support
 - Digital learning materials and resources
 - Progress tracking and parent updates
 - Level-completion certificates

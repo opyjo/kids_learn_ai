@@ -1,159 +1,74 @@
 ---
-title: "Project - My Calculator!"
-description: "Build your complete term project - a full-featured calculator using everything you've learned!"
+title: "Project — My Calculator!"
+description: "Plan, build, test, and polish your complete Term 2 calculator without copying a finished solution."
 difficulty: "beginner"
 order_index: 8
 course_slug: "term-2-math-wizard"
 is_premium: false
 requires_trinket: true
 starter_code: |
-  # ================================
+  # ==================================
   # MY CALCULATOR
-  # By: [Your Name]
-  # Term 2 Project
-  # ================================
+  # Builder:
+  # ==================================
 
-  # === WELCOME SCREEN ===
-  print("=" * 40)
-  print("     WELCOME TO MY CALCULATOR!")
-  print("=" * 40)
-  print("")
+  # PLAN
+  # First numeric variable:
+  # Second numeric variable:
+  # Required operations: +  -  *  /
+  # Known limitation:
 
-  # === GET NUMBERS FROM USER ===
-  num1_text = input("Enter your first number: ")
-  num2_text = input("Enter your second number: ")
+  # 1. Welcome and instructions
 
-  # === CONVERT TO NUMBERS ===
-  num1 = int(num1_text)
-  num2 = int(num2_text)
+  # 2. Collect and convert two decimal-capable numbers
 
-  # === DO THE CALCULATIONS ===
-  print("")
-  print("Here are your results:")
-  print("-" * 40)
-  print(num1, "+", num2, "=", num1 + num2)
-  print(num1, "-", num2, "=", num1 - num2)
-  print(num1, "×", num2, "=", num1 * num2)
-  print(num1, "÷", num2, "=", num1 / num2)
-  print("-" * 40)
+  # 3. Calculate and SAVE four results
 
-  # === ENDING ===
-  print("")
-  print("Thanks for using My Calculator!")
-  print("=" * 40)
+  # 4. Display labelled, tidy results
+
+  # 5. Thank the user
 class_activities: |
-  ## 🎮 Activity: Calculator Project Missions — Solo Edition!
+  ## Calculator Project Studio
 
-  Today you build YOUR calculator — all on your own, in YOUR own Trinket!
+  **Plan (8 min):** Complete the project design card and calculate expected answers for the required tests.
 
-  **Mission 1: Plan (10 min)** — Review the requirements and decide what will make YOUR calculator special
+  **Build the core (20 min):** Collect two numbers with `float()`, save the four results in variables, and display labelled answers. Build from the scaffold—not a finished solution.
 
-  **Mission 2: Build (30 min)** — Build your calculator, testing as you go. Stuck? Raise your virtual hand or post in the Zoom chat, and share your screen so your teacher can help!
+  **Test (10 min):** Run the required test matrix and repair one issue at a time.
 
-  **Mission 3: Test & Polish (15 min)** — Test with different numbers, fix any bugs, and add decorations and messages to make it yours
+  **Peer QA (8 min):** A partner uses the calculator, checks one result by hand, and records one strength and one improvement.
 
-  **Mission 4: Final Run (5 min)** — Run your complete program from start to finish and get ready to showcase next week!
+  **Polish (9 min):** Improve instructions, names, formatting, comments, and decimal display.
 
-  Post "Mission 1 Complete! 🚀" (then 2, 3, 4...) in the Zoom chat as you go, so your teacher can follow your progress.
+  **Demo rehearsal (5 min):** Practise a 60-second explanation of one design choice, one test, and one improvement.
 
-  **Bonus Mission:** Add a surprise feature nobody expects — a joke, a secret message, or fancy borders!
+  Optional extensions may use exponents, modulo, or floor division. Do not add menus, `if/else`, or error handling before those concepts are taught.
 take_home_assignment: |
-  ## 📚 Homework: Complete Your Calculator
+  ## Homework: Showcase-Ready Calculator
 
-  **Assignment:** Finish and polish your calculator for the Week 9 showcase!
+  Finish and test the calculator for Lesson 9.
 
-  **Requirements:**
-  1. Welcome message with decorative borders
-  2. Asks user for two numbers using input()
-  3. Converts both to numbers using int()
-  4. Performs all 4 basic operations: +, -, ×, ÷
-  5. Displays all results clearly
-  6. Ending message thanking the user
-  7. NO BUGS - code runs perfectly!
-  8. Add comments explaining each section
+  Required evidence:
 
-  **Bonus Points:**
-  - Add more operations (exponents, modulo)
-  - Ask for the user's name and personalize messages
-  - Add decorative borders and emojis
-   - Create a menu to choose operations
-  - Add error handling for division by zero
+  1. a clear welcome and instructions;
+  2. two numeric inputs converted with `float()`;
+  3. saved results for addition, subtraction, multiplication, and division;
+  4. labelled output with tidy decimal formatting;
+  5. comments separating the program stages;
+  6. a completed test table;
+  7. one improvement based on peer feedback; and
+  8. a written limitation: the second number must not be zero because conditional handling begins in Term 3.
 
-  **Submit:** Share your Trinket link. Be ready to present at the Week 9 Showcase!
+  Prepare a 60-second showcase demonstration. Do not add code you cannot explain.
 ai_activities: |
-  ## 🤖 AI Lab: Is Your Calculator an AI?
+  ## AI Lab: Exact Rules and Predictions Are Different
 
-  ### The big idea
+  A calculator follows exact written rules. The same valid input produces the same correct result. AI systems often make predictions based on patterns, and those predictions can be wrong.
 
-  Your calculator is a smart and useful program, but it is **not an AI system**. It follows exact rules:
-
-  - When it sees `+`, it adds.
-  - When it sees `*`, it multiplies.
-  - The same input always gives the same correct result.
-
-  An AI system usually uses patterns from examples to make a **prediction**. A prediction can be useful, but it can also be wrong.
-
-  ### Compare rules and predictions
-
-  **Calculator rule:**
-
-  ```python
-  first_number = 7
-  second_number = 5
-  answer = first_number + second_number
-  print(answer)
-  ```
-
-  The answer must be `12`.
-
-  **Prediction idea:**
-
-  A learning app notices that a student often practises multiplication after addition. It might predict, “You may want a multiplication challenge next.” That suggestion is based on a pattern, not a guaranteed fact.
-
-  ### Make your calculator explain itself
-
-  Clear output helps a person check the program:
-
-  ```python
-  first_text = input("First number: ")
-  second_text = input("Second number: ")
-
-  first_number = int(first_text)
-  second_number = int(second_text)
-
-  addition_answer = first_number + second_number
-  print(f"I added {first_number} and {second_number}.")
-  print(f"The answer is {addition_answer}.")
-  ```
-
-  This is a simple form of **explanation**. Instead of showing only `12`, the program also shows which numbers and operation it used. AI systems should also give people useful information for checking important results.
-
-  ### Test your complete calculator
-
-  Use this checklist:
-
-  1. Try two positive numbers, such as `8` and `2`.
-  2. Try zero, such as `9` and `0`.
-  3. Try a negative number, such as `-3` and `4`.
-  4. Check each answer by hand.
-  5. Read the labels. Can another person tell which operation was used?
-
-  Be careful with division by zero: Python cannot calculate `9 / 0`. If your calculator includes division, use a non-zero second number until you learn how to handle this special case.
-
-  ### Design a future AI feature
-
-  Imagine one optional AI feature for your calculator. It might suggest a practice problem or explain a math step. Write:
-
-  - What examples would it learn from?
-  - What would it predict or suggest?
-  - How could the user check its answer?
-  - What information should it never collect?
-
-  ### Think like an AI builder
-
-  Exact calculation and AI prediction are different tools. A trustworthy app tells the user which one it is using and makes important answers easy to check.
+  Make the calculator easy to check by showing the numbers, operation, and result. Then imagine one optional future feature that suggests a practice problem. Explain whether that feature uses an exact rule or a prediction and how a user could verify it.
 ---
-# Term 2, Lesson 8: Project - My Calculator! 🧮
+
+# Term 2, Lesson 8: Project — My Calculator! 🧮
 
 **Course:** Term 2: Math Wizard  
 **Duration:** 60 minutes  
@@ -161,309 +76,170 @@ ai_activities: |
 
 ---
 
-## 🎯 What You'll Build Today
+## The Outcome
 
-By the end of this lesson, you will have:
+Today you create the first complete version of your Term 2 project. The lesson gives you requirements, checkpoints, hints, and tests—but not a finished program to copy.
 
-- Built a complete calculator program
-- Used all the skills you've learned this term
-- Created something you can be proud of
-- Prepared for the Week 9 showcase!
+Your calculator will:
 
----
+- ask for two numbers;
+- support decimal input;
+- calculate all four basic operations;
+- save each answer in a variable;
+- display clear, tidy results; and
+- include evidence that you tested it.
 
-## 🤖 Welcome from BrightByte!
+## 1. Plan Before Coding
 
-> _"Hey there, Math Wizard! This is it—your BIG MOMENT! Today, you're going to build your very own calculator program using EVERYTHING you've learned this term! This is your Term 2 project, and I know you're going to create something AMAZING! Let's build something you can show off to your family and friends!"_
+Complete this design card:
 
-### What Is the Term Project?
+| Decision | Your plan |
+| --- | --- |
+| Calculator name | |
+| Welcome message | |
+| First prompt | |
+| Second prompt | |
+| Conversion needed | |
+| Four result variable names | |
+| Decimal display choice | |
+| Known limitation | |
 
-Your term project is a **complete calculator program** that:
-- Welcomes the user
-- Asks for two numbers
-- Performs all four basic operations
-- Displays results clearly
-- Looks polished and professional!
+### Required test predictions
 
-> _BrightByte says: "This is what you've been working toward all term! You've learned all the pieces, and now you're putting them together to build something REAL. I'm so excited to see what you create!"_
+Calculate the expected results by hand:
 
----
+| First | Second | Add | Subtract | Multiply | Divide |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 8 | 2 | | | | |
+| 2.5 | 4 | | | | |
+| -3 | 6 | | | | |
 
-## 📋 Project Requirements
+Do not use zero as the second number because division by zero needs conditional handling, which begins in Term 3.
 
-### Must-Have Features
+## 2. Build in Checkpoints
 
-1. **Welcome Message** — Greet the user with a nice message
-2. **Get Two Numbers** — Ask the user for two numbers using `input()`
-3. **Convert to Numbers** — Use `int()` to convert both inputs
-4. **All Four Operations** — Add, subtract, multiply, and divide
-5. **Display Results** — Show all four results clearly
-6. **Ending Message** — Thank the user
-7. **No Bugs!** — Code must run without errors
-8. **Comments** — Explain what each section does
+Run the program after every checkpoint.
 
-### Bonus Features (Optional)
+### Checkpoint A: Welcome
 
-- Add exponents (`**`) and modulo (`%`)
-- Ask for the user's name and personalize messages
-- Add decorative borders and emojis
-- Create a menu to choose which operation to perform
-- Add error handling (what if user types text instead of numbers?)
+Write a title and one sentence telling the user what the program does. Keep decoration secondary to clarity.
 
----
+### Checkpoint B: Collect and convert
 
-## 🏗️ Step-by-Step Building Guide
+Ask for two numbers that may contain decimals. Use the Lesson 5 conversion that accepts decimal input.
 
-### Step 1: Welcome Screen
-
-Start with a friendly welcome:
+If stuck, reveal this hint only:
 
 ```python
-# ================================
-# MY CALCULATOR
-# By: [Your Name]
-# Term 2 Project
-# ================================
-
-print("=" * 40)
-print("     WELCOME TO MY CALCULATOR!")
-print("=" * 40)
-print("")
+first_number = float(input("First number: "))
 ```
 
-> 💡 **Remember string patterns?** `"=" * 40` repeats the `=` sign 40 times to make a neat border — the same `*` trick you reviewed in Week 1 and first learned in Term 1!
+Write the second line yourself with a matching variable name.
 
-### Step 2: Get Numbers from User
+### Checkpoint C: Calculate and save
 
-Ask for the two numbers:
+Create four clearly named result variables:
 
-```python
-# === GET NUMBERS FROM USER ===
-num1_text = input("Enter your first number: ")
-num2_text = input("Enter your second number: ")
-```
+- addition result;
+- subtraction result;
+- multiplication result; and
+- division result.
 
-### Step 3: Convert to Numbers
+Do not place every expression directly inside `print()`. Saving the results makes the program easier to test and explain.
 
-Convert both inputs to numbers:
+### Checkpoint D: Communicate
 
-```python
-# === CONVERT TO NUMBERS ===
-num1 = int(num1_text)
-num2 = int(num2_text)
-```
+For every result, show:
 
-### Step 4: Do the Calculations
+- the first number;
+- the operation symbol;
+- the second number; and
+- the tidy answer.
 
-Perform all four operations:
+Use f-strings and the formatting skill from Lesson 5.
 
-```python
-# === DO THE CALCULATIONS ===
-print("")
-print("Here are your results:")
-print("-" * 40)
-print(num1, "+", num2, "=", num1 + num2)
-print(num1, "-", num2, "=", num1 - num2)
-print(num1, "×", num2, "=", num1 * num2)
-print(num1, "÷", num2, "=", num1 / num2)
-print("-" * 40)
-```
+### Checkpoint E: Close
 
-### Step 5: Ending Message
+Add a short ending and comments that mark the program stages.
 
-Thank the user:
+## 3. Verify the Core
 
-```python
-# === ENDING ===
-print("")
-print("Thanks for using My Calculator!")
-print("=" * 40)
-```
+Run all three required test rows and record actual results:
 
----
+| Test | Expected matches actual? | Bug or improvement found |
+| --- | --- | --- |
+| 8 and 2 | | |
+| 2.5 and 4 | | |
+| -3 and 6 | | |
 
-## 🎨 Making It Special
+Check each operation by hand. A program running without an error does not prove that the formula is correct.
 
-### Add Personalization
+## 4. Peer Quality Check
 
-Ask for the user's name:
+Exchange calculators. The reviewer must:
 
-```python
-name = input("What's your name? ")
-print("Hello,", name, "! Welcome to My Calculator!")
-```
+1. operate the program without coaching;
+2. use a new pair of non-zero-divisor values;
+3. verify one operation by hand;
+4. check the output labels and decimal display;
+5. identify one strength; and
+6. recommend one specific improvement.
 
-### Add Decorations
+The builder chooses and implements at least one improvement, then reruns the relevant test.
 
-Use emojis and borders:
+## 5. Project Requirements
 
-```python
-print("🧮" * 20)
-print("     WELCOME TO MY CALCULATOR! 🧮")
-print("🧮" * 20)
-```
+### Must have
 
-### Add More Operations
+- [ ] Clear title and instructions
+- [ ] Two `float()` inputs
+- [ ] Four correct operations
+- [ ] Four saved result variables
+- [ ] Labelled f-string output
+- [ ] Tidy decimal formatting
+- [ ] Comments marking stages
+- [ ] Three required tests
+- [ ] One peer-driven revision
+- [ ] Known limitation documented
 
-Include exponents and modulo:
+### Optional extensions using known skills
 
-```python
-print(num1, "**", num2, "=", num1 ** num2)
-print(num1, "%", num2, "=", num1 % num2)
-```
+- [ ] Exponent result
+- [ ] Floor-division result
+- [ ] Remainder result
+- [ ] User's name in the welcome
+- [ ] A fourth test designed by the student
 
----
+Do not add a menu, `if/else`, repeated operation loop, or `try/except` yet. Those are valuable future upgrades after the required concepts are taught.
 
-## 🎮 Complete Example
+## 6. Demo Rehearsal
 
-Here's a complete example to inspire you:
+Prepare a 60-second demonstration:
 
-```python
-# ================================
-# MY CALCULATOR
-# By: Alex
-# Term 2 Project
-# ================================
+1. State what you built.
+2. Run one interesting test.
+3. Explain one choice of variable, type, or formatting.
+4. Describe one bug or improvement from testing.
+5. State the current division-by-zero limitation honestly.
 
-# === WELCOME SCREEN ===
-print("=" * 50)
-print("     🧮 WELCOME TO MY CALCULATOR! 🧮")
-print("=" * 50)
-print("")
+## If You Are Stuck
 
-# === GET USER'S NAME ===
-name = input("What's your name? ")
-print("Hello,", name, "! Let's do some math!")
-print("")
+Use hints in this order:
 
-# === GET NUMBERS FROM USER ===
-num1_text = input("Enter your first number: ")
-num2_text = input("Enter your second number: ")
+1. Check the pipeline: collect → convert → calculate → communicate.
+2. Compare variable spellings.
+3. Check that both inputs use `float()`.
+4. Check the operator on each result line.
+5. Run only the first required test.
+6. Ask a classmate to read the error message aloud with you.
 
-# === CONVERT TO NUMBERS ===
-num1 = int(num1_text)
-num2 = int(num2_text)
+## Exit Ticket
 
-# === DO THE CALCULATIONS ===
-print("")
-print("Here are your results,", name, ":")
-print("-" * 50)
-print(num1, "+", num2, "=", num1 + num2)
-print(num1, "-", num2, "=", num1 - num2)
-print(num1, "×", num2, "=", num1 * num2)
-print(num1, "÷", num2, "=", num1 / num2)
-print("-" * 50)
+Finish both statements:
 
-# === ENDING ===
-print("")
-print("Thanks for using My Calculator,", name, "!")
-print("=" * 50)
-```
+- “My strongest evidence that the calculator works is…”
+- “One limitation or future improvement is…”
 
-**Example Output:**
-```
-==================================================
-     🧮 WELCOME TO MY CALCULATOR! 🧮
-==================================================
+## Next Lesson
 
-What's your name? Sam
-Hello, Sam ! Let's do some math!
-
-Enter your first number: 15
-Enter your second number: 4
-
-Here are your results, Sam :
---------------------------------------------------
-15 + 4 = 19
-15 - 4 = 11
-15 × 4 = 60
-15 ÷ 4 = 3.75
---------------------------------------------------
-
-Thanks for using My Calculator, Sam !
-==================================================
-```
-
----
-
-## 🎯 Testing Your Calculator
-
-### Test Checklist
-
-Before you're done, test your calculator with:
-
-- [ ] Two positive numbers (e.g., 10 and 5)
-- [ ] A big number and a small number (e.g., 100 and 3)
-- [ ] Two small numbers (e.g., 2 and 2)
-- [ ] Different combinations
-
-### What to Check
-
-- Does it ask for both numbers?
-- Does it convert them correctly?
-- Do all four operations work?
-- Are the results displayed clearly?
-- Does it look polished?
-
----
-
-## 📝 Key Takeaways
-
-### What You're Building
-
-- A **complete program** — Not just practice, a real project!
-- Something **useful** — People could actually use this!
-- Something **yours** — Add your personal touches!
-- Something to **show off** — Be proud of it!
-
-### Important Things to Remember
-
-1. **Test as you go** — Don't wait until the end!
-2. **Fix bugs immediately** — Don't let them pile up!
-3. **Make it yours** — Add personal touches!
-4. **Ask for help** — It's okay to need help!
-5. **Be proud** — You're building something real!
-
----
-
-## 🌟 Next Lesson Preview
-
-**Week 9: Showcase Party + Badge! 🎉**
-
-Next week, you'll present your calculator to the class, celebrate your achievements, and earn your "Python Beginner" badge! Get ready to show off your amazing work!
-
----
-
-## 🎉 Great Job!
-
-You just built your term project!
-
-**What you accomplished today:**
-
-- ✅ Built a complete calculator program
-- ✅ Used all the skills you learned this term
-- ✅ Created something you can be proud of
-- ✅ Prepared for the showcase next week!
-
-> _BrightByte says: "WOW! You did it! You built a REAL calculator program! This is something you can show to your family, your friends, everyone! You've come so far this term. Next week, we're going to celebrate all your hard work and you'll earn your badge! I'm so proud of you!"_
-
----
-
-## 📚 Final Tips
-
-Before next week's showcase:
-
-1. **Test your calculator** — Make sure it works perfectly!
-2. **Add personal touches** — Make it yours!
-3. **Practice presenting** — Be ready to show it off!
-4. **Be proud** — You built something amazing!
-
----
-
-_KidsLearnAI - Empowering the Next Generation with AI Education_  
-_www.kidslearnai.ca_  
-_Instagram: @kids_learn_ai_
-
----
-
-_Questions? Stuck on something? Don't worry! Ask your instructor for help. This is your project—make it amazing!_ 🧮
+Next lesson is the showcase. You will demonstrate the project, explain your reasoning, celebrate your progress, and earn the Term 2 badge.

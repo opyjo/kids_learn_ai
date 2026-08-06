@@ -70,6 +70,15 @@ export default function RootLayout({
 						url: absoluteUrl("/"),
 						logo: absoluteUrl("/web-app-manifest-512x512.png"),
 						email: "hello@kidslearnai.ca",
+						telephone: "+1-437-778-5339",
+						address: {
+							"@type": "PostalAddress",
+							streetAddress: "82 Bradbury Road",
+							addressLocality: "Stoney Creek",
+							addressRegion: "ON",
+							postalCode: "L8J 0E4",
+							addressCountry: "CA",
+						},
 						description: SITE_DESCRIPTION,
 						areaServed: "Canada",
 					}}

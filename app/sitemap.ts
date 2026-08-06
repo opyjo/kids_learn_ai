@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { posts } from "@/app/blog/blog-posts";
 import { absoluteUrl } from "@/lib/seo";
+import { storyIssues } from "@/lib/story-club";
 
 const PUBLIC_ROUTES = [
 	"/",
@@ -19,6 +20,7 @@ const PUBLIC_ROUTES = [
 	"/playground",
 	"/pricing",
 	"/privacy",
+	"/stories",
 	"/terms",
 ];
 
@@ -60,5 +62,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		priority: 0.8,
 	}));
 
-	return [...publicPages, ...articles];
+	const stories: MetadataRoute.Sitemap = storyIssues
+		.filter((story) => story.status === "published")
+		.map((story) => ({
+			url: absoluteUrl(`/stories/${story.slug}`),
+			lastModified: new Date(`${story.releaseDate}T00:00:00.000Z`),
+			changeFrequency: "weekly",
+			priority: 0.8,
+		}));
+
+	return [...publicPages, ...articles, ...stories];
 }
