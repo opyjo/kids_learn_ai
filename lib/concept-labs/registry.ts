@@ -9,6 +9,7 @@
  */
 
 import { fixTheBiasLab } from "./labs/fix-the-bias";
+import { handPoseDetectiveLab } from "./labs/hand-pose-detective";
 import { howAiLearnsLab } from "./labs/how-ai-learns";
 import { nextWordGuesserLab } from "./labs/next-word-guesser";
 import { shapeSorterLab } from "./labs/shape-sorter";
@@ -19,6 +20,7 @@ const LABS: ConceptLabDefinition[] = [
 	fixTheBiasLab,
 	shapeSorterLab,
 	nextWordGuesserLab,
+	handPoseDetectiveLab,
 ];
 
 function keyFor(courseSlug: string, orderIndex: number): string {

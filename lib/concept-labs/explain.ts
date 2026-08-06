@@ -30,6 +30,8 @@ export const MISCONCEPTION_HINTS: Record<string, string> = {
 		"the child may believe an AI can only ever learn a small, fixed number of things",
 	"ai-unfixable":
 		"the child may believe a mistrained AI cannot be improved with better examples",
+	"ai-identity-awareness":
+		"the child may believe hand tracking identifies who they are rather than locating visible landmarks",
 };
 
 /** "a Cat or a Dog" / "a Circle, a Square, or a Zigzag". */
@@ -54,6 +56,9 @@ export function openingQuestion(definition: ConceptLabDefinition): string {
 	if (definition.primitive === "next-word-guesser") {
 		return `Nice work teaching the machine your sentences! 🤖 When you gave it a starting word, how do you think it chose which word came next?`;
 	}
+	if (definition.primitive === "hand-pose") {
+		return "Nice exploring! 🤖 What points did the AI mark on the hand, and what could it not know from those points?";
+	}
 	return `Nice work teaching the machine! 🤖 When it saw your new drawing, how do you think it decided whether it was ${listClasses(definition.classes)}?`;
 }
 
@@ -66,6 +71,13 @@ function activityDescription(
 		return {
 			didWhat: `They taught a machine ${stats.trainedSampleCount} sentence(s), then gave it starting words and watched it continue the phrase. They tested it ${stats.testCount} time(s) (${stats.testCorrectCount} sounded right, by their own judgement).`,
 			mechanism: `The machine only counted which word followed which in the sentences it was taught — to continue a phrase it picks the word it saw most often next. It does not understand meaning.`,
+		};
+	}
+	if (definition.primitive === "hand-pose") {
+		return {
+			didWhat: `They used a pre-trained hand-pose model, watched it place landmarks on a visible hand, and captured ${stats.testCount} observation(s).`,
+			mechanism:
+				"The model estimates the positions of visible fingertips, joints and the wrist. A simple distance rule describes the pose. It does not identify the person or know what they are thinking.",
 		};
 	}
 	return {
@@ -116,7 +128,7 @@ export function buildSocraticSystemPrompt(
 		`- If they're close, encourage them to say a little more.`,
 		`- You have about ${remaining} exchange(s) left; if running low, help them put it in their own words.`,
 		``,
-		`SAFETY: You are talking to a child. Stay strictly on this drawing lab. If they go off-topic, gently steer back. Never ask for or repeat personal information.`,
+		`SAFETY: You are talking to a child. Stay strictly on this AI lab. If they go off-topic, gently steer back. Never ask for or repeat personal information.`,
 	].join("\n");
 }
 
@@ -133,11 +145,15 @@ export function buildRubricSystemPrompt(
 	const activity =
 		definition?.primitive === "next-word-guesser"
 			? 'a "guess the next word" language model'
-			: 'a machine-learning "guess the drawing" classifier';
+			: definition?.primitive === "hand-pose"
+				? "a hand-landmark computer-vision model"
+				: 'a machine-learning "guess the drawing" classifier';
 	const target =
 		definition?.primitive === "next-word-guesser"
 			? "the machine picks the next word by counting which words followed which in the sentences it was taught — it only knows the patterns it was shown"
-			: "the machine compares a new drawing to the examples it was taught and only knows what it was shown";
+			: definition?.primitive === "hand-pose"
+				? "the model estimates visible hand landmarks and does not identify the person or know their thoughts"
+				: "the machine compares a new drawing to the examples it was taught and only knows what it was shown";
 	return `You score a child's self-explanation of how ${activity} works, on a 0-2 rubric. Be encouraging but honest.
 0 = restates a misconception (e.g. "the AI just knows", "it thinks like a person") or says nothing relevant.
 1 = partially correct: mentions examples or learning, but vague or incomplete.
@@ -162,9 +178,24 @@ const FALLBACK_QUESTIONS = [
 	"You're so close! What did teaching it more examples change?",
 ];
 
-export function fallbackSocraticReply(childTurnsSoFar: number): string {
-	const index = Math.min(childTurnsSoFar, FALLBACK_QUESTIONS.length - 1);
-	return FALLBACK_QUESTIONS[index];
+const HAND_POSE_FALLBACK_QUESTIONS = [
+	"Which hand points did the model mark on the screen?",
+	"What happened when the hand was not visible to the camera?",
+	"Could those points tell the model your name or what you were thinking?",
+	"How would you explain the difference between tracking a hand and identifying a person?",
+	"You've got it! What does this model see—and what does it not know?",
+];
+
+export function fallbackSocraticReply(
+	childTurnsSoFar: number,
+	primitive?: ConceptLabDefinition["primitive"],
+): string {
+	const questions =
+		primitive === "hand-pose"
+			? HAND_POSE_FALLBACK_QUESTIONS
+			: FALLBACK_QUESTIONS;
+	const index = Math.min(childTurnsSoFar, questions.length - 1);
+	return questions[index];
 }
 
 /** Coerce an arbitrary model value into a valid rubric score, or undefined. */

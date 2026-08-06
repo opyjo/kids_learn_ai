@@ -26,6 +26,10 @@ wired into a real lesson.
   teaches sentences, then watches a bigram model continue phrases greedily —
   with the counts behind each pick shown, so "AI predicts from patterns" is
   visible rather than narrated.
+- **`HandPoseLab`** (`components/concept-labs/hand-pose-lab.tsx`): an opt-in,
+  browser-only ml5 hand-landmark explorer. Camera frames stay on the learner's
+  device, a camera-free demo keeps the lab accessible, and the overlay makes
+  the 21 detected points visible before the child captures an observation.
 - **Phase-machine host** (`concept-lab-host.tsx`): enforces the four-phase loop
   and records a `LabSessionSummary` per attempt, including misconception-tagged
   probe answers.
@@ -41,10 +45,11 @@ wired into a real lesson.
   finishing. The rubric score and full dialogue are captured in the session
   summary.
 - **Authored labs**: `labs/how-ai-learns.ts` for Term 5 Week 4
-  (`term-5-ai-sneak-peek`, order 4), plus three standalone labs (no lesson
+  (`term-5-ai-sneak-peek`, order 4), plus four standalone labs (no lesson
   binding yet): `labs/fix-the-bias.ts` (deliberately build a biased machine,
-  then repair it), `labs/shape-sorter.ts` (three-class classifier), and
-  `labs/next-word-guesser.ts` (bigram language model).
+  then repair it), `labs/shape-sorter.ts` (three-class classifier),
+  `labs/next-word-guesser.ts` (bigram language model), and
+  `labs/hand-pose-detective.ts` (pre-trained computer vision via ml5).
 - **Wiring**: a **Concept Lab** tab appears in the lesson viewer whenever
   `getLabForLesson(courseSlug, orderIndex)` returns a lab.
 

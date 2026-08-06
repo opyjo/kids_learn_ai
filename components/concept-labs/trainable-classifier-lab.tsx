@@ -215,6 +215,7 @@ export function TrainableClassifierLab({
 	}
 
 	function train() {
+		onCanContinueChange(false);
 		onAction({ type: "train", sampleCount: samples.length });
 		setStage("test");
 		setResult(null);
@@ -257,6 +258,7 @@ export function TrainableClassifierLab({
 	}
 
 	function backToTeaching() {
+		onCanContinueChange(false);
 		setStage("teach");
 		setResult(null);
 		setAwaitingVerdict(false);
