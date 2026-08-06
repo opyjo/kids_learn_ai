@@ -11,6 +11,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { DetectiveRankCard } from "@/components/stories/detective-rank-card";
+import { NextCaseCountdown } from "@/components/stories/next-case-countdown";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { publicMetadata } from "@/lib/seo";
@@ -74,6 +76,14 @@ export default function StoriesPage() {
 					</div>
 				</div>
 			</section>
+
+			<section className="py-8 sm:py-10" aria-label="Story Club progress">
+				<DetectiveRankCard />
+			</section>
+
+			<div className="pt-10">
+				<DetectiveRankCard />
+			</div>
 
 			{currentStory ? (
 				<section className="mx-auto max-w-6xl px-4 py-14 sm:py-20">
@@ -192,6 +202,11 @@ export default function StoriesPage() {
 									<Badge variant="outline" className="mt-5 rounded-full">
 										{story.concept}
 									</Badge>
+									<NextCaseCountdown
+										releaseDate={story.releaseDate}
+										title={story.title}
+										className="mt-5"
+									/>
 								</div>
 							</article>
 						))}
@@ -214,7 +229,8 @@ export default function StoriesPage() {
 				{currentStory ? (
 					<Button asChild size="lg" className="mt-7 rounded-full">
 						<Link href={`/stories/${currentStory.slug}`}>
-							Start issue one <ArrowRight className="h-4 w-4" />
+							Start issue {currentStory.issueNumber}{" "}
+							<ArrowRight className="h-4 w-4" />
 						</Link>
 					</Button>
 				) : null}

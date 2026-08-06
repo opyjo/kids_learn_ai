@@ -572,3 +572,60 @@ select:focus-visible {
     line-height: 2.125rem;
   }
 }
+
+/* --- AI Story Club --- */
+@keyframes story-confetti-fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.story-confetti-piece {
+  animation: story-confetti-fall linear forwards;
+}
+
+@keyframes story-stamp-in {
+  0% {
+    transform: rotate(-14deg) scale(2.6);
+    opacity: 0;
+  }
+  60% {
+    transform: rotate(-14deg) scale(0.92);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-14deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.story-stamp {
+  animation: story-stamp-in 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+}
+
+@keyframes story-clue-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(250, 204, 21, 0);
+  }
+}
+
+.story-clue-hint {
+  animation: story-clue-pulse 1.6s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-confetti-piece,
+  .story-stamp,
+  .story-clue-hint {
+    animation: none;
+  }
+}

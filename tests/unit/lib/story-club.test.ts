@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { currentStory, getPublishedStory, storyIssues } from "@/lib/story-club";
+import {
+	currentStory,
+	getPublishedStory,
+	publishedStories,
+	storyIssues,
+} from "@/lib/story-club";
 
 describe("AI Story Club library", () => {
 	it("ships a four-week first season with sequential issues", () => {
@@ -15,5 +20,12 @@ describe("AI Story Club library", () => {
 		expect(currentStory?.panels.length).toBeGreaterThanOrEqual(3);
 		expect(getPublishedStory(currentStory?.slug ?? "")).toBe(currentStory);
 		expect(getPublishedStory("the-video-that-never-happened")).toBeUndefined();
+	});
+
+	it("surfaces the most recent published issue as the current story", () => {
+		const latestIssueNumber = Math.max(
+			...publishedStories.map((story) => story.issueNumber),
+		);
+		expect(currentStory?.issueNumber).toBe(latestIssueNumber);
 	});
 });

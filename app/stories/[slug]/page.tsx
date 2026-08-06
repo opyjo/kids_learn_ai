@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { JsonLd } from "@/components/seo/json-ld";
 import { StoryReader } from "@/components/stories/story-reader";
-import { publicMetadata } from "@/lib/seo";
-import { getPublishedStory, storyIssues } from "@/lib/story-club";
+import {
+	absoluteUrl,
+	ORGANIZATION_AUTHOR,
+	publicMetadata,
+	SITE_NAME,
+} from "@/lib/seo";
+import { getPublishedStory, publishedStories } from "@/lib/story-club";
 
 type StoryPageProps = {
 	params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-	return storyIssues
-		.filter((story) => story.status === "published")
-		.map((story) => ({ slug: story.slug }));
+	return publishedStories.map((story) => ({ slug: story.slug }));
 }
 
 export async function generateMetadata({
@@ -37,6 +41,30 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
 	return (
 		<MainLayout>
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "Article",
+					headline: story.title,
+					description: story.description,
+					image: absoluteUrl(story.coverImage),
+					datePublished: story.releaseDate,
+					isPartOf: {
+						"@type": "CreativeWorkSeries",
+						name: `AI Story Club — ${story.season}`,
+					},
+					author: {
+						"@type": "Organization",
+						name: ORGANIZATION_AUTHOR,
+					},
+					publisher: {
+						"@type": "Organization",
+						name: SITE_NAME,
+						url: absoluteUrl("/"),
+					},
+					mainEntityOfPage: absoluteUrl(`/stories/${story.slug}`),
+				}}
+			/>
 			<StoryReader story={story} />
 		</MainLayout>
 	);

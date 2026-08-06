@@ -15,10 +15,16 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ConfettiBurst } from "@/components/stories/confetti-burst";
+import { NextCaseCountdown } from "@/components/stories/next-case-countdown";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { PublishedStoryIssue } from "@/lib/story-club";
+import { type PublishedStoryIssue, storyIssues } from "@/lib/story-club";
+import {
+	readStoryProgress,
+	writeStoryProgress,
+} from "@/lib/story-club-progress";
 import { cn } from "@/lib/utils";
 
 const speakerStyles = {
@@ -31,19 +37,74 @@ const speakerStyles = {
 export function StoryReader({ story }: { story: PublishedStoryIssue }) {
 	const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
 	const [challengeAnswer, setChallengeAnswer] = useState<string | null>(null);
+	const [foundClueIds, setFoundClueIds] = useState<string[]>([]);
+	const [pixelQuestionId, setPixelQuestionId] = useState<string | null>(null);
+	const [pixelVerdict, setPixelVerdict] = useState<boolean | null>(null);
+	// Only true for a fresh unlock this session, so restored progress
+	// doesn't replay the confetti on every visit.
+	const [celebrating, setCelebrating] = useState(false);
+
+	// Restore after mount so server and first client render stay in sync.
+	useEffect(() => {
+		const saved = readStoryProgress(story.slug);
+		if (
+			saved.choice &&
+			story.choices.some((item) => item.id === saved.choice)
+		) {
+			setSelectedChoice(saved.choice);
+		}
+		if (
+			saved.answer &&
+			story.challenge.options.some((item) => item.id === saved.answer)
+		) {
+			setChallengeAnswer(saved.answer);
+		}
+		if (story.clueHunt && saved.clues) {
+			const validClues = new Set(
+				story.clueHunt.hotspots.map((hotspot) => hotspot.id),
+			);
+			setFoundClueIds(saved.clues.filter((clue) => validClues.has(clue)));
+		}
+	}, [story]);
+
+	useEffect(() => {
+		if (!selectedChoice && !challengeAnswer && foundClueIds.length === 0)
+			return;
+		writeStoryProgress(story.slug, {
+			choice: selectedChoice ?? undefined,
+			answer: challengeAnswer ?? undefined,
+			clues: foundClueIds.length > 0 ? foundClueIds : undefined,
+		});
+	}, [story.slug, selectedChoice, challengeAnswer, foundClueIds]);
 
 	const choice = story.choices.find((item) => item.id === selectedChoice);
 	const challengeOption = story.challenge.options.find(
 		(item) => item.id === challengeAnswer,
 	);
+	const pixelQuestion = story.askPixel?.questions.find(
+		(item) => item.id === pixelQuestionId,
+	);
+	const allCluesFound =
+		story.clueHunt !== undefined &&
+		foundClueIds.length === story.clueHunt.hotspots.length;
+	const pixelVerdictCorrect =
+		pixelVerdict !== null && pixelVerdict === story.askPixel?.verdict.isTrue;
 	const storyProgress = challengeOption?.correct
 		? 100
-		: selectedChoice
+		: challengeOption
 			? 75
-			: 25;
+			: selectedChoice
+				? 50
+				: 25;
+	const nextIssue = storyIssues.find(
+		(issue) =>
+			issue.status === "upcoming" &&
+			issue.issueNumber === story.issueNumber + 1,
+	);
 
 	return (
 		<article className="pb-20">
+			{celebrating && challengeOption?.correct ? <ConfettiBurst /> : null}
 			<header className="border-b border-border/70 bg-[#fff9ec] dark:bg-[#171d2c]">
 				<div className="mx-auto max-w-6xl px-4 pb-12 pt-6 sm:pb-16 sm:pt-10">
 					<Link
@@ -119,7 +180,7 @@ export function StoryReader({ story }: { story: PublishedStoryIssue }) {
 								"h-2.5 rounded-full transition-all",
 								step === 1 || (step === 2 && selectedChoice)
 									? "w-10 bg-indigo-600"
-									: step === 3 && selectedChoice
+									: step === 3 && challengeOption
 										? "w-10 bg-orange-500"
 										: step === 4 && challengeOption?.correct
 											? "w-10 bg-emerald-500"
@@ -188,6 +249,76 @@ export function StoryReader({ story }: { story: PublishedStoryIssue }) {
 					</section>
 				))}
 
+				{story.clueHunt ? (
+					<section className="my-12 overflow-hidden rounded-[2rem] border-2 border-slate-900 bg-slate-950 text-white shadow-[7px_8px_0_0_#facc15] dark:border-slate-100">
+						<div className="p-6 sm:p-9">
+							<p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-yellow-300">
+								Clue hunt
+							</p>
+							<h2 className="mt-2 text-2xl font-black sm:text-3xl">
+								Spot what does not add up
+							</h2>
+							<p className="mt-3 max-w-2xl leading-relaxed text-slate-200">
+								{story.clueHunt.prompt}
+							</p>
+						</div>
+						<div className="relative aspect-[16/9] overflow-hidden border-y border-white/15">
+							<Image
+								src={story.clueHunt.image}
+								alt={story.clueHunt.imageAlt}
+								fill
+								sizes="(max-width: 896px) 100vw, 896px"
+								className="object-cover"
+							/>
+							{story.clueHunt.hotspots.map((hotspot, index) => {
+								const found = foundClueIds.includes(hotspot.id);
+								return (
+									<button
+										key={hotspot.id}
+										type="button"
+										aria-label={`Clue ${index + 1}: ${hotspot.label}`}
+										aria-pressed={found}
+										onClick={() =>
+											setFoundClueIds((current) =>
+												current.includes(hotspot.id)
+													? current
+													: [...current, hotspot.id],
+											)
+										}
+										className={cn(
+											"absolute flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-indigo-600 font-black shadow-lg transition hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-yellow-300 sm:h-12 sm:w-12",
+											found && "story-clue-hint bg-emerald-500",
+										)}
+										style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
+									>
+										{found ? <Check className="h-5 w-5" /> : index + 1}
+									</button>
+								);
+							})}
+						</div>
+						<div className="grid gap-3 p-6 sm:p-9">
+							{story.clueHunt.hotspots
+								.filter((hotspot) => foundClueIds.includes(hotspot.id))
+								.map((hotspot) => (
+									<div key={hotspot.id} className="rounded-2xl bg-white/10 p-4">
+										<p className="font-bold text-yellow-300">{hotspot.label}</p>
+										<p className="mt-1 text-sm leading-6 text-slate-200">
+											{hotspot.feedback}
+										</p>
+									</div>
+								))}
+							{allCluesFound ? (
+								<p
+									className="rounded-2xl bg-emerald-500/20 p-4 font-bold text-emerald-200"
+									role="status"
+								>
+									{story.clueHunt.successMessage}
+								</p>
+							) : null}
+						</div>
+					</section>
+				) : null}
+
 				<section className="my-12 rounded-[2rem] bg-gradient-to-br from-indigo-700 via-violet-700 to-fuchsia-700 p-1 shadow-xl">
 					<div className="rounded-[1.8rem] bg-[#12182a] p-6 text-white sm:p-9">
 						<div className="flex items-start gap-4">
@@ -245,6 +376,9 @@ export function StoryReader({ story }: { story: PublishedStoryIssue }) {
 								</p>
 								<p className="mt-2 leading-relaxed text-slate-100">
 									{choice.feedback}
+								</p>
+								<p className="mt-4 border-t border-white/15 pt-4 leading-relaxed text-white">
+									{choice.bridge}
 								</p>
 							</div>
 						) : null}
@@ -330,7 +464,85 @@ export function StoryReader({ story }: { story: PublishedStoryIssue }) {
 							</div>
 						</section>
 
-						<section className="rounded-[2rem] border border-emerald-300 bg-emerald-50 p-6 dark:border-emerald-800 dark:bg-emerald-950/30 sm:p-9">
+						{story.askPixel ? (
+							<section className="my-12 rounded-[2rem] border-2 border-indigo-300 bg-indigo-50 p-6 dark:border-indigo-800 dark:bg-indigo-950/30 sm:p-9">
+								<p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-indigo-700 dark:text-indigo-300">
+									Ask Pixel
+								</p>
+								<p className="mt-3 leading-relaxed text-muted-foreground">
+									{story.askPixel.intro}
+								</p>
+								<blockquote className="mt-5 rounded-2xl border border-teal-200 bg-white p-5 font-bold text-slate-900 dark:border-teal-900 dark:bg-slate-900 dark:text-white">
+									“{story.askPixel.claim}”
+								</blockquote>
+								<div className="mt-5 flex flex-wrap gap-2">
+									{story.askPixel.questions.map((question) => (
+										<Button
+											key={question.id}
+											type="button"
+											variant="outline"
+											aria-pressed={pixelQuestionId === question.id}
+											onClick={() => setPixelQuestionId(question.id)}
+											className="h-auto min-h-11 whitespace-normal rounded-full"
+										>
+											{question.label}
+										</Button>
+									))}
+								</div>
+								{pixelQuestion ? (
+									<p
+										className="mt-5 rounded-2xl bg-teal-100 p-4 leading-relaxed text-teal-950 dark:bg-teal-950 dark:text-teal-100"
+										aria-live="polite"
+									>
+										<strong>Pixel:</strong> {pixelQuestion.scriptedReply}
+									</p>
+								) : null}
+								<p className="mt-6 font-bold">{story.askPixel.verdictPrompt}</p>
+								<div className="mt-3 flex gap-3">
+									<Button
+										type="button"
+										variant="outline"
+										onClick={() => setPixelVerdict(true)}
+										aria-pressed={pixelVerdict === true}
+									>
+										True
+									</Button>
+									<Button
+										type="button"
+										variant="outline"
+										onClick={() => setPixelVerdict(false)}
+										aria-pressed={pixelVerdict === false}
+									>
+										False
+									</Button>
+								</div>
+								{pixelVerdict !== null ? (
+									<p
+										className={cn(
+											"mt-5 rounded-2xl p-4 font-medium leading-relaxed",
+											pixelVerdictCorrect
+												? "bg-emerald-100 text-emerald-950 dark:bg-emerald-950 dark:text-emerald-100"
+												: "bg-amber-100 text-amber-950 dark:bg-amber-950 dark:text-amber-100",
+										)}
+										role="status"
+									>
+										{pixelVerdictCorrect
+											? story.askPixel.verdict.correctFeedback
+											: story.askPixel.verdict.incorrectFeedback}
+									</p>
+								) : null}
+							</section>
+						) : null}
+
+						<section className="relative rounded-[2rem] border border-emerald-300 bg-emerald-50 p-6 dark:border-emerald-800 dark:bg-emerald-950/30 sm:p-9">
+							{challengeOption?.correct ? (
+								<span
+									aria-hidden="true"
+									className="story-stamp absolute right-5 top-5 z-10 rounded-lg border-4 border-emerald-600 px-3 py-1 font-mono text-base font-black uppercase tracking-widest text-emerald-600 sm:right-9 sm:top-8 sm:text-2xl"
+								>
+									Case closed
+								</span>
+							) : null}
 							<div className="flex items-start gap-4">
 								<div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-600 text-white">
 									<BadgeCheck className="h-6 w-6" aria-hidden="true" />
@@ -353,7 +565,10 @@ export function StoryReader({ story }: { story: PublishedStoryIssue }) {
 									<button
 										key={option.id}
 										type="button"
-										onClick={() => setChallengeAnswer(option.id)}
+										onClick={() => {
+											setChallengeAnswer(option.id);
+											if (option.correct) setCelebrating(true);
+										}}
 										aria-pressed={challengeAnswer === option.id}
 										className={cn(
 											"min-h-12 rounded-2xl border bg-white p-4 text-left text-sm font-bold text-slate-900 transition hover:border-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:bg-slate-900 dark:text-white",
@@ -408,6 +623,15 @@ export function StoryReader({ story }: { story: PublishedStoryIssue }) {
 								<p className="mt-3 max-w-2xl text-lg leading-relaxed text-slate-300">
 									{story.nextIssueTeaser}
 								</p>
+								{nextIssue ? (
+									<div className="mt-5">
+										<NextCaseCountdown
+											releaseDate={nextIssue.releaseDate}
+											title={nextIssue.title}
+											className="border-violet-500 bg-violet-950/60 text-violet-100"
+										/>
+									</div>
+								) : null}
 								<Button
 									asChild
 									className="mt-7 rounded-full bg-yellow-300 text-slate-950 hover:bg-yellow-200"
