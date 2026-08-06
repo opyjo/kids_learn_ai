@@ -183,6 +183,12 @@ const NAV_ITEMS = {
 	],
 	learn: [
 		{
+			href: "/stories",
+			label: "AI Story Club",
+			Icon: BookOpen,
+			description: "A new illustrated AI mystery every week",
+		},
+		{
 			href: "/playground",
 			label: "Playground",
 			Icon: TerminalSquare,

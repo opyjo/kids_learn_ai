@@ -24,6 +24,7 @@ import {
 	QuickChecksCard,
 } from "@/components/dashboard/quick-checks-card";
 import { RecentFeedbackCard } from "@/components/dashboard/recent-feedback-card";
+import { WeeklyStoryCard } from "@/components/dashboard/weekly-story-card";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -440,6 +441,9 @@ export default async function DashboardPage() {
 						</CardContent>
 					</Card>
 				)}
+
+				{/* A fresh, low-pressure AI literacy adventure every Thursday */}
+				<WeeklyStoryCard />
 
 				{/* Next Class + Continue Learning */}
 				{(nextClasses.length > 0 || continueLesson) && (

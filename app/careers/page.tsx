@@ -91,7 +91,7 @@ export default function CareersPage() {
 									<Users className="h-5 w-5 text-primary mx-auto mb-2" />
 									<p className="text-sm font-medium">Small Classes</p>
 									<p className="text-xs text-muted-foreground">
-										5-10 students max
+										6 students max
 									</p>
 								</div>
 							</div>
@@ -115,17 +115,21 @@ export default function CareersPage() {
 							<div className="grid sm:grid-cols-2 gap-4">
 								<div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
 									<p className="font-semibold text-lg">Mondays</p>
-									<p className="text-muted-foreground">Ages 9-10 class</p>
+									<p className="text-muted-foreground">
+										September beginner cohort, ages 9-13
+									</p>
 									<p className="text-sm text-primary mt-2">Weekly session</p>
 								</div>
 								<div className="bg-accent/5 rounded-xl p-4 border border-accent/20">
 									<p className="font-semibold text-lg">Wednesdays</p>
-									<p className="text-muted-foreground">Ages 11-13 class</p>
+									<p className="text-muted-foreground">
+										Continuing Term 2 cohort, ages 9-13
+									</p>
 									<p className="text-sm text-accent mt-2">Weekly session</p>
 								</div>
 							</div>
 							<p className="text-sm text-muted-foreground mt-4">
-								You can teach one or both age groups based on your availability.
+								You can support one or both cohorts based on your availability.
 							</p>
 						</CardContent>
 					</Card>
