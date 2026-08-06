@@ -6,6 +6,7 @@ import Hero from "@/components/home/Hero";
 import HowItWorksSection from "@/components/home/HowItWorksSection";
 import InteractiveCodeEditor from "@/components/home/InteractiveCodeEditor";
 import StatsSection from "@/components/home/StatsSection";
+import StoryClubSpotlight from "@/components/home/StoryClubSpotlight";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import { MainLayout } from "@/components/layouts/main-layout";
 import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
@@ -22,6 +23,7 @@ const HomePage = () => {
 		<MainLayout>
 			<Hero />
 			<HowItWorksSection />
+			<StoryClubSpotlight />
 			<InteractiveCodeEditor />
 			<StatsSection />
 			<CurriculumPathSection />
