@@ -25,7 +25,7 @@ const explainRateLimiter = createRateLimiter({
 
 /** A gentle nudge back on-topic if the child's message trips the safety check. */
 const STEER_BACK =
-	"Let's keep talking about your drawing lab! 🤖 What did the machine look at to make its guess?";
+	"Let's keep talking about your AI lab! 🤖 What patterns or points did the machine use?";
 
 const MODERATION_JSON_SCHEMA = {
 	type: "object",
@@ -182,7 +182,7 @@ async function handleReply(body: {
 	const content =
 		raw && checkKidChatSafety(raw).isSafe
 			? raw
-			: fallbackSocraticReply(childTurns);
+			: fallbackSocraticReply(childTurns, definition.primitive);
 
 	return NextResponse.json({
 		role: "assistant",

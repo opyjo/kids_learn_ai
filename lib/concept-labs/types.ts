@@ -91,7 +91,10 @@ export type LabAction =
 	| { type: "reset" };
 
 /** The simulation primitives available to authored labs. */
-export type LabPrimitive = "trainable-classifier" | "next-word-guesser";
+export type LabPrimitive =
+	| "trainable-classifier"
+	| "next-word-guesser"
+	| "hand-pose";
 
 /**
  * A fully-authored lab. Curriculum authors describe a lab as data; the host

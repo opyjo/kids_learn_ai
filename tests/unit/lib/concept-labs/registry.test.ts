@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { allLabs, getLabForLesson } from "@/lib/concept-labs/registry";
+import {
+	allLabs,
+	getLabById,
+	getLabForLesson,
+} from "@/lib/concept-labs/registry";
 
 describe("concept lab registry", () => {
 	it("finds the How AI Learns lab for Term 5 Week 4", () => {
@@ -16,6 +20,10 @@ describe("concept lab registry", () => {
 	it("returns null when course slug or order index is missing", () => {
 		expect(getLabForLesson(undefined, 4)).toBeNull();
 		expect(getLabForLesson("term-5-ai-sneak-peek", undefined)).toBeNull();
+	});
+
+	it("registers the standalone hand-pose pilot", () => {
+		expect(getLabById("hand-pose-detective-v1")?.primitive).toBe("hand-pose");
 	});
 
 	it("keeps every authored probe well-formed", () => {

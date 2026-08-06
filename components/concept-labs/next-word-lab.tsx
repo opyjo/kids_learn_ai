@@ -83,6 +83,7 @@ export function NextWordLab({
 	}
 
 	function train() {
+		onCanContinueChange(false);
 		onAction({ type: "train", sampleCount: sentences.length });
 		setStage("test");
 		setPhrase(null);
@@ -116,6 +117,7 @@ export function NextWordLab({
 	}
 
 	function backToTeaching() {
+		onCanContinueChange(false);
 		setStage("teach");
 		setPhrase(null);
 		setStartWord(null);
