@@ -47,6 +47,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { UserMenu } from "@/components/user/user-menu";
+import { CAREERS_OPEN } from "@/lib/careers";
 import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
@@ -234,12 +235,16 @@ const NAV_ITEMS = {
 			Icon: ExternalLink,
 			description: "Access Trinket online",
 		},
-		{
-			href: "/careers",
-			label: "Become an Instructor",
-			Icon: GraduationCap,
-			description: "Join our teaching team",
-		},
+		...(CAREERS_OPEN
+			? [
+					{
+						href: "/careers",
+						label: "Become an Instructor",
+						Icon: GraduationCap,
+						description: "Join our teaching team",
+					},
+				]
+			: []),
 	],
 	// Signed-in students only: appended to "Tools & Activities" once we know the
 	// visitor is authenticated, so nobody is sent to a login wall from the menu.

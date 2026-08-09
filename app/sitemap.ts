@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { posts } from "@/app/blog/blog-posts";
+import { CAREERS_OPEN } from "@/lib/careers";
 import { absoluteUrl } from "@/lib/seo";
 import { storyIssues } from "@/lib/story-club";
 
@@ -7,8 +8,7 @@ const PUBLIC_ROUTES = [
 	"/",
 	"/about",
 	"/blog",
-	"/careers",
-	"/careers/apply",
+	...(CAREERS_OPEN ? ["/careers", "/careers/apply"] : []),
 	"/contact",
 	"/faq",
 	"/games",
