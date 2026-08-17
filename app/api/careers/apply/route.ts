@@ -18,7 +18,6 @@ const resumeSchema = z.object({
 });
 
 const applicationSchema = z.object({
-	role: z.enum(["coding_instructor", "vfc_intern"]),
 	fullName: z
 		.string()
 		.trim()
@@ -49,18 +48,12 @@ const applicationSchema = z.object({
 		.min(1, "Please tell us why you're interested")
 		.min(20, "Please provide a bit more detail")
 		.max(1000, "Response must not exceed 1000 characters"),
-	availableMonday: z.boolean().default(false),
-	availableWednesday: z.boolean().default(false),
-	// Required only when role is "vfc_intern"; enforced below since eligibility
-	// only applies to the VFC-funded role.
-	citizenshipStatus: z
-		.enum([
-			"citizen",
-			"permanent_resident",
-			"protected_refugee",
-			"none_of_above",
-		])
-		.optional(),
+	citizenshipStatus: z.enum([
+		"citizen",
+		"permanent_resident",
+		"protected_refugee",
+		"none_of_above",
+	]),
 	isAtLeast18: z.boolean().default(false),
 	canCommitWeekdays: z.boolean().default(false),
 	linkedinUrl: z.string().trim().url().optional().or(z.literal("")),
@@ -126,18 +119,6 @@ const getExperienceLabel = (experience: string): string => {
 	}
 };
 
-const getAvailabilityText = (monday: boolean, wednesday: boolean): string => {
-	if (monday && wednesday) return "Both Mondays & Wednesdays";
-	if (monday) return "Mondays only (September beginner cohort, ages 9-13)";
-	if (wednesday) return "Wednesdays only (continuing Term 2, ages 9-13)";
-	return "Not specified";
-};
-
-const getRoleLabel = (role: "coding_instructor" | "vfc_intern"): string =>
-	role === "vfc_intern"
-		? "Curriculum & Content Support / Instructor Intern (VFC-funded)"
-		: "Coding Instructor";
-
 const getCitizenshipLabel = (status: string | undefined): string => {
 	switch (status) {
 		case "citizen":
@@ -187,47 +168,27 @@ export const POST = async (request: NextRequest) => {
 		const body = await request.json();
 		const validatedData = applicationSchema.parse(body);
 
-		if (validatedData.role === "coding_instructor") {
-			if (!validatedData.availableMonday && !validatedData.availableWednesday) {
-				return NextResponse.json(
-					{
-						error: "Please select at least one day you're available to teach",
-					},
-					{ status: 400 },
-				);
-			}
+		if (!validatedData.citizenshipStatus) {
+			return NextResponse.json(
+				{ error: "Please select your citizenship/immigration status" },
+				{ status: 400 },
+			);
+		}
+		if (!validatedData.isAtLeast18) {
+			return NextResponse.json(
+				{ error: "You must be at least 18 years old for this role" },
+				{ status: 400 },
+			);
+		}
+		if (!validatedData.canCommitWeekdays) {
+			return NextResponse.json(
+				{ error: "Please confirm you can commit to the Mon–Fri schedule" },
+				{ status: 400 },
+			);
 		}
 
-		if (validatedData.role === "vfc_intern") {
-			if (!validatedData.citizenshipStatus) {
-				return NextResponse.json(
-					{ error: "Please select your citizenship/immigration status" },
-					{ status: 400 },
-				);
-			}
-			if (!validatedData.isAtLeast18) {
-				return NextResponse.json(
-					{ error: "You must be at least 18 years old for this role" },
-					{ status: 400 },
-				);
-			}
-			if (!validatedData.canCommitWeekdays) {
-				return NextResponse.json(
-					{
-						error: "Please confirm you can commit to the Mon–Fri schedule",
-					},
-					{ status: 400 },
-				);
-			}
-		}
-
-		const roleLabel = getRoleLabel(validatedData.role);
 		const yearLabel = getYearLabel(validatedData.yearOfStudy);
 		const experienceLabel = getExperienceLabel(validatedData.pythonExperience);
-		const availabilityText = getAvailabilityText(
-			validatedData.availableMonday,
-			validatedData.availableWednesday,
-		);
 
 		// Prepare attachments if resume is provided
 		const attachments = validatedData.resume
@@ -244,14 +205,11 @@ export const POST = async (request: NextRequest) => {
 			from: "Kids Learn AI <hello@kidslearnai.ca>",
 			to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
 			replyTo: validatedData.email,
-			subject:
-				validatedData.role === "vfc_intern"
-					? `🎓 VFC Intern Application: ${validatedData.fullName} (${validatedData.university})${
-							validatedData.citizenshipStatus === "none_of_above"
-								? " ⚠️ not VFC-eligible"
-								: ""
-						}`
-					: `👨‍🏫 Instructor Application: ${validatedData.fullName} (${validatedData.university})`,
+			subject: `🎓 VFC Intern Application: ${validatedData.fullName} (${validatedData.university})${
+				validatedData.citizenshipStatus === "none_of_above"
+					? " ⚠️ not VFC-eligible"
+					: ""
+			}`,
 			attachments,
 			html: `
         <!DOCTYPE html>
@@ -353,9 +311,9 @@ export const POST = async (request: NextRequest) => {
           </head>
           <body>
             <div class="header">
-              <div class="badge">${validatedData.role === "vfc_intern" ? "🎓 VFC INTERN APPLICATION" : "📋 INSTRUCTOR APPLICATION"}</div>
+              <div class="badge">🎓 VFC INTERN APPLICATION</div>
               <h1 style="margin: 0; font-size: 24px;">New Application</h1>
-              <p style="margin: 10px 0 0 0; opacity: 0.9;">Applying for: ${roleLabel}</p>
+              <p style="margin: 10px 0 0 0; opacity: 0.9;">Curriculum & Content Support / Instructor Intern (VFC-funded)</p>
             </div>
             <div class="content">
               <!-- Applicant Info -->
@@ -427,17 +385,12 @@ export const POST = async (request: NextRequest) => {
               <div class="availability-box">
                 <div style="font-size: 14px; color: #065f46; margin-bottom: 5px;">📅 Availability</div>
                 <div style="font-size: 20px; font-weight: 700; color: #047857;">${
-									validatedData.role === "vfc_intern"
-										? validatedData.canCommitWeekdays
-											? "Confirmed: ~10 hrs/week, Mon–Fri"
-											: "Not confirmed"
-										: availabilityText
+									validatedData.canCommitWeekdays
+										? "Confirmed: ~10 hrs/week, Mon–Fri"
+										: "Not confirmed"
 								}</div>
               </div>
 
-              ${
-								validatedData.role === "vfc_intern"
-									? `
               <!-- VFC Eligibility -->
               <div class="section" style="${validatedData.citizenshipStatus === "none_of_above" ? "background: #fef2f2; border-color: #ef4444;" : ""}">
                 <div class="section-title">🇨🇦 VFC Eligibility</div>
@@ -455,9 +408,6 @@ export const POST = async (request: NextRequest) => {
 										: ""
 								}
               </div>
-              `
-									: ""
-							}
 
               <!-- Why Interested -->
               <div class="section">
@@ -484,7 +434,7 @@ export const POST = async (request: NextRequest) => {
 
               <!-- Action -->
               <div style="text-align: center; margin-top: 20px;">
-                <a href="mailto:${validatedData.email}?subject=Your Instructor Application at Kids Learn AI&body=Hi ${validatedData.fullName},%0D%0A%0D%0AThank you for applying to be an instructor at Kids Learn AI!%0D%0A%0D%0A" class="action-btn">
+                <a href="mailto:${validatedData.email}?subject=Your Internship Application at Kids Learn AI&body=Hi ${validatedData.fullName},%0D%0A%0D%0AThank you for applying to the Instructor Intern role at Kids Learn AI!%0D%0A%0D%0A" class="action-btn">
                   Reply to ${validatedData.fullName}
                 </a>
               </div>
