@@ -1,11 +1,14 @@
 import { withSentryConfig } from "@sentry/nextjs";
 
+const careersOpen =
+	process.env.NEXT_PUBLIC_CAREERS_OPEN?.toLowerCase() === "true";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	// Empty turbopack config to silence the warning
 	turbopack: {},
 	async redirects() {
-		return [
+		const redirects = [
 			{
 				source: "/:path*",
 				has: [{ type: "host", value: "kidslearnai.ca" }],
@@ -13,6 +16,16 @@ const nextConfig = {
 				permanent: true,
 			},
 		];
+
+		if (!careersOpen) {
+			redirects.push({
+				source: "/careers/apply",
+				destination: "/careers",
+				permanent: false,
+			});
+		}
+
+		return redirects;
 	},
 	async headers() {
 		const privateRoutes = [

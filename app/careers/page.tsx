@@ -20,16 +20,65 @@ import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { CAREERS_OPEN } from "@/lib/careers";
 import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = publicMetadata({
-	title: "Careers: Coding Instructor — Kids Learn AI",
-	description:
-		"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
-	path: "/careers",
-});
+export const metadata: Metadata = CAREERS_OPEN
+	? publicMetadata({
+			title: "Careers: Coding Instructor — Kids Learn AI",
+			description:
+				"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
+			path: "/careers",
+		})
+	: publicMetadata({
+			title: "Careers — Kids Learn AI",
+			description:
+				"Kids Learn AI is not currently accepting instructor applications.",
+			path: "/careers",
+			noIndex: true,
+		});
+
+function CareersClosedPage() {
+	return (
+		<div className="min-h-screen bg-linear-to-br from-primary/5 via-accent/5 to-secondary/10">
+			<SiteHeader />
+
+			<main className="container mx-auto px-4 py-16 lg:py-24">
+				<Card className="mx-auto max-w-2xl border-primary/20 shadow-lg">
+					<CardContent className="p-8 text-center sm:p-12">
+						<Badge className="mb-5 rounded-full border-primary/20 bg-primary/10 px-4 py-2 text-primary">
+							Recruitment paused
+						</Badge>
+						<h1 className="mb-4 text-3xl font-bold sm:text-4xl">
+							We’re not currently hiring
+						</h1>
+						<p className="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
+							Thank you for your interest in Kids Learn AI. Instructor
+							applications are closed for now. Please check back here when we
+							reopen recruitment.
+						</p>
+						<div className="flex flex-col justify-center gap-3 sm:flex-row">
+							<Button asChild>
+								<Link href="/">Return home</Link>
+							</Button>
+							<Button asChild variant="outline">
+								<Link href="/contact">Contact us</Link>
+							</Button>
+						</div>
+					</CardContent>
+				</Card>
+			</main>
+
+			<Footer />
+		</div>
+	);
+}
 
 export default function CareersPage() {
+	if (!CAREERS_OPEN) {
+		return <CareersClosedPage />;
+	}
+
 	return (
 		<div className="min-h-screen bg-linear-to-br from-primary/5 via-accent/5 to-secondary/10">
 			<SiteHeader />
