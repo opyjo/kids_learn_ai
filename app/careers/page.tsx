@@ -4,14 +4,12 @@ import {
 	Calendar,
 	CheckCircle,
 	Clock,
-	Code,
 	DollarSign,
 	GraduationCap,
 	Heart,
 	Laptop,
 	MessageSquare,
 	Sparkles,
-	Star,
 	Users,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -26,9 +24,9 @@ import { publicMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = CAREERS_OPEN
 	? publicMetadata({
-			title: "Careers: Coding Instructor — Kids Learn AI",
+			title: "Careers: Instructor Intern — Kids Learn AI",
 			description:
-				"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
+				"Join us as a VFC-funded Curriculum & Content Support / Instructor Intern. Build lesson materials and lead live Python and AI classes for kids aged 9-13.",
 			path: "/careers",
 		})
 	: publicMetadata({
@@ -150,19 +148,25 @@ export default function CareersPage() {
 								</div>
 							</div>
 
+							<p className="text-xs text-muted-foreground mb-6">
+								Compensation is contingent on approved Venture for Canada
+								funding for this placement.
+							</p>
+
 							<p className="text-muted-foreground leading-relaxed mb-6">
 								Build and refine Python/AI lesson materials for our live K-12
 								education program — designing exercises, prototyping engaging
 								ways to teach coding concepts, and developing content for new
-								course terms and competition-prep tracks. You'll also lead one
-								weekly live class (~2 hrs/week) to test and iterate on the
-								material you build.
+								course terms and competition-prep tracks. You'll also lead our
+								two weekly live classes (~4 hrs/week): the new Monday beginner
+								cohort and the continuing Wednesday Term 2 cohort, both
+								co-supervised by our founder.
 							</p>
 
 							<h3 className="font-semibold mb-3">Weekly Schedule</h3>
 							<div className="grid grid-cols-5 gap-2 sm:gap-3 mb-6">
 								{[
-									{ day: "Mon", focus: "Curriculum" },
+									{ day: "Mon", focus: "Live class" },
 									{ day: "Tue", focus: "Curriculum" },
 									{ day: "Wed", focus: "Live class" },
 									{ day: "Thu", focus: "Curriculum" },
@@ -197,81 +201,6 @@ export default function CareersPage() {
 						</CardContent>
 					</Card>
 
-					{/* Position Overview */}
-					<Card>
-						<CardContent className="p-6 lg:p-8">
-							<div className="flex items-center gap-3 mb-6">
-								<div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-									<GraduationCap className="h-6 w-6 text-primary" />
-								</div>
-								<div>
-									<h2 className="text-2xl font-bold">Coding Instructor</h2>
-									<p className="text-muted-foreground">Part-time • Remote</p>
-								</div>
-							</div>
-
-							<div className="grid sm:grid-cols-3 gap-4 mb-6">
-								<div className="bg-secondary/50 rounded-lg p-4 text-center">
-									<Clock className="h-5 w-5 text-primary mx-auto mb-2" />
-									<p className="text-sm font-medium">Flexible Hours</p>
-									<p className="text-xs text-muted-foreground">
-										Tue &/or Thu evenings
-									</p>
-								</div>
-								<div className="bg-secondary/50 rounded-lg p-4 text-center">
-									<Laptop className="h-5 w-5 text-primary mx-auto mb-2" />
-									<p className="text-sm font-medium">Fully Remote</p>
-									<p className="text-xs text-muted-foreground">
-										Teach from anywhere
-									</p>
-								</div>
-								<div className="bg-secondary/50 rounded-lg p-4 text-center">
-									<Users className="h-5 w-5 text-primary mx-auto mb-2" />
-									<p className="text-sm font-medium">Small Classes</p>
-									<p className="text-xs text-muted-foreground">
-										6 students max
-									</p>
-								</div>
-							</div>
-
-							<p className="text-muted-foreground leading-relaxed">
-								We're looking for enthusiastic university students to lead our
-								live Python and AI classes for kids. You'll guide young learners
-								through interactive coding lessons, help them build real
-								projects, and inspire the next generation of tech creators.
-							</p>
-						</CardContent>
-					</Card>
-
-					{/* Schedule */}
-					<Card>
-						<CardContent className="p-6 lg:p-8">
-							<h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-								<Calendar className="h-5 w-5 text-primary" />
-								Class Schedule
-							</h3>
-							<div className="grid sm:grid-cols-2 gap-4">
-								<div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
-									<p className="font-semibold text-lg">Mondays</p>
-									<p className="text-muted-foreground">
-										September beginner cohort, ages 9-13
-									</p>
-									<p className="text-sm text-primary mt-2">Weekly session</p>
-								</div>
-								<div className="bg-accent/5 rounded-xl p-4 border border-accent/20">
-									<p className="font-semibold text-lg">Wednesdays</p>
-									<p className="text-muted-foreground">
-										Continuing Term 2 cohort, ages 9-13
-									</p>
-									<p className="text-sm text-accent mt-2">Weekly session</p>
-								</div>
-							</div>
-							<p className="text-sm text-muted-foreground mt-4">
-								You can support one or both cohorts based on your availability.
-							</p>
-						</CardContent>
-					</Card>
-
 					{/* Responsibilities */}
 					<Card>
 						<CardContent className="p-6 lg:p-8">
@@ -295,51 +224,6 @@ export default function CareersPage() {
 									</li>
 								))}
 							</ul>
-						</CardContent>
-					</Card>
-
-					{/* Requirements */}
-					<Card>
-						<CardContent className="p-6 lg:p-8">
-							<h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-								<Code className="h-5 w-5 text-primary" />
-								Requirements
-							</h3>
-							<div className="space-y-4">
-								<div>
-									<h4 className="font-semibold mb-2">Must Have:</h4>
-									<ul className="space-y-2">
-										{[
-											"Currently enrolled in a STEM program at a university/college",
-											"Strong Python programming skills",
-											"Excellent communication skills in English",
-											"Reliable internet connection and quiet workspace",
-											"Passion for teaching and working with children",
-											"Available for at least one 8-10 week cohort",
-										].map((item) => (
-											<li key={item} className="flex items-start gap-3">
-												<CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-												<span>{item}</span>
-											</li>
-										))}
-									</ul>
-								</div>
-								<div>
-									<h4 className="font-semibold mb-2">Nice to Have:</h4>
-									<ul className="space-y-2 text-muted-foreground">
-										{[
-											"Previous tutoring or teaching experience",
-											"Experience with AI/ML concepts",
-											"Background working with children (camps, volunteering, etc.)",
-										].map((item) => (
-											<li key={item} className="flex items-start gap-3">
-												<Star className="h-5 w-5 text-yellow-500 shrink-0 mt-0.5" />
-												<span>{item}</span>
-											</li>
-										))}
-									</ul>
-								</div>
-							</div>
 						</CardContent>
 					</Card>
 
@@ -398,13 +282,6 @@ export default function CareersPage() {
 										</div>
 									</div>
 								))}
-							</div>
-							<div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
-								<p className="text-sm">
-									<strong>Compensation:</strong> Competitive rates discussed
-									during the interview process based on experience and
-									availability.
-								</p>
 							</div>
 						</CardContent>
 					</Card>

@@ -35,9 +35,6 @@ const ACCEPTED_FILE_TYPES = [
 ];
 
 const applicationFormSchema = z.object({
-	role: z.enum(["coding_instructor", "vfc_intern"], {
-		required_error: "Please select which position you're applying for",
-	}),
 	fullName: z
 		.string()
 		.trim()
@@ -72,18 +69,10 @@ const applicationFormSchema = z.object({
 		.min(1, "Please tell us why you're interested")
 		.min(20, "Please provide a bit more detail (at least 20 characters)")
 		.max(1000, "Response must not exceed 1000 characters"),
-	availableMonday: z.boolean().default(false),
-	availableWednesday: z.boolean().default(false),
-	// Required only for the VFC-funded intern role; enforced in onSubmit/server
-	// since eligibility only applies to that role.
-	citizenshipStatus: z
-		.enum([
-			"citizen",
-			"permanent_resident",
-			"protected_refugee",
-			"none_of_above",
-		])
-		.optional(),
+	citizenshipStatus: z.enum(
+		["citizen", "permanent_resident", "protected_refugee", "none_of_above"],
+		{ required_error: "Please select your citizenship/immigration status" },
+	),
 	isAtLeast18: z.boolean().default(false),
 	canCommitWeekdays: z.boolean().default(false),
 	linkedinUrl: z
@@ -125,16 +114,12 @@ export const InstructorApplicationForm = () => {
 			program: "",
 			teachingExperience: "",
 			whyInterested: "",
-			availableMonday: false,
-			availableWednesday: false,
 			isAtLeast18: false,
 			canCommitWeekdays: false,
 			linkedinUrl: "",
 			resume: undefined,
 		},
 	});
-
-	const role = form.watch("role");
 
 	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -200,26 +185,17 @@ export const InstructorApplicationForm = () => {
 	};
 
 	const onSubmit = async (data: ApplicationFormData) => {
-		if (data.role === "coding_instructor") {
-			if (!data.availableMonday && !data.availableWednesday) {
-				toast.error("Please select at least one day you're available to teach");
-				return;
-			}
+		if (!data.citizenshipStatus) {
+			toast.error("Please select your citizenship/immigration status");
+			return;
 		}
-
-		if (data.role === "vfc_intern") {
-			if (!data.citizenshipStatus) {
-				toast.error("Please select your citizenship/immigration status");
-				return;
-			}
-			if (!data.isAtLeast18) {
-				toast.error("You must be at least 18 years old for this role");
-				return;
-			}
-			if (!data.canCommitWeekdays) {
-				toast.error("Please confirm you can commit to the Mon–Fri schedule");
-				return;
-			}
+		if (!data.isAtLeast18) {
+			toast.error("You must be at least 18 years old for this role");
+			return;
+		}
+		if (!data.canCommitWeekdays) {
+			toast.error("Please confirm you can commit to the Mon–Fri schedule");
+			return;
 		}
 
 		if (!data.resume) {
@@ -288,41 +264,6 @@ export const InstructorApplicationForm = () => {
 				noValidate
 				className="space-y-6"
 			>
-				{/* Role */}
-				<FormField
-					control={form.control}
-					name="role"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>
-								Which position are you applying for?{" "}
-								<span className="text-red-500">*</span>
-							</FormLabel>
-							<Select
-								onValueChange={field.onChange}
-								defaultValue={field.value}
-								disabled={isSubmitting}
-							>
-								<FormControl>
-									<SelectTrigger>
-										<SelectValue placeholder="Select a position" />
-									</SelectTrigger>
-								</FormControl>
-								<SelectContent>
-									<SelectItem value="coding_instructor">
-										Coding Instructor
-									</SelectItem>
-									<SelectItem value="vfc_intern">
-										Curriculum & Content Support / Instructor Intern
-										(VFC-funded)
-									</SelectItem>
-								</SelectContent>
-							</Select>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-
 				{/* Full Name */}
 				<FormField
 					control={form.control}
@@ -476,156 +417,100 @@ export const InstructorApplicationForm = () => {
 					)}
 				/>
 
-				{/* Availability (Coding Instructor only) */}
-				{role === "coding_instructor" && (
-					<div className="space-y-3">
-						<div className="text-sm font-medium">
-							Availability <span className="text-red-500">*</span>
-						</div>
-						<div className="space-y-2">
-							<FormField
-								control={form.control}
-								name="availableMonday"
-								render={({ field }) => (
-									<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-										<FormControl>
-											<Checkbox
-												checked={field.value}
-												onCheckedChange={field.onChange}
-												disabled={isSubmitting}
-											/>
-										</FormControl>
-										<div className="space-y-1 leading-none">
-											<FormLabel>
-												Mondays (September beginner cohort, ages 9-13)
-											</FormLabel>
-										</div>
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="availableWednesday"
-								render={({ field }) => (
-									<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-										<FormControl>
-											<Checkbox
-												checked={field.value}
-												onCheckedChange={field.onChange}
-												disabled={isSubmitting}
-											/>
-										</FormControl>
-										<div className="space-y-1 leading-none">
-											<FormLabel>
-												Wednesdays (continuing Term 2 cohort, ages 9-13)
-											</FormLabel>
-										</div>
-									</FormItem>
-								)}
-							/>
-						</div>
-						<p className="text-xs text-muted-foreground">
-							Select at least one day you're available
-						</p>
-					</div>
-				)}
+				{/* VFC Eligibility */}
+				<div className="space-y-4 rounded-lg border border-accent/30 bg-accent/5 p-4">
+					<p className="text-sm font-medium">
+						This role is funded through Venture for Canada. A few quick
+						eligibility questions:
+					</p>
 
-				{/* VFC Eligibility (Instructor Intern only) */}
-				{role === "vfc_intern" && (
-					<div className="space-y-4 rounded-lg border border-accent/30 bg-accent/5 p-4">
-						<p className="text-sm font-medium">
-							This role is funded through Venture for Canada. A few quick
-							eligibility questions:
-						</p>
+					<FormField
+						control={form.control}
+						name="citizenshipStatus"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>
+									Citizenship / immigration status{" "}
+									<span className="text-red-500">*</span>
+								</FormLabel>
+								<Select
+									onValueChange={field.onChange}
+									defaultValue={field.value}
+									disabled={isSubmitting}
+								>
+									<FormControl>
+										<SelectTrigger>
+											<SelectValue placeholder="Select your status" />
+										</SelectTrigger>
+									</FormControl>
+									<SelectContent>
+										<SelectItem value="citizen">Canadian citizen</SelectItem>
+										<SelectItem value="permanent_resident">
+											Permanent resident
+										</SelectItem>
+										<SelectItem value="protected_refugee">
+											Protected refugee
+										</SelectItem>
+										<SelectItem value="none_of_above">
+											None of the above
+										</SelectItem>
+									</SelectContent>
+								</Select>
+								<FormDescription>
+									VFC funding requires a Canadian citizen, permanent resident,
+									or protected refugee (international students aren't eligible
+									for this stream).
+								</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 
-						<FormField
-							control={form.control}
-							name="citizenshipStatus"
-							render={({ field }) => (
-								<FormItem>
+					<FormField
+						control={form.control}
+						name="isAtLeast18"
+						render={({ field }) => (
+							<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+								<FormControl>
+									<Checkbox
+										checked={field.value}
+										onCheckedChange={field.onChange}
+										disabled={isSubmitting}
+									/>
+								</FormControl>
+								<div className="space-y-1 leading-none">
 									<FormLabel>
-										Citizenship / immigration status{" "}
+										I am at least 18 years old{" "}
 										<span className="text-red-500">*</span>
 									</FormLabel>
-									<Select
-										onValueChange={field.onChange}
-										defaultValue={field.value}
+								</div>
+							</FormItem>
+						)}
+					/>
+
+					<FormField
+						control={form.control}
+						name="canCommitWeekdays"
+						render={({ field }) => (
+							<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+								<FormControl>
+									<Checkbox
+										checked={field.value}
+										onCheckedChange={field.onChange}
 										disabled={isSubmitting}
-									>
-										<FormControl>
-											<SelectTrigger>
-												<SelectValue placeholder="Select your status" />
-											</SelectTrigger>
-										</FormControl>
-										<SelectContent>
-											<SelectItem value="citizen">Canadian citizen</SelectItem>
-											<SelectItem value="permanent_resident">
-												Permanent resident
-											</SelectItem>
-											<SelectItem value="protected_refugee">
-												Protected refugee
-											</SelectItem>
-											<SelectItem value="none_of_above">
-												None of the above
-											</SelectItem>
-										</SelectContent>
-									</Select>
-									<FormDescription>
-										VFC funding requires a Canadian citizen, permanent resident,
-										or protected refugee (international students aren't eligible
-										for this stream).
-									</FormDescription>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-
-						<FormField
-							control={form.control}
-							name="isAtLeast18"
-							render={({ field }) => (
-								<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-									<FormControl>
-										<Checkbox
-											checked={field.value}
-											onCheckedChange={field.onChange}
-											disabled={isSubmitting}
-										/>
-									</FormControl>
-									<div className="space-y-1 leading-none">
-										<FormLabel>
-											I am at least 18 years old{" "}
-											<span className="text-red-500">*</span>
-										</FormLabel>
-									</div>
-								</FormItem>
-							)}
-						/>
-
-						<FormField
-							control={form.control}
-							name="canCommitWeekdays"
-							render={({ field }) => (
-								<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-									<FormControl>
-										<Checkbox
-											checked={field.value}
-											onCheckedChange={field.onChange}
-											disabled={isSubmitting}
-										/>
-									</FormControl>
-									<div className="space-y-1 leading-none">
-										<FormLabel>
-											I can commit to ~10 hrs/week, Monday–Friday (2 hrs/day),
-											including the Wednesday live class{" "}
-											<span className="text-red-500">*</span>
-										</FormLabel>
-									</div>
-								</FormItem>
-							)}
-						/>
-					</div>
-				)}
+									/>
+								</FormControl>
+								<div className="space-y-1 leading-none">
+									<FormLabel>
+										I can commit to ~10 hrs/week, Monday–Friday (2 hrs/day),
+										including the Monday and Wednesday live classes{" "}
+										<span className="text-red-500">*</span>
+									</FormLabel>
+								</div>
+							</FormItem>
+						)}
+					/>
+				</div>
 
 				{/* Teaching Experience */}
 				<FormField
@@ -814,7 +699,9 @@ export const InstructorApplicationForm = () => {
 						<p className="font-medium">Application received!</p>
 						<p className="mt-1">
 							Thank you for your interest in joining our team. We'll review your
-							application and get back to you within a few days.
+							application and get back to you within a few days. Note:
+							compensation for this role is contingent on approved Venture for
+							Canada funding.
 						</p>
 					</div>
 				)}

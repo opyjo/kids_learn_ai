@@ -127,10 +127,10 @@ const verificationDocuments = [
 ];
 
 const studentEligibility = [
-	"Currently enrolled full-time or part-time at an accredited Canadian college or university",
-	"Enrolled for at least the first 30 days of the internship",
-	"Canadian citizen, permanent resident or protected refugee",
-	"Not an international student or recent graduate for this funding stream",
+	"Canadian citizen, permanent resident, or refugee status",
+	"Enrolled in a degree/diploma/certificate program at an accredited Canadian college or university",
+	"At arm's length from the employer — verify the candidate isn't a relative or someone with a close personal/business tie before extending an offer",
+	"Enrolled in their studies, with all graduation requirements not yet complete, for at least the first 30 days of the internship",
 	"At least 18 years old for the Kids Learn AI child-facing role",
 ];
 
