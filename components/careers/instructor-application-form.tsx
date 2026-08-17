@@ -699,7 +699,9 @@ export const InstructorApplicationForm = () => {
 						<p className="font-medium">Application received!</p>
 						<p className="mt-1">
 							Thank you for your interest in joining our team. We'll review your
-							application and get back to you within a few days.
+							application and get back to you within a few days. Note:
+							compensation for this role is contingent on approved Venture for
+							Canada funding.
 						</p>
 					</div>
 				)}

@@ -148,6 +148,11 @@ export default function CareersPage() {
 								</div>
 							</div>
 
+							<p className="text-xs text-muted-foreground mb-6">
+								Compensation is contingent on approved Venture for Canada
+								funding for this placement.
+							</p>
+
 							<p className="text-muted-foreground leading-relaxed mb-6">
 								Build and refine Python/AI lesson materials for our live K-12
 								education program — designing exercises, prototyping engaging
