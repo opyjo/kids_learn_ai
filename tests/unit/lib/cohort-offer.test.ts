@@ -18,7 +18,7 @@ describe("Fall 2026 enrolment offer", () => {
 
 	it("keeps the trial, cohort, capacity, and price in one offer", () => {
 		expect(FALL_2026_OFFER).toMatchObject({
-			trialDate: "Monday, August 17, 2026",
+			trialDate: "Monday, September 14, 2026",
 			cohortStartDate: "Monday, September 14, 2026",
 			maximumStudents: 6,
 			foundingRate: "$159.99 CAD",

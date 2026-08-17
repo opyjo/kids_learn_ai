@@ -19,7 +19,7 @@ describe("parent-facing positioning", () => {
 		expect(PARENT_FACING_HEADLINE).toContain("Responsible AI");
 		expect(PARENT_FACING_HEADLINE).toContain("Canadian Kids Ages 9–13");
 		expect(PARENT_FACING_SUPPORTING_COPY).toBe(
-			"Free live trial on Monday, August 17, 2026. The next beginner cohort starts Monday, September 14, 2026.",
+			"Free live trial on Monday, September 14, 2026 — the first class of the new beginner cohort.",
 		);
 		expect(FREE_FIRST_CLASS_CTA).toBe("Request a Free Trial Spot");
 	});

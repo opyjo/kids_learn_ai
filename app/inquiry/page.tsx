@@ -72,37 +72,21 @@ export default function InquiryPage() {
 							</h2>
 
 							<div className="space-y-4">
-								{/* Trial and cohort dates */}
-								<div className="grid gap-4 sm:grid-cols-2">
-									<div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
-										<div className="flex items-center gap-2 mb-2">
-											<Calendar className="h-4 w-4 text-primary" />
-											<span className="font-semibold text-sm">
-												Free Group Trial
-											</span>
-										</div>
-										<p className="text-xl font-bold text-primary">
-											{FALL_2026_OFFER.trialDateShort}
-										</p>
-										<p className="text-sm text-muted-foreground">
-											{FALL_2026_OFFER.trialDuration} · Time confirmed after
-											booking
-										</p>
+								{/* Trial and cohort date */}
+								<div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
+									<div className="flex items-center gap-2 mb-2">
+										<Calendar className="h-4 w-4 text-primary" />
+										<span className="font-semibold text-sm">
+											Free Trial & New Beginner Cohort
+										</span>
 									</div>
-									<div className="bg-accent/5 rounded-xl p-4 border border-accent/20">
-										<div className="flex items-center gap-2 mb-2">
-											<Calendar className="h-4 w-4 text-accent" />
-											<span className="font-semibold text-sm">
-												New Beginner Cohort
-											</span>
-										</div>
-										<p className="text-xl font-bold text-accent">
-											Starts {FALL_2026_OFFER.cohortStartDateShort}
-										</p>
-										<p className="text-sm text-muted-foreground">
-											{FALL_2026_OFFER.ageRange} · Weekly Mondays
-										</p>
-									</div>
+									<p className="text-xl font-bold text-primary">
+										{FALL_2026_OFFER.trialDateShort}
+									</p>
+									<p className="text-sm text-muted-foreground">
+										{FALL_2026_OFFER.trialDuration} free trial · then weekly
+										Mondays · {FALL_2026_OFFER.ageRange}
+									</p>
 								</div>
 
 								{/* Program Features */}

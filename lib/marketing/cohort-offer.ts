@@ -1,6 +1,6 @@
 export const FALL_2026_OFFER = {
-	trialDate: "Monday, August 17, 2026",
-	trialDateShort: "August 17",
+	trialDate: "Monday, September 14, 2026",
+	trialDateShort: "September 14",
 	trialDuration: "1 hour",
 	trialTimeConfirmation:
 		"Exact time and joining instructions confirmed within 24 hours",

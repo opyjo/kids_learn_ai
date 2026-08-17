@@ -5,6 +5,7 @@ import {
 	CheckCircle,
 	Clock,
 	Code,
+	DollarSign,
 	GraduationCap,
 	Heart,
 	Laptop,
@@ -108,6 +109,94 @@ export default function CareersPage() {
 				</div>
 
 				<div className="max-w-4xl mx-auto space-y-8">
+					{/* VFC-Funded Internship Position */}
+					<Card className="border-2 border-accent/30">
+						<CardContent className="p-6 lg:p-8">
+							<div className="flex items-center gap-3 mb-6">
+								<div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+									<BookOpen className="h-6 w-6 text-accent" />
+								</div>
+								<div>
+									<h2 className="text-2xl font-bold">
+										Curriculum & Content Support / Instructor Intern
+									</h2>
+									<p className="text-muted-foreground">
+										Part-time • Remote • VFC-funded internship
+									</p>
+								</div>
+							</div>
+
+							<div className="grid sm:grid-cols-3 gap-4 mb-6">
+								<div className="bg-secondary/50 rounded-lg p-4 text-center">
+									<Clock className="h-5 w-5 text-accent mx-auto mb-2" />
+									<p className="text-sm font-medium">~10 hrs/week</p>
+									<p className="text-xs text-muted-foreground">
+										Mon–Fri, 2 hrs/day
+									</p>
+								</div>
+								<div className="bg-secondary/50 rounded-lg p-4 text-center">
+									<DollarSign className="h-5 w-5 text-accent mx-auto mb-2" />
+									<p className="text-sm font-medium">$20/hour</p>
+									<p className="text-xs text-muted-foreground">
+										Venture for Canada subsidized
+									</p>
+								</div>
+								<div className="bg-secondary/50 rounded-lg p-4 text-center">
+									<Calendar className="h-5 w-5 text-accent mx-auto mb-2" />
+									<p className="text-sm font-medium">Apply by Sept 4</p>
+									<p className="text-xs text-muted-foreground">
+										2026 application deadline
+									</p>
+								</div>
+							</div>
+
+							<p className="text-muted-foreground leading-relaxed mb-6">
+								Build and refine Python/AI lesson materials for our live K-12
+								education program — designing exercises, prototyping engaging
+								ways to teach coding concepts, and developing content for new
+								course terms and competition-prep tracks. You'll also lead one
+								weekly live class (~2 hrs/week) to test and iterate on the
+								material you build.
+							</p>
+
+							<h3 className="font-semibold mb-3">Weekly Schedule</h3>
+							<div className="grid grid-cols-5 gap-2 sm:gap-3 mb-6">
+								{[
+									{ day: "Mon", focus: "Curriculum" },
+									{ day: "Tue", focus: "Curriculum" },
+									{ day: "Wed", focus: "Live class" },
+									{ day: "Thu", focus: "Curriculum" },
+									{ day: "Fri", focus: "Curriculum" },
+								].map((slot) => (
+									<div
+										key={slot.day}
+										className="bg-accent/5 rounded-lg p-2 sm:p-3 text-center border border-accent/20"
+									>
+										<p className="font-semibold text-sm">{slot.day}</p>
+										<p className="text-xs text-muted-foreground">2 hrs</p>
+										<p className="text-xs text-accent mt-1">{slot.focus}</p>
+									</div>
+								))}
+							</div>
+
+							<h3 className="font-semibold mb-2">What We're Looking For</h3>
+							<ul className="space-y-2">
+								{[
+									"Currently enrolled at a Canadian post-secondary institution",
+									"Solid grounding in Python fundamentals",
+									"Comfortable and patient working with kids/youth",
+									"Clear communicator, comfortable presenting live over video",
+									"Reliable and organized",
+								].map((item) => (
+									<li key={item} className="flex items-start gap-3">
+										<CheckCircle className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						</CardContent>
+					</Card>
+
 					{/* Position Overview */}
 					<Card>
 						<CardContent className="p-6 lg:p-8">

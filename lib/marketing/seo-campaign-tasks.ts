@@ -151,7 +151,7 @@ export const SEO_CAMPAIGN_TASKS: SeoCampaignTask[] = [
 		key: "positioning",
 		title: "Lock the parent-facing positioning",
 		description:
-			"Use one offer everywhere: a free live trial on August 17 for the new ages 9–13 Monday beginner cohort starting September 14, with a maximum of six students.",
+			"Use one offer everywhere: a free live trial on September 14 for the new ages 9–13 Monday beginner cohort, with a maximum of six students.",
 		successMeasure:
 			"Homepage, inquiry page, social bios, and campaign copy use the same offer.",
 		category: "Conversion",
@@ -190,7 +190,7 @@ export const SEO_CAMPAIGN_TASKS: SeoCampaignTask[] = [
 		key: "instant-trial-booking",
 		title: "Automate trial confirmation once the time is set",
 		description:
-			"Once the August 17 trial time is finalized, replace the 24-hour manual confirmation with an immediate spot confirmation and calendar invitation.",
+			"Once the September 14 trial time is finalized, replace the 24-hour manual confirmation with an immediate spot confirmation and calendar invitation.",
 		successMeasure:
 			"A parent can reserve a trial without waiting for a manual reply.",
 		category: "Conversion",
