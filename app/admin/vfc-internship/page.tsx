@@ -31,94 +31,89 @@ type ChecklistItem = {
 
 const checklist: ChecklistItem[] = [
 	{
-		label: "Employer application submitted",
-		detail: "Submitted to Venture for Canada on August 4, 2026.",
+		label: "Employer Application",
+		detail: "Submitted and reviewed by VFC.",
 		status: "Complete",
 	},
 	{
-		label: "Initial eligibility review",
-		detail: "VFC confirmed that the application meets the criteria to proceed.",
+		label: "Onboarding Webinar & Business Verification",
+		detail:
+			"Pre-recorded webinar plus third-party business verification, required for new employers to confirm eligibility.",
 		status: "Complete",
 	},
 	{
-		label: "Kids Learn AI business name registered",
+		label: "Deemed Eligible Employer",
 		detail:
-			"Registered in Ontario under Opyjo Consulting Inc. on August 4, 2026; active through August 3, 2031.",
+			"VFC confirmed Opyjo Consulting Inc. as an Eligible Employer for the Fall 2026 cohort and all future intakes.",
 		status: "Complete",
 	},
 	{
-		label: "Persona company verification",
+		label: "Student Selection",
 		detail:
-			"Verify Opyjo Consulting Inc. with the incorporation, address, registration, website and founder identity documents.",
-		status: "In progress",
-	},
-	{
-		label: "Employer onboarding",
-		detail:
-			"Complete VFC's program overview or onboarding materials and retain the eligibility confirmation.",
+			"Identify a candidate from your own network/school, or post the role to VFC's Internship Bulletin Board (submissions close September 21, 2026).",
 		status: "Next",
 	},
 	{
-		label: "Publish the internship opportunity",
+		label: "Student Verbally Accepts",
 		detail:
-			"Use the VFC-specific role terms below and submit the opportunity to the job board by August 21.",
+			"The candidate must verbally accept the offer before a Hiring Request can be submitted for them.",
 		status: "Next",
 	},
 	{
-		label: "Select a candidate",
+		label: "Submit Hiring Request",
 		detail:
-			"Interview eligible students, check references and obtain a verbal acceptance before the funding request.",
+			"Password-protected form, one submission per student. Accepted until September 28, 2026, or earlier if funding is fully allocated.",
 		status: "Next",
 	},
 	{
-		label: "Submit the hiring request",
-		detail:
-			"Submit the candidate-specific request by August 28. Do not treat the subsidy as approved until VFC confirms it.",
+		label: "Funding Approved",
+		detail: "VFC processes each Hiring Request within 15 business days.",
 		status: "Next",
 	},
 	{
-		label: "Complete paid onboarding",
+		label: "Submit Required Paperwork",
 		detail:
-			"Set up payroll, the employment agreement, safeguarding controls, supervised training and access limits.",
+			"Online Funding Contract, Online Wage Subsidy Form, and a signed Offer of Employment (attached to the Wage Subsidy Form) — all available once the Hiring Request is approved.",
+		status: "Next",
+	},
+	{
+		label: "Subsidy Payment",
+		detail:
+			"First half paid within 45 days of the internship start date; remainder within 45 days after it ends.",
 		status: "Next",
 	},
 ];
 
 const deadlines = [
 	{
-		date: "August 14, 2026",
-		label: "New-employer application deadline",
-		note: "Application submitted early and accepted to proceed.",
+		date: "May 25, 2026",
+		label: "Internship Bulletin Board opens",
+		note: "Only needed if sourcing a candidate through VFC's board instead of your own network.",
 	},
 	{
-		date: "August 17, 2026",
-		label: "Planned beginner group trial",
-		note: "One trial session for the five current leads; no backup date advertised.",
-	},
-	{
-		date: "August 21, 2026",
-		label: "Internship job-board deadline",
-		note: "May close earlier if VFC allocates all available funding.",
-	},
-	{
-		date: "August 28, 2026",
-		label: "Fall hiring-request deadline",
-		note: "Candidate must already have verbally accepted the offer.",
+		date: "June 8, 2026 · 10 AM PST",
+		label: "Hiring Request Form opens",
+		note: "Password-protected; the link is emailed to Eligible Employers.",
 	},
 	{
 		date: "September 14, 2026",
-		label: "Latest internship start",
-		note: "Also the proposed start of the new Monday beginner cohort.",
+		label: "Internship start window closes",
+		note: "Placement must start between July 1 and this date.",
+	},
+	{
+		date: "September 21, 2026",
+		label: "Internship Bulletin Board closes",
+		note: "Last day to post or browse candidates on VFC's board.",
+	},
+	{
+		date: "September 28, 2026",
+		label: "Hiring Request Form closes",
+		note: "Or earlier if funding is fully allocated before this date. Confirmed on VFC's live Hiring Request Form — supersedes the August 28 date in VFC's intro email.",
 	},
 	{
 		date: "January 25, 2027",
-		label: "Latest internship end",
-		note: "The Fall 2026 placement must finish by this date.",
-	},
-	{
-		date: "August 3, 2031",
-		label: "Kids Learn AI business-name expiry",
-		note: "Plan to review and renew the Ontario registration by May 2031.",
+		label: "Latest internship end date",
+		note: "Total engagement cannot exceed 20 weeks. The same intern-employer match can continue for two consecutive semesters (8 months); an intern can be hired by the same employer for up to 4 cohorts total (new as of Winter 2026).",
 	},
 ];
 
@@ -207,23 +202,22 @@ export default async function VfcInternshipPage() {
 								<Badge className="border-white/25 bg-white/15 text-white hover:bg-white/15">
 									Internal hiring workspace
 								</Badge>
-								<Badge className="border-amber-200 bg-amber-100 text-amber-900 hover:bg-amber-100">
-									Verification in progress
+								<Badge className="border-emerald-200 bg-emerald-100 text-emerald-900 hover:bg-emerald-100">
+									Eligible Employer confirmed
 								</Badge>
 							</div>
 							<h1 className="text-2xl font-bold tracking-tight lg:text-3xl">
 								Venture for Canada Internship
 							</h1>
 							<p className="mt-2 max-w-2xl text-sm leading-6 text-blue-50 lg:text-base">
-								The employer application passed its initial review. This page
-								tracks company verification, the wage-subsidy process, the Fall
-								2026 role and the operating decisions needed before a student is
-								hired.
+								VFC confirmed Opyjo Consulting Inc. as an Eligible Employer for
+								the Fall 2026 cohort. This page tracks the wage-subsidy process,
+								the Fall 2026 role, and the remaining steps to hire a student.
 							</p>
 						</div>
 						<div className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm backdrop-blur-sm">
 							<p className="font-semibold">Current stage</p>
-							<p className="mt-1 text-blue-50">Persona company verification</p>
+							<p className="mt-1 text-blue-50">Student Selection</p>
 						</div>
 					</div>
 				</div>
