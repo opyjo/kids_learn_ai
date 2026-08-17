@@ -1,6 +1,7 @@
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { CAREERS_OPEN } from "@/lib/careers";
 import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 
 export const Footer = () => {
@@ -127,14 +128,16 @@ export const Footer = () => {
 									Contact Us
 								</Link>
 							</li>
-							<li>
-								<Link
-									href="/careers"
-									className="hover:text-foreground transition-colors cursor-pointer"
-								>
-									Become an Instructor
-								</Link>
-							</li>
+							{CAREERS_OPEN ? (
+								<li>
+									<Link
+										href="/careers"
+										className="hover:text-foreground transition-colors cursor-pointer"
+									>
+										Become an Instructor
+									</Link>
+								</li>
+							) : null}
 							<li>
 								<Link
 									href="/privacy"

@@ -5,6 +5,6 @@ export const PARENT_FACING_PROMISE = `Live online Python and responsible AI clas
 export const PARENT_FACING_HEADLINE =
 	"Live Online Python & Responsible AI Classes for Canadian Kids Ages 9–13";
 
-export const PARENT_FACING_SUPPORTING_COPY = `Free live trial on ${FALL_2026_OFFER.trialDate}. The next beginner cohort starts ${FALL_2026_OFFER.cohortStartDate}.`;
+export const PARENT_FACING_SUPPORTING_COPY = `Free live trial on ${FALL_2026_OFFER.trialDate} — the first class of the new beginner cohort.`;
 
 export const FREE_FIRST_CLASS_CTA = "Request a Free Trial Spot";

@@ -5,6 +5,7 @@ import {
 	CheckCircle,
 	Clock,
 	Code,
+	DollarSign,
 	GraduationCap,
 	Heart,
 	Laptop,
@@ -20,16 +21,65 @@ import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { CAREERS_OPEN } from "@/lib/careers";
 import { publicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = publicMetadata({
-	title: "Careers: Coding Instructor — Kids Learn AI",
-	description:
-		"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
-	path: "/careers",
-});
+export const metadata: Metadata = CAREERS_OPEN
+	? publicMetadata({
+			title: "Careers: Coding Instructor — Kids Learn AI",
+			description:
+				"Join us as a part-time, remote coding instructor. University STEM students teach live Python and AI classes to kids aged 9-13 with flexible evening hours.",
+			path: "/careers",
+		})
+	: publicMetadata({
+			title: "Careers — Kids Learn AI",
+			description:
+				"Kids Learn AI is not currently accepting instructor applications.",
+			path: "/careers",
+			noIndex: true,
+		});
+
+function CareersClosedPage() {
+	return (
+		<div className="min-h-screen bg-linear-to-br from-primary/5 via-accent/5 to-secondary/10">
+			<SiteHeader />
+
+			<main className="container mx-auto px-4 py-16 lg:py-24">
+				<Card className="mx-auto max-w-2xl border-primary/20 shadow-lg">
+					<CardContent className="p-8 text-center sm:p-12">
+						<Badge className="mb-5 rounded-full border-primary/20 bg-primary/10 px-4 py-2 text-primary">
+							Recruitment paused
+						</Badge>
+						<h1 className="mb-4 text-3xl font-bold sm:text-4xl">
+							We’re not currently hiring
+						</h1>
+						<p className="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
+							Thank you for your interest in Kids Learn AI. Instructor
+							applications are closed for now. Please check back here when we
+							reopen recruitment.
+						</p>
+						<div className="flex flex-col justify-center gap-3 sm:flex-row">
+							<Button asChild>
+								<Link href="/">Return home</Link>
+							</Button>
+							<Button asChild variant="outline">
+								<Link href="/contact">Contact us</Link>
+							</Button>
+						</div>
+					</CardContent>
+				</Card>
+			</main>
+
+			<Footer />
+		</div>
+	);
+}
 
 export default function CareersPage() {
+	if (!CAREERS_OPEN) {
+		return <CareersClosedPage />;
+	}
+
 	return (
 		<div className="min-h-screen bg-linear-to-br from-primary/5 via-accent/5 to-secondary/10">
 			<SiteHeader />
@@ -59,6 +109,94 @@ export default function CareersPage() {
 				</div>
 
 				<div className="max-w-4xl mx-auto space-y-8">
+					{/* VFC-Funded Internship Position */}
+					<Card className="border-2 border-accent/30">
+						<CardContent className="p-6 lg:p-8">
+							<div className="flex items-center gap-3 mb-6">
+								<div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+									<BookOpen className="h-6 w-6 text-accent" />
+								</div>
+								<div>
+									<h2 className="text-2xl font-bold">
+										Curriculum & Content Support / Instructor Intern
+									</h2>
+									<p className="text-muted-foreground">
+										Part-time • Remote • VFC-funded internship
+									</p>
+								</div>
+							</div>
+
+							<div className="grid sm:grid-cols-3 gap-4 mb-6">
+								<div className="bg-secondary/50 rounded-lg p-4 text-center">
+									<Clock className="h-5 w-5 text-accent mx-auto mb-2" />
+									<p className="text-sm font-medium">~10 hrs/week</p>
+									<p className="text-xs text-muted-foreground">
+										Mon–Fri, 2 hrs/day
+									</p>
+								</div>
+								<div className="bg-secondary/50 rounded-lg p-4 text-center">
+									<DollarSign className="h-5 w-5 text-accent mx-auto mb-2" />
+									<p className="text-sm font-medium">$20/hour</p>
+									<p className="text-xs text-muted-foreground">
+										Venture for Canada subsidized
+									</p>
+								</div>
+								<div className="bg-secondary/50 rounded-lg p-4 text-center">
+									<Calendar className="h-5 w-5 text-accent mx-auto mb-2" />
+									<p className="text-sm font-medium">Apply by Sept 4</p>
+									<p className="text-xs text-muted-foreground">
+										2026 application deadline
+									</p>
+								</div>
+							</div>
+
+							<p className="text-muted-foreground leading-relaxed mb-6">
+								Build and refine Python/AI lesson materials for our live K-12
+								education program — designing exercises, prototyping engaging
+								ways to teach coding concepts, and developing content for new
+								course terms and competition-prep tracks. You'll also lead one
+								weekly live class (~2 hrs/week) to test and iterate on the
+								material you build.
+							</p>
+
+							<h3 className="font-semibold mb-3">Weekly Schedule</h3>
+							<div className="grid grid-cols-5 gap-2 sm:gap-3 mb-6">
+								{[
+									{ day: "Mon", focus: "Curriculum" },
+									{ day: "Tue", focus: "Curriculum" },
+									{ day: "Wed", focus: "Live class" },
+									{ day: "Thu", focus: "Curriculum" },
+									{ day: "Fri", focus: "Curriculum" },
+								].map((slot) => (
+									<div
+										key={slot.day}
+										className="bg-accent/5 rounded-lg p-2 sm:p-3 text-center border border-accent/20"
+									>
+										<p className="font-semibold text-sm">{slot.day}</p>
+										<p className="text-xs text-muted-foreground">2 hrs</p>
+										<p className="text-xs text-accent mt-1">{slot.focus}</p>
+									</div>
+								))}
+							</div>
+
+							<h3 className="font-semibold mb-2">What We're Looking For</h3>
+							<ul className="space-y-2">
+								{[
+									"Currently enrolled at a Canadian post-secondary institution",
+									"Solid grounding in Python fundamentals",
+									"Comfortable and patient working with kids/youth",
+									"Clear communicator, comfortable presenting live over video",
+									"Reliable and organized",
+								].map((item) => (
+									<li key={item} className="flex items-start gap-3">
+										<CheckCircle className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						</CardContent>
+					</Card>
+
 					{/* Position Overview */}
 					<Card>
 						<CardContent className="p-6 lg:p-8">

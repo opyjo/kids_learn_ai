@@ -245,9 +245,8 @@ export const CourseInquiryForm = () => {
 							</Select>
 							{selectedAgeGroup ? (
 								<FormDescription>
-									📅 Free trial: {FALL_2026_OFFER.trialDate}. The new beginner
-									cohort meets weekly on Mondays starting{" "}
-									{FALL_2026_OFFER.cohortStartDateShort}.
+									📅 Free first class: {FALL_2026_OFFER.trialDate}. The new
+									beginner cohort meets weekly on Mondays.
 								</FormDescription>
 							) : null}
 							<FormMessage />

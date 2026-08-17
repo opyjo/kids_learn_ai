@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import { CAREERS_OPEN } from "@/lib/careers";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -120,6 +121,18 @@ const getAvailabilityText = (monday: boolean, wednesday: boolean): string => {
 };
 
 export const POST = async (request: NextRequest) => {
+	if (!CAREERS_OPEN) {
+		return NextResponse.json(
+			{
+				error: "Instructor applications are currently closed.",
+			},
+			{
+				status: 403,
+				headers: { "Cache-Control": "no-store" },
+			},
+		);
+	}
+
 	try {
 		// Get IP address for rate limiting
 		const ip =
