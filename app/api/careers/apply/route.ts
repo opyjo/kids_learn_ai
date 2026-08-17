@@ -18,6 +18,7 @@ const resumeSchema = z.object({
 });
 
 const applicationSchema = z.object({
+	role: z.enum(["coding_instructor", "vfc_intern"]),
 	fullName: z
 		.string()
 		.trim()
@@ -50,6 +51,18 @@ const applicationSchema = z.object({
 		.max(1000, "Response must not exceed 1000 characters"),
 	availableMonday: z.boolean().default(false),
 	availableWednesday: z.boolean().default(false),
+	// Required only when role is "vfc_intern"; enforced below since eligibility
+	// only applies to the VFC-funded role.
+	citizenshipStatus: z
+		.enum([
+			"citizen",
+			"permanent_resident",
+			"protected_refugee",
+			"none_of_above",
+		])
+		.optional(),
+	isAtLeast18: z.boolean().default(false),
+	canCommitWeekdays: z.boolean().default(false),
 	linkedinUrl: z.string().trim().url().optional().or(z.literal("")),
 	resume: resumeSchema,
 });
@@ -120,6 +133,26 @@ const getAvailabilityText = (monday: boolean, wednesday: boolean): string => {
 	return "Not specified";
 };
 
+const getRoleLabel = (role: "coding_instructor" | "vfc_intern"): string =>
+	role === "vfc_intern"
+		? "Curriculum & Content Support / Instructor Intern (VFC-funded)"
+		: "Coding Instructor";
+
+const getCitizenshipLabel = (status: string | undefined): string => {
+	switch (status) {
+		case "citizen":
+			return "Canadian citizen";
+		case "permanent_resident":
+			return "Permanent resident";
+		case "protected_refugee":
+			return "Protected refugee";
+		case "none_of_above":
+			return "None of the above (not VFC-eligible)";
+		default:
+			return "Not specified";
+	}
+};
+
 export const POST = async (request: NextRequest) => {
 	if (!CAREERS_OPEN) {
 		return NextResponse.json(
@@ -154,16 +187,41 @@ export const POST = async (request: NextRequest) => {
 		const body = await request.json();
 		const validatedData = applicationSchema.parse(body);
 
-		// Validate at least one day selected
-		if (!validatedData.availableMonday && !validatedData.availableWednesday) {
-			return NextResponse.json(
-				{
-					error: "Please select at least one day you're available to teach",
-				},
-				{ status: 400 },
-			);
+		if (validatedData.role === "coding_instructor") {
+			if (!validatedData.availableMonday && !validatedData.availableWednesday) {
+				return NextResponse.json(
+					{
+						error: "Please select at least one day you're available to teach",
+					},
+					{ status: 400 },
+				);
+			}
 		}
 
+		if (validatedData.role === "vfc_intern") {
+			if (!validatedData.citizenshipStatus) {
+				return NextResponse.json(
+					{ error: "Please select your citizenship/immigration status" },
+					{ status: 400 },
+				);
+			}
+			if (!validatedData.isAtLeast18) {
+				return NextResponse.json(
+					{ error: "You must be at least 18 years old for this role" },
+					{ status: 400 },
+				);
+			}
+			if (!validatedData.canCommitWeekdays) {
+				return NextResponse.json(
+					{
+						error: "Please confirm you can commit to the Mon–Fri schedule",
+					},
+					{ status: 400 },
+				);
+			}
+		}
+
+		const roleLabel = getRoleLabel(validatedData.role);
 		const yearLabel = getYearLabel(validatedData.yearOfStudy);
 		const experienceLabel = getExperienceLabel(validatedData.pythonExperience);
 		const availabilityText = getAvailabilityText(
@@ -186,7 +244,14 @@ export const POST = async (request: NextRequest) => {
 			from: "Kids Learn AI <hello@kidslearnai.ca>",
 			to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@kidslearnai.ca",
 			replyTo: validatedData.email,
-			subject: `👨‍🏫 Instructor Application: ${validatedData.fullName} (${validatedData.university})`,
+			subject:
+				validatedData.role === "vfc_intern"
+					? `🎓 VFC Intern Application: ${validatedData.fullName} (${validatedData.university})${
+							validatedData.citizenshipStatus === "none_of_above"
+								? " ⚠️ not VFC-eligible"
+								: ""
+						}`
+					: `👨‍🏫 Instructor Application: ${validatedData.fullName} (${validatedData.university})`,
 			attachments,
 			html: `
         <!DOCTYPE html>
@@ -288,9 +353,9 @@ export const POST = async (request: NextRequest) => {
           </head>
           <body>
             <div class="header">
-              <div class="badge">📋 INSTRUCTOR APPLICATION</div>
-              <h1 style="margin: 0; font-size: 24px;">New Instructor Application</h1>
-              <p style="margin: 10px 0 0 0; opacity: 0.9;">A university student wants to join the teaching team</p>
+              <div class="badge">${validatedData.role === "vfc_intern" ? "🎓 VFC INTERN APPLICATION" : "📋 INSTRUCTOR APPLICATION"}</div>
+              <h1 style="margin: 0; font-size: 24px;">New Application</h1>
+              <p style="margin: 10px 0 0 0; opacity: 0.9;">Applying for: ${roleLabel}</p>
             </div>
             <div class="content">
               <!-- Applicant Info -->
@@ -360,9 +425,39 @@ export const POST = async (request: NextRequest) => {
 
               <!-- Availability -->
               <div class="availability-box">
-                <div style="font-size: 14px; color: #065f46; margin-bottom: 5px;">📅 Available to Teach</div>
-                <div style="font-size: 20px; font-weight: 700; color: #047857;">${availabilityText}</div>
+                <div style="font-size: 14px; color: #065f46; margin-bottom: 5px;">📅 Availability</div>
+                <div style="font-size: 20px; font-weight: 700; color: #047857;">${
+									validatedData.role === "vfc_intern"
+										? validatedData.canCommitWeekdays
+											? "Confirmed: ~10 hrs/week, Mon–Fri"
+											: "Not confirmed"
+										: availabilityText
+								}</div>
               </div>
+
+              ${
+								validatedData.role === "vfc_intern"
+									? `
+              <!-- VFC Eligibility -->
+              <div class="section" style="${validatedData.citizenshipStatus === "none_of_above" ? "background: #fef2f2; border-color: #ef4444;" : ""}">
+                <div class="section-title">🇨🇦 VFC Eligibility</div>
+                <div class="field">
+                  <div class="label">Citizenship / Immigration Status</div>
+                  <div class="value">${getCitizenshipLabel(validatedData.citizenshipStatus)}</div>
+                </div>
+                <div class="field">
+                  <div class="label">At Least 18 Years Old</div>
+                  <div class="value">${validatedData.isAtLeast18 ? "Yes" : "No"}</div>
+                </div>
+                ${
+									validatedData.citizenshipStatus === "none_of_above"
+										? `<div class="value" style="color: #b91c1c; font-weight: 600; margin-top: 8px;">⚠️ Does not meet VFC's citizenship/residency requirement for this funding stream.</div>`
+										: ""
+								}
+              </div>
+              `
+									: ""
+							}
 
               <!-- Why Interested -->
               <div class="section">
