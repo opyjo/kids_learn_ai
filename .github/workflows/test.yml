@@ -55,8 +55,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       
+      # No --with-deps: that runs apt-get, which hangs when the runner's
+      # Ubuntu mirror is unreachable. The ubuntu-latest image already ships
+      # Chromium's system libraries, and browser binaries come from
+      # Playwright's own CDN rather than apt.
       - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install chromium
         timeout-minutes: 10
 
       - name: Run E2E tests
