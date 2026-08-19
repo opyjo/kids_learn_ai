@@ -92,6 +92,69 @@ You will:
 
 There is no complete solution to copy because different students may choose different problems.
 
+## Recap: Your Toolkit So Far
+
+Before you plan your own tool, make sure these pieces are ready:
+
+| Skill | Where you learned it | How you will use it today |
+| --- | --- | --- |
+| `+`, `-`, `*`, `/` | Lesson 2: Python Does Math | Combine or compare values inside your formula |
+| `//` and `%` | Lesson 3: Bigger Math | Needed only if you choose the Party Share Tool |
+| `input()` and `int()` | Lesson 4: Numbers from Users | Collect and convert whole-number answers |
+| `float()`, `round()`, `:.2f` | Lesson 5: Decimals & Clean Answers | Collect and convert decimal answers, then tidy the result |
+| `collect → convert → calculate → communicate` | Lessons 4–5 | The pipeline every tool below is built on |
+
+If any row feels shaky, reread that lesson's numbered sections before choosing a tool brief.
+
+## Worked Example: Watch the Full Process Once
+
+This walkthrough uses a fourth scenario—Temperature Check—so it will not hand you the answer for Journey, Team Score, or Party Share. Read it once before choosing your own brief.
+
+**Problem:** A weather club wants to convert one Celsius reading into Fahrenheit.
+
+**Completed Design Card:**
+
+| Design question | Answer |
+| --- | --- |
+| What problem does the tool solve? | Converts a Celsius reading into Fahrenheit for the weather club log |
+| What information must the user enter? | One temperature in Celsius |
+| Which inputs are `int`? | None |
+| Which inputs are `float`? | The Celsius temperature—decimals like `21.5` are valid readings |
+| What is the formula in words? | Multiply Celsius by nine-fifths, then add thirty-two |
+| What should the result say? | The original Celsius value and the converted Fahrenheit value, labelled |
+| What limitation will the first version have? | Converts one direction only; Fahrenheit-to-Celsius is a future upgrade |
+
+**Planned tests:**
+
+| Test purpose | Inputs | Expected result |
+| --- | --- | --- |
+| Normal case | 20 | 68.0°F |
+| Boundary case with zero | 0 | 32.0°F |
+| Decimal case | 21.5 | 70.7°F |
+
+**Smallest working version:**
+
+```python
+celsius_text = input("Temperature in Celsius: ")
+celsius = float(celsius_text)
+
+fahrenheit = round(celsius * 9 / 5 + 32, 1)
+
+print(f"{celsius:g}°C is {fahrenheit}°F.")
+```
+
+**Partner usability test:** The partner understood the numbers but could not tell which direction the conversion went.
+
+**Revision:** Add one line stating the conversion direction:
+
+```python
+print("Conversion used: Celsius → Fahrenheit")
+```
+
+**60-second demo notes:** "I built a Celsius-to-Fahrenheit converter. I chose `float()` because temperatures can include decimals. My boundary test at 0°C confirmed the formula still gives the well-known freezing point, 32°F. After feedback, I added a line stating the conversion direction."
+
+Use this worked example as a model for structure—not as a program to copy. Your own tool must solve a different problem from the briefs below.
+
 ## 1. Pick a Tool Brief
 
 ### Journey Tool
@@ -166,6 +229,17 @@ print(f"Label: {tidy_result} unit")
 ```
 
 Write one stage at a time and run after each stage.
+
+## If You Are Stuck
+
+Work through these hints in order before asking for a full answer:
+
+1. Reread your Design Card. If you cannot say the formula in one sentence, you are not ready to code it.
+2. Check the pipeline: collect → convert → calculate → communicate (Lessons 4–5).
+3. Confirm each input's type: whole counts use `int()` (Lesson 4); decimals use `float()` (Lesson 5).
+4. Build and run one stage at a time instead of the whole program at once.
+5. Compare your structure to the Worked Example above.
+6. Ask a partner to read your Design Card aloud and point out the first unclear part.
 
 ## 5. Test and Diagnose
 

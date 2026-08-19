@@ -92,6 +92,19 @@ You will:
 - make the smallest useful repair; and
 - verify the repair with planned tests.
 
+## Recap: Your Toolkit So Far
+
+Bug-hunting today depends on skills from every earlier Term 2 lesson:
+
+| Skill | Where you learned it | Why it matters today |
+| --- | --- | --- |
+| `+`, `-`, `*`, `/` | Lesson 2: Python Does Math | Logic bugs often use the wrong operator |
+| `int()` and `float()` | Lessons 4–5: Numbers from Users, Decimals & Clean Answers | Runtime bugs often use the wrong conversion |
+| `round()` and `:.2f` | Lesson 5: Decimals & Clean Answers | Usability bugs often have messy or missing formatting |
+| Design Card, test table, partner feedback | Lesson 6: Math Problem-Solving Lab | The same plan → build → test → revise habit now applies to repairing code instead of writing it |
+
+If a station bug feels unfamiliar, it is testing a skill from one of these lessons—go back and check it.
+
 ## 1. The Clinic Cycle
 
 Use this process for every case:
@@ -103,6 +116,38 @@ Use this process for every case:
 5. **Repair** — change one thing at a time.
 6. **Verify** — compare actual results with expected tests.
 7. **Explain** — state what the evidence proves.
+
+## Warm-Up: Watch the Cycle Once
+
+Before working the stations, watch the seven-step cycle applied to one tiny bug.
+
+```python
+plyer_name = "Ama"
+print(f"Welcome, {player_name}!")
+```
+
+1. **Reproduce** — Run the code exactly as written.
+2. **Record** — Copy the exact message: `NameError: name 'player_name' is not defined`.
+3. **Classify** — Python understood the grammar, so this is not a syntax problem. It is a runtime problem: the program crashes while running.
+4. **Locate** — Compare the two names letter by letter: `plyer_name` and `player_name`.
+5. **Repair** — Choose one correct spelling and use it in both places.
+6. **Verify** — Predict the new output before rerunning: `Welcome, Ama!`. Then run it.
+7. **Explain** — The evidence is the expected greeting appearing exactly once, not merely "the red text is gone."
+
+**Completed case report for this example:**
+
+| Field | Evidence |
+| --- | --- |
+| Expected behaviour | Prints a welcome message using the stored name |
+| Actual symptom | `NameError: name 'player_name' is not defined` |
+| Bug category | Runtime |
+| Suspected line | The `print` line references a name that was never created |
+| Repair | Rename `plyer_name` to `player_name` |
+| Test 1 expected/actual | `Welcome, Ama!` / `Welcome, Ama!` |
+| Test 2 expected/actual | Change the name to `"Kwame"`; expect `Welcome, Kwame!` / `Welcome, Kwame!` |
+| Why the evidence is sufficient | Two different names both produced the exact expected greeting with no error |
+
+Use this same seven-step process and case-report format for every station below.
 
 ## 2. Four Bug Categories
 
@@ -140,7 +185,7 @@ print(double_price)
 
 Run once with `4`, then with `4.75`.
 
-The first test can pass while the second crashes. Choose a conversion that matches the intended decimal input and rerun both tests.
+The first test can pass while the second crashes. Choose a conversion that matches the intended decimal input (the `float()` decision from Lesson 5) and rerun both tests.
 
 ## 5. Station C: Logic
 
@@ -151,7 +196,7 @@ total = round_one * round_two
 print(f"Total points: {total}")
 ```
 
-Python understands the code. The formula does not match the stated goal.
+Python understands the code. The formula does not match the stated goal—the same operator skill from Lesson 2.
 
 Write two test cases that make the intended addition obvious, repair the operator, and verify both cases.
 
@@ -191,6 +236,15 @@ Diagnose this in order:
 
 This is why developers fix and test one issue at a time.
 
+## If You Are Stuck
+
+1. Run the original code exactly as given before changing anything.
+2. Copy the exact error message or wrong output—do not paraphrase it.
+3. Match it to a category using the table in Section 2: syntax, runtime, logic, or usability.
+4. Compare suspicious lines letter by letter for spelling, symbols, and punctuation.
+5. Change only one line, then rerun before changing anything else.
+6. Ask a partner to read the error message aloud with you.
+
 ## 8. Write a Case for a Partner
 
 Create a short, single-purpose program with exactly one intentional bug. Do not tell your partner its category.
@@ -205,6 +259,8 @@ Your partner must provide:
 Then reveal your intended bug and compare diagnoses.
 
 ## Case Report Template
+
+You already planned expected results before testing in Lesson 6's Design Card and test tables. This template asks for the same kind of evidence, applied to repairing code instead of building it.
 
 | Field | Evidence |
 | --- | --- |
