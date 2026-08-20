@@ -131,6 +131,13 @@ const adminNavItems: AdminNavItem[] = [
 		href: "/admin/vfc-internship",
 		label: "VFC Internship",
 		icon: BriefcaseBusiness,
+		exact: true,
+	},
+	{
+		section: "People",
+		href: "/admin/vfc-internship/applications",
+		label: "Intern Applications",
+		icon: BriefcaseBusiness,
 	},
 	{
 		section: "Insights",
