@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 import { CAREERS_OPEN } from "@/lib/careers";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -199,6 +200,33 @@ export const POST = async (request: NextRequest) => {
 					},
 				]
 			: undefined;
+
+		// Persist to database (best-effort — email is the critical path)
+		const supabaseAdmin = getSupabaseAdminClient();
+		if (supabaseAdmin) {
+			const { error: dbError } = await supabaseAdmin
+				.from("internship_applications")
+				.insert({
+					full_name: validatedData.fullName,
+					email: validatedData.email,
+					university: validatedData.university,
+					program: validatedData.program,
+					year_of_study: validatedData.yearOfStudy,
+					python_experience: validatedData.pythonExperience,
+					teaching_experience: validatedData.teachingExperience || null,
+					why_interested: validatedData.whyInterested,
+					citizenship_status: validatedData.citizenshipStatus,
+					is_at_least_18: validatedData.isAtLeast18,
+					can_commit_weekdays: validatedData.canCommitWeekdays,
+					linkedin_url: validatedData.linkedinUrl || null,
+					resume_filename: validatedData.resume?.name || null,
+					resume_content_type: validatedData.resume?.type || null,
+					resume_content: validatedData.resume?.content || null,
+				});
+			if (dbError) {
+				console.error("Failed to persist application:", dbError);
+			}
+		}
 
 		// Send email via Resend
 		const emailResult = await resend.emails.send({
