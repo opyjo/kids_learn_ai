@@ -38,20 +38,80 @@ class_activities: |
 
   **Demo:** Explain the problem and one test—not every line of code.
 take_home_assignment: |
-  ## Homework: Version 2
+  ## Homework: Math Wizard Review Challenge 🧙
 
-  Improve the tool you began in class rather than starting another calculator.
+  This week's homework is a review. It practises the two skills our class needs the most work on:
 
-  Submit:
+  1. **using the functions we have learned** — `input()`, `int()`, `float()`, `round()`, and `print()` with f-strings; and
+  2. **choosing variable names that make sense** — a name should say what is inside the box.
 
-  1. your revised Trinket link;
-  2. a one-sentence problem statement;
-  3. a table with at least four test cases;
-  4. the feedback you received;
-  5. the change you made because of that feedback; and
-  6. one known limitation of the program.
+  Complete all four parts in one Trinket program, with a comment line (`#`) before each part.
 
-  Your tool should solve one job well. The general four-operation calculator is reserved for Lesson 8.
+  ---
+
+  ### Part 1: Variable Name Rescue 🚑
+
+  This code works, but the names are terrible. Rewrite it with names that describe what each variable stores. Do not change what the program does.
+
+  ```python
+  x = input("How many stickers do you have? ")
+  y = int(x)
+  z = 4
+  a = y // z
+  b = y % z
+  print(f"Each friend gets {a} stickers with {b} left over.")
+  ```
+
+  **Naming rules to follow:**
+
+  - the name says what is inside (`sticker_count`, not `x` or `number`);
+  - use lowercase words joined by underscores (`price_per_ticket`);
+  - no single letters, and no names like `thing`, `stuff`, or `data`.
+
+  ### Part 2: Function Round-Up 🔍
+
+  Predict what each line prints, write your prediction as a comment, then run the code to check. Fix any prediction that was wrong — and add a comment saying why.
+
+  ```python
+  print(int("15") + 5)
+  print(float("2.5") * 2)
+  print(round(7.891, 2))
+  print(round(9.5))
+  print(10 // 3)
+  print(10 % 3)
+  ```
+
+  ### Part 3: Build the Snack Shop Tool 🍿
+
+  Build a small program that:
+
+  1. asks for the price of one snack (a decimal — which conversion function does that need?);
+  2. asks how many snacks the customer wants (a whole number — which function now?);
+  3. calculates the total cost;
+  4. prints a friendly, labelled answer using an f-string, rounded to 2 decimal places.
+
+  Every variable name must pass the naming rules from Part 1. No menus and no `if/else` — that magic starts in Term 3.
+
+  ### Part 4: Test Like a Wizard 🧪
+
+  Test your Snack Shop Tool and record the results in a comment table at the bottom of your program:
+
+  ```python
+  # Test              | Inputs        | Expected | Actual
+  # Normal case       | 2.50 and 3    | 7.5      |
+  # Boundary (zero)   | 2.50 and 0    | 0.0      |
+  # Decimal answer    | 1.99 and 2    | 3.98     |
+  ```
+
+  ---
+
+  ### Submit
+
+  1. your Trinket link with all four parts;
+  2. one sentence: which function was hardest to remember how to use, and what it does; and
+  3. one sentence: the worst variable name you fixed in Part 1 and the better name you gave it.
+
+  **Wizard bonus ⭐:** add one more question to your Snack Shop Tool (like a tip or a discount amount) and include it in the total — with a sensible variable name, of course.
 ai_activities: |
   ## AI Lab: A Score Is a Human-Designed Model
 
