@@ -21,6 +21,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
 import { absoluteUrl, publicMetadata, SITE_URL } from "@/lib/seo";
 
@@ -35,47 +36,46 @@ const pillars = [
 		title: "Mission",
 		icon: Heart,
 		description:
-			"Give every child the chance to master Python fundamentals and understand how AI affects their world—no gatekeepers, no intimidation, just joyful learning.",
+			"Move kids from consumers of AI to creators with it—starting with Python fundamentals and honest conversations about how these systems actually work.",
 	},
 	{
 		title: "Vision",
 		icon: Compass,
 		description:
-			"A generation of young innovators who can question, build, and guide intelligent technology with empathy, creativity, and confidence.",
+			"Young people who meet new technology by asking how it works and who it serves, not just being impressed by it.",
 	},
 	{
 		title: "Promise",
 		icon: ShieldCheck,
-		description:
-			"We design experiences that are safe, caring, and culturally aware, so families feel seen and supported every step of the journey.",
+		description: `No more than ${FALL_2026_OFFER.maximumStudents} students per class. A live instructor every single session. And a project your child can show you at the end of every term.`,
 	},
 ];
 
 const impactHighlights = [
 	{
-		stat: "70%",
-		label: "Of tomorrow's jobs",
+		stat: FALL_2026_OFFER.ageRange,
+		label: "Purpose-built for this age band",
 		detail:
-			"are projected to require advanced digital skills. Python and AI literacy prepare kids to make bold choices, not play catch-up.",
+			"Lessons, pacing, and projects are designed for 9–13 year olds specifically, not adapted down from a teen or adult course.",
 	},
 	{
-		stat: "3x",
-		label: "Higher confidence",
+		stat: FALL_2026_OFFER.programLength,
+		label: "Per term",
 		detail:
-			"is reported by young learners who build projects that reflect their voice, culture, and community stories.",
+			"Every cohort runs as a live weekly class that builds toward a project your child presents at the end.",
 	},
 	{
-		stat: "100%",
-		label: "Parent peace of mind",
+		stat: "$0",
+		label: "To try it first",
 		detail:
-			"comes from transparent curricula, realistic timelines, and mentors who care about the whole child—not just the code they write.",
+			"Every new cohort opens with a free live trial class, so you see the format before you pay anything.",
 	},
 ];
 
 const commitments = [
 	{
 		title: "Start with heart",
-		body: "We listen before we teach. Student check-ins, family feedback, and community advisors shape every update we release.",
+		body: "Every homework submission gets written feedback from an instructor, not just a grade—visible right in your child's dashboard.",
 	},
 	{
 		title: "Teach the " + "why" + " behind AI",
@@ -83,11 +83,11 @@ const commitments = [
 	},
 	{
 		title: "Make it accessible",
-		body: "Scholarships, teacher toolkits, and bilingual resources ensure cost or language never become the reason a child is left behind.",
+		body: "No software to install and no account needed to try it—Python runs right in the browser, on the laptop your child already has.",
 	},
 	{
 		title: "Celebrate small wins",
-		body: "From a first successful print statement to a full project showcase, we capture progress with reflection journals, badges, and family wrap-ups.",
+		body: "From a first successful print statement to a full project showcase, we track progress with badges and celebrate every term with a live project demo.",
 	},
 ];
 
@@ -143,7 +143,7 @@ export default function AboutPage() {
 				{/* Our Story */}
 				<section className="max-w-4xl mx-auto mb-20">
 					<h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-						We started with one question: who gets to build tomorrow?
+						We started with one question: will they build it, or just use it?
 					</h2>
 					<p className="text-muted-foreground text-lg leading-relaxed mb-6">
 						Kids Learn AI was born after watching brilliant young minds feel
