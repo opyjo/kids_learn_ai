@@ -16,6 +16,7 @@ import {
 	LayoutDashboard,
 	LibraryBig,
 	Mail,
+	NotebookPen,
 	Plus,
 	Presentation,
 	Target,
@@ -138,6 +139,12 @@ const adminNavItems: AdminNavItem[] = [
 		href: "/admin/vfc-internship/applications",
 		label: "Intern Applications",
 		icon: BriefcaseBusiness,
+	},
+	{
+		section: "People",
+		href: "/admin/vfc-internship/interview-guide",
+		label: "Interview Guide",
+		icon: NotebookPen,
 	},
 	{
 		section: "Insights",
