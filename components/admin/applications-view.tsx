@@ -1,6 +1,13 @@
 "use client";
 
-import { ExternalLink, Search, SlidersHorizontal, X } from "lucide-react";
+import {
+	ExternalLink,
+	NotebookPen,
+	Search,
+	SlidersHorizontal,
+	X,
+} from "lucide-react";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ApplicationStatusControl } from "@/components/admin/application-status-control";
 import { StatCard } from "@/components/admin/stat-card";
@@ -185,7 +192,7 @@ export function ApplicationsView({
 
 	return (
 		<div className="space-y-3">
-			<div className="flex items-center justify-between">
+			<div className="flex flex-wrap items-center justify-between gap-2">
 				<div>
 					<h1 className="text-xl font-semibold text-gray-900 dark:text-white">
 						Internship Applications
@@ -194,6 +201,13 @@ export function ApplicationsView({
 						Review and track VFC Instructor Intern applications
 					</p>
 				</div>
+				<Link
+					href="/admin/vfc-internship/interview-guide"
+					className="inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/30"
+				>
+					<NotebookPen className="h-4 w-4" />
+					Interview guide
+				</Link>
 			</div>
 
 			{/* Stats Grid — click a card to filter */}
