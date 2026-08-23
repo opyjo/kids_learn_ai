@@ -3,10 +3,10 @@ import { posts } from "@/app/blog/blog-posts";
 import { expandedArticles } from "@/lib/blog/expanded-articles";
 
 describe("expanded blog library", () => {
-	it("adds twelve unique, complete articles", () => {
-		expect(expandedArticles).toHaveLength(12);
+	it("adds seventeen unique, complete articles", () => {
+		expect(expandedArticles).toHaveLength(17);
 		expect(new Set(expandedArticles.map((article) => article.slug)).size).toBe(
-			12,
+			17,
 		);
 
 		for (const article of expandedArticles) {
@@ -19,7 +19,7 @@ describe("expanded blog library", () => {
 	});
 
 	it("publishes the expanded articles in the main blog registry", () => {
-		expect(posts).toHaveLength(21);
+		expect(posts).toHaveLength(26);
 
 		for (const article of expandedArticles) {
 			expect(posts.some((post) => post.slug === article.slug)).toBe(true);
