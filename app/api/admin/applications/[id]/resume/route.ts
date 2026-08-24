@@ -1,5 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { safeFilename } from "@/lib/security/sanitize";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+
+const ALLOWED_RESUME_TYPES = new Set([
+	"application/pdf",
+	"application/msword",
+	"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+]);
 
 export async function GET(
 	_request: NextRequest,
@@ -41,19 +48,20 @@ export async function GET(
 		}
 
 		if (!data.resume_content || !data.resume_filename) {
-			return NextResponse.json(
-				{ error: "No resume on file" },
-				{ status: 404 },
-			);
+			return NextResponse.json({ error: "No resume on file" }, { status: 404 });
 		}
 
 		const buffer = Buffer.from(data.resume_content, "base64");
+		const filename = safeFilename(data.resume_filename, "resume");
+		const contentType = ALLOWED_RESUME_TYPES.has(data.resume_content_type ?? "")
+			? (data.resume_content_type as string)
+			: "application/octet-stream";
 
 		return new NextResponse(buffer, {
 			headers: {
-				"Content-Type":
-					data.resume_content_type || "application/octet-stream",
-				"Content-Disposition": `attachment; filename="${data.resume_filename}"`,
+				"Content-Type": contentType,
+				"Content-Disposition": `attachment; filename="${filename}"`,
+				"X-Content-Type-Options": "nosniff",
 				"Content-Length": String(buffer.length),
 			},
 		});

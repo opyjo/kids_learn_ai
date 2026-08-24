@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { checkDbRateLimit } from "@/lib/rate-limit-db";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function PUT(request: NextRequest) {
@@ -30,6 +31,18 @@ export async function PUT(request: NextRequest) {
 			return NextResponse.json(
 				{ error: "User not authenticated" },
 				{ status: 401 },
+			);
+		}
+
+		const allowed = await checkDbRateLimit(
+			`pwchange:${authUser.id}`,
+			5,
+			"15 minutes",
+		);
+		if (!allowed) {
+			return NextResponse.json(
+				{ error: "Too many attempts. Please try again in a few minutes." },
+				{ status: 429 },
 			);
 		}
 

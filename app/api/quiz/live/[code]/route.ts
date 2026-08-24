@@ -35,12 +35,29 @@ import type {
 	QuizQuestionRecord,
 	TeamLeaderboardEntry,
 } from "@/lib/quizzes/types";
+import { checkDbRateLimit } from "@/lib/rate-limit-db";
 
 type Context = { params: Promise<{ code: string }> };
 
 async function load(code: string) {
 	const context = await getApiContext();
 	if ("error" in context) return context;
+
+	// Throttle per user so a valid session can't be used to enumerate codes.
+	const allowed = await checkDbRateLimit(
+		`quizcode:${context.user.id}`,
+		30,
+		"1 minute",
+	);
+	if (!allowed) {
+		return {
+			error: NextResponse.json(
+				{ error: "Too many requests. Please slow down." },
+				{ status: 429 },
+			),
+		};
+	}
+
 	const { data: initialGame } = await context.db
 		.from("quiz_games")
 		.select(

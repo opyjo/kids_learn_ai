@@ -20,6 +20,10 @@ vi.mock("next/navigation", () => ({
 	redirect: redirectMock,
 }));
 
+vi.mock("next/headers", () => ({
+	headers: vi.fn(async () => new Headers({ "x-forwarded-for": "203.0.113.5" })),
+}));
+
 vi.mock("@/lib/supabase/admin", () => ({
 	getSupabaseAdminClient: vi.fn(),
 }));

@@ -79,9 +79,3 @@ export const createRateLimiter = (config: RateLimitConfig) => {
 		clear,
 	};
 };
-
-// Default rate limiter for contact form: 3 requests per hour
-export const contactRateLimiter = createRateLimiter({
-	windowMs: 60 * 60 * 1000, // 1 hour
-	maxRequests: 3,
-});

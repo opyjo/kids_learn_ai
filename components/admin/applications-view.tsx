@@ -23,6 +23,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { safeExternalUrl } from "@/lib/security/sanitize";
 
 export interface Application {
 	id: string;
@@ -431,15 +432,23 @@ export function ApplicationsView({
 												LinkedIn
 											</dt>
 											<dd>
-												<a
-													href={selected.linkedin_url}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="inline-flex items-center gap-1 text-blue-600 hover:underline dark:text-blue-400"
-												>
-													View profile
-													<ExternalLink className="h-3 w-3" />
-												</a>
+												{safeExternalUrl(selected.linkedin_url) ? (
+													<a
+														href={
+															safeExternalUrl(selected.linkedin_url) as string
+														}
+														target="_blank"
+														rel="noopener noreferrer"
+														className="inline-flex items-center gap-1 text-blue-600 hover:underline dark:text-blue-400"
+													>
+														View profile
+														<ExternalLink className="h-3 w-3" />
+													</a>
+												) : (
+													<span className="text-gray-500 dark:text-gray-400">
+														Blocked unsafe link
+													</span>
+												)}
 											</dd>
 										</div>
 									)}
