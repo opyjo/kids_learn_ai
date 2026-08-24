@@ -1142,4 +1142,493 @@ export const expandedArticles: ExpandedArticle[] = [
 			},
 		],
 	},
+	{
+		slug: "loops-and-conditionals-for-kids",
+		title:
+			"Loops and Conditionals: Teaching Kids the Logic Behind “Repeat” and “If”",
+		description:
+			"A step-by-step way to introduce loops and conditionals, the two ideas that turn a short line-by-line script into a real, decision-making program.",
+		category: "Projects",
+		readingTime: "6 min read",
+		date: "August 5, 2026",
+		publishedAt: "2026-08-05",
+		updatedAt: "2026-08-05",
+		visual: "code",
+		tone: "green",
+		intro:
+			"A program that only runs top to bottom, once, can only do so much. Loops let a child’s code repeat without retyping it. Conditionals let it choose between paths. Together they turn a short script into something that can react.",
+		takeaways: [
+			"A teaching order that introduces conditionals before loops so one idea doesn’t overload the other.",
+			"Three small projects that make repetition and decision-making visible.",
+			"The misconceptions kids most often build about “if” and “while,” and how to correct them.",
+		],
+		sections: [
+			{
+				title: "Why this feels harder than variables",
+				paragraphs: [
+					"A variable is a single idea: a name connected to a value. Loops and conditionals ask a child to imagine the computer skipping lines, repeating lines, or never reaching some lines at all. That is a real shift from reading code the way we read a sentence, in order, once.",
+					"Give that shift a name instead of rushing past it. Tell the learner directly: “Until now, the computer read every line once, in order. Starting today, some lines can run more than once, and some lines might not run at all.” Naming the change reduces confusion later.",
+				],
+			},
+			{
+				title: "Start with conditionals: teaching a program to choose",
+				paragraphs: [
+					"Introduce conditionals before loops. A conditional is a single decision, which is easier to trace by hand than a repeating one. Use a check a child already reasons about, such as whether a score is high enough to pass a level.",
+					"Walk through an if, then an if/else, then an if/elif/else, adding one branch at a time. At each step, ask the learner to pick a test value and predict which branch runs before you run the program.",
+				],
+				bullets: [
+					"if: one path runs only when a condition is true",
+					"if/else: exactly one of two paths always runs",
+					"if/elif/else: the first true condition wins, and the rest are skipped",
+				],
+				callout:
+					"Ask “which branch, and why?” before running the code. Prediction is what turns tracing into understanding.",
+			},
+			{
+				title: "Move to loops: teaching a program to repeat",
+				paragraphs: [
+					"Once a single decision feels comfortable, introduce repetition with a for loop over a small, countable range, such as printing a countdown from five. A for loop is easier to reason about first because it has a visible, fixed number of repeats.",
+					"Save while loops for once for loops feel automatic. A while loop repeats based on a condition rather than a count, which means a learner must also understand why the loop eventually has to stop.",
+				],
+				bullets: [
+					"for: repeat a known number of times",
+					"while: repeat until a condition becomes false",
+					"Ask: what has to change inside the loop for it to end?",
+				],
+			},
+			{
+				title: "Three small projects that combine the ideas",
+				paragraphs: [
+					"A guess-the-number game asks a player to keep guessing until they find a hidden value, combining a while loop with a conditional that checks each guess. A traffic-light simulator cycles through red, yellow, and green using a loop, then uses conditionals to print what a driver should do at each colour. A tally counter loops through a list of weather reports and uses a conditional to count how many days were rainy.",
+					"In each project, ask the learner to identify, out loud, which part repeats and which part decides. Separating those two questions keeps the two concepts distinct instead of blurring together.",
+				],
+				bullets: [
+					"Guess-the-number: which line repeats, and what makes it stop?",
+					"Traffic light: what decides which message gets printed?",
+					"Weather tally: what is being counted, and where does that count live?",
+				],
+			},
+			{
+				title: "Correct the misconceptions early",
+				paragraphs: [
+					"Three mistakes appear consistently. First, learners often expect a for loop over a range of five to print the number five, rather than repeat five times starting from zero—walk through the actual sequence of values by hand. Second, learners often write an infinite while loop because nothing inside the loop changes the condition being checked. Third, learners often stack several if statements when they mean elif, which can cause more than one branch to run.",
+					"Each of these is best caught by tracing the program by hand, line by line, before running it. A prediction that turns out wrong is more informative than a program that happens to work.",
+				],
+			},
+			{
+				title: "Finish with an explanation, not just working code",
+				paragraphs: [
+					"Ask the learner to choose one project and explain, without reading the code aloud, what repeats, what gets decided, and what makes the repetition stop. That explanation is stronger evidence of understanding than a program that runs correctly by trial and error.",
+					"When these ideas feel solid, connect them to the guided lessons in Decision Maker and Loop Magic, or let the learner combine loops and conditionals into a larger game or quiz project.",
+				],
+			},
+		],
+		relatedLinks: [
+			{
+				label: "Explore the Decision Maker lessons",
+				href: "/lessons/term-3-decision-maker",
+			},
+			{
+				label: "Explore the Loop Magic lessons",
+				href: "/lessons/term-6-loop-magic",
+			},
+			{
+				label: "Try five Python variable projects first",
+				href: "/blog/python-variable-projects-for-kids",
+			},
+			{ label: "Practise in the Python playground", href: "/playground" },
+		],
+		sources: [
+			{
+				label: "The official Python tutorial: control flow",
+				href: "https://docs.python.org/3/tutorial/controlflow.html",
+			},
+		],
+	},
+	{
+		slug: "teaching-kids-prompt-engineering",
+		title:
+			"Teaching Kids to Write Better AI Prompts: A Beginner’s Guide to Prompt Engineering",
+		description:
+			"A simple structure that helps children write clearer AI prompts, revise weak ones, and understand why prompting is different from searching.",
+		category: "AI Literacy",
+		readingTime: "6 min read",
+		date: "August 10, 2026",
+		publishedAt: "2026-08-10",
+		updatedAt: "2026-08-10",
+		visual: "lightbulb",
+		tone: "purple",
+		intro:
+			"The way a question is asked changes the answer an AI tool gives. Teaching a child to notice that, and to revise a weak prompt into a clearer one, is a real literacy skill—not a shortcut around thinking.",
+		takeaways: [
+			"A four-part structure kids can use to write a clearer prompt.",
+			"Why vague prompts produce vague or invented answers, with a side-by-side example.",
+			"Why prompting is not the same as searching, and why that distinction matters.",
+		],
+		sections: [
+			{
+				title: "Prompting is a skill, not a trick",
+				paragraphs: [
+					"Some adults treat clever prompts as a way to “outsmart” an AI tool. A more useful frame for children is that a prompt is an instruction, and clearer instructions produce more useful results—the same way a clearer question gets a more useful answer from a teacher or a librarian.",
+					"That framing keeps the child in charge of the thinking. The AI tool is responding to the request it was given, not reading the child’s mind.",
+				],
+			},
+			{
+				title: "The four parts of a clear prompt",
+				paragraphs: [
+					"A prompt gets clearer when it states the goal, gives context, names a format, and sets a limit. A child does not need all four every time, but knowing the four gives them somewhere to go when an answer misses the mark.",
+				],
+				bullets: [
+					"Goal: what do I actually want the tool to do?",
+					"Context: what does it need to know to help me?",
+					"Format: how should the answer be organized—a list, a paragraph, three sentences?",
+					"Constraint: what should it avoid, or how short should it be?",
+				],
+				callout:
+					"Example: “Explain how volcanoes erupt, for a 10-year-old, in three sentences, without scary details.” Each part is doing a job.",
+			},
+			{
+				title: "Why vague prompts go wrong",
+				paragraphs: [
+					"A vague prompt such as “tell me about space” leaves the tool to guess the age, the purpose, and the length the child actually wants. It fills those gaps with an average, generic response, which is often too broad to be useful and sometimes drifts into details that are wrong or unnecessary.",
+					"Comparing a vague prompt and a specific one side by side, using the same topic, makes the difference concrete. Ask the learner which answer they could actually use for their project, and why.",
+				],
+			},
+			{
+				title: "Treat the first answer as a draft, not a final answer",
+				paragraphs: [
+					"Children often accept the first response as finished. Teach them instead to keep the conversation going: “make this shorter,” “explain that part again a different way,” or “give me one example.” Revising a prompt after seeing the first answer is normal, expected practice—not a sign that the first attempt failed.",
+					"This habit also builds patience. A single perfect prompt is rare; a short back-and-forth usually gets closer to what the learner actually needed.",
+				],
+			},
+			{
+				title: "Prompting is not the same as searching",
+				paragraphs: [
+					"A search engine finds existing pages and ranks them by relevance. A generative AI tool calculates a new response from patterns in its training data, which means it can produce a fluent answer that includes an invented fact, an outdated detail, or a plausible-sounding source that does not exist.",
+					"Children should understand that a well-written prompt makes an answer clearer and more useful, but it does not make the answer automatically true. A good prompt and a fact-check are two different, complementary skills.",
+				],
+			},
+			{
+				title: "Practice activities by age",
+				paragraphs: [
+					"Younger children can take one vague prompt and revise it three times, comparing what changed in the answer each time. Older children can write two versions of the same prompt—one vague, one using all four parts—and explain in their own words which parts of the better answer came from which part of the prompt.",
+					"Keep the same privacy habits in place during practice: no personal names, addresses, or private details in any prompt, regardless of how well it is written.",
+				],
+			},
+		],
+		relatedLinks: [
+			{
+				label: "Help kids check an AI answer before trusting it",
+				href: "/blog/how-kids-can-check-ai-answers",
+			},
+			{
+				label: "Explain AI in plain English",
+				href: "/blog/how-to-explain-ai-to-a-child",
+			},
+			{
+				label: "Use the AI literacy classroom checklist",
+				href: "/blog/ai-literacy-classroom-checklist",
+			},
+		],
+		sources: [
+			{
+				label: "UNESCO AI competency framework for students",
+				href: "https://www.unesco.org/en/articles/ai-competency-framework-students",
+			},
+			{
+				label: "UNESCO guidance for generative AI in education and research",
+				href: "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research",
+			},
+		],
+	},
+	{
+		slug: "spotting-ai-misinformation-kids",
+		title:
+			"Spotting AI-Generated Misinformation and Deepfakes: A Media Literacy Guide for Kids",
+		description:
+			"Practical warning signs and a simple pause-and-check routine to help children question AI-generated images, video, audio, and viral claims.",
+		category: "AI Safety",
+		readingTime: "6 min read",
+		date: "August 14, 2026",
+		publishedAt: "2026-08-14",
+		updatedAt: "2026-08-14",
+		visual: "shield",
+		tone: "coral",
+		intro:
+			"AI tools can now generate a convincing photo, voice clip, or video of someone doing or saying something that never happened. Children need practical habits for pausing and checking, not a fear of every image they see online.",
+		takeaways: [
+			"Concrete warning signs in AI-generated images, video, audio, and text.",
+			"A four-step pause-and-check routine to use before believing or sharing something.",
+			"What to do if a deepfake or false claim involves someone the child knows.",
+		],
+		sections: [
+			{
+				title: "Why this belongs alongside other AI-safety habits",
+				paragraphs: [
+					"Earlier AI-safety habits focus on what a child shares. This one focuses on what a child believes and forwards. Canadian media-literacy organizations such as MediaSmarts note that authenticating information online is now a routine, teachable skill rather than a specialist task.",
+					"The goal is not suspicion of everything. It is a short pause before an emotional reaction turns into a share.",
+				],
+			},
+			{
+				title: "Warning signs in images and video",
+				paragraphs: [
+					"AI-generated or altered images and video often contain small inconsistencies that are easier to notice once a child knows to look for them.",
+				],
+				bullets: [
+					"Hands, teeth, ears, or background text that look warped or wrong",
+					"Lighting or shadows that don’t match between a person and their background",
+					"Skin that looks unusually smooth, or blinking that looks unnatural in video",
+					"Lip movements that don’t quite match the audio",
+				],
+			},
+			{
+				title: "Warning signs in audio and text claims",
+				paragraphs: [
+					"Cloned voices can sound flat, oddly paced, or emotionally mismatched to what is being said. Fabricated quotes and viral claims often share a pattern: they provoke a strong emotion quickly and add pressure to share immediately, such as “before this gets deleted.”",
+					"That urgency is itself a signal. Genuine news rarely depends on being shared within minutes.",
+				],
+			},
+			{
+				title: "Use a pause-and-check routine",
+				paragraphs: [
+					"MediaSmarts’ Break the Fake approach centres on finding and verifying the original source before trusting a claim. A simplified version works well for children: stop before sharing, find where it actually came from, check whether another reliable source reports the same thing, and show a trusted adult anything that still feels uncertain.",
+				],
+				bullets: [
+					"Stop: notice the urge to share immediately, and pause",
+					"Source: where did this actually come from—can you trace it back?",
+					"Search: does a reliable source report the same thing?",
+					"Show: bring anything uncertain to a trusted adult",
+				],
+				callout:
+					"If a strong emotional reaction shows up fast, that is exactly the moment to slow down, not speed up.",
+			},
+			{
+				title: "If it involves someone the child knows",
+				paragraphs: [
+					"A deepfake or fabricated quote about a classmate, friend, or family member needs calm, careful handling. Do not forward or reshare it, even to “warn” others. Save a copy as evidence if it is safe to do so, tell a trusted adult right away, and report it to the platform where it appeared.",
+					"UNICEF’s guidance on AI and children emphasizes protection and the child’s well-being above all else in situations like this—the priority is supporting the person affected, not investigating on your own.",
+				],
+			},
+			{
+				title: "Build the habit before it’s needed",
+				paragraphs: [
+					"Practise with real, publicly documented examples of deepfakes or misinformation rather than waiting for a stressful moment to teach the routine for the first time. Ask the child to explain, out loud, which warning sign they noticed and which step of the routine they would use next.",
+					"A rehearsed habit is far more reliable in the moment than a rule the child has only heard about once.",
+				],
+			},
+		],
+		relatedLinks: [
+			{
+				label: "Read the AI chatbot privacy checklist",
+				href: "/blog/ai-chatbot-privacy-checklist-canadian-families",
+			},
+			{
+				label: "Help kids check an AI answer before trusting it",
+				href: "/blog/how-kids-can-check-ai-answers",
+			},
+			{
+				label: "Read the complete family AI safety guide",
+				href: "/blog/safe-ai-use-at-home",
+			},
+		],
+		sources: [
+			{
+				label: "MediaSmarts: Break the Fake",
+				href: "https://mediasmarts.ca/break-fake",
+			},
+			{
+				label: "UNICEF policy guidance on AI for children",
+				href: "https://www.unicef.org/innocenti/reports/policy-guidance-ai-children",
+			},
+		],
+	},
+	{
+		slug: "girls-in-canadian-stem",
+		title:
+			"Closing Canada’s Coding Gender Gap: Practical Ways to Support Girls in STEM",
+		description:
+			"What Canadian data shows about where girls leave the STEM pipeline, and concrete family, classroom, and community steps that keep them engaged.",
+		category: "Community",
+		readingTime: "7 min read",
+		date: "August 18, 2026",
+		publishedAt: "2026-08-18",
+		updatedAt: "2026-08-18",
+		visual: "sparkles",
+		tone: "blue",
+		intro:
+			"Girls are not missing from STEM because of interest alone. Canadian data points to a gap that widens through school, shaped by confidence, representation, and everyday classroom habits that families and educators can actually change.",
+		takeaways: [
+			"What Canadian data shows about where the gender gap opens in STEM fields.",
+			"Concrete classroom and family practices that keep girls engaged in coding.",
+			"Where established Canadian programs and role models can add support.",
+		],
+		sections: [
+			{
+				title: "What the numbers show",
+				paragraphs: [
+					"Statistics Canada research on gender and STEM programs found that women make up the majority of young university graduates overall, yet remain underrepresented across STEM fields—and the gap is not even across fields. Representation is comparatively higher in biological sciences and lower in mathematics, physical sciences, engineering, and especially computer and information sciences.",
+					"That unevenness matters. It suggests the gap is not about general interest in learning, but about something specific happening around computing and technical fields.",
+				],
+			},
+			{
+				title: "Where the gap opens",
+				paragraphs: [
+					"Researchers point to a mix of contributing factors: gender stereotypes about who technology is “for,” a shortage of visible role models in computing, and classroom dynamics where one group ends up doing most of the typing while another mostly watches.",
+					"This site’s age range, 9 to 13, sits right in the window where confidence gaps often start to form. That makes it a genuinely useful window for intervention, not a coincidence to work around.",
+				],
+			},
+			{
+				title: "What families can do",
+				paragraphs: [
+					"Small, repeated choices matter more than a single conversation about “girls in tech.”",
+				],
+				bullets: [
+					"Give equal turns at the keyboard during shared coding time",
+					"Avoid casually gendering technology as a “boy thing” or “girl thing”",
+					"Point out real women and girls working in computing and AI when they come up",
+					"Praise persistence and debugging, not just quick natural talent",
+				],
+			},
+			{
+				title: "What educators can do",
+				paragraphs: [
+					"Inclusive classroom design, described in more depth in our guide to building an inclusive AI classroom, applies directly here. Rotate roles during pair programming so the same student is not always driving. Use project examples and prompts that appeal across interests rather than defaulting to the same narrow set of themes.",
+					"Avoid framing early coding activities as a competition. A comparison-heavy classroom tends to discourage students who are still building confidence, regardless of ability.",
+				],
+			},
+			{
+				title: "Where community programs can help",
+				paragraphs: [
+					"Canada has established organizations working specifically on this gap. Actua’s National Girls Program runs girls-focused STEM sessions in communities across the country, pairing participants with instructors who serve as visible role models.",
+					"A single program will not close a national gap on its own, but combined with consistent habits at home and in the classroom, it adds real, structured exposure that many girls otherwise don’t get.",
+				],
+			},
+			{
+				title: "Keep the goal specific",
+				paragraphs: [
+					"The aim is not to convince every girl to pursue a computing career. It is to make sure that trying coding, sticking with a hard bug, and imagining a future in it feel equally available—regardless of gender.",
+					"A low-pressure trial class, with an instructor who actively distributes turns and attention, is a reasonable and concrete first step for a family wondering where to begin.",
+				],
+			},
+		],
+		relatedLinks: [
+			{
+				label: "Support Black youth in Canadian STEM",
+				href: "/blog/black-youth-stem-canada",
+			},
+			{
+				label: "Build an inclusive AI classroom",
+				href: "/blog/building-inclusive-ai-classrooms",
+			},
+			{ label: "Book a free trial class", href: "/inquiry" },
+		],
+		sources: [
+			{
+				label:
+					"Statistics Canada: Persistence and representation of women in STEM programs",
+				href: "https://www150.statcan.gc.ca/n1/pub/75-006-x/2019001/article/00006-eng.htm",
+			},
+			{
+				label: "Actua’s National Girls Program",
+				href: "https://www.actua.ca/en/programs/national-girls-program/",
+			},
+		],
+	},
+	{
+		slug: "minecraft-roblox-coding-gateway",
+		title: "Turning Minecraft and Roblox Time Into Coding Time",
+		description:
+			"An honest look at what Minecraft and Roblox actually teach, and simple ways to move a child from playing games to building and scripting inside them.",
+		category: "For Families",
+		readingTime: "6 min read",
+		date: "August 22, 2026",
+		publishedAt: "2026-08-22",
+		updatedAt: "2026-08-22",
+		visual: "family",
+		tone: "yellow",
+		intro:
+			"Many children already spend hours inside Minecraft or Roblox. That time can genuinely connect to programming—but only if it moves from consuming content toward building and scripting, and parents should know the difference.",
+		takeaways: [
+			"The real skill overlap between game building and programming, and its limits.",
+			"Specific bridge activities that move a child from playing to creating.",
+			"Questions to ask before treating a “coding game” as an actual coding lesson.",
+		],
+		sections: [
+			{
+				title: "What playing actually teaches",
+				paragraphs: [
+					"Regular Minecraft or Roblox play builds spatial reasoning, planning, and persistence through failure—all useful habits. Minecraft’s redstone system even behaves like simple logic circuits, and building one is a genuine, hands-on introduction to how conditions and signals work.",
+					"Be honest about the limit, though: most time spent playing is not writing code, and a child can put in hundreds of hours without touching anything resembling a program. Enjoying a game and learning to build one are related but different activities.",
+				],
+			},
+			{
+				title: "The bridge activities that actually count",
+				paragraphs: [
+					"A few activities move a child from playing toward creating. In Minecraft, building a redstone circuit—an AND gate or a simple repeating clock—translates directly into the idea of a condition controlling an outcome. Code.org’s Minecraft Hour of Code tutorials use block-based commands to move a character and solve puzzles, which is a real, structured first step into programming logic.",
+					"In Roblox, Roblox Studio lets a child build a game world, and its scripting layer uses Lua, a real text-based programming language, once a learner is ready to move past drag-and-drop building.",
+				],
+				bullets: [
+					"Minecraft redstone: an early, physical introduction to conditions and logic",
+					"Minecraft Hour of Code: block-based commands and puzzles",
+					"Roblox Studio: game building plus optional Lua scripting",
+				],
+			},
+			{
+				title: "A simple progression from blocks to real code",
+				paragraphs: [
+					"A workable path looks like this: block-based tutorials first, to build comfort with sequences, loops, and conditions without worrying about typing syntax exactly right. Then a move to a real text-based language, where the same ideas—storing values, making decisions, repeating actions—reappear in Python or Lua.",
+					"That progression mirrors how this site’s own curriculum is sequenced, moving from foundational Python concepts toward more independent projects over time.",
+				],
+			},
+			{
+				title: "Questions to ask about a “learn to code” game",
+				paragraphs: [
+					"Not every game or app that claims to teach coding actually does, especially once a child has outgrown the beginner level.",
+				],
+				bullets: [
+					"Does the child ever write or edit actual code, or only drag pre-made blocks indefinitely?",
+					"Does the difficulty increase, or does every level feel the same?",
+					"Can the child explain, in their own words, what one block or line of code does?",
+					"Is game time balanced with other activities, in line with general digital-media guidance?",
+				],
+			},
+			{
+				title: "A weekend project to try together",
+				paragraphs: [
+					"Build one small redstone circuit together and ask the child to predict what will happen before testing it, then connect it explicitly to the idea of an “if” statement in code. Or work through a single Minecraft Hour of Code tutorial together, pausing before each run to predict what the block sequence will do.",
+					"The goal of the weekend project is the same predict-then-test habit used throughout this site’s lessons—game or no game.",
+				],
+			},
+			{
+				title: "Know when to graduate to real code",
+				paragraphs: [
+					"A few signs suggest a child is ready to move beyond block-based games: they finish tutorials quickly and want more, they start asking unprompted “how do I make it do X” questions, or they want to build something that isn’t offered as a template.",
+					"At that point, a structured beginner Python course gives the child a real, general-purpose language rather than skills tied to one game’s built-in tools.",
+				],
+				callout:
+					"Enjoying Minecraft or Roblox is a fine reason to try coding. It is not, by itself, evidence that a child already knows how.",
+			},
+		],
+		relatedLinks: [
+			{
+				label: "Start with Term 1: Hello Python",
+				href: "/lessons/term-1-hello-python",
+			},
+			{
+				label: "Support a young coder without being the expert",
+				href: "/blog/parents-guide-supporting-young-coders",
+			},
+			{ label: "Practise in the Python playground", href: "/playground" },
+		],
+		sources: [
+			{
+				label: "Code.org: Minecraft Hour of Code",
+				href: "https://code.org/hour-of-code/minecraft",
+			},
+			{
+				label: "Canadian Paediatric Society: healthy digital-media use",
+				href: "https://cps.ca/documents/position/digital-media",
+			},
+		],
+	},
 ];
