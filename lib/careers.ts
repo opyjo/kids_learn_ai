@@ -1,4 +1,3 @@
-// Recruitment stays closed unless it is explicitly enabled for a deployment.
-// Set NEXT_PUBLIC_CAREERS_OPEN=true and redeploy to reopen the careers funnel.
-export const CAREERS_OPEN =
-	process.env.NEXT_PUBLIC_CAREERS_OPEN?.toLowerCase() === "true";
+// Recruitment is intentionally closed for the current hiring round.
+// Change this to true when applications are ready to reopen.
+export const CAREERS_OPEN = false;
