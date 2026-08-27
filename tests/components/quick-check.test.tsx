@@ -13,7 +13,11 @@ const question = {
 	time_limit_seconds: 30,
 };
 const payload = {
-	quiz: { id: "quiz-1", title: "Quick Check", description: "One question." },
+	quiz: {
+		id: "quiz-1",
+		title: "Math Wizard Homework Challenge",
+		description: "One question.",
+	},
 	questions: [question],
 	attempts: [],
 	canAttempt: true,
@@ -54,9 +58,10 @@ describe("QuickCheck", () => {
 		});
 
 		render(<QuickCheck lessonId={lessonId} signedIn={true} />);
-		fireEvent.click(
-			await screen.findByRole("button", { name: /need a hint/i }),
-		);
+		expect(
+			await screen.findByText("Math Wizard Homework Challenge"),
+		).toBeInTheDocument();
+		fireEvent.click(screen.getByRole("button", { name: /need a hint/i }));
 		expect(screen.getByText(/maths, not text/i)).toBeInTheDocument();
 
 		fireEvent.click(screen.getByRole("radio", { name: "4" }));
