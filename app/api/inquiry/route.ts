@@ -10,6 +10,7 @@ import {
 	FALL_2026_OFFER,
 	getBeginnerCohortDetails,
 } from "@/lib/marketing/cohort-offer";
+import { checkDbRateLimit } from "@/lib/rate-limit-db";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -44,31 +45,6 @@ const inquirySchema = z.object({
 	attribution: campaignAttributionSchema.optional(),
 });
 
-// Rate limiting map
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
-const MAX_REQUESTS_PER_WINDOW = 5;
-
-const checkRateLimit = (identifier: string): boolean => {
-	const now = Date.now();
-	const userLimit = rateLimitMap.get(identifier);
-
-	if (!userLimit || now > userLimit.resetTime) {
-		rateLimitMap.set(identifier, {
-			count: 1,
-			resetTime: now + RATE_LIMIT_WINDOW,
-		});
-		return true;
-	}
-
-	if (userLimit.count >= MAX_REQUESTS_PER_WINDOW) {
-		return false;
-	}
-
-	userLimit.count++;
-	return true;
-};
-
 const getExperienceLabel = (experience: string): string => {
 	switch (experience) {
 		case "none":
@@ -91,7 +67,7 @@ export const POST = async (request: NextRequest) => {
 			"unknown";
 
 		// Check rate limit
-		if (!checkRateLimit(ip)) {
+		if (!(await checkDbRateLimit(`inquiry:${ip}`, 5, "1 hour"))) {
 			return NextResponse.json(
 				{
 					error: "Too many requests. Please try again later.",

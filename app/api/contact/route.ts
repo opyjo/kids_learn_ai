@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
-import { contactRateLimiter } from "@/lib/rate-limit";
+import { checkDbRateLimit } from "@/lib/rate-limit-db";
 import { contactFormSchema } from "@/lib/schemas/contact";
 
 // Initialize Resend
@@ -16,7 +16,7 @@ export const POST = async (request: NextRequest) => {
 			"unknown";
 
 		// Check rate limit
-		if (!contactRateLimiter.checkRateLimit(ip)) {
+		if (!(await checkDbRateLimit(`contact:${ip}`, 3, "1 hour"))) {
 			return NextResponse.json(
 				{
 					error: "Too many requests. Please try again later.",

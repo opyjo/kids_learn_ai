@@ -1,8 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { isCheckedConsent, LEGAL_CONSENT_VERSIONS } from "@/lib/legal/consent";
+import { checkAllRateLimits } from "@/lib/rate-limit-db";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -10,6 +12,16 @@ type ActionState = {
 	error?: string;
 	success?: boolean;
 } | null;
+
+const TOO_MANY_ATTEMPTS =
+	"Too many attempts. Please wait a few minutes and try again.";
+
+async function getClientIp(): Promise<string> {
+	const headerList = await headers();
+	const forwarded = headerList.get("x-forwarded-for");
+	if (forwarded) return forwarded.split(",")[0].trim();
+	return headerList.get("x-real-ip") || "unknown";
+}
 
 function withAnalyticsEvent(
 	path: string,
@@ -33,6 +45,19 @@ export async function loginAction(
 	}
 
 	try {
+		const ip = await getClientIp();
+		const allowed = await checkAllRateLimits([
+			{ identifier: `login:ip:${ip}`, limit: 20, windowInterval: "15 minutes" },
+			{
+				identifier: `login:id:${identifier.toLowerCase()}`,
+				limit: 8,
+				windowInterval: "15 minutes",
+			},
+		]);
+		if (!allowed) {
+			return { error: TOO_MANY_ATTEMPTS };
+		}
+
 		const supabase = await getSupabaseServerClient();
 		let email = identifier.toLowerCase();
 
@@ -165,6 +190,14 @@ export async function signupAction(
 	}
 
 	try {
+		const ip = await getClientIp();
+		const allowed = await checkAllRateLimits([
+			{ identifier: `signup:ip:${ip}`, limit: 5, windowInterval: "1 hour" },
+		]);
+		if (!allowed) {
+			return { error: TOO_MANY_ATTEMPTS };
+		}
+
 		const supabase = await getSupabaseServerClient();
 		const siteUrl = (
 			process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
@@ -257,6 +290,19 @@ export async function forgotPasswordAction(
 	}
 
 	try {
+		const ip = await getClientIp();
+		const allowed = await checkAllRateLimits([
+			{ identifier: `pwreset:ip:${ip}`, limit: 5, windowInterval: "1 hour" },
+			{
+				identifier: `pwreset:email:${email.trim().toLowerCase()}`,
+				limit: 3,
+				windowInterval: "1 hour",
+			},
+		]);
+		if (!allowed) {
+			return { error: TOO_MANY_ATTEMPTS };
+		}
+
 		const supabase = await getSupabaseServerClient();
 
 		const origin = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";

@@ -2,6 +2,12 @@ import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 import { CAREERS_OPEN } from "@/lib/careers";
+import { checkDbRateLimit } from "@/lib/rate-limit-db";
+import {
+	escapeHtml,
+	isSafeExternalUrl,
+	safeFilename,
+} from "@/lib/security/sanitize";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 
 // Initialize Resend
@@ -57,34 +63,18 @@ const applicationSchema = z.object({
 	]),
 	isAtLeast18: z.boolean().default(false),
 	canCommitWeekdays: z.boolean().default(false),
-	linkedinUrl: z.string().trim().url().optional().or(z.literal("")),
+	linkedinUrl: z
+		.string()
+		.trim()
+		.url()
+		.refine(
+			isSafeExternalUrl,
+			"LinkedIn URL must start with http:// or https://",
+		)
+		.optional()
+		.or(z.literal("")),
 	resume: resumeSchema,
 });
-
-// Rate limiting map
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
-const MAX_REQUESTS_PER_WINDOW = 3;
-
-const checkRateLimit = (identifier: string): boolean => {
-	const now = Date.now();
-	const userLimit = rateLimitMap.get(identifier);
-
-	if (!userLimit || now > userLimit.resetTime) {
-		rateLimitMap.set(identifier, {
-			count: 1,
-			resetTime: now + RATE_LIMIT_WINDOW,
-		});
-		return true;
-	}
-
-	if (userLimit.count >= MAX_REQUESTS_PER_WINDOW) {
-		return false;
-	}
-
-	userLimit.count++;
-	return true;
-};
 
 const getYearLabel = (year: string): string => {
 	switch (year) {
@@ -156,7 +146,7 @@ export const POST = async (request: NextRequest) => {
 			"unknown";
 
 		// Check rate limit
-		if (!checkRateLimit(ip)) {
+		if (!(await checkDbRateLimit(`careers:${ip}`, 3, "1 hour"))) {
 			return NextResponse.json(
 				{
 					error: "Too many requests. Please try again later.",
@@ -195,7 +185,7 @@ export const POST = async (request: NextRequest) => {
 		const attachments = validatedData.resume
 			? [
 					{
-						filename: validatedData.resume.name,
+						filename: safeFilename(validatedData.resume.name),
 						content: validatedData.resume.content,
 					},
 				]
@@ -219,7 +209,9 @@ export const POST = async (request: NextRequest) => {
 					is_at_least_18: validatedData.isAtLeast18,
 					can_commit_weekdays: validatedData.canCommitWeekdays,
 					linkedin_url: validatedData.linkedinUrl || null,
-					resume_filename: validatedData.resume?.name || null,
+					resume_filename: validatedData.resume
+						? safeFilename(validatedData.resume.name)
+						: null,
 					resume_content_type: validatedData.resume?.type || null,
 					resume_content: validatedData.resume?.content || null,
 				});
@@ -349,12 +341,12 @@ export const POST = async (request: NextRequest) => {
                 <div class="section-title">👤 Applicant Information</div>
                 <div class="field">
                   <div class="label">Name</div>
-                  <div class="value" style="font-size: 20px; font-weight: 600;">${validatedData.fullName}</div>
+                  <div class="value" style="font-size: 20px; font-weight: 600;">${escapeHtml(validatedData.fullName)}</div>
                 </div>
                 <div class="field">
                   <div class="label">Email</div>
                   <div class="value">
-                    <a href="mailto:${validatedData.email}">${validatedData.email}</a>
+                    <a href="mailto:${encodeURIComponent(validatedData.email)}">${escapeHtml(validatedData.email)}</a>
                   </div>
                 </div>
                 ${
@@ -363,7 +355,7 @@ export const POST = async (request: NextRequest) => {
                 <div class="field">
                   <div class="label">LinkedIn</div>
                   <div class="value">
-                    <a href="${validatedData.linkedinUrl}" target="_blank">${validatedData.linkedinUrl}</a>
+                    <a href="${escapeHtml(validatedData.linkedinUrl)}" target="_blank">${escapeHtml(validatedData.linkedinUrl)}</a>
                   </div>
                 </div>
                 `
@@ -376,11 +368,11 @@ export const POST = async (request: NextRequest) => {
                 <div class="section-title">🎓 Education</div>
                 <div class="field">
                   <div class="label">University</div>
-                  <div class="value">${validatedData.university}</div>
+                  <div class="value">${escapeHtml(validatedData.university)}</div>
                 </div>
                 <div class="field">
                   <div class="label">Program / Major</div>
-                  <div class="value">${validatedData.program}</div>
+                  <div class="value">${escapeHtml(validatedData.program)}</div>
                 </div>
                 <div class="field">
                   <div class="label">Year of Study</div>
@@ -402,7 +394,7 @@ export const POST = async (request: NextRequest) => {
 										? `
                 <div class="field">
                   <div class="label">Teaching/Tutoring Experience</div>
-                  <div class="value" style="white-space: pre-wrap;">${validatedData.teachingExperience}</div>
+                  <div class="value" style="white-space: pre-wrap;">${escapeHtml(validatedData.teachingExperience)}</div>
                 </div>
                 `
 										: ""
@@ -440,7 +432,7 @@ export const POST = async (request: NextRequest) => {
               <!-- Why Interested -->
               <div class="section">
                 <div class="section-title">💭 Why They Want to Teach Kids</div>
-                <div class="value" style="white-space: pre-wrap;">${validatedData.whyInterested}</div>
+                <div class="value" style="white-space: pre-wrap;">${escapeHtml(validatedData.whyInterested)}</div>
               </div>
 
               ${
@@ -452,7 +444,7 @@ export const POST = async (request: NextRequest) => {
                   <span style="font-size: 24px;">📎</span>
                   <div>
                     <div style="font-weight: 600; color: #92400e;">Resume Attached</div>
-                    <div style="font-size: 14px; color: #b45309;">${validatedData.resume.name}</div>
+                    <div style="font-size: 14px; color: #b45309;">${escapeHtml(validatedData.resume.name)}</div>
                   </div>
                 </div>
               </div>
@@ -462,8 +454,8 @@ export const POST = async (request: NextRequest) => {
 
               <!-- Action -->
               <div style="text-align: center; margin-top: 20px;">
-                <a href="mailto:${validatedData.email}?subject=Your Internship Application at Kids Learn AI&body=Hi ${validatedData.fullName},%0D%0A%0D%0AThank you for applying to the Instructor Intern role at Kids Learn AI!%0D%0A%0D%0A" class="action-btn">
-                  Reply to ${validatedData.fullName}
+                <a href="mailto:${encodeURIComponent(validatedData.email)}?subject=Your Internship Application at Kids Learn AI&body=Hi ${encodeURIComponent(validatedData.fullName)},%0D%0A%0D%0AThank you for applying to the Instructor Intern role at Kids Learn AI!%0D%0A%0D%0A" class="action-btn">
+                  Reply to ${escapeHtml(validatedData.fullName)}
                 </a>
               </div>
 
