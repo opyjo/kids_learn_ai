@@ -1,7 +1,8 @@
 import { withSentryConfig } from "@sentry/nextjs";
 
-const careersOpen =
-	process.env.NEXT_PUBLIC_CAREERS_OPEN?.toLowerCase() === "true";
+// Keep the application route aligned with the closed recruitment state in
+// lib/careers.ts. Change both flags when applications are ready to reopen.
+const careersOpen = false;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

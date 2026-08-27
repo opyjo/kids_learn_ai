@@ -33,9 +33,11 @@ function defaultAnswer(question: StudentQuestion): string | string[] {
 function Shell({
 	badge,
 	children,
+	title = "Quick Check",
 }: {
 	badge?: React.ReactNode;
 	children: React.ReactNode;
+	title?: string;
 }) {
 	return (
 		<div className="rounded-xl border border-purple-200/60 bg-purple-50/70 p-4 dark:border-purple-900/60 dark:bg-purple-950/20">
@@ -43,7 +45,7 @@ function Shell({
 				<div className="flex items-center gap-2.5">
 					<Brain className="h-4 w-4 text-purple-600" />
 					<h3 className="text-sm font-semibold text-purple-800 dark:text-purple-200">
-						Quick Check
+						{title}
 					</h3>
 				</div>
 				{badge}
@@ -209,7 +211,7 @@ export function QuickCheck({
 
 	if (result) {
 		return (
-			<Shell badge={badge}>
+			<Shell badge={badge} title={data.quiz.title}>
 				<div className="space-y-3 py-2 text-center">
 					<p className="text-4xl" aria-hidden>
 						{result.percentage === 100 ? "🌟" : result.passed ? "🎉" : "💪"}
@@ -240,7 +242,7 @@ export function QuickCheck({
 
 	if (!playing) {
 		return (
-			<Shell badge={badge}>
+			<Shell badge={badge} title={data.quiz.title}>
 				<div className="space-y-3 py-2 text-center">
 					{bestPassed ? (
 						<>
@@ -277,7 +279,7 @@ export function QuickCheck({
 
 	if (!question) {
 		return (
-			<Shell badge={badge}>
+			<Shell badge={badge} title={data.quiz.title}>
 				<p className="text-sm text-muted-foreground">
 					This quiz needs questions before it can be played.
 				</p>
@@ -286,7 +288,7 @@ export function QuickCheck({
 	}
 
 	return (
-		<Shell badge={badge}>
+		<Shell badge={badge} title={data.quiz.title}>
 			<div className="space-y-4">
 				<p className="text-sm text-muted-foreground">
 					{data.quiz.description ||

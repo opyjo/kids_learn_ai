@@ -43,19 +43,82 @@ class_activities: |
 
   Finish by writing one original buggy snippet for another student to diagnose.
 take_home_assignment: |
-  ## Homework: Three Bug Case Reports
+  ## Homework: Math Wizard Readiness Challenge
 
-  Diagnose and repair three separate snippets supplied in the lesson: one conversion bug, one calculation bug, and one output bug.
+  This take-home assignment replaces the usual Lesson 7 homework. Complete both parts before the calculator project begins. Plan for about 60–75 minutes in total; you may split the work across two days.
 
-  For each report include:
+  ### Part A — Platform quiz
 
-  - the original symptom;
-  - the bug category;
-  - the corrected line or lines;
-  - two planned tests with expected results; and
-  - one sentence explaining why the tests prove the fix.
+  Open the **Quick Check** tab for this lesson and complete the 20-question **Math Wizard Homework Challenge — Lessons 1–7**.
 
-  Do not submit another completed calculator. The calculator build begins next lesson.
+  - The quiz is open-notes: you may use Lessons 1–7, your own programs, and your notes.
+  - Work independently. An adult may read the instructions, but the answers must be yours.
+  - Do not ask another person or an AI tool to answer the questions for you.
+  - You have two attempts. Read the explanation after each question before using a second attempt.
+
+  ### Part B — Trinket: Event Sharing Tool
+
+  Build a program that helps a group buy and share identical items. It must ask for:
+
+  1. the decimal price of one item;
+  2. the whole number of items; and
+  3. the whole number of friends sharing them.
+
+  Calculate and save:
+
+  - the total cost using `*`;
+  - the cost per friend using `/`;
+  - the complete items per friend using `//`; and
+  - the items left over using `%`.
+
+  Your program must also:
+
+  - use `float()` for the price and `int()` for both counts;
+  - use clear variable names and comments for each program stage;
+  - display labelled results with f-strings;
+  - display money to exactly two decimal places; and
+  - state that the number of friends must be greater than zero.
+
+  Start from this scaffold:
+
+  ```python
+  # EVENT SHARING TOOL
+  # Builder:
+
+  # 1. Welcome
+
+  # 2. Collect and convert
+  item_price =
+  number_of_items =
+  number_of_friends =
+
+  # 3. Calculate and save
+  total_cost =
+  cost_per_friend =
+  items_per_friend =
+  items_left_over =
+
+  # 4. Communicate clear results
+
+  # 5. Test evidence and reflection
+  ```
+
+  Test your program with all three rows. Record the expected and actual results as comments at the bottom of your Trinket.
+
+  | Price | Items | Friends | Expected total | Cost each | Items each | Left over |
+  | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+  | 2.50 | 8 | 4 | 20.00 | 5.00 | 2 | 0 |
+  | 1.25 | 10 | 3 | 12.50 | 4.17 | 3 | 1 |
+  | Your choice | | | | | | |
+
+  Finish with comment answers to these questions:
+
+  1. Why did you use `float()` for the price and `int()` for the counts?
+  2. Which test gave you the strongest evidence that your program works?
+  3. Describe one bug you fixed or one improvement you made.
+  4. Did you use AI for help? If yes, record what you asked and what you changed yourself.
+
+  Submit the Trinket share link in the **Homework** tab. Do not build the four-operation calculator yet; that project begins next lesson.
 ai_activities: |
   ## AI Lab: Correct Code Can Still Use a Bad Rule
 
