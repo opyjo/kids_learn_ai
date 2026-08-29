@@ -2,6 +2,7 @@
 
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { useMemo, useState } from "react";
+import { AddInquiryDialog } from "@/components/admin/add-inquiry-dialog";
 import { InquiryStatusControl } from "@/components/admin/inquiry-status-control";
 import { StatCard } from "@/components/admin/stat-card";
 import { Badge } from "@/components/ui/badge";
@@ -186,6 +187,7 @@ export function InquiriesView({
 						View parent inquiries, campaign attribution, and follow-up status
 					</p>
 				</div>
+				<AddInquiryDialog />
 			</div>
 
 			{/* Stats Grid — click a card to filter */}
