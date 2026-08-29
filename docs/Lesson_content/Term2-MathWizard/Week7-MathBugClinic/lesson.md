@@ -64,6 +64,13 @@ take_home_assignment: |
   2. the whole number of items; and
   3. the whole number of friends sharing them.
 
+  When Trinket asks for values:
+
+  - type a price as `2.50`, without a dollar sign;
+  - type counts as whole numbers such as `8`, not `8.0`;
+  - zero items is safe to test; and
+  - never enter zero friends, because Python cannot divide by zero.
+
   Calculate and save:
 
   - the total cost using `*`;
@@ -79,28 +86,32 @@ take_home_assignment: |
   - display money to exactly two decimal places; and
   - state that the number of friends must be greater than zero.
 
-  Start from this scaffold:
+  Start from this scaffold. The instruction lines are comments, so the starter runs without an error. Replace one commented instruction at a time with valid Python, then run the program again.
 
   ```python
   # EVENT SHARING TOOL
   # Builder:
 
   # 1. Welcome
+  # TODO: display a welcome message
+  # TODO: state that the number of friends must be greater than zero
 
   # 2. Collect and convert
-  item_price =
-  number_of_items =
-  number_of_friends =
+  # TODO: ask for item_price and convert it to float
+  # TODO: ask for number_of_items and convert it to int
+  # TODO: ask for number_of_friends and convert it to int
 
   # 3. Calculate and save
-  total_cost =
-  cost_per_friend =
-  items_per_friend =
-  items_left_over =
+  # TODO: calculate and save total_cost
+  # TODO: calculate and save cost_per_friend
+  # TODO: calculate and save items_per_friend
+  # TODO: calculate and save items_left_over
 
   # 4. Communicate clear results
+  # TODO: display each labelled result with an f-string
 
   # 5. Test evidence and reflection
+  # TODO: record expected and actual results as comments
   ```
 
   Test your program with all three rows. Record the expected and actual results as comments at the bottom of your Trinket.

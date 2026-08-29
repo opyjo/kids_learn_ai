@@ -276,7 +276,7 @@ print(total)
     ),
     (
       v_quiz_id,
-      'Which expression means “multiply 2 by itself 6 times”?',
+      'Which expression means “2 raised to the power of 6”?',
       'multiple_choice',
       jsonb_build_array('2 * 6', '2 ** 6', '2 // 6', '6 % 2'),
       to_jsonb('2 ** 6'::TEXT),

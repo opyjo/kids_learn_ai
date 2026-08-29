@@ -10,6 +10,7 @@ import {
 	XCircle,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { LessonMarkdown } from "@/components/lessons/viewer/lesson-markdown";
 import { QuestionInput } from "@/components/quizzes/question-input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,7 @@ interface QuizPayload {
 }
 
 const MAX_ATTEMPTS = 2;
+const MAX_RECORDED_ANSWER_TIME_MS = 600_000;
 
 function defaultAnswer(question: StudentQuestion): string | string[] {
 	return question.question_type === "code_ordering" ? question.options : "";
@@ -142,23 +144,33 @@ export function QuickCheck({
 	const check = async () => {
 		if (!question || currentAnswer === "") return;
 		setBusy(true);
-		const elapsed = Date.now() - startedAt.current;
+		setSubmitError("");
+		const elapsed = Math.min(
+			Math.max(Date.now() - startedAt.current, 0),
+			MAX_RECORDED_ANSWER_TIME_MS,
+		);
 		timeTaken.current[question.id] = elapsed;
 		// Persist the answer even when the student kept the default order of a
 		// code_ordering question, so the final submission includes it.
 		setAnswers((previous) => ({ ...previous, [question.id]: currentAnswer }));
-		const response = await fetch(`/api/quiz/lesson/${lessonId}`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				action: "check",
-				questionId: question.id,
-				answer: currentAnswer,
-				timeTakenMs: elapsed,
-			}),
-		});
-		if (response.ok) setFeedback(await response.json());
-		setBusy(false);
+		try {
+			const response = await fetch(`/api/quiz/lesson/${lessonId}`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					action: "check",
+					questionId: question.id,
+					answer: currentAnswer,
+					timeTakenMs: elapsed,
+				}),
+			});
+			if (!response.ok) throw new Error("Answer check failed");
+			setFeedback(await response.json());
+		} catch {
+			setSubmitError("We couldn’t check your answer. Please try again!");
+		} finally {
+			setBusy(false);
+		}
 	};
 
 	const next = async () => {
@@ -317,9 +329,12 @@ export function QuickCheck({
 						/>
 					))}
 				</div>
-				<h3 className="text-lg font-semibold sm:text-xl">
-					{question.question}
-				</h3>
+				<div role="heading" aria-level={3}>
+					<LessonMarkdown
+						content={question.question}
+						className="prose-p:my-0 prose-p:text-lg prose-p:font-semibold prose-p:leading-snug sm:prose-p:text-xl"
+					/>
+				</div>
 				<QuestionInput
 					question={question}
 					value={currentAnswer}
