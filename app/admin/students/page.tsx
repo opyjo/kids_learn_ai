@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AddStudentDialog } from "@/components/admin/add-student-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,7 +50,7 @@ export default async function StudentsPage({
 	// Fetch just this page of students.
 	const { data: studentsData } = await supabase
 		.from("profiles")
-		.select("id, email, full_name, created_at")
+		.select("id, email, full_name, username, created_at")
 		.eq("role", "student")
 		.order("created_at", { ascending: false })
 		.range(from, to);
@@ -57,7 +58,7 @@ export default async function StudentsPage({
 	const students = (studentsData || []).map((student) => ({
 		id: student.id,
 		name: student.full_name || "Unknown User",
-		email: student.email,
+		login: student.username ? `@${student.username}` : student.email,
 		joinDate: new Date(student.created_at).toLocaleDateString("en-CA"),
 		isEnrolled: enrolledStudentIds.has(student.id),
 	}));
@@ -67,13 +68,16 @@ export default async function StudentsPage({
 
 	return (
 		<div className="space-y-3">
-			<div>
-				<h1 className="text-xl font-semibold text-gray-900 dark:text-white">
-					Student Management
-				</h1>
-				<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-					View and manage all registered students
-				</p>
+			<div className="flex items-start justify-between gap-4">
+				<div>
+					<h1 className="text-xl font-semibold text-gray-900 dark:text-white">
+						Student Management
+					</h1>
+					<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+						View and manage all registered students
+					</p>
+				</div>
+				<AddStudentDialog />
 			</div>
 
 			<div className="grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -133,7 +137,7 @@ export default async function StudentsPage({
 										<h4 className="text-sm font-medium text-gray-900 dark:text-white">
 											{student.name}
 										</h4>
-										<p className="text-xs text-gray-500">{student.email}</p>
+										<p className="text-xs text-gray-500">{student.login}</p>
 										<p className="text-xs text-gray-400 mt-0.5">
 											Joined {student.joinDate}
 										</p>
