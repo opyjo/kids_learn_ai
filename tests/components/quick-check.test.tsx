@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { QuickCheck } from "@/components/quizzes/quick-check";
 
@@ -94,5 +94,53 @@ describe("QuickCheck", () => {
 		expect(
 			screen.queryByRole("button", { name: /try again/i }),
 		).not.toBeInTheDocument();
+	});
+
+	it("renders fenced code in a question instead of showing Markdown fences", async () => {
+		vi.spyOn(globalThis, "fetch").mockResolvedValue(
+			new Response(
+				JSON.stringify({
+					...payload,
+					questions: [
+						{
+							...question,
+							question: "What does this show?\n\n```python\nprint(2 + 2)\n```",
+						},
+					],
+				}),
+				{ status: 200 },
+			),
+		);
+
+		render(<QuickCheck lessonId={lessonId} signedIn={true} />);
+
+		await screen.findByText("What does this show?");
+		expect(document.querySelector("code.language-python")).toHaveTextContent(
+			"print(2 + 2)",
+		);
+		expect(screen.queryByText(/```python/)).not.toBeInTheDocument();
+	});
+
+	it("caps a long take-home pause and reports a failed answer check", async () => {
+		let requestBody: Record<string, unknown> | undefined;
+		vi.spyOn(globalThis, "fetch").mockImplementation(async (_input, init) => {
+			if (!init || init.method !== "POST")
+				return new Response(JSON.stringify(payload), { status: 200 });
+			requestBody = JSON.parse(String(init.body));
+			return new Response("Could not check", { status: 500 });
+		});
+		const dateNow = vi.spyOn(Date, "now");
+		dateNow.mockReturnValueOnce(1_000).mockReturnValue(3_601_000);
+
+		render(<QuickCheck lessonId={lessonId} signedIn={true} />);
+		await screen.findByText("Math Wizard Homework Challenge");
+		fireEvent.click(screen.getByRole("radio", { name: "4" }));
+		fireEvent.click(screen.getByRole("button", { name: "Check answer" }));
+
+		expect(
+			await screen.findByText(/couldn’t check your answer/i),
+		).toBeInTheDocument();
+		await waitFor(() => expect(requestBody?.timeTakenMs).toBe(600_000));
+		expect(screen.getByRole("button", { name: "Check answer" })).toBeEnabled();
 	});
 });
