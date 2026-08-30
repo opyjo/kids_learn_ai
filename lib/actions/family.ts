@@ -99,12 +99,14 @@ export async function createChildAccount(
 	const { data: linkedProfile, error: linkError } = await admin
 		.from("profiles")
 		.update({
+			// Auth can persist app_metadata after the new-user trigger runs.
+			// The service-role client makes the trusted student assignment here.
+			role: "student",
 			parent_id: user.id,
 			username,
 			updated_at: new Date().toISOString(),
 		})
 		.eq("id", childAccount.user.id)
-		.eq("role", "student")
 		.select("id")
 		.single();
 

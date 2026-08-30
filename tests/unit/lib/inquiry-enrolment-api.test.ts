@@ -47,6 +47,7 @@ function adminClient(
 	linkedStudent: object | null = null,
 ) {
 	const profileUpdateEq = vi.fn(async () => ({ error: null }));
+	const profileUpdate = vi.fn(() => ({ eq: profileUpdateEq }));
 	const inquiryUpdateEq = vi.fn(async () => ({ error: null }));
 	const inquiryUpdate = vi.fn(() => ({ eq: inquiryUpdateEq }));
 	const inviteUserByEmail = vi.fn(async () => ({
@@ -61,6 +62,7 @@ function adminClient(
 
 	return {
 		profileUpdateEq,
+		profileUpdate,
 		inquiryUpdate,
 		inquiryUpdateEq,
 		inviteUserByEmail,
@@ -96,10 +98,7 @@ function adminClient(
 						? linkedStudent
 						: existingParent,
 				}));
-				chain.update =
-					table === "inquiries"
-						? inquiryUpdate
-						: vi.fn(() => ({ eq: profileUpdateEq }));
+				chain.update = table === "inquiries" ? inquiryUpdate : profileUpdate;
 				return chain;
 			}),
 		},
@@ -146,6 +145,12 @@ describe("inquiry account approval API", () => {
 				app_metadata: expect.objectContaining({
 					account_type: "student",
 				}),
+			}),
+		);
+		expect(admin.profileUpdate).toHaveBeenCalledWith(
+			expect.objectContaining({
+				role: "student",
+				parent_id: parentId,
 			}),
 		);
 		expect(admin.client.from).not.toHaveBeenCalledWith("level_enrollments");

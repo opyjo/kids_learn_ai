@@ -191,7 +191,13 @@ export async function POST(request: NextRequest) {
 
 			const { error: childProfileError } = await admin
 				.from("profiles")
-				.update({ parent_id: parentId, username })
+				.update({
+					// Assign the trusted role explicitly; Auth app_metadata may be
+					// persisted after the new-user database trigger has already run.
+					role: "student",
+					parent_id: parentId,
+					username,
+				})
 				.eq("id", studentId);
 
 			if (childProfileError) {

@@ -330,6 +330,7 @@ describe("trusted child creation", () => {
 		);
 		expect(linkChain.update).toHaveBeenCalledWith(
 			expect.objectContaining({
+				role: "student",
 				parent_id: parentId,
 				username: "ada-codes",
 			}),

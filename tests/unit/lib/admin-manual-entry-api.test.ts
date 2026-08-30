@@ -49,6 +49,7 @@ function studentAdminClient(usernameOwner: object | null = null) {
 		error: null,
 	}));
 	const deleteUser = vi.fn(async () => ({ error: null }));
+	const updateProfile = vi.fn();
 	const profile = {
 		id: studentId,
 		full_name: "Ada Lovelace",
@@ -60,6 +61,7 @@ function studentAdminClient(usernameOwner: object | null = null) {
 	return {
 		createUser,
 		deleteUser,
+		updateProfile,
 		client: {
 			auth: { admin: { createUser, deleteUser } },
 			from: vi.fn(() => {
@@ -74,7 +76,7 @@ function studentAdminClient(usernameOwner: object | null = null) {
 					data: usernameOwner,
 					error: null,
 				}));
-				chain.update = vi.fn(() => {
+				chain.update = updateProfile.mockImplementation(() => {
 					operation = "update";
 					return chain;
 				});
@@ -153,6 +155,12 @@ describe("manual student creation API", () => {
 				email_confirm: true,
 				user_metadata: { full_name: "Ada Lovelace" },
 				app_metadata: { account_type: "student" },
+			}),
+		);
+		expect(admin.updateProfile).toHaveBeenCalledWith(
+			expect.objectContaining({
+				role: "student",
+				username: "ada-codes",
 			}),
 		);
 	});
