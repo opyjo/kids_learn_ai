@@ -96,11 +96,14 @@ export async function POST(request: NextRequest) {
 		const { data: student, error: profileError } = await admin
 			.from("profiles")
 			.update({
+				// Supabase Auth may persist app_metadata after the auth.users INSERT
+				// trigger runs, so the trigger can initially create this as a parent.
+				// This trusted service-role call is the authoritative role assignment.
+				role: "student",
 				username,
 				updated_at: new Date().toISOString(),
 			})
 			.eq("id", authAccount.user.id)
-			.eq("role", "student")
 			.select("id, full_name, email, username, created_at")
 			.single();
 
