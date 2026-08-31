@@ -23,6 +23,24 @@ interface QuizPayload {
 	questions: StudentQuestion[];
 	attempts: { percentage: number; passed: boolean; attempt_number: number }[];
 	canAttempt: boolean;
+	inProgress?: {
+		attemptNumber: number;
+		checks: {
+			questionId: string;
+			answer: string | string[];
+			correct: boolean;
+			explanation: string;
+			correctAnswer: string | string[];
+		}[];
+	} | null;
+}
+
+interface CheckFeedback {
+	correct: boolean;
+	explanation: string;
+	correctAnswer: string | string[];
+	lockedAnswer?: string | string[];
+	alreadyChecked?: boolean;
 }
 
 const MAX_ATTEMPTS = 2;
@@ -69,11 +87,7 @@ export function QuickCheck({
 	const [playing, setPlaying] = useState(false);
 	const [index, setIndex] = useState(0);
 	const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
-	const [feedback, setFeedback] = useState<{
-		correct: boolean;
-		explanation: string;
-		correctAnswer: string | string[];
-	} | null>(null);
+	const [feedback, setFeedback] = useState<CheckFeedback | null>(null);
 	const [showHint, setShowHint] = useState(false);
 	const [result, setResult] = useState<{
 		percentage: number;
@@ -91,6 +105,43 @@ export function QuickCheck({
 			.then((response) => (response.ok ? response.json() : null))
 			.then((payload: QuizPayload | null) => {
 				setData(payload);
+				const resumedChecks = payload?.inProgress?.checks || [];
+				if (payload?.quiz && resumedChecks.length > 0) {
+					setAnswers(
+						Object.fromEntries(
+							resumedChecks.map((check) => [check.questionId, check.answer]),
+						),
+					);
+					const resumedByQuestion = new Map(
+						resumedChecks.map((check) => [check.questionId, check]),
+					);
+					let resumedIndex = -1;
+					for (
+						let itemIndex = 0;
+						itemIndex < payload.questions.length;
+						itemIndex++
+					) {
+						if (resumedByQuestion.has(payload.questions[itemIndex].id)) {
+							resumedIndex = itemIndex;
+						}
+					}
+					const resumed =
+						resumedIndex >= 0
+							? resumedByQuestion.get(payload.questions[resumedIndex].id)
+							: undefined;
+					if (resumed) {
+						setIndex(resumedIndex);
+						setFeedback({
+							correct: resumed.correct,
+							explanation: resumed.explanation,
+							correctAnswer: resumed.correctAnswer,
+							lockedAnswer: resumed.answer,
+							alreadyChecked: true,
+						});
+						setPlaying(true);
+						return;
+					}
+				}
 				// First-time players jump straight in; returning players get a
 				// summary first so they don't burn their last try by accident.
 				if (payload?.quiz && payload.attempts.length === 0) setPlaying(true);
@@ -165,7 +216,14 @@ export function QuickCheck({
 				}),
 			});
 			if (!response.ok) throw new Error("Answer check failed");
-			setFeedback(await response.json());
+			const checked = (await response.json()) as CheckFeedback;
+			if (checked.lockedAnswer !== undefined) {
+				setAnswers((previous) => ({
+					...previous,
+					[question.id]: checked.lockedAnswer as string | string[],
+				}));
+			}
+			setFeedback(checked);
 		} catch {
 			setSubmitError("We couldn’t check your answer. Please try again!");
 		} finally {
@@ -203,6 +261,7 @@ export function QuickCheck({
 			setData({
 				...data,
 				canAttempt: data.attempts.length + 1 < MAX_ATTEMPTS,
+				inProgress: null,
 				attempts: [
 					...data.attempts,
 					{
@@ -374,6 +433,15 @@ export function QuickCheck({
 								<XCircle className="h-5 w-5 text-amber-600" />
 							)}
 							<span>
+								{feedback.alreadyChecked && (
+									<>
+										<span className="font-medium">
+											Resumed answer: your first answer for this question was
+											already checked and remains locked.
+										</span>
+										<br />
+									</>
+								)}
 								<strong>
 									{feedback.correct
 										? "🎉 You got it!"
