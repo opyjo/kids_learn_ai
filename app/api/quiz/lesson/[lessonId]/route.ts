@@ -54,13 +54,59 @@ export async function GET(_request: NextRequest, { params }: Context) {
 			.eq("user_id", loaded.user.id)
 			.order("attempt_number"),
 	]);
+	const typedQuestions = (questions || []) as QuizQuestionRecord[];
+	const completedAttempts = attempts || [];
+	const nextAttemptNumber = completedAttempts.length + 1;
+	let inProgress: {
+		attemptNumber: number;
+		checks: {
+			questionId: string;
+			answer: string | string[];
+			correct: boolean;
+			explanation: string;
+			correctAnswer: string | string[];
+		}[];
+	} | null = null;
+
+	if (nextAttemptNumber <= MAX_ATTEMPTS) {
+		const { data: checks } = await loaded.db
+			.from("quiz_question_checks")
+			.select("question_id, answer, correct")
+			.eq("user_id", loaded.user.id)
+			.eq("quiz_id", loaded.quiz.id)
+			.eq("attempt_number", nextAttemptNumber)
+			.order("question_id");
+		const checkByQuestion = new Map(
+			(checks || []).map((check) => [check.question_id, check]),
+		);
+		const resumableChecks = typedQuestions.flatMap((question) => {
+			const check = checkByQuestion.get(question.id);
+			if (!check) return [];
+			return [
+				{
+					questionId: question.id,
+					answer: check.answer as string | string[],
+					correct: Boolean(check.correct),
+					explanation:
+						question.explanation || "Review this concept and try again.",
+					correctAnswer: question.correct_answer,
+				},
+			];
+		});
+		if (resumableChecks.length > 0) {
+			inProgress = {
+				attemptNumber: nextAttemptNumber,
+				checks: resumableChecks,
+			};
+		}
+	}
+
 	return NextResponse.json({
 		quiz: loaded.quiz,
-		questions: ((questions || []) as QuizQuestionRecord[]).map(
-			sanitizeQuestion,
-		),
-		attempts: attempts || [],
-		canAttempt: (attempts?.length || 0) < MAX_ATTEMPTS,
+		questions: typedQuestions.map(sanitizeQuestion),
+		attempts: completedAttempts,
+		canAttempt: completedAttempts.length < MAX_ATTEMPTS,
+		inProgress,
 	});
 }
 
@@ -127,6 +173,7 @@ export async function POST(request: NextRequest, { params }: Context) {
 			explanation: typed.explanation || "Review this concept and try again.",
 			correctAnswer: typed.correct_answer,
 			lockedAnswer: verdict.answer,
+			alreadyChecked: Boolean(existing),
 		});
 	}
 	// Finish the attempt: grade from the answers recorded at check time — the

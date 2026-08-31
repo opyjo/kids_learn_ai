@@ -121,6 +121,80 @@ describe("QuickCheck", () => {
 		expect(screen.queryByText(/```python/)).not.toBeInTheDocument();
 	});
 
+	it("resumes a checked answer after a reload without regrading a new choice", async () => {
+		const secondQuestion = {
+			...question,
+			id: "00000000-0000-4000-8000-000000000002",
+			question: "What does print(3 + 3) show?",
+			options: ["6", "33", "Error"],
+			order_index: 1,
+		};
+		vi.spyOn(globalThis, "fetch").mockResolvedValue(
+			new Response(
+				JSON.stringify({
+					...payload,
+					questions: [question, secondQuestion],
+					inProgress: {
+						attemptNumber: 1,
+						checks: [
+							{
+								questionId: question.id,
+								answer: "22",
+								correct: false,
+								explanation: "Python adds numbers.",
+								correctAnswer: "4",
+							},
+						],
+					},
+				}),
+				{ status: 200 },
+			),
+		);
+
+		render(<QuickCheck lessonId={lessonId} signedIn={true} />);
+
+		expect(await screen.findByText(/resumed answer/i)).toBeInTheDocument();
+		expect(screen.getByRole("radio", { name: "22" })).toHaveAttribute(
+			"aria-checked",
+			"true",
+		);
+		expect(screen.getByText(/answer is: 4/i)).toBeInTheDocument();
+		expect(screen.getByText(/question 1 of 2/i)).toBeInTheDocument();
+		fireEvent.click(screen.getByRole("button", { name: "Next question" }));
+		expect(screen.getByText(/question 2 of 2/i)).toBeInTheDocument();
+		expect(screen.getByText(/print\(3 \+ 3\)/i)).toBeInTheDocument();
+	});
+
+	it("shows the originally locked answer when a stale page resubmits a question", async () => {
+		vi.spyOn(globalThis, "fetch").mockImplementation(async (_input, init) => {
+			if (!init || init.method !== "POST") {
+				return new Response(JSON.stringify(payload), { status: 200 });
+			}
+			return new Response(
+				JSON.stringify({
+					correct: false,
+					explanation: "Python adds numbers.",
+					correctAnswer: "4",
+					lockedAnswer: "22",
+					alreadyChecked: true,
+				}),
+				{ status: 200 },
+			);
+		});
+
+		render(<QuickCheck lessonId={lessonId} signedIn={true} />);
+		await screen.findByText("Math Wizard Homework Challenge");
+		fireEvent.click(screen.getByRole("radio", { name: "4" }));
+		fireEvent.click(screen.getByRole("button", { name: "Check answer" }));
+
+		expect(await screen.findByText(/resumed answer/i)).toBeInTheDocument();
+		expect(screen.getByRole("radio", { name: "22" })).toHaveAttribute(
+			"aria-checked",
+			"true",
+		);
+		expect(screen.getByText(/answer is: 4/i)).toBeInTheDocument();
+	});
+
 	it("caps a long take-home pause and reports a failed answer check", async () => {
 		let requestBody: Record<string, unknown> | undefined;
 		vi.spyOn(globalThis, "fetch").mockImplementation(async (_input, init) => {
