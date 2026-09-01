@@ -157,6 +157,10 @@ export function isFreeTrialLesson(
 	courseSlug: string,
 	lessonOrderIndex: number,
 ): boolean {
-	const freeTrialCourses = ["term-1-hello-python", "term-2-math-wizard"];
+	const freeTrialCourses = [
+		"term-1-hello-python",
+		"term-2-math-wizard",
+		"web-creator-term-1-foundations",
+	];
 	return lessonOrderIndex === 1 && freeTrialCourses.includes(courseSlug);
 }

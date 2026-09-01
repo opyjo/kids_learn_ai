@@ -13,6 +13,10 @@ vi.mock("@/components/code/python-editor", () => ({
 	PythonEditor: () => <div data-testid="python-editor">Python Editor</div>,
 }));
 
+vi.mock("@/components/code/web-editor", () => ({
+	WebEditor: () => <div data-testid="web-editor">Web Editor</div>,
+}));
+
 vi.mock("@/components/code/trinket-editor", () => ({
 	TrinketEditor: () => <div data-testid="trinket-editor">Trinket Editor</div>,
 }));
@@ -84,6 +88,8 @@ function buildProps(
 			class_activities: "Do this in class",
 			take_home_assignment: "Do this at home",
 			ai_activities: "Think about AI",
+			editor_type: "python",
+			starter_files: { html: "", css: "", javascript: "" },
 		},
 		userId: "user-1",
 		courseSlug: "term-1-hello-python",
@@ -141,6 +147,26 @@ describe("LessonViewer", () => {
 		await user.click(codeTab);
 		expect(codeTab).toHaveAttribute("aria-selected", "true");
 		expect(screen.getByTestId("python-editor")).toBeInTheDocument();
+	});
+
+	it("uses the web workspace for Web Creator lessons", async () => {
+		const props = buildProps({
+			courseSlug: "web-creator-term-1-foundations",
+			lesson: {
+				...buildProps().lesson,
+				editor_type: "web",
+				starter_files: {
+					html: "<h1>Hello</h1>",
+					css: "h1 { color: purple; }",
+					javascript: "",
+				},
+			},
+		});
+		const { user } = render(<LessonViewer {...props} />);
+
+		await user.click(screen.getByRole("tab", { name: "Code" }));
+		expect(screen.getByTestId("web-editor")).toBeInTheDocument();
+		expect(screen.queryByTestId("python-editor")).toBeNull();
 	});
 
 	it("shows homework tab only when take-home assignment is present", () => {

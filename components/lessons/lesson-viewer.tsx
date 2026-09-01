@@ -80,7 +80,10 @@ export function LessonViewer({
 	}, [lesson.dbId, setCurrentLessonCompletion, supabase]);
 
 	const fetchSubmission = useCallback(async () => {
-		if (!lesson.dbId) return;
+		if (!lesson.dbId || lesson.editor_type === "web") {
+			setSubmission(null);
+			return;
+		}
 
 		try {
 			const {
@@ -114,7 +117,7 @@ export function LessonViewer({
 		} catch {
 			setSubmission(null);
 		}
-	}, [lesson.dbId, supabase]);
+	}, [lesson.dbId, lesson.editor_type, supabase]);
 
 	useEffect(() => {
 		void fetchSubmission();
@@ -267,9 +270,10 @@ export function LessonViewer({
 	);
 
 	const codePanel =
-		variant === "level-term" ? (
+		lesson.editor_type !== "none" ? (
 			<LessonCodePanel
 				lesson={lesson}
+				courseSlug={courseSlug}
 				onCodeChange={handleCodeChange}
 				onRunComplete={handleRunComplete}
 			/>
@@ -282,7 +286,6 @@ export function LessonViewer({
 				courseSlug={courseSlug}
 				courseTitle={courseTitle}
 				navigation={navigation}
-				variant={variant}
 				mainPanel={mainPanel}
 				codePanel={codePanel}
 				outline={

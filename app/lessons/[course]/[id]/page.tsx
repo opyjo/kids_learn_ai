@@ -7,6 +7,7 @@ import {
 import { checkLevelEnrollment, isFreeTrialLesson } from "@/lib/auth-helpers";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { normalizeWebProjectFiles } from "@/lib/web-project";
 
 interface LessonPageProps {
 	params: Promise<{
@@ -33,7 +34,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
 	// First, get the course by slug
 	const { data: course } = await supabase
 		.from("courses")
-		.select("id, slug, title")
+		.select("id, slug, title, editor_type")
 		.eq("slug", courseSlug)
 		.single();
 
@@ -44,7 +45,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
 	// Then fetch lesson from Supabase by course_id and order_index
 	const { data: lesson, error } = await supabase
 		.from("lessons")
-		.select("*, courses(slug, title)")
+		.select("*, courses(slug, title, editor_type)")
 		.eq("course_id", course.id)
 		.eq("order_index", lessonOrderIndex)
 		.single();
@@ -135,6 +136,13 @@ export default async function LessonPage({ params }: LessonPageProps) {
 		class_activities: lesson.class_activities || "",
 		take_home_assignment: lesson.take_home_assignment || "",
 		ai_activities: lesson.ai_activities || "",
+		editor_type:
+			lesson.courses?.editor_type === "web"
+				? ("web" as const)
+				: lesson.courses?.editor_type === "none"
+					? ("none" as const)
+					: ("python" as const),
+		starter_files: normalizeWebProjectFiles(lesson.starter_files),
 	};
 
 	return (

@@ -3,6 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { type NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { normalizeWebProjectFiles } from "@/lib/web-project";
 
 interface SyncResult {
 	synced: string[];
@@ -133,6 +134,10 @@ export async function POST(_request: NextRequest) {
 						class_activities: frontmatter.class_activities || "",
 						take_home_assignment: frontmatter.take_home_assignment || "",
 						ai_activities: frontmatter.ai_activities || "",
+						starter_files: normalizeWebProjectFiles(frontmatter.starter_files),
+						solution_files: normalizeWebProjectFiles(
+							frontmatter.solution_files,
+						),
 						course_id: courseId,
 						updated_at: new Date().toISOString(),
 					};
