@@ -29,6 +29,7 @@ export function isLevelTermCourse(courseSlug?: string): boolean {
 
 export function getLessonVariant(courseSlug?: string): LessonVariant {
 	if (courseSlug === "ai-ml") return "ai-ml";
+	if (courseSlug?.startsWith("web-creator-")) return "web-creator";
 	if (isLevelTermCourse(courseSlug)) return "level-term";
 	return "legacy";
 }

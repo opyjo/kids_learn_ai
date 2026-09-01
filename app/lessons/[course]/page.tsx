@@ -259,7 +259,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 					className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors"
 				>
 					<ArrowLeft className="h-4 w-4" />
-					Back to All Levels
+					Back to All Courses
 				</Link>
 
 				{/* Header */}
@@ -354,7 +354,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 								</div>
 								<div className="flex-1">
 									<h3 className="font-semibold text-foreground mb-1">
-										You're Not Enrolled in This Level
+										You're Not Enrolled in This Course
 									</h3>
 									<p className="text-sm text-muted-foreground">
 										{lessons.some((l) => l.isFreeTrial)
@@ -528,7 +528,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 					<Card className="mt-5 border-accent/30 bg-gradient-to-r from-accent/5 to-primary/5">
 						<CardContent className="p-4 text-center">
 							<h3 className="text-lg font-bold text-foreground mb-2">
-								Ready to Start This Level?
+								Ready to Start This Course?
 							</h3>
 							<p className="text-muted-foreground mb-3">
 								Get full access to all {lessons.length} lessons in{" "}

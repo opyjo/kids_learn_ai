@@ -17,9 +17,9 @@ import { publicMetadata } from "@/lib/seo";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export const metadata = publicMetadata({
-	title: "Python & AI Lessons — Kids Learn AI",
+	title: "Coding, AI & Web Creator Lessons — Kids Learn AI",
 	description:
-		"Browse the full Kids Learn AI curriculum — term-by-term Python and AI lessons with hands-on projects for kids.",
+		"Browse the Kids Learn AI curriculum — Python, responsible AI, and age-appropriate web creation with hands-on projects.",
 	path: "/lessons",
 });
 
@@ -99,7 +99,7 @@ export default async function LessonsPage() {
 					<div className="flex items-start justify-between mb-3">
 						<div>
 							<h1 className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-								Python &amp; AI Curriculum for Kids Ages 9–13
+								Coding, AI &amp; Web Creator Curriculum for Ages 9–13
 							</h1>
 							<p className="text-muted-foreground">
 								{user

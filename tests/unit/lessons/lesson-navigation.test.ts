@@ -2,9 +2,17 @@ import { describe, expect, it } from "vitest";
 import {
 	buildCourseLessons,
 	computeLessonNavigation,
+	getLessonVariant,
 } from "@/components/lessons/viewer/lesson-viewer.helpers";
 
 describe("lesson navigation helpers", () => {
+	it("recognizes the Web Creator lesson variant", () => {
+		expect(getLessonVariant("web-creator-term-1-foundations")).toBe(
+			"web-creator",
+		);
+		expect(getLessonVariant("term-1-hello-python")).toBe("level-term");
+	});
+
 	it("computes previous and next for first, middle, and last lessons", () => {
 		const lessons = [
 			{
