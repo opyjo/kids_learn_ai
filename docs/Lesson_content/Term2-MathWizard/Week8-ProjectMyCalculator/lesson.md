@@ -1,6 +1,6 @@
 ---
 title: "Project — My Calculator!"
-description: "Plan, build, test, and polish your complete Term 2 calculator without copying a finished solution."
+description: "Build a 7-operation calculator using every Term 2 skill — name formatting, float input, all operators, f-strings, and planned test cases."
 difficulty: "beginner"
 order_index: 8
 course_slug: "term-2-math-wizard"
@@ -12,60 +12,66 @@ starter_code: |
   # Builder:
   # ==================================
 
-  # PLAN
-  # First numeric variable:
-  # Second numeric variable:
-  # Required operations: +  -  *  /
-  # Known limitation:
+  # Section 1: Welcome (name + .title())
 
-  # 1. Welcome and instructions
+  # Section 2: Collect two decimal-capable numbers (float)
 
-  # 2. Collect and convert two decimal-capable numbers
+  # Section 3: Calculate ALL 7 operations and SAVE each result
 
-  # 3. Calculate and SAVE four results
+  # Section 4: Display labelled, tidy results (:.2f)
 
-  # 4. Display labelled, tidy results
-
-  # 5. Thank the user
+  # Section 5: Close with name
 class_activities: |
-  ## Calculator Project Studio
+  ## 🧮 Class Activity: Calculator Build Day
 
-  **Plan (8 min):** Complete the project design card and calculate expected answers for the required tests.
+  ### Part A — Live Demo with Teacher (10 min)
+  Watch your teacher build the full calculator live using the 5-section plan:
+  1. Welcome (name + `.title()`)
+  2. Collect (`float(input(...))`)
+  3. Calculate all 7 operations (L2 + L3 operators)
+  4. Display with f-strings and `:.2f`
+  5. Close with name
 
-  **Build the core (20 min):** Collect two numbers with `float()`, save the four results in variables, and display labelled answers. Build from the scaffold—not a finished solution.
+  Pay attention to *why* each section exists and *which lesson* each skill came from.
 
-  **Test (10 min):** Run the required test matrix and repair one issue at a time.
+  ### Part B — Write Your Tests First (5 min)
+  Before coding, complete the test table in the lesson with your own expected values for rows 1 and 2. Calculate by hand. This is your Lesson 7 Bug Clinic habit.
 
-  **Peer QA (8 min):** A partner uses the calculator, checks one result by hand, and records one strength and one improvement.
+  ### Part C — Build Independently (30 min)
+  Your teacher wipes the screen. Build all 5 sections from scratch. Run after each section — don't write everything and then run.
 
-  **Polish (9 min):** Improve instructions, names, formatting, comments, and decimal display.
+  Stay in scope: no `if/else`, no loops, no menus yet.
 
-  **Demo rehearsal (5 min):** Practise a 60-second explanation of one design choice, one test, and one improvement.
+  ### Part D — Peer Swap (8 min)
+  Exchange calculators. Partner enters their name + new numbers, checks one result by hand, gives one strength and one improvement. Builder makes at least one fix.
 
-  Optional extensions may use exponents, modulo, or floor division. Do not add menus, `if/else`, or error handling before those concepts are taught.
+  ### Part E — Mini Showcases + Exit Ticket (7 min)
+  2–3 students demo live. Everyone writes their exit ticket before leaving.
 take_home_assignment: |
   ## Homework: Showcase-Ready Calculator
 
-  Finish and test the calculator for Lesson 9.
+  Polish your calculator for the Lesson 9 showcase.
 
   Required evidence:
 
-  1. a clear welcome and instructions;
+  1. a personalised welcome using the user's name with `.title()`;
   2. two numeric inputs converted with `float()`;
-  3. saved results for addition, subtraction, multiplication, and division;
-  4. labelled output with tidy decimal formatting;
-  5. comments separating the program stages;
-  6. a completed test table;
+  3. saved results for all 7 operations: `+`, `-`, `*`, `/`, `**`, `//`, `%`;
+  4. labelled output with `:.2f` formatting on every result;
+  5. comments marking each section;
+  6. a completed test table (3 rows, written before running);
   7. one improvement based on peer feedback; and
-  8. a written limitation: the second number must not be zero because conditional handling begins in Term 3.
+  8. a documented limitation: the second number must not be zero — conditional handling begins in Term 3.
 
-  Prepare a 60-second showcase demonstration. Do not add code you cannot explain.
+  Prepare a 60-second showcase demonstration. Be ready to explain what `float()` does, what one Lesson 3 operator means in real life, and one thing you'd improve with `if/else`.
 ai_activities: |
   ## AI Lab: Exact Rules and Predictions Are Different
 
-  A calculator follows exact written rules. The same valid input produces the same correct result. AI systems often make predictions based on patterns, and those predictions can be wrong.
+  A calculator follows exact written rules. The same valid input produces the same correct result every time. AI systems often make predictions based on patterns, and those predictions can be wrong.
 
-  Make the calculator easy to check by showing the numbers, operation, and result. Then imagine one optional future feature that suggests a practice problem. Explain whether that feature uses an exact rule or a prediction and how a user could verify it.
+  Think about your calculator: if you enter 10 and 2, you always get 12.00 for addition. No surprises. Now imagine an AI that tries to *predict* what answer a student wants — it might get it wrong.
+
+  Discuss: what would have to change about your calculator to make it behave more like an AI? What would it gain? What would it lose?
 ---
 
 # Term 2, Lesson 8: Project — My Calculator! 🧮
@@ -76,170 +82,172 @@ ai_activities: |
 
 ---
 
-## The Outcome
+## 🎯 What You're Doing Today
 
-Today you create the first complete version of your Term 2 project. The lesson gives you requirements, checkpoints, hints, and tests—but not a finished program to copy.
+Today is your **project build day**. You've spent seven lessons learning every tool you need. Now you combine them all into one real, working calculator.
 
 Your calculator will:
+- greet the user by name
+- work with decimal numbers
+- calculate **7 operations** using everything you've learned
+- display clean, formatted results
+- pass 3 planned test cases
 
-- ask for two numbers;
-- support decimal input;
-- calculate all four basic operations;
-- save each answer in a variable;
-- display clear, tidy results; and
-- include evidence that you tested it.
+Your teacher will build it live first. Then it's your turn.
 
-## 1. Plan Before Coding
+---
 
-Complete this design card:
+## 🤖 BrightByte Says...
 
-| Decision | Your plan |
-| --- | --- |
-| Calculator name | |
-| Welcome message | |
-| First prompt | |
-| Second prompt | |
-| Conversion needed | |
-| Four result variable names | |
-| Decimal display choice | |
-| Known limitation | |
+> *"Look at everything you've learned this term — operators, exponents, modulo, float(), round(), f-strings, string methods, test cases. You didn't learn those separately. You learned them so that TODAY you could put them all together. This is your moment. Let's build something real. 🧮"*
 
-### Required test predictions
+---
 
-Calculate the expected results by hand:
+## 🧱 The Build Plan
 
-| First | Second | Add | Subtract | Multiply | Divide |
-| ---: | ---: | ---: | ---: | ---: | ---: |
-| 8 | 2 | | | | |
-| 2.5 | 4 | | | | |
-| -3 | 6 | | | | |
+Your calculator has 5 sections. Build them in order, running after each one.
 
-Do not use zero as the second number because division by zero needs conditional handling, which begins in Term 3.
+---
 
-## 2. Build in Checkpoints
+### Section 1 — Welcome Your User 👋
 
-Run the program after every checkpoint.
-
-### Checkpoint A: Welcome
-
-Write a title and one sentence telling the user what the program does. Keep decoration secondary to clarity.
-
-### Checkpoint B: Collect and convert
-
-Ask for two numbers that may contain decimals. Use the Lesson 5 conversion that accepts decimal input.
-
-If stuck, reveal this hint only:
+Ask for the user's name and greet them. Use `.title()` so the name is always capitalized correctly.
 
 ```python
-first_number = float(input("First number: "))
+name = input("What is your name? ").title()
+print("=" * 30)
+print(f"  Welcome, {name}!")
+print(f"  The Python Calculator")
+print("=" * 30)
 ```
 
-Write the second line yourself with a matching variable name.
+**Run it.** Type your name in lowercase — does `.title()` fix it?
 
-### Checkpoint C: Calculate and save
+---
 
-Create four clearly named result variables:
+### Section 2 — Collect the Numbers 🔢
 
-- addition result;
-- subtraction result;
-- multiplication result; and
-- division result.
+Ask for two numbers. Use `float()` so decimals work.
 
-Do not place every expression directly inside `print()`. Saving the results makes the program easier to test and explain.
+```python
+first = float(input("\nEnter first number: "))
+second = float(input("Enter second number (not zero): "))
+```
 
-### Checkpoint D: Communicate
+**Why `float()` and not `int()`?** Because a calculator should work with `2.5`, not just whole numbers.
 
-For every result, show:
+---
 
-- the first number;
-- the operation symbol;
-- the second number; and
-- the tidy answer.
+### Section 3 — Calculate ALL 7 Operations ➗
 
-Use f-strings and the formatting skill from Lesson 5.
+You know all of these. Save every result in its own variable.
 
-### Checkpoint E: Close
+```python
+# The four basics (Lesson 2)
+add_result    = first + second
+sub_result    = first - second
+mul_result    = first * second
+div_result    = first / second
 
-Add a short ending and comments that mark the program stages.
+# The extras (Lesson 3)
+power_result  = first ** second
+floor_result  = first // second
+mod_result    = first % second
+```
 
-## 3. Verify the Core
+**Why save to variables?** So you can display, check, and reuse the results. Never calculate inside `print()` alone.
 
-Run all three required test rows and record actual results:
+---
 
-| Test | Expected matches actual? | Bug or improvement found |
-| --- | --- | --- |
-| 8 and 2 | | |
-| 2.5 and 4 | | |
-| -3 and 6 | | |
+### Section 4 — Display the Results 📺
 
-Check each operation by hand. A program running without an error does not prove that the formula is correct.
+Use f-strings with `:.2f` for all decimal results.
 
-## 4. Peer Quality Check
+```python
+print("\n" + "-" * 30)
+print(f"  Results for {name}")
+print("-" * 30)
+print(f"  {first} + {second}  = {add_result:.2f}")
+print(f"  {first} - {second}  = {sub_result:.2f}")
+print(f"  {first} x {second}  = {mul_result:.2f}")
+print(f"  {first} / {second}  = {div_result:.2f}")
+print(f"  {first} ** {second} = {power_result:.2f}")
+print(f"  {first} // {second} = {floor_result:.2f}  (complete groups)")
+print(f"  {first} % {second}  = {mod_result:.2f}  (remainder)")
+print("-" * 30)
+```
 
-Exchange calculators. The reviewer must:
+---
 
-1. operate the program without coaching;
-2. use a new pair of non-zero-divisor values;
-3. verify one operation by hand;
-4. check the output labels and decimal display;
-5. identify one strength; and
-6. recommend one specific improvement.
+### Section 5 — Close Cleanly 🎬
 
-The builder chooses and implements at least one improvement, then reruns the relevant test.
+```python
+print(f"\nThanks for calculating, {name}! 🧮")
+```
 
-## 5. Project Requirements
+---
 
-### Must have
+## 🧪 Write Your Tests BEFORE You Run
 
-- [ ] Clear title and instructions
-- [ ] Two `float()` inputs
-- [ ] Four correct operations
-- [ ] Four saved result variables
-- [ ] Labelled f-string output
-- [ ] Tidy decimal formatting
-- [ ] Comments marking stages
-- [ ] Three required tests
-- [ ] One peer-driven revision
-- [ ] Known limitation documented
+This is the Lesson 7 Bug Clinic habit. Calculate the expected answers by hand first, then check them against your program.
 
-### Optional extensions using known skills
+| First | Second | Add | Subtract | Multiply | Divide | Power | Floor | Mod |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 10 | 2 | 12 | 8 | 20 | 5 | 100 | 5 | 0 |
+| 7 | 3 | 10 | 4 | 21 | 2.33 | 343 | 2 | 1 |
+| 2.5 | 2 | 4.5 | 0.5 | 5 | 1.25 | 6.25 | 1 | 0.5 |
 
-- [ ] Exponent result
-- [ ] Floor-division result
-- [ ] Remainder result
-- [ ] User's name in the welcome
-- [ ] A fourth test designed by the student
+If any result doesn't match — go back to Section 3 and check that formula.
 
-Do not add a menu, `if/else`, repeated operation loop, or `try/except` yet. Those are valuable future upgrades after the required concepts are taught.
+---
 
-## 6. Demo Rehearsal
+## 🐛 Common Bugs
 
-Prepare a 60-second demonstration:
+| What went wrong | Why | Fix |
+|---|---|---|
+| Name shows all lowercase | Missing `.title()` | Add `.title()` after the input |
+| `"5" + "3"` gives `"53"` | Forgot `float()` | Wrap `input()` with `float()` |
+| `NameError` | Typo in variable name | Check spelling matches exactly |
+| Division by zero crash | Used 0 as second number | Document this as a known limitation |
+| Long decimals (e.g. `4.000000`) | Missing `:.2f` | Add `:.2f` inside the f-string |
+| `^` gives wrong answer | `^` is not a power in Python | Use `**` for exponents |
 
-1. State what you built.
-2. Run one interesting test.
-3. Explain one choice of variable, type, or formatting.
-4. Describe one bug or improvement from testing.
-5. State the current division-by-zero limitation honestly.
+---
 
-## If You Are Stuck
+## 👥 Peer Swap
 
-Use hints in this order:
+Once all 3 tests pass, swap with a classmate. They:
+1. Enter their own name and a new pair of numbers
+2. Check ONE result by hand
+3. Give you **one thing they liked** and **one thing to improve**
 
-1. Check the pipeline: collect → convert → calculate → communicate.
-2. Compare variable spellings.
-3. Check that both inputs use `float()`.
-4. Check the operator on each result line.
-5. Run only the first required test.
-6. Ask a classmate to read the error message aloud with you.
+Make at least one improvement, then run your tests again.
 
-## Exit Ticket
+---
 
-Finish both statements:
+## 🎤 Mini Showcase
 
-- “My strongest evidence that the calculator works is…”
-- “One limitation or future improvement is…”
+If your teacher calls on you, 60 seconds:
+1. Run one test live
+2. Explain what `float()` does and why you used it
+3. Show one operation from Lesson 3 (`**`, `//`, or `%`) and explain what it means
+4. State your known limitation (division by zero — coming in Term 3)
 
-## Next Lesson
+---
 
-Next lesson is the showcase. You will demonstrate the project, explain your reasoning, celebrate your progress, and earn the Term 2 badge.
+## 📝 Exit Ticket
+
+Finish both sentences:
+- *"My calculator uses skills from Lesson ___ when it..."*
+- *"One thing I would improve with if/else (Term 3) is..."*
+
+---
+
+## 📚 Next Lesson
+
+Lesson 9 is the **showcase and badge ceremony**. Polish your calculator at home — clean it up, make sure all 3 tests pass, and prepare your 60-second explanation.
+
+---
+
+*KidsLearnAI — Empowering the Next Generation with AI Education*  
+*www.kidslearnai.ca*
