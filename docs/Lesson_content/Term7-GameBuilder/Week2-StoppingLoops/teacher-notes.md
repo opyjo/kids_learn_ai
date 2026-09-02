@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing control flow
 
 ### Pre-Lesson Preparation
@@ -432,7 +432,7 @@ KidsLearnAI
 - [ ] Prepare examples
 - [ ] Think about safety
 - [ ] Prepare menu examples
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -459,4 +459,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: Break and continue are powerful tools that make loops safe and controllable. Emphasize the difference and when to use each. Students who master this are ready for game loops next week!_ 🛑
-

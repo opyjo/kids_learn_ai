@@ -10,7 +10,7 @@ export interface Game {
 	code: string;
 	howItWorks: string[];
 	challenges: string[];
-	trinketLink?: string;
+	pickcodeLink?: string;
 }
 
 export const games: Game[] = [
@@ -69,7 +69,7 @@ while attempts < max_attempts:
 			"Add hints after 5 wrong guesses",
 			"Create a two-player mode where players take turns",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "rock-paper-scissors",
@@ -171,7 +171,7 @@ else:
 			"Add sound effects or ASCII art for each choice",
 			"Track win/loss statistics across multiple games",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "hangman",
@@ -326,7 +326,7 @@ if tries_left == 0:
 			"Add a two-player mode where one player enters the word",
 			"Keep track of wins and losses with a score counter",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "dice-roller",
@@ -463,7 +463,7 @@ while True:
 			"Add colored output for different dice results",
 			"Create a probability calculator showing chances of rolling certain numbers",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "mad-libs",
@@ -577,7 +577,7 @@ else:
 			"Add a random story mode that picks a story automatically",
 			"Create themed story packs (holiday, space, underwater)",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "quiz-game",
@@ -702,7 +702,7 @@ else:
 			"Add a hint system that costs points",
 			"Save high scores to a file and display leaderboard",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "fortune-teller",
@@ -815,7 +815,7 @@ while True:
 			"Add ASCII art of a crystal ball or mystical symbols",
 			"Make fortunes more specific based on keywords in the question",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "snake",
@@ -1006,7 +1006,7 @@ screen.mainloop()`,
 			"Make the snake change colors as it grows",
 			"Add a pause feature with the spacebar",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "pong",
@@ -1173,7 +1173,7 @@ screen.mainloop()`,
 			'Create a "first to 10" mode or custom win conditions',
 			"Add a center line and make the ball flash when scored",
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 	{
 		id: "tic-tac-toe",
@@ -1370,6 +1370,6 @@ screen.mainloop()`,
 			"Highlight the winning combination when someone wins",
 			'Add a "Play Again" button to reset the game',
 		],
-		trinketLink: "https://trinket.io/python",
+		pickcodeLink: "https://app.pickcode.io/home",
 	},
 ];

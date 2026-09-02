@@ -21,7 +21,7 @@ The big idea is the **engine pattern**, and it must land cleanly because Weeks 7
 - **A main loop** keeps a `current` scene name, calls the matching scene function, and stores the returned string back in `current`.
 - **A shared `inventory` list** (starts empty) lets scenes `append` items, and later scenes check membership with `if "item" in inventory:` to change the story.
 
-The session has two clear halves: **plan on paper (story-map), then build live in Trinket**, one scene at a time, with Zoom checkpoints. Your job is pacing and correctness — the code is the content.
+The session has two clear halves: **plan on paper (story-map), then build live in Pickcode**, one scene at a time, with Zoom checkpoints. Your job is pacing and correctness — the code is the content.
 
 Three core goals:
 
@@ -44,25 +44,25 @@ By the end of this lesson, students will be able to:
 ### Key Success Metrics
 
 - [ ] Every student's 3-scene adventure runs end to end (both a WIN and a LOSE path)
-- [ ] Every student has saved a Trinket named `Y2-T3-W6-Adventure`
+- [ ] Every student has saved a Pickcode named `Y2-T3-W6-Adventure`
 - [ ] Students can explain why a scene must always `return` a scene name
 - [ ] Students drew a story-map with no dangling arrows
 
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
-- Zoom with screen share; teacher's Trinket visible throughout
+- Zoom with screen share; teacher's Pickcode visible throughout
 - **Paper and pen for every student** (or the Zoom whiteboard) — the story-map is not optional
-- Students' Trinket accounts
+- Students' Pickcode accounts
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Type the full solution yourself once** in a fresh Trinket named `Y2-T3-W6-Adventure` — you'll build it live and it must be flawless
+1. **Type the full solution yourself once** in a fresh Pickcode named `Y2-T3-W6-Adventure` — you'll build it live and it must be flawless
 2. **Play all three example runs** (left→follow = WIN; right→push = LOSE; left→rest = LOSE) so your live demos match the lesson exactly
 3. **Draw the story-map** on your whiteboard/paper beforehand so you can model it fast
-4. **Rehearse the two headline bugs** you'll demo deliberately: a scene with no `return` (→ "Unknown scene!"), and a scene returning its own name (→ infinite loop; know where Trinket's **Stop** button is)
+4. **Rehearse the two headline bugs** you'll demo deliberately: a scene with no `return` (→ "Unknown scene!"), and a scene returning its own name (→ infinite loop; know where Pickcode's **Stop** button is)
 5. **Prepare a "catch-up" pasteable** of each scene's code in case someone falls behind — paste into Zoom chat, don't stall the class
 
 ---
@@ -101,7 +101,7 @@ Screen-share the sample playthrough from the lesson. Then state the **three rule
 
 Then the non-negotiable setup instruction:
 
-> "Create a NEW Trinket. Name it exactly Y2-T3-W6-Adventure. Type it in the chat when done. This is the file you KEEP — next week we finish this very game."
+> "Create a NEW Pickcode. Name it exactly Y2-T3-W6-Adventure. Type it in the chat when done. This is the file you KEEP — next week we finish this very game."
 
 #### Teaching Tips
 
@@ -170,13 +170,13 @@ This is the heart. Build the loop and narrate the flow of `current`:
 
 Point out the `else: print("Unknown scene!"); current = "lose"` safety net and explain WHY it matters: it catches a typo'd scene name or a missing `return` (which returns `None`) instead of crashing or looping forever.
 
-**Then the full run.** Do all three example runs live so students see WIN and both LOSE paths. Celebrate the first WIN loudly, then: **SAVE the Trinket.**
+**Then the full run.** Do all three example runs live so students see WIN and both LOSE paths. Celebrate the first WIN loudly, then: **SAVE the Pickcode.**
 
 #### Teaching Tips
 
 - **Build the loop incrementally, don't paste the whole block.** Add `start`, run, add `forest`, run, and so on. Students who fall behind can't recover from a pasted wall.
 - **New scene = new function AND a new `elif`.** Say this now; it's the homework's most common trip-up (Common Mistake 4).
-- **Indentation is the silent killer** — the `if`/`elif` bodies are 4 spaces. Trinket auto-indents after the colon; point that out.
+- **Indentation is the silent killer** — the `if`/`elif` bodies are 4 spaces. Pickcode auto-indents after the colon; point that out.
 
 ---
 
@@ -205,7 +205,7 @@ Point out the tiers (4 scenes+item / 5 scenes+2 endings / gated scene).
 
 #### Wrap-Up (3 minutes)
 
-> "Five weeks of functions, and today you built a game ENGINE. Next week we finish YOUR whole adventure. Save your Trinket — I'll see you there."
+> "Five weeks of functions, and today you built a game ENGINE. Next week we finish YOUR whole adventure. Save your Pickcode project — I'll see you there."
 
 Stay on the call 2-3 minutes for questions and to help anyone whose game isn't running or terminating.
 
@@ -234,7 +234,7 @@ Pair it with the **infinite-loop** demo (`return "cave"` inside `cave_scene`) so
 - [ ] Wrote scene functions that `return` a string on every branch
 - [ ] Used `inventory.append(...)` and `if "item" in inventory:`
 - [ ] Built a loop that terminates on `"win"`/`"lose"`
-- [ ] Saved the Trinket with the correct name
+- [ ] Saved the Pickcode with the correct name
 
 **Engagement:**
 - [ ] Kept pace with the live build (thumbs up at each scene)

@@ -9,7 +9,7 @@
 - **Styling:** Tailwind CSS 4, shadcn/ui, Radix UI
 - **Backend:** Supabase (PostgreSQL, Auth, RLS)
 - **AI:** Anthropic Claude (claude-haiku-4-5)
-- **Code Execution:** Pyodide (Python in browser), Trinket integration
+- **Code Execution:** Pyodide (Python in browser), Pickcode integration
 - **Animation:** Lottie React
 - **Package Manager:** pnpm
 
@@ -137,7 +137,7 @@ CREATE TABLE lessons (
 
 ### Lesson Viewer Features
 - Markdown rendering with syntax highlighting
-- Built-in code editor (Pyodide or Trinket)
+- Built-in code editor (Pyodide) with a Pickcode workflow for full projects
 - Progress tracking
 - Mark as complete functionality
 - Navigation between lessons
@@ -180,14 +180,14 @@ CREATE TABLE lessons (
 - Output display
 - Keyboard shortcuts (Ctrl+Enter to run)
 
-### Trinket Editor
-- Embedded Trinket.io iframe
-- Full Python environment
-- For lessons requiring `input()` function
+### Pickcode Integration
+- Displays and copies lesson starter code
+- Opens a saved Pickcode Python project for full program execution
+- Accepts View Code project links for teacher review
 
 ### Location: `components/code/`
 - `python-editor.tsx` - Pyodide-based editor
-- `trinket-editor.tsx` - Trinket embed component
+- `pickcode-editor.tsx` - Pickcode starter-code and launch component
 
 ---
 
@@ -211,7 +211,7 @@ CREATE TABLE lessons (
 - Challenge ideas for extensions
 - Skill badges
 - Difficulty indicators
-- Trinket links for running
+- Pickcode links for running
 
 ---
 
@@ -521,5 +521,3 @@ Proprietary - Kids Learn AI © 2025
 
 *Last Updated: December 2025*
 *Version: 1.0.0*
-
-

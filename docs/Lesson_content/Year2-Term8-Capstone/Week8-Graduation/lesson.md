@@ -9,7 +9,7 @@ requires_trinket: true
 starter_code: |
   # 🎓 GRADUATION-DAY CHECKLIST
   # This is the LAST lesson of Year 2. Today you present.
-  # Before you go live on Zoom, tick these off in Trinket:
+  # Before you go live on Zoom, tick these off in Pickcode:
   #
   # [ ] My capstone RUNS with no red errors
   # [ ] I can demo my 2-3 must-have features
@@ -17,7 +17,7 @@ starter_code: |
   # [ ] I know my proudest project of the whole year
   # [ ] I can say ONE way I've grown since Term 1
   #
-  # Open your capstone Trinket now and run it once, top to bottom.
+  # Open your capstone Pickcode now and run it once, top to bottom.
   # Then run the line below and take a breath — you made it. 🎉
 
   print("I built 8 projects. I finished Year 2. I'm ready to graduate! 🎓")
@@ -105,7 +105,7 @@ take_home_assignment: |
   There's no next class — so this last piece of homework is a gift to your future self. Pick ONE (or do both if you're buzzing!):
 
   ### Option A — "My Coding Journey" Letter (recommended)
-  Write a program in Trinket that prints a message to **future-you**.
+  Write a program in Pickcode that prints a message to **future-you**.
 
   **Requirements:**
   1. Ask for your name with `input()`
@@ -118,9 +118,9 @@ take_home_assignment: |
   ### Option B — Keep Building
   Open your favourite project of the whole year and add **one new feature** to it — a nice-to-have you never got to. You're an AI-Ready Developer now; you don't need a lesson to keep going.
 
-  **Submit (optional!):** Save your Trinket, click **Share**, and send the link wherever your teacher asks — or just keep it for yourself. This one's for you.
+  **Submit (optional!):** Save your Pickcode project, choose **Share → Anyone with link → View Code**, and send the link wherever your teacher asks — or just keep it for yourself. This one's for you.
 
-  **Trinket for this week:** `Y2-T8-W8-Graduation`
+  **Pickcode for this week:** `Y2-T8-W8-Graduation`
 
   > 🔑 There's no Week 9 and no Term 9 — because you've finished. From here, the projects are yours to choose. Keep coding. 💛
 ai_activities: |
@@ -172,7 +172,7 @@ ai_activities: |
 
 Before the ceremony, let's make sure your capstone is ready for its moment. **No new features today** — you're just making the work you already did sparkle.
 
-Open your capstone Trinket and run it once, top to bottom. Then check every box:
+Open your capstone Pickcode and run it once, top to bottom. Then check every box:
 
 | ✅ Check | What "good" looks like |
 |---|---|
@@ -290,7 +290,7 @@ It certifies that you can:
 
 ### 🖨️ Your Own Certificate Printer
 
-To mark the moment, today's **solution code** is a special program: an **AI-Ready Developer Certificate printer**. It's built from the very skills you earned this year — a **function**, **f-strings**, and a **loop over your portfolio of 8 projects**. Open the solution, type your name, and print your own certificate right in Trinket.
+To mark the moment, today's **solution code** is a special program: an **AI-Ready Developer Certificate printer**. It's built from the very skills you earned this year — a **function**, **f-strings**, and a **loop over your portfolio of 8 projects**. Open the solution, type your name, and print your own certificate right in Pickcode.
 
 Here's a peek at the heart of it — a function that centres text using a nested f-string:
 
@@ -395,7 +395,7 @@ Over eight terms, look at everything you learned and built:
 There's no next class — so this last piece of homework is a gift to your future self. Pick ONE (or both!):
 
 ### Option A — "My Coding Journey" Letter (recommended)
-Write a program in Trinket that prints a message to **future-you**.
+Write a program in Pickcode that prints a message to **future-you**.
 
 **Requirements:**
 1. Ask for your name with `input()`
@@ -408,7 +408,7 @@ Write a program in Trinket that prints a message to **future-you**.
 ### Option B — Keep Building
 Open your favourite project of the whole year and add **one new feature** — a nice-to-have you never got to. You're an AI-Ready Developer now; you don't need a lesson to keep going.
 
-**Submit (optional!):** Save your Trinket, click **Share**, and send the link wherever your teacher asks — or just keep it for yourself. This one's for you.
+**Submit (optional!):** Save your Pickcode project, choose **Share → Anyone with link → View Code**, and send the link wherever your teacher asks — or just keep it for yourself. This one's for you.
 
 > 🔑 There's no Week 9 and no Term 9 — because you've finished. From here, the projects are yours to choose. Keep coding. 💛
 

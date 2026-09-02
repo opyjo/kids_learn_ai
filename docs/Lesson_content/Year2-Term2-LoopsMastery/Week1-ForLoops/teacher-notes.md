@@ -42,19 +42,19 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Trinket accounts (from Year 1/Term 1) — new-joiner sign-up steps ready
+- Pickcode accounts (from Year 1/Term 1) — new-joiner sign-up steps ready
 - This teaching guide open during class
-- Class WhatsApp/email thread for sharing Trinket links
+- Class WhatsApp/email thread for sharing Pickcode links
 - Optional: a visible number line or the `list(range(...))` trick ready to demonstrate
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Pre-type the Loop Lab snippets** into a Trinket so you can reveal outputs instantly during predict-then-run
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Pre-type the Loop Lab snippets** into a Pickcode so you can reveal outputs instantly during predict-then-run
 3. **Rehearse the countdown trace** — `range(3, 0, -1)` producing `3, 2, 1` (NOT `0`) is the trickiest idea today; be ready to walk it slowly
 4. **Have the arcade roadmap ready** — the Week 1-8 table is your motivational hook; screen-share or paste it
 5. **Prepare the `list(range(...))` demo** — showing `[1, 2, 3, 4, 5]` makes the abstract range concrete
-6. **Set the Trinket naming reminder** — today's is `Y2-T2-W1-ForLoops`; portfolio habit continues
+6. **Set the Pickcode naming reminder** — today's is `Y2-T2-W1-ForLoops`; portfolio habit continues
 
 ---
 
@@ -247,7 +247,7 @@ Stay on 2-3 minutes for questions.
 | Countdown produces no output | They forgot the negative step; run `range(5, 0)` vs `range(5, 0, -1)` side by side |
 | `IndentationError` / `SyntaxError` on the for line | Check the colon and that the body is indented; these are the two most common today |
 | Loop Lab predictions too easy | Add tougher ranges: `range(10, 0, -2)` or `range(0, 100, 25)` |
-| Trinket login trouble | Password reset via private chat; spare class account as last resort |
+| Pickcode login trouble | Password reset via private chat; spare class account as last resort |
 
 ---
 

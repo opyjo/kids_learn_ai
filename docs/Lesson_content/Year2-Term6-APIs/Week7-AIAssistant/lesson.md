@@ -212,7 +212,7 @@ class_activities: |
 
   We upgrade your Week 6 assistant in **three stages**, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move together!
 
-  > 📁 **First:** open your **`Y2-T6-W6-Assistant`** Trinket. Save it as a NEW trinket named **`Y2-T6-W7-Assistant`** (File → Save a copy). We upgrade the copy — your Week 6 original stays safe.
+  > 📁 **First:** open your **`Y2-T6-W6-Assistant`** Pickcode. Save it as a NEW Pickcode project named **`Y2-T6-W7-Assistant`** (File → Save a copy). We upgrade the copy — your Week 6 original stays safe.
 
   ### Stage 1 — Memory: the `user` dictionary (⭐⭐)
   At the very start of `run_assistant()`, ask the user's name and favourite city, then store BOTH in one dictionary — **before** the chat loop.
@@ -252,14 +252,14 @@ class_activities: |
       if result["status"] == "ok":
           print(f"{BOT_NAME}: My advice: {result['data']['advice']}")
   ```
-  ✅ **Final checkpoint:** ask for advice AND try nonsense like "banana" — friendly reply, no crash? 🎉 **Save your Trinket!**
+  ✅ **Final checkpoint:** ask for advice AND try nonsense like "banana" — friendly reply, no crash? 🎉 **Save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Make It Showcase-Ready ✨
 
   Next week you'll **demo your assistant** to the class and earn the **API Master Badge**! This week, give it a real personality and make sure it never, ever crashes.
 
   **Requirements:**
-  1. Open your **`Y2-T6-W7-Assistant`** Trinket
+  1. Open your **`Y2-T6-W7-Assistant`** Pickcode
   2. Give your assistant a **unique name and personality** (its own `BOT_NAME` and a consistent, friendly voice)
   3. **Remember at least one preference** in the `user` dictionary (name + favourite city, or add your own like a favourite emoji)
   4. Add **your own new service + intent** (advice, compliment, a quiz question, a time-of-day greeting — your choice!)
@@ -277,7 +277,7 @@ take_home_assignment: |
 
   > 💡 Bring this exact program to next week's showcase — you'll run it live on Zoom and earn your badge! 🏆
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? Real Assistants Remember You Too
 
@@ -338,7 +338,7 @@ Bot: It's 30 degrees and sunny in Accra
 
 Friendly enough — but it doesn't know who it's talking to, it has no name of its own, and every reply is flat. Today we give it **memory, personality, more services, and armour**.
 
-> 📁 **BEFORE WE START:** Open your **`Y2-T6-W6-Assistant`** Trinket. Save a **copy** and name it **`Y2-T6-W7-Assistant`**. We upgrade the copy — that way your Week 6 original is always safe!
+> 📁 **BEFORE WE START:** Open your **`Y2-T6-W6-Assistant`** Pickcode. Save a **copy** and name it **`Y2-T6-W7-Assistant`**. We upgrade the copy — that way your Week 6 original is always safe!
 
 ---
 
@@ -557,7 +557,7 @@ if intent == "bye":
 
 ## ✅ Part 7: The Whole Personalised Assistant
 
-Here is your complete assistant. This is what should be in your `Y2-T6-W7-Assistant` Trinket:
+Here is your complete assistant. This is what should be in your `Y2-T6-W7-Assistant` Pickcode:
 
 ```python
 # 🤖 Y2-T6-W7-Assistant — your PERSONALISED AI-Powered Assistant ⭐
@@ -718,7 +718,7 @@ Kofi: bye
 Ada: Goodbye, Kofi! Come back soon. 👋
 ```
 
-🎉 **You built a personalised, crash-proof AI-powered assistant!** Save your Trinket now.
+🎉 **You built a personalised, crash-proof AI-powered assistant!** Save your Pickcode project now.
 
 ---
 
@@ -788,7 +788,7 @@ while running:
         running = False
 ```
 
-> 😵 Stuck in a forever loop in Trinket? Click **Stop** (or re-run) to escape, then find the missing `running = False`.
+> 😵 Stuck in a forever loop in Pickcode? Click **Stop** (or re-run) to escape, then find the missing `running = False`.
 
 ---
 
@@ -821,7 +821,7 @@ Your assistant is **finished** — personalised, polished, and bulletproof. Next
 - 🧠 We'll look back at the whole term — request/response, JSON, mock APIs, intents, and this assistant
 - 🎖️ You'll earn your **API Master Badge** for building a real AI-powered assistant from scratch!
 
-> Bring your `Y2-T6-W7-Assistant` Trinket next week — make sure it runs, never crashes, remembers your name, and you're proud of it. It's showtime!
+> Bring your `Y2-T6-W7-Assistant` Pickcode next week — make sure it runs, never crashes, remembers your name, and you're proud of it. It's showtime!
 
 ---
 
@@ -844,7 +844,7 @@ Your assistant is **finished** — personalised, polished, and bulletproof. Next
 Next week you'll **demo your assistant** and earn the **API Master Badge**! This week, give it a real personality and make sure it never, ever crashes.
 
 **Requirements:**
-1. Open your **`Y2-T6-W7-Assistant`** Trinket
+1. Open your **`Y2-T6-W7-Assistant`** Pickcode
 2. Give your assistant a **unique name and personality** (its own `BOT_NAME` and a consistent, friendly voice)
 3. **Remember at least one preference** in the `user` dictionary (name + favourite city, or your own idea)
 4. Add **your own new service + intent** (advice, compliment, a quiz question, a time-of-day greeting — your choice!)
@@ -862,7 +862,7 @@ Next week you'll **demo your assistant** and earn the **API Master Badge**! This
 
 > 💡 Bring this exact program to next week's showcase — you'll run it live on Zoom and earn your badge! 🏆
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

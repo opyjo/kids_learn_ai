@@ -31,7 +31,7 @@ By the end of this lesson, students will be able to:
 Students should have completed Lesson 1 and be able to:
 
 - Write and run a basic `print("message")` statement
-- Navigate the Trinket interface
+- Navigate the Pickcode interface
 - Identify and fix basic syntax errors (missing quotes, wrong capitalization)
 
 ### Materials Needed
@@ -619,7 +619,7 @@ If a new student joins:
 | Emojis not working          | Test before class          | Use regular text; show emoji keyboard |
 | Code runs but shows nothing | Check for `print()`        | Remind about `print()` being required |
 | Syntax errors piling up     | Encourage frequent running | "Run your code after every 2-3 lines" |
-| Student lost in interface   | Clear Trinket demo         | Re-show the left/right panel layout   |
+| Student lost in interface   | Clear Pickcode demo         | Re-show the left/right panel layout   |
 
 ### Conceptual Confusion
 

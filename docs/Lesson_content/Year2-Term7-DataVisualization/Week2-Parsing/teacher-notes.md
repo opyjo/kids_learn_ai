@@ -45,13 +45,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Students' Trinket accounts; today's Trinket name: `Y2-T7-W2-Parsing`
+- Students' Pickcode accounts; today's Pickcode name: `Y2-T7-W2-Parsing`
 - This teaching guide open during class
 - The shared class dataset ready to paste in chat (columns `name,score`)
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test the solution code in Trinket** — run it once so you can live-demo each split output
+1. **Test the solution code in Pickcode** — run it once so you can live-demo each split output
 2. **Have the `data` string ready to paste** into the Zoom chat so no one loses time typing it (watch for auto-formatting that mangles the triple quotes)
 3. **Rehearse the three deliberate crashes** (Common Mistakes) so you can trigger each error message on cue — seeing the real `TypeError`/`ValueError`/`IndexError` is the lesson's best teaching moment
 4. **Recall the Term 4 record pattern** — students built lists of dictionaries in Term 4 (Contact Manager). Have that callback ready; today reuses it exactly
@@ -98,7 +98,7 @@ Then introduce the triple-quoted string. The key mental model to hammer home:
 #### Teaching Tips
 
 - **Don't rush the `\n` idea.** If students don't believe the string is really one line, print `repr(data)` live so they see the `\n` characters with their own eyes.
-- **Reassure the "no files" point.** Some students may ask "why not a real file?" — Trinket runs in the browser and can't open files. The multi-line string is our data file all term. Real files come in later years.
+- **Reassure the "no files" point.** Some students may ask "why not a real file?" — Pickcode runs in the browser and can't open files. The multi-line string is our data file all term. Real files come in later years.
 
 ---
 

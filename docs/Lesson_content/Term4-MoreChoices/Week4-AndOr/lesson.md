@@ -56,7 +56,7 @@ take_home_assignment: |
   - Study rewards (hours AND score, OR bonus points)
   - Any creative combination you can think of!
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

@@ -100,7 +100,7 @@ take_home_assignment: |
 
   You've been handed a working but MESSY program. It runs fine — but it repeats itself over and over and is painful to change. Your job: **refactor** it into clean, well-named functions.
 
-  **The messy program (copy this into Trinket):**
+  **The messy program (copy this into Pickcode):**
   ```python
   print("*" * 25)
   print("KOFI THE KNIGHT")
@@ -130,7 +130,7 @@ take_home_assignment: |
   - ⭐⭐ Add a 4th hero of your own invention
   - ⭐⭐⭐ Add a `strongest` global variable that your program updates to remember which hero had the most gold, then print it at the end
 
-  **Submit:** Save your Trinket (`Y2-T3-W4-Scope`), click **Share**, copy the link, and paste it where your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T3-W4-Scope`), choose **Share → Anyone with link → View Code**, copy the link, and paste it where your teacher asks.
 ai_activities: |
   ## 🤖 Quick Chat: How Big AI Teams Stay Tidy
 
@@ -578,7 +578,7 @@ You've got tidy, well-named functions. Next week they team up — one function *
 
 You've been handed a working but MESSY program. It runs fine — but it repeats itself and is painful to change. **Refactor** it into clean, well-named functions.
 
-**The messy program (copy into Trinket):**
+**The messy program (copy into Pickcode):**
 ```python
 print("*" * 25)
 print("KOFI THE KNIGHT")
@@ -608,7 +608,7 @@ print("*" * 25)
 - ⭐⭐ Add a 4th hero of your own invention
 - ⭐⭐⭐ Add a `strongest` global variable that remembers which hero had the most gold, then print it at the end
 
-**Submit:** Save your Trinket (`Y2-T3-W4-Scope`), click **Share**, copy the link, and paste it where your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T3-W4-Scope`), choose **Share → Anyone with link → View Code**, copy the link, and paste it where your teacher asks.
 
 ---
 

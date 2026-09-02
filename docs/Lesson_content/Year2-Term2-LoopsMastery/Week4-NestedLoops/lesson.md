@@ -57,7 +57,7 @@ solution_code: |
 class_activities: |
   ## 🎨 Class Activity: Pattern Studio 🔳
 
-  Open your Trinket `Y2-T2-W4-NestedLoops` and build patterns together. Run each one, then give a **thumbs up** in Zoom when your output matches.
+  Open your Pickcode project `Y2-T2-W4-NestedLoops` and build patterns together. Run each one, then give a **thumbs up** in Zoom when your output matches.
 
   ### Warm-up — Predict the Lines (whole class, Zoom chat)
   Look at this program **without running it**:
@@ -90,7 +90,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Pattern Artist 🎨
 
-  Write a **"Pattern Artist"** program in Trinket that draws at least **TWO** different shapes or patterns using **nested loops**.
+  Write a **"Pattern Artist"** program in Pickcode that draws at least **TWO** different shapes or patterns using **nested loops**.
 
   **Requirements:**
   1. Use a **nested loop** (a loop inside a loop) for at least one pattern
@@ -117,7 +117,7 @@ take_home_assignment: |
   - ⭐⭐ Add a times-table grid OR a kente strip using emoji/symbols
   - ⭐⭐⭐ Draw a *hollow* rectangle (stars on the edges, spaces in the middle) using `if` inside your nested loop
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Think: Pictures Are Grids Too!
 
@@ -507,7 +507,7 @@ for row in range(2):
 
 ## 🎨 Class Activity: Pattern Studio 🔳
 
-Open your Trinket `Y2-T2-W4-NestedLoops`. We'll build three patterns together — run each one and **thumbs up** 👍 in Zoom when your output matches.
+Open your Pickcode project `Y2-T2-W4-NestedLoops`. We'll build three patterns together — run each one and **thumbs up** 👍 in Zoom when your output matches.
 
 1. **Predict the Lines** (whole class): guess how many lines the warm-up nested loop prints, in the Zoom chat, *before* running it.
 2. **Station 1 — Star Pyramid (⭐):** grow a triangle from 1 star to 5 — try it both ways (`"*" * i` and a nested loop).
@@ -542,7 +542,7 @@ You can now build grids, boards and patterns — the *skeleton* of a game. But a
 
 ## 📚 Homework: Pattern Artist 🎨
 
-Write a **"Pattern Artist"** program in Trinket that draws at least **TWO** different shapes or patterns using **nested loops**.
+Write a **"Pattern Artist"** program in Pickcode that draws at least **TWO** different shapes or patterns using **nested loops**.
 
 **Requirements:**
 1. Use a **nested loop** (a loop inside a loop) for at least one pattern
@@ -555,7 +555,7 @@ Write a **"Pattern Artist"** program in Trinket that draws at least **TWO** diff
 - ⭐⭐ Add a times-table grid OR a kente strip using emoji/symbols
 - ⭐⭐⭐ Draw a *hollow* rectangle (stars on the edges, spaces in the middle) using `if` inside your nested loop
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

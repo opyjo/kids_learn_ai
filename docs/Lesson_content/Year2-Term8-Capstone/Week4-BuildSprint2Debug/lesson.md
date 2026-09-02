@@ -163,7 +163,7 @@ class_activities: |
 
   ### Part A — Build Sprint 2: Stats & Chart (⭐ → ⭐⭐⭐)
 
-  Open your capstone Trinket (`Y2-T8-Capstone`) and build your SECOND feature. If you're following Study Buddy, build **View stats & chart** step by step:
+  Open your capstone Pickcode (`Y2-T8-Capstone`) and build your SECOND feature. If you're following Study Buddy, build **View stats & chart** step by step:
 
   - ⭐ Guard the empty log, then print the **total hours** and the **average per session**
   - ⭐⭐ Add a **tally dict** (`subject -> total hours`) and print it
@@ -202,7 +202,7 @@ take_home_assignment: |
   - ⭐⭐ Feature is guarded against empty/odd input, and your bug report names the error TYPE (e.g. TypeError)
   - ⭐⭐⭐ You used `print()` checks to isolate the bug and explained in your report exactly which value was wrong
 
-  **Submit:** Save your Trinket (`Y2-T8-Capstone`), click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T8-Capstone`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Chat: Even AI Code Has Bugs
 
@@ -549,7 +549,7 @@ print(s["subject"])   # exact match, lowercase
 
 ### Part A — Build Sprint 2 (⭐ → ⭐⭐⭐)
 
-In your `Y2-T8-Capstone` Trinket, build your **second feature**. Study Buddy builders finish **View stats & chart**:
+In your `Y2-T8-Capstone` Pickcode, build your **second feature**. Study Buddy builders finish **View stats & chart**:
 
 - ⭐ Guard the empty log, then print **total** and **average** hours
 - ⭐⭐ Add the **tally dict** and print it
@@ -610,7 +610,7 @@ Keep building your capstone!
 - ⭐⭐ Feature is guarded against empty/odd input, and your report names the error TYPE
 - ⭐⭐⭐ You used `print()` checks to isolate the bug and explained which value was wrong
 
-**Submit:** Save your Trinket (`Y2-T8-Capstone`), click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T8-Capstone`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 
 ---
 

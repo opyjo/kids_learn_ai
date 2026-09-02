@@ -1,6 +1,7 @@
 "use client";
 
 import { AlertCircle, CheckCircle, Loader2, Upload } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -15,71 +16,44 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+	parsePickcodeProjectUrl,
+	validatePickcodeProjectUrl,
+} from "@/lib/pickcode";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-import { extractEmbedUrl, TrinketPreview } from "./trinket-preview";
+import { PickcodePreview } from "./pickcode-preview";
 
-interface TrinketSubmissionFormProps {
+interface PickcodeSubmissionFormProps {
 	lessonId: string;
 	lessonTitle: string;
 	existingUrl?: string;
 	onSubmitSuccess?: () => void;
 }
 
-const validateTrinketUrl = (
-	url: string,
-): { valid: boolean; message: string } => {
-	if (!url.trim()) {
-		return { valid: false, message: "Please enter a Trinket URL" };
-	}
-
-	// Check if it's a trinket.io URL
-	if (!url.includes("trinket.io")) {
-		return { valid: false, message: "Please enter a valid Trinket.io URL" };
-	}
-
-	// Try to extract embed URL
-	const embedUrl = extractEmbedUrl(url);
-	if (!embedUrl.includes("/embed/")) {
-		return {
-			valid: false,
-			message:
-				"Could not parse Trinket URL. Make sure you're using a share link or embed URL.",
-		};
-	}
-
-	return { valid: true, message: "Valid Trinket URL" };
-};
-
-export const TrinketSubmissionForm = ({
+export function PickcodeSubmissionForm({
 	lessonId,
 	lessonTitle,
 	existingUrl,
 	onSubmitSuccess,
-}: TrinketSubmissionFormProps) => {
+}: Readonly<PickcodeSubmissionFormProps>) {
 	const [isOpen, setIsOpen] = useState(false);
-	const [trinketUrl, setTrinketUrl] = useState(existingUrl || "");
+	const [projectUrl, setProjectUrl] = useState(existingUrl || "");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [success, setSuccess] = useState(false);
 	const [showPreview, setShowPreview] = useState(false);
+	const validation = validatePickcodeProjectUrl(projectUrl);
 
-	const validation = validateTrinketUrl(trinketUrl);
-
-	const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setTrinketUrl(e.target.value);
+	const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setProjectUrl(event.target.value);
 		setError(null);
 		setSuccess(false);
 		setShowPreview(false);
 	};
 
-	const handlePreview = () => {
-		if (validation.valid) {
-			setShowPreview(true);
-		}
-	};
-
 	const handleSubmit = async () => {
-		if (!validation.valid) {
+		const project = parsePickcodeProjectUrl(projectUrl);
+		if (!project) {
 			setError(validation.message);
 			return;
 		}
@@ -98,40 +72,29 @@ export const TrinketSubmissionForm = ({
 				return;
 			}
 
-			const embedUrl = extractEmbedUrl(trinketUrl);
-
-			// Upsert the submission (update if exists, insert if not)
+			// Keep the legacy table and column names so existing submissions and
+			// RLS policies continue to work while storing Pickcode project URLs.
 			const { error: submitError } = await supabase
 				.from("trinket_submissions")
 				.upsert(
 					{
 						student_id: user.id,
 						lesson_id: lessonId,
-						trinket_url: embedUrl,
+						trinket_url: project.projectUrl,
 						status: "submitted",
 						submitted_at: new Date().toISOString(),
 						updated_at: new Date().toISOString(),
 					},
-					{
-						onConflict: "student_id,lesson_id",
-					},
+					{ onConflict: "student_id,lesson_id" },
 				);
 
-			if (submitError) {
-				throw submitError;
-			}
+			if (submitError) throw submitError;
 
+			setProjectUrl(project.projectUrl);
 			setSuccess(true);
 			onSubmitSuccess?.();
-
-			// Close dialog after a brief delay
-			setTimeout(() => {
-				setIsOpen(false);
-				setSuccess(false);
-				setShowPreview(false);
-			}, 1500);
-		} catch (err) {
-			console.error("Submission error:", err);
+		} catch (submissionError) {
+			console.error("Submission error:", submissionError);
 			setError("Failed to submit. Please try again.");
 		} finally {
 			setIsSubmitting(false);
@@ -141,10 +104,7 @@ export const TrinketSubmissionForm = ({
 	const handleOpenChange = (open: boolean) => {
 		setIsOpen(open);
 		if (!open) {
-			// Reset state when closing
-			if (!existingUrl) {
-				setTrinketUrl("");
-			}
+			if (!existingUrl) setProjectUrl("");
 			setError(null);
 			setSuccess(false);
 			setShowPreview(false);
@@ -159,80 +119,87 @@ export const TrinketSubmissionForm = ({
 					size="sm"
 					className="gap-2"
 				>
-					<Upload className="h-4 w-4" />
+					<Upload className="h-4 w-4" aria-hidden="true" />
 					{existingUrl ? "Update Submission" : "Submit Assignment"}
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+			<DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
 				<DialogHeader>
-					<DialogTitle>Submit Assignment</DialogTitle>
+					<DialogTitle>Submit Pickcode Assignment</DialogTitle>
 					<DialogDescription>
-						Paste your Trinket share link or embed URL for "{lessonTitle}"
+						Share your code for “{lessonTitle}” using a Pickcode View Code
+						project link.
 					</DialogDescription>
 				</DialogHeader>
 
 				<div className="space-y-4 py-4">
 					<div className="space-y-2">
-						<Label htmlFor="trinket-url">Trinket URL</Label>
+						<Label htmlFor="pickcode-project-url">Pickcode project link</Label>
 						<Input
-							id="trinket-url"
-							placeholder="https://trinket.io/python/abc123..."
-							value={trinketUrl}
+							id="pickcode-project-url"
+							placeholder="https://app.pickcode.io/project/..."
+							value={projectUrl}
 							onChange={handleUrlChange}
-							className={
-								validation.valid && trinketUrl ? "border-green-500" : ""
-							}
+							className={validation.valid ? "border-green-500" : ""}
 						/>
 						<p className="text-xs text-muted-foreground">
-							Copy the share link from Trinket (click Share → Link)
+							In Pickcode, choose Share → Anyone with link → View Code, then
+							copy the project link.{" "}
+							<Link href="/get-pickcode" className="font-medium underline">
+								See the setup guide
+							</Link>
+							.
 						</p>
 					</div>
 
-					{trinketUrl && !validation.valid && (
+					{projectUrl && !validation.valid ? (
 						<Alert variant="destructive">
-							<AlertCircle className="h-4 w-4" />
+							<AlertCircle className="h-4 w-4" aria-hidden="true" />
 							<AlertDescription>{validation.message}</AlertDescription>
 						</Alert>
-					)}
+					) : null}
 
-					{validation.valid && trinketUrl && !showPreview && (
+					{validation.valid && !showPreview ? (
 						<Button
 							variant="outline"
-							onClick={handlePreview}
+							onClick={() => setShowPreview(true)}
 							className="w-full"
 						>
 							Preview Code
 						</Button>
-					)}
+					) : null}
 
-					{showPreview && validation.valid && (
-						<TrinketPreview
-							trinketUrl={trinketUrl}
-							title="Preview"
+					{showPreview && validation.valid ? (
+						<PickcodePreview
+							projectUrl={projectUrl}
+							title="Pickcode preview"
 							className="mt-4"
 						/>
-					)}
+					) : null}
 
-					{error && (
+					{error ? (
 						<Alert variant="destructive">
-							<AlertCircle className="h-4 w-4" />
+							<AlertCircle className="h-4 w-4" aria-hidden="true" />
 							<AlertDescription>{error}</AlertDescription>
 						</Alert>
-					)}
+					) : null}
 
-					{success && (
+					{success ? (
 						<Alert className="border-green-500 bg-green-50 dark:bg-green-950">
-							<CheckCircle className="h-4 w-4 text-green-600" />
-							<AlertDescription className="text-green-600">
-								Assignment submitted successfully!
+							<CheckCircle
+								className="h-4 w-4 text-green-600"
+								aria-hidden="true"
+							/>
+							<AlertDescription className="text-green-700 dark:text-green-300">
+								Assignment submitted successfully.
 							</AlertDescription>
 						</Alert>
-					)}
+					) : null}
 				</div>
 
 				<DialogFooter>
 					<Button variant="outline" onClick={() => setIsOpen(false)}>
-						Cancel
+						{success ? "Done" : "Cancel"}
 					</Button>
 					<Button
 						onClick={handleSubmit}
@@ -240,14 +207,14 @@ export const TrinketSubmissionForm = ({
 					>
 						{isSubmitting ? (
 							<>
-								<Loader2 className="h-4 w-4 mr-2 animate-spin" />
+								<Loader2
+									className="h-4 w-4 mr-2 animate-spin"
+									aria-hidden="true"
+								/>
 								Submitting...
 							</>
 						) : success ? (
-							<>
-								<CheckCircle className="h-4 w-4 mr-2" />
-								Submitted!
-							</>
+							"Submitted"
 						) : (
 							"Submit Assignment"
 						)}
@@ -256,4 +223,4 @@ export const TrinketSubmissionForm = ({
 			</DialogContent>
 		</Dialog>
 	);
-};
+}

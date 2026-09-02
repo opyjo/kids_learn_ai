@@ -9,7 +9,7 @@ requires_trinket: true
 starter_code: |
   # 🧮 Y2-T1-W6-Calculator — Smart Calculator Core
   # Made by: [YOUR NAME]
-  # IMPORTANT: Save this Trinket! Next week you extend THIS EXACT program.
+  # IMPORTANT: Save this Pickcode! Next week you extend THIS EXACT program.
 
   # --- Part 1: Title / Welcome ---
   # (build a bordered title with "=" * 40 and print())
@@ -81,7 +81,7 @@ class_activities: |
 
   We build the Smart Calculator Core in **five stages**, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works. Do NOT rush ahead — we all move together, stage by stage.
 
-  > 📁 **First:** create a new Trinket and name it **`Y2-T1-W6-Calculator`**. You will KEEP this file and extend it next week!
+  > 📁 **First:** create a new Pickcode project and name it **`Y2-T1-W6-Calculator`**. You will KEEP this file and extend it next week!
 
   ### Stage 1 — The Title (⭐)
   Build a bordered welcome using `"=" * 40` and `print()`.
@@ -134,14 +134,14 @@ class_activities: |
   else:
       print("❌ That is not a valid choice. Please run me again and pick 1-4.")
   ```
-  ✅ **Final checkpoint:** Run the whole thing. Pick option 3, enter 8 and 6.5 — do you get `52.00`? 🎉 Thumbs up and **save your Trinket!**
+  ✅ **Final checkpoint:** Run the whole thing. Pick option 3, enter 8 and 6.5 — do you get `52.00`? 🎉 Thumbs up and **save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Add Your Own Operation
 
   Your calculator does four things. Give it a **fifth power**!
 
   **Requirements:**
-  1. Open your **`Y2-T1-W6-Calculator`** Trinket (the one from class)
+  1. Open your **`Y2-T1-W6-Calculator`** Pickcode (the one from class)
   2. Add a new line to the **menu** (e.g. `  5. Power     (^)`)
   3. Add a matching **`elif`** branch that does the new maths
   4. Test it and make sure the answer is correct
@@ -165,7 +165,7 @@ take_home_assignment: |
 
   > ⚠️ Remember: compare `choice` as a **string** — `elif choice == "5":` (with quotes), NOT `choice == 5`.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? Calculators Are the Grandparents of AI
 
@@ -237,7 +237,7 @@ Enter the second number: 7
 Thanks for using Smart Calculator! 🎉
 ```
 
-> 📁 **BEFORE WE START:** Open Trinket, create a **new** Python trinket, and name it **`Y2-T1-W6-Calculator`**. This is important — next week you extend THIS EXACT file into a deluxe calculator. Do not delete it!
+> 📁 **BEFORE WE START:** Open Pickcode, create a **new** Python Pickcode project, and name it **`Y2-T1-W6-Calculator`**. This is important — next week you extend THIS EXACT file into a deluxe calculator. Do not delete it!
 
 ---
 
@@ -370,7 +370,7 @@ print("Thanks for using Smart Calculator! 🎉")
 
 ## ✅ Part 7: The Whole Program — Run It!
 
-Here is your complete Smart Calculator Core. This is what should be in your `Y2-T1-W6-Calculator` Trinket:
+Here is your complete Smart Calculator Core. This is what should be in your `Y2-T1-W6-Calculator` Pickcode:
 
 ```python
 # 🧮 Y2-T1-W6-Calculator — Smart Calculator Core
@@ -442,7 +442,7 @@ Enter the second number: 8
 100.0 / 8.0 = 12.50
 ```
 
-🎉 **You built a real, working calculator!** Save your Trinket now.
+🎉 **You built a real, working calculator!** Save your Pickcode project now.
 
 ---
 
@@ -538,7 +538,7 @@ Next week — **Week 7: Calculator Deluxe** — we make it professional:
 - 🛡️ A **divide-by-zero guard** so it never crashes (try dividing by 0 today... 💥)
 - ✅ **Bad-input protection** using the validation tricks from Week 5
 
-> Keep your `Y2-T1-W6-Calculator` Trinket safe — next week we upgrade THIS EXACT program into something you'd be proud to put in an app store!
+> Keep your `Y2-T1-W6-Calculator` Pickcode safe — next week we upgrade THIS EXACT program into something you'd be proud to put in an app store!
 
 ---
 
@@ -561,7 +561,7 @@ Next week — **Week 7: Calculator Deluxe** — we make it professional:
 Give your calculator a **fifth power**!
 
 **Requirements:**
-1. Open your **`Y2-T1-W6-Calculator`** Trinket (the one from class)
+1. Open your **`Y2-T1-W6-Calculator`** Pickcode (the one from class)
 2. Add a new line to the **menu** (e.g. `  5. Power     (^)`)
 3. Add a matching **`elif`** branch that does the new maths
 4. Test it and make sure the answer is correct
@@ -585,7 +585,7 @@ elif choice == "5":
 
 > ⚠️ Remember: compare `choice` as a **string** — `elif choice == "5":` (with quotes), NOT `choice == 5`.
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

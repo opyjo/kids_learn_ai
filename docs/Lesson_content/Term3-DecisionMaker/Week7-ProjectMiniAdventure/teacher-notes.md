@@ -27,7 +27,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for project requirements
 - Optional: Example adventures for inspiration
 
@@ -379,4 +379,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is a celebration of learning! Students should feel proud of what they've built. Focus on what they accomplished, not perfection. The showcase next week is about celebrating their journey, not comparing projects._ 🎮
-

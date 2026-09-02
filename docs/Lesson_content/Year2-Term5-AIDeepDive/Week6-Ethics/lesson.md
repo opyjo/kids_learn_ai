@@ -75,7 +75,7 @@ take_home_assignment: |
 
   **Step 1 — Choose your AI system.** Pick ONE real AI you know (see the topic ideas in the lesson). Not sure? Ask in the class chat.
 
-  **Step 2 — Draft your outline in Trinket** (`Y2-T5-W6-Ethics`). Use **comments** (`#`) to answer the five report questions — even a rough sentence each is perfect for now:
+  **Step 2 — Draft your outline in Pickcode** (`Y2-T5-W6-Ethics`). Use **comments** (`#`) to answer the five report questions — even a rough sentence each is perfect for now:
   ```python
   # MY AI INVESTIGATION — OUTLINE
 
@@ -93,7 +93,7 @@ take_home_assignment: |
   - ⭐⭐ Each answer is a clear full sentence, and your demo idea is chosen
   - ⭐⭐⭐ You already list a real **source** you'll use to cross-check a fact about your AI (a trusted website, a person to ask)
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it where your teacher asks. Bring this outline to Week 7 — you'll build straight from it!
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it where your teacher asks. Bring this outline to Week 7 — you'll build straight from it!
 ai_activities: |
   ## 🤖 Big Discussion: Being a Responsible AI Citizen 🌍
 
@@ -337,7 +337,7 @@ Tonight's homework is **Step 1**: choose your topic and draft the outline (comme
 
 This week is mostly thinking and planning — but here's a tiny, fun program that fits the theme. It doesn't *use* AI; it just **prints a detective's checklist** to remind you to slow down before believing something.
 
-Open **Trinket** and name it `Y2-T5-W6-Ethics`. Here's the starter:
+Open **Pickcode** and name it `Y2-T5-W6-Ethics`. Here's the starter:
 
 ```python
 def show_checklist():
@@ -416,7 +416,7 @@ Next week is a **workshop** — you'll take the outline you draft for homework a
 
 ## 📚 Homework: Plan Your AI Investigation 🔍
 
-Choose your AI system and **draft your outline** in Trinket (`Y2-T5-W6-Ethics`) using comments to answer all five report questions, plus which demo you'll show:
+Choose your AI system and **draft your outline** in Pickcode (`Y2-T5-W6-Ethics`) using comments to answer all five report questions, plus which demo you'll show:
 
 ```python
 # MY AI INVESTIGATION — OUTLINE
@@ -433,7 +433,7 @@ Choose your AI system and **draft your outline** in Trinket (`Y2-T5-W6-Ethics`) 
 - ⭐⭐ Each answer a clear full sentence, and demo idea chosen
 - ⭐⭐⭐ You list a real **source** you'll use to cross-check a fact about your AI
 
-**Submit:** Save your Trinket, click **Share**, and paste the link where your teacher asks. Bring this outline to Week 7 — you'll build straight from it!
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, and paste the link where your teacher asks. Bring this outline to Week 7 — you'll build straight from it!
 
 ---
 

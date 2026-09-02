@@ -17,7 +17,7 @@ Last week students met `for` loops with `range()`. This week completes the pair 
 
 Students already met `while` in Term 1 (the `running` flag in the Calculator). Today we build on that memory and go deeper: looping on a **live condition** (`while lives > 0:`, `while guess != secret:`), counting loops, and the two patterns every game needs — the **"Keep Guessing"** loop and the **"Play Again"** wrapper. By the end, every student has built a working game loop skeleton — the exact structure they'll reuse in Week 7.
 
-The single biggest risk of the lesson is the **infinite loop**. Treat it as a feature, not a disaster: deliberately trigger one, show the class how to hit Stop in Trinket, and turn it into the memorable moment of the day.
+The single biggest risk of the lesson is the **infinite loop**. Treat it as a feature, not a disaster: deliberately trigger one, show the class how to hit Stop in Pickcode, and turn it into the memorable moment of the day.
 
 ### Learning Objectives
 
@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 3. Choose between `for` and `while` using the "do I know how many times?" test
 4. Build the "Keep Guessing" loop (`while guess != secret:`)
 5. Build the "Play Again" wrapper (`while play_again == "yes":`) and combine both into a game loop
-6. Recognise, escape (Stop in Trinket), and fix an infinite loop
+6. Recognise, escape (Stop in Pickcode), and fix an infinite loop
 
 ### Key Success Metrics
 
@@ -36,23 +36,23 @@ By the end of this lesson, students will be able to:
 - [ ] Every student completes Stages 1 and 2 of the Magic Word Game; most complete Stage 3
 - [ ] Every student has triggered AND escaped an infinite loop at least once (guided)
 - [ ] Students can state the `for` vs `while` rule in their own words
-- [ ] Students leave with a saved `Y2-T2-W2-WhileLoops` Trinket
+- [ ] Students leave with a saved `Y2-T2-W2-WhileLoops` Pickcode
 
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share and reactions enabled
-- Students' Trinket accounts
+- Students' Pickcode accounts
 - This teaching guide open during class
 - A few extra `while` loops prepared for the "predict the loop count" chat warm-ups
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Rehearse the infinite loop live** — practise triggering one and hitting Stop in Trinket so you can demo it calmly and confidently
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Rehearse the infinite loop live** — practise triggering one and hitting Stop in Pickcode so you can demo it calmly and confidently
 3. **Prepare 3-4 predict-the-count loops** to paste in the Zoom chat as warm-ups (vary count-up, count-down, and a tricky `while n >= 0`)
-4. **Have the Magic Word Game solution open** in a separate Trinket so you can screen-share the working target
+4. **Have the Magic Word Game solution open** in a separate Pickcode so you can screen-share the working target
 5. **Recall last week** — note which students were shaky on `for`/`range()`; they may need extra support tracing `while` conditions
 
 ---
@@ -65,7 +65,7 @@ By the end of this lesson, students will be able to:
 ⏱️  0-8 min   → Recap the running flag + today's goal (game loops)
 ⏱️  8-20 min  → while with a condition: countdown, count-up, lives
 ⏱️ 20-30 min  → for vs while + predict-the-count chat warm-ups
-⏱️ 30-38 min  → The infinite loop demo (trigger + Stop in Trinket)
+⏱️ 30-38 min  → The infinite loop demo (trigger + Stop in Pickcode)
 ⏱️ 38-58 min  → Build the Magic Word Game (3 stages)
 ⏱️ 58-70 min  → Common mistakes + homework + Week 3 teaser
 ⏱️ 70-75 min  → Wrap-up + questions
@@ -156,17 +156,17 @@ Click Stop. Then fix it live by adding the missing line. Reinforce Mistake 2 too
 #### Teaching Tips
 
 - **Reassure loudly:** "Everyone makes infinite loops — I still do! The skill isn't avoiding them, it's spotting them and hitting Stop." This removes fear before the build.
-- Make sure every student knows WHERE the Stop button is in their own Trinket before moving on.
+- Make sure every student knows WHERE the Stop button is in their own Pickcode before moving on.
 
 ---
 
 ### Part 5: Build the Magic Word Game (20 minutes)
 
-The main build. Everyone opens a new Trinket named `Y2-T2-W2-WhileLoops`. Work in three stages; **thumbs up after each**.
+The main build. Everyone opens a new Pickcode project named `Y2-T2-W2-WhileLoops`. Work in three stages; **thumbs up after each**.
 
 #### Stage 1 — Countdown (⭐, ~4 min)
 
-Type the countdown, run it, then change it to start from 10. This warms up the loop mechanics and confirms everyone's Trinket works.
+Type the countdown, run it, then change it to start from 10. This warms up the loop mechanics and confirms everyone's Pickcode works.
 
 #### Stage 2 — Keep Guessing (⭐⭐, ~8 min)
 
@@ -190,7 +190,7 @@ Wrap the game in `while play_again == "yes":`, add the `tries` counter, and ask 
 
 #### Teaching Tips
 
-- **Indentation is the #1 stumble** with nested loops. Screen-share and point at how far each block is indented. Trinket's auto-indent helps but check on shared screens.
+- **Indentation is the #1 stumble** with nested loops. Screen-share and point at how far each block is indented. Pickcode's auto-indent helps but check on shared screens.
 - If Stage 3 runs long, demo it and set it as homework step 1 — don't sacrifice the wrap-up.
 
 ---
@@ -211,7 +211,7 @@ Walk through the requirements and example run. Point out it's the same "Keep Gue
 
 > "Today you built a game loop — a game that runs until you win, then asks 'again?'. That's the skeleton of the arcade you build in Week 7. Next week: how to BREAK out of a loop early. See you there!"
 
-Stay on 2-3 minutes for questions and to help stragglers save their Trinkets.
+Stay on 2-3 minutes for questions and to help stragglers save their Pickcode projects.
 
 ---
 
@@ -229,7 +229,7 @@ Stay on 2-3 minutes for questions and to help stragglers save their Trinkets.
 **Engagement:**
 - [ ] Participated in predict-the-count chat warm-ups
 - [ ] Used Zoom reactions at each checkpoint
-- [ ] Saved a named Trinket
+- [ ] Saved a named Pickcode
 
 ### Students to Watch
 
@@ -246,13 +246,13 @@ Stay on 2-3 minutes for questions and to help stragglers save their Trinkets.
 
 | Problem | Solution |
 |---|---|
-| Student's code runs forever / output scrolls | Have them click **Stop** in Trinket; then check for a missing or wrong-direction update line (Mistakes 1 & 2) |
+| Student's code runs forever / output scrolls | Have them click **Stop** in Pickcode; then check for a missing or wrong-direction update line (Mistakes 1 & 2) |
 | `NameError: name 'guess' is not defined` | The loop variable wasn't created before the `while` line — add `guess = ""` first (Mistake 4) |
 | `SyntaxError` on the while line | Almost always `=` instead of `==` in the condition (Mistake 3) |
 | Loop runs one time too many / too few | Off-by-one — check `>` vs `>=` (or `<` vs `<=`); trace it out loud together |
 | Nested loops confuse a student | Have them build Stage 2 fully first and get it working, THEN wrap it; don't write both loops at once |
 | Play Again never repeats | They compared to the wrong text, or asked BEFORE the loop instead of at the end — check the `input()` is the LAST line inside the loop |
-| Trinket won't save | Ensure logged in; use File → Save a copy; last resort share via the auto-generated link |
+| Pickcode won't save | Ensure logged in; use File → Save a copy; last resort share via the auto-generated link |
 
 ---
 

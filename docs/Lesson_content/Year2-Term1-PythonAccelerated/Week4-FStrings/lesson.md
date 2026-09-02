@@ -70,7 +70,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Shop Receipt (or Profile Card)
 
-  Build ONE polished program in Trinket using f-strings.
+  Build ONE polished program in Pickcode using f-strings.
 
   **Option A — Shop Receipt:**
   1. Ask for an item name, a price (`float()`), and a quantity (`int()`)
@@ -104,7 +104,7 @@ take_home_assignment: |
   - ⭐⭐ money formatted with `:.2f`
   - ⭐⭐⭐ add a discount or tax line, still perfectly formatted
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: AI Cares About Presentation Too
 
@@ -150,7 +150,7 @@ ai_activities: |
 
 ## 😖 Part 1: The Problem With Ugly Output
 
-Remember last week's maths power-ups? Try this in Trinket right now:
+Remember last week's maths power-ups? Try this in Pickcode right now:
 
 ```python
 print(10 / 3)
@@ -615,7 +615,7 @@ Next week — **Week 5: Smart Decisions & Safe Input** — you'll learn how to s
 
 ## 📚 Homework: Shop Receipt (or Profile Card)
 
-Build ONE polished program in Trinket using f-strings.
+Build ONE polished program in Pickcode using f-strings.
 
 **Option A — Shop Receipt:**
 1. Ask for an item name, a price (`float()`), and a quantity (`int()`)
@@ -649,7 +649,7 @@ TOTAL:    ₦6.00
 - ⭐⭐ money formatted with `:.2f`
 - ⭐⭐⭐ add a discount or tax line, still perfectly formatted
 
-**Submit:** Save your Trinket (name it `Y2-T1-W4-FStrings`), click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project (name it `Y2-T1-W4-FStrings`), choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

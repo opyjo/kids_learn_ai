@@ -35,7 +35,7 @@ By the end of this lesson, students will be able to:
 
 ### Key Success Metrics
 
-- [ ] Every student defines and calls at least one function in Trinket
+- [ ] Every student defines and calls at least one function in Pickcode
 - [ ] Every student completes the Function Factory (banner turned into a function, called 3 times)
 - [ ] Students can answer "what does calling `greet()` twice print?" correctly
 - [ ] Students can articulate the difference between defining and calling
@@ -44,14 +44,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' existing Trinket accounts; the class starter code ready to share (`Y2-T3-W1-Functions`)
+- Students' existing Pickcode accounts; the class starter code ready to share (`Y2-T3-W1-Functions`)
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Load the starter code** into a Trinket and have the share link ready to paste in chat
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Load the starter code** into a Pickcode and have the share link ready to paste in chat
 3. **Rehearse the "nothing prints" moment** — you'll define a function and run it to show it produces NO output. This surprise is a teaching centrepiece; make sure it lands
 4. **Have the four error messages ready to live-demo** (missing `()`, call-before-define, missing `:`, missing indent) — students learn errors best by seeing them happen live
 5. **Prepare the Text Adventure hook** — one or two scene names (`forest()`, `dragon()`) to make the term's project vivid
@@ -154,7 +154,7 @@ for i in range(3):
 #### Teaching Tips
 
 - **Have them predict counts.** "If I call it twice, how many banners?" "If the loop runs 3 times?" Prediction keeps them active.
-- **This is where fluency builds.** Give them 3-4 minutes to type along in Trinket: define `cheer()`, call it once, then in a loop. Thumbs-up when it works.
+- **This is where fluency builds.** Give them 3-4 minutes to type along in Pickcode: define `cheer()`, call it once, then in a loop. Thumbs-up when it works.
 
 ---
 
@@ -190,7 +190,7 @@ Frame errors positively:
 
 ### Part 5: THE FUNCTION FACTORY (15 minutes)
 
-The centrepiece activity. Paste the starter Trinket link in chat. Frame it:
+The centrepiece activity. Paste the starter Pickcode link in chat. Frame it:
 
 > "You're going to take that ugly copy-pasted banner and factory-pack it into ONE function. Then call it as many times as you like."
 
@@ -272,7 +272,7 @@ Paste submission instructions and set the due date.
 | `IndentationError: expected an indented block` | Function body isn't indented. 4 spaces under the `def`. |
 | Function runs once when they wanted it several times | They wrote the call once — show that each `name()` line (or each loop pass) runs the body again. |
 | Student asks about putting words in the brackets | Great instinct! "That's parameters — exactly next week. Today we keep the brackets empty." Don't teach it yet. |
-| Trinket/Zoom technical issues | Same playbook as always: repl.it backup link in chat, private-chat triage, pair with a neighbour. |
+| Pickcode/Zoom technical issues | Same playbook as always: repl.it backup link in chat, private-chat triage, pair with a neighbour. |
 
 ---
 

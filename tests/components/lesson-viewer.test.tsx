@@ -17,19 +17,19 @@ vi.mock("@/components/code/web-editor", () => ({
 	WebEditor: () => <div data-testid="web-editor">Web Editor</div>,
 }));
 
-vi.mock("@/components/code/trinket-editor", () => ({
-	TrinketEditor: () => <div data-testid="trinket-editor">Trinket Editor</div>,
+vi.mock("@/components/code/pickcode-editor", () => ({
+	PickcodeEditor: () => <div data-testid="pickcode-editor">Pickcode Editor</div>,
 }));
 
-vi.mock("@/components/dashboard/trinket-preview", () => ({
-	TrinketPreview: () => (
-		<div data-testid="trinket-preview">Submission Preview</div>
+vi.mock("@/components/dashboard/pickcode-preview", () => ({
+	PickcodePreview: () => (
+		<div data-testid="pickcode-preview">Submission Preview</div>
 	),
 }));
 
-vi.mock("@/components/dashboard/trinket-submission-form", () => ({
-	TrinketSubmissionForm: () => (
-		<button type="button" data-testid="trinket-submission-form">
+vi.mock("@/components/dashboard/pickcode-submission-form", () => ({
+	PickcodeSubmissionForm: () => (
+		<button type="button" data-testid="pickcode-submission-form">
 			Submission Form
 		</button>
 	),

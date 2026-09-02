@@ -52,7 +52,7 @@ take_home_assignment: |
   - Age group categorizer (kid, teen, adult, senior)
   - Game level status (level 1, 2, 3, 4+)
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

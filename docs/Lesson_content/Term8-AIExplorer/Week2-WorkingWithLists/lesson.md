@@ -49,7 +49,7 @@ take_home_assignment: |
   - Add items at specific positions
   - Create multiple lists and work with them
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -467,4 +467,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: indices start at 0, and practice makes perfect!_ 📋
-

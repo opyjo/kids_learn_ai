@@ -105,7 +105,7 @@ A heartfelt close. Stay on the call for goodbyes and photos.
 - Note each student's growth and a "what's next" suggestion you can share with them/parents.
 
 **Where students can go next:**
-- Keep building capstone v2; try a new Trinket type (turtle games); learn a beginner library outside Trinket; teach a sibling/friend; enter a kids' coding challenge.
+- Keep building capstone v2; try a new Pickcode project type (turtle games); learn a beginner library outside Pickcode; teach a sibling/friend; enter a kids' coding challenge.
 
 ---
 

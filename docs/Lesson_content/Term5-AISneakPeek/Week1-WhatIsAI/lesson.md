@@ -51,7 +51,7 @@ take_home_assignment: |
   # ... and so on!
   ```
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

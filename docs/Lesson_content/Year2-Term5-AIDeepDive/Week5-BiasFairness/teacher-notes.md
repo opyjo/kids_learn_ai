@@ -46,7 +46,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and chat enabled
-- Trinket (online Python 3 editor) — students' existing accounts
+- Pickcode (online Python 3 editor) — students' existing accounts
 - This teaching guide open during class
 - The lesson page for screen sharing the audit output
 - A private note where you can log who needs a support nudge (as always)
@@ -118,7 +118,7 @@ Read a few aloud, thank each student, and reflect the cause back: "So the tool p
 
 ### Part 3: Catch It — The Biased Recogniser (15 minutes)
 
-Everyone opens a Trinket named `Y2-T5-W5-BiasFairness` and runs the starter code. Expected output is in the lesson; have them confirm with a **thumbs up** 👍.
+Everyone opens a Pickcode named `Y2-T5-W5-BiasFairness` and runs the starter code. Expected output is in the lesson; have them confirm with a **thumbs up** 👍.
 
 Then run the detective question live:
 
@@ -173,7 +173,7 @@ Add the honesty caveat from the lesson: real AI is far larger than a six-item li
 
 ### Part 6: Fairness Mindset + Misconceptions (10 minutes)
 
-Paste the three fairness questions in the chat and have students copy them into a comment at the top of their Trinket:
+Paste the three fairness questions in the chat and have students copy them into a comment at the top of their Pickcode:
 
 1. Who might this be unfair to?
 2. What data was it trained on?
@@ -255,7 +255,7 @@ This lesson touches on fairness, exclusion, names, accents, and skin tone. Handl
 | Discussion turns to blaming a group | Reassert the ground rule immediately; redirect to "which data was missing?" |
 | Discussion stalls / is too quiet | Use your prepared factual example; ask the names/accents question directly — it usually unlocks stories |
 | Chat gets heated or personal | Pause, restate the respect rule warmly, and steer back to the tool-and-data framing |
-| Trinket/Zoom technical issues | Standard playbook: repl.it backup, private-chat triage, spare account as last resort |
+| Pickcode/Zoom technical issues | Standard playbook: repl.it backup, private-chat triage, spare account as last resort |
 
 ---
 

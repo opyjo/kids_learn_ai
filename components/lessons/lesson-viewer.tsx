@@ -109,7 +109,7 @@ export function LessonViewer({
 
 			setSubmission({
 				id: data.id,
-				trinketUrl: data.trinket_url,
+				projectUrl: data.trinket_url,
 				status: data.status as "submitted" | "reviewed" | "graded",
 				feedback: data.feedback,
 				grade: data.grade,

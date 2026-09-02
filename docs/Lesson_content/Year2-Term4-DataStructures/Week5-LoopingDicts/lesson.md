@@ -43,7 +43,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: The Vote Counter & The Translator 🗳️
 
-  Two builds today. Type each one in Trinket, run it, and give a **thumbs up** in Zoom when it works!
+  Two builds today. Type each one in Pickcode, run it, and give a **thumbs up** in Zoom when it works!
 
   ### Part A — The Vote Counter (⭐⭐)
   The class voted for their favourite lunch. Turn the raw list of votes into a tally!
@@ -82,7 +82,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: The Tally Machine
 
-  Build a **Word Counter** (or any Tally Machine) in Trinket that counts how many times each thing appears and prints the totals.
+  Build a **Word Counter** (or any Tally Machine) in Pickcode that counts how many times each thing appears and prints the totals.
 
   **Requirements:**
   1. Start with a **list** of things (words, votes, colours — your choice)
@@ -104,7 +104,7 @@ take_home_assignment: |
   - ⭐⭐ Ask the user for a sentence with `input()`, then `.split()` it into words and count them
   - ⭐⭐⭐ After the counts, find and print the thing with the **highest** count ("Most common word: the")
 
-  **Submit:** Save your Trinket (`Y2-T4-W5-LoopingDicts`), click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T4-W5-LoopingDicts`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Tiny AI Corner: How AI Reads Your Words
 
@@ -492,7 +492,7 @@ for vote in votes:
 
 ## 🎮 Class Activity: The Vote Counter & The Translator 🗳️
 
-Two builds today. Type each in Trinket, run it, thumbs up in Zoom when it works!
+Two builds today. Type each in Pickcode, run it, thumbs up in Zoom when it works!
 
 ### Part A — The Vote Counter (⭐⭐)
 
@@ -577,7 +577,7 @@ Next week, **Week 6: Lists of Dictionaries — Records!** 📇 You'll level up f
 
 ## 📚 Homework: The Tally Machine
 
-Build a **Word Counter** (or any Tally Machine) in Trinket that counts how many times each thing appears and prints the totals.
+Build a **Word Counter** (or any Tally Machine) in Pickcode that counts how many times each thing appears and prints the totals.
 
 **Requirements:**
 1. Start with a **list** of things (words, votes, colours — your choice)
@@ -599,7 +599,7 @@ mat: 1
 - ⭐⭐ Ask the user for a sentence with `input()`, then `.split()` it into words and count them
 - ⭐⭐⭐ After the counts, find and print the thing with the **highest** count ("Most common word: the")
 
-**Submit:** Save your Trinket (`Y2-T4-W5-LoopingDicts`), click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T4-W5-LoopingDicts`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 
 ---
 

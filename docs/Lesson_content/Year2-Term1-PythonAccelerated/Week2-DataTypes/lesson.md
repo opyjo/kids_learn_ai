@@ -68,7 +68,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: The Number Cruncher
 
-  Build a **Number Cruncher** in Trinket — a program that asks numeric questions, converts the answers, and does REAL maths (no text glue allowed!).
+  Build a **Number Cruncher** in Pickcode — a program that asks numeric questions, converts the answers, and does REAL maths (no text glue allowed!).
 
   **Requirements:**
   1. Ask at least **2 numeric questions** with `input()`
@@ -93,7 +93,7 @@ take_home_assignment: |
   - ⭐⭐ 3 questions, including one decimal answer converted with `float()`
   - ⭐⭐⭐ Print the `type()` of one answer BEFORE and AFTER conversion to prove the change happened
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: AI Speaks Numbers Too!
 
@@ -140,7 +140,7 @@ ai_activities: |
 
 ## 💥 Part 1: The Mystery Returns
 
-Remember this from last week? Open Trinket, name today's project `Y2-T1-W2-DataTypes`, and run the crime scene:
+Remember this from last week? Open Pickcode, name today's project `Y2-T1-W2-DataTypes`, and run the crime scene:
 
 ```python
 age = input("How old are you? ")
@@ -497,7 +497,7 @@ Predict the EXACT output:
 
 ### Round 3 — Mini Build: Dog Years Converter (⭐⭐⭐)
 
-Build it yourself in Trinket:
+Build it yourself in Pickcode:
 
 ```python
 age = int(input("How old are you? "))
@@ -541,7 +541,7 @@ Remember the term mission — the **Smart Calculator**. Here's why today matters
 
 ## 🌟 What's Coming Next Week
 
-Your calculator can now receive real numbers... but can it do POWER maths? Try these in Trinket if you dare:
+Your calculator can now receive real numbers... but can it do POWER maths? Try these in Pickcode if you dare:
 
 ```python
 print(17 // 5)
@@ -570,7 +570,7 @@ Two slashes?! A percent sign that isn't a percentage?! Double stars?! Next week 
 
 ## 📚 Homework: The Number Cruncher
 
-Build a **Number Cruncher** in Trinket — a program that asks numeric questions, converts the answers, and does REAL maths (no text glue allowed!).
+Build a **Number Cruncher** in Pickcode — a program that asks numeric questions, converts the answers, and does REAL maths (no text glue allowed!).
 
 **Requirements:**
 1. Ask at least **2 numeric questions** with `input()`
@@ -595,7 +595,7 @@ Your heart beats about 115200 times every day! ❤️
 - ⭐⭐ 3 questions, including one decimal answer converted with `float()`
 - ⭐⭐⭐ Print the `type()` of one answer BEFORE and AFTER conversion to prove the change happened
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

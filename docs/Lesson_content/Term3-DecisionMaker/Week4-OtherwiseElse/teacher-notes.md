@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing if/else structure
 
 ### Pre-Lesson Preparation
@@ -362,4 +362,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This completes the basic if/else structure! Make sure students understand that if/else handles ALL cases (True and False). This is essential for building complete decision-making programs!_ ⚖️
-

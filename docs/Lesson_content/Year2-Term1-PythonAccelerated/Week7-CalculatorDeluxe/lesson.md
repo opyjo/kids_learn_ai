@@ -121,7 +121,7 @@ class_activities: |
 
   We upgrade your Week 6 calculator in **four stages**, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move together!
 
-  > 📁 **First:** open your **`Y2-T1-W6-Calculator`** Trinket. Save it as a NEW trinket named **`Y2-T1-W7-CalculatorDeluxe`** (File → Save a copy, or copy-paste into a new one). We upgrade the copy — your Week 6 original stays safe.
+  > 📁 **First:** open your **`Y2-T1-W6-Calculator`** Pickcode. Save it as a NEW Pickcode project named **`Y2-T1-W7-CalculatorDeluxe`** (File → Save a copy, or copy-paste into a new one). We upgrade the copy — your Week 6 original stays safe.
 
   ### Stage 1 — The Play-Again Loop (⭐⭐)
   Wrap your whole calculator in a `while` loop so it repeats. Add a **Quit** option (7) that stops it.
@@ -168,14 +168,14 @@ class_activities: |
   except ValueError:
       print("⚠️ That wasn't a number! Please enter digits next time.")
   ```
-  ✅ **Final checkpoint:** Type `banana` for a number. Calm message, no crash? 🎉 **Save your Trinket!**
+  ✅ **Final checkpoint:** Type `banana` for a number. Calm message, no crash? 🎉 **Save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Make It Showcase-Ready ✨
 
   Next week you'll **demo your calculator** to the class. This week, add ONE personal touch and make sure it never, ever crashes.
 
   **Requirements:**
-  1. Open your **`Y2-T1-W7-CalculatorDeluxe`** Trinket
+  1. Open your **`Y2-T1-W7-CalculatorDeluxe`** Pickcode
   2. Make sure the play-again loop, divide-by-zero guard, and bad-input safety net all work
   3. Add **one personal touch** (pick from the ideas below)
   4. Test it hard — try to BREAK it. It should survive silly input.
@@ -193,7 +193,7 @@ take_home_assignment: |
 
   > 💡 Bring this exact program to next week's showcase — you'll run it live on Zoom!
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? Real AI Never Trusts Its Input
 
@@ -242,7 +242,7 @@ Your Core calculator from last week is brilliant — but it has three annoyances
 | 💥 **Divide by zero crashes** | Choose Divide, enter `0` as the second number → red error | A friendly warning, no crash |
 | 🍌 **"banana" crashes it** | Type letters where a number goes → red error | Stay calm, tell the user, carry on |
 
-> 📁 **BEFORE WE START:** Open your **`Y2-T1-W6-Calculator`** Trinket. Save a **copy** and name it **`Y2-T1-W7-CalculatorDeluxe`**. We upgrade the copy — that way your Week 6 original is always safe!
+> 📁 **BEFORE WE START:** Open your **`Y2-T1-W6-Calculator`** Pickcode. Save a **copy** and name it **`Y2-T1-W7-CalculatorDeluxe`**. We upgrade the copy — that way your Week 6 original is always safe!
 
 Try the crash yourself right now (it's fun to see!):
 
@@ -438,7 +438,7 @@ elif choice == "1" or choice == "2" or choice == "3" or choice == "4":
 
 ## ✅ Part 6: The Whole Deluxe Program
 
-Here is your complete Calculator Deluxe. This is what should be in your `Y2-T1-W7-CalculatorDeluxe` Trinket:
+Here is your complete Calculator Deluxe. This is what should be in your `Y2-T1-W7-CalculatorDeluxe` Pickcode:
 
 ```python
 # 🧮 Y2-T1-W7-CalculatorDeluxe
@@ -520,7 +520,7 @@ print("=" * 40)
 print("Calculator closed. See you next time! 🎉")
 ```
 
-🎉 **You built a professional, crash-proof calculator!** Save your Trinket now.
+🎉 **You built a professional, crash-proof calculator!** Save your Pickcode project now.
 
 ---
 
@@ -545,7 +545,7 @@ while running:
         running = False
 ```
 
-> 😵 Stuck in a forever loop? In Trinket, click **Stop** (or re-run) to escape it.
+> 😵 Stuck in a forever loop? In Pickcode, click **Stop** (or re-run) to escape it.
 
 ---
 
@@ -617,7 +617,7 @@ Your calculator is **finished** — and it's genuinely impressive. Next week is 
 - 🧠 We'll play a fun **Term 1 quiz** covering everything you've learned
 - 🎊 We'll **celebrate** finishing your very first Year 2 term!
 
-> Bring your `Y2-T1-W7-CalculatorDeluxe` Trinket next week — make sure it runs, doesn't crash, and you're proud of it. It's showtime!
+> Bring your `Y2-T1-W7-CalculatorDeluxe` Pickcode next week — make sure it runs, doesn't crash, and you're proud of it. It's showtime!
 
 ---
 
@@ -640,7 +640,7 @@ Your calculator is **finished** — and it's genuinely impressive. Next week is 
 Next week you'll **demo your calculator** to the class. This week, add ONE personal touch and make sure it never, ever crashes.
 
 **Requirements:**
-1. Open your **`Y2-T1-W7-CalculatorDeluxe`** Trinket
+1. Open your **`Y2-T1-W7-CalculatorDeluxe`** Pickcode
 2. Make sure the play-again loop, divide-by-zero guard, and bad-input safety net all work
 3. Add **one personal touch** (pick from the ideas below)
 4. Test it hard — try to BREAK it. It should survive silly input.
@@ -658,7 +658,7 @@ Next week you'll **demo your calculator** to the class. This week, add ONE perso
 
 > 💡 Bring this exact program to next week's showcase — you'll run it live on Zoom!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

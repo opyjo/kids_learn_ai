@@ -29,7 +29,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing syntax
 - Optional: Visual aids showing loop flow
 
@@ -536,7 +536,7 @@ KidsLearnAI
 - [ ] Prepare demo code examples
 - [ ] Practice explaining `range()`
 - [ ] Prepare common mistake examples
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -564,4 +564,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is students' first real loop! Take your time with syntax, especially the colon and indentation. These are foundational skills that will be used throughout the rest of the term. Celebrate their success—they're becoming real programmers!_ 🔄
-

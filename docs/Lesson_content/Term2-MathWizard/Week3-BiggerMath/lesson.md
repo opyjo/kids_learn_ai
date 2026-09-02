@@ -48,7 +48,7 @@ take_home_assignment: |
   6. include expected answers for three tests; and
   7. explain the results with clear labels.
 
-  Submit the Trinket link and one sentence explaining when `%` is more useful than `/`.
+  Submit the Pickcode link and one sentence explaining when `%` is more useful than `/`.
 ai_activities: |
   ## AI Lab: Calculation Rules Must Be Checkable
 

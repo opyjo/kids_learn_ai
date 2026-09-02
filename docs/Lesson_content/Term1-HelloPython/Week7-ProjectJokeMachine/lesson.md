@@ -88,7 +88,7 @@ take_home_assignment: |
   - Add creative ASCII art
   - Use string methods for effects
 
-  **Submit:** Share your Trinket link. Be ready to present at the Week 8 Showcase Party!
+  **Submit:** Share your Pickcode project link. Be ready to present at the Week 8 Showcase Party!
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -798,7 +798,7 @@ Next week is the **Showcase Party**! Here are tips for presenting:
 
 ## 🏠 Homework: Complete Your Joke Machine
 
-**Platform:** Complete this assignment on [Trinket](https://trinket.io/python)
+**Platform:** Complete this assignment on [Pickcode](https://app.pickcode.io/home)
 
 ### Requirements
 
@@ -835,7 +835,7 @@ Your finished Joke Machine must have:
 
 ### How to Submit
 
-1. Complete your Joke Machine on Trinket
+1. Complete your Joke Machine on Pickcode
 2. Test it multiple times to make sure it works
 3. Save your work
 4. Click **Share** and copy the link

@@ -28,7 +28,7 @@ By the end of this lesson, students will have:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts (for Python option)
+- Pickcode accounts (for Python option)
 - Optional: Canva, Google Slides access (for digital option)
 - Optional: Art supplies (for hand-drawn option)
 - Optional: Camera/phone (to photograph hand-drawn posters)
@@ -102,7 +102,7 @@ By the end of this lesson, students will have:
 **Option 1: Python Program**
 - Show example
 - Good for students who like coding
-- Easy to share via Trinket
+- Easy to share via Pickcode
 
 **Option 2: Digital Poster**
 - Show example (Canva, Slides, etc.)

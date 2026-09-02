@@ -8,7 +8,7 @@ is_premium: false
 requires_trinket: true
 starter_code: |
   # ✅ DEMO-READY CHECKLIST
-  # Before you show your Smart Calculator, tick these off in Trinket:
+  # Before you show your Smart Calculator, tick these off in Pickcode:
   #
   # [ ] It RUNS with no red errors
   # [ ] The menu appears clearly
@@ -18,7 +18,7 @@ starter_code: |
   # [ ] It does NOT crash on silly input (like "banana")
   # [ ] You can quit cleanly
   #
-  # Open your calculator Trinket now and run it once, top to bottom.
+  # Open your calculator Pickcode now and run it once, top to bottom.
   # If every box is ticked — you're ready to shine on Zoom! 🎤
 
   print("My Smart Calculator is demo-ready! 🚀")
@@ -77,7 +77,7 @@ take_home_assignment: |
   Choose ONE (or do both if you're buzzing!):
 
   ### Option A — Certificate Program (recommended)
-  Write a **"Term 1 Trophy"** program in Trinket that prints YOU a certificate using f-strings.
+  Write a **"Term 1 Trophy"** program in Pickcode that prints YOU a certificate using f-strings.
 
   **Requirements:**
   1. Ask the user their name with `input()`
@@ -94,7 +94,7 @@ take_home_assignment: |
 
   **Also (optional, 2 min):** peek at the Term 2 preview below and write down which Arcade game you most want to build.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link (and paste your family notes), and send it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link (and paste your family notes), and send it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: You Just Built the Foundations of AI
 
@@ -141,7 +141,7 @@ ai_activities: |
 
 Before you show anything, let's make sure your calculator shines. **No new features today** — you're just tidying up work you already did.
 
-Open your Smart Calculator Trinket and run it once, top to bottom. Then check every box:
+Open your Smart Calculator Pickcode and run it once, top to bottom. Then check every box:
 
 | ✅ Check | What "good" looks like |
 |---|---|
@@ -372,7 +372,7 @@ Over 8 weeks, you learned and mastered:
 Choose ONE (or both if you're buzzing!):
 
 ### Option A — Certificate Program (recommended)
-Write a **"Term 1 Trophy"** program in Trinket that prints YOU a certificate using f-strings.
+Write a **"Term 1 Trophy"** program in Pickcode that prints YOU a certificate using f-strings.
 
 **Requirements:**
 1. Ask the user their name with `input()`
@@ -388,7 +388,7 @@ Show your finished Smart Calculator to someone at home. Let them try to break it
 
 **Also (optional, 2 min):** peek at the Term 2 preview above and write down which Arcade game you most want to build.
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and send it wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and send it wherever your teacher asks.
 
 ---
 

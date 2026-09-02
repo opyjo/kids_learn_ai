@@ -9,7 +9,7 @@ requires_trinket: true
 starter_code: |
   # 🗃️ Y2-T4-W6-Records — Class Register
   # Made by: [YOUR NAME]
-  # IMPORTANT: Save this Trinket! Next week you reuse this EXACT pattern
+  # IMPORTANT: Save this Pickcode! Next week you reuse this EXACT pattern
   # to build the Contact Manager.
 
   # --- Part 1: A list of dictionaries (records!) ---
@@ -80,7 +80,7 @@ class_activities: |
 
   We build a real **Class Register** in **five parts**, live on Zoom. After each part, **run your code** and give a **thumbs up** 👍 when it works. Move together, part by part — don't race ahead.
 
-  > 📁 **First:** create a new Trinket and name it **`Y2-T4-W6-Records`**. Keep this file — next week's Contact Manager uses this exact pattern!
+  > 📁 **First:** create a new Pickcode project and name it **`Y2-T4-W6-Records`**. Keep this file — next week's Contact Manager uses this exact pattern!
 
   ### Part 1 — The Register (a list of records) (⭐)
   ```python
@@ -132,14 +132,14 @@ class_activities: |
   for student in teens:
       print(f"  {student['name']} ({student['age']})")
   ```
-  ✅ **Final checkpoint:** How many students are 13+? Which names? (2 — Kofi and Zara.) Thumbs up and **save your Trinket!**
+  ✅ **Final checkpoint:** How many students are 13+? Which names? (2 — Kofi and Zara.) Thumbs up and **save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Build a Mini Database
 
   Build your very own **Mini Database** — a list of records about a topic YOU love.
 
   **Requirements:**
-  1. Open a Trinket (you can keep it in your `Y2-T4-W6-Records` file or make a new one)
+  1. Open a Pickcode (you can keep it in your `Y2-T4-W6-Records` file or make a new one)
   2. Pick ONE topic: **books**, **pets**, or **players**
   3. Make a list of **at least 4 record dictionaries**, each with the **same 3 fields**
   4. Print them all as a **neat table** (loop over the list)
@@ -176,7 +176,7 @@ take_home_assignment: |
 
   > ⚠️ Remember: to reach a field you go **through the record** — `pets[0]["name"]`, never `pets["name"]`. Every item in the list is a **dictionary**.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? A Table of Records Is What AI Learns From
 
@@ -247,7 +247,7 @@ Picture it as a **table**:
 
 Every row is a record. Every column is a **field** (`name`, `age`). This is exactly how a spreadsheet, a register, or a phone's contacts list is organised.
 
-> 📁 **BEFORE WE START:** open Trinket, create a **new** Python trinket, and name it **`Y2-T4-W6-Records`**. Keep it — next week's Contact Manager is built on this very pattern!
+> 📁 **BEFORE WE START:** open Pickcode, create a **new** Python Pickcode project, and name it **`Y2-T4-W6-Records`**. Keep it — next week's Contact Manager is built on this very pattern!
 
 ---
 
@@ -460,7 +460,7 @@ Now `teens` is its own list of records you can loop over, count, or print — a 
 
 ## 🏫 Part 7: Put It Together — The Class Register
 
-Let's combine everything into a real program. This is what goes in your `Y2-T4-W6-Records` Trinket. Our records have **three** fields this time: `name`, `age`, and `grade`.
+Let's combine everything into a real program. This is what goes in your `Y2-T4-W6-Records` Pickcode. Our records have **three** fields this time: `name`, `age`, and `grade`.
 
 ```python
 # 🗃️ Y2-T4-W6-Records — Class Register
@@ -524,7 +524,7 @@ Students aged 13+: 2
   Zara (13)
 ```
 
-🎉 **You built a searchable, filterable register!** Save your Trinket now.
+🎉 **You built a searchable, filterable register!** Save your Pickcode project now.
 
 ---
 
@@ -629,7 +629,7 @@ Look familiar? A list of dictionaries — records! Next week we'll:
 - 🔎 **Search** for a contact by name (like Part 5)
 - 🔁 Wrap it in a **menu loop** so you can do it again and again
 
-> Keep your `Y2-T4-W6-Records` Trinket safe. Everything you practised today is exactly the toolkit the Contact Manager needs — this week was the training, next week is the match! ⚽
+> Keep your `Y2-T4-W6-Records` Pickcode safe. Everything you practised today is exactly the toolkit the Contact Manager needs — this week was the training, next week is the match! ⚽
 
 ---
 
@@ -653,7 +653,7 @@ Look familiar? A list of dictionaries — records! Next week we'll:
 Build your own **Mini Database** — a list of records about a topic YOU love.
 
 **Requirements:**
-1. Open a Trinket (keep it in `Y2-T4-W6-Records` or make a new one)
+1. Open a Pickcode (keep it in `Y2-T4-W6-Records` or make a new one)
 2. Pick ONE topic: **books**, **pets**, or **players**
 3. Make a list of **at least 4 record dictionaries**, each with the **same 3 fields**
 4. Print them all as a **neat table** (loop over the list)
@@ -671,7 +671,7 @@ Build your own **Mini Database** — a list of records about a topic YOU love.
 
 > ⚠️ Remember: to reach a field you go **through the record** — `pets[0]["name"]`, never `pets["name"]`. Every item in the list is a **dictionary**.
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

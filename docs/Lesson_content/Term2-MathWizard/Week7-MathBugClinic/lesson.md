@@ -56,7 +56,7 @@ take_home_assignment: |
   - Do not ask another person or an AI tool to answer the questions for you.
   - You have two attempts. Read the explanation after each question before using a second attempt.
 
-  ### Part B — Trinket: Event Sharing Tool
+  ### Part B — Pickcode: Event Sharing Tool
 
   Build a program that helps a group buy and share identical items. It must ask for:
 
@@ -64,7 +64,7 @@ take_home_assignment: |
   2. the whole number of items; and
   3. the whole number of friends sharing them.
 
-  When Trinket asks for values:
+  When Pickcode asks for values:
 
   - type a price as `2.50`, without a dollar sign;
   - type counts as whole numbers such as `8`, not `8.0`;
@@ -114,7 +114,7 @@ take_home_assignment: |
   # TODO: record expected and actual results as comments
   ```
 
-  Test your program with all three rows. Record the expected and actual results as comments at the bottom of your Trinket.
+  Test your program with all three rows. Record the expected and actual results as comments at the bottom of your Pickcode project.
 
   | Price | Items | Friends | Expected total | Cost each | Items each | Left over |
   | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -129,7 +129,7 @@ take_home_assignment: |
   3. Describe one bug you fixed or one improvement you made.
   4. Did you use AI for help? If yes, record what you asked and what you changed yourself.
 
-  Submit the Trinket share link in the **Homework** tab. Do not build the four-operation calculator yet; that project begins next lesson.
+  Submit the Pickcode share link in the **Homework** tab. Do not build the four-operation calculator yet; that project begins next lesson.
 ai_activities: |
   ## AI Lab: Correct Code Can Still Use a Bad Rule
 

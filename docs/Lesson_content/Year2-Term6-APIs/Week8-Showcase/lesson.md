@@ -8,7 +8,7 @@ is_premium: false
 requires_trinket: true
 starter_code: |
   # ✅ ASSISTANT DEMO-READY CHECKLIST
-  # Before you show your AI-Powered Assistant, tick these off in Trinket:
+  # Before you show your AI-Powered Assistant, tick these off in Pickcode:
   #
   # [ ] It RUNS with no red errors, top to bottom
   # [ ] It GREETS the user by name (remembers them in a dict)
@@ -19,7 +19,7 @@ starter_code: |
   # [ ] It has PERSONALITY (a name, a greeting, a catchphrase)
   # [ ] You can QUIT cleanly (typing "bye" / "quit" ends it tidily)
   #
-  # Open your assistant Trinket now and run it once, top to bottom.
+  # Open your assistant Pickcode now and run it once, top to bottom.
   # If every box is ticked — you're ready to shine on Zoom! 🎤
 
   print("My AI assistant is demo-ready! 🤖🚀")
@@ -93,7 +93,7 @@ take_home_assignment: |
   Choose ONE (or do both if you're buzzing!):
 
   ### Option A — Certificate Program (recommended)
-  Write an **"API Master Certificate"** program in Trinket — a mock service that returns a dict, and a client that reads it and prints your certificate.
+  Write an **"API Master Certificate"** program in Pickcode — a mock service that returns a dict, and a client that reads it and prints your certificate.
 
   **Requirements:**
   1. A **service function** (e.g. `get_certificate(name)`) that **returns a dict**
@@ -112,7 +112,7 @@ take_home_assignment: |
 
   **Also (optional, 2 min):** peek at the Term 7 preview below and write down one question you'd love to answer with a **chart or graph**.
 
-  **Submit:** Save your Trinket (`Y2-T6-W8-Showcase`), click **Share**, copy the link (and paste your family notes), and send it wherever your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T6-W8-Showcase`), choose **Share → Anyone with link → View Code**, copy the link (and paste your family notes), and send it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: You Just Built How Real AI Tools Work
 
@@ -162,7 +162,7 @@ ai_activities: |
 
 Before you show anything, let's make sure your assistant shines. **No new features today** — you're just tidying up work you already did over Weeks 6 and 7.
 
-Open your assistant Trinket and run it once, top to bottom. Then check every box:
+Open your assistant Pickcode and run it once, top to bottom. Then check every box:
 
 | ✅ Check | What "good" looks like |
 |---|---|
@@ -416,7 +416,7 @@ Over 8 weeks, you learned and mastered:
 Choose ONE (or both if you're buzzing!):
 
 ### Option A — Certificate Program (recommended)
-Write an **"API Master Certificate"** program in Trinket — a mock service that returns a dict, and a client that reads it and prints your certificate.
+Write an **"API Master Certificate"** program in Pickcode — a mock service that returns a dict, and a client that reads it and prints your certificate.
 
 **Requirements:**
 1. A **service function** (e.g. `get_certificate(name)`) that **returns a dict**
@@ -432,7 +432,7 @@ Show your finished AI assistant to someone at home. Let them chat with it — an
 
 **Also (optional, 2 min):** peek at the Term 7 preview above and write down one question you'd love to answer with a **chart or graph**.
 
-**Submit:** Save your Trinket (`Y2-T6-W8-Showcase`), click **Share**, copy the link, and send it wherever your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T6-W8-Showcase`), choose **Share → Anyone with link → View Code**, copy the link, and send it wherever your teacher asks.
 
 ---
 

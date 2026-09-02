@@ -40,21 +40,21 @@ By the end of this lesson, students will be able to:
 ### Key Success Metrics
 
 - [ ] Every student's Data Story runs end to end and prints stats, chart, and insights
-- [ ] Every student has saved a Trinket named `Y2-T7-W7-DataStory`
+- [ ] Every student has saved a Pickcode named `Y2-T7-W7-DataStory`
 - [ ] Students can explain why numbers need `int()` after `split()`, and why the chart scale needs `int()`
 - [ ] Every student has swapped in (or started swapping in) their own Week 6 dataset
 
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
-- Zoom with screen share; teacher's Trinket visible throughout
-- Students' Trinket accounts and their **Week 6 dataset** ready to paste
+- Zoom with screen share; teacher's Pickcode visible throughout
+- Students' Pickcode accounts and their **Week 6 dataset** ready to paste
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Type the full solution yourself once** in a fresh Trinket named `Y2-T7-W7-DataStory` — you build it live and it must be flawless
+1. **Type the full solution yourself once** in a fresh Pickcode named `Y2-T7-W7-DataStory` — you build it live and it must be flawless
 2. **Run it and confirm the exact output** (total 750, average 107.1, busiest Sat 200, quietest Thu 45, games 3 of 7) so your live demo matches the lesson
 3. **Rehearse each of the four common-mistake demos** — you'll trigger them deliberately (the TypeErrors, the IndexError, the ZeroDivisionError)
 4. **Have a "catch-up" pasteable** of each stage's function ready for the Zoom chat, so a straggler can rejoin without stalling the class
@@ -93,7 +93,7 @@ Screen-share the **skills-to-stages table** from the lesson. Point at each week 
 
 Then the non-negotiable setup instruction:
 
-> "Create a NEW Trinket. Name it exactly `Y2-T7-W7-DataStory`. Type it in the chat when done. This is the file you KEEP and PRESENT next week."
+> "Create a NEW Pickcode. Name it exactly `Y2-T7-W7-DataStory`. Type it in the chat when done. This is the file you KEEP and PRESENT next week."
 
 Paste the `DATA` string and have everyone paste it at the top. Point out the two data families: `activity` categorical, `minutes` numerical.
 
@@ -183,7 +183,7 @@ Then `main()`. This is the satisfying click:
 
 > "Four functions, and `main()` just calls them in order — parse, stats, chart, insights. Read it top to bottom: it's the plan, in code."
 
-Build the little `minutes_by_day` dict inside `main()` and pass it to `draw_chart`. Run the WHOLE thing. Celebrate the complete report loudly. Then: **SAVE the Trinket.**
+Build the little `minutes_by_day` dict inside `main()` and pass it to `draw_chart`. Run the WHOLE thing. Celebrate the complete report loudly. Then: **SAVE the Pickcode.**
 
 #### Teaching Tips
 
@@ -223,7 +223,7 @@ Point at the tiers. Stress: at least 6 rows, one categorical + one numerical col
 
 #### Wrap-Up (2 minutes)
 
-> "Six weeks of skills, one real project. You built a data pipeline today. Next week you take the stage and tell your data's story. Save your Trinket — see you at the showcase."
+> "Six weeks of skills, one real project. You built a data pipeline today. Next week you take the stage and tell your data's story. Save your Pickcode project — see you at the showcase."
 
 Stay on the call 2-3 minutes to help anyone whose program isn't running.
 
@@ -249,7 +249,7 @@ Ask: "The maths is right — 9.5 IS Monday's share. So why is Python upset?" Let
 - [ ] Drew a scaled chart using `int()` around the block count
 - [ ] Wrote insights that actually reference the numbers
 - [ ] Wrote a `main()` that runs all four stages
-- [ ] Saved the Trinket with the correct name
+- [ ] Saved the Pickcode with the correct name
 
 **Engagement:**
 - [ ] Kept pace with the live build (thumbs up at each stage)

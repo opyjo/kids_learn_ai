@@ -33,7 +33,7 @@ By the end of this lesson, students will be able to:
 
 ### Key Success Metrics
 
-- [ ] Every student logs into Trinket and runs code by minute 20
+- [ ] Every student logs into Pickcode and runs code by minute 20
 - [ ] Every student completes Sprint Rounds 1 and 2; most complete Round 3
 - [ ] You have a private list of 2-4 students who need a catch-up nudge
 - [ ] Students leave excited about the Smart Calculator project
@@ -42,17 +42,17 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' existing Trinket accounts (from Year 1) — have password-reset steps ready
+- Students' existing Pickcode accounts (from Year 1) — have password-reset steps ready
 - A timer visible on your screen share (or just count down verbally) for sprint rounds
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** as usual — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** as usual — audio, video, screen share, code runs
 2. **Review the Year 1 register** — know who completed Year 1 strongly, who scraped through, and any brand-new joiners (they'll need extra scaffolding today)
 3. **Prepare the roadmap moment** — you'll show the 8-term table; decide whether to screen-share the lesson page or paste it in chat
-4. **Have the Trinket password-reset flow ready** — someone WILL have forgotten their login after the break
+4. **Have the Pickcode password-reset flow ready** — someone WILL have forgotten their login after the break
 5. **Prepare a naming convention reminder** — `Y2-T1-W1-CodeSprint`; portfolio-building starts today
 6. **Check the AI discussion prompt** — have 1-2 recent AI examples ready (a new chatbot feature, AI images) in case the chat is slow to start
 
@@ -64,14 +64,14 @@ By the end of this lesson, students will be able to:
 
 ```
 ⏱️  0-10 min  → Welcome back + AI catch-up discussion
-⏱️ 10-20 min  → Year 2 roadmap + Trinket check
+⏱️ 10-20 min  → Year 2 roadmap + Pickcode check
 ⏱️ 20-30 min  → Python muscles warm-up (review program walkthrough)
 ⏱️ 30-50 min  → THE CODE SPRINT (3 timed rounds + bonus)
 ⏱️ 50-60 min  → Common mistakes + Smart Calculator mission briefing
 ⏱️ 60-75 min  → Homework + Week 2 mystery teaser + wrap-up
 ```
 
-**Flexible timing:** If Trinket logins eat time (likely after a break), compress the warm-up walkthrough — the sprint is the heart of the lesson and must get its full 20 minutes.
+**Flexible timing:** If Pickcode logins eat time (likely after a break), compress the warm-up walkthrough — the sprint is the heart of the lesson and must get its full 20 minutes.
 
 ---
 
@@ -102,7 +102,7 @@ Read answers aloud, call on 2-3 students to elaborate. Then land the hook:
 
 ---
 
-### Part 2: Year 2 Roadmap + Trinket Check (10 minutes)
+### Part 2: Year 2 Roadmap + Pickcode Check (10 minutes)
 
 #### The Roadmap Moment (5 minutes)
 
@@ -113,7 +113,7 @@ Share the 8-term table from the lesson. Go term by term QUICKLY, with one excite
 
 Then the chat vote: "Which project are you most excited about?" — this gives you instant engagement data and a callback for future lessons ("I know half of you are waiting for the arcade term — this loop skill is exactly what you'll need").
 
-#### Trinket Check (5 minutes)
+#### Pickcode Check (5 minutes)
 
 Everyone logs in and runs:
 
@@ -125,13 +125,13 @@ Thumbs-up reaction when it works. Handle stragglers via private chat while the c
 
 **Introduce the portfolio habit:**
 
-> "New Year 2 rule: name every Trinket properly. Today's is Y2-T1-W1-CodeSprint. At the end of the year, you'll assemble ALL your projects into a portfolio — future-you will thank present-you."
+> "New Year 2 rule: name every Pickcode properly. Today's is Y2-T1-W1-CodeSprint. At the end of the year, you'll assemble ALL your projects into a portfolio — future-you will thank present-you."
 
 | Problem | Quick Fix |
 |---|---|
-| Forgotten Trinket password | Walk them through reset via private chat; or paste a spare class login |
+| Forgotten Pickcode password | Walk them through reset via private chat; or paste a spare class login |
 | New student, no account | Sign up with Google — 2 minutes; pair them with a neighbour meanwhile |
-| Trinket down | repl.it backup link in chat |
+| Pickcode down | repl.it backup link in chat |
 
 ---
 
@@ -263,11 +263,11 @@ Stay on the call 2-3 minutes for questions.
 
 | Problem | Solution |
 |---|---|
-| Many forgotten Trinket logins | Budget 5 extra minutes; paste reset steps in chat; use a spare class account as last resort |
+| Many forgotten Pickcode logins | Budget 5 extra minutes; paste reset steps in chat; use a spare class account as last resort |
 | Sprint rounds too easy for the class | Shorten timers, skip straight to the bonus combo, add a 4th round: "ask TWO questions and use both answers in one sentence" |
 | Sprint rounds too hard (heavy rust) | Drop the timer entirely, live-code each round first, students reproduce — the lesson still works as guided revision |
 | A student is demoralised ("I forgot everything") | Private chat: "That's exactly what Term 1 is for — it re-teaches everything at speed. You're in the right place." |
-| Zoom/Trinket technical issues | Same playbook as Year 1: repl.it backup, browser-window-only screen share, private-chat triage |
+| Zoom/Pickcode technical issues | Same playbook as Year 1: repl.it backup, browser-window-only screen share, private-chat triage |
 
 ---
 

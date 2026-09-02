@@ -45,13 +45,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share and chat enabled
-- Students' existing Trinket accounts
+- Students' existing Pickcode accounts
 - **A small set of labelled example images/descriptions for the "Be the Machine" activity** — 4-6 ripe/unripe/very-ripe plantains, plus one "new" mystery plantain to predict (photos ideal; simple text descriptions work fine)
 - This teaching guide open during class
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Prepare the "Be the Machine" examples** — arrange your labelled plantains in a slide or chat message, and pick ONE mystery example to reveal last. If plantain photos are hard to source, any everyday ripe/unripe fruit works — keep the West African tie-in if you can.
 3. **Rehearse the rules-vs-learning explanation** — this is the concept the whole term rests on; be ready to give TWO everyday examples of each
 4. **Have your own AI-is-wrong example ready** — e.g. autocorrect changing a name, a voice assistant mishearing, a photo app mislabelling — in case students are shy
@@ -67,7 +67,7 @@ By the end of this lesson, students will be able to:
 ⏱️  0-8 min   → Welcome to the new term + what "AI Deep Dive" means
 ⏱️  8-20 min  → Part 1: Two ways to be smart (rules vs learning) + discussion
 ⏱️ 20-30 min  → Part 2: Train then predict (plantain analogy)
-⏱️ 30-45 min  → Part 3: Trinket — build the rule-based classifier
+⏱️ 30-45 min  → Part 3: Pickcode — build the rule-based classifier
 ⏱️ 45-55 min  → Part 4: Where rules struggle + misconceptions
 ⏱️ 55-68 min  → Class activity: Human vs Machine Learning
 ⏱️ 68-75 min  → Homework + Week 2 teaser + wrap-up
@@ -122,7 +122,7 @@ Land the BrightByte line: study good examples → good guesses; study bad/unfair
 
 ### Part 3: Build the Rule-Based Classifier (30-45 min)
 
-Now they code. Everyone opens Trinket and names it `Y2-T5-W1-HowMachinesLearn`.
+Now they code. Everyone opens Pickcode and names it `Y2-T5-W1-HowMachinesLearn`.
 
 Start with the **partial** starter code (only the `"green"` rule). Run it FIRST so they see `"yellow"` fall through to `not sure`:
 

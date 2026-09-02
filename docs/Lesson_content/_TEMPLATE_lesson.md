@@ -24,7 +24,7 @@ take_home_assignment: |
   1. Requirement 1
   2. Requirement 2
 
-  **Submit:** Share your Trinket link with your teacher.
+  **Submit:** Share your Pickcode project link with your teacher.
 ---
 
 # PASTE YOUR LESSON CONTENT BELOW THIS LINE

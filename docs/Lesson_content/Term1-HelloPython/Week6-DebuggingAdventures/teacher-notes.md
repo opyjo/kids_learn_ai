@@ -401,7 +401,7 @@ Ask throughout the lesson:
 
 | Issue | Solution |
 |-------|----------|
-| Trinket input field is hard to find | Point to the output panel — input appears there |
+| Pickcode input field is hard to find | Point to the output panel — input appears there |
 | Program seems frozen | It's waiting for input! Click output and type |
 | Student types a number and sees unexpected behaviour | Acknowledge it, say "Great discovery — we'll fix this in a future lesson!" |
 | Student's output is on one line | Check that they have separate `print()` calls |
@@ -480,7 +480,7 @@ Changes for next time:
 ### For Teachers
 
 - **Python docs — input():** docs.python.org/3/library/functions.html#input
-- **Trinket input tip:** In Trinket, the input field appears at the bottom of the output panel — point this out before the first demo
+- **Pickcode input tip:** In Pickcode, the input field appears at the bottom of the output panel — point this out before the first demo
 - **Growth mindset:** When students see the "wow" of their name on screen, lean into that joy — it's a powerful hook
 
 ### For Students (Share with Parents)
@@ -579,7 +579,7 @@ print("ROBOT: Welcome aboard. Beep.")
 
 ### Before Class
 
-- [ ] Test all demo programs in Trinket
+- [ ] Test all demo programs in Pickcode
 - [ ] Plan your "funny answers" for live demos (keep it age-appropriate and silly)
 - [ ] Have the Interview Show example ready to display
 - [ ] Plan student pairs

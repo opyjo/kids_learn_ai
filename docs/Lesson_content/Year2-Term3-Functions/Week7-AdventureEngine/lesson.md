@@ -204,7 +204,7 @@ class_activities: |
 
   We build **The Lost Temple of Zaria** one scene at a time, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move together — no scene left behind!
 
-  > 📁 **First:** open a new Trinket and name it **`Y2-T3-W7-Adventure`**. Paste in the starter code (the backpack, `start_scene()`, and the engine loop). Run it — you should reach the gate, then "Unknown scene!" because the other scenes don't exist yet. That's expected!
+  > 📁 **First:** open a new Pickcode project and name it **`Y2-T3-W7-Adventure`**. Paste in the starter code (the backpack, `start_scene()`, and the engine loop). Run it — you should reach the gate, then "Unknown scene!" because the other scenes don't exist yet. That's expected!
 
   ### Stage 1 — The Dispatcher Works (⭐)
   Read the engine loop together. `current` holds the name of the scene we're in; each scene **returns the name of the next scene**; the loop dispatches to it.
@@ -244,14 +244,14 @@ class_activities: |
   ### Stage 4 — Tunnel, Bridge & the Endings (⭐⭐⭐)
   Add `tunnel_scene()`, `bridge_scene()` and `treasure_scene()`, each with their `elif`. Make sure every path ends in `"win"` or `"lose"`. Add the second gate: searching the tunnel is safe **only** `if "torch" in inventory`.
 
-  ✅ **Final checkpoint:** Play a full **win** and a full **lose**. No crashes, no "Unknown scene!" 🎉 **Save your Trinket!**
+  ✅ **Final checkpoint:** Play a full **win** and a full **lose**. No crashes, no "Unknown scene!" 🎉 **Save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Make Your Adventure Showcase-Ready ✨
 
   Next week you'll **demo your adventure** to the class. This week, make it *yours* and make sure every path works.
 
   **Requirements:**
-  1. Open your **`Y2-T3-W7-Adventure`** Trinket
+  1. Open your **`Y2-T3-W7-Adventure`** Pickcode
   2. Give it a **personal theme** (space station? haunted school? football tournament?) — rename the scenes and rewrite the story text
   3. Have at least **5 scenes**, **one inventory item that unlocks a choice**, **one win** and **one lose** ending
   4. Add **one new thing** (pick from the ideas below)
@@ -270,7 +270,7 @@ take_home_assignment: |
 
   > 💡 Bring this exact program to next week's showcase — you'll run it live on Zoom!
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? Your Engine Is a Decision Tree
 
@@ -398,7 +398,7 @@ That's the whole toolkit. `append` to collect, `in` to check. Simple — but it'
 
 ## 🚪 Part 4: The Dispatcher & the Start Scene
 
-Let's build. Open a fresh Trinket named **`Y2-T3-W7-Adventure`** and start with the backpack, the start scene, and the engine loop:
+Let's build. Open a fresh Pickcode named **`Y2-T3-W7-Adventure`** and start with the backpack, the start scene, and the engine loop:
 
 ```python
 inventory = []
@@ -607,7 +607,7 @@ Add all three `elif` lines to the dispatcher and you're done wiring it up:
 
 ## ✅ Part 8: The Whole Adventure
 
-Here is your complete engine. This is what should be in your `Y2-T3-W7-Adventure` Trinket:
+Here is your complete engine. This is what should be in your `Y2-T3-W7-Adventure` Pickcode:
 
 ```python
 # 🗺️ Y2-T3-W7-Adventure — The Lost Temple of Zaria
@@ -766,7 +766,7 @@ print("=" * 40)
 
 **A losing run:** at the gate pick `1` (straight to the hall, no key), then `1` (try the door — locked! → tunnel), then `2` (search the dark tunnel with no torch) → **💀 Game over.**
 
-🎉 **You built a complete text adventure engine!** Save your Trinket now.
+🎉 **You built a complete text adventure engine!** Save your Pickcode project now.
 
 ---
 
@@ -824,7 +824,7 @@ def hall_scene():
 ```
 The game never reaches `"win"` or `"lose"`, so the loop spins forever. ✅ **Fix:** make sure every scene has at least one path that leads **somewhere new**, and the map always flows towards an ending.
 
-> 😵 Stuck in a forever loop? In Trinket, click **Stop** (or re-run) to escape it.
+> 😵 Stuck in a forever loop? In Pickcode, click **Stop** (or re-run) to escape it.
 
 ---
 
@@ -849,11 +849,11 @@ if choice == "1":        # quotes! "1" matches "1"
 Your adventure is **finished** — and it's genuinely fun to play. Next week is **Week 8: Adventure Showcase & Celebration!** 🎉
 
 - 🎤 You'll **demo your adventure** live on Zoom — share your screen and let a classmate play it
-- 🗺️ You'll swap Trinket links and **play each other's stories**
+- 🗺️ You'll swap Pickcode links and **play each other's stories**
 - 💬 You'll give and get kind **peer feedback**
 - 🎊 We'll **celebrate** finishing the Functions term!
 
-> Bring your `Y2-T3-W7-Adventure` Trinket next week — make sure every path reaches win or lose without crashing, and you're proud of it. It's showtime!
+> Bring your `Y2-T3-W7-Adventure` Pickcode next week — make sure every path reaches win or lose without crashing, and you're proud of it. It's showtime!
 
 ---
 
@@ -876,7 +876,7 @@ Your adventure is **finished** — and it's genuinely fun to play. Next week is 
 Next week you'll **demo your adventure** to the class. This week, make it *yours* and make sure every path works.
 
 **Requirements:**
-1. Open your **`Y2-T3-W7-Adventure`** Trinket
+1. Open your **`Y2-T3-W7-Adventure`** Pickcode
 2. Give it a **personal theme** (space station? haunted school? football tournament?) — rename the scenes and rewrite the story text
 3. Have at least **5 scenes**, **one inventory item that unlocks a choice**, **one win** and **one lose** ending
 4. Add **one new thing** (pick from the ideas below)
@@ -895,7 +895,7 @@ Next week you'll **demo your adventure** to the class. This week, make it *yours
 
 > 💡 Bring this exact program to next week's showcase — you'll run it live on Zoom!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

@@ -49,7 +49,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: Build a Profile Box 🗂️
 
-  You are going to build a student profile as a dictionary, then read, add, and update its fields. Run each step in Trinket and give a **thumbs up** in Zoom when it works!
+  You are going to build a student profile as a dictionary, then read, add, and update its fields. Run each step in Pickcode and give a **thumbs up** in Zoom when it works!
 
   ### Step 1 — Create the box (⭐)
   Make a dictionary with your own details:
@@ -93,7 +93,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: My Profile (or Pet Record!)
 
-  Build a **profile program** in Trinket that stores information in a **dictionary**. Choose either a "My Profile" about you, or a "Pet Record" about a real or imaginary pet.
+  Build a **profile program** in Pickcode that stores information in a **dictionary**. Choose either a "My Profile" about you, or a "Pet Record" about a real or imaginary pet.
 
   **Requirements:**
   1. Create a dictionary with **at least 4 fields** (e.g. `name`, `age`, `favourite_colour`, `town`)
@@ -116,7 +116,7 @@ take_home_assignment: |
   - ⭐⭐ Use `.get()` to safely print a field that might not exist, and an `if "key" in dict:` check
   - ⭐⭐⭐ Ask the user with `input()` to fill in one of the fields, then store their answer in the dictionary
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? AI Runs on Dictionaries
 
@@ -445,7 +445,7 @@ print("name" in person)      # True — "name" IS a key
 
 ## 🎮 Class Activity: Build a Profile Box
 
-Time to build your own labelled boxes! Open **Trinket** and create a new file named `Y2-T4-W4-Dictionaries`.
+Time to build your own labelled boxes! Open **Pickcode** and create a new file named `Y2-T4-W4-Dictionaries`.
 
 You'll build a student profile step by step — create it, read fields, add a field, update a field, then check keys safely. Full instructions are in the activity panel. Give a **thumbs up** in Zoom after each step that runs. 👍
 
@@ -501,7 +501,7 @@ Next week — **Week 5: Looping Over Dictionaries** — you'll learn how to swee
 
 ## 📚 Homework: My Profile (or Pet Record!)
 
-Build a **profile program** in Trinket that stores information in a **dictionary**. Choose either a "My Profile" about you, or a "Pet Record" about a real or imaginary pet.
+Build a **profile program** in Pickcode that stores information in a **dictionary**. Choose either a "My Profile" about you, or a "Pet Record" about a real or imaginary pet.
 
 **Requirements:**
 1. Create a dictionary with **at least 4 fields** (e.g. `name`, `age`, `favourite_colour`, `town`)
@@ -524,7 +524,7 @@ Favourite toy: rope (newly added!)
 - ⭐⭐ Use `.get()` to safely print a field that might not exist, and an `if "key" in dict:` check
 - ⭐⭐⭐ Ask the user with `input()` to fill in one of the fields, then store their answer in the dictionary
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

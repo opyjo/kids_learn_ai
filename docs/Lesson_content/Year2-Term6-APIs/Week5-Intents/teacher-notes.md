@@ -44,14 +44,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' Trinket accounts; today's Trinket name: `Y2-T6-W5-Intents`
+- Students' Pickcode accounts; today's Pickcode name: `Y2-T6-W5-Intents`
 - The Week 3/Week 4 mock service functions ready to paste (`get_weather`, `get_joke`, `get_fact`)
 - This teaching guide open during class
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Have the service functions ready** — students reuse `get_weather(city)` etc. from Weeks 3-4; keep a clean copy in the chat to paste so nobody stalls hunting old Trinkets
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Have the service functions ready** — students reuse `get_weather(city)` etc. from Weeks 3-4; keep a clean copy in the chat to paste so nobody stalls hunting old Pickcode projects
 3. **Rehearse the overlapping-keywords demo** — "tell me a joke about the weather" is the money moment; practise running it both orders so the reveal lands
 4. **Prepare the intent table** — you'll build the weather keyword list live from student suggestions; have a fallback list ready if the chat is quiet
 5. **Recall the Term 5 link** — be ready to say "this is your keyword chatbot, but now each match returns a *label*" — many students will click instantly on that framing

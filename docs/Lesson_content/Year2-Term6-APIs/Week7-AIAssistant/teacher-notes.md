@@ -43,17 +43,17 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share
-- Students' saved `Y2-T6-W6-Assistant` Trinket from last week (CRITICAL — remind them in advance)
+- Students' saved `Y2-T6-W6-Assistant` Pickcode from last week (CRITICAL — remind them in advance)
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Send an advance reminder** (day before if possible): "Bring your Week 6 assistant Trinket — we personalise it live!" Have a spare copy of the Week 6 solution ready to paste in chat for anyone who lost theirs.
-2. **Test Zoom and Trinket** — confirm code runs, screen share works.
+1. **Send an advance reminder** (day before if possible): "Bring your Week 6 assistant Pickcode — we personalise it live!" Have a spare copy of the Week 6 solution ready to paste in chat for anyone who lost theirs.
+2. **Test Zoom and Pickcode** — confirm code runs, screen share works.
 3. **Pre-build the full assistant yourself** and run every path (default-city weather, named-city weather, unknown-city error, joke, fact, advice, compliment, nonsense, bye) so the demos are smooth. The full conversation trace in the lesson is your script.
 4. **Rehearse the "set first, read later" line** — it's the anchor for the memory concept and pre-empts the term's most common `KeyError`.
-5. **Prepare the "Save a copy" instruction** — students copy W6 into a new `Y2-T6-W7-Assistant` trinket so the original is preserved.
+5. **Prepare the "Save a copy" instruction** — students copy W6 into a new `Y2-T6-W7-Assistant` Pickcode project so the original is preserved.
 
 ---
 
@@ -173,7 +173,7 @@ Then walk the four Common Mistakes, prioritising the two `KeyError`s (reading a 
 
 Homework is explicitly **showcase prep**: unique personality, at least one remembered preference, one new service, and bulletproof.
 
-> "Next week is your big demo AND your API Master Badge. This week: give your assistant a personality all its own, make sure it remembers you, add a service you invent, and try HARD to break it. Bring THIS exact Trinket next week — it goes live on Zoom."
+> "Next week is your big demo AND your API Master Badge. This week: give your assistant a personality all its own, make sure it remembers you, add a service you invent, and try HARD to break it. Bring THIS exact Pickcode next week — it goes live on Zoom."
 
 Preview Week 8: the showcase and the badge. Build excitement. Paste submission instructions in chat.
 
@@ -218,7 +218,7 @@ Preview Week 8: the showcase and the badge. Build excitement. Paste submission i
 | New service never responds | They added the loop handler but forgot the `detect_intent` branch (or vice versa) — a new intent needs BOTH |
 | f-string prints `{user['name']}` literally | Missing the `f` prefix before the string |
 | `SyntaxError` in an f-string | Quote clash — use single quotes inside a double-quoted f-string: `f"{user['name']}"` |
-| Infinite loop (forgot `running = False`) | Show the Stop/re-run button in Trinket, then add the missing flag flip in the `bye` branch |
+| Infinite loop (forgot `running = False`) | Show the Stop/re-run button in Pickcode, then add the missing flag flip in the `bye` branch |
 | Weather always uses the favourite city | `find_city` only spots a city after the word "in" — remind them to phrase it "weather in Lagos" |
 | Running behind schedule | Cut the second new service (compliment); advice alone meets the "new service + intent" objective |
 

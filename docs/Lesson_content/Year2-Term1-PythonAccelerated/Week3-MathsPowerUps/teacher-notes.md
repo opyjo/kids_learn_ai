@@ -42,15 +42,15 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Trinket accounts — students name today's file `Y2-T1-W3-MathsPowerUps`
+- Pickcode accounts — students name today's file `Y2-T1-W3-MathsPowerUps`
 - The Remainder Riddles list ready to paste into chat one at a time
-- A calculator (or a second Trinket tab) to verify any student-invented riddles live
+- A calculator (or a second Pickcode tab) to verify any student-invented riddles live
 - This teaching guide open during class
 - Class WhatsApp group or email thread for homework links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Run every snippet yourself** — especially `10 / 3` (verify your screen shows `3.3333333333333335` for the Week 4 teaser) and `2 ** 63`
 3. **Review last week's homework submissions** — note who is still shaky on `int(input(...))`; they'll struggle in the Sweet Sharer without a nudge
 4. **Prepare the riddles** — have all seven Remainder Riddles in a notes file, ready to paste into chat individually
@@ -273,7 +273,7 @@ Walk through the requirements and example run (347 → ODD, square 120409, last 
 
 > "⭐ is even/odd plus square — everyone can do that tonight. ⭐⭐ adds last digit and cube. ⭐⭐⭐ is the pocket-money doubler — it needs a `for` loop with `2 ** day`, exactly like our chessboard loop. If you loved the chessboard moment, that tier is for you."
 
-Trinket name `Y2-T1-W3-MathsMagician`; paste submission instructions in the chat; set the due date.
+Pickcode name `Y2-T1-W3-MathsMagician`; paste submission instructions in the chat; set the due date.
 
 #### Week 4 Teaser + Wrap-Up (5 minutes)
 
@@ -328,7 +328,7 @@ Close with the recap question round: "How do I check if a number is even? How do
 | Student's `2 ^ 10` gives 8 and they insist Python is broken | Perfect teaching moment — run `2 ** 10` beside it; reinforce "wrong-but-no-crash is the sneakiest bug type" |
 | `ZeroDivisionError` panic during Sweet Sharer | Reframe as a discovery: "you found the crash Week 5 teaches us to prevent!" |
 | Fast finishers idle during the build | Sticker variant, `/` vs `//` comparison line, or invent riddles for the class (verify answers before posting!) |
-| Zoom/Trinket technical issues | Usual playbook: repl.it backup link, browser-window-only screen share, private-chat triage |
+| Zoom/Pickcode technical issues | Usual playbook: repl.it backup link, browser-window-only screen share, private-chat triage |
 
 ---
 

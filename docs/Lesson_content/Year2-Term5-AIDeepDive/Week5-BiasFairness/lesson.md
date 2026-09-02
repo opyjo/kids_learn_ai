@@ -89,10 +89,10 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Bias Investigator
 
-  Pick **ONE** of the two tracks. Do it in a Trinket named **`Y2-T5-W5-BiasFairness`**.
+  Pick **ONE** of the two tracks. Do it in a Pickcode named **`Y2-T5-W5-BiasFairness`**.
 
   ### Track A — Investigate a real AI tool (writing)
-  Choose one AI tool you know (a voice assistant, a photo filter, a translator, an autocomplete, a recommendation feed). In a comment block (`#`) at the top of your Trinket, answer:
+  Choose one AI tool you know (a voice assistant, a photo filter, a translator, an autocomplete, a recommendation feed). In a comment block (`#`) at the top of your Pickcode project, answer:
   1. **What does it do?**
   2. **Who might it be unfair to, and why?**
   3. **What data was it likely trained on? Who might have been left out?**
@@ -112,7 +112,7 @@ take_home_assignment: |
   - ⭐⭐ Add a third group to test, or a second real-world example
   - ⭐⭐⭐ Explain in comments how *unbalanced training data* caused the bias (callback to Week 2!)
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it where your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it where your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Who Is AI Built For?
 
@@ -200,7 +200,7 @@ Imagine a company builds an AI to sort job applications, and trains it on **who 
 
 ## 🔎 Part 3: Catch an AI Being Unfair
 
-Enough talk — let's catch one red-handed. Open **Trinket** and start a new Trinket named `Y2-T5-W5-BiasFairness`.
+Enough talk — let's catch one red-handed. Open **Pickcode** and start a new Pickcode project named `Y2-T5-W5-BiasFairness`.
 
 Here is a tiny **rule-based classifier** — exactly the style you built in Week 3. It's a "name recogniser": an app that checks whether it *knows* a name (imagine a sign-up form, or a voice assistant deciding if it heard a real name).
 
@@ -402,7 +402,7 @@ You've learned AI can be *unfair*. Next week: AI can also be *convincingly wrong
 
 ## 📚 Homework: Bias Investigator
 
-Pick **ONE** track and do it in a Trinket named **`Y2-T5-W5-BiasFairness`**.
+Pick **ONE** track and do it in a Pickcode named **`Y2-T5-W5-BiasFairness`**.
 
 **Track A — Investigate a real AI tool (writing).** In a comment block, describe a tool, say who it might be unfair to and why, what data it was likely trained on, who was left out, and one idea to make it fairer. 5–8 sentences, factual and respectful.
 
@@ -413,7 +413,7 @@ Pick **ONE** track and do it in a Trinket named **`Y2-T5-W5-BiasFairness`**.
 - ⭐⭐ Add a third group / a second real example
 - ⭐⭐⭐ Explain how *unbalanced training data* caused the bias (callback to Week 2!)
 
-**Submit:** Save, click **Share**, copy the link, paste it where your teacher asks.
+**Submit:** Save, choose **Share → Anyone with link → View Code**, copy the link, paste it where your teacher asks.
 
 ---
 

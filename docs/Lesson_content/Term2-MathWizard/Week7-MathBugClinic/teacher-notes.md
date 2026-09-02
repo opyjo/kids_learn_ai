@@ -57,11 +57,11 @@ Each completed case needs a recorded symptom, category, focused repair, two expe
 This challenge replaces the previous three-case-report homework. It has two parts:
 
 1. the 20-question **Math Wizard Homework Challenge — Lessons 1–7** in the lesson's **Quick Check** tab; and
-2. the **Event Sharing Tool** submitted as a Trinket share link in the **Homework** tab.
+2. the **Event Sharing Tool** submitted as a Pickcode share link in the **Homework** tab.
 
 The platform quiz is open-notes and allows two attempts. A score of 70% means 14 of 20 answers are correct. Treat the first attempt as diagnostic evidence. Before a second attempt, ask the student to review the explanations for missed questions rather than simply memorizing answer positions.
 
-Before students begin the Trinket task, model the input format without revealing the calculations: enter prices as numbers such as `2.50` without a dollar sign, and enter item/friend counts as whole numbers such as `8` rather than `8.0`. Zero items is a valid boundary test. Zero friends is not valid because the program would divide by zero.
+Before students begin the Pickcode task, model the input format without revealing the calculations: enter prices as numbers such as `2.50` without a dollar sign, and enter item/friend counts as whole numbers such as `8` rather than `8.0`. Zero items is a valid boundary test. Zero friends is not valid because the program would divide by zero.
 
 ### Platform Quiz Answer Key
 
@@ -105,7 +105,7 @@ Use missed questions to choose a short review before Lesson 8:
 | 17–18 | Debugging cycle and bug categories |
 | 20 | Planning varied tests |
 
-## Trinket Reference Solution
+## Pickcode Reference Solution
 
 This is a teacher reference, not starter code to distribute. Accept different welcome messages, prompts, variable names, and output wording when the program meets the requirements and the student can explain it.
 
@@ -153,7 +153,7 @@ Do not require `if/else`, loops, or `try/except`. Students have not learned thos
 
 For the second test, the unformatted result of `12.5 / 3` continues beyond two decimal places. The displayed `4.17` is correct because the program formats money with `:.2f`.
 
-## Trinket Marking Rubric — 20 Marks
+## Pickcode Marking Rubric — 20 Marks
 
 | Criterion | Marks | Full-credit evidence |
 | --- | ---: | --- |
@@ -169,7 +169,7 @@ For the second test, the unformatted result of `12.5 / 3` continues beyond two d
 
 ### Combined Readiness Interpretation
 
-Combine the platform quiz score out of 20 with the Trinket score out of 20:
+Combine the platform quiz score out of 20 with the Pickcode score out of 20:
 
 | Total | Recommended next step |
 | ---: | --- |
@@ -178,7 +178,7 @@ Combine the platform quiz score out of 20 with the Trinket score out of 20:
 | 20–27 | Complete a guided review of the missed concepts before building. |
 | Below 20 | Build one supported mini-tool before starting the calculator project. |
 
-Do not use the total alone. A student who reads code successfully but struggles in Trinket needs building practice; a student with working code but weak explanations needs code-tracing and vocabulary support.
+Do not use the total alone. A student who reads code successfully but struggles in Pickcode needs building practice; a student with working code but weak explanations needs code-tracing and vocabulary support.
 
 ## Looking Ahead
 

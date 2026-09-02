@@ -57,7 +57,7 @@ class_activities: |
   Study them. Then your teacher shows a **brand-new plantain you've never seen** and asks: *"Ripe or not?"* You guess. That guess is a **prediction** — you learned the pattern from examples, nobody gave you a rule!
 
   ### Part B — Write the Rules (⭐⭐)
-  Open Trinket and finish the `is_ripe(colour)` function in the starter code. Add rules for `"yellow"` and `"black"`, and a sensible answer for colours you didn't plan for. Run it and give a **thumbs up** in Zoom when your four test lines print correctly.
+  Open Pickcode and finish the `is_ripe(colour)` function in the starter code. Add rules for `"yellow"` and `"black"`, and a sensible answer for colours you didn't plan for. Run it and give a **thumbs up** in Zoom when your four test lines print correctly.
 
   ### Part C — Break It (⭐⭐⭐)
   Find an example your rules get WRONG or can't handle (a half-yellow-half-green plantain? a colour like `"Green"` with a capital G?). Paste the tricky example in the **Zoom chat**.
@@ -68,10 +68,10 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Rules or Learning? 🕵️
 
-  This term ends with an **AI Investigation Report**, so start being a detective NOW! Pick ONE of these two options and do it in Trinket.
+  This term ends with an **AI Investigation Report**, so start being a detective NOW! Pick ONE of these two options and do it in Pickcode.
 
   **Option 1 — Spot the AI**
-  Think of one AI you actually use (YouTube suggestions, a voice assistant, autocorrect, a game opponent, a photo filter). In Trinket:
+  Think of one AI you actually use (YouTube suggestions, a voice assistant, autocorrect, a game opponent, a photo filter). In Pickcode:
   1. Write **comments** (`#`) explaining what the AI does
   2. Say whether you think it works more by **RULES** or by **LEARNING FROM EXAMPLES**, and why
   3. Write a small **rule-based function** that copies a tiny piece of what it does (e.g. `def autocorrect(word):` that fixes one or two words with `if`)
@@ -89,7 +89,7 @@ take_home_assignment: |
   - ⭐⭐ Comments explain clearly whether it's rules or learning
   - ⭐⭐⭐ Add a comment describing ONE case your rules get wrong — and why a *learning* system might do better
 
-  **Submit:** Save your Trinket (`Y2-T5-W1-HowMachinesLearn`), click **Share**, copy the link, and paste it where your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T5-W1-HowMachinesLearn`), choose **Share → Anyone with link → View Code**, copy the link, and paste it where your teacher asks.
 ai_activities: |
   ## 🤖 Big Discussion: Does the Machine Actually "Know" Anything?
 
@@ -185,11 +185,11 @@ The key word is **new**. Training is about the past examples; prediction is abou
 
 ---
 
-## 🖥️ Part 3: Trinket Warm-Up — A Rule-Based "AI"
+## 🖥️ Part 3: Pickcode Warm-Up — A Rule-Based "AI"
 
 Today we build the **simpler** kind: a rule-based classifier. A **classifier** is just a program that sorts things into groups (ripe / unripe / very ripe). Every rule is written by a human — YOU.
 
-Open **Trinket** (trinket.io) and log in. Name today's Trinket `Y2-T5-W1-HowMachinesLearn`.
+Open **Pickcode** (app.pickcode.io) and log in. Name today's Pickcode `Y2-T5-W1-HowMachinesLearn`.
 
 Here's the starter code:
 
@@ -322,7 +322,7 @@ Time to become the machine yourself, then build one!
 Your teacher shows you several **labelled examples** (photos or descriptions): yellow-with-spots → **RIPE**, bright green → **UNRIPE**, mostly black → **VERY RIPE**. Study them. Then a **brand-new plantain** appears and you must guess. Nobody gave you a rule — your brain spotted the **pattern**. That's a **prediction**!
 
 ### Part B — Write the Rules (⭐⭐)
-In Trinket, finish `is_ripe(colour)`: add rules for `"yellow"` and `"black"` plus a sensible `else`. Run your four test lines and **thumbs up** when the output is correct.
+In Pickcode, finish `is_ripe(colour)`: add rules for `"yellow"` and `"black"` plus a sensible `else`. Run your four test lines and **thumbs up** when the output is correct.
 
 ### Part C — Break It (⭐⭐⭐)
 Find an input your rules get **wrong** or can't handle (a capital `"Green"`? an in-between colour?). Paste it in the **Zoom chat** — let's collect the trickiest ones as a class.
@@ -355,7 +355,7 @@ Today you saw that learning-based AI needs **examples** to learn from. But not j
 
 ## 📚 Homework: Rules or Learning? 🕵️
 
-Our term ends with an **AI Investigation Report** — so start investigating now! Pick **one** option in Trinket (`Y2-T5-W1-HowMachinesLearn`):
+Our term ends with an **AI Investigation Report** — so start investigating now! Pick **one** option in Pickcode (`Y2-T5-W1-HowMachinesLearn`):
 
 **Option 1 — Spot the AI:** Choose one AI you use (YouTube suggestions, voice assistant, autocorrect, a game bot). In **comments**, explain what it does and whether it's more **rules** or **learning**, and why. Then write a small **rule-based function** that copies a tiny piece of it.
 
@@ -366,7 +366,7 @@ Our term ends with an **AI Investigation Report** — so start investigating now
 - ⭐⭐ Comments clearly explain rules vs learning
 - ⭐⭐⭐ Add a comment describing ONE case your rules get wrong — and why *learning* might do better
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it where your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it where your teacher asks.
 
 ---
 

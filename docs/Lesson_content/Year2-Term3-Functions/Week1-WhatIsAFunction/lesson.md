@@ -66,7 +66,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: My Toolbox 🧰
 
-  Build a **"My Toolbox"** program in Trinket that is made entirely of functions YOU define and then call.
+  Build a **"My Toolbox"** program in Pickcode that is made entirely of functions YOU define and then call.
 
   **Requirements:**
   1. Define **at least 3 functions**, each with no parameters — for example:
@@ -93,9 +93,9 @@ take_home_assignment: |
   - ⭐⭐ 4+ functions, and one called several times inside a loop
   - ⭐⭐⭐ Make one function CALL another function inside its body (functions using functions!)
 
-  **Trinket:** Start from the class link, name it `Y2-T3-W1-Functions`.
+  **Pickcode:** Start from the class link, name it `Y2-T3-W1-Functions`.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: AI Is Built From Tiny Functions
 
@@ -455,7 +455,7 @@ def greet():
 
 ## 🎮 Part 6: The Function Factory (Class Activity)
 
-Time to build! Open **Trinket** and start from the class starter code (name it `Y2-T3-W1-Functions`).
+Time to build! Open **Pickcode** and start from the class starter code (name it `Y2-T3-W1-Functions`).
 
 ### Step 1 — Spot the Repeat (⭐)
 The starter program prints the same banner **twice**. Count the copy-pasted lines and say the number in the **Zoom chat**.
@@ -544,7 +544,7 @@ Because they didn't get arrays! 😄
 - ⭐⭐ 4+ functions, and one called several times inside a loop
 - ⭐⭐⭐ Make one function CALL another function inside its body
 
-**Trinket:** name it `Y2-T3-W1-Functions`. Save, click **Share**, copy the link, and submit it where your teacher asks.
+**Pickcode:** name it `Y2-T3-W1-Functions`. Save, choose **Share → Anyone with link → View Code**, copy the link, and submit it where your teacher asks.
 
 ---
 

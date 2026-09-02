@@ -19,10 +19,10 @@ export const GameCard = ({ game }: GameCardProps) => {
 		setIsExpanded(!isExpanded);
 	};
 
-	const handleOpenTrinket = (e: React.MouseEvent) => {
+	const handleOpenPickcode = (e: React.MouseEvent) => {
 		e.stopPropagation(); // Prevent card expansion when clicking the button
-		const trinketUrl = game.trinketLink || "https://trinket.io/python";
-		window.open(trinketUrl, "_blank", "noopener,noreferrer");
+		const projectUrl = game.pickcodeLink || "https://app.pickcode.io/home";
+		window.open(projectUrl, "_blank", "noopener,noreferrer");
 	};
 
 	return (
@@ -55,15 +55,18 @@ export const GameCard = ({ game }: GameCardProps) => {
 						</div>
 					</div>
 					<div className="flex-shrink-0 flex items-center gap-2">
-						{game.trinketLink && (
+						{game.pickcodeLink && (
 							<Button
 								variant="outline"
 								size="sm"
-								onClick={handleOpenTrinket}
+								onClick={handleOpenPickcode}
 								className="rounded-full shrink-0"
-								aria-label="Open in Trinket.io"
+								aria-label="Open this game in Pickcode"
 							>
-								<ExternalLink className="w-4 h-4 mr-1.5" />
+								<ExternalLink
+									className="w-4 h-4 mr-1.5"
+									aria-hidden="true"
+								/>
 								Try It
 							</Button>
 						)}

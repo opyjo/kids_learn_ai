@@ -357,7 +357,7 @@ take_home_assignment: |
   **Assignment: My Profile Card**
   
   Create a program with at least 5 variables about yourself.
-  Submit your Trinket link.
+  Submit your Pickcode View Code project link.
 ---
 
 # Term 1, Week 3: Variables are Boxes! 📦
@@ -398,4 +398,3 @@ Potential enhancements for the sync system:
 ---
 
 *KidsLearnAI - Empowering the Next Generation with AI Education*
-

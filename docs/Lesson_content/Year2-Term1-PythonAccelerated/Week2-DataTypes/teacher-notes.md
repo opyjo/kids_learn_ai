@@ -34,7 +34,7 @@ By the end of this lesson, students will be able to:
 
 ### Key Success Metrics
 
-- [ ] Every student runs the crash, then runs the fixed version, in their own Trinket
+- [ ] Every student runs the crash, then runs the fixed version, in their own Pickcode
 - [ ] Most students correctly predict `type("42")` is a string by Round 1 of Type Detective
 - [ ] Every student completes the Dog Years mini build with a working `int(input(...))`
 - [ ] Students can answer "what does input() give you?" in chorus by the end: "A STRING!"
@@ -43,15 +43,15 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Your own Trinket ready with the Week 1 crash program pre-typed (the "crime scene")
+- Your own Pickcode ready with the Week 1 crash program pre-typed (the "crime scene")
 - The Type Detective snippets ready to paste one at a time (prepare them in a text file)
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Pre-type the crime scene** in a Trinket named `Y2-T1-W2-DataTypes` so the lesson opens with zero typing delay:
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Pre-type the crime scene** in a Pickcode named `Y2-T1-W2-DataTypes` so the lesson opens with zero typing delay:
    ```python
    age = input("How old are you? ")
    print(age + 1)
@@ -104,7 +104,7 @@ Do NOT explain the fix yet. Curiosity should stay open until Part 3 ends.
 
 #### Teaching Tips
 
-- **Have students run the crash themselves** in their own Trinket (`Y2-T1-W2-DataTypes`). Owning the crash makes owning the fix sweeter.
+- **Have students run the crash themselves** in their own Pickcode (`Y2-T1-W2-DataTypes`). Owning the crash makes owning the fix sweeter.
 - **Model error-reading calmly.** Many students still see red text as "I failed." Narrate the opposite: "Errors are Python leaving us clues. Good detectives READ the clues."
 
 ---
@@ -239,7 +239,7 @@ Snippet 3 is the diagnostic: students who get it have genuinely understood conve
 
 #### Round 3 — Dog Years Mini Build (⭐⭐⭐, ~10 minutes)
 
-Students build independently in their own Trinket:
+Students build independently in their own Pickcode:
 
 ```python
 age = int(input("How old are you? "))
@@ -320,7 +320,7 @@ Paste submission instructions in the chat. Set the due date.
 | Class confuses `type()` with conversion (`type(age)` "changes" age) | Clarify with the detective metaphor: `type()` only LOOKS (inspector); `int()` actually TRANSFORMS (converter) |
 | Predictions in chat are all copy-pasted from the first answer | Ask for answers via Zoom's private chat to you instead, or use a quick reaction poll (thumbs up = str, heart = int) |
 | Lesson runs long | Cut Round 2 of Type Detective to snippets 1 and 3, and move the AI discussion to the first 5 minutes of Week 3 — never cut the mini build |
-| Zoom/Trinket technical issues | Same playbook as Week 1: repl.it backup link, browser-window-only screen share, private-chat triage |
+| Zoom/Pickcode technical issues | Same playbook as Week 1: repl.it backup link, browser-window-only screen share, private-chat triage |
 
 ---
 

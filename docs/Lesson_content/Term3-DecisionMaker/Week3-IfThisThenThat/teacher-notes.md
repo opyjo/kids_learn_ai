@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing if structure
 - Visual aids showing indentation
 
@@ -435,4 +435,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is THE most important lesson! If statements are the foundation of all decision-making. Make sure students really understand indentation—it's the #1 source of errors. Be patient, use visual aids, and celebrate every working if statement!_ 🧠
-

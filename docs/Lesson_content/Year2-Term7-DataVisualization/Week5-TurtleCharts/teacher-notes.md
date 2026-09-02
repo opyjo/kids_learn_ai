@@ -19,13 +19,13 @@ Turtle is new to this cohort. Treat it gently: the delight of "I told a robot to
 
 1. **Demystify turtle fast** — within 15 minutes every student has drawn *something* on screen
 2. **Build the bar chart in layers** — one line → one bar (a helper) → a full looped chart — so nobody is overwhelmed
-3. **Guarantee no one is stuck** — the biggest risk is the "blank output" trap (turtle code in a text trinket); the text-chart fallback means every student can still complete the work
+3. **Guarantee no one is stuck** — the biggest risk is the "blank output" trap (turtle code in a text Pickcode project); the text-chart fallback means every student can still complete the work
 
 ### Learning Objectives
 
 By the end of this lesson, students will be able to:
 
-1. Explain what turtle is (a pen steered by code) and open a "Python with Turtle" trinket
+1. Explain what turtle is (a pen steered by code) and open a "Python Graphics" Pickcode project
 2. Use `forward`, `left`/`right`, `penup`/`pendown`, `goto`, and `color` to draw
 3. Write/complete a `draw_bar(t, x, height, colour)` helper that draws one filled rectangle
 4. Loop over a dictionary to draw a full bar chart, scaling values to pixel heights (ints) and labelling bars with `write()`
@@ -42,19 +42,19 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share enabled
-- **A pre-made "Python with Turtle" trinket** you can screen-share and live-code in (trinket.io/turtle)
-- The solution code open and tested in a Turtle trinket
-- The text-chart fallback tested in a normal trinket (your Plan B)
-- Class WhatsApp/email for sharing Trinket links
+- **A pre-made "Python Graphics" Pickcode project** you can screen-share and live-code in (app.pickcode.io/home)
+- The solution code open and tested in a Python Graphics project
+- The text-chart fallback tested in a normal Pickcode project (your Plan B)
+- Class WhatsApp/email for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Set up Turtle trinkets.** This is the #1 prep item. Make and test a "Python with Turtle" trinket yourself so you can demo live. Have the direct link **trinket.io/turtle** ready to paste in chat.
-2. **Test the solution code** end to end in a Turtle trinket — confirm the full fruit chart draws with colours, labels, and title.
-3. **Test the fallback** in a normal trinket so you can pivot instantly if turtle fails for anyone.
-4. **Prepare the "blank output" warning.** You WILL have students who paste turtle code into a text trinket and see nothing. Rehearse the one-line diagnosis: "Blank output = wrong trinket type."
+1. **Set up Python Graphics projects.** This is the #1 prep item. Make and test a "Python Graphics" Pickcode project yourself so you can demo live. Have the direct link **app.pickcode.io/home** ready to paste in chat.
+2. **Test the solution code** end to end in a Python Graphics project — confirm the full fruit chart draws with colours, labels, and title.
+3. **Test the fallback** in a normal Pickcode project so you can pivot instantly if turtle fails for anyone.
+4. **Prepare the "blank output" warning.** You WILL have students who paste turtle code into a text Pickcode project and see nothing. Rehearse the one-line diagnosis: "Blank output = wrong Pickcode project type."
 5. **Have the naming convention ready:** `Y2-T7-W5-TurtleCharts`.
-6. **Decide your fallback trigger:** if a student can't get a Turtle trinket working within ~5 minutes, move them to the text version rather than losing them.
+6. **Decide your fallback trigger:** if a student can't get a Python Graphics project working within ~5 minutes, move them to the text version rather than losing them.
 
 ---
 
@@ -64,14 +64,14 @@ By the end of this lesson, students will be able to:
 
 ```
 ⏱️  0-8 min   → Recap Week 4 text charts + "today we DRAW" hook
-⏱️  8-18 min  → Open Turtle trinkets + first drawing (Part 1 & 2)
+⏱️  8-18 min  → Open Python Graphics projects + first drawing (Part 1 & 2)
 ⏱️ 18-30 min  → The draw_bar helper — one bar (Part 3)
 ⏱️ 30-50 min  → Loop into a full chart (Part 4) + Chart Studio activity
 ⏱️ 50-60 min  → Text-chart fallback + common mistakes
 ⏱️ 60-75 min  → Homework + Week 6 teaser + wrap-up
 ```
 
-**Flexible timing:** If Turtle-trinket setup eats time (likely — it's new), protect Parts 3 and 4. The single bar and the loop are the heart of the lesson; the intro moves can be trimmed.
+**Flexible timing:** If Turtle-Pickcode project setup eats time (likely — it's new), protect Parts 3 and 4. The single bar and the loop are the heart of the lesson; the intro moves can be trimmed.
 
 ---
 
@@ -83,7 +83,7 @@ Open by celebrating where they are:
 
 > "For four weeks you've built charts out of block characters — and they were genuinely useful. Today we upgrade. Today we draw REAL charts, with a pen we steer using code. Meet the turtle."
 
-Screen-share your Turtle trinket and live-run:
+Screen-share your Python Graphics project and live-run:
 
 ```python
 import turtle
@@ -100,20 +100,20 @@ The line appearing on screen is the "wow" moment. Milk it.
 
 ---
 
-### Part 2: Turtle Trinkets + Basic Moves (10 minutes)
+### Part 2: Python Graphics projects + Basic Moves (10 minutes)
 
 **The critical instruction — say it twice:**
 
-> "Turtle ONLY works in a 'Python with Turtle' trinket. Go to trinket.io/turtle. If you use a normal text trinket, you'll see NOTHING — no error, just blank. That's not a bug, it's the wrong trinket type."
+> "Turtle ONLY works in a 'Python Graphics' Pickcode project. Go to app.pickcode.io/home. If you use a normal text Pickcode project, you'll see NOTHING — no error, just blank. That's not a bug, it's the wrong Pickcode project type."
 
-Everyone opens a Turtle trinket, names it `Y2-T7-W5-TurtleCharts`, and runs the forward/left example from the lesson. **Thumbs up** when the L-shape appears.
+Everyone opens a Python Graphics project, names it `Y2-T7-W5-TurtleCharts`, and runs the forward/left example from the lesson. **Thumbs up** when the L-shape appears.
 
 Walk the commands table quickly. The one concept to land hard is **penup/pendown** — "lift the pen to move without drawing." Demo the goto-with-pen-up example so they *see* the no-line jump.
 
 | Problem | Quick Fix |
 |---|---|
-| Blank output panel | Wrong trinket type — move them to trinket.io/turtle |
-| Can't make a Turtle trinket | Switch them to the text-chart fallback now — don't lose them |
+| Blank output panel | Wrong Pickcode project type — move them to app.pickcode.io/home |
+| Can't make a Python Graphics project | Switch them to the text-chart fallback now — don't lose them |
 | Turtle draws lines everywhere | They forgot `penup()` before moving — most common turtle bug |
 
 ---
@@ -141,7 +141,7 @@ draw_bar(pen, -50, 120, "red")
 
 ### Part 4: Loop Into a Full Chart + Chart Studio (20 minutes)
 
-Now the payoff. Introduce the plan on screen: dictionary → baseline → loop → scale → label. Build it in the shared trinket, or have students assemble the solution while you circulate.
+Now the payoff. Introduce the plan on screen: dictionary → baseline → loop → scale → label. Build it in the shared Pickcode project, or have students assemble the solution while you circulate.
 
 **Two ideas to teach explicitly:**
 - **Scaling:** "A value of 8 is 8 pixels — invisible. Multiply by a scale (20) to get 160 pixels. Keep the scale a whole number so heights stay ints."
@@ -174,7 +174,7 @@ for name in fruit:
 Reassure the no-turtle students loudly: "The text chart is a completely valid answer. Same data, same story."
 
 Run the four common mistakes live, especially:
-1. **Blank output** = wrong trinket type (the big one)
+1. **Blank output** = wrong Pickcode project type (the big one)
 2. **Missing `turtle.done()`** = window vanishes
 3. **Decimal scale** = messy heights — keep ints
 4. **Pen down while moving** = stray lines
@@ -200,7 +200,7 @@ Stay on 2-3 minutes for questions.
 ### During Class, Observe:
 
 **Technical Skills:**
-- [ ] Opened a Turtle trinket and drew a first line
+- [ ] Opened a Python Graphics project and drew a first line
 - [ ] Used penup/pendown correctly (no stray lines)
 - [ ] Completed the `draw_bar` helper and drew one bar
 - [ ] Built the full looped, labelled chart (or the text equivalent)
@@ -214,7 +214,7 @@ Stay on 2-3 minutes for questions.
 ### Students to Watch
 
 **Need Extra Support:**
-- Stuck on blank output — confirm trinket type, then fall back to text if needed
+- Stuck on blank output — confirm Pickcode project type, then fall back to text if needed
 - Confused by coordinates/goto — pair them with a neighbour; the text version is always available
 
 **Ready for More Challenge:**
@@ -226,7 +226,7 @@ Stay on 2-3 minutes for questions.
 
 | Problem | Solution |
 |---|---|
-| Turtle code shows nothing | Wrong trinket type — must be "Python with Turtle" (trinket.io/turtle). This is the #1 issue today. |
+| Turtle code shows nothing | Wrong Pickcode project type — must be "Python Graphics" (app.pickcode.io/home). This is the #1 issue today. |
 | A student can't get turtle working at all | Switch them to the text-chart fallback immediately — it's a full, valid solution |
 | Bars overlap or sit on each other | The `x = x + 60` slide is missing or too small; increase spacing |
 | Lines drawn between bars | Missing `penup()` before `goto()`; the helper handles this, but stray label moves may not |
@@ -240,8 +240,8 @@ Stay on 2-3 minutes for questions.
 
 **After class, spend 5 minutes noting:**
 
-- **Turtle setup friction:** how long did Turtle trinkets take? Adjust next turtle lesson's buffer.
-- **Fallback count:** how many students used the text version? (If many, check trinket access before Week 7.)
+- **Turtle setup friction:** how long did Python Graphics projects take? Adjust next turtle lesson's buffer.
+- **Fallback count:** how many students used the text version? (If many, check Pickcode project access before Week 7.)
 - **Concept check:** did scaling and penup/pendown land? These recur in any future graphics work.
 - **Chart pride:** who made something they loved? Flag them to share in the Week 8 showcase.
 
@@ -251,7 +251,7 @@ Stay on 2-3 minutes for questions.
 
 **The goal today is a chart every student is proud of — by any route.**
 
-Turtle is the exciting path, but the text fallback is a first-class citizen, not a consolation prize. A student who produces a clean, labelled text chart has fully met the objective. Keep the wonder of "I made the computer draw" alive, but never let the turtle trinket become a barrier — the moment it does, pivot to text and keep the momentum.
+Turtle is the exciting path, but the text fallback is a first-class citizen, not a consolation prize. A student who produces a clean, labelled text chart has fully met the objective. Keep the wonder of "I made the computer draw" alive, but never let the turtle Pickcode project become a barrier — the moment it does, pivot to text and keep the momentum.
 
 **You've got this — go make some charts!** 🐢📊
 

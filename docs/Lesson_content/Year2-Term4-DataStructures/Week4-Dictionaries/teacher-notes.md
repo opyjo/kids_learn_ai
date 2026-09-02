@@ -34,7 +34,7 @@ By the end of this lesson, students will be able to:
 
 ### Key Success Metrics
 
-- [ ] Every student creates and reads from a dictionary in Trinket by minute 30
+- [ ] Every student creates and reads from a dictionary in Pickcode by minute 30
 - [ ] Every student completes the "Profile Box" add + update steps
 - [ ] The class can correctly answer "what does `in` check — keys or values?"
 - [ ] Students can state that each Contact Manager contact will be a dictionary
@@ -43,13 +43,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' existing Trinket accounts; new Trinket named `Y2-T4-W4-Dictionaries`
+- Students' existing Pickcode accounts; new Pickcode named `Y2-T4-W4-Dictionaries`
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Prepare the "list weakness" hook** — have the `person = ["Ama", 12, "ama@email.com"]` list ready to screen-share; you'll ask "which position is the email?" to expose the pain of position-based access
 3. **Pre-type the KeyError demo** — you will deliberately crash `person["email"]` live; rehearse it so the error message appears cleanly
 4. **Have the comparison table ready** (list vs dictionary) — this is the conceptual centrepiece
@@ -189,7 +189,7 @@ This is the concept students most often get wrong. Say it three different ways; 
 
 ### Part 7: Class Activity — Build a Profile Box (15 minutes)
 
-The hands-on heart of the lesson. Students open Trinket (`Y2-T4-W4-Dictionaries`) and work the five steps: create → read → add → update → safe-read/membership. Thumbs-up after each step.
+The hands-on heart of the lesson. Students open Pickcode (`Y2-T4-W4-Dictionaries`) and work the five steps: create → read → add → update → safe-read/membership. Thumbs-up after each step.
 
 - Circulate via shared screens / chat. The most common stuck points: forgetting quotes on keys, and trying `me[0]`.
 - When someone hits a `KeyError` naturally, celebrate it: "Perfect — that's the error we practised! What's the fix?"
@@ -280,7 +280,7 @@ Stay on 2-3 minutes for questions.
 | Confusion that `.get()` shows nothing | `None` prints as `None`; clarify it means "empty", not an error and not the text "None" |
 | "When do I use a list vs a dict?" | Return to the rule of thumb: same-kind ordered things → list; labelled facts about one thing → dict |
 | Class grasps it very fast | Preview a list of dictionaries (Week 6) or start the Week 5 looping teaser early |
-| Trinket/Zoom technical issues | Same playbook as always: repl.it backup, browser-window screen share, private-chat triage |
+| Pickcode/Zoom technical issues | Same playbook as always: repl.it backup, browser-window screen share, private-chat triage |
 
 ---
 

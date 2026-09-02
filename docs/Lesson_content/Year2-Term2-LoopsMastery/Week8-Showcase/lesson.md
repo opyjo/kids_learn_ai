@@ -8,7 +8,7 @@ is_premium: false
 requires_trinket: true
 starter_code: |
   # ✅ DEMO-READY CHECKLIST
-  # Before you show your Arcade Game Collection, tick these off in Trinket:
+  # Before you show your Arcade Game Collection, tick these off in Pickcode:
   #
   # [ ] It RUNS with no red errors
   # [ ] The arcade MENU appears clearly (all 3 games listed + Quit)
@@ -18,7 +18,7 @@ starter_code: |
   # [ ] After a game finishes, you return to the menu
   # [ ] You can QUIT cleanly (option 4 says goodbye and stops)
   #
-  # Open your arcade Trinket now and run it once, top to bottom.
+  # Open your arcade Pickcode now and run it once, top to bottom.
   # Play ONE game all the way through. If every box is ticked —
   # you're ready to shine on Zoom! 🎤
 
@@ -83,7 +83,7 @@ take_home_assignment: |
   Choose ONE (or do both if you're buzzing!):
 
   ### Option A — Badge Certificate Program (recommended)
-  Write a **"Python Pro Badge"** program in Trinket that prints YOU a certificate using f-strings and a loop.
+  Write a **"Python Pro Badge"** program in Pickcode that prints YOU a certificate using f-strings and a loop.
 
   **Requirements:**
   1. Ask the user their name with `input()`
@@ -102,7 +102,7 @@ take_home_assignment: |
 
   **Also (optional, 2 min):** peek at the Term 3 preview below and write down which **Text Adventure** you'd most love to build.
 
-  **Submit:** Save your Trinket as `Y2-T2-W8-Showcase`, click **Share**, copy the link (and paste your family notes), and send it wherever your teacher asks.
+  **Submit:** Save your Pickcode project as `Y2-T2-W8-Showcase`, choose **Share → Anyone with link → View Code**, copy the link (and paste your family notes), and send it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Loops Trained Every AI You've Ever Used
 
@@ -153,7 +153,7 @@ ai_activities: |
 
 Before you show anything, let's make sure your arcade shines. **No new games today** — you're just tidying up work you already did.
 
-Open your Arcade Game Collection Trinket and run it once, top to bottom. Play one game all the way through. Then check every box:
+Open your Arcade Game Collection Pickcode and run it once, top to bottom. Play one game all the way through. Then check every box:
 
 | ✅ Check | What "good" looks like |
 |---|---|
@@ -431,7 +431,7 @@ Over 8 weeks, you learned and mastered:
 Choose ONE (or both if you're buzzing!):
 
 ### Option A — Badge Certificate Program (recommended)
-Write a **"Python Pro Badge"** program in Trinket that prints YOU a certificate using f-strings and a loop.
+Write a **"Python Pro Badge"** program in Pickcode that prints YOU a certificate using f-strings and a loop.
 
 **Requirements:**
 1. Ask the user their name with `input()`
@@ -447,7 +447,7 @@ Show your finished Arcade Game Collection to someone at home. Let them play a ga
 
 **Also (optional, 2 min):** peek at the Term 3 preview above and write down which **Text Adventure** you'd most love to build.
 
-**Submit:** Save your Trinket as `Y2-T2-W8-Showcase`, click **Share**, copy the link, and send it wherever your teacher asks.
+**Submit:** Save your Pickcode project as `Y2-T2-W8-Showcase`, choose **Share → Anyone with link → View Code**, copy the link, and send it wherever your teacher asks.
 
 ---
 

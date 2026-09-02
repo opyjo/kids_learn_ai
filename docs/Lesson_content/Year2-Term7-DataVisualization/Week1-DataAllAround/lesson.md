@@ -63,7 +63,7 @@ class_activities: |
   ```
 
   ### Step 2 — Store (⭐⭐)
-  Copy the list into your own Trinket. Print how many rows (records) there are:
+  Copy the list into your own Pickcode. Print how many rows (records) there are:
 
   ```python
   print("We collected", len(fruits), "answers!")
@@ -106,7 +106,7 @@ take_home_assignment: |
   - ⭐⭐ 8–10 rows with 3 columns, and tally TWO different categorical columns
   - ⭐⭐⭐ Also find the biggest category in your tally and print it in a sentence
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: AI Eats Data for Breakfast
 
@@ -370,7 +370,7 @@ Time to turn the WHOLE class into a dataset! 🎉
 fruits = ["mango", "banana", "mango", "orange", "mango", "banana"]
 ```
 
-**Step 2 — Store:** Copy the list into Trinket and count the rows:
+**Step 2 — Store:** Copy the list into Pickcode and count the rows:
 
 ```python
 print("We collected", len(fruits), "answers!")
@@ -442,9 +442,9 @@ Favourite snack tally: {'chin chin': 3, 'plantain chips': 2, 'groundnut': 1}
 - ⭐⭐ 8–10 rows with 3 columns, and tally TWO different categorical columns
 - ⭐⭐⭐ Also find the biggest category in your tally and print it in a sentence
 
-**Submit:** Save your Trinket (name it `Y2-T7-W1-DataAllAround`), click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project (name it `Y2-T7-W1-DataAllAround`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 
-👉 **Trinket:** [trinket.io](https://trinket.io) — log in and open a new Python 3 trinket named `Y2-T7-W1-DataAllAround`.
+👉 **Pickcode:** [app.pickcode.io](https://app.pickcode.io) — log in and open a new Python 3 Pickcode project named `Y2-T7-W1-DataAllAround`.
 
 ---
 

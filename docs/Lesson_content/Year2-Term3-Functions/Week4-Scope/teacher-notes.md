@@ -45,13 +45,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Students' Trinket accounts; today's Trinket: `Y2-T3-W4-Scope`
+- Students' Pickcode accounts; today's Pickcode: `Y2-T3-W4-Scope`
 - This teaching guide open during class
 - A messy code blob ready to paste for the Detective Round 2
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Rehearse the `NameError` demo** — you'll run the `make_potion` example live and let it crash. Practise narrating the crash calmly so students see it as *expected*, not scary
 3. **Rehearse the "doesn't stick" demo** — the `score = 100` / prints `0` moment is your best hook. Know it cold
 4. **Prepare the Detective Round 2 blob** — have a short repetitive program ready to paste (the homework hero-stats program works well, or invent a menu)
@@ -231,7 +231,7 @@ Stay on 2-3 minutes for questions.
 | Students overuse `global` everywhere | Re-show the pass-in/return-out example; give the rule: "reach for `global` only when return genuinely can't do the job" |
 | The "doesn't stick" example just confuses | Slow right down; add a `print("inside:", score)` line inside the function so they see the local is 100 while the global stays 0 |
 | Refactor feels pointless to fast students | Ask them to add a 20th scene to the messy version vs the tidy version — the pain sells it |
-| Trinket/Zoom technical issues | Standard playbook: repl.it backup, browser-only screen share, private-chat triage |
+| Pickcode/Zoom technical issues | Standard playbook: repl.it backup, browser-only screen share, private-chat triage |
 
 ---
 

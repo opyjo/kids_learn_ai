@@ -38,7 +38,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: The Great Code Sprint 🏁
 
-  Three timed rounds. Each round, your teacher starts the clock — type your solution in Trinket, run it, and give a **thumbs up** in Zoom when it works!
+  Three timed rounds. Each round, your teacher starts the clock — type your solution in Pickcode, run it, and give a **thumbs up** in Zoom when it works!
 
   ### Round 1 — Bug Hunt (⭐)
   Fix the broken line in the starter code so it prints `Welcome back, coder!`
@@ -58,7 +58,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Year 2 Me
 
-  Write a "Year 2 Me" interview program in Trinket — your program interviews YOU!
+  Write a "Year 2 Me" interview program in Pickcode — your program interviews YOU!
 
   **Requirements:**
   1. Use `input()` to ask at least **3 questions** (e.g. name, age, coding goal for this year)
@@ -80,7 +80,7 @@ take_home_assignment: |
   - ⭐⭐ 5 questions and a nicely formatted summary with a border of stars
   - ⭐⭐⭐ Add a question whose reply changes depending on the answer (use `if`!)
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: How AI Grew While You Were Away
 
@@ -180,9 +180,9 @@ Read it slowly. Can you explain what **every line** does? If yes — you're read
 
 ---
 
-## 🖥️ Part 3: Trinket Check — Are You Ready to Race?
+## 🖥️ Part 3: Pickcode Check — Are You Ready to Race?
 
-Quick pit-stop before the sprint. Open **Trinket** (trinket.io) and log in — same account as last year.
+Quick pit-stop before the sprint. Open **Pickcode** (app.pickcode.io) and log in — same account as last year.
 
 > 💡 **Forgotten your password?** Type "help" in the Zoom chat and your teacher will sort you out while the class continues.
 
@@ -194,7 +194,7 @@ print("Year 2, here I come! 🏁")
 
 See it in the output panel? Give a **thumbs up** in Zoom reactions. 👍
 
-> **New this year:** in Year 2 we save EVERYTHING. Every program you write this year can go into your end-of-year portfolio. Name your Trinkets clearly — today's is `Y2-T1-W1-CodeSprint`.
+> **New this year:** in Year 2 we save EVERYTHING. Every program you write this year can go into your end-of-year portfolio. Name your Pickcode projects clearly — today's is `Y2-T1-W1-CodeSprint`.
 
 ---
 
@@ -397,7 +397,7 @@ print(age + 1)
 
 ## 📚 Homework: Year 2 Me
 
-Write a **"Year 2 Me"** interview program in Trinket — your program interviews YOU!
+Write a **"Year 2 Me"** interview program in Pickcode — your program interviews YOU!
 
 **Requirements:**
 1. Use `input()` to ask at least **3 questions** (name, age, coding goal for this year)
@@ -419,7 +419,7 @@ Kofi is 12 years old and this year they will build: A game! 🚀
 - ⭐⭐ 5 questions and a nicely formatted summary with a border of stars
 - ⭐⭐⭐ Add a question whose reply changes depending on the answer (use `if`!)
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

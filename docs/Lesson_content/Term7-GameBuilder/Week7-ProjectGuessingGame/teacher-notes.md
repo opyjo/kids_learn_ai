@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for project planning
 - Optional: Example projects to show
 
@@ -483,4 +483,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is a celebration of learning! Students are combining multiple concepts. Be supportive, celebrate progress, and help them create something they're proud of. The showcase next week will be amazing!_ 🎮✨
-

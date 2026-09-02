@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing index positions
 
 ### Pre-Lesson Preparation
@@ -450,7 +450,7 @@ KidsLearnAI
 - [ ] Prepare examples
 - [ ] Think about zero-based indexing
 - [ ] Prepare troubleshooting
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -477,4 +477,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: Zero-based indexing is often confusing. Emphasize it heavily and use visual aids. Students who master list operations are ready to combine loops with lists next week!_ 📋
-

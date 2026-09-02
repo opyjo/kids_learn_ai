@@ -194,7 +194,7 @@ After EVERY presentation:
 | Issue              | Quick Solution                                                |
 | ------------------ | ------------------------------------------------------------- |
 | Project won't load | Have student describe what it does while you troubleshoot     |
-| Trinket is slow    | Fill time with questions about the project                    |
+| Pickcode is slow    | Fill time with questions about the project                    |
 | Code has bug       | "This is a great debugging opportunity! What might be wrong?" |
 | Student freezes    | Gently prompt: "Tell us about one of your jokes"              |
 | Audio issues       | Read the output aloud for the class                           |

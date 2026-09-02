@@ -37,7 +37,7 @@ Students will be able to:
 
 ### Materials Needed
 - Zoom with screen share and breakout rooms (for paired review)
-- Students' `Y2-T8-Capstone` Trinket (with Sprints 1–2 done)
+- Students' `Y2-T8-Capstone` Pickcode (with Sprints 1–2 done)
 - This guide; class WhatsApp/email for sharing links
 
 ### Pre-Lesson Preparation

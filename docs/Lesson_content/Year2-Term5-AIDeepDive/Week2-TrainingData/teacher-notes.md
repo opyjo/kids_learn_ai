@@ -37,7 +37,7 @@ By the end of this lesson, students will be able to:
 ### Key Success Metrics
 
 - [ ] Every student can point to a feature and a label when shown a table
-- [ ] Every student builds and runs a list-of-dicts dataset in Trinket
+- [ ] Every student builds and runs a list-of-dicts dataset in Pickcode
 - [ ] Most students contribute an example to the class "Build a Dataset" activity
 - [ ] Students give at least one reason data quality matters
 
@@ -45,14 +45,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Students' Trinket accounts; the starter code loaded
+- Students' Pickcode accounts; the starter code loaded
 - The shared screen ready to collect the class fruit dataset live
 - This teaching guide open during class
-- Class WhatsApp group or email thread for Trinket links
+- Class WhatsApp group or email thread for Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Pre-build a blank dataset skeleton** on your screen so you can drop student fruit examples into a list of dicts live (you'll type fast — practise once)
 3. **Have the animal table ready** to screen-share; it's the spine of Parts 1-5
 4. **Prepare 2-3 "mystery" examples** for the classify-by-hand moment (e.g. 4 legs/fur/meow → cat; 2 legs/no fur/tweet → bird)
@@ -75,7 +75,7 @@ By the end of this lesson, students will be able to:
 ⏱️ 68-75 min  → Homework + Week 3 teaser + wrap-up
 ```
 
-**Flexible timing:** the feature/label idea (Part 2) is non-negotiable — protect it. If time runs short, trim Part 4 (counting) and shorten the activity to a class-built dataset without individual Trinket builds.
+**Flexible timing:** the feature/label idea (Part 2) is non-negotiable — protect it. If time runs short, trim Part 4 (counting) and shorten the activity to a class-built dataset without individual Pickcode builds.
 
 ---
 
@@ -107,7 +107,7 @@ This is the "you already have the tool" moment. Frame it big:
 
 > "You built lists of dicts in Term 4 for a Contact Manager. Same structure — I'm just going to call one dict an EXAMPLE and add a key called label. That's it. That's a dataset."
 
-Live-code the single dict first, then stack into the list. Run the loop and let students see the four output lines match the table exactly. Have them reproduce it in Trinket and thumbs-up.
+Live-code the single dict first, then stack into the list. Run the loop and let students see the four output lines match the table exactly. Have them reproduce it in Pickcode and thumbs-up.
 
 Then Part 4 — counting. The key teaching line: **a machine can only ever predict a label it saw in training.** Ask: "Could this machine ever guess 'fish'?" (No — never in the data.) This lands the point that the label column defines the entire universe of possible answers.
 
@@ -136,7 +136,7 @@ The centrepiece hands-on moment. Run it in four steps (see the lesson's activiti
 
 1. **Agree features as a class** (colour, shape, size) — keep it to three.
 2. **Collect examples** — each student drops one fruit in the chat as `feature=…, feature=… -> label`. You type them into a list of dicts on the shared screen in real time. This models data collection beautifully.
-3. **Store & print** — students build the fruits list in their own Trinket and run the loop. Thumbs-up when the table prints.
+3. **Store & print** — students build the fruits list in their own Pickcode and run the loop. Thumbs-up when the table prints.
 4. **Predict by hand** — read a new fruit's features; class predicts; discuss which clue mattered and whether more examples would help.
 
 #### Teaching Tips
@@ -218,9 +218,9 @@ Use these to reward curiosity, but park anything heading toward algorithms/maths
 |---|---|
 | Students confuse features and labels | Return to the quiz-card analogy (front = clues, back = answer); do rapid chat-round "feature or label?" drills |
 | "But more data is ALWAYS better!" pushback | Show the 3-dogs-1-cat demo and ask "is this good at cats?"; contrast a small balanced set with a huge lopsided one |
-| Dict/list syntax errors in Trinket | Point to the starter code; common culprits are missing quotes on string values and a forgotten `"label"` key |
+| Dict/list syntax errors in Pickcode | Point to the starter code; common culprits are missing quotes on string values and a forgotten `"label"` key |
 | Class dataset has inconsistent features | Frame as a lesson: every example must share the same feature keys — that's why we agree them first |
-| Activity running long | Skip individual Trinket builds; build one dataset together on the shared screen and go straight to predict-by-hand |
+| Activity running long | Skip individual Pickcode builds; build one dataset together on the shared screen and go straight to predict-by-hand |
 | Lesson feels too abstract for a student | Anchor everything to the fruit/animal tables and the quiz card — avoid the word "algorithm"; keep it to clues and answers |
 
 ---

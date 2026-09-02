@@ -99,7 +99,7 @@ take_home_assignment: |
   - Add decorative borders and emojis
   - Personalize messages
 
-  **Submit:** Share your Trinket link. Be ready to present at the Week 8 Showcase!
+  **Submit:** Share your Pickcode project link. Be ready to present at the Week 8 Showcase!
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -377,4 +377,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _This is YOUR project! Make it amazing! You've got this!_ 🎮✨
-

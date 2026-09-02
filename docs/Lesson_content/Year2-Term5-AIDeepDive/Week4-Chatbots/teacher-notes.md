@@ -42,15 +42,15 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share and chat enabled
-- Students' Trinket accounts; new trinket named `Y2-T5-W4-Chatbots`
+- Students' Pickcode accounts; new Pickcode project named `Y2-T5-W4-Chatbots`
 - This teaching guide open during class
 - A few prepared "next-word" sentence starters for the unplugged game
-- (Optional) One prepared, kid-safe example of an AI hallucination to describe — do NOT rely on live internet; Trinket has no network
+- (Optional) One prepared, kid-safe example of an AI hallucination to describe — do NOT rely on live internet; Pickcode has no network
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs; type into an `input()` prompt to confirm the console accepts input in your setup
-2. **Pre-build the full BrightByte Buddy solution** in your own trinket so you can live-code confidently and reveal it if the class stalls
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs; type into an `input()` prompt to confirm the console accepts input in your setup
+2. **Pre-build the full BrightByte Buddy solution** in your own Pickcode project so you can live-code confidently and reveal it if the class stalls
 3. **Rehearse the traced conversation** from the lesson — you'll narrate exactly why each line matches (or hits the `else`)
 4. **Prepare 3-4 next-word sentence starters** the class will recognise (nursery rhymes, sayings) so the game lands fast
 5. **Prepare your hallucination talking point** — pitch it as "confidently wrong," not "AI is bad." Keep it age-appropriate and non-scary
@@ -111,7 +111,7 @@ Screen-share the three-step heartbeat (READ → CHECK → REPLY → loop) and th
 
 ### Part 4: BUILD BrightByte Buddy Together (22 minutes)
 
-The centrepiece. Everyone opens a new trinket named `Y2-T5-W4-Chatbots`. Build incrementally, running after EACH step:
+The centrepiece. Everyone opens a new Pickcode project named `Y2-T5-W4-Chatbots`. Build incrementally, running after EACH step:
 
 1. **The loop + quit** — `while True`, `input()`, `.lower()`, and the `bye` → `break` branch. Run it: type `bye`, confirm it stops. (If it doesn't stop, you forgot `break` — teachable moment.)
 2. **Greeting** — add the `hello`/`hey` branch. Run, type "Hello".
@@ -181,7 +181,7 @@ Run the `ai_activities` discussion in the Zoom chat: strengths, limits, and "so 
 #### Common Mistakes (5 min)
 Live-run the two code bugs so students see them fail:
 1. **No `.lower()`** — capitals don't match
-2. **No `break`** — the loop never ends (in Trinket, they'll see it keep asking; show how to stop it)
+2. **No `break`** — the loop never ends (in Pickcode, they'll see it keep asking; show how to stop it)
 
 Reinforce the two misconceptions verbally: "the bot understands me" (it matches) and "LLMs are always right" (they hallucinate).
 
@@ -237,9 +237,9 @@ Stay on the call 2-3 minutes for questions.
 | Keyword ignores capitals | They matched against `message`, not `message.lower()` — add `text = message.lower()` |
 | Two branches "fight" (wrong reply wins) | `elif` stops at first match — reorder specific keywords above general ones |
 | `IndentationError` / `SyntaxError` on `elif` | Check the colon and that every branch body is indented consistently |
-| Student asks to call a "real AI API" | Trinket has NO internet — real APIs can't run here. That's Term 6 (APIs). Today everything is simulated in plain Python |
+| Student asks to call a "real AI API" | Pickcode has NO internet — real APIs can't run here. That's Term 6 (APIs). Today everything is simulated in plain Python |
 | "But the AI IS smart / does understand" debate | Validate the impressiveness, then restate: impressive prediction is still prediction, not understanding |
-| Input prompt not accepting typing | Click into the Trinket console/output area first; confirm before the build starts |
+| Input prompt not accepting typing | Click into the Pickcode console/output area first; confirm before the build starts |
 
 ---
 

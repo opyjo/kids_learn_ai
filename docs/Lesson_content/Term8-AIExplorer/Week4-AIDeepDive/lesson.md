@@ -45,7 +45,7 @@ take_home_assignment: |
   - Process data in different ways
   - Think about what patterns AI might find
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -376,4 +376,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: everything you've learned connects to how AI works!_ 🤖
-

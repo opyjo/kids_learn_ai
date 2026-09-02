@@ -43,13 +43,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' Trinket accounts; new Trinket named `Y2-T4-W3-Sorting`
+- Students' Pickcode accounts; new Pickcode named `Y2-T4-W3-Sorting`
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Pre-type the three error examples** so you can crash them live on demand (the `None`, the `sum()`-on-strings `TypeError`, the mixed-list `TypeError`)
 3. **Have the Leaderboard scores ready** (`[58, 91, 43, 76, 88, 64]`) and pre-compute the answers: sorted-desc `[91, 88, 76, 64, 58, 43]`, sum `420`, average `70.0`
 4. **Prepare the sort-vs-sorted analogy** you'll use (see below) — this is the moment the lesson lives or dies on
@@ -109,7 +109,7 @@ print(scores)           # [1, 2, 3]  ← the list itself changed
 Then teach `reverse=True` (Part 2 of the lesson) and sorting words (Part 3). For words, emphasise the capital-letter gotcha only lightly — flag it exists, promise a fix later, don't rabbit-hole.
 
 #### Checkpoint (Zoom)
-Everyone types both `sorted()` and `.sort()` into Trinket and thumbs-up. Watch shared screens for anyone who assigned `x = scores.sort()` — that's your cue for Mistake 1.
+Everyone types both `sorted()` and `.sort()` into Pickcode and thumbs-up. Watch shared screens for anyone who assigned `x = scores.sort()` — that's your cue for Mistake 1.
 
 ---
 

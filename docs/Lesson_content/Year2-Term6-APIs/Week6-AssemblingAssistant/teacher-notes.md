@@ -38,7 +38,7 @@ By the end of this lesson, students will be able to:
 ### Key Success Metrics
 
 - [ ] Every student's assistant runs end to end and answers weather, joke, and fact
-- [ ] Every student has saved a Trinket named `Y2-T6-W6-Assistant`
+- [ ] Every student has saved a Pickcode named `Y2-T6-W6-Assistant`
 - [ ] Students' assistants quit cleanly on `bye` (no infinite loop)
 - [ ] Students' weather branch checks the status and survives an unknown city
 - [ ] Students leave knowing next week they PERSONALISE this file (the Week 7 hook)
@@ -46,14 +46,14 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
-- Zoom with screen share; teacher's Trinket visible throughout
-- Students' Trinket accounts
+- Zoom with screen share; teacher's Pickcode visible throughout
+- Students' Pickcode accounts
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Type the full solution yourself once** in a fresh Trinket named `Y2-T6-W6-Assistant` — you build it live and it must be flawless
+1. **Type the full solution yourself once** in a fresh Pickcode named `Y2-T6-W6-Assistant` — you build it live and it must be flawless
 2. **Rehearse a full scripted conversation** (weather Accra → joke → something silly → bye) so your live demo matches the lesson exactly
 3. **Rehearse the 404 path** — ask for weather in "Paris" or "Cairo" and confirm BrightBot reports the error instead of crashing
 4. **Have the two deliberate bug demos ready:** (a) reading `data` after a 404 → `KeyError`; (b) removing `chatting = False` → infinite loop (know how to stop it — the Stop button)
@@ -71,7 +71,7 @@ By the end of this lesson, students will be able to:
 ⏱️ 20-30 min  → Stage 2: the intent brain — build + test live
 ⏱️ 30-40 min  → Stage 3: the chat-loop skeleton (prove it quits on bye)
 ⏱️ 40-55 min  → Stage 4: wire each intent (weather status check is the heart)
-⏱️ 55-65 min  → Full conversation run + common mistakes + save the Trinket
+⏱️ 55-65 min  → Full conversation run + common mistakes + save the Pickcode
 ⏱️ 65-75 min  → Homework brief + Week 7 "personalise it" teaser + wrap-up
 ```
 
@@ -91,7 +91,7 @@ Screen-share the **skills-to-assistant table** from the lesson. Point at each we
 
 Then the non-negotiable setup instruction:
 
-> "Create a NEW Trinket. Name it exactly Y2-T6-W6-Assistant. Type it in the chat when done. This is the file you KEEP — next week we personalise this very program."
+> "Create a NEW Pickcode. Name it exactly Y2-T6-W6-Assistant. Type it in the chat when done. This is the file you KEEP — next week we personalise this very program."
 
 #### Teaching Tips
 
@@ -163,7 +163,7 @@ Run it, type a few messages, then `bye`. Confirm it **stops**.
 #### Teaching Tips
 
 - **The exit door is the lesson here.** Deliberately delete `chatting = False` and run it (see Assessment) so students feel the infinite loop, then fix it. This lands the concept far better than telling.
-- Know how to stop a runaway program in Trinket (the Stop/red button) and show students, so nobody panics when their own loop runs away during Stage 4.
+- Know how to stop a runaway program in Pickcode (the Stop/red button) and show students, so nobody panics when their own loop runs away during Stage 4.
 - Reassure them the `(intent: ...)` line is temporary scaffolding — we replace it next.
 
 ---
@@ -202,8 +202,8 @@ Then the 404 path with "Cairo" so they see the graceful failure.
 #### Teaching Tips
 
 - **Build branch by branch, don't paste the whole loop.** Students who fall behind can't recover from a wall of pasted code; incremental typing keeps everyone together.
-- **Indentation is the silent killer.** The branches sit inside the `while`, which sits inside `run_assistant`. That's deep nesting — Trinket auto-indents, but watch for students whose branches drift out of the loop.
-- **Celebrate the first working conversation loudly.** "You just chatted with a program YOU built. Screenshot that." Then: SAVE the Trinket.
+- **Indentation is the silent killer.** The branches sit inside the `while`, which sits inside `run_assistant`. That's deep nesting — Pickcode auto-indents, but watch for students whose branches drift out of the loop.
+- **Celebrate the first working conversation loudly.** "You just chatted with a program YOU built. Screenshot that." Then: SAVE the Pickcode.
 
 ---
 
@@ -231,7 +231,7 @@ Stress the non-negotiable: **keep the `bye` branch and its `chatting = False`.**
 
 #### Wrap-Up (3 minutes)
 
-> "Six weeks of parts, one talking assistant. You assembled BrightBot today. Next week we give it a soul — a name, a memory, a personality. Save your Trinket, and I'll see you there."
+> "Six weeks of parts, one talking assistant. You assembled BrightBot today. Next week we give it a soul — a name, a memory, a personality. Save your Pickcode project, and I'll see you there."
 
 Stay on the call 2-3 minutes for questions and to help anyone whose assistant isn't running.
 
@@ -270,7 +270,7 @@ Run it, type `bye`, watch it ask `You:` again. Stop the program with the red but
 - [ ] Chat loop uses a `chatting` flag and quits on `bye`
 - [ ] Weather branch checks `status == 200` before reading `data`
 - [ ] Called `run_assistant()` and had a full conversation
-- [ ] Saved the Trinket with the correct name
+- [ ] Saved the Pickcode with the correct name
 
 **Engagement:**
 - [ ] Kept pace with the live build (thumbs up at each stage)

@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing import syntax
 
 ### Pre-Lesson Preparation
@@ -464,7 +464,7 @@ KidsLearnAI
 - [ ] Prepare examples
 - [ ] Think about game ideas
 - [ ] Prepare troubleshooting
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -491,4 +491,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: Random numbers make games exciting! Students who master this are ready to add scoring and build complete games. Make it fun and show the excitement of unpredictability!_ 🎲
-

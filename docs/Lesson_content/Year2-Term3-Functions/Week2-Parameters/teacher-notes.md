@@ -45,17 +45,17 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' Trinket accounts
+- Students' Pickcode accounts
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Have last week's `greet()` ready to screen-share** — you'll open by showing the "stuck on repeat" problem live
 3. **Pre-type the `introduce(12, "Ama")` swap demo** — the wrong-order output is the lesson's "aha" moment; have it ready to run instantly
 4. **Prepare the three error demos** — missing argument, too many arguments, no-quotes NameError. Run them live; students must SEE the real messages
-5. **Reminder of the Trinket naming convention** — `Y2-T3-W2-Parameters`
+5. **Reminder of the Pickcode naming convention** — `Y2-T3-W2-Parameters`
 6. **Recall the adventure tie-in** — be ready to connect parameters to "the player's name in a scene"; this keeps the term's big project alive in students' minds
 
 ---
@@ -119,7 +119,7 @@ Use the **labelled slot** metaphor out loud: "`name` is an empty box. When I cal
 
 Run it. Two different greetings from one function. Let that satisfaction register — invite thumbs up.
 
-Then have students do it themselves in Trinket immediately (this is Round 1 of the activity brought forward, essentially). Circulate via shared screens.
+Then have students do it themselves in Pickcode immediately (this is Round 1 of the activity brought forward, essentially). Circulate via shared screens.
 
 #### Common Confusions
 
@@ -187,7 +187,7 @@ for person in names:
 
 ### Part 5: Class Activity — The Personalised Greeter (15 minutes)
 
-Three rounds, tiered. Students build in Trinket (`Y2-T3-W2-Parameters`), thumbs up per round.
+Three rounds, tiered. Students build in Pickcode (`Y2-T3-W2-Parameters`), thumbs up per round.
 
 - **Round 1 (⭐):** `greet(name)` called with two names — everyone should clear this
 - **Round 2 (⭐⭐):** `greet_person(name, age)` — two parameters, three calls. Watch for order mistakes here
@@ -276,7 +276,7 @@ Stay on 2-3 minutes for questions.
 | Missing-argument TypeError panics a student | Reframe: "the error is helpful — it names the exact slot it needs." Fixing it is one word |
 | Student writes `greet(Ama)` and gets NameError | Point to the quotes rule; text arguments always need quotes |
 | Confusion between parameter/argument words | De-stress it: "getting the words perfect isn't today's goal — using them correctly in code is" |
-| Trinket/Zoom technical issues | Standard playbook: repl.it backup, browser-only screen share, private-chat triage |
+| Pickcode/Zoom technical issues | Standard playbook: repl.it backup, browser-only screen share, private-chat triage |
 
 ---
 

@@ -60,7 +60,7 @@ take_home_assignment: |
   3. Use every variable in a printed message
   4. The output should read like a short, friendly paragraph
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -135,7 +135,7 @@ Let's break this line apart:
 
 ## 🎬 Your First Conversation
 
-Type this in Trinket and run it:
+Type this in Pickcode and run it:
 
 ```python
 name = input("What is your name? ")
@@ -420,7 +420,7 @@ variable_name = input("Your question here? ")
 
 ## 🏠 Homework: My Personal Greeter
 
-**Platform:** Complete this assignment on [Trinket](https://trinket.io/python)
+**Platform:** Complete this assignment on [Pickcode](https://app.pickcode.io/home)
 
 ### The Assignment
 
@@ -473,7 +473,7 @@ Hope you have an amazing day!
 
 ### How to Submit
 
-1. Write your program on Trinket
+1. Write your program on Pickcode
 2. Run it and make sure it works
 3. Click the **Share** button
 4. Copy the link

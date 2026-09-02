@@ -95,7 +95,7 @@ solution_code: |
 class_activities: |
   ## 🧮 Class Activity: Data Cruncher
 
-  We are handed a parsed dataset and asked to crunch the numbers together. Your teacher shares the screen; you type in Trinket and give a **thumbs up** in Zoom when each part runs. 👍
+  We are handed a parsed dataset and asked to crunch the numbers together. Your teacher shares the screen; you type in Pickcode and give a **thumbs up** in Zoom when each part runs. 👍
 
   We use this scores dataset (already parsed into `records`, a list of dicts):
 
@@ -131,7 +131,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Stats Report 📊
 
-  Write a **Stats Report** program in Trinket. It takes a small dataset, crunches the numbers, and prints a tidy report.
+  Write a **Stats Report** program in Pickcode. It takes a small dataset, crunches the numbers, and prints a tidy report.
 
   Start from this snack-shop data (or invent your own — same shape):
 
@@ -166,9 +166,9 @@ take_home_assignment: |
   - ⭐⭐ Add the category count dict
   - ⭐⭐⭐ Also find and print the **best-selling snack by name** (loop for the max record), and guard your average so it never divides by zero
 
-  **Start here:** open a fresh Python 3 Trinket at [trinket.io/python](https://trinket.io/python).
+  **Start here:** open a fresh Python 3 Pickcode at [app.pickcode.io/home](https://app.pickcode.io/home).
 
-  **Submit:** Save your Trinket as `Y2-T7-W3-NumberCrunching`, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project as `Y2-T7-W3-NumberCrunching`, choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: AI Lives on Averages
 
@@ -482,9 +482,9 @@ print(sum(scores))     # 255
 
 ---
 
-## 🖥️ Trinket Check
+## 🖥️ Pickcode Check
 
-Open **Trinket** (trinket.io) and start a fresh Python 3 script. Name it `Y2-T7-W3-NumberCrunching` — remember, every Trinket this term can go into your Data Story portfolio.
+Open **Pickcode** (app.pickcode.io) and start a fresh Python 3 script. Name it `Y2-T7-W3-NumberCrunching` — remember, every Pickcode this term can go into your Data Story portfolio.
 
 Paste the parsing block from Part 1, then add the Big Five. When your average prints as `84.7`, give a **thumbs up** in Zoom reactions. 👍
 
@@ -534,7 +534,7 @@ That chart is literally your `team_counts` dict from today, printed with `"█" 
 
 ## 📚 Homework: Stats Report 📊
 
-Write a **Stats Report** program in Trinket. It takes a small dataset, crunches the numbers, and prints a tidy report.
+Write a **Stats Report** program in Pickcode. It takes a small dataset, crunches the numbers, and prints a tidy report.
 
 Start from this snack-shop data (or invent your own — same shape):
 
@@ -569,9 +569,9 @@ Type counts: {'Fried': 2, 'Baked': 2, 'Raw': 1}
 - ⭐⭐ Add the category count dict
 - ⭐⭐⭐ Also find and print the **best-selling snack by name** (loop for the max record), and guard your average so it never divides by zero
 
-**Start here:** open a fresh Python 3 Trinket at [trinket.io/python](https://trinket.io/python).
+**Start here:** open a fresh Python 3 Pickcode at [app.pickcode.io/home](https://app.pickcode.io/home).
 
-**Submit:** Save your Trinket as `Y2-T7-W3-NumberCrunching`, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project as `Y2-T7-W3-NumberCrunching`, choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

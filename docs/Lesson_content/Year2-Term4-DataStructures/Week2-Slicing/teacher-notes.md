@@ -44,15 +44,15 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' existing Trinket accounts
+- Students' existing Pickcode accounts
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 - The `leaderboard` example ready to paste for the List Detective activity
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Pre-load two Trinkets:** the slicing demo (Parts 1–2) and the searching demo (Parts 3–6), so you can flip between them without retyping
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Pre-load two Pickcode projects:** the slicing demo (Parts 1–2) and the searching demo (Parts 3–6), so you can flip between them without retyping
 3. **Draw or paste the index table** (`0 1 2 3 4` above the values) — you will refer to it constantly; a shared visual is the fastest way to teach the off-by-one rule
 4. **Rehearse the two deliberate crashes:** `names.index("Musa")` → `ValueError`, and confirm the *non*-crash of `names[1:99]`. Students learn the difference by seeing both live.
 5. **Have the Contact Manager tie-in ready** — remind students what they're building towards; it motivates the "why."
@@ -176,7 +176,7 @@ Run all three live, especially:
 
 #### Homework (5 min)
 
-Walk through "Search My List." Stress that requirement 4 (the collecting loop) is the ⭐⭐ tier and the `input()` + `try`/`except` version is ⭐⭐⭐. Any tier counts as done. Remind them of the Trinket name `Y2-T4-W2-Slicing`.
+Walk through "Search My List." Stress that requirement 4 (the collecting loop) is the ⭐⭐ tier and the `input()` + `try`/`except` version is ⭐⭐⭐. Any tier counts as done. Remind them of the Pickcode name `Y2-T4-W2-Slicing`.
 
 #### Week 3 Teaser (3 min)
 

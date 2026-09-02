@@ -43,7 +43,7 @@ class_activities: |
 
   **Part 3: Share & Test (10 min)**
   - Share your calculators on screen
-  - Try each other's programs (share Trinket links in the Zoom chat)
+  - Try each other's programs (share Pickcode links in the Zoom chat)
   - Give feedback
 
   **Challenge:** Who can create the most useful grade calculator?
@@ -69,7 +69,7 @@ take_home_assignment: |
   - Make it interactive with input()
   - Add decorative borders
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

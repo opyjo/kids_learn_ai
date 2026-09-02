@@ -35,7 +35,7 @@ class_activities: |
   - Answer questions
 
   **Part 3: Game Tournament (10 min)**
-  - Play classmates' games (share Trinket links in the Zoom chat)
+  - Play classmates' games (share Pickcode links in the Zoom chat)
   - Try to beat high scores
   - Give compliments and feedback
 
@@ -333,4 +333,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Congratulations on completing Term 7! You're a Game Developer! Keep coding, keep creating, and keep being amazing!_ 🎮✨🎉
-
