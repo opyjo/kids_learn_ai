@@ -36,7 +36,7 @@ class_activities: |
 
   **Part 3: Gallery Share (10 min)**
   - See classmates' projects as they share their screens
-  - Try out different generators (share Trinket links in the Zoom chat)
+  - Try out different generators (share Pickcode links in the Zoom chat)
   - Give compliments and feedback
 
   **Part 4: Celebration (5 min)**
@@ -329,4 +329,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Congratulations on completing Term 6! You're a Loop Master! Keep coding, keep creating, and keep being amazing!_ 🎨✨🎉
-

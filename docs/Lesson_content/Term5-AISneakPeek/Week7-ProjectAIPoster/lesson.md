@@ -74,7 +74,7 @@ take_home_assignment: |
   - Multiple questions about AI
   - Personal touches and creativity
 
-  **Submit:** Share your poster (link, photo, or Trinket) with your instructor. Be ready to present at Week 8 Showcase!
+  **Submit:** Share your poster (link, photo, or Pickcode) with your instructor. Be ready to present at Week 8 Showcase!
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -155,7 +155,7 @@ This project lets you:
 **Python Program:**
 - Good if you want to code
 - Can use print() statements
-- Easy to share via Trinket
+- Easy to share via Pickcode
 
 **Digital Poster:**
 - Good if you like design

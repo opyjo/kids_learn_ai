@@ -25,7 +25,7 @@ Three core goals:
 
 ### Be Honest About "Mock"
 
-Keep saying it plainly: **a real API talks over the internet to another computer; ours does not.** Our API is a plain Python function acting as the server. Same shape, same thinking, no network — which is exactly why it runs in Trinket. Students who understand this now will not be confused later when they meet real HTTP APIs.
+Keep saying it plainly: **a real API talks over the internet to another computer; ours does not.** Our API is a plain Python function acting as the server. Same shape, same thinking, no network — which is exactly why it runs in Pickcode. Students who understand this now will not be confused later when they meet real HTTP APIs.
 
 ### Learning Objectives
 
@@ -49,15 +49,15 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share enabled
-- Students' Trinket accounts — today's Trinket: `Y2-T6-W3-MockAPI`
+- Students' Pickcode accounts — today's Pickcode: `Y2-T6-W3-MockAPI`
 - This teaching guide open during class
-- Class WhatsApp/email thread for sharing Trinket links
+- Class WhatsApp/email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Have the Week 1-2 recap ready** — the request→response diagram and one response dict students read last week; you'll rebuild continuity in 2 minutes
-3. **Pre-type the three services** in a Trinket so you can paste-and-run if live typing runs slow — but plan to build `get_weather` live (see Part 2)
+3. **Pre-type the three services** in a Pickcode so you can paste-and-run if live typing runs slow — but plan to build `get_weather` live (see Part 2)
 4. **Rehearse the two deliberate crashes** — the `KeyError` (unknown city) and the `TypeError` (returning a bare value). Both are teaching moments; make sure yours reproduce
 5. **Prepare the Week 6/7 tie-in line** — "these three functions ARE your assistant's tools" — and say it at least twice
 
@@ -168,7 +168,7 @@ Now speed up — students have the pattern. Two teaching points:
 - **`get_joke()` has no parameter.** Empty brackets, but still returns a dict. This shows not every service needs a request. Good chat question: "Why does `get_weather` need brackets-with-a-city but `get_joke` doesn't?"
 - **`get_fact(topic)` is the same recipe as `get_weather`** — dict database, `if ... in ...`, data dict or error dict. Frame it as "you already know how to do this" to build confidence.
 
-Have students type `get_fact` mostly on their own; circulate (screen shares / shared Trinkets) and spot-check.
+Have students type `get_fact` mostly on their own; circulate (screen shares / shared Pickcode projects) and spot-check.
 
 #### Teaching Tips
 

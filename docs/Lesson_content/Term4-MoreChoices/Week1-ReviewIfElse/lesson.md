@@ -47,7 +47,7 @@ take_home_assignment: |
   - Pet care assistant (hunger, happiness, energy)
   - Adventure game starter (character creation, starting choice)
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

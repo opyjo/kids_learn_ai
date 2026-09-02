@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing number sequences
 
 ### Pre-Lesson Preparation
@@ -565,7 +565,7 @@ KidsLearnAI
 - [ ] Prepare counting examples
 - [ ] Practice backwards counting explanation
 - [ ] Prepare common mistake examples
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -593,4 +593,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: The step parameter is a powerful addition to loops. Take time with backwards counting—it's often confusing. Students who master this are ready for pattern creation next week!_ 🔄
-

@@ -253,10 +253,10 @@ const NAV_ITEMS = {
 			description: "Download Thonny IDE",
 		},
 		{
-			href: "/get-trinket",
-			label: "Get Trinket.io",
+			href: "/get-pickcode",
+			label: "Get Pickcode",
 			Icon: ExternalLink,
-			description: "Access Trinket online",
+			description: "Set up your coding workspace",
 		},
 		...(CAREERS_OPEN
 			? [

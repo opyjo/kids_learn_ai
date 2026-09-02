@@ -821,7 +821,7 @@ Students with prior coding experience take a placement assessment to determine t
 ## Technical Requirements
 
 ### Software
-- Python 3.x (via Trinket, Replit, or local installation)
+- Python 3.x (via Pickcode, Replit, or local installation)
 - Access to free API services (weather, facts, etc.)
 - Matplotlib for data visualization
 - Text editor or IDE

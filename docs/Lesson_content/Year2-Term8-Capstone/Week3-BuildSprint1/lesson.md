@@ -141,7 +141,7 @@ class_activities: |
 
   Today is a **sprint**: we pick ONE must-have feature and build it FULLY. In Study Buddy that feature is **logging and viewing study sessions**. We build it in stages, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works.
 
-  > 📁 **First:** open your **`Y2-T8-Capstone`** Trinket (your Week 2 skeleton). We add to it today — no new file, we GROW the one project.
+  > 📁 **First:** open your **`Y2-T8-Capstone`** Pickcode (your Week 2 skeleton). We add to it today — no new file, we GROW the one project.
 
   ### Stage 1 — Create the data store (⭐)
   At the very TOP of your file (above the functions), create the empty list that will hold every session:
@@ -184,14 +184,14 @@ class_activities: |
 
   ### Stage 4 — Your own core feature (⭐⭐⭐)
   Now build the FIRST must-have feature of **YOUR** capstone (not Study Buddy). Same recipe: a list to store data, a function to add to it, a function to view it. Get ONE feature working end to end.
-  ✅ **Final checkpoint:** Run YOUR feature. Does it save something and show it back? 🎉 **Save your Trinket!**
+  ✅ **Final checkpoint:** Run YOUR feature. Does it save something and show it back? 🎉 **Save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Finish Your First Must-Have Feature ✨
 
   This week's mission: make your capstone's **first must-have feature actually work**, end to end.
 
   **Requirements:**
-  1. Open your **`Y2-T8-Capstone`** Trinket
+  1. Open your **`Y2-T8-Capstone`** Pickcode
   2. Your project has a **list** (or dictionary) that stores the feature's data
   3. One menu option **adds** data (with a `try`/`except` guard if it takes a number)
   4. One menu option **views** the data with a loop
@@ -204,7 +204,7 @@ take_home_assignment: |
 
   > 💡 **Stuck on a blocker?** Write it down and bring it to Week 4 — that's our **Debugging Clinic**! You are not meant to have everything perfect. A working first feature is a HUGE win.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? Real Software Ships ONE Feature at a Time
 
@@ -246,7 +246,7 @@ ai_activities: |
 
 ## 🗺️ Part 1: Where We Are (and What a Sprint Is)
 
-Look at your **`Y2-T8-Capstone`** Trinket from Week 2. Right now it has:
+Look at your **`Y2-T8-Capstone`** Pickcode from Week 2. Right now it has:
 
 - ✅ A **menu** that shows the options
 - ✅ A **main loop** that keeps the program running until the user quits
@@ -460,7 +460,7 @@ def main():
 main()
 ```
 
-🎉 **One feature, fully working.** That's a successful sprint. Save your Trinket!
+🎉 **One feature, fully working.** That's a successful sprint. Save your Pickcode project!
 
 ---
 
@@ -569,7 +569,7 @@ Next week is **Week 4: Build Sprint 2 + Debugging Clinic!** 🐛🔧
 - 🩺 **Debugging Clinic** — bring the blocker from your stand-up (or homework) and we'll fix real bugs together, live
 - 🧠 You'll learn a pro habit: how to describe a bug clearly so anyone can help you
 
-> Bring your `Y2-T8-Capstone` Trinket with its first feature working — AND bring your blockers. A bug you can't crack alone is exactly what the clinic is for. Nobody debugs alone here!
+> Bring your `Y2-T8-Capstone` Pickcode with its first feature working — AND bring your blockers. A bug you can't crack alone is exactly what the clinic is for. Nobody debugs alone here!
 
 ---
 
@@ -592,7 +592,7 @@ Next week is **Week 4: Build Sprint 2 + Debugging Clinic!** 🐛🔧
 This week's mission: make your capstone's **first must-have feature actually work**, end to end.
 
 **Requirements:**
-1. Open your **`Y2-T8-Capstone`** Trinket
+1. Open your **`Y2-T8-Capstone`** Pickcode
 2. Your project has a **list** (or dictionary) that stores the feature's data
 3. One menu option **adds** data (with a `try`/`except` guard if it takes a number)
 4. One menu option **views** the data with a loop
@@ -605,7 +605,7 @@ This week's mission: make your capstone's **first must-have feature actually wor
 
 > 💡 **Stuck on a blocker?** Write it down and bring it to Week 4 — that's our **Debugging Clinic**! A working first feature is a HUGE win.
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

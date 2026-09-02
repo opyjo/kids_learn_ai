@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for problem-solving
 
 ### Pre-Lesson Preparation
@@ -337,4 +337,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is a practice week! Students should feel confident applying if/else to real problems. Celebrate every working program, guide them through building, and prepare them for story building next week!_ 🎯
-

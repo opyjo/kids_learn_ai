@@ -45,16 +45,16 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet (teacher and each student)
 - Zoom with screen share
-- Each student's **`Y2-T8-Capstone`** Trinket (their Week 2 skeleton)
+- Each student's **`Y2-T8-Capstone`** Pickcode (their Week 2 skeleton)
 - This teaching guide open during class
 - A shared doc or note where you jot each student's project type + blocker (feeds Week 4)
 - Class WhatsApp/email for sharing links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Re-read your Week 2 notes** — you need each student's project type in front of you. If you don't have it, plan to collect it in the first 5 minutes.
-3. **Have the Study Buddy solution open** in your own Trinket, ready to build live from the skeleton
+3. **Have the Study Buddy solution open** in your own Pickcode, ready to build live from the skeleton
 4. **Rehearse the build** once yourself so the live typing is smooth (see the staged code in the lesson's `class_activities`)
 5. **Prepare the "translation table"** — the Part 7 grid mapping Study Buddy steps to other project types; you'll lean on it hard
 6. **Set up your blocker-capture doc** — one row per student for the stand-up
@@ -276,7 +276,7 @@ Stay on 2-3 minutes for questions.
 | Hours "add up wrong" later | Stored as text (no `float()`). Recap `"2" + "3"` → `23`. Convert with `float()`. |
 | Student building a wildly different project | Great — coach the PATTERN (list, add, view), not the specifics. The recipe is universal. |
 | Student wants to build everything today | Redirect: "One feature FINISHED beats ten started. Feature two is next week." |
-| Trinket/Zoom technical issues | Standard playbook: repl.it backup, browser-only screen share, private-chat triage. |
+| Pickcode/Zoom technical issues | Standard playbook: repl.it backup, browser-only screen share, private-chat triage. |
 
 ---
 

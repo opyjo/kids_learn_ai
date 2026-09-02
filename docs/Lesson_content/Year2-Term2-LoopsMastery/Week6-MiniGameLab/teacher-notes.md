@@ -15,7 +15,7 @@
 
 This is a **build-along project lesson** — the loops-and-logic equivalent of Term 1's Calculator Core. For five weeks students have collected loop skills in isolation: for loops, while loops, `range()`, `break`/`continue`, nested loops, `random.randint`/`choice`, and score/lives accumulators. Today they **assemble them into two complete, playable games**: Dice Duel and Guess-the-Number Deluxe.
 
-Both games live in ONE Trinket named `Y2-T2-W6-MiniGames`. This is the file Week 7 ("Arcade Game Collection") plugs straight into — so the variable names and structure below must be identical for every student.
+Both games live in ONE Pickcode named `Y2-T2-W6-MiniGames`. This is the file Week 7 ("Arcade Game Collection") plugs straight into — so the variable names and structure below must be identical for every student.
 
 The session is a **live build-along in two halves**: Dice Duel (a `for` loop over a fixed number of rounds) then Guess-the-Number (a `while True` loop that exits with `break`). Students type alongside you, run after every stage, and use Zoom reactions as checkpoints. Your job is pacing and correctness — the code is the content.
 
@@ -44,19 +44,19 @@ By the end of this lesson, students will be able to:
 - [ ] Dice Duel scores add up correctly and announce a winner
 - [ ] Guess-the-Number gives correct hints and stops with `break` on a win
 - [ ] Students can explain why `guess` must be wrapped in `int()`
-- [ ] Every student has SAVED the Trinket (Week 7 depends on it)
+- [ ] Every student has SAVED the Pickcode (Week 7 depends on it)
 
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
-- Zoom with screen share; teacher's Trinket visible throughout
-- Students' Trinket accounts
+- Zoom with screen share; teacher's Pickcode visible throughout
+- Students' Pickcode accounts
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Type both full games yourself once** in a fresh Trinket named `Y2-T2-W6-MiniGames` — you build them live and they must be flawless
+1. **Type both full games yourself once** in a fresh Pickcode named `Y2-T2-W6-MiniGames` — you build them live and they must be flawless
 2. **Run each game several times** — because they're random, rehearse narrating "your numbers will differ" and be ready for a tie, a player win, and a computer win
 3. **Rehearse the `int()` bug** — show `guess = input(...)` (no `int()`) crashing with a `TypeError`, then fix it
 4. **Rehearse the infinite-loop point** — explain (don't actually hang the class) why `while True` needs a `break`
@@ -69,7 +69,7 @@ By the end of this lesson, students will be able to:
 ### Quick Reference Timeline
 
 ```
-⏱️  0-6 min   → Welcome + "today we build TWO games" + the plan + name the Trinket
+⏱️  0-6 min   → Welcome + "today we build TWO games" + the plan + name the Pickcode
 ⏱️  6-10 min  → import random + Dice Duel Stage 1 (banner)
 ⏱️ 10-22 min  → Dice Duel Stages 2-3 (scores + rounds loop + who wins)
 ⏱️ 22-30 min  → Dice Duel Stage 4 (overall winner) + full run + SAVE
@@ -95,7 +95,7 @@ Screen-share the **skills-to-games table** from the lesson. Point at each skill 
 
 Then the non-negotiable setup:
 
-> "Create a NEW Trinket. Name it exactly `Y2-T2-W6-MiniGames`. BOTH games go in this one file. Type the name in the chat when done. This is the file you KEEP — next week we combine both games into an Arcade."
+> "Create a NEW Pickcode. Name it exactly `Y2-T2-W6-MiniGames`. BOTH games go in this one file. Type the name in the chat when done. This is the file you KEEP — next week we combine both games into an Arcade."
 
 Have everyone type `import random` at the very top, once.
 
@@ -135,7 +135,7 @@ Then, AFTER the loop (back at the left margin), the final comparison and winner 
 #### Teaching Tips
 
 - **Indentation is the silent killer.** The win-check must be indented inside the `for`; the final winner-check must be OUTSIDE it. This is Common Mistake 4 — flag it live.
-- **Celebrate the first working game loudly.** "That's a complete game. Save it." Then make everyone SAVE the Trinket before moving on.
+- **Celebrate the first working game loudly.** "That's a complete game. Save it." Then make everyone SAVE the Pickcode before moving on.
 - Ties are common with a d6 — if nobody ties in your demo, mention it can happen so it's not a surprise.
 
 ---
@@ -201,7 +201,7 @@ Walk through the options: best-of-5 (`rounds = 5`), difficulty levels (`randint(
 
 #### Wrap-Up (3 minutes)
 
-> "Two games in one lesson. Loops, random, scores, hints, and a clean break — all yours. Next week we open the Arcade and add Rock-Paper-Scissors. Save your Trinket, and I'll see you there."
+> "Two games in one lesson. Loops, random, scores, hints, and a clean break — all yours. Next week we open the Arcade and add Rock-Paper-Scissors. Save your Pickcode project, and I'll see you there."
 
 Stay on the call 2-3 minutes to help anyone whose games aren't running.
 
@@ -229,7 +229,7 @@ Run it, type a guess, and watch the `TypeError`. Ask: "Why did comparing crash?"
 - [ ] Kept `player_score`/`computer_score` with `+= 1` accumulators
 - [ ] Wrapped the guess in `int()`
 - [ ] Used `break` to exit the `while True` loop on a win
-- [ ] Saved the Trinket named `Y2-T2-W6-MiniGames`
+- [ ] Saved the Pickcode named `Y2-T2-W6-MiniGames`
 
 **Engagement:**
 - [ ] Kept pace with the live build (thumbs up at each stage)

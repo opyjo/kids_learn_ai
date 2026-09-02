@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 1. Explain what Artificial Intelligence (AI) is in their own words
 2. Give at least two examples of AI they use in daily life
 3. Explain what Python is and why it's a good language to learn
-4. Navigate the Trinket coding environment (code panel, output panel, run button, save)
+4. Navigate the Pickcode coding environment (code panel, output panel, run button, save)
 5. Write and execute a Python program using `print()`
 6. Identify and fix two common syntax errors (missing quotes, wrong capitalisation)
 
@@ -43,20 +43,20 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Trinket accounts (pre-created or sign up together during class)
+- Pickcode accounts (pre-created or sign up together during class)
 - BrightByte mascot image (optional — can be used as a Zoom virtual background or shared in chat)
 - This teaching guide open during class (minimised behind Zoom)
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
 1. **Test Zoom** — Open the Zoom meeting link, confirm your audio, video, and screen share are working
-2. **Test Trinket** — Open trinket.io, create a test Python project, run code, and confirm output works
-3. **Prep screen share** — Have Trinket open and ready to share the moment students join
+2. **Test Pickcode** — Open app.pickcode.io, create a test Python project, run code, and confirm output works
+3. **Prep screen share** — Have Pickcode open and ready to share the moment students join
 4. **Prepare the Zoom chat** — Know how to monitor the chat while typing code (you'll use both simultaneously)
 5. **Review student names** — Know who's who; use their Zoom display names to call on them
 6. **Prepare AI discussion starter** — Think of 2-3 relatable AI examples for this age group (e.g. TikTok algorithm, Snapchat filters, WhatsApp suggested replies)
-7. **Set up backup** — Have repl.it open as a backup if Trinket fails
+7. **Set up backup** — Have repl.it open as a backup if Pickcode fails
 8. **Review this guide** — Know your timing and key teaching points
 
 ---
@@ -68,14 +68,14 @@ By the end of this lesson, students will be able to:
 ```
 ⏱️  0-10 min  → Welcome + What is AI?
 ⏱️ 10-20 min  → What is Python?
-⏱️ 20-30 min  → Trinket setup + interface tour
+⏱️ 20-30 min  → Pickcode setup + interface tour
 ⏱️ 30-45 min  → First program + print() + common errors
 ⏱️ 45-55 min  → Hello Chain class activity
 ⏱️ 55-65 min  → Student showcase (2-3 volunteers)
 ⏱️ 65-75 min  → Homework explanation + questions + wrap-up
 ```
 
-**Flexible timing:** If students are deeply engaged in coding practice, extend that section. If Trinket setup takes longer (common in first class), compress the showcase to 1-2 students.
+**Flexible timing:** If students are deeply engaged in coding practice, extend that section. If Pickcode setup takes longer (common in first class), compress the showcase to 1-2 students.
 
 ---
 
@@ -184,24 +184,24 @@ Log onto Zoom 5 minutes early and greet students as they join — use their name
 
 ---
 
-### Part 3: Setting Up Trinket (10 minutes)
+### Part 3: Setting Up Pickcode (10 minutes)
 
 #### Goals
 
-Get EVERY student logged in and looking at a blank Python Trinket by the end of this section.
+Get EVERY student logged in and looking at a blank Python Pickcode by the end of this section.
 
 #### Step-by-Step Walkthrough (7 minutes)
 
-**Start Zoom screen share** — share your browser window showing Trinket. Students open their own browser alongside Zoom.
+**Start Zoom screen share** — share your browser window showing Pickcode. Students open their own browser alongside Zoom.
 
-> "Keep Zoom open on one side of your screen, and open a new browser tab on the other side. We're going to set up Trinket while I walk you through it live. Let's go to t-r-i-n-k-e-t dot i-o"
+> "Keep Zoom open on one side of your screen, and open a new browser tab on the other side. We're going to set up Pickcode while I walk you through it live. Let's go to t-r-i-n-k-e-t dot i-o"
 
 **Step-by-step (narrate each one, wait for students to follow):**
 
-1. "Go to trinket.io — you should see the same page I'm showing on screen"
+1. "Go to app.pickcode.io — you should see the same page I'm showing on screen"
 2. "Click 'Sign Up' at the top right — or log in if you already have an account"
 3. "Sign up with Google (easiest) or use the login details I'll paste in the **Zoom chat** now"
-4. "Once logged in, click the '+' button or 'New Trinket', then choose 'Python'"
+4. "Once logged in, click the '+' button or 'New Pickcode', then choose 'Python'"
 5. "You should now see a split screen — does yours look like mine?"
 
 **Explain the interface** (point to each part on your shared screen):
@@ -219,10 +219,10 @@ Get EVERY student logged in and looking at a blank Python Trinket by the end of 
 > "Let's make sure yours is working. Type this exactly — watch my screen — and click Run:"
 
 ```python
-print("Trinket is working!")
+print("Pickcode is working!")
 ```
 
-> "Give me a **thumbs up** in Zoom reactions when you see 'Trinket is working!' on the right side!"
+> "Give me a **thumbs up** in Zoom reactions when you see 'Pickcode is working!' on the right side!"
 
 *Wait until most students have reacted before moving on. Ask in chat: "Still setting up? Type 'help' in the chat!"*
 
@@ -230,16 +230,16 @@ print("Trinket is working!")
 
 | Problem | Quick Fix |
 |---|---|
-| Trinket won't load | Paste repl.it link in Zoom chat as backup; continue demo while they switch |
+| Pickcode won't load | Paste repl.it link in Zoom chat as backup; continue demo while they switch |
 | Can't create account | Paste shared teacher login in Zoom chat; fix their own account after class |
 | No output appears | "Did you click the ▶ Run button? It's the green triangle at the top!" |
-| Screen looks different | Ask them to share screen briefly so you can see their Trinket |
+| Screen looks different | Ask them to share screen briefly so you can see their Pickcode |
 | Internet drop (student) | Tell them to rejoin Zoom; continue for others; follow up with that student |
 | Zoom screen share lags | Reduce screen resolution; share just the browser window, not whole screen |
 
 #### Teaching Tips
 
-- **Paste the Trinket link in the Zoom chat** — don't rely on students typing the URL correctly
+- **Paste the Pickcode link in the Zoom chat** — don't rely on students typing the URL correctly
 - **Go slower than you think** — Tech setup in a first Zoom class always takes longer than expected
 - **Use Zoom reactions as checkpoints** — "Thumbs up when you're done" keeps everyone synced without interrupting flow
 - **Don't leave anyone behind** — This is the foundation. Check the chat for students saying "help" or "not working"
@@ -376,14 +376,14 @@ This is a community-building exercise. It reinforces print() while making every 
 
 #### How to Run It on Zoom
 
-> "Now we're going to write a class program TOGETHER. I've opened a new Trinket and I'm sharing my screen. Your job: type your line in the **Zoom chat**, and I'll add it to our class program live!"
+> "Now we're going to write a class program TOGETHER. I've opened a new Pickcode project and I'm sharing my screen. Your job: type your line in the **Zoom chat**, and I'll add it to our class program live!"
 
-**Make sure your Trinket is visible on screen share.**
+**Make sure your Pickcode project is visible on screen share.**
 
 > "Type your line in the chat RIGHT NOW in this format:
 > `print("My name is [NAME] and I love [THING]! [EMOJI]")`"
 
-*Give students 60 seconds to type in chat. Read each one aloud, paste it into Trinket, and say the student's name.*
+*Give students 60 seconds to type in chat. Read each one aloud, paste it into Pickcode, and say the student's name.*
 
 ```python
 print("My name is Kwame and I love football! ⚽")
@@ -414,7 +414,7 @@ Once all lines are in — build the suspense, then run it:
 > "Before we wrap up — who wants to share their screen and show the class what THEY created today?"
 
 **For volunteers on Zoom:**
-1. Ask them to **share their screen** (click Share Screen in Zoom)
+1. Ask them to **share their screen** (choose Share → Anyone with link → View Code Screen in Zoom)
 2. Have them run their code so the output is visible
 3. Point out something specific that's impressive or creative
 4. Lead applause via chat — "Everyone drop a 🔥 in the chat for [Name]!"
@@ -435,7 +435,7 @@ Once all lines are in — build the suspense, then run it:
 
 #### Homework Introduction (3 minutes)
 
-> "For homework, you're going to write an 'About Me' program in Trinket."
+> "For homework, you're going to write an 'About Me' program in Pickcode."
 
 **Display or share requirements:**
 
@@ -453,9 +453,9 @@ Requirements:
 Bonus: Add 5 more lines and be extra creative!
 
 To submit:
-1. Click Save in Trinket
+1. Click Save in Pickcode
 2. Click the Share button
-3. Copy the Trinket link
+3. Copy the Pickcode link
 4. Paste the link in [class WhatsApp group / Google Classroom / email]
 ```
 
@@ -487,7 +487,7 @@ Take any final questions (via unmute or Zoom chat), then end on a high note. Sta
 ### During Class, Observe:
 
 **Technical Skills:**
-- [ ] Can access and navigate Trinket
+- [ ] Can access and navigate Pickcode
 - [ ] Can type `print("text")` correctly
 - [ ] Can run code and read output
 - [ ] Can identify missing quotes
@@ -507,7 +507,7 @@ Take any final questions (via unmute or Zoom chat), then end on a high note. Sta
 ### Students to Watch
 
 **Need Extra Support:**
-- Students who struggled to log into Trinket
+- Students who struggled to log into Pickcode
 - Students who couldn't run "Hello, World!" independently
 - Students who seemed very frustrated or disengaged
 
@@ -535,19 +535,19 @@ Take any final questions (via unmute or Zoom chat), then end on a high note. Sta
 
 | Problem | Solution |
 |---|---|
-| Trinket won't load | Paste repl.it link in Zoom chat as backup; continue demo |
+| Pickcode won't load | Paste repl.it link in Zoom chat as backup; continue demo |
 | Students can't log in | Paste shared teacher login in Zoom chat; fix accounts after class |
 | Student's internet drops | Continue for the rest of class; send the parent the lesson materials and catch-up plan |
-| Your internet drops | Reconnect quickly; students continue working in Trinket independently |
+| Your internet drops | Reconnect quickly; students continue working in Pickcode independently |
 | Zoom screen share lags | Share just the browser window (not whole screen); reduce video quality |
-| Screen share fails entirely | Paste a direct Trinket link in chat; students follow written steps |
+| Screen share fails entirely | Paste a direct Pickcode link in chat; students follow written steps |
 | Code runs but no output | "Did you click the ▶ Run button?" — show it on screen share |
 
 ### Pacing Issues
 
 | Situation | What To Do |
 |---|---|
-| Running 10+ min behind on Trinket setup | Skip the bug challenge; jump straight to Hello Chain |
+| Running 10+ min behind on Pickcode setup | Skip the bug challenge; jump straight to Hello Chain |
 | Running ahead of schedule | Extend hands-on time; let students build a short print() story |
 | Mixed pace | Fast finishers: bonus challenge via chat; you help slower students privately |
 
@@ -599,8 +599,8 @@ Take any final questions (via unmute or Zoom chat), then end on a high note. Sta
 
 ### For You (Teacher)
 
-- **Trinket Teacher Account:** trinket.io/schools (classroom management features)
-- **Backup Platform:** repl.it (if Trinket is unavailable)
+- **Pickcode Teacher Account:** app.pickcode.io/schools (classroom management features)
+- **Backup Platform:** repl.it (if Pickcode is unavailable)
 - **Your Prep Checklist:** Review this guide 15 minutes before class
 
 ### For Parents (Send After Class)
@@ -615,7 +615,7 @@ Your child completed their very first Python and AI lesson today!
 What we covered:
 • What Artificial Intelligence (AI) is and how it's already part of daily life
 • What Python is and why it's one of the world's most important languages
-• Setting up Trinket — their online coding environment
+• Setting up Pickcode — their online coding environment
 • Writing their first Python program using print()
 • Finding and fixing code errors like a real developer
 
@@ -645,9 +645,9 @@ KidsLearnAI
 - [ ] Zoom meeting link is tested and working
 - [ ] Your camera and microphone are working
 - [ ] Zoom screen share is tested (share browser window specifically)
-- [ ] Trinket is open and a blank Python project is ready to demo
+- [ ] Pickcode is open and a blank Python project is ready to demo
 - [ ] Backup platform (repl.it) is open in another tab
-- [ ] Trinket login details (if pre-created) are ready to paste in Zoom chat
+- [ ] Pickcode login details (if pre-created) are ready to paste in Zoom chat
 - [ ] Submission link / WhatsApp group is ready to paste in Zoom chat
 - [ ] This guide is minimised and accessible during class
 - [ ] Student Zoom display names are reviewed
@@ -660,7 +660,7 @@ KidsLearnAI
 - [ ] Camera on, encouraged students' cameras on
 - [ ] AI discussion happens before any coding
 - [ ] Zoom reactions used as engagement checkpoints throughout
-- [ ] Every student logs into Trinket (monitor via chat)
+- [ ] Every student logs into Pickcode (monitor via chat)
 - [ ] Every student runs "Hello, World!" and gives thumbs up reaction
 - [ ] Hello Chain completed using Zoom chat
 - [ ] At least 2 students share their screen for showcase

@@ -50,7 +50,7 @@ class_activities: |
   print(not (7 == 7))
   ```
 
-  Then run it in Trinket and see how many you got right! 👍
+  Then run it in Pickcode and see how many you got right! 👍
 
   ### Round 2 — The Basic Bouncer (⭐⭐)
   1. Ask the user `"How old are you? "`
@@ -67,7 +67,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Number Guard 🔐
 
-  Build a **"Number Guard"** program in Trinket — a polite security guard that only accepts a valid secret number.
+  Build a **"Number Guard"** program in Pickcode — a polite security guard that only accepts a valid secret number.
 
   **Requirements:**
   1. Ask the user to enter a number (their "secret PIN")
@@ -91,7 +91,7 @@ take_home_assignment: |
   - ⭐⭐ Keep asking in a `while` loop until the input is valid
   - ⭐⭐⭐ After a valid number arrives, also check it is exactly 4 digits long (a real PIN!) and reject "0000" with a special "too easy!" message
 
-  **Submit:** Save your Trinket (name it `Y2-T1-W5-SafeInput`), click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project (name it `Y2-T1-W5-SafeInput`), choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Garbage In, Garbage Out
 
@@ -481,7 +481,7 @@ while not age_text.isdigit():
     age_text = input("Age? ")
 ```
 
-> If your program seems "stuck" printing the same thing over and over, you probably forgot to ask for new input inside the loop. Stop it with the ⏹ button in Trinket!
+> If your program seems "stuck" printing the same thing over and over, you probably forgot to ask for new input inside the loop. Stop it with the ⏹ button in Pickcode!
 
 ---
 
@@ -563,7 +563,7 @@ We'll build a menu-driven calculator that asks the user what they want to do, ta
 
 ## 📚 Homework: Number Guard 🔐
 
-Build a **"Number Guard"** program in Trinket — a polite guard that only accepts a valid secret number.
+Build a **"Number Guard"** program in Pickcode — a polite guard that only accepts a valid secret number.
 
 **Requirements:**
 1. Ask the user to enter a number (their "secret PIN")
@@ -587,7 +587,7 @@ Enter your secret PIN: 4269
 - ⭐⭐ Keep asking in a `while` loop until the input is valid
 - ⭐⭐⭐ After a valid number arrives, also check it is exactly 4 digits long (a real PIN!) and reject "0000" with a special "too easy!" message
 
-**Submit:** Save your Trinket (name it `Y2-T1-W5-SafeInput`), click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project (name it `Y2-T1-W5-SafeInput`), choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

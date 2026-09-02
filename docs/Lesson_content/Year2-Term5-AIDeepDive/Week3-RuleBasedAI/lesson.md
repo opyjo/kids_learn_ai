@@ -79,7 +79,7 @@ class_activities: |
 
   We build a real classifier live on Zoom in **four stages**. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move together — do not race ahead!
 
-  > 📁 **First:** open Trinket, create a new Python trinket, and name it **`Y2-T5-W3-RuleBasedAI`**.
+  > 📁 **First:** open Pickcode, create a new Python Pickcode project, and name it **`Y2-T5-W3-RuleBasedAI`**.
 
   ### Stage 1 — The Rules (⭐)
   Type the keyword list. These are our hand-written rules.
@@ -127,7 +127,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Grow Your Classifier (or Build a New One!)
 
-  Open your **`Y2-T5-W3-RuleBasedAI`** Trinket and make your classifier smarter — OR build a brand-new rule-based classifier of your own.
+  Open your **`Y2-T5-W3-RuleBasedAI`** Pickcode and make your classifier smarter — OR build a brand-new rule-based classifier of your own.
 
   **Pick ONE path:**
 
@@ -152,7 +152,7 @@ take_home_assignment: |
   - ⭐⭐ Build a whole new classifier from scratch
   - ⭐⭐⭐ Give your classifier **three** possible labels, not just two
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Is This REALLY "AI"?
 
@@ -233,7 +233,7 @@ spam_words = ["free", "win", "prize", "click", "cash", "urgent", "offer", "congr
 
 That's it — that's the entire "brain". It's a plain Python list, exactly like the lists you've used since Year 1. Every word in here is a rule that says *"if you see me, be suspicious."*
 
-> 📁 **BEFORE WE START CODING:** open Trinket, create a **new** Python trinket, and name it **`Y2-T5-W3-RuleBasedAI`**. Save often!
+> 📁 **BEFORE WE START CODING:** open Pickcode, create a **new** Python Pickcode project, and name it **`Y2-T5-W3-RuleBasedAI`**. Save often!
 
 ✅ **Zoom checkpoint:** How many keyword rules are in our list? Count them and type the number in the chat. (It's 8!)
 
@@ -462,7 +462,7 @@ You just used **keyword matching** to make decisions — and next week we reuse 
 - Then we peek inside real **Large Language Models** (like the AI you chat with) to see how they're different — and where the trick is
 - Spoiler: your chatbot follows rules too... until you meet something that *predicts* words instead. Sound familiar?
 
-> Keep your `Y2-T5-W3-RuleBasedAI` Trinket safe — the keyword ideas carry straight into next week, and your Week 7 Investigation Report can analyse a classifier just like this one!
+> Keep your `Y2-T5-W3-RuleBasedAI` Pickcode safe — the keyword ideas carry straight into next week, and your Week 7 Investigation Report can analyse a classifier just like this one!
 
 ---
 
@@ -482,7 +482,7 @@ You just used **keyword matching** to make decisions — and next week we reuse 
 
 ## 📚 Homework: Grow Your Classifier (or Build a New One!)
 
-Open your **`Y2-T5-W3-RuleBasedAI`** Trinket and make your classifier smarter — OR build a brand-new one.
+Open your **`Y2-T5-W3-RuleBasedAI`** Pickcode and make your classifier smarter — OR build a brand-new one.
 
 **Pick ONE path:**
 
@@ -507,7 +507,7 @@ Write a NEW `classify(message)` function that does one of these:
 - ⭐⭐ Build a whole new classifier from scratch
 - ⭐⭐⭐ Give your classifier **three** possible labels, not just two
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

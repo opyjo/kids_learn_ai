@@ -21,7 +21,7 @@ This lesson has three core goals:
 2. **Consolidate the term's data-structure skills** — nothing here is brand new. The learning is in *combining* known pieces into a larger, well-organised program.
 3. **Instil the "one function, one job" habit** — students see how breaking a program into named functions makes it readable, testable, and easy to extend.
 
-This is a **live build-along**, not a lecture. You type on shared screen, students fill in one function at a time in their own trinket. Keep everyone synchronised with thumbs-up checkpoints after each of the five stages.
+This is a **live build-along**, not a lecture. You type on shared screen, students fill in one function at a time in their own Pickcode project. Keep everyone synchronised with thumbs-up checkpoints after each of the five stages.
 
 ### Learning Objectives
 
@@ -44,16 +44,16 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share
-- Trinket (trinket.io), logged in
+- Pickcode (app.pickcode.io), logged in
 - This teaching guide open during class
 - The starter skeleton and full solution ready to paste in chat if needed
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
 1. **Pre-build the Contact Manager yourself** and run every path (add, view empty, view full, search hit, search miss, delete hit, delete miss, invalid choice, quit) so every demo is smooth.
 2. **Have the skeleton ready to paste** in the Zoom chat — students who fall behind on setup can grab it instantly.
-3. **Test Zoom and Trinket** — confirm code runs and screen share works.
+3. **Test Zoom and Pickcode** — confirm code runs and screen share works.
 4. **Rehearse the delete `return` explanation** — the "don't modify a list while iterating" point is the one genuinely tricky idea today; have your words ready.
 5. **Decide your demo names** — use West African names (Amara, Kwame, Chidi, Ama, Kofi, Zainab) so students see relatable data.
 
@@ -65,7 +65,7 @@ By the end of this lesson, students will be able to:
 
 ```
 ⏱️  0-6 min   → Welcome + the plan (what is a Contact Manager? list of dicts recap)
-⏱️  6-12 min  → Setup: new trinket + paste the skeleton
+⏱️  6-12 min  → Setup: new Pickcode project + paste the skeleton
 ⏱️ 12-22 min  → Stage 1: the data store + add_contact
 ⏱️ 22-30 min  → Stage 2: view_contacts (empty case + loop)
 ⏱️ 30-40 min  → Stage 3: search_contacts (case-insensitive substring)
@@ -97,7 +97,7 @@ Recap the data shape on screen: each contact is a **dictionary**, and all of the
 
 ### Part 2: Setup + The Skeleton (6 minutes)
 
-> "Open a NEW trinket. Name it exactly `Y2-T4-W7-ContactManager` — this is the one you demo next week."
+> "Open a NEW Pickcode project. Name it exactly `Y2-T4-W7-ContactManager` — this is the one you demo next week."
 
 Paste the skeleton (empty functions with `pass` + the menu shell). Run it together — it does nothing, but it runs. That's the point: a valid skeleton first, then we fill it in.
 
@@ -209,7 +209,7 @@ Walk the four Common Mistakes from the lesson — especially:
 
 Then homework: **showcase prep** — make it bulletproof + ONE personal touch (count option, sorted view, extra `birthday` field, or an edit option).
 
-> "Next week is your Data Showcase — you demo this live and earn the Data Architect Badge. This week: make sure nothing crashes, and add ONE personal touch. Bring THIS exact trinket."
+> "Next week is your Data Showcase — you demo this live and earn the Data Architect Badge. This week: make sure nothing crashes, and add ONE personal touch. Bring THIS exact Pickcode project."
 
 Preview Week 8 and build excitement for the badge. Paste submission instructions in chat.
 

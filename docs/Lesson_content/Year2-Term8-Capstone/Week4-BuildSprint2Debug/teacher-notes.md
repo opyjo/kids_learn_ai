@@ -43,14 +43,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share; the lesson page open
-- Each student's `Y2-T8-Capstone` Trinket from Sprint 1
+- Each student's `Y2-T8-Capstone` Pickcode from Sprint 1
 - This guide and the **solution_code** (Log + View stats & chart) open on your machine
-- A scratch Trinket for live-coding the four clinic bugs (so you can crash it on purpose)
+- A scratch Pickcode for live-coding the four clinic bugs (so you can crash it on purpose)
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
 1. **Run the solution_code yourself** — log a few sessions, view the stats, confirm the chart draws. Know the expected output cold.
-2. **Pre-load the four clinic bugs** in a scratch Trinket, each ready to run-and-crash: the float-times-string `TypeError`, the empty-list `ZeroDivisionError`, the `"subjects"` `KeyError`, and the `sesions` typo `NameError`.
+2. **Pre-load the four clinic bugs** in a scratch Pickcode, each ready to run-and-crash: the float-times-string `TypeError`, the empty-list `ZeroDivisionError`, the `"subjects"` `KeyError`, and the `sesions` typo `NameError`.
 3. **Practise reading a traceback aloud** — bottom line first. This is the single most important teaching move today.
 4. **Review the register** — note who finished Sprint 1 strongly vs. who is still catching up on the Log feature; the latter group needs pairing during Part A.
 5. **Prep the chat prompt** for the Bug Clinic so you can paste it quickly.
@@ -123,7 +123,7 @@ Walk the error-type cheat sheet quickly. Don't drill it — they'll absorb it th
 
 This is the signature activity. Two halves.
 
-**Half A — Four live cases (~8 min).** Using your pre-loaded scratch Trinket, run each of the four bugs so the class sees the *real* red message, then apply the method out loud:
+**Half A — Four live cases (~8 min).** Using your pre-loaded scratch Pickcode, run each of the four bugs so the class sees the *real* red message, then apply the method out loud:
 
 1. `"█" * hours` (float) → `TypeError` → fix with `int()`
 2. average on empty list → `ZeroDivisionError` → fix with the guard

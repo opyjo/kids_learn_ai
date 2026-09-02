@@ -98,7 +98,7 @@ take_home_assignment: |
   - Create a themed adventure (space, fantasy, mystery, etc.)
   - Make it interactive with menus
 
-  **Submit:** Share your Trinket link. Be ready to present at the Week 8 Showcase!
+  **Submit:** Share your Pickcode project link. Be ready to present at the Week 8 Showcase!
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

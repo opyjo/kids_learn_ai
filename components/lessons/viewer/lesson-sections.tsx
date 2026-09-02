@@ -14,8 +14,8 @@ import {
 import type React from "react";
 import { useMemo } from "react";
 import { ConceptLabHost } from "@/components/concept-labs/concept-lab-host";
-import { TrinketPreview } from "@/components/dashboard/trinket-preview";
-import { TrinketSubmissionForm } from "@/components/dashboard/trinket-submission-form";
+import { PickcodePreview } from "@/components/dashboard/pickcode-preview";
+import { PickcodeSubmissionForm } from "@/components/dashboard/pickcode-submission-form";
 import {
 	LessonMarkdown,
 	ThemedMarkdown,
@@ -244,9 +244,9 @@ export function LessonSections({
 								{!submission ? (
 									<div className="flex flex-col items-start gap-2">
 										<p className="text-xs text-blue-700 dark:text-blue-300">
-											Complete your assignment on Trinket, then submit it here.
+											Complete your assignment in Pickcode, then submit it here.
 										</p>
-										<TrinketSubmissionForm
+										<PickcodeSubmissionForm
 											lessonId={lesson.dbId}
 											lessonTitle={lesson.title}
 											onSubmitSuccess={onSubmissionSuccess}
@@ -285,10 +285,10 @@ export function LessonSections({
 													{showSubmissionPreview ? "Hide" : "View"} Submission
 												</Button>
 												{submission.status === "submitted" && (
-													<TrinketSubmissionForm
+													<PickcodeSubmissionForm
 														lessonId={lesson.dbId}
 														lessonTitle={lesson.title}
-														existingUrl={submission.trinketUrl}
+														existingUrl={submission.projectUrl}
 														onSubmitSuccess={onSubmissionSuccess}
 													/>
 												)}
@@ -310,8 +310,8 @@ export function LessonSections({
 										)}
 
 										{showSubmissionPreview && (
-											<TrinketPreview
-												trinketUrl={submission.trinketUrl}
+											<PickcodePreview
+												projectUrl={submission.projectUrl}
 												title="Your Submission"
 											/>
 										)}

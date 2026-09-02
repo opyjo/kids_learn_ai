@@ -45,7 +45,7 @@ take_home_assignment: |
   1. **using the functions we have learned** — `input()`, `int()`, `float()`, `round()`, and `print()` with f-strings; and
   2. **choosing variable names that make sense** — a name should say what is inside the box.
 
-  Complete all four parts in one Trinket program, with a comment line (`#`) before each part.
+  Complete all four parts in one Pickcode program, with a comment line (`#`) before each part.
 
   ---
 
@@ -107,7 +107,7 @@ take_home_assignment: |
 
   ### Submit
 
-  1. your Trinket link with all four parts;
+  1. your Pickcode project link with all four parts;
   2. one sentence: which function was hardest to remember how to use, and what it does; and
   3. one sentence: the worst variable name you fixed in Part 1 and the better name you gave it.
 

@@ -29,7 +29,7 @@ Students should have completed Lessons 1-2 and be able to:
 
 - Write and run print() statements
 - Use string multiplication (\*) and concatenation (+)
-- Navigate Trinket confidently
+- Navigate Pickcode confidently
 
 ### Materials Needed
 
@@ -43,7 +43,7 @@ Students should have completed Lessons 1-2 and be able to:
 
 1. **Review Lesson 2 homework** - Note creative poems to celebrate
 2. **Prepare physical demo** (optional) - Label some boxes or containers
-3. **Create demonstration code** - Have examples ready in Trinket
+3. **Create demonstration code** - Have examples ready in Pickcode
 4. **Prepare variable naming quiz** - For interactive portion
 5. **Anticipate the "quotes confusion"** - Prepare clear explanations
 
@@ -221,7 +221,7 @@ age = "10"    # This is TEXT
 
 #### Student Practice: Create Three Variables
 
-> "Everyone create THREE variables in your Trinket:
+> "Everyone create THREE variables in your Pickcode project:
 >
 > 1. Your name (a string)
 > 2. Your age (an integer)

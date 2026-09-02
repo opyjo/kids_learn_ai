@@ -9,7 +9,7 @@ requires_trinket: true
 starter_code: |
   # 🤖 Y2-T6-W6-Assistant — BrightBot, your AI-style assistant
   # Made by: [YOUR NAME]
-  # IMPORTANT: Save this Trinket! Next week (Week 7) you PERSONALISE this exact program.
+  # IMPORTANT: Save this Pickcode! Next week (Week 7) you PERSONALISE this exact program.
 
   # --- Part 1: Mock API services (from Weeks 3 & 4) ---
   # Each one returns a dictionary with a "status" and either "data" or "error".
@@ -138,7 +138,7 @@ class_activities: |
 
   We build the assistant in **four stages**, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works. Do NOT rush ahead — we assemble the machine one part at a time.
 
-  > 📁 **First:** create a new Trinket and name it **`Y2-T6-W6-Assistant`**. You KEEP this file — next week you personalise it!
+  > 📁 **First:** create a new Pickcode project and name it **`Y2-T6-W6-Assistant`**. You KEEP this file — next week you personalise it!
 
   ### Stage 1 — The Services (⭐⭐)
   Paste in your three mock API services. Each returns a **status + data/error** dict — exactly what you built in Weeks 3 & 4.
@@ -224,14 +224,14 @@ class_activities: |
           else:
               print("🤖 Sorry, I didn't understand. Try 'weather', 'joke', or 'fact'.")
   ```
-  ✅ **Final checkpoint:** have a full conversation — ask for the weather in Accra, ask for a joke, type something silly, then say `bye`. Everything works AND it quits? 🎉 Thumbs up and **save your Trinket!**
+  ✅ **Final checkpoint:** have a full conversation — ask for the weather in Accra, ask for a joke, type something silly, then say `bye`. Everything works AND it quits? 🎉 Thumbs up and **save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Give BrightBot a New Skill
 
   BrightBot can do three things. Teach it a **fourth**!
 
   **Requirements:**
-  1. Open your **`Y2-T6-W6-Assistant`** Trinket (the one from class)
+  1. Open your **`Y2-T6-W6-Assistant`** Pickcode (the one from class)
   2. Write **one new service** function that returns a `{"status": 200, "data": {...}}` dict — e.g. `get_advice()`, `get_compliment()`, or `get_quiz()`
   3. Add a matching branch to **`detect_intent`** (e.g. `elif "advice" in message: return "advice"`)
   4. Add a matching `elif` in the **chat loop** that calls your service and prints the reply
@@ -261,7 +261,7 @@ take_home_assignment: |
 
   > ⚠️ Remember: keep the `elif intent == "bye":` branch that sets `chatting = False`. If you delete it, your assistant never stops!
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? You Just Built a Mini AI Assistant
 
@@ -334,7 +334,7 @@ You: bye
 
 Three pieces do all the work: **services** (the tools), the **intent brain** (the decider), and the **chat loop** (the conversation). We build them in that order.
 
-> 📁 **BEFORE WE START:** Open Trinket, create a **new** Python trinket, and name it **`Y2-T6-W6-Assistant`**. This is important — next week you extend THIS EXACT file to give BrightBot a memory and personality. Do not delete it!
+> 📁 **BEFORE WE START:** Open Pickcode, create a **new** Python Pickcode project, and name it **`Y2-T6-W6-Assistant`**. This is important — next week you extend THIS EXACT file to give BrightBot a memory and personality. Do not delete it!
 
 ---
 
@@ -547,7 +547,7 @@ The `else` catches anything the brain labelled `unknown` — so BrightBot always
 
 ## ✅ Part 6: The Whole Assistant — Run It!
 
-Here is your complete BrightBot. This is what should be in your `Y2-T6-W6-Assistant` Trinket:
+Here is your complete BrightBot. This is what should be in your `Y2-T6-W6-Assistant` Pickcode:
 
 ```python
 # 🤖 Y2-T6-W6-Assistant — BrightBot, your AI-style assistant
@@ -655,7 +655,7 @@ You: weather please
 🤖 Sorry, I don't have weather for that city. (No weather data for 'cairo')
 ```
 
-🎉 **You built a working AI-style assistant!** Save your Trinket now.
+🎉 **You built a working AI-style assistant!** Save your Pickcode project now.
 
 ---
 
@@ -759,7 +759,7 @@ run_assistant()   # switch it on!
 
 We build in **four stages**. Run after each stage and thumbs-up in Zoom. 👍
 
-> 📁 **First:** create a new Trinket named **`Y2-T6-W6-Assistant`** — you keep this for next week!
+> 📁 **First:** create a new Pickcode project named **`Y2-T6-W6-Assistant`** — you keep this for next week!
 
 **Stage 1 — The Services (⭐⭐):** paste in `get_weather`, `get_joke`, `get_fact`. Test with `print(get_weather("Accra"))`.
 
@@ -769,7 +769,7 @@ We build in **four stages**. Run after each stage and thumbs-up in Zoom. 👍
 
 **Stage 4 — Wire Each Intent (⭐⭐⭐):** replace the temporary print with real replies — weather (with status check), joke, fact, bye, unknown. Have a full conversation, then say `bye`.
 
-> ✅ **Final checkpoint:** ask for weather in Accra, ask for a joke, type something silly, then `bye`. Everything works AND it quits cleanly? 🎉 Save your Trinket!
+> ✅ **Final checkpoint:** ask for weather in Accra, ask for a joke, type something silly, then `bye`. Everything works AND it quits cleanly? 🎉 Save your Pickcode project!
 
 ---
 
@@ -784,7 +784,7 @@ Next week — **Week 7: AI-Powered Assistant — Personalise It!** — we give B
 - ⭐ It remembers your **favourite city** so you don't retype it every time
 - 💬 It gives warmer, more varied replies
 
-> Keep your `Y2-T6-W6-Assistant` Trinket safe — next week we upgrade THIS EXACT program into an assistant that feels like it actually knows you. The week after (Week 8) you showcase it and earn your **API Master Badge** 🏆!
+> Keep your `Y2-T6-W6-Assistant` Pickcode safe — next week we upgrade THIS EXACT program into an assistant that feels like it actually knows you. The week after (Week 8) you showcase it and earn your **API Master Badge** 🏆!
 
 ---
 
@@ -807,7 +807,7 @@ Next week — **Week 7: AI-Powered Assistant — Personalise It!** — we give B
 BrightBot can do three things. Teach it a **fourth**!
 
 **Requirements:**
-1. Open your **`Y2-T6-W6-Assistant`** Trinket (the one from class)
+1. Open your **`Y2-T6-W6-Assistant`** Pickcode (the one from class)
 2. Write **one new service** that returns a `{"status": 200, "data": {...}}` dict — e.g. `get_advice()`, `get_compliment()`, or `get_quiz()`
 3. Add a matching branch to **`detect_intent`** (e.g. `elif "advice" in message: return "advice"`)
 4. Add a matching `elif` in the **chat loop** that calls your service and prints the reply
@@ -837,7 +837,7 @@ def get_advice():
 
 > ⚠️ Remember: keep the `elif intent == "bye":` branch that sets `chatting = False`. If you delete it, your assistant never stops!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

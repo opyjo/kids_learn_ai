@@ -11,7 +11,7 @@ starter_code: |
   # Made by: [YOUR NAME]
   # Turn a CSV string into a list of dictionaries!
 
-  # --- Our "data file" is a MULTI-LINE STRING (Trinket has no real files) ---
+  # --- Our "data file" is a MULTI-LINE STRING (Pickcode has no real files) ---
   data = """name,score
   Ama,85
   Kofi,72
@@ -138,7 +138,7 @@ take_home_assignment: |
   - ⭐⭐ Also print the column names from the header row, and print how many records you parsed
   - ⭐⭐⭐ Add your own extra row to the data, AND make your program not crash if the data has a blank line at the end (hint: `if line == "": continue`)
 
-  **Submit:** Save your Trinket as `Y2-T7-W2-Parsing`, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project as `Y2-T7-W2-Parsing`, choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? Parsing IS the Job
 
@@ -210,7 +210,7 @@ That's it! The very first line, `name,score`, is the **header** — it names the
 
 ## 🧵 Part 2: A Dataset in a String
 
-Real CSVs live in files. But Trinket runs in your browser and **can't open files** — no problem. We'll store our dataset right inside Python as a **multi-line string** using **triple quotes** `"""`.
+Real CSVs live in files. But Pickcode runs in your browser and **can't open files** — no problem. We'll store our dataset right inside Python as a **multi-line string** using **triple quotes** `"""`.
 
 ```python
 data = """name,score
@@ -542,7 +542,7 @@ Guava sold 12
 - ⭐⭐ Also print the column names, and how many records you parsed
 - ⭐⭐⭐ Add your own extra row, AND make your program survive a blank last line (`if line == "": continue`)
 
-**Submit:** Save your Trinket as `Y2-T7-W2-Parsing`, click **Share**, and paste the link wherever your teacher asks.
+**Submit:** Save your Pickcode project as `Y2-T7-W2-Parsing`, choose **Share → Anyone with link → View Code**, and paste the link wherever your teacher asks.
 
 ---
 

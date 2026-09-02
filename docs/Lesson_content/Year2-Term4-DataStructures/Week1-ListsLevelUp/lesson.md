@@ -54,7 +54,7 @@ solution_code: |
 class_activities: |
   ## 🧪 Class Activity: The List Lab
 
-  You are the lab technician. Start with this party list in Trinket and run each experiment in order, checking the output after every step.
+  You are the lab technician. Start with this party list in Pickcode and run each experiment in order, checking the output after every step.
 
   ```python
   party = ["balloons", "cake", "music"]
@@ -85,7 +85,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Playlist Manager
 
-  Build a **Playlist Manager** (or a Shopping List — your choice!) in Trinket that stores items in a list and changes them.
+  Build a **Playlist Manager** (or a Shopping List — your choice!) in Pickcode that stores items in a list and changes them.
 
   **Requirements:**
   1. Start with a list of at least **3 songs** (or items)
@@ -107,7 +107,7 @@ take_home_assignment: |
   - ⭐⭐ Print the first and last song by name using `[0]` and `[-1]`, and wrap the steps in a `def show_playlist(playlist)` function (you know functions now!)
   - ⭐⭐⭐ Let the user `input()` a song name to add, and use `try`/`except` (or an `if`) so removing a song that isn't there doesn't crash the program
 
-  **Submit:** Save your Trinket as `Y2-T4-W1-Lists`, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project as `Y2-T4-W1-Lists`, choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Think: How AI Uses Lists
 
@@ -471,7 +471,7 @@ Track 3 is Focus
 
 ## 🧪 Part 6: Class Activity — The List Lab
 
-Time to be a lab technician! Open Trinket (`Y2-T4-W1-Lists`) and start with this list:
+Time to be a lab technician! Open Pickcode (`Y2-T4-W1-Lists`) and start with this list:
 
 ```python
 party = ["balloons", "cake", "music"]
@@ -516,7 +516,7 @@ Next week is **Week 2: Slicing & Searching Lists** — you'll learn `list[start:
 
 ## 📚 Homework: Playlist Manager
 
-Build a **Playlist Manager** (or a Shopping List — your choice!) in Trinket that stores items in a list and changes them.
+Build a **Playlist Manager** (or a Shopping List — your choice!) in Pickcode that stores items in a list and changes them.
 
 **Requirements:**
 1. Start with a list of at least **3 songs** (or items)
@@ -538,7 +538,7 @@ Total songs: 4
 - ⭐⭐ Print the first and last song by name using `[0]` and `[-1]`, and wrap the steps in a `def show_playlist(playlist)` function (you know functions now!)
 - ⭐⭐⭐ Let the user `input()` a song name to add, and use `try`/`except` (or an `if`) so removing a song that isn't there doesn't crash the program
 
-**Submit:** Save your Trinket as `Y2-T4-W1-Lists`, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project as `Y2-T4-W1-Lists`, choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

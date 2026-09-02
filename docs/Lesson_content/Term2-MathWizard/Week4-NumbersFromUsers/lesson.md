@@ -61,7 +61,7 @@ take_home_assignment: |
   5. include two comments; and
   6. be tested with at least three planned test cases.
 
-  Submit the Trinket link and list the three tests you ran. Do not build the four-operation calculator yet—that is the Term 2 final project.
+  Submit the Pickcode link and list the three tests you ran. Do not build the four-operation calculator yet—that is the Term 2 final project.
 ai_activities: |
   ## AI Lab: Follow the Data Pipeline
 

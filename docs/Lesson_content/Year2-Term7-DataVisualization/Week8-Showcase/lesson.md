@@ -8,7 +8,7 @@ is_premium: false
 requires_trinket: true
 starter_code: |
   # ✅ REPORTER-READY CHECKLIST
-  # Before you present your Data Story, tick these off in Trinket:
+  # Before you present your Data Story, tick these off in Pickcode:
   #
   # [ ] It RUNS with no red errors
   # [ ] It PARSES the data (split() turns the CSV blob into rows/columns)
@@ -17,7 +17,7 @@ starter_code: |
   # [ ] It states at least ONE insight BACKED BY A NUMBER
   # [ ] Your headline is a real sentence, not just a number
   #
-  # Open your Data Story Trinket now and run it once, top to bottom.
+  # Open your Data Story Pickcode now and run it once, top to bottom.
   # If every box is ticked — you're ready to report LIVE on Zoom! 🎤
 
   print("My Data Story is reporter-ready! 📊🚀")
@@ -94,7 +94,7 @@ take_home_assignment: |
   Choose ONE (or do both if you're buzzing!):
 
   ### Option A — Data Detective Certificate (recommended)
-  Write a **"Data Detective Certificate"** program in Trinket that celebrates a small dataset with a text chart.
+  Write a **"Data Detective Certificate"** program in Pickcode that celebrates a small dataset with a text chart.
 
   **Requirements:**
   1. Store a small dataset (5–7 rows) about anything you like — snacks, teams, songs
@@ -111,9 +111,9 @@ take_home_assignment: |
 
   **Also (optional, 2 min):** peek at the Term 8 preview below and jot down ONE idea for the capstone project you'd love to build.
 
-  **Submit:** Save your Trinket (name it `Y2-T7-W8-Showcase`), click **Share**, copy the link (and paste your family notes), and send it wherever your teacher asks.
+  **Submit:** Save your Pickcode project (name it `Y2-T7-W8-Showcase`), choose **Share → Anyone with link → View Code**, copy the link (and paste your family notes), and send it wherever your teacher asks.
 
-  👉 **Trinket:** [trinket.io](https://trinket.io) — log in and open a new Python 3 trinket named `Y2-T7-W8-Showcase`.
+  👉 **Pickcode:** [app.pickcode.io](https://app.pickcode.io) — log in and open a new Python 3 Pickcode project named `Y2-T7-W8-Showcase`.
 ai_activities: |
   ## 🤖 Class Discussion: You Just Ran a Data Science Pipeline
 
@@ -161,7 +161,7 @@ ai_activities: |
 
 Before you report anything, let's make sure your Data Story shines. **No new features today** — you're just tidying up work you already did.
 
-Open your Data Story Trinket and run it once, top to bottom. Then check every box:
+Open your Data Story Pickcode and run it once, top to bottom. Then check every box:
 
 | ✅ Check | What "good" looks like |
 |---|---|
@@ -398,7 +398,7 @@ Over 8 weeks, you learned and mastered:
 Choose ONE (or both if you're buzzing!):
 
 ### Option A — Data Detective Certificate (recommended)
-Write a **"Data Detective Certificate"** program in Trinket that celebrates a small dataset with a text chart.
+Write a **"Data Detective Certificate"** program in Pickcode that celebrates a small dataset with a text chart.
 
 **Requirements:**
 1. Store a small dataset (5–7 rows) about anything you like — snacks, teams, songs
@@ -414,9 +414,9 @@ Present your finished Data Story to someone at home like a TV reporter. Read you
 
 **Also (optional, 2 min):** peek at the Term 8 preview above and jot down ONE idea for the capstone project you'd love to build.
 
-**Submit:** Save your Trinket (name it `Y2-T7-W8-Showcase`), click **Share**, copy the link, and send it wherever your teacher asks.
+**Submit:** Save your Pickcode project (name it `Y2-T7-W8-Showcase`), choose **Share → Anyone with link → View Code**, copy the link, and send it wherever your teacher asks.
 
-👉 **Trinket:** [trinket.io](https://trinket.io) — log in and open a new Python 3 trinket named `Y2-T7-W8-Showcase`.
+👉 **Pickcode:** [app.pickcode.io](https://app.pickcode.io) — log in and open a new Python 3 Pickcode project named `Y2-T7-W8-Showcase`.
 
 ---
 

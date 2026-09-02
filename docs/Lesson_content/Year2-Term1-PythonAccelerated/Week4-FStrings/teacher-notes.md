@@ -45,14 +45,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share enabled
-- Students' Trinket accounts
+- Students' Pickcode accounts
 - This teaching guide open during class
-- Class WhatsApp group or email thread for Trinket links
+- Class WhatsApp group or email thread for Pickcode links
 - A currency symbol ready to copy-paste into chat: ₦ and GH₵ (some keyboards can't type these easily)
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Pre-load the "ugly output" demo** — have `print(10 / 3)` ready to run live; the `3.3333333333333335` reveal is the hook
 3. **Copy ₦ and GH₵ into your clipboard / a note** — paste them into the Zoom chat early so students can copy them (typing these symbols trips people up)
 4. **Have the starter and solution code open** — the Glow-Up starter is the spine of the class
@@ -253,7 +253,7 @@ Walk through both options (Shop Receipt or Profile Card) and the example run. Po
 
 > "⭐ is f-strings plus a border. ⭐⭐ adds `:.2f` money. ⭐⭐⭐ adds a discount or tax line — for the brave. Any tier counts as done."
 
-Remind them to name it `Y2-T1-W4-FStrings` and share the Trinket link.
+Remind them to name it `Y2-T1-W4-FStrings` and share the Pickcode link.
 
 #### Week 5 Teaser (2 minutes)
 
@@ -310,7 +310,7 @@ Type `banana`. Let it crash with the `ValueError`.
 | Can't type ₦ or GH₵ | Paste the symbols in the Zoom chat for copying; or let them use `$` / `£` |
 | Receipt total is wrong or crashes | Check the inputs are wrapped in `float()`/`int()` (Week 2 skill) |
 | `round(2.675, 2)` gives `2.67` and a student notices | Acknowledge floating-point quirk briefly; steer to `:.2f` for money — don't derail |
-| Trinket won't display the ₦/GH₵ symbol | Rare; fall back to `$` or the word "GHS"/"NGN" — the formatting lesson still stands |
+| Pickcode won't display the ₦/GH₵ symbol | Rare; fall back to `$` or the word "GHS"/"NGN" — the formatting lesson still stands |
 
 ---
 

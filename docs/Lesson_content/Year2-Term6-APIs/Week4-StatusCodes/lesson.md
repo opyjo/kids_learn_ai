@@ -116,7 +116,7 @@ take_home_assignment: |
   - ⭐⭐ Write a client that checks the status and handles both 200 and 404 without crashing
   - ⭐⭐⭐ Add a **500 Server Error** path (e.g. return status 500 if the database is "down") and handle all THREE cases: 200, 404, and 500
 
-  **Submit:** Save your Trinket (name it `Y2-T6-W4-StatusCodes`), click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project (name it `Y2-T6-W4-StatusCodes`), choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: How AI Apps Cope When Things Break
 
@@ -171,7 +171,7 @@ That number is a **status code**. Think of it like traffic lights for your reque
 
 Every time your phone loads a website, checks the weather, or sends a message, status codes are flying back and forth invisibly. You've been using them your whole life without knowing their names. Today you learn them.
 
-> 💡 **Honest moment:** real APIs live on the **internet** — your request travels across the world to a real server and back. Our Trinket versions are *mock* APIs (functions returning dicts) so we can learn the ideas safely offline. But the status codes we use are the **real, actual numbers** the whole web runs on. 🌍
+> 💡 **Honest moment:** real APIs live on the **internet** — your request travels across the world to a real server and back. Our Pickcode versions are *mock* APIs (functions returning dicts) so we can learn the ideas safely offline. But the status codes we use are the **real, actual numbers** the whole web runs on. 🌍
 
 ---
 
@@ -530,7 +530,7 @@ Pick ANY mock service (weather, jokes, scores — your choice) and give it **sta
 - ⭐⭐ Write a client that checks the status and handles both 200 and 404 without crashing
 - ⭐⭐⭐ Add a **500 Server Error** path (e.g. return status 500 if the database is "down") and handle all THREE cases: 200, 404, and 500
 
-**Submit:** Save your Trinket (name it `Y2-T6-W4-StatusCodes`), click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project (name it `Y2-T6-W4-StatusCodes`), choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

@@ -89,7 +89,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: Team of Functions 🤝
 
-  Your functions stop working alone today — they become a TEAM led by a `main()` captain. Build in Trinket, run after each stage, and give a **thumbs up** in Zoom when yours works!
+  Your functions stop working alone today — they become a TEAM led by a `main()` captain. Build in Pickcode, run after each stage, and give a **thumbs up** in Zoom when yours works!
 
   ### Stage 1 — Three Players (⭐)
   Write **three** tiny functions, each printing one line:
@@ -115,7 +115,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Build a Mini App 🧰
 
-  Build a **Mini App** in Trinket: a menu that **routes to at least 3 different functions**. Think of a tiny toolkit — a greeter, a dice roller, and a complimenter — but yours can be anything!
+  Build a **Mini App** in Pickcode: a menu that **routes to at least 3 different functions**. Think of a tiny toolkit — a greeter, a dice roller, and a complimenter — but yours can be anything!
 
   **Requirements:**
   1. Define **at least 3 functions** that each do one job (e.g. `greeter()`, `roll_dice()`, `complimenter()`)
@@ -140,7 +140,7 @@ take_home_assignment: |
   - ⭐⭐ One function RETURNS a value that another function or line uses
   - ⭐⭐⭐ `main()` calls a function that itself calls TWO more functions (a team within the team!)
 
-  **Submit:** Save your Trinket (`Y2-T3-W5-FunctionsTogether`), click **Share**, copy the link, and paste it where your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T3-W5-FunctionsTogether`), choose **Share → Anyone with link → View Code**, copy the link, and paste it where your teacher asks.
 ai_activities: |
   ## 🤖 Quick Think: AI Is a Menu of Functions Too
 
@@ -474,7 +474,7 @@ Next week is **Week 6: Designing Your Adventure** 🗺️ — the fun planning w
 
 ## 📚 Homework: Build a Mini App 🧰
 
-Build a **Mini App** in Trinket: a menu that **routes to at least 3 different functions** — a tiny toolkit (greeter, dice roller, complimenter, or your own idea!).
+Build a **Mini App** in Pickcode: a menu that **routes to at least 3 different functions** — a tiny toolkit (greeter, dice roller, complimenter, or your own idea!).
 
 **Requirements:**
 1. Define **at least 3 functions**, each doing one job
@@ -488,7 +488,7 @@ Build a **Mini App** in Trinket: a menu that **routes to at least 3 different fu
 - ⭐⭐ One function RETURNS a value that another function or line uses
 - ⭐⭐⭐ `main()` calls a function that itself calls TWO more functions (a team within the team!)
 
-**Submit:** Save your Trinket (`Y2-T3-W5-FunctionsTogether`), click **Share**, copy the link, and paste it where your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T3-W5-FunctionsTogether`), choose **Share → Anyone with link → View Code**, copy the link, and paste it where your teacher asks.
 
 ---
 

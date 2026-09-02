@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing comparison operators
 - Optional: Visual aids showing True/False
 
@@ -218,7 +218,7 @@ print(3 >= 5)   # False
 
 #### Guided Practice
 
-> "Now it's YOUR turn! Open Trinket and let's practice!"
+> "Now it's YOUR turn! Open Pickcode and let's practice!"
 
 **Exercise 1: Basic Comparisons**
 > "Try these: print(10 > 5), print(7 < 3), print(8 == 8)"
@@ -446,4 +446,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is the foundation of all decision-making! Make sure students really understand `==` vs `=` and that comparisons always give True or False. This sets the stage for if/else statements next week!_ ✅❌
-

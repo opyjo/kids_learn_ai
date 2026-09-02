@@ -42,16 +42,16 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share and chat enabled (chat is central today!)
-- Students' existing Trinket accounts
+- Students' existing Pickcode accounts
 - This teaching guide open during class
 - A prepared example table (fruit/sleep) to screen-share
-- A place for students to paste their homework Trinket links
+- A place for students to paste their homework Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom + Trinket** — audio, screen share, and that code runs in a Python 3 trinket
+1. **Test Zoom + Pickcode** — audio, screen share, and that code runs in a Python 3 Pickcode project
 2. **Decide your live survey question** — "favourite fruit" is the default; "hours of sleep last night" or "number of pets" work too. Pick ONE categorical for the tally.
-3. **Pre-type the tally code** in a trinket so you can live-run the class's real answers instantly
+3. **Pre-type the tally code** in a Pickcode project so you can live-run the class's real answers instantly
 4. **Have the two storage examples ready** — the list of dicts and the multi-line string — to screen-share
 5. **Prepare 2-3 everyday data examples** relevant to your class (local league table, weather forecast, a music chart) in case discussion is slow
 6. **Reminder:** this term awards no badge — frame motivation around the Data Story project
@@ -154,7 +154,7 @@ The technical heart of the lesson. Students know this pattern (Term 4 vote count
 This is the lesson students will remember. Run it as three visible steps:
 
 1. **Collect:** Ask your survey question ("favourite fruit?"). Everyone types ONE word in chat. Read them out and build the list live on screen.
-2. **Store:** Students copy the real list into Trinket. Run `len()` to count rows. Thumbs up.
+2. **Store:** Students copy the real list into Pickcode. Run `len()` to count rows. Thumbs up.
 3. **Count:** Students run the tally dict on the class's OWN data. Reveal the winner together.
 
 Land the point:

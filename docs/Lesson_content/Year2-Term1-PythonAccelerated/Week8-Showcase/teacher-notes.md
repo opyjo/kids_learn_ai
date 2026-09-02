@@ -43,7 +43,7 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share enabled for students
-- Students' finished `Y2-T1-W7-CalculatorDeluxe` Trinkets (remind them in advance!)
+- Students' finished `Y2-T1-W7-CalculatorDeluxe` Pickcode projects (remind them in advance!)
 - The quiz questions (in the lesson) — decide whether to screen-share or read aloud
 - This teaching guide
 - Class WhatsApp group/email for sharing links and celebration
@@ -102,7 +102,7 @@ The heart of the lesson. Each student follows the 5-step demo format from the le
 
 - **Model the first demo yourself** or have a confident volunteer go first, so the format is clear.
 - **Coach the feedback.** The first time someone types "it's good", redirect: "Be specific — what exactly did you like?" Reinforce the golden rule: kind, specific, helpful.
-- **Protect nervous students.** Offer options: share screen, OR you run their shared Trinket link, OR they just describe one feature. Never force screen-sharing.
+- **Protect nervous students.** Offer options: share screen, OR you run their shared Pickcode link, OR they just describe one feature. Never force screen-sharing.
 - **Celebrate every demo by name.** "Let's get a 🔥 in the chat for Ama!" Every student should feel seen.
 - **Handle live bugs warmly:** "Ooh, a live bug — real programmers debug in public all the time!" Model calm debugging.
 
@@ -183,7 +183,7 @@ Use today to finalise your term picture of each student:
 | Feedback chat goes quiet | Prompt specifically: "Drop a 🔥 and one thing you liked about Kofi's menu!" |
 | Quiz too easy / too hard | Skip ahead or slow down; add a bonus "explain WHY" for fast classes |
 | Large class, not enough time for all demos | Two rounds, cap at 90 seconds each, or group demos into breakout rooms with a spokesperson |
-| Student forgot their Trinket | Have them open the class solution and walk through it as if it were theirs — still a valid demo experience |
+| Student forgot their Pickcode | Have them open the class solution and walk through it as if it were theirs — still a valid demo experience |
 
 ---
 

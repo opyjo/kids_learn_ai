@@ -44,14 +44,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share and chat enabled
-- Students' existing Trinket accounts; today's Trinket name is `Y2-T4-W1-Lists`
+- Students' existing Pickcode accounts; today's Pickcode name is `Y2-T4-W1-Lists`
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Pre-type the List Lab starter** (`party = ["balloons", "cake", "music"]`) in a Trinket ready to screen-share
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Pre-type the List Lab starter** (`party = ["balloons", "cake", "music"]`) in a Pickcode ready to screen-share
 3. **Rehearse the negative-index queue analogy** — `[0]` is the front of the queue, `[-1]` is the back; it lands better than abstract counting
 4. **Have the IndexError demo ready** — you WILL live-run a crash on purpose; make sure your screen-share font is large enough to read the red error text
 5. **Prepare the term framing** — Contact Manager at Week 7, Data Architect Badge at Week 8; decide whether to screen-share or paste the week map
@@ -121,7 +121,7 @@ You want to hear "negative counts from the end / -1 is the last one." If you get
 
 ### Part 3: The Five List Moves (15 minutes)
 
-Live-code each move in ONE running Trinket, printing the list after every change so students see it mutate. Have them type along.
+Live-code each move in ONE running Pickcode, printing the list after every change so students see it mutate. Have them type along.
 
 ```python
 pets = ["cat", "dog"]
@@ -269,7 +269,7 @@ Stay on 2-3 minutes for questions.
 | Index assignment expected to add an item | Print length before and after `list[1] = "x"` — same length; it replaces |
 | `remove()` crashes on missing value | Expected! Use it to introduce ValueError and the `if x in list:` guard (Week 2 preview) |
 | Class races ahead of the refresh | Skip straight to Part 3, come back to indexing only if the checkpoint reveals gaps |
-| Trinket/Zoom technical issues | repl.it backup link in chat; private-chat triage while class continues |
+| Pickcode/Zoom technical issues | repl.it backup link in chat; private-chat triage while class continues |
 
 ---
 

@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing examples
 - Optional: Math manipulatives for visual learners
 
@@ -102,7 +102,7 @@ score = 95
 ```
 
 **Practice:**
-> "Let's create some variables! Open Trinket and create 3 variables about yourself!"
+> "Let's create some variables! Open Pickcode and create 3 variables about yourself!"
 
 Guide students through creating variables.
 

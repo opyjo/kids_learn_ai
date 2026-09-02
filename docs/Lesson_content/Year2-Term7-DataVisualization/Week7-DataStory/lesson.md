@@ -197,7 +197,7 @@ class_activities: |
 
   We build the whole Data Story in **four stages**, live on Zoom, one function at a time. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move together — do NOT race ahead!
 
-  > 📁 **First:** create a new Trinket and name it **`Y2-T7-W7-DataStory`**. You KEEP this and present it next week!
+  > 📁 **First:** create a new Pickcode project and name it **`Y2-T7-W7-DataStory`**. You KEEP this and present it next week!
 
   ### Stage 1 — Parse (⭐⭐)
   Paste the `DATA` string, then write `parse_data` to turn it into a list of dicts.
@@ -237,7 +237,7 @@ take_home_assignment: |
   Turn today's pipeline into a polished, presentation-ready Data Story about a topic **you** care about — screen-time, football scores, pocket money, sleep, songs played, anything!
 
   **Requirements:**
-  1. Open your **`Y2-T7-W7-DataStory`** Trinket
+  1. Open your **`Y2-T7-W7-DataStory`** Pickcode
   2. Put YOUR dataset in the `DATA` string — at least **6 rows**, with one categorical and one numerical column
   3. Make all four functions work on it: `parse_data`, `show_stats`, `draw_chart`, `print_insights`
   4. Write **2-3 real insights** that are backed by your numbers (not made up!)
@@ -250,7 +250,7 @@ take_home_assignment: |
 
   > ⚠️ Remember: convert your numeric column with `int()` (or `float()`) inside `parse_data`, or the maths will crash!
 
-  **Bring it to Week 8** — you'll present it to the class. Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Bring it to Week 8** — you'll present it to the class. Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? You Just Ran the AI Workflow
 
@@ -347,7 +347,7 @@ The End — that's my data story! 🎉
 ========================================
 ```
 
-> 📁 **BEFORE WE START:** open Trinket, create a **new** Python 3 trinket, and name it **`Y2-T7-W7-DataStory`**. This is important — you'll present THIS EXACT file next week. Do not delete it!
+> 📁 **BEFORE WE START:** open Pickcode, create a **new** Python 3 Pickcode project, and name it **`Y2-T7-W7-DataStory`**. This is important — you'll present THIS EXACT file next week. Do not delete it!
 
 Our example dataset is **one week of screen-time**. Paste it at the very top of your program:
 
@@ -589,7 +589,7 @@ Between stats and chart we build one small helper dict — `minutes_by_day` — 
 
 ## ✅ Part 7: The Whole Program — Run It!
 
-Here is your complete Data Story. This is what should be in your `Y2-T7-W7-DataStory` Trinket:
+Here is your complete Data Story. This is what should be in your `Y2-T7-W7-DataStory` Pickcode:
 
 ```python
 # 📊📖 Y2-T7-W7-DataStory — My Data Story
@@ -720,7 +720,7 @@ def main():
 main()
 ```
 
-🎉 **Run it. You built a complete data-analysis pipeline!** Save your Trinket now.
+🎉 **Run it. You built a complete data-analysis pipeline!** Save your Pickcode project now.
 
 ---
 
@@ -817,7 +817,7 @@ average = total / count
 
 We build all four stages live, one function at a time, then wire them up with `main()`.
 
-> 📁 Create and name your Trinket **`Y2-T7-W7-DataStory`** first!
+> 📁 Create and name your Pickcode project **`Y2-T7-W7-DataStory`** first!
 
 1. **Stage 1 — Parse (⭐⭐):** write `parse_data` and print the list of dicts. Check `minutes` are numbers.
 2. **Stage 2 — Stats (⭐⭐):** add `show_stats` — total, average, highest, lowest, activity tally.
@@ -839,7 +839,7 @@ Your Data Story runs — but a great story is meant to be **told**. Next week is
 - 💡 You'll learn how to explain what your numbers MEAN in under a minute
 - 🏆 It's the grand finish of the whole Data & Visualization term!
 
-> Keep your `Y2-T7-W7-DataStory` Trinket safe and polished — next week it takes the stage!
+> Keep your `Y2-T7-W7-DataStory` Pickcode safe and polished — next week it takes the stage!
 
 ---
 
@@ -861,7 +861,7 @@ Your Data Story runs — but a great story is meant to be **told**. Next week is
 Turn today's pipeline into a polished Data Story about a topic **you** care about.
 
 **Requirements:**
-1. Open your **`Y2-T7-W7-DataStory`** Trinket
+1. Open your **`Y2-T7-W7-DataStory`** Pickcode
 2. Put YOUR dataset in the `DATA` string — at least **6 rows**, one categorical + one numerical column
 3. Make all four functions work on it: `parse_data`, `show_stats`, `draw_chart`, `print_insights`
 4. Write **2-3 real insights** backed by your numbers
@@ -874,9 +874,9 @@ Turn today's pipeline into a polished Data Story about a topic **you** care abou
 
 > ⚠️ Remember: convert your numeric column with `int()` inside `parse_data`, or the maths will crash!
 
-**Bring it to Week 8 to present!** Save your Trinket, click **Share**, and paste the link wherever your teacher asks.
+**Bring it to Week 8 to present!** Save your Pickcode project, choose **Share → Anyone with link → View Code**, and paste the link wherever your teacher asks.
 
-👉 **Trinket:** [trinket.io](https://trinket.io) — log in and open your Python 3 trinket named `Y2-T7-W7-DataStory`.
+👉 **Pickcode:** [app.pickcode.io](https://app.pickcode.io) — log in and open your Python 3 Pickcode project named `Y2-T7-W7-DataStory`.
 
 ---
 

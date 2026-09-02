@@ -47,7 +47,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: Loop Lab 🔬
 
-  Three stations. Each time, **predict the output in the Zoom chat FIRST**, then run it in Trinket and check if you were right. Thumbs up when your prediction matches!
+  Three stations. Each time, **predict the output in the Zoom chat FIRST**, then run it in Pickcode and check if you were right. Thumbs up when your prediction matches!
 
   ### Station 1 — Predict the Range (⭐)
   Before running each line, type in the chat what `list(...)` will show:
@@ -72,7 +72,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Times Table Machine 🔢 (or Loop Artist 🎨)
 
-  Build a program in Trinket that puts your new loop powers to work.
+  Build a program in Pickcode that puts your new loop powers to work.
 
   **Times Table Machine (main mission):**
   1. Use `input()` to ask the user for a number
@@ -97,7 +97,7 @@ take_home_assignment: |
   - ⭐⭐ Add a neat title and `=` border, and use an f-string to line the sums up
   - ⭐⭐⭐ Also print a **countdown** (10 down to 1, then "Blast off!") OR make a "Loop Artist" that draws a pattern (e.g. a growing triangle of stars) using a loop
 
-  **Submit:** Save your Trinket as `Y2-T2-W1-ForLoops`, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project as `Y2-T2-W1-ForLoops`, choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: AI Learns in Loops
 
@@ -512,7 +512,7 @@ for i in range(3):
 
 ## 🎮 Class Activity: Loop Lab 🔬
 
-Three stations. Each time, **predict the output in the Zoom chat FIRST**, then run it in Trinket and check. Thumbs up when your prediction matches!
+Three stations. Each time, **predict the output in the Zoom chat FIRST**, then run it in Pickcode and check. Thumbs up when your prediction matches!
 
 ### Station 1 — Predict the Range (⭐)
 Type your prediction in the chat, THEN run:
@@ -568,7 +568,7 @@ The heartbeat of the arcade starts next week. 🫀
 
 ## 📚 Homework: Times Table Machine 🔢 (or Loop Artist 🎨)
 
-Build a program in Trinket that puts your loop powers to work.
+Build a program in Pickcode that puts your loop powers to work.
 
 **Times Table Machine (main mission):**
 1. Use `input()` to ask the user for a number
@@ -593,7 +593,7 @@ The 8 Times Table
 - ⭐⭐ Add a neat title and `=` border, and use an f-string to line the sums up
 - ⭐⭐⭐ Also print a **countdown** (10 down to 1, then "Blast off!") OR make a **Loop Artist** that draws a growing pattern of stars using a loop
 
-**Submit:** Save your Trinket as `Y2-T2-W1-ForLoops`, click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project as `Y2-T2-W1-ForLoops`, choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 
 ---
 

@@ -19,7 +19,7 @@ This is the **term project build week**. Students take the scene-function engine
 2. **Master the engine as a pattern** — a dispatcher loop plus scene functions that each return the next scene's name; this is genuinely how real games are structured
 3. **Make items matter** — the "aha" of the day is the **inventory gate**: a choice that behaves differently depending on what the player is carrying
 
-This is a **live build-along**, not a lecture. You code on shared screen, students follow scene by scene in their own Trinket. Keep everyone synchronised with thumbs-up checkpoints after each stage. There is **no badge this term** — the project itself is the reward, and next week's showcase is the celebration.
+This is a **live build-along**, not a lecture. You code on shared screen, students follow scene by scene in their own Pickcode. Keep everyone synchronised with thumbs-up checkpoints after each stage. There is **no badge this term** — the project itself is the reward, and next week's showcase is the celebration.
 
 ### Learning Objectives
 
@@ -42,16 +42,16 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share
-- The full solution open in your own Trinket, pre-tested (every path!)
+- The full solution open in your own Pickcode, pre-tested (every path!)
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 - A drawn or slide copy of the **temple map** (Part 2 of the lesson) to share on screen
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
 1. **Pre-build the whole adventure yourself** and play every path: the win via garden→torch→door, the win via bridge-leap, the lose via no-torch tunnel search, the lose via bridge collapse. Smooth demos come from rehearsal.
 2. **Have the map ready to show.** The single biggest predictor of success is whether students can *see* the structure before they type it. Share the map diagram early and keep referring back to it.
-3. **Test Zoom and Trinket** — confirm code runs and screen share works.
+3. **Test Zoom and Pickcode** — confirm code runs and screen share works.
 4. **Prepare the starter code** to paste in chat, so nobody loses time copying it.
 5. **Rehearse the "returns None" demo** (Common Mistake 1) — deliberately deleting a `return` and showing the "Unknown scene!" crash is the most powerful teaching moment of the day.
 
@@ -203,7 +203,7 @@ Assemble/paste the full program and play both scripted runs from the lesson (the
 
 Homework is explicitly **showcase prep**: personalise the theme and make sure every path reaches an ending.
 
-> "Next week is your big demo — a classmate will PLAY your game live. This week: reskin it as your own story, keep the 5 scenes, the item gate, and both endings, and add ONE new thing. Then test every path. Bring THIS exact Trinket next week."
+> "Next week is your big demo — a classmate will PLAY your game live. This week: reskin it as your own story, keep the 5 scenes, the item gate, and both endings, and add ONE new thing. Then test every path. Bring THIS exact Pickcode next week."
 
 Preview Week 8: the showcase and celebration — students play each other's adventures. Build excitement. Paste submission instructions in chat.
 
@@ -247,7 +247,7 @@ If time allows, run the optional **AI activity** discussion (decision trees / ga
 | Game runs forever | A scene returns its own name on every path; ensure at least one path leads onward |
 | Choice always hits the `else` | They wrote `choice == 1` (number) instead of `choice == "1"` (string) |
 | `IndentationError` around the nested `if` | The inner `if "key" in inventory:` must be indented under the outer `if choice == "1":` |
-| Lost their Week 6 work | Doesn't matter — today starts a fresh Trinket. Paste the starter code in chat |
+| Lost their Week 6 work | Doesn't matter — today starts a fresh Pickcode. Paste the starter code in chat |
 
 ---
 

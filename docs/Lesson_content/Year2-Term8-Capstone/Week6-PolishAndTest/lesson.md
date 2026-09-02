@@ -245,7 +245,7 @@ class_activities: |
   Real software is never released until someone OTHER than the author has tried to break it. Today, you ARE that someone.
 
   ### Set-up (in Zoom breakout pairs)
-  1. Pair up. Swap Trinket **Share links** in the chat (or share your screen).
+  1. Pair up. Swap Pickcode **Share links** in the chat (or share your screen).
   2. Open your partner's program and run it.
 
   ### Round 1 — Be the Confused User (⭐)
@@ -286,7 +286,7 @@ take_home_assignment: |
   # Tester: ______   Found: ______   I fixed it by: ______
   ```
 
-  **Submit:** Save your Trinket (`Y2-T8-Capstone`), click **Share**, and paste the link where your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T8-Capstone`), choose **Share → Anyone with link → View Code**, and paste the link where your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: Real Software Ships AFTER Testing
 
@@ -569,7 +569,7 @@ Comment the **reason**, not the obvious action. A file full of pointless comment
 
 ## 🧪 Class Activity: Break My Program!
 
-**Pair up in Zoom breakout rooms.** Swap your Trinket Share links.
+**Pair up in Zoom breakout rooms.** Swap your Pickcode project Share links.
 
 1. **Round 1 (⭐):** Use your partner's program with NO instructions. Note what confuses you.
 2. **Round 2 (⭐⭐):** Try to break it — type `ten`, `banana`, blank input, ask for stats with no data, use a negative number. File a mini bug report in chat: *what you typed → what happened*.
@@ -625,7 +625,7 @@ Write at the top of your file:
 # Tester: ______   Found: ______   I fixed it by: ______
 ```
 
-**Submit:** Save your Trinket (`Y2-T8-Capstone`), click **Share**, and paste the link where your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T8-Capstone`), choose **Share → Anyone with link → View Code**, and paste the link where your teacher asks.
 
 ---
 

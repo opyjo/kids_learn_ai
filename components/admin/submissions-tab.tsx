@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { TrinketPreview } from "@/components/dashboard/trinket-preview";
+import { PickcodePreview } from "@/components/dashboard/pickcode-preview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -52,7 +52,7 @@ interface Submission {
 	lessonId: string;
 	lessonTitle: string;
 	lessonOrderIndex: number;
-	trinketUrl: string;
+	projectUrl: string;
 	status: "submitted" | "reviewed" | "graded";
 	feedback: string | null;
 	grade: string | null;
@@ -163,7 +163,7 @@ export const SubmissionsTab = () => {
 					lessonId: sub.lesson_id,
 					lessonTitle: sub.lessons?.title || "Unknown Lesson",
 					lessonOrderIndex: sub.lessons?.order_index || 0,
-					trinketUrl: sub.trinket_url,
+					projectUrl: sub.trinket_url,
 					status: sub.status,
 					feedback: sub.feedback,
 					grade: sub.grade,
@@ -513,9 +513,9 @@ export const SubmissionsTab = () => {
 								</div>
 							</div>
 
-							{/* Trinket Preview */}
-							<TrinketPreview
-								trinketUrl={selectedSubmission.trinketUrl}
+							{/* Pickcode project preview */}
+							<PickcodePreview
+								projectUrl={selectedSubmission.projectUrl}
 								title="Student Code"
 							/>
 

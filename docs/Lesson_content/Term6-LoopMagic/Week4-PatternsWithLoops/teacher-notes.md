@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for drawing patterns
 
 ### Pre-Lesson Preparation
@@ -570,7 +570,7 @@ KidsLearnAI
 - [ ] Practice `end=""` examples
 - [ ] Prepare pattern examples
 - [ ] Think about common mistakes
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -598,4 +598,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is a highly visual and engaging lesson! Students love seeing their patterns come to life. Take time with nested loops—they're often confusing but very powerful. Celebrate creativity!_ 🎨
-

@@ -47,7 +47,7 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share enabled for students
-- Students' finished AI Investigation Reports (printed) and their demo Trinkets — remind them in advance!
+- Students' finished AI Investigation Reports (printed) and their demo Pickcode projects — remind them in advance!
 - The quiz questions (in the lesson) — decide whether to screen-share or read aloud
 - The debate motion chosen in advance (default: "AI should be allowed to mark homework")
 - The AI Scholar Badge (digital certificate/image, or your platform's badge) ready to award
@@ -55,7 +55,7 @@ By the end of this lesson, students will be able to:
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Send an advance reminder:** "Bring your printed AI Investigation Report AND your demo Trinket — today is the AI Summit!" Ask students to run their demo once before class.
+1. **Send an advance reminder:** "Bring your printed AI Investigation Report AND your demo Pickcode — today is the AI Summit!" Ask students to run their demo once before class.
 2. **Decide the presentation order** — volunteers first, then gently invite quieter students. Plan it so it flows without awkward silences.
 3. **Prepare the quiz delivery** — read-aloud + chat answers works well; have the answer key (in the lesson) open.
 4. **Choose and prep the debate** — pick a motion, decide how you'll split the class into FOR/AGAINST, and have the sentence starters ready to paste in chat.
@@ -109,7 +109,7 @@ The heart of the lesson. Each student follows the 6-step format from the lesson:
 - **Model the first talk yourself** or have a confident volunteer go first, so the format is clear.
 - **Coach the feedback.** The first time someone types "it's good", redirect: "Be specific — what exactly did you like about their point?" Reinforce: kind, specific, helpful.
 - **Push for the four questions.** If a student only shows the demo, gently prompt: "Great — now in one sentence, how does it *decide*?" These four answers are the term's core learning.
-- **Protect nervous students.** Offer options: share screen, OR you run their shared Trinket, OR they just talk through their report. Never force screen-sharing.
+- **Protect nervous students.** Offer options: share screen, OR you run their shared Pickcode, OR they just talk through their report. Never force screen-sharing.
 - **Celebrate every talk by name.** "Let's get a 🔥 in the chat for Ama!" Every scholar should feel seen.
 - **Handle live bugs warmly:** "Ooh, a live bug — real scientists hit surprises in public all the time!"
 
@@ -217,14 +217,14 @@ Use today to finalise your term picture of each student:
 | Problem | Solution |
 |---|---|
 | Student's demo crashes / investigation unfinished | Have them present a class example (Week 3 classifier / Week 4 chatbot) and explain it, or talk through their report verbally |
-| Student refuses to share screen | Offer alternatives: you run their shared Trinket, or they describe their investigation and one risk verbally |
+| Student refuses to share screen | Offer alternatives: you run their shared Pickcode, or they describe their investigation and one risk verbally |
 | Awkward silence, no presentation volunteers | Model the format yourself first, or call a confident student you prepped in advance |
 | Feedback chat goes quiet | Prompt specifically: "Drop a 🔥 and one thing you liked about Kofi's point on training data!" |
 | Debate turns personal or heated | Reset the golden rule: "We challenge the idea, not the person." Redirect to a sentence starter |
 | Debate is one-sided / quiet | Assign sides explicitly; give the quiet side a strong starter reason to build on |
 | Quiz too easy / too hard | Skip ahead or slow down; for fast classes add a bonus "explain WHY" on Q4, Q10, and Q12 |
 | Large class, not enough time for all talks | Two rounds, cap at 90 seconds each, or use breakout rooms with a spokesperson |
-| Student forgot report/Trinket | Let them present a class example and explain it as if investigating it — still a valid experience |
+| Student forgot report/Pickcode | Let them present a class example and explain it as if investigating it — still a valid experience |
 
 ---
 

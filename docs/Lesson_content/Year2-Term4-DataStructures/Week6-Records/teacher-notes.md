@@ -41,21 +41,21 @@ By the end of this lesson, students will be able to:
 ### Key Success Metrics
 
 - [ ] Every student's Class Register runs end to end
-- [ ] Every student has saved a Trinket named `Y2-T4-W6-Records`
+- [ ] Every student has saved a Pickcode named `Y2-T4-W6-Records`
 - [ ] Students can explain why `people["name"]` fails but `people[0]["name"]` works
 - [ ] Students leave knowing next week's Contact Manager is "this exact pattern"
 
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
-- Zoom with screen share; teacher's Trinket visible throughout
-- Students' Trinket accounts
+- Zoom with screen share; teacher's Pickcode visible throughout
+- Students' Pickcode accounts
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Type the full Class Register solution yourself once** in a fresh Trinket named `Y2-T4-W6-Records` — you build it live and it must be flawless
+1. **Type the full Class Register solution yourself once** in a fresh Pickcode named `Y2-T4-W6-Records` — you build it live and it must be flawless
 2. **Test the example run** (search `Zara` → the two-teen filter) so your live demo matches the lesson exactly
 3. **Rehearse the `people["name"]` crash** — you'll deliberately show the `TypeError` and fix it
 4. **Rehearse the f-string quote crash** — `f"{person["name"]}"` → `SyntaxError`; then fix with single quotes
@@ -91,7 +91,7 @@ Open with the "so what" — this is the pattern behind real apps.
 
 Screen-share the **table picture** from the lesson (rows = records, columns = fields). This is the mental model everything hangs on. Then the non-negotiable setup:
 
-> "Create a NEW Trinket. Name it exactly `Y2-T4-W6-Records`. Type it in the chat when done. Keep this file — next week's Contact Manager is built on today's pattern."
+> "Create a NEW Pickcode. Name it exactly `Y2-T4-W6-Records`. Type it in the chat when done. Keep this file — next week's Contact Manager is built on today's pattern."
 
 #### Teaching Tips
 
@@ -166,7 +166,7 @@ Run it: `age >= 13` gives Kofi and Zara. Then flip the test live to `< 13` so th
 
 Now combine everything into the full program with three fields (`name`, `age`, `grade`). Build top to bottom, running as you add each block. Do the example run live: search `Zara`, watch the table, the match, and the two-teen filter.
 
-> "This is a real, searchable, filterable register — a mini database you built from scratch. Screenshot it. Then SAVE the Trinket."
+> "This is a real, searchable, filterable register — a mini database you built from scratch. Screenshot it. Then SAVE the Pickcode."
 
 #### Teaching Tips
 
@@ -196,7 +196,7 @@ Walk through it: pick books, pets, or players; at least 4 records; **same 3 fiel
 
 #### Wrap-Up
 
-> "You built a database today — a list of records you can add to, print, search, and filter. Next week we point this exact skill at a Contact Manager. Save your Trinket, and I'll see you there."
+> "You built a database today — a list of records you can add to, print, search, and filter. Next week we point this exact skill at a Contact Manager. Save your Pickcode project, and I'll see you there."
 
 Stay on the call 2-3 minutes for questions and to help anyone whose program isn't running.
 
@@ -227,7 +227,7 @@ Ask: "It's a list of people — why can't I just ask for the name?" Let them rea
 - [ ] Looped to a table using single-quoted keys in the f-string
 - [ ] Wrote a search with a working `found` flag
 - [ ] Built a filter (empty list → loop → test → append)
-- [ ] Saved the Trinket with the correct name
+- [ ] Saved the Pickcode with the correct name
 
 **Engagement:**
 - [ ] Kept pace with the live build (thumbs up each part)

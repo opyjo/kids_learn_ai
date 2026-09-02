@@ -124,7 +124,7 @@ class_activities: |
 
   We build the whole program in **five stages**, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move as one class!
 
-  > 📁 **First:** open Trinket and start a NEW trinket named **`Y2-T4-W7-ContactManager`**. Paste in the starter skeleton (the empty functions + menu). We fill in one function at a time.
+  > 📁 **First:** open Pickcode and start a NEW Pickcode project named **`Y2-T4-W7-ContactManager`**. Paste in the starter skeleton (the empty functions + menu). We fill in one function at a time.
 
   ### Stage 1 — The Data Store + Add (⭐⭐)
   Create the `contacts = []` list, then fill in `add_contact()`.
@@ -195,14 +195,14 @@ class_activities: |
   else:
       print("❌ Please pick 1-5.")
   ```
-  ✅ **Final checkpoint:** Run the WHOLE thing: add → view → search → delete → quit. No crashes? 🎉 **Save your Trinket!**
+  ✅ **Final checkpoint:** Run the WHOLE thing: add → view → search → delete → quit. No crashes? 🎉 **Save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Make It Showcase-Ready ✨
 
   Next week is the **Data Showcase** — you'll demo your Contact Manager and earn the **Data Architect Badge** 🏆. This week, add ONE personal touch and make sure it never crashes.
 
   **Requirements:**
-  1. Open your **`Y2-T4-W7-ContactManager`** Trinket
+  1. Open your **`Y2-T4-W7-ContactManager`** Pickcode
   2. Make sure Add, View, Search, Delete, and Quit all work
   3. Add **one personal touch** (pick from the ideas below)
   4. Test it hard — try to BREAK it. It should survive every menu choice.
@@ -220,7 +220,7 @@ take_home_assignment: |
 
   > 💡 Bring this exact program to next week's showcase — you'll run it live on Zoom and earn your badge!
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? Your Contact Manager Is a Tiny Database
 
@@ -277,7 +277,7 @@ Our program will show a **menu** and let the user:
 4. **Delete** a contact
 5. **Quit**
 
-> 📁 **BEFORE WE START:** open Trinket and make a NEW trinket named **`Y2-T4-W7-ContactManager`**. This is the one you'll demo next week — name it exactly so it's easy to find!
+> 📁 **BEFORE WE START:** open Pickcode and make a NEW Pickcode project named **`Y2-T4-W7-ContactManager`**. This is the one you'll demo next week — name it exactly so it's easy to find!
 
 ### The big idea: a list of dictionaries
 
@@ -304,7 +304,7 @@ That's a **list of dictionaries** — the exact record pattern you practised in 
 
 ## 🏗️ Part 2: The Skeleton
 
-Before we write any function bodies, let's lay out the whole shape of the program. This is the **skeleton** — empty functions plus the menu. Paste this into your Trinket:
+Before we write any function bodies, let's lay out the whole shape of the program. This is the **skeleton** — empty functions plus the menu. Paste this into your Pickcode project:
 
 ```python
 # 📇 Y2-T4-W7-ContactManager
@@ -540,7 +540,7 @@ main()
 
 ## ✅ Part 8: The Whole Program
 
-Here is your complete Contact Manager. This is what should be in your `Y2-T4-W7-ContactManager` Trinket:
+Here is your complete Contact Manager. This is what should be in your `Y2-T4-W7-ContactManager` Pickcode:
 
 ```python
 # 📇 Y2-T4-W7-ContactManager
@@ -614,7 +614,7 @@ def main():
 main()
 ```
 
-🎉 **You built a complete Contact Manager!** Save your Trinket now.
+🎉 **You built a complete Contact Manager!** Save your Pickcode project now.
 
 ---
 
@@ -677,7 +677,7 @@ while running:
         running = False
 ```
 
-> 😵 Stuck in a forever loop? In Trinket, click **Stop** (or re-run) to escape it.
+> 😵 Stuck in a forever loop? In Pickcode, click **Stop** (or re-run) to escape it.
 
 ---
 
@@ -715,7 +715,7 @@ Your Contact Manager is **finished** — and it's genuinely impressive! Next wee
 - 🧠 We'll play a fun **Term 4 quiz** covering lists, dictionaries, records, and functions
 - 🏆 You'll earn the **Data Architect Badge** for building a real data-driven program!
 
-> Bring your `Y2-T4-W7-ContactManager` Trinket next week — make sure it runs, doesn't crash, and you're proud of it. It's showtime!
+> Bring your `Y2-T4-W7-ContactManager` Pickcode next week — make sure it runs, doesn't crash, and you're proud of it. It's showtime!
 
 ---
 
@@ -738,7 +738,7 @@ Your Contact Manager is **finished** — and it's genuinely impressive! Next wee
 Next week is the **Data Showcase** — you'll demo your Contact Manager and earn the **Data Architect Badge** 🏆. This week, add ONE personal touch and make sure it never crashes.
 
 **Requirements:**
-1. Open your **`Y2-T4-W7-ContactManager`** Trinket
+1. Open your **`Y2-T4-W7-ContactManager`** Pickcode
 2. Make sure Add, View, Search, Delete, and Quit all work
 3. Add **one personal touch** (pick from the ideas below)
 4. Test it hard — try to BREAK it. It should survive every menu choice.
@@ -756,7 +756,7 @@ Next week is the **Data Showcase** — you'll demo your Contact Manager and earn
 
 > 💡 Bring this exact program to next week's showcase — you'll run it live on Zoom and earn your badge!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

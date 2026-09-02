@@ -43,13 +43,13 @@ By the end of this lesson, students will have:
 
 ### Pre-Lesson Preparation
 
-1. **Test all student projects** — Verify Trinket links work before class
+1. **Test all student projects** — Verify Pickcode links work before class
 2. **Prepare presentation order** — Mix skill levels, volunteers first
 3. **Prepare digital certificates** — Personalized for each student (PDF or image to email/share)
 4. **Prepare awards** — Decide on categories and recipients
 5. **Test screen sharing** — Ensure students know how to share their screen
 6. **Prepare Term 2 preview** — Exciting snippets about Math Wizard to share
-7. **Have student Trinket links ready** — Backup in case a student can't screen share
+7. **Have student Pickcode links ready** — Backup in case a student can't screen share
 
 ---
 
@@ -207,9 +207,9 @@ After EVERY presentation:
 
 | Issue                    | Quick Solution                                                  |
 | ------------------------ | --------------------------------------------------------------- |
-| Can't share screen       | Have student paste their Trinket link in chat; teacher shares   |
+| Can't share screen       | Have student paste their Pickcode link in chat; teacher shares   |
 | Project won't load       | Have student describe what it does while you troubleshoot       |
-| Trinket is slow          | Fill time with questions about the project                      |
+| Pickcode is slow          | Fill time with questions about the project                      |
 | Code has bug             | "This is a great debugging opportunity!"                        |
 | Student freezes          | Gently prompt: "Tell us about your Mad Libs theme"              |
 | Audio/mic issues         | Student types in chat; teacher reads aloud for the class        |

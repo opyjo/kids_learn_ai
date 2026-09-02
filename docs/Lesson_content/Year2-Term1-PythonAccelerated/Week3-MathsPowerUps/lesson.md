@@ -46,7 +46,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity 1: Remainder Riddles 🔮
 
-  Your teacher will post riddles one at a time. **PREDICT the answer in the Zoom chat FIRST** — then everyone runs it in Trinket to check. Point for every correct prediction!
+  Your teacher will post riddles one at a time. **PREDICT the answer in the Zoom chat FIRST** — then everyone runs it in Pickcode to check. Point for every correct prediction!
 
   - `17 % 5` — what's left over?
   - `7 // 2` — how many whole times?
@@ -76,7 +76,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: The Maths Magician 🎩
 
-  Write a **Maths Magician** program in Trinket — it asks for ONE number and reveals its secrets!
+  Write a **Maths Magician** program in Pickcode — it asks for ONE number and reveals its secrets!
 
   **Requirements:**
   1. Ask the user for a whole number with `int(input(...))`
@@ -97,7 +97,7 @@ take_home_assignment: |
   - ⭐⭐ Add the last digit and the cube (`** 3`)
   - ⭐⭐⭐ Add a "pocket money doubler": ask how many days, then use a `for` loop with `2 ** day` to show the money doubling every day
 
-  **Submit:** Save your Trinket as `Y2-T1-W3-MathsMagician`, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project as `Y2-T1-W3-MathsMagician`, choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: AI Is Just Maths — At MASSIVE Scale
 
@@ -180,7 +180,7 @@ Time to unlock the three new operators. Here's the complete Python maths toolkit
 | `%` | **Modulo** | Gives the **remainder** after dividing | `7 % 2` | `1` |
 | `**` | **Power** | Multiplies a number by itself | `2 ** 3` | `8` |
 
-Try all four right now in Trinket (name it `Y2-T1-W3-MathsPowerUps`):
+Try all four right now in Pickcode (name it `Y2-T1-W3-MathsPowerUps`):
 
 ```python
 print(7 / 2)
@@ -522,7 +522,7 @@ That `.0` is not a bug — it's `/` doing its job (floats, always). If you need 
 
 ## 🎮 Class Activity 1: Remainder Riddles 🔮
 
-Prediction time! Your teacher posts a riddle — you **type your prediction in the Zoom chat FIRST**, then everyone runs it in Trinket to check. Score a point for every correct guess!
+Prediction time! Your teacher posts a riddle — you **type your prediction in the Zoom chat FIRST**, then everyone runs it in Pickcode to check. Score a point for every correct guess!
 
 ```python
 print(17 % 5)        # Riddle 1
@@ -618,7 +618,7 @@ Each friend pays: 3.3333333333333335
 
 ## 📚 Homework: The Maths Magician 🎩
 
-Write a **Maths Magician** program in Trinket — it asks for ONE number and reveals its secrets!
+Write a **Maths Magician** program in Pickcode — it asks for ONE number and reveals its secrets!
 
 **Requirements:**
 1. Ask the user for a whole number with `int(input(...))`
@@ -639,7 +639,7 @@ Its last digit is 7
 - ⭐⭐ Add the last digit and the cube (`** 3`)
 - ⭐⭐⭐ Add a "pocket money doubler": ask how many days, then use a `for` loop with `2 ** day` to show the money doubling every day
 
-**Submit:** Save your Trinket as `Y2-T1-W3-MathsMagician`, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project as `Y2-T1-W3-MathsMagician`, choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

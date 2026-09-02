@@ -42,7 +42,7 @@ Students should have completed Lessons 1-4 covering:
 
 1. **Review Week 4 homework** — Note creative Mad Libs to celebrate
 2. **Prepare the "before/after" messy code demo** — Have it ready to type live
-3. **Test all f-string examples** — Make sure they work in Trinket
+3. **Test all f-string examples** — Make sure they work in Pickcode
 4. **Print Quick Reference Card** — Optional, for students who benefit from a physical copy
 5. **Identify struggling students** — Plan to circulate to them first during exercises
 
@@ -344,7 +344,7 @@ print(f"I love {city.upper()}!")
 | Forgetting the `f` | "Check the start of your string — does it have `f` before the quote?" |
 | Using `()` instead of `{}` | "Curly braces! The squiggly ones — `{` and `}` — not round ones" |
 | Putting quotes around variable inside `{}` | "No quotes inside the braces! Just the variable name: `{name}` not `{'name'}`" |
-| F-string not working in Trinket | Check Python version — f-strings require Python 3.6+. Trinket's Python 3 should work |
+| F-string not working in Pickcode | Check Python version — f-strings require Python 3.6+. Pickcode's Python 3 should work |
 
 ---
 
@@ -771,7 +771,7 @@ Changes for next time:
 ### For Teachers
 
 - **Python f-string documentation:** f-strings were introduced in Python 3.6
-- **Quick tip:** f-strings work in Trinket's Python 3 environment
+- **Quick tip:** f-strings work in Pickcode's Python 3 environment
 - **Common confusion:** Students may try `f'...'` (single quotes) — this also works!
 
 ### For Students (Share with Parents)
@@ -826,7 +826,7 @@ KidsLearnAI
 
 - [ ] Review Week 4 homework (Mad Libs)
 - [ ] Prepare messy code examples for the makeover
-- [ ] Test all f-string examples in Trinket
+- [ ] Test all f-string examples in Pickcode
 - [ ] Set up screen sharing / projector
 - [ ] Optional: Print Quick Reference Card
 - [ ] Identify students who may need extra support

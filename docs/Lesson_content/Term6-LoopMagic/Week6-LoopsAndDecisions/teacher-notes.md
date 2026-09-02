@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing logic flow
 
 ### Pre-Lesson Preparation
@@ -485,7 +485,7 @@ KidsLearnAI
 - [ ] Review loop concepts
 - [ ] Prepare combination examples
 - [ ] Think about project preparation
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -514,4 +514,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This lesson combines two major concepts. Take time to ensure students understand the flow: loop → check → decide. This is critical for the project next week. Students who master this are ready to create amazing ASCII art generators!_ 🧠
-

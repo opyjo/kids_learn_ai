@@ -45,14 +45,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Students' Trinket accounts; today's Trinket: `Y2-T2-W4-NestedLoops`
+- Students' Pickcode accounts; today's Pickcode: `Y2-T2-W4-NestedLoops`
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Pre-type the key examples** into a Trinket so you can live-run them without typos: the rectangle, both pyramids, the times-table grid, and the kente strip
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Pre-type the key examples** into a Pickcode so you can live-run them without typos: the rectangle, both pyramids, the times-table grid, and the kente strip
 3. **Rehearse the two live "crashes"** — the all-on-one-line output (missing `print()`) and the `IndentationError`. You will trigger these on purpose.
 4. **Have the prediction question ready** in chat: the `range(4)`/`range(3)` → 12 lines example
 5. **Prepare emoji blocks** — copy `🟨🟥🟩⬛` somewhere handy; emoji entry can slow students down on some devices
@@ -230,7 +230,7 @@ Stay on the call 2-3 minutes for questions.
 | Problem | Solution |
 |---|---|
 | "All my stars are on one line!" | Missing bare `print()` after the inner loop — the #1 issue today. Show where it goes. |
-| `IndentationError` everywhere | Trinket auto-indents after `:`; teach students to trust it and to align the bare `print()` with the inner `for`. |
+| `IndentationError` everywhere | Pickcode auto-indents after `:`; teach students to trust it and to align the bare `print()` with the inner `for`. |
 | Thin single column of stars | The bare `print()` is *inside* the inner loop — move it out one level. |
 | Emoji won't type / misalign | Switch to text symbols (`X`/`.`); alignment is cosmetic, the logic is what matters. |
 | Grid columns are ragged | They dropped the `:4` width — add it back, or use `end="\t"`. |

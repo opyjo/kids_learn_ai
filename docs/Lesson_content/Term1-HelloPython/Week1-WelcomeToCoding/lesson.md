@@ -1,6 +1,6 @@
 ---
 title: "Welcome to Coding! 🤖🐍"
-description: "Discover what AI is, set up your Trinket coding environment, and write your very first Python program"
+description: "Discover what AI is, set up your Pickcode project coding environment, and write your very first Python program"
 difficulty: "beginner"
 order_index: 1
 course_slug: "term-1-hello-python"
@@ -45,7 +45,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: My Python Story
 
-  Write a Python "About Me" program in Trinket!
+  Write a Python "About Me" program in Pickcode!
 
   **Requirements:**
   1. At least 5 print statements
@@ -62,7 +62,7 @@ take_home_assignment: |
   print("I am excited to learn Python!")
   ```
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: AI Around Us
 
@@ -91,7 +91,7 @@ ai_activities: |
 
 - What Artificial Intelligence (AI) is and how it's already part of your life
 - What Python is and why it's one of the best languages to learn
-- How to set up and use Trinket (your online coding tool)
+- How to set up and use Pickcode (your online coding tool)
 - How to write and run your very first Python program
 - What the `print()` command does
 
@@ -195,11 +195,11 @@ Python is used by some of the biggest companies and projects in the world:
 
 ---
 
-## 💻 Part 3: Setting Up Trinket
+## 💻 Part 3: Setting Up Pickcode
 
-Before we write any code, we need our coding tool. We'll use **Trinket** — a free, online Python editor that works right in your browser. No installation needed!
+Before we write any code, we need our coding tool. We'll use **Pickcode** — a free, online Python editor that works right in your browser. No installation needed!
 
-> 💡 **Zoom Tip:** You'll have two windows open at the same time — **Zoom** and **Trinket**. Put them side by side on your screen, or switch between them using **Alt+Tab** (Windows) or **Cmd+Tab** (Mac).
+> 💡 **Zoom Tip:** You'll have two windows open at the same time — **Zoom** and **Pickcode**. Put them side by side on your screen, or switch between them using **Alt+Tab** (Windows) or **Cmd+Tab** (Mac).
 
 ### Step-by-Step Setup
 
@@ -209,7 +209,7 @@ Keep your Zoom window open — your teacher will walk you through every step by 
 **Step 2: Open a new browser tab**
 Open Google Chrome or Firefox alongside Zoom. Type this in the address bar:
 ```
-trinket.io
+app.pickcode.io
 ```
 
 **Step 3: Create a free account**
@@ -217,8 +217,8 @@ trinket.io
 - Choose **"Sign up with Google"** (easiest) or fill in your email
 - Your teacher may send login details in the **Zoom chat** — check there if so
 
-**Step 4: Create a new Python Trinket**
-- Once logged in, click the **"+"** button or **"New Trinket"**
+**Step 4: Create a new Python Pickcode**
+- Once logged in, click the **"+"** button or **"New Pickcode"**
 - Choose **"Python"** from the list
 
 **Step 5: Tour the interface**
@@ -242,15 +242,15 @@ Your teacher will show this live on Zoom screen share — match what you see on 
 **Step 6: Run your first test**
 In the code panel, type:
 ```python
-print("Trinket is working!")
+print("Pickcode is working!")
 ```
-Then click the **▶ Run** button. You should see `Trinket is working!` appear on the right side!
+Then click the **▶ Run** button. You should see `Pickcode is working!` appear on the right side!
 
 Give a **thumbs up** in Zoom reactions when it works! 👍
 
 **Step 7: Save your work**
 - Click the **floppy disk icon** 💾 or press **Ctrl+S** (Windows) / **Cmd+S** (Mac)
-- Give your Trinket a name
+- Give your Pickcode project a name
 - Your work is automatically saved to your account!
 
 > **Note:** If you get stuck at any step, type your question in the **Zoom chat** and your teacher will help you!
@@ -263,7 +263,7 @@ Give a **thumbs up** in Zoom reactions when it works! 👍
 
 Every programmer in the world has written this program. Now it's your turn!
 
-Type this exactly in your Trinket code panel:
+Type this exactly in your Pickcode project code panel:
 
 ```python
 print("Hello, World!")
@@ -389,12 +389,12 @@ Now let's build something together as a class — live on Zoom!
 
 **Here's how it works:**
 
-1. Your teacher shares their Trinket screen on Zoom
+1. Your teacher shares their Pickcode screen on Zoom
 2. Type your line in the **Zoom chat** in this format:
    ```
    print("My name is [YOUR NAME] and I love [YOUR THING]! 🎮")
    ```
-3. Your teacher copies each student's line into the shared Trinket
+3. Your teacher copies each student's line into the shared Pickcode
 4. When everyone is in — the teacher runs it and the whole class appears on screen!
 
 **Example class program:**
@@ -431,7 +431,7 @@ Look how much you've learned in just one lesson:
 
 - ✅ You understand what **Artificial Intelligence** is
 - ✅ You know what **Python** is and why it matters
-- ✅ You have a working **Trinket** account
+- ✅ You have a working **Pickcode** account
 - ✅ You wrote and ran your **first Python program**
 - ✅ You know what **`print()`** does
 - ✅ You know how to avoid common beginner mistakes
@@ -443,7 +443,7 @@ Look how much you've learned in just one lesson:
 
 ## 📚 Homework: My Python Story
 
-Before next class, write an **"About Me"** program in Trinket.
+Before next class, write an **"About Me"** program in Pickcode.
 
 **Requirements:**
 1. At least **5 print statements**
@@ -462,7 +462,7 @@ print("I am excited to learn Python!")
 
 **Bonus:** Can you add 5 more lines and make it even more creative?
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

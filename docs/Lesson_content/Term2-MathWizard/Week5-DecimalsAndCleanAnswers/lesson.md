@@ -59,7 +59,7 @@ take_home_assignment: |
   - `0.75` units × `4` batches;
   - one test you design.
 
-  Submit your Trinket link and test table.
+  Submit your Pickcode project link and test table.
 ai_activities: |
   ## AI Lab: Precision Has a Purpose
 

@@ -74,7 +74,7 @@ class_activities: |
   Your teacher collects them into a Python list of dicts on the shared screen.
 
   ### Step 3 — Store & print the dataset (⭐⭐)
-  In Trinket, build the dataset as a **list of dicts** and loop through it:
+  In Pickcode, build the dataset as a **list of dicts** and loop through it:
   ```python
   fruits = [
       {"colour": "red",    "shape": "round", "label": "apple"},
@@ -122,7 +122,7 @@ take_home_assignment: |
   - ⭐⭐ 3 features per example, and print how many examples there are with `len()`
   - ⭐⭐⭐ Add a NEW example with NO label and write (in a comment) what YOU predict the label should be and why
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Where Does Training Data Come From?
 
@@ -385,7 +385,7 @@ dog
 
 1. **Agree the features** as a class (e.g. `colour`, `shape`, `size`).
 2. **Collect examples** — each student adds one fruit in the Zoom chat as features + label.
-3. **Store & print** the dataset as a list of dicts in Trinket:
+3. **Store & print** the dataset as a list of dicts in Pickcode:
    ```python
    fruits = [
        {"colour": "red",    "shape": "round", "label": "apple"},
@@ -446,7 +446,7 @@ Build a small **labelled dataset** about a topic YOU like — football players, 
 - ⭐⭐ 3 features per example, and print how many examples there are with `len()`
 - ⭐⭐⭐ Add a NEW example with NO label and write (in a comment) what YOU predict the label should be and why
 
-**Submit:** Save your Trinket (`Y2-T5-W2-TrainingData`), click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T5-W2-TrainingData`), choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

@@ -39,7 +39,7 @@ export interface CourseLessonNavItem {
 
 export interface LessonSubmission {
 	id: string;
-	trinketUrl: string;
+	projectUrl: string;
 	status: "submitted" | "reviewed" | "graded";
 	feedback: string | null;
 	grade: string | null;

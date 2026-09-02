@@ -28,7 +28,7 @@ class_activities: |
   - Answer questions
 
   **Part 2: Playing Games (20 min)**
-  - Play each other's adventures (drop your Trinket links in the Zoom chat)
+  - Play each other's adventures (drop your Pickcode project links in the Zoom chat)
   - Try different paths
   - Give positive feedback
   - Celebrate creativity!
@@ -52,7 +52,7 @@ take_home_assignment: |
   4. Be proud of what you built!
 
   **Optional:**
-  - Share your Trinket link with family
+  - Share your Pickcode project link with family
   - Create a short video showing your adventure
   - Write a paragraph about what you learned this term
 

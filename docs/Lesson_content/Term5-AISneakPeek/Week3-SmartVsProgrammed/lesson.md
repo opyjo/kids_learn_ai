@@ -63,7 +63,7 @@ take_home_assignment: |
   # - Get better over time
   ```
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

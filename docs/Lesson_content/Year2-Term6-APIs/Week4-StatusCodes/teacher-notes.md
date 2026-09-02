@@ -42,13 +42,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share enabled
-- Students' existing Trinket accounts — today's Trinket is `Y2-T6-W4-StatusCodes`
+- Students' existing Pickcode accounts — today's Pickcode is `Y2-T6-W4-StatusCodes`
 - Last week's mock API code handy (students build directly on the `get_weather` idea)
 - This teaching guide open during class
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Have the Week 3 mock API fresh in mind** — students arrive with a `get_weather(city)` that returns a dict; today reshapes it. Be ready to remind them of last week's version.
 3. **Prepare a real-world status-code hook** — a "404 page not found" screenshot or the memory of one is gold; nearly every student has seen a 404 without knowing its name.
 4. **Pre-load the KeyError crash** — you'll deliberately run the "use data without checking" mistake live; have it typed and ready so the crash lands at the right moment.
@@ -187,7 +187,7 @@ Walk the requirements and the example run. Stress: any service they like (weathe
 
 > "⭐ gives your service status codes. ⭐⭐ builds the never-crash client. ⭐⭐⭐ adds a 500 server-down case and handles all three. Any tier counts as done."
 
-Trinket name: `Y2-T6-W4-StatusCodes`. Paste submission steps in chat, set the due date.
+Pickcode name: `Y2-T6-W4-StatusCodes`. Paste submission steps in chat, set the due date.
 
 #### Wrap-Up (3 minutes)
 

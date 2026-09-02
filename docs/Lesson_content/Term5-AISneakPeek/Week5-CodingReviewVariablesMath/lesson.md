@@ -61,7 +61,7 @@ take_home_assignment: |
   - Sports stats tracker (scores, averages, totals)
   - Any creative idea using variables and math!
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

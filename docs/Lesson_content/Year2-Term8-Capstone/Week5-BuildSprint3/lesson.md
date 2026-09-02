@@ -218,7 +218,7 @@ class_activities: |
   4. Print the final score out of the total
 
   ### Stage 3 — Peer Code Review (⭐⭐⭐)
-  In your Zoom breakout pair, swap Trinket **Share** links and answer three questions about your partner's code:
+  In your Zoom breakout pair, swap Pickcode **Share** links and answer three questions about your partner's code:
   1. **Does it run?** (any red error messages?)
   2. **Is it clear?** (could you follow what it does?)
   3. **One kind suggestion** (a single, specific idea to make it better)
@@ -233,14 +233,14 @@ take_home_assignment: |
   1. Add **one wow feature** that shows off a Year 2 skill — a data insight (a total, an average, a text chart) OR a mini AI touch (a keyword assistant or a quiz)
   2. Make sure your **whole program still runs** with no red errors
   3. If you use `random`, remember `import random` at the top!
-  4. Do a **peer review** with a classmate if you can (swap Trinket links) and write down the **one improvement** you'll make next
+  4. Do a **peer review** with a classmate if you can (swap Pickcode links) and write down the **one improvement** you'll make next
 
   **Challenge tiers:**
   - ⭐ Add one working wow feature and run the whole program once
   - ⭐⭐ Add a wow feature that uses a list of dictionaries OR keyword matching
   - ⭐⭐⭐ Add a feature AND complete a peer review, noting one improvement in a comment at the top of your file
 
-  **Submit:** Save your Trinket (named `Y2-T8-Capstone`), click **Share**, and paste the link where your teacher asks. Include your one-line improvement note!
+  **Submit:** Save your Pickcode project (named `Y2-T8-Capstone`), choose **Share → Anyone with link → View Code**, and paste the link where your teacher asks. Include your one-line improvement note!
 ai_activities: |
   ## 🤖 Mini AI Feature: Your Keyword Assistant
 
@@ -296,7 +296,7 @@ A **wow feature** is one that shows off an *advanced* Year 2 skill. It's not jus
 - **Motivation tip** uses **keyword matching** — a mini AI touch from Terms 5 and 6.
 - **Quiz me** uses a **list of dictionaries** — the data structure from Term 4.
 
-Open your Study Buddy Trinket (named `Y2-T8-Capstone`). You'll see two **stubs** — functions that only print "coming soon":
+Open your Study Buddy Pickcode (named `Y2-T8-Capstone`). You'll see two **stubs** — functions that only print "coming soon":
 
 ```python
 # 🚧 STUB — build this today!
@@ -454,7 +454,7 @@ Here's the finished feature set to celebrate:
 
 ## 🤝 Part 5: Peer Code Review — Kind and Useful
 
-Real developers read each other's code every day. It's called a **code review**, and the goal is to *help*, never to show off or criticise. In your Zoom breakout pair, swap Trinket **Share** links and answer three questions:
+Real developers read each other's code every day. It's called a **code review**, and the goal is to *help*, never to show off or criticise. In your Zoom breakout pair, swap Pickcode **Share** links and answer three questions:
 
 ### The 3-Question Review
 
@@ -546,7 +546,7 @@ if "tired" in feeling:        # now "TIRED" becomes "tired" ✓
 
 **Stage 2 — Quiz Me (⭐⭐):** Build a list of dictionaries, loop and score, and compare with `.lower().strip()`.
 
-**Stage 3 — Peer Review (⭐⭐⭐):** Swap Trinket links in your breakout pair. Answer: does it run, is it clear, one kind suggestion. Post one thing you liked in the Zoom chat.
+**Stage 3 — Peer Review (⭐⭐⭐):** Swap Pickcode links in your breakout pair. Answer: does it run, is it clear, one kind suggestion. Post one thing you liked in the Zoom chat.
 
 Give a **thumbs up** 👍 after each stage runs!
 
@@ -592,7 +592,7 @@ Give **your own capstone** (not Study Buddy) a wow moment.
 - ⭐⭐ Add a wow feature that uses a list of dictionaries OR keyword matching
 - ⭐⭐⭐ Add a feature AND complete a peer review, noting one improvement in a comment at the top of your file
 
-**Submit:** Save your Trinket (named `Y2-T8-Capstone`), click **Share**, and paste the link where your teacher asks. Include your one-line improvement note!
+**Submit:** Save your Pickcode project (named `Y2-T8-Capstone`), choose **Share → Anyone with link → View Code**, and paste the link where your teacher asks. Include your one-line improvement note!
 
 ---
 

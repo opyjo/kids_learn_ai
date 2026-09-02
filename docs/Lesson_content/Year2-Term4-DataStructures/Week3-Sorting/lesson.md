@@ -54,7 +54,7 @@ solution_code: |
 class_activities: |
   ## 🏆 Class Activity: Leaderboard Builder
 
-  We're building a proper leaderboard from raw scores — the same idea behind every game high-score table. Type each stage in Trinket, run it, and give a **thumbs up** in Zoom when your output matches!
+  We're building a proper leaderboard from raw scores — the same idea behind every game high-score table. Type each stage in Pickcode, run it, and give a **thumbs up** in Zoom when your output matches!
 
   ### Stage 1 — Rank the players (⭐)
   Start with this list and print it sorted from **highest to lowest**:
@@ -77,7 +77,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Score Analyser
 
-  Build a **Score Analyser** in Trinket — a program that takes a list of scores and reports on it like a real dashboard.
+  Build a **Score Analyser** in Pickcode — a program that takes a list of scores and reports on it like a real dashboard.
 
   **Requirements:**
   1. Start with a list of at least **6 numbers**
@@ -99,9 +99,9 @@ take_home_assignment: |
   - ⭐⭐ Also print the scores **highest to lowest** with `reverse=True`, and build a `top_scores` list (a loop that collects every score over 80)
   - ⭐⭐⭐ Let the user `input()` scores one at a time into a list, then analyse them (remember to convert each with `int()`!)
 
-  **Trinket starter:** open **Y2-T4-W3-Sorting**, or start a fresh Trinket and name it exactly that.
+  **Pickcode starter:** open **Y2-T4-W3-Sorting**, or start a fresh Pickcode and name it exactly that.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Discussion: Why AI Loves Sorting
 
@@ -368,7 +368,7 @@ print(sorted(words))           # ['apple', 'pear']
 
 ## 🏆 Part 6: Class Activity — Leaderboard Builder
 
-Time to put it all together and build a real leaderboard! Follow the stages in Trinket. **Thumbs up** in Zoom when each stage runs.
+Time to put it all together and build a real leaderboard! Follow the stages in Pickcode. **Thumbs up** in Zoom when each stage runs.
 
 **Stage 1 — Rank the players (⭐)**
 ```python
@@ -424,7 +424,7 @@ Next week we unlock a **whole new data structure**: the **dictionary** 📖. Ins
 
 ## 📚 Homework: Score Analyser
 
-Build a **Score Analyser** in Trinket — a program that takes a list of scores and reports on it like a real dashboard.
+Build a **Score Analyser** in Pickcode — a program that takes a list of scores and reports on it like a real dashboard.
 
 **Requirements:**
 1. Start with a list of at least **6 numbers**
@@ -446,9 +446,9 @@ Average: 69.67
 - ⭐⭐ Also print the scores **highest to lowest** with `reverse=True`, and build a `top_scores` list (a loop that collects every score over 80)
 - ⭐⭐⭐ Let the user `input()` scores one at a time into a list, then analyse them (remember to convert each with `int()`!)
 
-**Trinket:** open **Y2-T4-W3-Sorting**, or start a fresh Trinket and name it exactly that.
+**Pickcode:** open **Y2-T4-W3-Sorting**, or start a fresh Pickcode and name it exactly that.
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 
 ---
 

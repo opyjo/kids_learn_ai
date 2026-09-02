@@ -57,7 +57,7 @@ take_home_assignment: |
 
   **Bonus Challenge:** Add a `sidekick_name` variable and include them in your story!
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

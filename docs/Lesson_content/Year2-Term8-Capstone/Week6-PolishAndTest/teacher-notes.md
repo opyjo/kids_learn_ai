@@ -38,7 +38,7 @@ Students will be able to:
 
 ### Materials Needed
 - Zoom with screen share and breakout rooms
-- Students' `Y2-T8-Capstone` Trinket (all features built)
+- Students' `Y2-T8-Capstone` Pickcode (all features built)
 - This guide; the testing checklist; class WhatsApp/email
 
 ### Pre-Lesson Preparation

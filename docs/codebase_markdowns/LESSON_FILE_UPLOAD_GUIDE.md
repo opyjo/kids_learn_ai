@@ -210,7 +210,7 @@ This lesson teaches students about the print() function...
 
 ## Materials Needed
 
-- Computers with Trinket access
+- Computers with Pickcode access
 - Projector for demonstrations
 
 ## Common Mistakes
@@ -351,4 +351,3 @@ After syncing, you'll see:
 ---
 
 *KidsLearnAI - Empowering the Next Generation with AI Education*
-

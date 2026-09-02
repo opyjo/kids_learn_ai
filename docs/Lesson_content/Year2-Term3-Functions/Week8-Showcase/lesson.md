@@ -8,7 +8,7 @@ is_premium: false
 requires_trinket: true
 starter_code: |
   # ✅ DEMO-READY CHECKLIST
-  # Before a classmate play-tests your Text Adventure, tick these off in Trinket:
+  # Before a classmate play-tests your Text Adventure, tick these off in Pickcode:
   #
   # [ ] It RUNS with no red errors
   # [ ] The opening scene prints clearly (the player knows where they are)
@@ -18,7 +18,7 @@ starter_code: |
   # [ ] It does NOT crash on unexpected input (typing "banana" or "5" at a choice)
   # [ ] Your inventory list works (picking up / checking an item)
   #
-  # Open your adventure Trinket now and play it once, start to finish.
+  # Open your adventure Pickcode now and play it once, start to finish.
   # If every box is ticked — you're ready to be play-tested on Zoom! 🎤
 
   print("My Text Adventure is demo-ready! 🗺️")
@@ -81,7 +81,7 @@ take_home_assignment: |
   Choose ONE (or do both if you're buzzing!):
 
   ### Option A — Function Certificate Program (recommended)
-  Write a **"Function Certificate"** program in Trinket that prints YOU a certificate — built out of functions.
+  Write a **"Function Certificate"** program in Pickcode that prints YOU a certificate — built out of functions.
 
   **Requirements:**
   1. Write at least **two functions**
@@ -98,7 +98,7 @@ take_home_assignment: |
 
   **Also (optional, 2 min):** peek at the Term 4 preview below and write down one idea for your Contact Manager.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link (and paste your family notes), and send it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link (and paste your family notes), and send it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Functions Keep Huge AI Systems Organised
 
@@ -145,7 +145,7 @@ ai_activities: |
 
 Before anyone play-tests your game, let's make sure it shines. **No new scenes today** — you're just tidying up work you already did.
 
-Open your Text Adventure Trinket and play it once, start to finish. Then check every box:
+Open your Text Adventure Pickcode and play it once, start to finish. Then check every box:
 
 | ✅ Check | What "good" looks like |
 |---|---|
@@ -404,7 +404,7 @@ Over 8 weeks, you learned and mastered:
 Choose ONE (or both if you're buzzing!):
 
 ### Option A — Function Certificate Program (recommended)
-Write a **"Function Certificate"** program in Trinket that prints YOU a certificate — built out of functions.
+Write a **"Function Certificate"** program in Pickcode that prints YOU a certificate — built out of functions.
 
 **Requirements:**
 1. Write at least **two functions**
@@ -420,7 +420,7 @@ Play your finished Text Adventure with someone at home. Let them choose the path
 
 **Also (optional, 2 min):** peek at the Term 4 preview above and write down one idea for your Contact Manager.
 
-**Submit:** Save your Trinket (`Y2-T3-W8-Showcase`), click **Share**, copy the link, and send it wherever your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T3-W8-Showcase`), choose **Share → Anyone with link → View Code**, copy the link, and send it wherever your teacher asks.
 
 ---
 

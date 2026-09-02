@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing score patterns
 
 ### Pre-Lesson Preparation
@@ -463,7 +463,7 @@ KidsLearnAI
 - [ ] Prepare scoring examples
 - [ ] Think about game ideas
 - [ ] Prepare troubleshooting
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -490,4 +490,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: Score tracking makes games competitive and fun. Students who master this are ready to combine everything into complete games next week!_ 📊
-

@@ -391,7 +391,7 @@ Notes for Year 2:
 ### For Students (Share with Parents)
 
 - **Graduation Photos:** Share celebration photos
-- **Project Links:** Share Trinket links
+- **Project Links:** Share Pickcode links
 - **Certificate:** Display proudly
 - **Year 2 Preview:** Get excited for next year
 
@@ -468,4 +468,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is a celebration! Make it special, make it memorable, and most importantly—celebrate each student's unique achievements. They've worked hard and deserve recognition. You've guided them through an amazing learning journey. Be proud!_ 🎓✨🎉
-

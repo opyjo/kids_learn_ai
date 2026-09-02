@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing loop flow
 
 ### Pre-Lesson Preparation
@@ -440,7 +440,7 @@ KidsLearnAI
 - [ ] Prepare examples
 - [ ] Think about AI connection
 - [ ] Prepare troubleshooting
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -467,4 +467,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This combination is powerful and essential for the quiz game project. Students who master this are ready to build their quiz game. Make sure they understand the flow!_ 🔄📋
-

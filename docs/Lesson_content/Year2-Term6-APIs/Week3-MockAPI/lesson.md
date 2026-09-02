@@ -91,7 +91,7 @@ solution_code: |
 class_activities: |
   ## 🏗️ Class Activity: Build the Weather Service Together
 
-  We build ONE service live, step by step. Run each step in Trinket and give a **thumbs up** in Zoom when yours works!
+  We build ONE service live, step by step. Run each step in Pickcode and give a **thumbs up** in Zoom when yours works!
 
   ### Step 1 — The empty service (⭐)
   Write a function that takes a `city` and returns a fixed dict:
@@ -144,7 +144,7 @@ take_home_assignment: |
   - ⭐⭐ Handles an unknown input with an `{"error": ...}` dict
   - ⭐⭐⭐ Build TWO services and a client that calls both
 
-  **Submit:** Save your Trinket (`Y2-T6-W3-MockAPI`), click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T6-W3-MockAPI`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: How Real Assistants Use Services Like Yours
 
@@ -207,7 +207,7 @@ Accra
 Sunny
 ```
 
-But where did that dict come from? A real API fetches it over the **internet** from a computer far away. We can't do that in Trinket — and honestly, we don't need to yet. Instead, **we write a function that RETURNS the dict**. That function IS our server.
+But where did that dict come from? A real API fetches it over the **internet** from a computer far away. We can't do that in Pickcode — and honestly, we don't need to yet. Instead, **we write a function that RETURNS the dict**. That function IS our server.
 
 > 🧠 **Be honest about it:** a real API talks over the internet to another computer. Ours does not. Our "API" is a plain Python **function** that acts as the server. Same shape, same thinking — no network. We call it a **mock API**.
 
@@ -483,7 +483,7 @@ def get_weather(city):
 
 ## 🏗️ Class Activity: Build the Weather Service Together
 
-We build `get_weather` live, in three steps. Run each step in Trinket and **thumbs up** in Zoom when yours works.
+We build `get_weather` live, in three steps. Run each step in Pickcode and **thumbs up** in Zoom when yours works.
 
 **Step 1 (⭐)** — an empty service that returns a fixed dict:
 ```python
@@ -545,7 +545,7 @@ Invent your OWN mock API service — a function that takes a request and returns
 - ⭐⭐ Handles an unknown input with an `{"error": ...}` dict
 - ⭐⭐⭐ Build TWO services and a client that calls both
 
-**Submit:** Save your Trinket (`Y2-T6-W3-MockAPI`), click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T6-W3-MockAPI`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 
 ---
 

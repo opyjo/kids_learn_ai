@@ -28,14 +28,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts (should already be set up)
+- Pickcode accounts (should already be set up)
 - Whiteboard for visual examples
 - Optional: Stickers or small rewards for creative programs
 
 ### Pre-Lesson Preparation
 
 1. **Review Term 3 concepts** — Refresh your understanding of what students learned about if/else
-2. **Prepare demo Trinket** — Have examples ready that are DIFFERENT from Term 3
+2. **Prepare demo Pickcode** — Have examples ready that are DIFFERENT from Term 3
 3. **Assess student readiness** — Note which students struggled with if/else in Term 3
 4. **Prepare creative examples** — Game themes, real-world scenarios, fun challenges
 5. **Send welcome message** — Welcome students to Term 4 and get them excited!
@@ -211,7 +211,7 @@ else:
 
 **Exercise 1: Character Level Checker**
 
-> "Let's code together! Open Trinket and let's build a level checker!"
+> "Let's code together! Open Pickcode and let's build a level checker!"
 
 Guide students through:
 

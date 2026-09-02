@@ -153,7 +153,7 @@ export default async function DashboardPage() {
 		}
 	});
 
-	// Fetch student's trinket submissions
+	// The legacy table stores Pickcode project links for existing deployments.
 	const { data: submissionsData } = await supabase
 		.from("trinket_submissions")
 		.select(
@@ -184,7 +184,7 @@ export default async function DashboardPage() {
 		lessonTitle: sub.lessons?.title || "Unknown Lesson",
 		lessonOrderIndex: sub.lessons?.order_index || 0,
 		courseSlug: sub.lessons?.courses?.slug || "level-1-python-foundations-1",
-		trinketUrl: sub.trinket_url,
+		projectUrl: sub.trinket_url,
 		status: sub.status as "submitted" | "reviewed" | "graded",
 		feedback: sub.feedback,
 		grade: sub.grade,

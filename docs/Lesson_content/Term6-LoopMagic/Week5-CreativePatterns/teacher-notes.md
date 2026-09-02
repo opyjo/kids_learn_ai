@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for drawing patterns
 
 ### Pre-Lesson Preparation
@@ -491,7 +491,7 @@ KidsLearnAI
 - [ ] Practice growing/shrinking triangles
 - [ ] Prepare diamond example
 - [ ] Think about creativity encouragement
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -519,4 +519,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This lesson combines creativity with technical skills. Encourage students to experiment and create their own patterns. The `range(row)` concept is key—make sure students understand it before moving on!_ 🎨
-

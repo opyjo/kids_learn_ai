@@ -19,7 +19,7 @@ starter_code: |
   # [ ] I can run my demo in under a minute
   # [ ] I have ONE question ready, in case my audience is shy
   #
-  # Open your demo Trinket now and run it once, top to bottom.
+  # Open your demo Pickcode now and run it once, top to bottom.
   # Every box ticked in your head? You're ready for the AI Summit! 🎤
 
   print("My AI Investigation is Summit-ready! 🔍🏅")
@@ -108,7 +108,7 @@ take_home_assignment: |
   Choose ONE (or do both if you're buzzing!):
 
   ### Option A — AI Scholar Certificate (recommended)
-  Write an **"AI Scholar Certificate"** program in Trinket that prints YOU a certificate using f-strings.
+  Write an **"AI Scholar Certificate"** program in Pickcode that prints YOU a certificate using f-strings.
 
   **Requirements:**
   1. Ask the user their name with `input()`
@@ -125,7 +125,7 @@ take_home_assignment: |
 
   **Also (optional, 2 min):** peek at the Term 6 preview below and write down one thing you'd want your own AI assistant to help you with.
 
-  **Submit:** Save your Trinket (`Y2-T5-W8-Summit`), click **Share**, copy the link (and paste your written piece if you chose Option B), and send it wherever your teacher asks.
+  **Submit:** Save your Pickcode project (`Y2-T5-W8-Summit`), choose **Share → Anyone with link → View Code**, copy the link (and paste your written piece if you chose Option B), and send it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: You Are Now a Thoughtful AI Citizen
 
@@ -174,7 +174,7 @@ ai_activities: |
 
 Before you present anything, let's make sure your investigation shines. **No new research today** — you're just polishing work you already did.
 
-Open your demo Trinket, run it once top to bottom, then check every box:
+Open your demo Pickcode, run it once top to bottom, then check every box:
 
 | ✅ Check | What "good" looks like |
 |---|---|
@@ -428,7 +428,7 @@ Over 8 weeks, you learned and mastered:
 Choose ONE (or both if you're buzzing!):
 
 ### Option A — AI Scholar Certificate (recommended)
-Write an **"AI Scholar Certificate"** program in Trinket that prints YOU a certificate using f-strings.
+Write an **"AI Scholar Certificate"** program in Pickcode that prints YOU a certificate using f-strings.
 
 **Requirements:**
 1. Ask the user their name with `input()`
@@ -445,7 +445,7 @@ Write a short piece (6–8 sentences) on **the single most important thing you l
 
 **Also (optional, 2 min):** peek at the Term 6 preview above and write down one thing you'd want your own AI assistant to help you with.
 
-**Submit:** Save your Trinket (`Y2-T5-W8-Summit`), click **Share**, copy the link (and paste your written piece if you chose Option B), and send it wherever your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T5-W8-Summit`), choose **Share → Anyone with link → View Code**, copy the link (and paste your written piece if you chose Option B), and send it wherever your teacher asks.
 
 ---
 

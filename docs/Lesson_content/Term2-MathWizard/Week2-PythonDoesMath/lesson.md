@@ -45,7 +45,7 @@ take_home_assignment: |
   5. includes a comment explaining each calculation; and
   6. is tested by changing the starting numbers twice.
 
-  Submit your Trinket link and state one thing that changed when you used the second set of values.
+  Submit your Pickcode project link and state one thing that changed when you used the second set of values.
 ai_activities: |
   ## AI Lab: Humans Design the Score
 
@@ -85,7 +85,7 @@ You will:
 
 ## 1. Operator Match-Up
 
-Match each story to an operator before opening Trinket:
+Match each story to an operator before opening Pickcode:
 
 | Story | Operator |
 | --- | --- |

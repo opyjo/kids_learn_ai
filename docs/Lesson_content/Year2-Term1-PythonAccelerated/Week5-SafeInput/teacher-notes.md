@@ -45,15 +45,15 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share enabled
-- Students' Trinket accounts; today's Trinket name is `Y2-T1-W5-SafeInput`
+- Students' Pickcode accounts; today's Pickcode name is `Y2-T1-W5-SafeInput`
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Pre-type the crash demo** in a Trinket so you can run it instantly: `age = int(input("How old are you? "))` — you'll type "banana" live for maximum drama
-3. **Have the `while`-loop stop trick ready** — know where the ⏹ stop button is in Trinket; a forgotten "ask again" line WILL cause an infinite loop in someone's code
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Pre-type the crash demo** in a Pickcode so you can run it instantly: `age = int(input("How old are you? "))` — you'll type "banana" live for maximum drama
+3. **Have the `while`-loop stop trick ready** — know where the ⏹ stop button is in Pickcode; a forgotten "ask again" line WILL cause an infinite loop in someone's code
 4. **Review Week 2 recall** — students met `ValueError` as a preview in Week 2; you're now paying it off
 5. **Prepare the predict-the-output warm-up** — have the boolean lines ready to paste into chat
 
@@ -125,7 +125,7 @@ Show both the grade example (chained) and the age-check example (nested). Land t
 This deliberately previews Part 5, so the nesting doesn't feel abstract.
 
 #### Teaching Tips
-- Emphasise indentation — nested `if`s live further to the right. Trinket auto-indents, but check students' shared screens.
+- Emphasise indentation — nested `if`s live further to the right. Pickcode auto-indents, but check students' shared screens.
 
 ---
 
@@ -212,7 +212,7 @@ Deliberately demonstrate the infinite loop (delete the inner `input()`, run it, 
 
 ### Part 6: Bouncer at the Door Activity (10 minutes)
 
-Launch the activity. Students work in their own Trinkets; you circulate via shared screens.
+Launch the activity. Students work in their own Pickcode projects; you circulate via shared screens.
 
 - **Round 1 (Predict):** whole-class, fast — post guesses in chat, then run
 - **Round 2 (Basic Bouncer):** everyone should reach this — `.isdigit()` guard, no crash
@@ -285,7 +285,7 @@ Stay on 2-3 minutes for questions.
 | `SyntaxError` on `if age = 12` | Single `=` used for comparison; needs `==` |
 | `.isdigit()` returns False for "3.5" or "-5" and students think it's broken | It's correct — `.isdigit()` only accepts non-negative whole numbers. Frame as a known limit |
 | Class races ahead of the crash demo | Let them try typing "banana" themselves — the live crash is more powerful when they cause it |
-| Zoom/Trinket technical issues | Same playbook as always: repl.it backup, private-chat triage, spare class login |
+| Zoom/Pickcode technical issues | Same playbook as always: repl.it backup, private-chat triage, spare class login |
 
 ---
 

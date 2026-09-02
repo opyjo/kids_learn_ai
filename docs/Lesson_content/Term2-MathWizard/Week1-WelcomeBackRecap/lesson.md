@@ -48,7 +48,7 @@ take_home_assignment: |
   6. contains two explanatory comments; and
   7. is tested by two different users or with two different answer sets.
 
-  Submit the Trinket link and name the Term 1 skill that needed the most review.
+  Submit the Pickcode link and name the Term 1 skill that needed the most review.
 ai_activities: |
   ## AI Lab: Input, Memory, Process, Output
 

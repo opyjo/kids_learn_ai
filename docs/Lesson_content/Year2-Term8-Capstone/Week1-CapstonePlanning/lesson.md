@@ -101,7 +101,7 @@ take_home_assignment: |
 
   **Two ways to submit — pick one:**
   - Type your mini-spec neatly and paste it in the class WhatsApp/email, **or**
-  - Type it as comments at the top of a Trinket and share the link.
+  - Type it as comments at the top of a Pickcode and share the link.
 
   **Challenge tiers:**
   - ⭐ Name, description, and 2 must-haves
@@ -110,7 +110,7 @@ take_home_assignment: |
 
   > 🔑 **The golden rule:** keep it SMALL enough to finish. It's far better to fully finish a simple project than to half-build a huge one. You can always add nice-to-haves later!
 
-  **Trinket for this week:** `Y2-T8-W1-CapstonePlan`
+  **Pickcode for this week:** `Y2-T8-W1-CapstonePlan`
 ai_activities: |
   ## 🤖 How Real AI Products Start: With a Spec
 
@@ -187,11 +187,11 @@ Not every idea makes a good capstone. The best ones tick **three boxes**:
 |---|---|
 | **Uses your Year 2 skills** | You already know how to build it — you're combining tools you've mastered, not learning brand-new ones |
 | **Is achievable in a few weeks** | Small enough to actually FINISH — a finished small project beats an unfinished huge one every time |
-| **Is something you care about** | You'll spend 6 weeks on it — pick a topic that makes YOU want to open Trinket |
+| **Is something you care about** | You'll spend 6 weeks on it — pick a topic that makes YOU want to open Pickcode |
 
 Think of it like a recipe: you already own all the ingredients (your skills). The capstone is choosing a dish you'd love to eat and that you can actually cook with what's in your kitchen.
 
-> ⚠️ **The #1 trap:** dreaming TOO big. "I'll build a 3D multiplayer game with online accounts" is exciting — but impossible in Trinket with plain Python. We'll help you scope it down to something brilliant AND finishable.
+> ⚠️ **The #1 trap:** dreaming TOO big. "I'll build a 3D multiplayer game with online accounts" is exciting — but impossible in Pickcode with plain Python. We'll help you scope it down to something brilliant AND finishable.
 
 ---
 
@@ -265,7 +265,7 @@ Notice how it ticks all three boxes: it **uses Year 2 skills** you already have,
 
 > 📌 **Study Buddy is just ONE example.** Your project can be totally different! We'll return to Study Buddy each build week to show HOW to build a capstone — but the goal is for you to build YOURS.
 
-Here's a tiny taste of the kind of "pitch" your project can print — try it in Trinket:
+Here's a tiny taste of the kind of "pitch" your project can print — try it in Pickcode:
 
 ```python
 project_name = "Study Buddy"
@@ -302,7 +302,7 @@ That's the entire code for today — because this week is about **thinking**, no
 Project: MegaGame3000 — a 3D game with online multiplayer,
 accounts, a store, and 50 levels.
 ```
-(This is impossible in Trinket with plain Python — and 6 weeks is not enough.)
+(This is impossible in Pickcode with plain Python — and 6 weeks is not enough.)
 
 ✅ Right-sized:
 ```
@@ -346,7 +346,7 @@ Project: Afrobeats Quiz — test your knowledge of your
 favourite songs and artists!
 ```
 
-> You'll spend 6 weeks with this project. Pick something that makes you *want* to open Trinket.
+> You'll spend 6 weeks with this project. Pick something that makes you *want* to open Pickcode.
 
 ---
 
@@ -409,7 +409,7 @@ Lock in the project you'll build over the next 6 weeks. Complete your **mini-spe
 - ⭐⭐ Full mini-spec: name, description, 3 must-haves, 1 nice-to-have, 3 skills
 - ⭐⭐⭐ Also sketch your **menu** — the list of options your program will show
 
-**Submit:** type your mini-spec and paste it in the class WhatsApp/email, or write it as comments in a Trinket (`Y2-T8-W1-CapstonePlan`) and share the link.
+**Submit:** type your mini-spec and paste it in the class WhatsApp/email, or write it as comments in a Pickcode (`Y2-T8-W1-CapstonePlan`) and share the link.
 
 > 🔑 Remember the golden rule: **keep it small enough to finish.**
 

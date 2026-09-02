@@ -62,7 +62,7 @@ class_activities: |
   3. **A joke** — respond to `"joke"`
   4. **Quit** — the `while` loop must `break` on `"bye"`
 
-  After each new `elif`, run the bot and test it in Trinket. **Thumbs up** in Zoom when yours works!
+  After each new `elif`, run the bot and test it in Pickcode. **Thumbs up** in Zoom when yours works!
 
   ### Part B — Break It On Purpose (~5 min)
   Type `HELLO` (all capitals) into a bot that has NO `.lower()`. Watch it fail to match. Then add `.lower()` and watch it work. **Post in the Zoom chat: why did capitals break it?**
@@ -80,13 +80,13 @@ take_home_assignment: |
   Pick **ONE** path (or do both for extra glory 🌟):
 
   ### Path 1 — Grow BrightByte Buddy 🤖
-  Extend your chatbot in Trinket with **at least 3 NEW keyword topics** the class didn't build (ideas: `"weather"`, `"favourite"`, `"help"`, `"age"`, `"pizza"`, a topic you love).
+  Extend your chatbot in Pickcode with **at least 3 NEW keyword topics** the class didn't build (ideas: `"weather"`, `"favourite"`, `"help"`, `"age"`, `"pizza"`, a topic you love).
   - Every keyword match must still use `.lower()`
   - The loop must still quit cleanly on `"bye"`
   - Add a comment above each new `elif` saying what it does
 
   ### Path 2 — Explain the Magic 🧠
-  Write a short explanation (as **comments** in a Trinket) of how a real LLM is **like** and **unlike** your keyword bot. Include a tiny demo bot at the top. Answer these in your comments:
+  Write a short explanation (as **comments** in a Pickcode) of how a real LLM is **like** and **unlike** your keyword bot. Include a tiny demo bot at the top. Answer these in your comments:
   1. What does an LLM do over and over? (Hint: next ____)
   2. Name one thing your keyword bot CAN'T do that an LLM can.
   3. What is a "hallucination", and why should you double-check AI answers?
@@ -96,7 +96,7 @@ take_home_assignment: |
   - ⭐⭐ 5+ keywords with a friendly `else` reply, OR a clear like/unlike table in comments
   - ⭐⭐⭐ Add a keyword that gives a DIFFERENT reply depending on a second answer you `input()`
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it where your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it where your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: How Much Should We Trust an LLM?
 
@@ -218,7 +218,7 @@ if "hello" in text:          # ✅ matches Hello, HELLO, hello, HeLLo...
 
 ## 🛠️ Part 4: Build BrightByte Buddy (Together!)
 
-Open **Trinket** (trinket.io), log in, and make a new Python trinket named **`Y2-T5-W4-Chatbots`**.
+Open **Pickcode** (app.pickcode.io), log in, and make a new Python Pickcode project named **`Y2-T5-W4-Chatbots`**.
 
 We'll build the bot one keyword at a time. Here's the finished version — but in class we add each `elif` step by step and test as we go:
 
@@ -438,7 +438,7 @@ Pick **ONE** path (both = extra glory 🌟):
 
 **Path 1 — Grow BrightByte Buddy:** add **at least 3 new keyword topics** the class didn't build (e.g. `"weather"`, `"favourite"`, `"help"`). Every match uses `.lower()`, the loop still quits on `"bye"`, and each new `elif` has a comment above it.
 
-**Path 2 — Explain the Magic:** in Trinket comments, explain how a real LLM is **like** and **unlike** your keyword bot. Answer: (1) what does an LLM do over and over? (2) name one thing your bot can't do that an LLM can, (3) what is a hallucination and why double-check AI answers?
+**Path 2 — Explain the Magic:** in Pickcode comments, explain how a real LLM is **like** and **unlike** your keyword bot. Answer: (1) what does an LLM do over and over? (2) name one thing your bot can't do that an LLM can, (3) what is a hallucination and why double-check AI answers?
 
 **Challenge tiers:**
 - ⭐ 3 new keywords + clean quit (Path 1) OR the 3 questions answered (Path 2)
@@ -447,7 +447,7 @@ Pick **ONE** path (both = extra glory 🌟):
 
 > 💡 **Investigation Report tie-in (Week 7):** the chatbot or AI assistant you use at home would make a GREAT subject for your AI Investigation Report. Start noticing: what is it good at? When does it get things wrong?
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it where your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it where your teacher asks.
 
 ---
 

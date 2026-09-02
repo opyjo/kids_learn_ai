@@ -34,7 +34,7 @@ By the end of this lesson, students will be able to:
 
 ### Key Success Metrics
 
-- [ ] Every student has a `Y2-T8-Capstone` Trinket that RUNS (menu loops, stubs print, Quit stops it)
+- [ ] Every student has a `Y2-T8-Capstone` Pickcode that RUNS (menu loops, stubs print, Quit stops it)
 - [ ] Every student can point to their menu and say which tool each feature will need
 - [ ] Most students have started their OWN skeleton (menu + at least two stubs) by the end
 - [ ] No student leaves with a program that crashes on launch
@@ -43,14 +43,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet (teacher and each student)
 - Zoom with screen share
-- Students' Trinket accounts
+- Students' Pickcode accounts
 - Each student's **Week 1 spec** open (name, must-haves, nice-to-haves) — remind them to have it ready
 - The toolkit reference table from the lesson, ready to screen-share
 - This teaching guide open during class
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Type the full Study Buddy skeleton once yourself** so the live build is smooth and you know where the tricky moments are (function order, the `main()` call at the bottom)
 3. **Skim last week's specs** — know which students picked ambitious projects (games, many features) vs. simple ones; the ambitious ones need help *trimming* to 3-4 must-haves
 4. **Prepare a "menu-to-tool" example** for one or two students' projects so you can model the toolkit-matching out loud
@@ -134,7 +134,7 @@ Land the term-long rule:
 
 ### Part 4: Build-Along — Study Buddy Skeleton (20 minutes)
 
-The centrepiece. Everyone builds the SAME thing with you, stage by stage, so they own the pattern before adapting it. Get everyone into a new Trinket named **`Y2-T8-Capstone`** first — stress that this is THE file for the whole term.
+The centrepiece. Everyone builds the SAME thing with you, stage by stage, so they own the pattern before adapting it. Get everyone into a new Pickcode project named **`Y2-T8-Capstone`** first — stress that this is THE file for the whole term.
 
 Build the five stages live, thumbs-up after each:
 
@@ -150,7 +150,7 @@ Then run it together: choose 1-4 (each prints "coming soon"), choose something s
 
 - **Function order.** If `main()` is called before the functions are defined → `NameError`. Show the fix: definitions above, `main()` call at the very bottom.
 - **`choice == "1"` vs `choice == 1`.** No quotes → every choice falls through to `else`, and the menu looks "broken" even though it runs. This is the #1 silent bug.
-- **The forever loop.** No Quit branch (or forgetting `running = False`) → the menu never stops. Show them Trinket's **Stop** button as the escape hatch, then add the Quit branch.
+- **The forever loop.** No Quit branch (or forgetting `running = False`) → the menu never stops. Show them Pickcode's **Stop** button as the escape hatch, then add the Quit branch.
 
 #### Teaching Tips
 
@@ -185,7 +185,7 @@ The goal is not a polished project — it's a *running skeleton*. Every option p
 #### Teaching Tips
 
 - **Same skeleton, different words.** Reassure the room: everyone's structure is identical; only the menu text and function names change. This calms students who feel their project is "different".
-- **Save early, save often.** Remind them this file lives all term. A lost Trinket now is a lost capstone later.
+- **Save early, save often.** Remind them this file lives all term. A lost Pickcode now is a lost capstone later.
 
 ---
 
@@ -240,11 +240,11 @@ Stay on 2-3 minutes for questions and to help anyone whose skeleton doesn't yet 
 |---|---|
 | `NameError: name 'show_title' is not defined` | `main()` (or its call) is above the function definitions. Move all `def`s up; put `main()` on the last line. |
 | Menu always jumps to `else` | `choice` compared to a number: `choice == 1`. Fix to `choice == "1"` with quotes. |
-| Program never stops (forever loop) | No Quit branch, or `running = False` missing/misindented. Add it inside the Quit branch. Use Trinket **Stop** to escape meanwhile. |
+| Program never stops (forever loop) | No Quit branch, or `running = False` missing/misindented. Add it inside the Quit branch. Use Pickcode **Stop** to escape meanwhile. |
 | `IndentationError` in `main()` | Loop body four levels deep confuses students. Rebuild the branch slowly; 4 spaces per level. |
 | Student's project "doesn't fit" the pattern | It does — menu + loop + stubs suits almost anything. Reframe their features as menu lines together. |
 | Over-scoped spec (too many features) | Trim to 3-4 must-haves for the skeleton; park the rest as nice-to-haves for later sprints. |
-| Lost/unsaved Trinket | Remind: Save after every stage. If lost, the skeleton is fast to rebuild from the solution. |
+| Lost/unsaved Pickcode | Remind: Save after every stage. If lost, the skeleton is fast to rebuild from the solution. |
 
 ---
 
@@ -263,7 +263,7 @@ Stay on 2-3 minutes for questions and to help anyone whose skeleton doesn't yet 
 
 **The win today is a program that RUNS, not one that DOES anything.**
 
-Students trained all year to make code *work* may feel odd shipping empty stubs. Reframe it: the skeleton is the single most important structural decision of the whole capstone, and getting it running is a genuine achievement. If every student leaves with a `Y2-T8-Capstone` Trinket that loops its menu and quits cleanly, Build Sprint 1 becomes "just fill one blank" — and the road to graduation is smooth.
+Students trained all year to make code *work* may feel odd shipping empty stubs. Reframe it: the skeleton is the single most important structural decision of the whole capstone, and getting it running is a genuine achievement. If every student leaves with a `Y2-T8-Capstone` Pickcode that loops its menu and quits cleanly, Build Sprint 1 becomes "just fill one blank" — and the road to graduation is smooth.
 
 **You're framing the house they'll graduate from. Build it square!** 🏗️🎓
 

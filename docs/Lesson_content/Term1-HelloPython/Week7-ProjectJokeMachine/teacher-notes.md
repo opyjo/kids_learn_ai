@@ -260,7 +260,7 @@ print("🎭 THE END 🎭")
 > 3. ✅ Display each joke with setup, pause, punchline
 > 4. ✅ Ending message
 >
-> Open Trinket, start coding, and have FUN! I'll be walking around to help."
+> Open Pickcode, start coding, and have FUN! I'll be walking around to help."
 
 #### Teacher Circulation Strategy
 
@@ -570,7 +570,7 @@ Showcase preparation notes:
 
 3. **Technical setup:**
 
-   - Test displaying student Trinket links
+   - Test displaying student Pickcode links
    - Have a backup plan if a project won't run
 
 4. **Celebration elements:**

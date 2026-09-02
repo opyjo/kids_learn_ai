@@ -30,7 +30,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for brainstorming repetition examples
 - Optional: Timer for repetition challenges
 
@@ -601,4 +601,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This lesson sets the conceptual foundation for loops. Make sure students understand WHY loops exist before diving into HOW they work next week. Build excitement—loops are one of programming's most powerful tools!_ 🔄
-

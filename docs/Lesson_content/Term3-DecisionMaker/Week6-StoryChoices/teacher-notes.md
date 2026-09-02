@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for story planning
 
 ### Pre-Lesson Preparation
@@ -286,4 +286,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is a creative, fun lesson! Encourage creativity, help students plan their stories, and celebrate every interactive story. This prepares them for the term project next week!_ 📖
-

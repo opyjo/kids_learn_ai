@@ -61,7 +61,7 @@ take_home_assignment: |
   - Game status checker (health, level, status messages)
   - Any creative idea using decisions!
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

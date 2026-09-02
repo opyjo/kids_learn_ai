@@ -43,7 +43,7 @@ class_activities: |
 
   **Part 3: Share & Play (10 min)**
   - Share your quizzes on screen
-  - Take each other's quizzes (share Trinket links in the Zoom chat)
+  - Take each other's quizzes (share Pickcode links in the Zoom chat)
   - Give feedback
 
   **Challenge:** Who can create the most fun and challenging quiz?
@@ -70,7 +70,7 @@ take_home_assignment: |
   - Make it themed (science, math, fun facts, etc.)
   - Add decorative borders
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

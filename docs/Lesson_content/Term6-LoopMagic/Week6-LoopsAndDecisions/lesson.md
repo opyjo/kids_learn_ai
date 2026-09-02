@@ -50,7 +50,7 @@ take_home_assignment: |
   - Create a pattern based on multiples of 5
   - Create a pattern that combines conditions (and/or)
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -530,4 +530,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: combining loops and decisions makes your programs smart!_ 🧠
-
