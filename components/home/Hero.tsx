@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { SlideInRight } from "@/components/ui/motion";
 import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import {
+	ENROLL_NOW_CTA,
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_HEADLINE,
 	PARENT_FACING_SUPPORTING_COPY,
@@ -38,11 +39,14 @@ const Hero = () => {
 						</h1>
 					</div>
 					<div>
-						<p className="text-xl lg:text-2xl text-muted-foreground mb-8 text-pretty leading-relaxed">
+						<p className="text-xl lg:text-2xl text-muted-foreground mb-4 text-pretty leading-relaxed">
 							{PARENT_FACING_SUPPORTING_COPY}
 						</p>
+						<p className="mb-8 text-base font-semibold text-foreground text-pretty">
+							{FALL_2026_OFFER.weeklySchedule}
+						</p>
 					</div>
-					<div>
+					<div className="flex flex-col gap-3 items-center lg:items-start">
 						<div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
 							{/* Brightbyte pointing toward the CTA button */}
 							<motion.div
@@ -77,10 +81,20 @@ const Hero = () => {
 									{FREE_FIRST_CLASS_CTA}
 								</Button>
 							</Link>
-							<span className="text-sm text-muted-foreground">
-								No commitment required
-							</span>
+							<Button
+								asChild
+								size="lg"
+								variant="outline"
+								className="rounded-full px-8 py-6 text-lg"
+							>
+								<Link href="/pricing#payment-instructions">
+									{ENROLL_NOW_CTA}
+								</Link>
+							</Button>
 						</div>
+						<span className="text-sm text-muted-foreground">
+							Try free or enroll now—the choice is yours.
+						</span>
 					</div>
 					<div>
 						<div className="mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center lg:justify-start text-sm text-muted-foreground relative">

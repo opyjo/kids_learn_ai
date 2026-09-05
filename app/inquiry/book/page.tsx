@@ -14,7 +14,10 @@ import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
-import { PARENT_FACING_PROMISE } from "@/lib/marketing/positioning";
+import {
+	ENROLL_NOW_CTA,
+	PARENT_FACING_PROMISE,
+} from "@/lib/marketing/positioning";
 import { publicMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = publicMetadata({
@@ -52,8 +55,21 @@ export default function BookTrialPage() {
 					</h1>
 					<p className="text-lg text-muted-foreground">
 						{PARENT_FACING_PROMISE} Complete the form to request a place; we'll
-						confirm the exact time and joining instructions within 24 hours.
+						confirm availability and email joining instructions within 24 hours.
 					</p>
+					<div className="mt-6 rounded-xl border border-primary/20 bg-primary/5 p-4">
+						<p className="font-semibold text-foreground">
+							{FALL_2026_OFFER.weeklySchedule}
+						</p>
+						<p className="mt-2 text-sm text-muted-foreground">
+							The free first class and weekly program share this time.
+						</p>
+						<Button asChild variant="link" className="mt-2 h-auto p-0">
+							<Link href="/pricing#payment-instructions">
+								Ready to commit? {ENROLL_NOW_CTA}
+							</Link>
+						</Button>
+					</div>
 				</div>
 
 				{/* Benefits Quick View */}
@@ -90,7 +106,7 @@ export default function BookTrialPage() {
 								All fields marked with <span className="text-red-500">*</span>{" "}
 								are required. This requests a spot for{" "}
 								{FALL_2026_OFFER.trialDate}; your spot is confirmed when you
-								receive the exact time and joining instructions.
+								receive our confirmation email with joining instructions.
 							</p>
 						</div>
 						<CourseInquiryForm />

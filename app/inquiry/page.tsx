@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import {
+	ENROLL_NOW_CTA,
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_PROMISE,
 } from "@/lib/marketing/positioning";
@@ -54,12 +55,20 @@ export default function InquiryPage() {
 					<p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
 						{PARENT_FACING_PROMISE}
 					</p>
-					<Button asChild size="lg" className="group">
-						<Link href="/inquiry/book">
-							{FREE_FIRST_CLASS_CTA}
-							<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-						</Link>
-					</Button>
+					<p className="font-semibold text-foreground max-w-2xl mx-auto mb-6 text-pretty">
+						{FALL_2026_OFFER.weeklySchedule}
+					</p>
+					<div className="flex flex-col sm:flex-row justify-center gap-3">
+						<Button asChild size="lg" className="group">
+							<Link href="/inquiry/book">
+								{FREE_FIRST_CLASS_CTA}
+								<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+							</Link>
+						</Button>
+						<Button asChild size="lg" variant="outline">
+							<Link href="/pricing#payment-instructions">{ENROLL_NOW_CTA}</Link>
+						</Button>
+					</div>
 				</div>
 
 				<div className="max-w-4xl mx-auto space-y-8">
@@ -82,6 +91,9 @@ export default function InquiryPage() {
 									</div>
 									<p className="text-xl font-bold text-primary">
 										{FALL_2026_OFFER.trialDateShort}
+									</p>
+									<p className="font-semibold my-2">
+										{FALL_2026_OFFER.classTime}
 									</p>
 									<p className="text-sm text-muted-foreground">
 										{FALL_2026_OFFER.trialDuration} free trial · then weekly
@@ -192,10 +204,11 @@ export default function InquiryPage() {
 									</AccordionTrigger>
 									<AccordionContent>
 										The free trial is a one-hour live group class on{" "}
-										{FALL_2026_OFFER.trialDate}. Submit the form to request a
-										spot; we will email the exact class time and joining
-										instructions within 24 hours. No payment is required for the
-										trial.
+										{FALL_2026_OFFER.trialDate}, {FALL_2026_OFFER.classTime}.
+										Weekly classes continue at the same time. Submit the form to
+										request a spot; we will confirm availability and email
+										joining instructions within 24 hours. No payment is required
+										for the trial.
 									</AccordionContent>
 								</AccordionItem>
 								<AccordionItem value="experience">
@@ -228,9 +241,8 @@ export default function InquiryPage() {
 								<AccordionItem value="payment">
 									<AccordionTrigger>When do I pay?</AccordionTrigger>
 									<AccordionContent>
-										Only after your child's free first class! If you decide to
-										continue into the Monday beginner cohort starting September
-										14, you'll pay the one-time fee of{" "}
+										You can enroll and pay immediately, or wait until after your
+										child's free first class. The one-time fee is{" "}
 										{FALL_2026_OFFER.foundingRate} for the full{" "}
 										{FALL_2026_OFFER.programLength} program via e-Transfer.
 									</AccordionContent>
@@ -244,15 +256,23 @@ export default function InquiryPage() {
 						<h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
 						<p className="text-muted-foreground mb-6 max-w-lg mx-auto">
 							Request one of {FALL_2026_OFFER.maximumStudents} spots in the{" "}
-							{FALL_2026_OFFER.trialDateShort} trial. We will confirm the exact
-							time and joining instructions within 24 hours.
+							{FALL_2026_OFFER.trialDateShort} trial,{" "}
+							{FALL_2026_OFFER.classTime}. We will confirm availability and
+							email joining instructions within 24 hours.
 						</p>
-						<Button asChild size="lg" className="group">
-							<Link href="/inquiry/book">
-								{FREE_FIRST_CLASS_CTA}
-								<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-							</Link>
-						</Button>
+						<div className="flex flex-col sm:flex-row justify-center gap-3">
+							<Button asChild size="lg" className="group">
+								<Link href="/inquiry/book">
+									{FREE_FIRST_CLASS_CTA}
+									<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+								</Link>
+							</Button>
+							<Button asChild size="lg" variant="outline">
+								<Link href="/pricing#payment-instructions">
+									{ENROLL_NOW_CTA}
+								</Link>
+							</Button>
+						</div>
 					</div>
 				</div>
 			</main>

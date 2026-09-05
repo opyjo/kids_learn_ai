@@ -7,7 +7,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FadeIn, ScaleIn } from "@/components/ui/motion";
 import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
-import { FREE_FIRST_CLASS_CTA } from "@/lib/marketing/positioning";
+import {
+	ENROLL_NOW_CTA,
+	FREE_FIRST_CLASS_CTA,
+} from "@/lib/marketing/positioning";
 
 const CTASection = () => {
 	const [imageError, setImageError] = useState(false);
@@ -69,8 +72,8 @@ const CTASection = () => {
 									Your child can try a one-hour live Python class before joining
 									the new {FALL_2026_OFFER.ageRange.toLowerCase()} beginner
 									cohort. Weekly classes begin {FALL_2026_OFFER.cohortStartDate}
-									, with no more than {FALL_2026_OFFER.maximumStudents}{" "}
-									students.
+									, {FALL_2026_OFFER.classTime}, with no more than{" "}
+									{FALL_2026_OFFER.maximumStudents} students.
 								</p>
 							</FadeIn>
 							<FadeIn delay={0.3}>
@@ -85,11 +88,16 @@ const CTASection = () => {
 											{FREE_FIRST_CLASS_CTA}
 										</Button>
 									</Link>
-									<span className="text-primary-foreground/80 text-sm">
-										<span className="line-through opacity-70">$199.99</span>{" "}
-										<span className="font-semibold">$159.99</span> CAD Founding
-										Rate
-									</span>
+									<Button
+										asChild
+										size="lg"
+										variant="outline"
+										className="text-lg px-8 py-6 rounded-full border-primary-foreground/60 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full sm:w-auto"
+									>
+										<Link href="/pricing#payment-instructions">
+											{ENROLL_NOW_CTA}
+										</Link>
+									</Button>
 								</div>
 							</FadeIn>
 						</div>

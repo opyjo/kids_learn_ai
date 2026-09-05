@@ -1,9 +1,15 @@
+// Use Eastern/Mountain rather than EST/MST so the labels remain correct
+// when Toronto and Edmonton switch between daylight and standard time.
+const CLASS_TIME = "6–7 p.m. Eastern / 4–5 p.m. Mountain (Calgary/Edmonton)";
+
 export const FALL_2026_OFFER = {
 	trialDate: "Monday, September 14, 2026",
 	trialDateShort: "September 14",
 	trialDuration: "1 hour",
-	trialTimeConfirmation:
-		"Exact time and joining instructions confirmed within 24 hours",
+	classTime: CLASS_TIME,
+	weeklySchedule: `Mondays, ${CLASS_TIME}`,
+	trialConfirmation:
+		"Availability and joining instructions confirmed within 24 hours",
 	cohortStartDate: "Monday, September 14, 2026",
 	cohortStartDateShort: "September 14",
 	cohortDay: "Mondays",

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+	ENROLL_NOW_CTA,
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_HEADLINE,
 	PARENT_FACING_PROMISE,
@@ -22,5 +23,6 @@ describe("parent-facing positioning", () => {
 			"Free live trial on Monday, September 14, 2026 — the first class of the new beginner cohort.",
 		);
 		expect(FREE_FIRST_CLASS_CTA).toBe("Request a Free Trial Spot");
+		expect(ENROLL_NOW_CTA).toBe("Enroll Now — $159.99 CAD");
 	});
 });

@@ -276,6 +276,7 @@ export const POST = async (request: NextRequest) => {
               <div class="schedule-box">
                 <div style="font-size: 14px; color: #166534; margin-bottom: 5px;">📅 New Beginner Cohort</div>
                 <div class="schedule-day">${ageGroupDetails.day}</div>
+                <div style="font-size: 14px; color: #166534; margin-top: 5px;">${FALL_2026_OFFER.classTime}</div>
                 <div style="font-size: 12px; color: #166534; margin-top: 5px;">Starts ${FALL_2026_OFFER.cohortStartDate} · ${ageGroupDetails.label}</div>
               </div>
 
@@ -564,11 +565,11 @@ export const POST = async (request: NextRequest) => {
                   </div>
                   <div class="detail-row">
 					<span class="detail-label">Trial Time</span>
-					<span class="detail-value">${FALL_2026_OFFER.trialTimeConfirmation}</span>
+					<span class="detail-value">${FALL_2026_OFFER.classTime}</span>
                   </div>
                   <div class="detail-row">
                     <span class="detail-label">Beginner Cohort</span>
-					<span class="detail-value">${ageGroupDetails.day}, starting ${FALL_2026_OFFER.cohortStartDateShort}</span>
+					<span class="detail-value">${FALL_2026_OFFER.weeklySchedule}, starting ${FALL_2026_OFFER.cohortStartDateShort}</span>
                   </div>
                   <div class="detail-row">
                     <span class="detail-label">Experience Level</span>
@@ -584,7 +585,7 @@ export const POST = async (request: NextRequest) => {
                   </div>
                   <div class="step">
                     <div class="step-number">2</div>
-									<div class="step-text">You will receive the exact class time and Zoom joining instructions</div>
+									<div class="step-text">If a spot is available, you will receive your confirmation and Zoom joining instructions</div>
                   </div>
                   <div class="step">
                     <div class="step-number">3</div>

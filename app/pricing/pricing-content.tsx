@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/card";
 import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 import {
+	ENROLL_NOW_CTA,
 	FREE_FIRST_CLASS_CTA,
 	PARENT_FACING_HEADLINE,
 	PARENT_FACING_SUPPORTING_COPY,
@@ -92,9 +93,9 @@ export function PricingContent() {
 							<p className="text-2xl font-bold text-primary mb-2">
 								{FALL_2026_OFFER.trialDateShort}
 							</p>
-							<p className="text-muted-foreground">
-								{FALL_2026_OFFER.trialDuration} ·{" "}
-								{FALL_2026_OFFER.trialTimeConfirmation}
+							<p className="font-semibold mb-2">{FALL_2026_OFFER.classTime}</p>
+							<p className="text-sm text-muted-foreground">
+								{FALL_2026_OFFER.trialConfirmation}
 							</p>
 						</CardContent>
 					</Card>
@@ -107,8 +108,11 @@ export function PricingContent() {
 							<p className="text-2xl font-bold text-accent mb-2">
 								Starts {FALL_2026_OFFER.cohortStartDateShort}
 							</p>
+							<p className="font-semibold mb-2">
+								{FALL_2026_OFFER.weeklySchedule}
+							</p>
 							<p className="text-muted-foreground">
-								{FALL_2026_OFFER.ageRange} · Weekly Mondays · Max{" "}
+								{FALL_2026_OFFER.ageRange} · Max{" "}
 								{FALL_2026_OFFER.maximumStudents}
 							</p>
 						</CardContent>
@@ -187,12 +191,12 @@ export function PricingContent() {
 									className="flex-1"
 									onClick={handleScrollToPayment}
 								>
-									Already tried? Pay Now
+									{ENROLL_NOW_CTA}
 								</Button>
 							</div>
 
 							<p className="text-center text-sm text-muted-foreground">
-								Try your first class free. Only pay if you decide to continue.
+								Try the first class free, or enroll and pay now if you're ready.
 							</p>
 						</CardContent>
 					</Card>
@@ -334,11 +338,12 @@ export function PricingContent() {
 							<CardContent>
 								<p className="text-muted-foreground">
 									Request a spot in the one-hour group trial on{" "}
-									{FALL_2026_OFFER.trialDate}. We will confirm availability, the
-									exact time, and joining instructions within 24 hours. If you
-									love it, pay {FALL_2026_OFFER.foundingRate} to join the Monday
-									beginner cohort starting{" "}
-									{FALL_2026_OFFER.cohortStartDateShort}.
+									{FALL_2026_OFFER.trialDate}, {FALL_2026_OFFER.classTime}. We
+									will confirm availability and email joining instructions
+									within 24 hours. If you love it, pay{" "}
+									{FALL_2026_OFFER.foundingRate} to join the Monday beginner
+									cohort starting {FALL_2026_OFFER.cohortStartDateShort} at the
+									same weekly time.
 								</p>
 							</CardContent>
 						</Card>
@@ -380,13 +385,13 @@ export function PricingContent() {
 							</CardHeader>
 							<CardContent>
 								<p className="text-muted-foreground">
-									That's why the first class is free: families can decide before
-									paying. Once the first paid class has begun, program fees are
-									non-refundable if a student withdraws, misses a class, or
-									cannot attend. If we cancel the remainder of the program and
-									do not provide a replacement, we refund the amount paid for
-									the classes we do not provide. Statutory consumer rights still
-									apply.
+									You can try the first class free before paying, or enroll and
+									pay immediately. Once the first paid class has begun, program
+									fees are non-refundable if a student withdraws, misses a
+									class, or cannot attend. If we cancel the remainder of the
+									program and do not provide a replacement, we refund the amount
+									paid for the classes we do not provide. Statutory consumer
+									rights still apply.
 								</p>
 							</CardContent>
 						</Card>
