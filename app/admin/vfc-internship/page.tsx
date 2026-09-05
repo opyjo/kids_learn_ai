@@ -51,7 +51,7 @@ const checklist: ChecklistItem[] = [
 		label: "Student Selection",
 		detail:
 			"Identify a candidate from your own network/school, or post the role to VFC's Internship Bulletin Board (submissions close September 21, 2026).",
-		status: "Next",
+		status: "Complete",
 	},
 	{
 		label: "Student Verbally Accepts",
@@ -217,7 +217,9 @@ export default async function VfcInternshipPage() {
 						</div>
 						<div className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm backdrop-blur-sm">
 							<p className="font-semibold">Current stage</p>
-							<p className="mt-1 text-blue-50">Student Selection</p>
+							<p className="mt-1 text-blue-50">
+								Conditional Offer &amp; Verification
+							</p>
 						</div>
 					</div>
 				</div>
