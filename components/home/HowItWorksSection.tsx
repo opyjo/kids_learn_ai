@@ -11,7 +11,7 @@ const STEPS = [
 		number: 1,
 		title: "Request a free trial spot",
 		icon: CalendarCheck,
-		description: `Submit the short form for ${FALL_2026_OFFER.trialDate}. We confirm the exact time within 24 hours.`,
+		description: `Submit the short form for ${FALL_2026_OFFER.trialDate}, ${FALL_2026_OFFER.classTime}. We confirm availability and email joining instructions within 24 hours.`,
 		link: { href: "/inquiry", label: "Request yours →" },
 	},
 	{

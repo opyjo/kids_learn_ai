@@ -24,4 +24,16 @@ describe("Fall 2026 enrolment offer", () => {
 			foundingRate: "$159.99 CAD",
 		});
 	});
+
+	it("publishes the same Eastern and Mountain times for the trial and weekly classes", () => {
+		expect(FALL_2026_OFFER.classTime).toBe(
+			"6–7 p.m. Eastern / 4–5 p.m. Mountain (Calgary/Edmonton)",
+		);
+		expect(FALL_2026_OFFER.weeklySchedule).toBe(
+			`Mondays, ${FALL_2026_OFFER.classTime}`,
+		);
+		expect(FALL_2026_OFFER.trialConfirmation).toBe(
+			"Availability and joining instructions confirmed within 24 hours",
+		);
+	});
 });

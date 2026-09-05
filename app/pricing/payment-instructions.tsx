@@ -19,6 +19,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { FALL_2026_OFFER } from "@/lib/marketing/cohort-offer";
 
 const PAYMENT_EMAIL = "payment@kidslearnai.ca";
 
@@ -42,7 +43,7 @@ async function copyToClipboard(text: string, successMessage: string) {
 }
 
 export function PaymentInstructions({ userEmail }: PaymentInstructionsProps) {
-	const suggestedMessage = `Child: ____ / Email: ${userEmail || "your email"}`;
+	const suggestedMessage = `Child: ____ / Age: ____ / Email: ${userEmail || "your email"}`;
 
 	const steps: PaymentStep[] = [
 		{
@@ -74,7 +75,7 @@ export function PaymentInstructions({ userEmail }: PaymentInstructionsProps) {
 					<span className="line-through text-muted-foreground mr-2">
 						$199.99
 					</span>
-					$159.99 CAD
+					{FALL_2026_OFFER.foundingRate}
 				</p>
 			),
 		},
@@ -84,7 +85,7 @@ export function PaymentInstructions({ userEmail }: PaymentInstructionsProps) {
 			content: (
 				<div className="space-y-2">
 					<p className="text-sm text-muted-foreground">
-						Include your child's name and your email address.
+						Include your child's name, age, and your email address.
 					</p>
 					<div className="flex flex-wrap items-center gap-2">
 						<code className="rounded bg-muted px-2 py-1 text-sm">
@@ -145,11 +146,15 @@ export function PaymentInstructions({ userEmail }: PaymentInstructionsProps) {
 		>
 			<div className="text-center mb-8">
 				<Badge className="mb-4 bg-primary/10 text-primary border-primary/20 rounded-full px-4 py-2">
-					Already Tried Your Free Class?
+					Free Trial Optional
 				</Badge>
-				<h2 className="text-3xl font-bold mb-2">How to Pay</h2>
+				<h2 className="text-3xl font-bold mb-2">Enroll Now by e-Transfer</h2>
 				<p className="text-muted-foreground">
-					Continue your child's learning journey with the full program
+					Pay now to join the full program—you do not need to attend the free
+					first class before enrolling.
+				</p>
+				<p className="mt-2 text-sm font-medium text-foreground">
+					{FALL_2026_OFFER.weeklySchedule}
 				</p>
 			</div>
 
@@ -205,8 +210,10 @@ export function PaymentInstructions({ userEmail }: PaymentInstructionsProps) {
 					<Alert>
 						<CheckCircle2 className="h-4 w-4" aria-hidden="true" />
 						<AlertDescription>
-							<strong>Important:</strong> Without your child's name and your
-							email in the e-Transfer message, we can't match your payment.
+							<strong>Payment pending:</strong> Enrollment is confirmed after we
+							match your transfer and verify a seat. If the cohort is full, we
+							will return the payment in full. Include your child's name, age,
+							and your email so we can match the transfer.
 						</AlertDescription>
 					</Alert>
 				</CardContent>

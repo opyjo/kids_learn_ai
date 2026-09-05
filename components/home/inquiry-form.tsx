@@ -245,8 +245,9 @@ export const CourseInquiryForm = () => {
 							</Select>
 							{selectedAgeGroup ? (
 								<FormDescription>
-									📅 Free first class: {FALL_2026_OFFER.trialDate}. The new
-									beginner cohort meets weekly on Mondays.
+									📅 Free first class: {FALL_2026_OFFER.trialDate},{" "}
+									{FALL_2026_OFFER.classTime}. Weekly classes continue at the
+									same time.
 								</FormDescription>
 							) : null}
 							<FormMessage />
@@ -365,9 +366,9 @@ export const CourseInquiryForm = () => {
 					<div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 rounded-lg p-4 text-sm">
 						<p className="font-medium">Thank you for your interest!</p>
 						<p className="mt-1">
-							We've received your request for {FALL_2026_OFFER.trialDate}. We
-							will email the exact time and joining instructions within 24
-							hours.
+							We've received your request for {FALL_2026_OFFER.trialDate},{" "}
+							{FALL_2026_OFFER.classTime}. We will confirm availability and
+							email joining instructions within 24 hours.
 						</p>
 					</div>
 				)}

@@ -68,7 +68,7 @@ const impactHighlights = [
 		stat: "$0",
 		label: "To try it first",
 		detail:
-			"Every new cohort opens with a free live trial class, so you see the format before you pay anything.",
+			"Every new cohort opens with a free live trial class. Families can try before paying or enroll immediately when they are ready.",
 	},
 ];
 

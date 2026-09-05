@@ -8,3 +8,5 @@ export const PARENT_FACING_HEADLINE =
 export const PARENT_FACING_SUPPORTING_COPY = `Free live trial on ${FALL_2026_OFFER.trialDate} — the first class of the new beginner cohort.`;
 
 export const FREE_FIRST_CLASS_CTA = "Request a Free Trial Spot";
+
+export const ENROLL_NOW_CTA = `Enroll Now — ${FALL_2026_OFFER.foundingRate}`;

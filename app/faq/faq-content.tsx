@@ -20,11 +20,11 @@ export const FaqContent = () => {
 		},
 		{
 			question: "What ages and schedules are available?",
-			answer: `The new beginner cohort is for ${FALL_2026_OFFER.ageRange.toLowerCase()} and meets weekly on Mondays starting ${FALL_2026_OFFER.cohortStartDate}. Class size is limited to ${FALL_2026_OFFER.maximumStudents} students.`,
+			answer: `The new beginner cohort is for ${FALL_2026_OFFER.ageRange.toLowerCase()} and starts ${FALL_2026_OFFER.cohortStartDate}. Classes meet weekly: ${FALL_2026_OFFER.weeklySchedule}. Class size is limited to ${FALL_2026_OFFER.maximumStudents} students.`,
 		},
 		{
 			question: "How does the free trial work?",
-			answer: `The free trial is a one-hour live group class on ${FALL_2026_OFFER.trialDate}. Submit the request form and we will confirm availability, the exact class time, and joining instructions within 24 hours. If the program is a good fit, the founding rate is a one-time payment of ${FALL_2026_OFFER.foundingRate} for the full ${FALL_2026_OFFER.programLength} program.`,
+			answer: `The free trial is a one-hour live group class on ${FALL_2026_OFFER.trialDate}, ${FALL_2026_OFFER.classTime}. Weekly classes continue at the same time. Submit the request form and we will confirm availability and email joining instructions within 24 hours. You may also skip the trial and enroll immediately. The founding rate is a one-time payment of ${FALL_2026_OFFER.foundingRate} for the full ${FALL_2026_OFFER.programLength} program.`,
 		},
 		{
 			question: "What equipment does my child need?",
