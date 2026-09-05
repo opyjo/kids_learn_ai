@@ -7,6 +7,7 @@ import {
 	BriefcaseBusiness,
 	CalendarClock,
 	ChartNoAxesCombined,
+	ClipboardCheck,
 	FileCode,
 	FileText,
 	FlaskConical,
@@ -145,6 +146,12 @@ const adminNavItems: AdminNavItem[] = [
 		href: "/admin/vfc-internship/interview-guide",
 		label: "Interview Guide",
 		icon: NotebookPen,
+	},
+	{
+		section: "People",
+		href: "/admin/vfc-internship/post-selection",
+		label: "Post-selection",
+		icon: ClipboardCheck,
 	},
 	{
 		section: "Insights",
