@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for presentations
-- Trinket accounts
+- Pickcode accounts
 - Badges or certificates (Game Developer)
 - Optional: Camera for photos
 - Optional: Snacks for celebration
@@ -351,7 +351,7 @@ Notes for Next Term:
 ### For Students (Share with Parents)
 
 - **Showcase Photos:** Share celebration photos
-- **Project Links:** Share Trinket links
+- **Project Links:** Share Pickcode links
 - **Reflection:** Encourage reflection at home
 
 ### Parent Communication Template
@@ -426,4 +426,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is a celebration! Make it special, make it memorable, and most importantly—celebrate each student's unique achievements. They've worked hard and deserve recognition. You've guided them through an amazing learning journey. Be proud!_ 🎮✨🎉
-

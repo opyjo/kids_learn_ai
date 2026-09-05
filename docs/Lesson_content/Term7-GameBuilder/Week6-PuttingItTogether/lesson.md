@@ -64,7 +64,7 @@ take_home_assignment: |
   - Add difficulty levels
   - Create a menu system
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -402,4 +402,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: you're combining everything you've learned—you've got this!_ 🎮
-

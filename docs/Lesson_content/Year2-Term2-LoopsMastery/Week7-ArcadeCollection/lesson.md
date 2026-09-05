@@ -169,7 +169,7 @@ class_activities: |
 
   We assemble the arcade in **five stages**, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works. Nobody moves on until the whole class is ready!
 
-  > 📁 **First:** open a NEW Trinket and name it **`Y2-T2-W7-Arcade`**. This is the program you'll bring to next week's showcase.
+  > 📁 **First:** open a NEW Pickcode and name it **`Y2-T2-W7-Arcade`**. This is the program you'll bring to next week's showcase.
 
   ### Stage 1 — The Menu + The Loop (⭐⭐)
   Type the `import random`, `total_score = 0`, `playing = True`, and the `while playing:` menu. Add the Quit branch (4) and the `else`. Leave `pass` in the game branches for now.
@@ -189,14 +189,14 @@ class_activities: |
 
   ### Stage 5 — Score + Quit Polish (⭐⭐)
   Make sure `total_score` shows on the menu and in the goodbye message — and that it is set ONCE at the top, never reset inside the loop.
-  ✅ **Final checkpoint:** Play all three games in one run, then quit. Does your final score add up? 🎉 **Save your Trinket!**
+  ✅ **Final checkpoint:** Play all three games in one run, then quit. Does your final score add up? 🎉 **Save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Make Your Arcade Showcase-Ready ✨
 
   Next week is the **Arcade Showcase** — you demo your arcade live and earn your **Python Pro Badge**. This week, add ONE personal touch and make sure your arcade NEVER crashes.
 
   **Requirements:**
-  1. Open your **`Y2-T2-W7-Arcade`** Trinket
+  1. Open your **`Y2-T2-W7-Arcade`** Pickcode
   2. Make sure all three games work AND you always land back on the menu afterwards
   3. Add **one personal touch** (pick from the ideas below)
   4. Test it hard — try to BREAK it. Type letters, empty answers, huge numbers. It should survive everything.
@@ -214,9 +214,9 @@ take_home_assignment: |
 
   > 💡 Bring THIS exact program to next week's showcase — you'll run it live on Zoom and earn your badge!
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
-  🔗 **New here or lost your file?** Start a fresh Trinket at [trinket.io](https://trinket.io) and paste in today's arcade code.
+  🔗 **New here or lost your file?** Start a fresh Pickcode at [app.pickcode.io](https://app.pickcode.io) and paste in today's arcade code.
 ai_activities: |
   ## 🤖 Did You Know? RPS Bots Can Learn Your Patterns
 
@@ -250,7 +250,7 @@ ai_activities: |
 
 ## 🤖 BrightByte's Challenge
 
-> *"This is it — build week TWO. Over the last few weeks you made Dice Duel and Guess the Number. Great games... but they live in separate Trinkets, and you have to re-run each one on its own. Real arcades don't work like that! Today we build ONE program — a proper arcade cabinet — with a menu that lets a player pick any game, play it, and come straight back for more, all while ONE score keeps climbing. Plus a brand-new game to round it off. By the end you'll have something that genuinely feels like a real app. Let's build the arcade!"*
+> *"This is it — build week TWO. Over the last few weeks you made Dice Duel and Guess the Number. Great games... but they live in separate Pickcode projects, and you have to re-run each one on its own. Real arcades don't work like that! Today we build ONE program — a proper arcade cabinet — with a menu that lets a player pick any game, play it, and come straight back for more, all while ONE score keeps climbing. Plus a brand-new game to round it off. By the end you'll have something that genuinely feels like a real app. Let's build the arcade!"*
 > — BrightByte 🤖✨
 
 ---
@@ -289,7 +289,7 @@ You already know this shape! It's the **menu-driven `while` loop** — the exact
 | 🔤 **`choice` is a STRING** | `input()` always gives text, so we compare `choice == "1"`, not `choice == 1` |
 | 🏆 **`total_score` lives OUTSIDE the loop** | We set it ONCE at the top so it survives from game to game. Never reset it inside! |
 
-> 📁 **BEFORE WE START:** Open a new Trinket and save it as **`Y2-T2-W7-Arcade`**. This is the program you'll bring to next week's showcase — give it a good home!
+> 📁 **BEFORE WE START:** Open a new Pickcode project and save it as **`Y2-T2-W7-Arcade`**. This is the program you'll bring to next week's showcase — give it a good home!
 
 ---
 
@@ -521,7 +521,7 @@ elif choice == "4":
 
 ## ✅ Part 7: The Whole Arcade Program
 
-Here is your complete arcade. This is exactly what should be in your `Y2-T2-W7-Arcade` Trinket:
+Here is your complete arcade. This is exactly what should be in your `Y2-T2-W7-Arcade` Pickcode:
 
 ```python
 # 🕹️ Y2-T2-W7-Arcade — the full Arcade Game Collection
@@ -645,7 +645,7 @@ print("=" * 40)
 print("Arcade closed. Come back soon! 🎉")
 ```
 
-🎉 **You built a three-game arcade with a shared score!** Save your Trinket now.
+🎉 **You built a three-game arcade with a shared score!** Save your Pickcode project now.
 
 ---
 
@@ -691,7 +691,7 @@ The menu keeps reappearing forever, even after you pick 4!
         playing = False
 ```
 
-> 😵 Stuck in a forever loop? In Trinket, click **Stop** (or re-run) to escape it.
+> 😵 Stuck in a forever loop? In Pickcode, click **Stop** (or re-run) to escape it.
 
 ---
 
@@ -777,7 +777,7 @@ Your arcade is **finished** — and it's genuinely impressive. Next week is **We
 - 🧠 We'll play a fun **Term 2 quiz** covering loops, `break`/`continue`, `random`, and menus
 - 🏅 You'll earn your **Python Pro Badge** for completing the Loops & Logic Mastery term!
 
-> Bring your `Y2-T2-W7-Arcade` Trinket next week — make sure all three games run, nothing crashes, and you're proud of it. It's showtime!
+> Bring your `Y2-T2-W7-Arcade` Pickcode next week — make sure all three games run, nothing crashes, and you're proud of it. It's showtime!
 
 ---
 
@@ -800,7 +800,7 @@ Your arcade is **finished** — and it's genuinely impressive. Next week is **We
 Next week is the **Arcade Showcase** — you demo your arcade live and earn your **Python Pro Badge**. This week, add ONE personal touch and make sure your arcade NEVER crashes.
 
 **Requirements:**
-1. Open your **`Y2-T2-W7-Arcade`** Trinket
+1. Open your **`Y2-T2-W7-Arcade`** Pickcode
 2. Make sure all three games work AND you always land back on the menu afterwards
 3. Add **one personal touch** (pick from the ideas below)
 4. Test it hard — try to BREAK it. Type letters, empty answers, huge numbers. It should survive everything.
@@ -818,9 +818,9 @@ Next week is the **Arcade Showcase** — you demo your arcade live and earn your
 
 > 💡 Bring THIS exact program to next week's showcase — you'll run it live on Zoom and earn your badge!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
-🔗 **New here or lost your file?** Start a fresh Trinket at [trinket.io](https://trinket.io) and paste in today's arcade code.
+🔗 **New here or lost your file?** Start a fresh Pickcode at [app.pickcode.io](https://app.pickcode.io) and paste in today's arcade code.
 
 ---
 

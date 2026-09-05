@@ -62,7 +62,7 @@ take_home_assignment: |
   - Library menu (search, borrow, return, account, hours)
   - Any creative menu you can think of!
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 

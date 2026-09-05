@@ -135,7 +135,7 @@ export default function PrivacyPolicyPage() {
 							for AI tutor processing and safety checks, Resend for email,
 							Sentry for error monitoring, Google for sign-in and website
 							analytics, and Zoom for live classes. A family may also choose to
-							use an external coding service such as Trinket.
+							use an external coding service such as Pickcode.
 						</p>
 						<p>
 							These providers receive only the information needed for their

@@ -48,7 +48,7 @@ solution_code: |
 class_activities: |
   ## 🕵️ Class Activity: List Detective
 
-  You're a detective and the leaderboard is your case file. Type each mission in Trinket, run it, and give a **thumbs up** in Zoom when your output matches!
+  You're a detective and the leaderboard is your case file. Type each mission in Pickcode, run it, and give a **thumbs up** in Zoom when your output matches!
 
   ```python
   leaderboard = ["Ama", "Kofi", "Zara", "Yaw", "Efua", "Chidi"]
@@ -73,7 +73,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Search My List 🔍
 
-  Build a **"Search My List"** program in Trinket. Start with a list of your own (favourite games, foods, songs — your choice, at least 6 items).
+  Build a **"Search My List"** program in Pickcode. Start with a list of your own (favourite games, foods, songs — your choice, at least 6 items).
 
   **Requirements:**
   1. Print a **slice** of your list (e.g. the first 3 items) with a friendly label
@@ -94,9 +94,9 @@ take_home_assignment: |
   - ⭐⭐ Add the collecting loop (requirement 4)
   - ⭐⭐⭐ Ask the user with `input()` what to search for, then use `in` and `.index()` on their answer — and wrap the `.index()` call in `try`/`except` so a missing item never crashes your program!
 
-  **Trinket to open:** `Y2-T4-W2-Slicing`
+  **Pickcode to open:** `Y2-T4-W2-Slicing`
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Think: Searching Is Everywhere in AI
 
@@ -504,7 +504,7 @@ You'll meet `.sort()`, `sorted()`, `.reverse()`, `max()`, `min()`, and `sum()` �
 
 ## 📚 Homework: Search My List 🔍
 
-Build a **"Search My List"** program in Trinket, starting with a list of your own (at least 6 items).
+Build a **"Search My List"** program in Pickcode, starting with a list of your own (at least 6 items).
 
 **Requirements:**
 1. Print a **slice** of your list (e.g. the first 3 items) with a friendly label
@@ -525,9 +525,9 @@ Build a **"Search My List"** program in Trinket, starting with a list of your ow
 - ⭐⭐ Add the collecting loop (requirement 4)
 - ⭐⭐⭐ Ask the user with `input()` what to search for, then use `in` and `.index()` on their answer — wrapped in `try`/`except` so a missing item never crashes!
 
-**Trinket to open:** `Y2-T4-W2-Slicing`
+**Pickcode to open:** `Y2-T4-W2-Slicing`
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 
 ---
 

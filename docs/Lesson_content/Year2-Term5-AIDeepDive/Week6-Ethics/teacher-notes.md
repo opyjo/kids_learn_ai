@@ -40,11 +40,11 @@ By the end of this lesson, students will be able to:
 
 ### Materials Needed
 
-- Computer with internet, Zoom (screen share), Trinket (light use only today)
+- Computer with internet, Zoom (screen share), Pickcode (light use only today)
 - **A prepared set of "Real or AI?" examples** — see the box below; prepare these BEFORE class
 - The report checklist (in the lesson) ready to screen-share
 - This teaching guide open during class
-- Class WhatsApp/email for sharing Trinket links
+- Class WhatsApp/email for sharing Pickcode links
 
 ### Preparing the "Real or AI?" examples (do this before class!)
 
@@ -80,7 +80,7 @@ Have the "answer + the tell" ready for each, so you can reveal and explain.
 ⏱️ 58-70 min  → Light code (checklist) + homework + wrap-up (Part 7)
 ```
 
-**Flexible timing:** The two non-negotiables are the **"Real or AI?" game** and the **project briefing + topic choice**. If time runs short, cut or shorten the Trinket checklist code (Part 7) — it is explicitly the optional light touch. Never cut the topic choice; students must leave with a topic.
+**Flexible timing:** The two non-negotiables are the **"Real or AI?" game** and the **project briefing + topic choice**. If time runs short, cut or shorten the Pickcode checklist code (Part 7) — it is explicitly the optional light touch. Never cut the topic choice; students must leave with a topic.
 
 ---
 
@@ -146,7 +146,7 @@ Then run **Round 2**: every student posts their chosen topic + one thing they kn
 
 ### Part 7: Light Code + Homework + Wrap-Up (~12 min)
 
-The Trinket "misinformation checker" is a **light, optional** touch — a `list` + `for` loop printing a checklist. If time is tight, demo it on your screen and set it as part of homework rather than doing it live. Its real value is thematic (it reinforces the detective questions), not technical.
+The Pickcode "misinformation checker" is a **light, optional** touch — a `list` + `for` loop printing a checklist. If time is tight, demo it on your screen and set it as part of homework rather than doing it live. Its real value is thematic (it reinforces the detective questions), not technical.
 
 Walk through the **homework**: choose topic + draft the five-question outline in comments + name the demo. Stress that this outline **is** the start of their report — good work now makes Week 7 easy.
 
@@ -193,7 +193,7 @@ Stay on 2-3 minutes for topic questions.
 | Student can't pick a topic | Offer a default from your prepared list; reassure they can change it in Week 7 |
 | Topics are all too broad | Give the right-sizing rule live: "pick ONE app you actually use and can explain in three sentences" |
 | Debate gets heated (e.g. "AI cheating") | Welcome it, keep it respectful, land on "honest + credited use is the goal, not zero use" |
-| Time running short | Cut/shorten the Trinket checklist code — it's the optional light touch; protect the game and topic choice |
+| Time running short | Cut/shorten the Pickcode checklist code — it's the optional light touch; protect the game and topic choice |
 | A student is anxious about deepfakes/misinformation | Reframe: "you now have the tools most adults don't — that's power, not fear" |
 
 ---

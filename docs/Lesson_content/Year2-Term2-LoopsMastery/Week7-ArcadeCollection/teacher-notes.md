@@ -19,7 +19,7 @@ This is the second and final build week of the term project. Students take the g
 2. **Cement the menu-loop architecture** — `import random` → shared state → `while playing:` menu → `if/elif` branches → clean quit. This is the single most reusable program shape in the course
 3. **Practise integration** — the hard part today isn't new syntax; it's combining working pieces into one coherent program with a *shared* score and consistent menu numbering
 
-This is a **live build-along**, not a lecture. You code on shared screen; students follow stage by stage in their own `Y2-T2-W7-Arcade` Trinket. Keep everyone synchronised with thumbs-up checkpoints after each of the five stages.
+This is a **live build-along**, not a lecture. You code on shared screen; students follow stage by stage in their own `Y2-T2-W7-Arcade` Pickcode. Keep everyone synchronised with thumbs-up checkpoints after each of the five stages.
 
 ### Learning Objectives
 
@@ -45,12 +45,12 @@ By the end of this lesson, students will be able to:
 - Computer with internet, Zoom with screen share
 - This teaching guide open during class
 - A pre-built, tested copy of the full arcade solution (paste-ready in chat for anyone who falls behind)
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
 1. **Pre-build the full arcade yourself** and run every branch: Dice Duel win/lose/tie, Guess correct/out-of-guesses/"banana", RPS win/lose/tie/invalid move, invalid menu choice, and Quit. Smooth demos depend on this.
-2. **Test Zoom and Trinket** — confirm code runs and screen share is legible (font size up!).
+2. **Test Zoom and Pickcode** — confirm code runs and screen share is legible (font size up!).
 3. **Have the Stage-1 skeleton ready to paste** so slower typists can catch up without derailing the class.
 4. **Rehearse the "shared score" point** — the single most important idea today is that `total_score = 0` lives *outside* the loop. Have the reset-inside-the-loop bug ready to demo.
 5. **Rehearse the RPS win logic** — check-the-three-wins framing is clearer for students than trying to enumerate losses.
@@ -81,7 +81,7 @@ By the end of this lesson, students will be able to:
 
 Open with the big picture. Put the canonical skeleton on screen and name each part.
 
-> "Over the last few weeks you built Dice Duel and Guess the Number — but they live in separate Trinkets. Today we build ONE program: an arcade cabinet. A menu, a loop that keeps it open, and each game tucked into its own branch. And ONE score that climbs no matter which game you play."
+> "Over the last few weeks you built Dice Duel and Guess the Number — but they live in separate Pickcode projects. Today we build ONE program: an arcade cabinet. A menu, a loop that keeps it open, and each game tucked into its own branch. And ONE score that climbs no matter which game you play."
 
 Anchor the three ideas from the lesson table: the loop keeps the arcade open, `choice` is a string, and `total_score` lives outside the loop. Plant these now — every checkpoint reinforces them.
 
@@ -106,7 +106,7 @@ Type it live. Emphasise:
 #### Teaching Tips
 
 - **Test the edges immediately:** pick 4 (quits), pick 9 (invalid), pick 1/2/3 (currently do nothing — that's expected with `pass`). "The frame works. Now we furnish the rooms."
-- **Show the Stop button** in Trinket now, pre-empting the inevitable first forever-loop panic.
+- **Show the Stop button** in Pickcode now, pre-empting the inevitable first forever-loop panic.
 - **Watch the indentation** — the number-one Stage-1 stumble is a menu line left at the wrong indent level.
 
 ---
@@ -184,7 +184,7 @@ Demo the reset-inside-the-loop bug, then run the full program end to end: play a
 
 Homework is explicitly **showcase prep**: make it bulletproof + one personal touch (themed banner, a 4th game, or a score-based high-score message).
 
-> "Next week you demo this and earn your Python Pro Badge. This week: make sure nothing crashes, and add ONE personal touch. Bring THIS exact Trinket."
+> "Next week you demo this and earn your Python Pro Badge. This week: make sure nothing crashes, and add ONE personal touch. Bring THIS exact Pickcode."
 
 Flag the ⭐⭐⭐ tier trap: adding a 4th game means updating BOTH the printed menu AND the "Pick a game (1-4)" range. Preview Week 8: showcase, peer feedback, Term 2 quiz, and the badge. Paste submission instructions in chat.
 

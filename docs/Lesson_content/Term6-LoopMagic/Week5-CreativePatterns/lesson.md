@@ -50,7 +50,7 @@ take_home_assignment: |
   - Create a pattern with different characters
   - Create a pattern that tells a story
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -490,4 +490,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: creativity takes practice, but it's so rewarding!_ 🎨
-

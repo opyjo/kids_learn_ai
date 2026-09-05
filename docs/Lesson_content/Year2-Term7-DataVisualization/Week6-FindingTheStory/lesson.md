@@ -98,7 +98,7 @@ take_home_assignment: |
 
   **Requirements:**
   1. **Pick or build a dataset** with **6+ rows** (screen-time, football goals, songs played, rainfall, snacks sold — your choice!)
-  2. Store it in Trinket as a **list of dicts** (rows and columns, like Week 1)
+  2. Store it in Pickcode as a **list of dicts** (rows and columns, like Week 1)
   3. Compute **at least 2 stats** (e.g. an average, and a top/bottom using `sorted()`)
   4. Draft **2–3 headline insights** — each one backed by a real number from your data
 
@@ -114,9 +114,9 @@ take_home_assignment: |
   - ⭐⭐ Add a group COMPARISON headline (average of group A vs group B)
   - ⭐⭐⭐ Add a "so what?" line under each headline AND one honesty note (why your small dataset might mislead)
 
-  **Submit:** Save your Trinket (name it `Y2-T7-W6-FindingTheStory`), click **Share**, copy the link, and paste it wherever your teacher asks. Bring it to Week 7 — this IS your Data Story starting point!
+  **Submit:** Save your Pickcode project (name it `Y2-T7-W6-FindingTheStory`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks. Bring it to Week 7 — this IS your Data Story starting point!
 
-  👉 **Trinket:** [trinket.io](https://trinket.io) — log in and open a new Python 3 trinket named `Y2-T7-W6-FindingTheStory`.
+  👉 **Pickcode:** [app.pickcode.io](https://app.pickcode.io) — log in and open a new Python 3 Pickcode project named `Y2-T7-W6-FindingTheStory`.
 ai_activities: |
   ## 🤖 Quick Thought: AI Spots Patterns — Humans Decide What Matters
 
@@ -411,7 +411,7 @@ Some numbers to spark ideas: Ngozi (8) read **double** the average (4.0), and **
 
 ## 🧭 Part 6: Plan YOUR Data Story
 
-Next week you BUILD a Data Story. Today you choose it. Use this quick planner in a comment block in Trinket:
+Next week you BUILD a Data Story. Today you choose it. Use this quick planner in a comment block in Pickcode:
 
 ```python
 # --- My Data Story Plan ---
@@ -455,7 +455,7 @@ Next week you BUILD your Data Story. This week you choose it and find its headli
 
 **Requirements:**
 1. **Pick or build a dataset** with **6+ rows** (screen-time, football goals, songs played, rainfall, snacks sold — your choice!)
-2. Store it in Trinket as a **list of dicts** (rows and columns, like Week 1)
+2. Store it in Pickcode as a **list of dicts** (rows and columns, like Week 1)
 3. Compute **at least 2 stats** (e.g. an average, and a top/bottom using `sorted()`)
 4. Draft **2–3 headline insights** — each one backed by a real number
 
@@ -471,7 +471,7 @@ HEADLINE: Musa scored MORE THAN DOUBLE the team average (11 vs 4.5)!
 - ⭐⭐ Add a group COMPARISON headline (average of group A vs group B)
 - ⭐⭐⭐ Add a "so what?" line under each headline AND one honesty note (why your small dataset might mislead)
 
-**Submit:** Save your Trinket (name it `Y2-T7-W6-FindingTheStory`), click **Share**, copy the link, and paste it wherever your teacher asks. Bring it to Week 7 — this IS your Data Story starting point!
+**Submit:** Save your Pickcode project (name it `Y2-T7-W6-FindingTheStory`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks. Bring it to Week 7 — this IS your Data Story starting point!
 
 ---
 

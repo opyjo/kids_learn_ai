@@ -44,7 +44,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and chat
-- Trinket accounts (for the optional pitch program and the ⭐⭐⭐ homework)
+- Pickcode accounts (for the optional pitch program and the ⭐⭐⭐ homework)
 - This teaching guide open during class
 - The Ideas Menu and Mini-Spec Template ready to screen-share or paste
 - Class WhatsApp/email thread for submitting mini-specs
@@ -129,7 +129,7 @@ Draw the analogy to professional teams building a "minimum viable product" — t
 
 Walk through the full Study Buddy mini-spec (table in the lesson). This is the model students copy. Emphasise that it ticks all three boxes and has exactly three focused must-haves. Stress loudly: **Study Buddy is ONE example — your project can be completely different.** You'll return to Study Buddy every build week to demonstrate technique, but the goal is their own project.
 
-Optionally have students run the tiny "pitch" program in Trinket (`Y2-T8-W1-CapstonePlan`) — a light, fun touch that gets them into the editor without any real building.
+Optionally have students run the tiny "pitch" program in Pickcode (`Y2-T8-W1-CapstonePlan`) — a light, fun touch that gets them into the editor without any real building.
 
 #### The Study Buddy Reference Spec (keep for the whole term)
 
@@ -186,7 +186,7 @@ When a student pitches something oversized, don't say "that's too hard." Instead
 
 Example: "Online multiplayer battle royale" → "Let's build the one-on-one text battle with health points. Multiplayer becomes a someday nice-to-have."
 
-### Trinket / plain-Python reality checks
+### Pickcode / plain-Python reality checks
 
 Remind students (kindly) what's out of scope in our environment, so no one specs the impossible:
 

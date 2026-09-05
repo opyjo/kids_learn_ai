@@ -44,15 +44,15 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Students' Trinket accounts; today's Trinket name is `Y2-T3-W5-FunctionsTogether`
+- Students' Pickcode accounts; today's Pickcode name is `Y2-T3-W5-FunctionsTogether`
 - This teaching guide open during class
 - The lesson's starter and solution code ready to screen-share
-- Class WhatsApp/email thread for sharing Trinket links
+- Class WhatsApp/email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Run the solution code yourself** in Trinket so you can live-demo the menu routing confidently
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Run the solution code yourself** in Pickcode so you can live-demo the menu routing confidently
 3. **Prepare the "captain" metaphor** — `main()` is the team captain who calls players; students respond well to this framing
 4. **Pre-write the three common-mistake snippets** so you can trigger each real error live (the `NameError`, the `SyntaxError`, and the missing-brackets no-op)
 5. **Have next week's hook ready** — Week 6 is the fun DESIGN week; build anticipation

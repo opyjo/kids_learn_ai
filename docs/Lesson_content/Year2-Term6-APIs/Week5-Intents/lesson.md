@@ -90,7 +90,7 @@ class_activities: |
   Collect them together — `weather`, `temperature`, `rain`, `hot`, `cold`, `sunny`... Your teacher writes the winning list on screen. This list becomes the assistant's ears.
 
   ### Part B — Write `detect_intent` Together (⭐⭐)
-  In Trinket (`Y2-T6-W5-Intents`), build the function as a class:
+  In Pickcode (`Y2-T6-W5-Intents`), build the function as a class:
   1. Start with `text = message.lower()` (case-proofing!)
   2. Add a `weather` check using `in`
   3. Add `joke`, `fact`, and `bye` checks
@@ -130,7 +130,7 @@ take_home_assignment: |
   - ⭐⭐ Add a `handle(message)` router that calls a mock API (returning `{"status": ..., "data": ...}`) for at least one of your new intents
   - ⭐⭐⭐ Fix an *overlapping keywords* bug on purpose: find a message that matches two intents, then reorder your checks so the RIGHT intent wins — explain your choice in a comment
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Real Assistants Do "Intent Classification"
 
@@ -234,7 +234,7 @@ Now `"weather" in text` is `True` no matter how the user typed it. This is the v
 
 ## 🏗️ Part 4: Building `detect_intent` Together
 
-Let's build the brain one intent at a time. Open **Trinket** and name it `Y2-T6-W5-Intents`.
+Let's build the brain one intent at a time. Open **Pickcode** and name it `Y2-T6-W5-Intents`.
 
 **Start with the shape** — lowercase, then a safety net:
 
@@ -565,7 +565,7 @@ Extend `detect_intent` so your assistant understands more of what people say.
 - ⭐⭐ Add a `handle(message)` router that calls a mock API (returning `{"status": ..., "data": ...}`) for at least one of your new intents
 - ⭐⭐⭐ Fix an *overlapping keywords* bug on purpose: find a message that matches two intents, then reorder your checks so the RIGHT intent wins — explain your choice in a comment
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

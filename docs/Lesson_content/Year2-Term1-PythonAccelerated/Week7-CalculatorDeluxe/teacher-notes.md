@@ -42,17 +42,17 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share
-- Students' saved `Y2-T1-W6-Calculator` Trinket from last week (CRITICAL — remind them in advance)
+- Students' saved `Y2-T1-W6-Calculator` Pickcode from last week (CRITICAL — remind them in advance)
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Send an advance reminder** (day before if possible): "Bring your Week 6 calculator Trinket — we upgrade it live!" Have a spare copy of the Week 6 solution ready to paste in chat for anyone who lost theirs.
-2. **Test Zoom and Trinket** — confirm code runs, screen share works
+1. **Send an advance reminder** (day before if possible): "Bring your Week 6 calculator Pickcode — we upgrade it live!" Have a spare copy of the Week 6 solution ready to paste in chat for anyone who lost theirs.
+2. **Test Zoom and Pickcode** — confirm code runs, screen share works
 3. **Pre-build the deluxe calculator yourself** and run every branch (add, divide-by-zero, banana, percentage, tip, quit) so the demos are smooth
 4. **Rehearse the `try`/`except` explanation** — the trapeze-net analogy is the anchor; have it ready
-5. **Prepare the "Save a copy" instruction** — students should copy W6 into a new `Y2-T1-W7-CalculatorDeluxe` trinket so the original is preserved
+5. **Prepare the "Save a copy" instruction** — students should copy W6 into a new `Y2-T1-W7-CalculatorDeluxe` Pickcode project so the original is preserved
 
 ---
 
@@ -106,7 +106,7 @@ Frame the three annoyances (loop, divide-by-zero, bad input) using the table in 
 #### Teaching Tips
 
 - **Name the pattern:** "This is a flag or sentinel. You will use this EXACT pattern in every game next term." Plants a seed for Term 2.
-- **Escaping a forever loop:** show them the Stop button in Trinket now, before someone accidentally makes an infinite loop and panics.
+- **Escaping a forever loop:** show them the Stop button in Pickcode now, before someone accidentally makes an infinite loop and panics.
 
 ---
 
@@ -177,7 +177,7 @@ Paste/assemble the complete program and run every path live: add, divide-by-zero
 
 Homework is explicitly **showcase prep**: make it bulletproof + one personal touch.
 
-> "Next week is your big demo. This week: make sure it never crashes, and add ONE personal touch — a themed banner, an extra operation, or a history list for the brave. Bring THIS exact Trinket next week — you'll run it live."
+> "Next week is your big demo. This week: make sure it never crashes, and add ONE personal touch — a themed banner, an extra operation, or a history list for the brave. Bring THIS exact Pickcode next week — you'll run it live."
 
 Preview Week 8: the showcase and celebration. Build excitement. Paste submission instructions in chat.
 
@@ -214,7 +214,7 @@ Preview Week 8: the showcase and celebration. Build excitement. Paste submission
 | Problem | Solution |
 |---|---|
 | Student lost their Week 6 file | Paste the Week 6 solution code in the chat; they start from there |
-| Infinite loop (forgot `running = False`) | Show the Stop/re-run button in Trinket; then find the missing flag flip together |
+| Infinite loop (forgot `running = False`) | Show the Stop/re-run button in Pickcode; then find the missing flag flip together |
 | `IndentationError` after adding the loop | Their menu/maths isn't indented under `while`; select the block and indent it as one unit |
 | `try`/`except` "still crashes" | The dependent maths is outside the `try` — move it inside (Common Mistake 3) |
 | Calculator always says "invalid choice" | They're comparing `choice == 7` (number) instead of `choice == "7"` (string) |

@@ -14,8 +14,8 @@ import {
 import type React from "react";
 import { useMemo } from "react";
 import { ConceptLabHost } from "@/components/concept-labs/concept-lab-host";
-import { TrinketPreview } from "@/components/dashboard/trinket-preview";
-import { TrinketSubmissionForm } from "@/components/dashboard/trinket-submission-form";
+import { PickcodePreview } from "@/components/dashboard/pickcode-preview";
+import { PickcodeSubmissionForm } from "@/components/dashboard/pickcode-submission-form";
 import {
 	LessonMarkdown,
 	ThemedMarkdown,
@@ -160,7 +160,7 @@ export function LessonSections({
 		});
 	}
 
-	if (variant === "level-term") {
+	if (variant === "level-term" || variant === "web-creator") {
 		if (lesson.class_activities) {
 			sections.push({
 				id: "activity",
@@ -226,7 +226,13 @@ export function LessonSections({
 							linkClassName="text-blue-700 dark:text-blue-300"
 						/>
 
-						{userId ? (
+						{lesson.editor_type === "web" ? (
+							<div className="mt-3 border-t border-blue-200/60 pt-3 text-xs text-blue-800 dark:border-blue-900/60 dark:text-blue-200">
+								Your website autosaves privately on this device. Show it during
+								class; publishing stays off unless a parent or instructor
+								approves it.
+							</div>
+						) : userId ? (
 							<div className="mt-3 pt-3 border-t border-blue-200/60 dark:border-blue-900/60">
 								<div className="flex items-center gap-2 mb-3">
 									<Upload className="h-4 w-4 text-blue-600" />
@@ -238,9 +244,9 @@ export function LessonSections({
 								{!submission ? (
 									<div className="flex flex-col items-start gap-2">
 										<p className="text-xs text-blue-700 dark:text-blue-300">
-											Complete your assignment on Trinket, then submit it here.
+											Complete your assignment in Pickcode, then submit it here.
 										</p>
-										<TrinketSubmissionForm
+										<PickcodeSubmissionForm
 											lessonId={lesson.dbId}
 											lessonTitle={lesson.title}
 											onSubmitSuccess={onSubmissionSuccess}
@@ -279,10 +285,10 @@ export function LessonSections({
 													{showSubmissionPreview ? "Hide" : "View"} Submission
 												</Button>
 												{submission.status === "submitted" && (
-													<TrinketSubmissionForm
+													<PickcodeSubmissionForm
 														lessonId={lesson.dbId}
 														lessonTitle={lesson.title}
-														existingUrl={submission.trinketUrl}
+														existingUrl={submission.projectUrl}
 														onSubmitSuccess={onSubmissionSuccess}
 													/>
 												)}
@@ -304,8 +310,8 @@ export function LessonSections({
 										)}
 
 										{showSubmissionPreview && (
-											<TrinketPreview
-												trinketUrl={submission.trinketUrl}
+											<PickcodePreview
+												projectUrl={submission.projectUrl}
 												title="Your Submission"
 											/>
 										)}

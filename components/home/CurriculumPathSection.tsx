@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/motion";
 import { cn } from "@/lib/utils";
 
-type Term = { label: string; href: string };
+type Term = { label: string; href: string; comingSoon?: boolean };
 
 const YEAR_1_TERMS: Term[] = [
 	{ label: "Hello Python!", href: "/lessons/term-1-hello-python" },
@@ -33,6 +33,23 @@ const YEAR_2_TERMS: Term[] = [
 		href: "/lessons/year2-term-7-data-visualization",
 	},
 	{ label: "Capstone", href: "/lessons/year2-term-8-capstone" },
+];
+
+const WEB_CREATOR_TERMS: Term[] = [
+	{
+		label: "Website Foundations",
+		href: "/lessons/web-creator-term-1-foundations",
+	},
+	{
+		label: "Interactive Websites",
+		href: "/lessons/web-creator-term-2-interactive",
+		comingSoon: true,
+	},
+	{
+		label: "AI Web Applications",
+		href: "/lessons/web-creator-term-3-ai-apps",
+		comingSoon: true,
+	},
 ];
 
 const TermStrip = ({
@@ -99,6 +116,11 @@ const TermStrip = ({
 											/>
 										)}
 										{term.label}
+										{term.comingSoon ? (
+											<span className="ml-1 rounded-full bg-amber-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+												Soon
+											</span>
+										) : null}
 									</Link>
 								</div>
 							);
@@ -123,14 +145,15 @@ const CurriculumPathSection = () => {
 						The Journey
 					</Badge>
 					<h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-						A Two-Year Path from First Line to Capstone
+						A Core Path with Room to Create
 					</h2>
 					<p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-						8 focused terms per year — from{" "}
+						Build Python and AI foundations, then explore a focused Web Creator
+						pathway—from{" "}
 						<code className="font-mono text-base text-accent">
 							print("hello")
 						</code>{" "}
-						to training real AI models.
+						to responsible interactive websites.
 					</p>
 				</div>
 
@@ -145,6 +168,13 @@ const CurriculumPathSection = () => {
 						terms={YEAR_2_TERMS}
 						yearLabel="Year 2 · Python Mastery to AI & Data"
 						yearClassName="bg-secondary/20 text-foreground border-secondary/40"
+						highlightLast
+					/>
+					<TermStrip
+						terms={WEB_CREATOR_TERMS}
+						yearLabel="AI Web Creator · Ages 9–13 Elective"
+						yearClassName="bg-sky-100 text-sky-800 border-sky-200 dark:bg-sky-950/40 dark:text-sky-200 dark:border-sky-900"
+						highlightFirst
 						highlightLast
 					/>
 				</div>

@@ -27,7 +27,7 @@ By the end of this lesson, students will have:
 
 - Computer with internet access (for each student)
 - Projector/screen share for presentations
-- Trinket accounts
+- Pickcode accounts
 - Decision Master badges (physical or digital)
 - Camera for photos (optional)
 - Celebration snacks (optional)
@@ -148,7 +148,7 @@ By the end of this lesson, students will have:
 **Structure:**
 - Students can move around
 - Try different adventures
-- Share Trinket links
+- Share Pickcode links
 - Give positive feedback
 - Have fun!
 

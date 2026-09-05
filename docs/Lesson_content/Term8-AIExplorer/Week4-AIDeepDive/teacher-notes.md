@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing AI concepts
 - Optional: Examples of AI systems
 
@@ -464,7 +464,7 @@ KidsLearnAI
 - [ ] Prepare examples
 - [ ] Think about connections
 - [ ] Prepare discussion points
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -491,4 +491,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This lesson connects everything students have learned to AI. Make the connections clear and concrete. Students who understand this are ready for the important ethics discussion next week!_ 🤖
-

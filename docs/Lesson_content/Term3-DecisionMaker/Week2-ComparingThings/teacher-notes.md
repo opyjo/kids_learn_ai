@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing comparison examples
 
 ### Pre-Lesson Preparation
@@ -345,4 +345,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This lesson prepares students for if statements! Make sure they understand comparisons well, especially case sensitivity and alphabetical order. These concepts will be crucial next week!_ 🔍
-

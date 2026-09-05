@@ -8,7 +8,7 @@ is_premium: false
 requires_trinket: true
 starter_code: |
   # ✅ DEMO-READY CHECKLIST
-  # Before you show your Contact Manager, tick these off in Trinket:
+  # Before you show your Contact Manager, tick these off in Pickcode:
   #
   # [ ] It RUNS with no red errors
   # [ ] The menu appears clearly (Add / View / Search / Delete / Quit)
@@ -19,7 +19,7 @@ starter_code: |
   # [ ] It does NOT crash on a bad menu choice (like "banana" or "99")
   # [ ] It QUITS cleanly when you choose the quit option
   #
-  # Open your Contact Manager Trinket now and run it once, top to bottom.
+  # Open your Contact Manager Pickcode now and run it once, top to bottom.
   # If every box is ticked — you're ready to shine on Zoom! 🎤
 
   print("My Contact Manager is demo-ready! 📇")
@@ -84,7 +84,7 @@ take_home_assignment: |
   Choose ONE (or do both if you're buzzing!):
 
   ### Option A — Data Architect Certificate (recommended)
-  Write a **"Data Architect Certificate"** program in Trinket that celebrates a mini contacts book.
+  Write a **"Data Architect Certificate"** program in Pickcode that celebrates a mini contacts book.
 
   **Requirements:**
   1. Make a **list of at least 3 dictionaries**, each with `name` and `phone` (add `email` if you like)
@@ -102,7 +102,7 @@ take_home_assignment: |
 
   **Also (optional, 2 min):** peek at the Term 5 preview below and write down one question you have about **how AI really works**.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link (and paste your family notes), and send it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link (and paste your family notes), and send it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Data Structures Are How AI Remembers Everything
 
@@ -149,7 +149,7 @@ ai_activities: |
 
 Before you show anything, let's make sure your Contact Manager shines. **No new features today** — you're just tidying up work you already did over Weeks 6-7.
 
-Open your Contact Manager Trinket and run it once, top to bottom. Then check every box:
+Open your Contact Manager Pickcode and run it once, top to bottom. Then check every box:
 
 | ✅ Check | What "good" looks like |
 |---|---|
@@ -402,7 +402,7 @@ Over 8 weeks, you learned and mastered:
 Choose ONE (or both if you're buzzing!):
 
 ### Option A — Data Architect Certificate (recommended)
-Write a **"Data Architect Certificate"** program in Trinket that celebrates a mini contacts book.
+Write a **"Data Architect Certificate"** program in Pickcode that celebrates a mini contacts book.
 
 **Requirements:**
 1. Make a **list of at least 3 dictionaries**, each with `name` and `phone` (add `email` if you like)
@@ -419,7 +419,7 @@ Show your finished Contact Manager to someone at home. Let them add and search f
 
 **Also (optional, 2 min):** peek at the Term 5 preview above and write down one question you have about **how AI really works**.
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and send it wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and send it wherever your teacher asks.
 
 ---
 

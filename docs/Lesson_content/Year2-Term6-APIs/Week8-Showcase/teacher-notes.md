@@ -45,7 +45,7 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share enabled for students
-- Students' finished assistant Trinkets from Weeks 6-7 (remind them in advance!)
+- Students' finished assistant Pickcode projects from Weeks 6-7 (remind them in advance!)
 - The quiz questions (in the lesson) — decide whether to screen-share or read aloud
 - The API Master Badge asset/graphic (however your programme awards badges)
 - This teaching guide
@@ -106,7 +106,7 @@ The heart of the lesson. Each student follows the "talk to my assistant" format 
 
 - **Model the first demo yourself** or have a confident volunteer go first, so the format is clear. Chatting with the assistant live (not reading code) is the goal.
 - **Coach the feedback.** The first time someone types "it's good", redirect: "Be specific — what exactly did you like?" Reinforce the golden rule: kind, specific, helpful.
-- **Protect nervous students.** Offer options: share screen, OR you run their shared Trinket link, OR they just describe one service. Never force screen-sharing.
+- **Protect nervous students.** Offer options: share screen, OR you run their shared Pickcode link, OR they just describe one service. Never force screen-sharing.
 - **Celebrate every demo by name.** "Let's get a 🔥 in the chat for Ama's assistant!" Every student should feel seen.
 - **Handle live bugs warmly:** "Ooh, a live bug — real programmers debug in public all the time!" Model calm debugging.
 
@@ -208,7 +208,7 @@ Use today to finalise your term picture of each student:
 | Feedback chat goes quiet | Prompt specifically: "Drop a 🔥 and one thing you liked about Kofi's joke service!" |
 | Quiz too easy / too hard | Skip ahead or slow down; add a bonus "explain WHY" for fast classes |
 | Large class, not enough time for all demos | Two rounds, cap at 90 seconds each, or group demos into breakout rooms with a spokesperson |
-| Student forgot their Trinket | Have them open the class solution and walk through it as if it were theirs — still a valid demo experience and still badge-worthy |
+| Student forgot their Pickcode | Have them open the class solution and walk through it as if it were theirs — still a valid demo experience and still badge-worthy |
 | Assistant works but has no personality | That's fine for the badge; suggest personality as a "wish" and a lovely holiday tweak |
 
 ---

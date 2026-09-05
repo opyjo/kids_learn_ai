@@ -75,7 +75,7 @@ class_activities: |
 
   Your teacher will share a mock API response dict (the Accra weather response in your starter code). You are the **Data Explorer** — your job is to dig specific values out of it.
 
-  Type each answer in Trinket, run it, and give a **thumbs up** in Zoom when your output matches!
+  Type each answer in Pickcode, run it, and give a **thumbs up** in Zoom when your output matches!
 
   ### Explore 1 — Surface Data (⭐)
   Print the **country**. It's a top-level key, so you only need one `[ ]`.
@@ -94,7 +94,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Read the Response
 
-  Open the Trinket **Y2-T6-W2-JSON** (link below) — it contains a nested mock API response dict for a city. Your job is to be the Data Explorer.
+  Open the Pickcode **Y2-T6-W2-JSON** (link below) — it contains a nested mock API response dict for a city. Your job is to be the Data Explorer.
 
   **Requirements:**
   1. Write code that extracts and prints **4 or more** specific pieces of data from the response
@@ -115,7 +115,7 @@ take_home_assignment: |
   - ⭐⭐ Extract 6 pieces, loop over the whole `forecast` list to print every day
   - ⭐⭐⭐ Use `.get()` for one value and `in` to check a key exists before reading it — so your program never crashes even if a key is missing
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: How AI Uses JSON
 
@@ -493,7 +493,7 @@ You've learned to read data **out** of a response. But where do those responses 
 
 ## 📚 Homework: Read the Response
 
-Open the Trinket **Y2-T6-W2-JSON** — it has a nested mock API response for a city. Be the Data Explorer.
+Open the Pickcode **Y2-T6-W2-JSON** — it has a nested mock API response for a city. Be the Data Explorer.
 
 **Requirements:**
 1. Extract and print **4 or more** pieces of data from the response
@@ -514,7 +514,7 @@ Open the Trinket **Y2-T6-W2-JSON** — it has a nested mock API response for a c
 - ⭐⭐ 6 pieces, plus loop over the whole `forecast` list to print every day
 - ⭐⭐⭐ Use `.get()` for one value and `in` to check a key exists — so it never crashes
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 
 ---
 

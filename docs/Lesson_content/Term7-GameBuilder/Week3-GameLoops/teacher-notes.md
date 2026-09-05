@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for showing game loop structure
 
 ### Pre-Lesson Preparation
@@ -413,7 +413,7 @@ KidsLearnAI
 - [ ] Prepare examples
 - [ ] Think about game ideas
 - [ ] Prepare troubleshooting
-- [ ] Test Trinket access
+- [ ] Test Pickcode access
 
 ### During Class
 
@@ -440,4 +440,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: Game loops are the foundation of interactive games. Students who master this are ready to add random numbers and build complete games. Make it fun and engaging!_ 🎮
-

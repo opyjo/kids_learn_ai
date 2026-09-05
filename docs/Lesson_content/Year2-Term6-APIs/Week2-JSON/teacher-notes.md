@@ -24,7 +24,7 @@ If students leave believing that, the rest of Term 6 becomes "you already know t
 3. Pulling from a **list inside a dict** (`response["forecast"][0]["day"]`)
 4. **Safe** access with `.get()` and `in` to avoid `KeyError`
 
-**Honesty note (important):** be transparent that real APIs use the internet and send JSON as text. Ours are plain dicts because Trinket has no network. Do NOT require the `json` module — everything must run as plain dicts in Trinket. If a curious student mentions `json.loads`, affirm it but keep it optional and off the critical path.
+**Honesty note (important):** be transparent that real APIs use the internet and send JSON as text. Ours are plain dicts because Pickcode has no network. Do NOT require the `json` module — everything must run as plain dicts in Pickcode. If a curious student mentions `json.loads`, affirm it but keep it optional and off the critical path.
 
 ### Learning Objectives
 
@@ -47,13 +47,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share enabled
-- Students' Trinket accounts; the **Y2-T6-W2-JSON** starter Trinket ready to share
+- Students' Pickcode accounts; the **Y2-T6-W2-JSON** starter Pickcode ready to share
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Have the Accra `weather_response` dict ready** to screen-share and live-edit — you'll be typing extractions live
 3. **Pre-load two example errors** so you can trigger them on demand: `weather_response["temp"]` (KeyError — it's nested) and `weather_response["forecast"]["Monday"]` (TypeError — list index)
 4. **Prepare the "boxes inside boxes" visual** (in the lesson) — this is the mental model that makes nesting click
@@ -99,7 +99,7 @@ Let them notice there's almost none. Land it:
 #### Teaching Tips
 
 - **Don't overload the JSON name.** Students don't need JavaScript history. "Format APIs send data in, shaped like a dict" is enough.
-- **Be honest about the internet.** Say plainly: "Real APIs send JSON text across the internet; a program converts it to a dict. Trinket has no internet, so ours ARE dicts. Same shape, same skills." This honesty is a course value — students trust you more for it.
+- **Be honest about the internet.** Say plainly: "Real APIs send JSON text across the internet; a program converts it to a dict. Pickcode has no internet, so ours ARE dicts. Same shape, same skills." This honesty is a course value — students trust you more for it.
 
 ---
 
@@ -160,7 +160,7 @@ Expected: `weather_response["weather"]["humidity"]`. Call out a correct one; gen
 #### Teaching Tips
 
 - **The single most important habit:** read nested access **left to right**, one box at a time. Say it every time.
-- Watch for the `°C` character — it's fine in Trinket's Python 3 output; if a student's copy-paste breaks, have them retype it or drop the symbol.
+- Watch for the `°C` character — it's fine in Pickcode's Python 3 output; if a student's copy-paste breaks, have them retype it or drop the symbol.
 
 ---
 
@@ -196,7 +196,7 @@ Give the decision rule clearly:
 
 ### Data Explorer Activity (15 minutes)
 
-Share the starter Trinket. Students work the three tiers; you roam via screen shares and chat.
+Share the starter Pickcode. Students work the three tiers; you roam via screen shares and chat.
 
 - **Explore 1 (country):** everyone should clear this fast — it confirms one-bracket access.
 - **Explore 2 (humidity):** the nested check. This is your diagnostic — anyone stuck here needs the "two brackets, one per box" reminder.
@@ -272,7 +272,7 @@ Stay on 2-3 minutes for questions.
 
 | Problem | Solution |
 |---|---|
-| "Isn't JSON different from a dict?" | Affirm: JSON is text over the internet, a dict is the in-Python version — same shape. We use dicts because Trinket has no network. |
+| "Isn't JSON different from a dict?" | Affirm: JSON is text over the internet, a dict is the in-Python version — same shape. We use dicts because Pickcode has no network. |
 | Student imports `json` and it errors/confuses | Reassure it's optional; we don't need it. Steer back to plain dicts — everything runs without `json`. |
 | KeyError everywhere | Usually a misspelt key or forgetting it's nested. Have them print the parent box first (`response["weather"]`) to see the real keys. |
 | `TypeError: list indices must be integers` | They used a key on the forecast LIST. Remind: list = number index, starting at 0. |

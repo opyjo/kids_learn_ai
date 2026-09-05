@@ -22,7 +22,7 @@ Every student should:
 
 ## Preparation
 
-- Confirm every student can access their Trinket.
+- Confirm every student can access their Pickcode.
 - Arrange a presentation order and a visible timer.
 - Prepare audience feedback cards: “One strength…” and “One question…”
 - Prepare the Python Beginner badges.

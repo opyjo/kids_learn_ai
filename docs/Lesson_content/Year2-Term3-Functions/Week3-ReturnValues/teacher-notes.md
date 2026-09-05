@@ -44,13 +44,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share enabled
-- Students' Trinket accounts; today's Trinket: `Y2-T3-W3-ReturnValues`
+- Students' Pickcode accounts; today's Pickcode: `Y2-T3-W3-ReturnValues`
 - This teaching guide open during class
-- Class WhatsApp/email thread for sharing Trinket links
+- Class WhatsApp/email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Pre-type the two demo functions** (`show_double` vs `double`) so you can run them instantly without live-typing delays
 3. **Rehearse the `None` demo** — `x = print("hi")` then `print(x)`. Practise the pause before you reveal `None`; the surprise is the teaching moment
 4. **Have a returns-map ready** — the table of the four uses of a returned value (variable / f-string / if / chain)
@@ -243,7 +243,7 @@ Walk through requirements and the example run. Stress requirement 3 — *combini
 
 > "⭐ is three functions that return. ⭐⭐ feeds one return straight into another. ⭐⭐⭐ adds an average and a True/False check. Any tier counts as done."
 
-Paste submission instructions and the due date. Trinket name: `Y2-T3-W3-ReturnValues`.
+Paste submission instructions and the due date. Pickcode name: `Y2-T3-W3-ReturnValues`.
 
 #### Week 4 Teaser (2 min)
 
@@ -296,7 +296,7 @@ Stay on the call 2-3 minutes for questions.
 | `return "True"` instead of `return n % 2 == 0` | Show that `"True"` is text and `True` is a boolean; run `is_even(4)` both ways to compare |
 | "Why is the code after return not running?" | That's correct behaviour — return is the exit door; move the work above the return |
 | Parameters still shaky from last week | Spend 3 minutes re-recapping `def double(n):` before layering `return` on top |
-| Trinket/Zoom technical issues | repl.it backup link in chat; browser-window-only screen share; private-chat triage |
+| Pickcode/Zoom technical issues | repl.it backup link in chat; browser-window-only screen share; private-chat triage |
 
 ---
 

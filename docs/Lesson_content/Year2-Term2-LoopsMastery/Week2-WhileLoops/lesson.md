@@ -66,7 +66,7 @@ class_activities: |
 
   We build it live, in three stages. After each stage, **run your code** and give a **thumbs up** 👍 in Zoom when it works. We move together!
 
-  > 📁 **First:** open Trinket and make a new trinket named **`Y2-T2-W2-WhileLoops`**.
+  > 📁 **First:** open Pickcode and make a new Pickcode project named **`Y2-T2-W2-WhileLoops`**.
 
   ### Stage 1 — Warm-Up Countdown (⭐)
   Type the countdown and run it. Then change it to count down from **10**.
@@ -109,7 +109,7 @@ class_activities: |
       play_again = input("Play again? (yes/no): ")
   print("Thanks for playing! 👋")
   ```
-  ✅ **Final checkpoint:** Win, type `yes`, play again; type `no` to stop. 🎉 **Save your Trinket!**
+  ✅ **Final checkpoint:** Win, type `yes`, play again; type `no` to stop. 🎉 **Save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: The Persistent Robot 🤖
 
@@ -136,7 +136,7 @@ take_home_assignment: |
 
   > 💡 **Prefer a countdown?** Swap the riddle for a **Countdown Launcher**: ask the user for a start number with `int(input(...))`, then use `while count > 0:` to count down to `BLAST OFF! 🚀`.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? AI Agents Live in a Loop
 
@@ -169,7 +169,7 @@ ai_activities: |
 - The difference between `for` and `while` — and how to pick the right one
 - How to **count** with a `while` loop (up AND down)
 - The two patterns every game needs: the **"Keep Guessing"** loop and the **"Play Again"** wrapper
-- How to spot and escape an **infinite loop** (and how to hit Stop in Trinket! 🛑)
+- How to spot and escape an **infinite loop** (and how to hit Stop in Pickcode! 🛑)
 
 ---
 
@@ -454,7 +454,7 @@ while count > 0:
     count = count - 1
 ```
 
-> 🛑 **Stuck in an infinite loop in Trinket?** Click the **Stop** button (the ▶ Run button turns into a Stop square while your code is running). If your output is scrolling forever, that's your clue — hit Stop, then fix the missing update line.
+> 🛑 **Stuck in an infinite loop in Pickcode?** Click the **Stop** button (the ▶ Run button turns into a Stop square while your code is running). If your output is scrolling forever, that's your clue — hit Stop, then fix the missing update line.
 
 ---
 
@@ -524,7 +524,7 @@ while guess != secret:
 
 We build it live, in three stages. After each stage, **run your code** and give a **thumbs up** 👍 in Zoom when it works. We move together!
 
-> 📁 **First:** open Trinket and make a new trinket named **`Y2-T2-W2-WhileLoops`**.
+> 📁 **First:** open Pickcode and make a new Pickcode project named **`Y2-T2-W2-WhileLoops`**.
 
 ### Stage 1 — Warm-Up Countdown (⭐)
 Type the countdown and run it. Then change it to count down from **10**.
@@ -553,7 +553,7 @@ print("🎉 YES! You cracked it! 🔓")
 ### Stage 3 — The Play Again Wrapper (⭐⭐⭐)
 Wrap the whole game in a `while play_again == "yes":` loop, add a `tries` counter, and ask at the END. (See the full program in Part 7 above.)
 
-✅ **Final checkpoint:** Win, type `yes`, play again; type `no` to stop. 🎉 **Save your Trinket!**
+✅ **Final checkpoint:** Win, type `yes`, play again; type `no` to stop. 🎉 **Save your Pickcode project!**
 
 ---
 
@@ -596,7 +596,7 @@ You can now loop UNTIL something happens — but what if you want to **jump out 
 - ✅ You know **when to use `for` vs `while`** (do I know how many times?)
 - ✅ You built the **"Keep Guessing"** loop and the **"Play Again"** wrapper
 - ✅ You combined them into a real **game loop** — the Magic Word Game
-- ✅ You can spot, escape, and fix an **infinite loop** in Trinket 🛑
+- ✅ You can spot, escape, and fix an **infinite loop** in Pickcode 🛑
 
 > *"Look at what you just built — a game that keeps going until the player wins, then asks if they want to play again. That 'game loop' is the exact skeleton of every arcade machine, every mobile game, every app that says 'try again?'. You didn't just learn a loop today — you learned the heartbeat of games. In Week 7, this becomes your whole arcade."*
 > — BrightByte 🤖🎮
@@ -628,7 +628,7 @@ Build a robot that will NOT let you pass until you answer its riddle correctly �
 
 > 💡 **Prefer a countdown?** Swap the riddle for a **Countdown Launcher**: ask the user for a start number with `int(input(...))`, then use `while count > 0:` to count down to `BLAST OFF! 🚀`.
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

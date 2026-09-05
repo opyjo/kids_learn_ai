@@ -38,21 +38,21 @@ By the end of this lesson, students will be able to:
 ### Key Success Metrics
 
 - [ ] Every student's calculator runs end to end and gives a correct answer
-- [ ] Every student has saved a Trinket named `Y2-T1-W6-Calculator`
+- [ ] Every student has saved a Pickcode named `Y2-T1-W6-Calculator`
 - [ ] Students can explain why `choice == "1"` needs quotes
 - [ ] Students leave knowing their calculator only does ONE sum (the Week 7 hook)
 
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
-- Zoom with screen share; teacher's Trinket visible throughout
-- Students' Trinket accounts
+- Zoom with screen share; teacher's Pickcode visible throughout
+- Students' Pickcode accounts
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Type the full solution yourself once** in a fresh Trinket named `Y2-T1-W6-Calculator` — you'll build it live and it must be flawless
+1. **Type the full solution yourself once** in a fresh Pickcode named `Y2-T1-W6-Calculator` — you'll build it live and it must be flawless
 2. **Test each example run** (add 15+7=22.00, multiply 8×6.5=52.00, divide 100/8=12.50) so your live demos match the lesson
 3. **Rehearse the string-vs-number bug** — you'll deliberately show `choice == 1` failing
 4. **Have the divide-by-zero crash ready** as the Week 7 teaser (option 4, second number 0 → ZeroDivisionError)
@@ -69,7 +69,7 @@ By the end of this lesson, students will be able to:
 ⏱️  8-15 min  → Stage 1 (title) + Stage 2 (menu) — build live
 ⏱️ 15-25 min  → Stage 3 (choice) + Stage 4 (float numbers) — build live
 ⏱️ 25-45 min  → Stage 5 (if/elif/else brain) — the heart of the lesson
-⏱️ 45-55 min  → Full run-through + example runs + save the Trinket
+⏱️ 45-55 min  → Full run-through + example runs + save the Pickcode
 ⏱️ 55-65 min  → Common mistakes (esp. string vs number) + divide-by-zero teaser
 ⏱️ 65-75 min  → Homework brief + Week 7 "Deluxe" teaser + wrap-up
 ```
@@ -90,7 +90,7 @@ Screen-share the **skills-to-calculator table** from the lesson. Point at each w
 
 Then the non-negotiable setup instruction:
 
-> "Create a NEW Trinket. Name it exactly Y2-T1-W6-Calculator. Type it in the chat when you've done it. This is the file you KEEP — next week we upgrade this very program."
+> "Create a NEW Pickcode. Name it exactly Y2-T1-W6-Calculator. Type it in the chat when you've done it. This is the file you KEEP — next week we upgrade this very program."
 
 #### Teaching Tips
 
@@ -162,8 +162,8 @@ Point out the `15.0` — `float()` shows the `.0`. Reassure them that's normal a
 #### Teaching Tips
 
 - **Build branch by branch, don't paste the whole block.** Students who fall behind can't recover from a wall of pasted code; incremental typing keeps everyone together.
-- **Indentation is the silent killer.** Each branch's `result` and `print` are indented 4 spaces. Trinket auto-indents after the colon — point this out so nobody fights it.
-- **Celebrate the first correct answer loudly.** "You just built a working calculator. Screenshot that." Then: SAVE the Trinket.
+- **Indentation is the silent killer.** Each branch's `result` and `print` are indented 4 spaces. Pickcode auto-indents after the colon — point this out so nobody fights it.
+- **Celebrate the first correct answer loudly.** "You just built a working calculator. Screenshot that." Then: SAVE the Pickcode.
 
 ---
 
@@ -208,7 +208,7 @@ Stress the quotes again: `choice == "5"`. Point out the tiers (1 op / 2 ops / op
 
 #### Wrap-Up (3 minutes)
 
-> "Five weeks of skills, one real program. You built a calculator today. Next week we make it professional — it'll loop, do percentages, and never crash. Save your Trinket, and I'll see you there."
+> "Five weeks of skills, one real program. You built a calculator today. Next week we make it professional — it'll loop, do percentages, and never crash. Save your Pickcode project, and I'll see you there."
 
 Stay on the call 2-3 minutes for questions and to help anyone whose program isn't running.
 
@@ -238,7 +238,7 @@ Run it, pick 1, and watch it wrongly print the error. Ask: "It IS a valid choice
 - [ ] Used `float()` on the numbers (not on `choice`)
 - [ ] Compared `choice` as a string with quotes
 - [ ] Got a correct, `:.2f`-formatted answer
-- [ ] Saved the Trinket with the correct name
+- [ ] Saved the Pickcode with the correct name
 
 **Engagement:**
 - [ ] Kept pace with the live build (thumbs up at each stage)

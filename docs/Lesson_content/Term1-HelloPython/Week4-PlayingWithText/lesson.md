@@ -49,7 +49,7 @@ take_home_assignment: |
   5. Add a decorative title using string multiplication
   6. Code must run without errors
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -444,7 +444,7 @@ print(name)   # Now prints "ALEX"
 
 ## 🏠 Homework: Mad Libs Story Generator
 
-**Platform:** Complete this assignment on [Trinket](https://trinket.io/python)
+**Platform:** Complete this assignment on [Pickcode](https://app.pickcode.io/home)
 
 ### Requirements
 
@@ -471,7 +471,7 @@ Your program must include:
 
 ### How to Submit
 
-1. Write your code on Trinket
+1. Write your code on Pickcode
 2. Save your work (click the 💾 Save button)
 3. Click the **Share** button
 4. Copy the link

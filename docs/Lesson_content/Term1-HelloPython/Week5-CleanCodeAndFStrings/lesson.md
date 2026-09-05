@@ -78,7 +78,7 @@ take_home_assignment: |
   - Add section comments (# --- Appetizers ---, # --- Main Course ---, etc.)
   - Use at least one string method inside an f-string
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -485,7 +485,7 @@ print("My # is 7")  # This prints: My # is 7
 
 ## 🏠 Homework: Choose Your Challenge
 
-**Platform:** Complete this assignment on [Trinket](https://trinket.io/python)
+**Platform:** Complete this assignment on [Pickcode](https://app.pickcode.io/home)
 
 ### Pick ONE of These Options:
 
@@ -518,7 +518,7 @@ print("My # is 7")  # This prints: My # is 7
 
 ### How to Submit
 
-1. Write your code on Trinket
+1. Write your code on Pickcode
 2. Save your work
 3. Click the **Share** button
 4. Copy the link

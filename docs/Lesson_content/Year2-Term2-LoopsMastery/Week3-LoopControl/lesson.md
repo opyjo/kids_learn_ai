@@ -53,7 +53,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: Number Bouncer 🏀
 
-  Build a loop that bounces through a list, **skips** the numbers it doesn't like, and **stops** the moment it hits a wall. Run it in Trinket and give a **thumbs up** in Zoom when your output matches!
+  Build a loop that bounces through a list, **skips** the numbers it doesn't like, and **stops** the moment it hits a wall. Run it in Pickcode and give a **thumbs up** in Zoom when your output matches!
 
   ### Part 1 — The Bouncer (⭐⭐)
   Using the list `numbers = [5, -3, 8, -1, 2, 0, 9]`:
@@ -81,7 +81,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Bouncer Loop OR Menu Until Quit
 
-  Pick **one** project (or do both if you're feeling mighty 💪) and build it in Trinket.
+  Pick **one** project (or do both if you're feeling mighty 💪) and build it in Pickcode.
 
   ### Option A — Bouncer Loop
   Loop through a list of at least **8 numbers** and:
@@ -116,7 +116,7 @@ take_home_assignment: |
   - ⭐⭐ Uses BOTH `break` and `continue` (Option A), or handles a wrong choice politely (Option B)
   - ⭐⭐⭐ Counts how many turns happened before quitting and prints the total at the end
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it where your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it where your teacher asks.
 ai_activities: |
   ## 🤖 Quick Discussion: How AI "Stops Early" (2 minutes)
 
@@ -181,7 +181,7 @@ Loop is over.
 
 Even though `range(1, 11)` was ready to count all the way to 10, `break` slammed the exit door at 5. Numbers 6, 7, 8, 9, 10 **never happened**.
 
-> 🖥️ **Trinket check:** Type this in, run it, and confirm you see the numbers stop at 5. Give a **thumbs up** in Zoom when your output matches! 👍
+> 🖥️ **Pickcode check:** Type this in, run it, and confirm you see the numbers stop at 5. Give a **thumbs up** in Zoom when your output matches! 👍
 
 Think of `break` as the emergency exit in a cinema: it doesn't matter which row you're in — one push and you're straight outside.
 
@@ -339,7 +339,7 @@ while count <= 5:
 
 Because `count` is never updated, `count <= 5` is *always* true, so it prints `Counting: 1` over and over... forever. 😵
 
-**How to stop a runaway loop in Trinket:** click the **Stop** button (the ⏹️ square that appears where **▶ Run** was). It halts the program instantly. Every coder needs this button — now you know where it is!
+**How to stop a runaway loop in Pickcode:** click the **Stop** button (the ⏹️ square that appears where **▶ Run** was). It halts the program instantly. Every coder needs this button — now you know where it is!
 
 **The fix** — always make sure something *moves the loop towards ending*:
 
@@ -457,7 +457,7 @@ Name (type 'quit'): quit
 
 ## 🎮 Class Activity: Number Bouncer 🏀
 
-Time to put `break` and `continue` in the same program! Open Trinket (name it **`Y2-T2-W3-LoopControl`**) and build the Number Bouncer.
+Time to put `break` and `continue` in the same program! Open Pickcode (name it **`Y2-T2-W3-LoopControl`**) and build the Number Bouncer.
 
 **Part 1 — The Bouncer.** Using `numbers = [5, -3, 8, -1, 2, 0, 9]`:
 - Loop through every number
@@ -516,7 +516,7 @@ That prints a whole rectangle of stars! Nested loops are how games draw boards, 
 
 ## 📚 Homework: Bouncer Loop OR Menu Until Quit
 
-Pick **one** (or both if you're feeling mighty 💪) and build it in Trinket.
+Pick **one** (or both if you're feeling mighty 💪) and build it in Pickcode.
 
 **Option A — Bouncer Loop:** Loop through at least **8 numbers**, use `continue` to skip some, and `break` to stop at a special value.
 
@@ -527,7 +527,7 @@ Pick **one** (or both if you're feeling mighty 💪) and build it in Trinket.
 - ⭐⭐ Uses BOTH `break` and `continue` (A), or handles a wrong choice politely (B)
 - ⭐⭐⭐ Counts how many turns happened before quitting and prints the total
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it where your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it where your teacher asks.
 
 ---
 

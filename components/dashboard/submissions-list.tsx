@@ -18,8 +18,8 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import { TrinketPreview } from "./trinket-preview";
-import { TrinketSubmissionForm } from "./trinket-submission-form";
+import { PickcodePreview } from "./pickcode-preview";
+import { PickcodeSubmissionForm } from "./pickcode-submission-form";
 
 interface Submission {
 	id: string;
@@ -27,7 +27,7 @@ interface Submission {
 	lessonTitle: string;
 	lessonOrderIndex: number;
 	courseSlug: string;
-	trinketUrl: string;
+	projectUrl: string;
 	status: "submitted" | "reviewed" | "graded";
 	feedback: string | null;
 	grade: string | null;
@@ -103,7 +103,7 @@ export const SubmissionsList = ({
 						My Assignments
 					</CardTitle>
 					<CardDescription>
-						Submit your Trinket code for lesson assignments
+						Submit your Pickcode projects for lesson assignments
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
@@ -136,7 +136,7 @@ export const SubmissionsList = ({
 						My Assignments
 					</CardTitle>
 					<CardDescription>
-						Your submitted Trinket assignments and teacher feedback
+						Your submitted Pickcode assignments and teacher feedback
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-3">
@@ -178,10 +178,10 @@ export const SubmissionsList = ({
 									View
 								</Button>
 								{submission.status === "submitted" && (
-									<TrinketSubmissionForm
+									<PickcodeSubmissionForm
 										lessonId={submission.lessonId}
 										lessonTitle={submission.lessonTitle}
-										existingUrl={submission.trinketUrl}
+										existingUrl={submission.projectUrl}
 										onSubmitSuccess={onRefresh}
 									/>
 								)}
@@ -209,8 +209,8 @@ export const SubmissionsList = ({
 
 					{selectedSubmission && (
 						<div className="space-y-4">
-							<TrinketPreview
-								trinketUrl={selectedSubmission.trinketUrl}
+							<PickcodePreview
+								projectUrl={selectedSubmission.projectUrl}
 								title="Your Code"
 							/>
 
@@ -237,10 +237,10 @@ export const SubmissionsList = ({
 
 							{selectedSubmission.status === "submitted" && (
 								<div className="flex justify-end">
-									<TrinketSubmissionForm
+									<PickcodeSubmissionForm
 										lessonId={selectedSubmission.lessonId}
 										lessonTitle={selectedSubmission.lessonTitle}
-										existingUrl={selectedSubmission.trinketUrl}
+										existingUrl={selectedSubmission.projectUrl}
 										onSubmitSuccess={() => {
 											handleCloseView();
 											onRefresh?.();

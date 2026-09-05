@@ -93,7 +93,7 @@ take_home_assignment: |
   - Hints for questions
   - Creative theme and messages
 
-  **Submit:** Share your Trinket link. Be ready to present at graduation!
+  **Submit:** Share your Pickcode project link. Be ready to present at graduation!
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -384,4 +384,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _This is YOUR graduation project! Make it amazing! You've got this!_ 🎮✨
-

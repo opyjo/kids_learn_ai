@@ -45,8 +45,8 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share enabled for students
-- Students' finished `Y2-T4-W7-ContactManager` Trinkets (remind them in advance!)
-- Today's showcase Trinket for the celebratory solution: `Y2-T4-W8-Showcase`
+- Students' finished `Y2-T4-W7-ContactManager` Pickcode projects (remind them in advance!)
+- Today's showcase Pickcode for the celebratory solution: `Y2-T4-W8-Showcase`
 - The quiz questions (in the lesson) — decide whether to screen-share or read aloud
 - This teaching guide
 - Class WhatsApp group/email for sharing links and celebration
@@ -108,7 +108,7 @@ The heart of the lesson. Each student follows the 5-step demo format from the le
 
 - **Model the first demo yourself** or have a confident volunteer go first, so the format is clear.
 - **Coach the feedback.** The first time someone types "it's good", redirect: "Be specific — what exactly did you like?" Reinforce the golden rule: kind, specific, helpful.
-- **Protect nervous students.** Offer options: share screen, OR you run their shared Trinket link, OR they just describe one feature. Never force screen-sharing.
+- **Protect nervous students.** Offer options: share screen, OR you run their shared Pickcode link, OR they just describe one feature. Never force screen-sharing.
 - **Celebrate every demo by name.** "Let's get a 🔥 in the chat for Ama!" Every student should feel seen.
 - **Handle live bugs warmly:** "Ooh, a live bug — real programmers debug in public all the time!" Model calm debugging.
 
@@ -214,7 +214,7 @@ Use today to finalise your term picture of each student:
 | Feedback chat goes quiet | Prompt specifically: "Drop a 🔥 and one thing you liked about Kofi's search feature!" |
 | Quiz too easy / too hard | Skip ahead or slow down; for fast classes add a bonus "explain WHY" (e.g. why `.sort()` returns `None`) |
 | Large class, not enough time for all demos | Two rounds, cap at 90 seconds each, or group demos into breakout rooms with a spokesperson |
-| Student forgot their Trinket | Have them open the class solution and walk through it as if it were theirs — still a valid demo experience |
+| Student forgot their Pickcode | Have them open the class solution and walk through it as if it were theirs — still a valid demo experience |
 | Unsure whether a student "earns" the badge | Award it for concept understanding and participation, not code perfection — this is a growth milestone |
 
 ---

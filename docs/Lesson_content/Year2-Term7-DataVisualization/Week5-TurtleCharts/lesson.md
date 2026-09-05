@@ -8,8 +8,8 @@ is_premium: false
 requires_trinket: true
 starter_code: |
   # 🐢📊 Turtle Chart Studio — Week 5
-  # ⚠️ IMPORTANT: open a "Python with Turtle" trinket (trinket.io/turtle)
-  # A plain text trinket will show NOTHING for turtle code!
+  # ⚠️ IMPORTANT: open a "Python Graphics" Pickcode project (app.pickcode.io/home)
+  # A plain text Pickcode project will show NOTHING for turtle code!
 
   import turtle
 
@@ -41,7 +41,7 @@ starter_code: |
   turtle.done()   # keeps the drawing window open
 solution_code: |
   # 🐢📊 Turtle Bar Chart — one working solution
-  # ⚠️ Run this in a "Python with Turtle" trinket (trinket.io/turtle)!
+  # ⚠️ Run this in a "Python Graphics" Pickcode project (app.pickcode.io/home)!
 
   import turtle
 
@@ -111,7 +111,7 @@ class_activities: |
 
   You are going to draw a REAL bar chart with turtle — coloured bars, labels, and a title. We build it in stages, and you give a **thumbs up** in Zoom at each checkpoint.
 
-  > 🐢 **Open a Turtle trinket first!** Go to **trinket.io/turtle** (or make a new "Python with Turtle" trinket). Turtle drawings do NOT appear in a normal text trinket. Name it `Y2-T7-W5-TurtleCharts`.
+  > 🐢 **Open a Python Graphics project first!** Go to **app.pickcode.io/home** (or make a new "Python Graphics" Pickcode project). Turtle drawings do NOT appear in a normal text Pickcode project. Name it `Y2-T7-W5-TurtleCharts`.
 
   ### Stage 1 — Wake the turtle (⭐)
   Type the set-up lines and draw ONE test line, then run it:
@@ -123,7 +123,7 @@ class_activities: |
   pen.forward(50)
   turtle.done()
   ```
-  See the pen draw an L-shape? **Thumbs up!** 👍 (If nothing appears — you're in a text trinket. Switch to a Turtle trinket.)
+  See the pen draw an L-shape? **Thumbs up!** 👍 (If nothing appears — you're in a text Pickcode project. Switch to a Python Graphics project.)
 
   ### Stage 2 — One bar (⭐⭐)
   Add the `draw_bar` helper from the starter code, finish the missing `goto()` lines, then draw one bar:
@@ -142,7 +142,7 @@ class_activities: |
   - Change the `scale` from 20 to 30 and watch every bar grow
   - Give each bar your own colour by editing the `colours` list
 
-  > 🐢 **No turtle? No problem.** Do the "Text-chart fallback" version from today's lesson in a normal trinket — you still make a labelled chart of the same data.
+  > 🐢 **No turtle? No problem.** Do the "Text-chart fallback" version from today's lesson in a normal Pickcode project — you still make a labelled chart of the same data.
 take_home_assignment: |
   ## 📚 Homework: Your Own Turtle Chart
 
@@ -162,9 +162,9 @@ take_home_assignment: |
   - ⭐⭐ Add a title and make the tallest bar a different, bold colour
   - ⭐⭐⭐ Sort your data so the bars go tallest → shortest, then draw it
 
-  **No turtle available?** Do the **text-chart version** instead: use `"█" * count` and f-strings to print a labelled bar chart of the same 5+ categories in a normal trinket. Any tier counts as done.
+  **No turtle available?** Do the **text-chart version** instead: use `"█" * count` and f-strings to print a labelled bar chart of the same 5+ categories in a normal Pickcode project. Any tier counts as done.
 
-  **Submit:** Save your Trinket (`Y2-T7-W5-TurtleCharts`), click **Share**, copy the link, and paste it where your teacher asks. New Trinket? Start one at **trinket.io/turtle**.
+  **Submit:** Save your Pickcode project (`Y2-T7-W5-TurtleCharts`), choose **Share → Anyone with link → View Code**, copy the link, and paste it where your teacher asks. New Pickcode project? Start one at **app.pickcode.io/home**.
 ai_activities: |
   ## 🤖 Light Discussion: Why Charts Matter for AI
 
@@ -204,14 +204,14 @@ ai_activities: |
 
 ---
 
-## 🐢 Use a Turtle Trinket!
+## 🐢 Use a Turtle Pickcode!
 
 > ### ⚠️ READ THIS BEFORE YOU CODE
-> Turtle graphics only appear in a **"Python with Turtle"** trinket.
+> Turtle graphics only appear in a **"Python Graphics"** Pickcode project.
 >
-> 👉 Go to **trinket.io/turtle** and start a new one, OR make a new trinket and choose the **"Python with Turtle"** type.
+> 👉 Go to **app.pickcode.io/home** and start a new one, OR make a new Pickcode project and choose the **"Python Graphics"** type.
 >
-> If you type turtle code into a **normal text trinket**, you will see... **nothing**. No error, no drawing — just a blank output. That confuses everyone, so check this first! Name today's trinket `Y2-T7-W5-TurtleCharts`.
+> If you type turtle code into a **normal text Pickcode project**, you will see... **nothing**. No error, no drawing — just a blank output. That confuses everyone, so check this first! Name today's Pickcode project `Y2-T7-W5-TurtleCharts`.
 
 ---
 
@@ -229,7 +229,7 @@ pen.forward(100)        # walk forward 100 steps, drawing a line
 turtle.done()           # keep the window open
 ```
 
-Run that in a **Turtle trinket** and you'll see a line appear. That's it — you're drawing with code!
+Run that in a **Python Graphics project** and you'll see a line appear. That's it — you're drawing with code!
 
 The screen is a grid, like graph paper. The **middle is (0, 0)**. Going right increases `x`, going up increases `y` — exactly like the coordinates you know from maths.
 
@@ -424,7 +424,7 @@ for name in fruit:
 turtle.done()
 ```
 
-Run it in a **Turtle trinket** and watch your chart build itself, bar by bar. That `i % len(colours)` trick means the colours repeat if you have more bars than colours — clever and tidy.
+Run it in a **Python Graphics project** and watch your chart build itself, bar by bar. That `i % len(colours)` trick means the colours repeat if you have more bars than colours — clever and tidy.
 
 > 💡 **How the loop knows the value:** `for name in fruit:` gives us each **key** (like `"Mango"`), and `fruit[name]` looks up its number. Same dictionary skill you've used all term — now it's drawing pictures!
 
@@ -432,10 +432,10 @@ Run it in a **Turtle trinket** and watch your chart build itself, bar by bar. Th
 
 ## 🚫 No turtle? Text-chart fallback
 
-Can't open a Turtle trinket today? No problem — you already know how to make a brilliant chart from **Week 4**, and it runs in any plain trinket. Same data, same idea, drawn with the block character `█`:
+Can't open a Python Graphics project today? No problem — you already know how to make a brilliant chart from **Week 4**, and it runs in any plain Pickcode project. Same data, same idea, drawn with the block character `█`:
 
 ```python
-# Runs in a NORMAL text trinket — no turtle needed
+# Runs in a NORMAL text Pickcode project — no turtle needed
 fruit = {"Mango": 8, "Banana": 5, "Orange": 6, "Apple": 3, "Guava": 7}
 
 print("FAVOURITE FRUITS IN CLASS 2B")
@@ -463,11 +463,11 @@ Guava    | ███████ 7
 
 ## ⚠️ Common Mistakes
 
-**Mistake 1: Running turtle in a normal text trinket**
+**Mistake 1: Running turtle in a normal text Pickcode project**
 
 ❌ You type perfect turtle code, click Run, and see... nothing. No error, no drawing. 😱
 
-✅ Turtle only draws in a **"Python with Turtle"** trinket (trinket.io/turtle). Check the trinket type FIRST. Blank output almost always means wrong trinket type.
+✅ Turtle only draws in a **"Python Graphics"** Pickcode project (app.pickcode.io/home). Check the Pickcode project type FIRST. Blank output almost always means wrong Pickcode project type.
 
 ---
 
@@ -557,9 +557,9 @@ Draw a bar chart of a dataset **you** choose, with **5 or more categories**.
 - ⭐⭐ Add a title and make the tallest bar a different, bold colour
 - ⭐⭐⭐ Sort your data tallest → shortest, then draw it
 
-**No turtle available?** Do the **text-chart version** with `"█" * count` and f-strings for the same 5+ categories in a normal trinket. Any tier counts as done.
+**No turtle available?** Do the **text-chart version** with `"█" * count` and f-strings for the same 5+ categories in a normal Pickcode project. Any tier counts as done.
 
-**Submit:** Save your Trinket (`Y2-T7-W5-TurtleCharts`), click **Share**, copy the link, and paste it where your teacher asks. New Trinket? Start one at **trinket.io/turtle**.
+**Submit:** Save your Pickcode project (`Y2-T7-W5-TurtleCharts`), choose **Share → Anyone with link → View Code**, copy the link, and paste it where your teacher asks. New Pickcode project? Start one at **app.pickcode.io/home**.
 
 ---
 

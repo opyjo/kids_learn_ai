@@ -1,3 +1,7 @@
+import type { WebProjectFiles } from "@/lib/web-project";
+
+export type LessonEditorType = "python" | "web" | "none";
+
 export interface Lesson {
 	id: number;
 	dbId: string;
@@ -13,6 +17,8 @@ export interface Lesson {
 	class_activities?: string;
 	take_home_assignment?: string;
 	ai_activities?: string;
+	editor_type: LessonEditorType;
+	starter_files: WebProjectFiles;
 }
 
 export interface LessonNavigation {
@@ -33,7 +39,7 @@ export interface CourseLessonNavItem {
 
 export interface LessonSubmission {
 	id: string;
-	trinketUrl: string;
+	projectUrl: string;
 	status: "submitted" | "reviewed" | "graded";
 	feedback: string | null;
 	grade: string | null;
@@ -49,6 +55,6 @@ export interface LessonViewerProps {
 	hasQuickCheck?: boolean;
 }
 
-export type LessonVariant = "ai-ml" | "level-term" | "legacy";
+export type LessonVariant = "ai-ml" | "level-term" | "web-creator" | "legacy";
 
 export type LearnerMode = "learn" | "code";

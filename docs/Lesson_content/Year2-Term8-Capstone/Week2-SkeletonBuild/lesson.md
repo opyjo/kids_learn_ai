@@ -120,7 +120,7 @@ class_activities: |
 
   We build the **Study Buddy skeleton** in five stages, live on Zoom. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move together — no rushing ahead!
 
-  > 📁 **First:** create a new Trinket and name it **`Y2-T8-Capstone`**. This is THE file you grow all term. Do NOT delete it — every week we add to it.
+  > 📁 **First:** create a new Pickcode project and name it **`Y2-T8-Capstone`**. This is THE file you grow all term. Do NOT delete it — every week we add to it.
 
   ### Stage 1 — The Title Function (⭐)
   Wrap the banner in a function called `show_title()`.
@@ -194,7 +194,7 @@ class_activities: |
   ```python
   main()
   ```
-  ✅ **Final checkpoint:** Run it. Pick 1, 2, 3, 4 — each prints "coming soon". Pick 5 — it says bye and STOPS cleanly. 🎉 Thumbs up and **save your Trinket!**
+  ✅ **Final checkpoint:** Run it. Pick 1, 2, 3, 4 — each prints "coming soon". Pick 5 — it says bye and STOPS cleanly. 🎉 Thumbs up and **save your Pickcode project!**
 
   ### Now — Your Own Skeleton! (⭐⭐⭐)
   Open the starter template and rebuild the skeleton for YOUR project from your Week 1 spec:
@@ -209,7 +209,7 @@ take_home_assignment: |
   Turn your Week 1 spec into a running skeleton — no real features yet, just the structure that RUNS.
 
   **Requirements:**
-  1. Open your **`Y2-T8-Capstone`** Trinket (start it if you didn't finish in class)
+  1. Open your **`Y2-T8-Capstone`** Pickcode (start it if you didn't finish in class)
   2. A `show_title()` function with your project's name in a border
   3. A `show_menu()` function with **one line per must-have feature**, plus a **Quit** option
   4. A **stub function** for each feature that prints `"[feature] — coming soon!"`
@@ -241,7 +241,7 @@ take_home_assignment: |
 
   > ⚠️ Compare `choice` as a **string** — `if choice == "1":` (with quotes), NOT `choice == 1`. And define every function ABOVE `main()` or Python won't find it!
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 How Pro Developers Actually Start (Skeleton First!)
 
@@ -373,7 +373,7 @@ Enter a choice (1-5): 1
 📝 Log a study session — coming soon! 🚧
 ```
 
-> 📁 **BEFORE WE BUILD:** Open Trinket, create a **new** Python trinket, and name it **`Y2-T8-Capstone`**. This is THE file you grow every week this term. Guard it with your life! 🛡️
+> 📁 **BEFORE WE BUILD:** Open Pickcode, create a **new** Python Pickcode project, and name it **`Y2-T8-Capstone`**. This is THE file you grow every week this term. Guard it with your life! 🛡️
 
 ---
 
@@ -496,7 +496,7 @@ main()
 
 ## ✅ Part 10: The Whole Skeleton — Run It!
 
-Here is your complete Study Buddy skeleton. This is what should be in your `Y2-T8-Capstone` Trinket:
+Here is your complete Study Buddy skeleton. This is what should be in your `Y2-T8-Capstone` Pickcode:
 
 ```python
 # 📚 Y2-T8-Capstone — Study Buddy (SKELETON)
@@ -577,7 +577,7 @@ Enter a choice (1-5): 5
 👋 Thanks for studying with Study Buddy. Bye!
 ```
 
-🎉 **It RUNS!** The menu loops, every stub prints its placeholder, and Quit stops it cleanly. You have a working skeleton — the whole term hangs on this frame. **Save your Trinket now.**
+🎉 **It RUNS!** The menu loops, every stub prints its placeholder, and Quit stops it cleanly. You have a working skeleton — the whole term hangs on this frame. **Save your Pickcode project now.**
 
 ---
 
@@ -656,7 +656,7 @@ def main():
             log_session()
         # ...but no Quit branch! 😱
 ```
-You'll be stuck answering the menu forever (in Trinket, hit **Stop** to escape).
+You'll be stuck answering the menu forever (in Pickcode, hit **Stop** to escape).
 
 ✅ Correct — a Quit branch that flips the flag:
 ```python
@@ -673,7 +673,7 @@ Your skeleton is standing — now we start furnishing it! Next week, **Week 3: B
 
 For Study Buddy, that's **Log a study session**: we replace the `log_session()` stub with code that asks for a subject and hours, builds a **dictionary** for each session, and appends it to a **list** — your growing study record. For YOUR project, you'll pick your most important must-have and make it real.
 
-> Keep your `Y2-T8-Capstone` Trinket safe. From now on, every week you fill one more stub — and by graduation it's a finished app you'll be proud to show. 🎓
+> Keep your `Y2-T8-Capstone` Pickcode safe. From now on, every week you fill one more stub — and by graduation it's a finished app you'll be proud to show. 🎓
 
 ---
 
@@ -696,7 +696,7 @@ For Study Buddy, that's **Log a study session**: we replace the `log_session()` 
 Turn your Week 1 spec into a running skeleton — no real features yet, just structure that RUNS.
 
 **Requirements:**
-1. Open your **`Y2-T8-Capstone`** Trinket
+1. Open your **`Y2-T8-Capstone`** Pickcode
 2. A `show_title()` with your project's name in a border
 3. A `show_menu()` with **one line per must-have feature**, plus **Quit**
 4. A **stub** for each feature that prints `"[feature] — coming soon!"`
@@ -712,7 +712,7 @@ Turn your Week 1 spec into a running skeleton — no real features yet, just str
 
 > ⚠️ Compare `choice` as a **string** — `if choice == "1":` (with quotes). And define every function ABOVE `main()`!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

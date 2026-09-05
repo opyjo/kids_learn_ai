@@ -28,7 +28,7 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (for each student)
 - Projector/screen share for demonstrations
-- Trinket accounts
+- Pickcode accounts
 - Whiteboard for project planning
 - Optional: Example quiz games
 
@@ -441,4 +441,3 @@ _For instructor support, contact: [instructor support email]_
 ---
 
 _Remember: This is Part A of the graduation project. Students who complete this are ready for Part B (AI Presentation) next week, then graduation! Be supportive and celebrate their progress!_ 🎮✨
-

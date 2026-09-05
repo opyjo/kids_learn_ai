@@ -43,13 +43,13 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Trinket accounts (trinket.io) — students name today's file `Y2-T5-W3-RuleBasedAI`
+- Pickcode accounts (app.pickcode.io) — students name today's file `Y2-T5-W3-RuleBasedAI`
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test the full classifier yourself in Trinket** — run the solution code and confirm the five test messages label correctly (3 SPAM, 2 NOT SPAM)
+1. **Test the full classifier yourself in Pickcode** — run the solution code and confirm the five test messages label correctly (3 SPAM, 2 NOT SPAM)
 2. **Pre-load the "break it" messages** — have the three tricky messages ready to paste (sarcasm, new-words spam, science-fair invite)
 3. **Recall Weeks 1-2** — students know rules-vs-learning (W1) and features/labels/datasets (W2). Today reuses "features" (keyword matches) and "labels" (SPAM / NOT SPAM). Plan a one-line callback.
 4. **Prepare the honesty framing** — rehearse the "this IS AI but it doesn't learn" line so it lands clearly and isn't muddled
@@ -101,7 +101,7 @@ Show the `spam_words` list and make the honesty point early and plainly:
 
 > "This list is the ENTIRE brain of our AI. No magic. It only knows the words WE type. Hold that thought — it's going to matter enormously in twenty minutes."
 
-Have everyone create and name the Trinket `Y2-T5-W3-RuleBasedAI` now. Chat checkpoint: how many keywords? (8.)
+Have everyone create and name the Pickcode `Y2-T5-W3-RuleBasedAI` now. Chat checkpoint: how many keywords? (8.)
 
 ---
 
@@ -198,7 +198,7 @@ Paste submission instructions and the due date in the chat.
 
 #### Wrap-Up (2 minutes)
 
-> "You built real AI today, and then you out-smarted it. That's exactly how every machine-learning engineer's story begins. Save your Trinket — see you next week!"
+> "You built real AI today, and then you out-smarted it. That's exactly how every machine-learning engineer's story begins. Save your Pickcode project — see you next week!"
 
 Stay on 2-3 minutes for questions.
 
@@ -239,7 +239,7 @@ Stay on 2-3 minutes for questions.
 | Students think the classifier is "broken/bad" | Reframe: it's working perfectly — it's the RULE APPROACH that has limits. That's the whole point. |
 | Class races ahead to Part 5 | Hold the line — no break-it until everyone has a green thumbs-up on the working classifier |
 | Nobody can fool the classifier in Stage 4 | Offer the scaffold: "Try a nice message that happens to use two spammy words" or "real spam using words NOT on the list" |
-| Trinket login trouble | Same playbook as always: reset via private chat, spare account, repl.it backup |
+| Pickcode login trouble | Same playbook as always: reset via private chat, spare account, repl.it backup |
 
 ---
 

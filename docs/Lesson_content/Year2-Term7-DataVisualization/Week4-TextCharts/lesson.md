@@ -56,7 +56,7 @@ solution_code: |
 class_activities: |
   ## 📊 Class Activity: Chart Studio
 
-  Open Trinket (`Y2-T7-W4-TextCharts`) and turn real numbers into pictures. Give a **thumbs up** in Zoom each time a chart appears in your output panel! 👍
+  Open Pickcode (`Y2-T7-W4-TextCharts`) and turn real numbers into pictures. Give a **thumbs up** in Zoom each time a chart appears in your output panel! 👍
 
   ### Level 1 — First Bars (⭐)
   Use this dataset and print one bar per fruit with `"█" * count`:
@@ -82,7 +82,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Bar Chart Maker
 
-  Write a **Bar Chart Maker** in Trinket — a program that takes a dataset and prints a neat, labelled text bar chart.
+  Write a **Bar Chart Maker** in Pickcode — a program that takes a dataset and prints a neat, labelled text bar chart.
 
   **Requirements:**
   1. Start from a dataset — a **dict** of `label -> value` (make one up: goals scored, books read, hours of sleep…)
@@ -104,7 +104,7 @@ take_home_assignment: |
   - ⭐⭐ Aligned labels, values at the end, and a title line
   - ⭐⭐⭐ Wrap it in a `bar_chart(data, block)` **function** that automatically works out the scale from `max()`
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Think: Why Humans Make Charts
 
@@ -415,7 +415,7 @@ Banana  | ███
 
 ## 📊 Class Activity: Chart Studio
 
-Time to become a chart artist! Open Trinket (`Y2-T7-W4-TextCharts`).
+Time to become a chart artist! Open Pickcode (`Y2-T7-W4-TextCharts`).
 
 **Level 1 — First Bars (⭐):** Loop over the fruit dict and print one bar per fruit with `"█" * count`.
 ```python
@@ -460,7 +460,7 @@ This week your charts were made of **text**. Next week — **Week 5: Turtle Grap
 
 ## 📚 Homework: Bar Chart Maker
 
-Write a **Bar Chart Maker** in Trinket — a program that takes a dataset and prints a neat, labelled text bar chart.
+Write a **Bar Chart Maker** in Pickcode — a program that takes a dataset and prints a neat, labelled text bar chart.
 
 **Requirements:**
 1. Start from a **dict** of `label -> value` (make one up: goals scored, books read, hours of sleep…)
@@ -482,7 +482,7 @@ Zainab    | ████████████ 24
 - ⭐⭐ Aligned labels, values at the end, and a title line
 - ⭐⭐⭐ Wrap it in a `bar_chart(data, block)` **function** that works out the scale from `max()` automatically
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

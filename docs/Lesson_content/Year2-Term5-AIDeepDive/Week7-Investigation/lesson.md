@@ -209,7 +209,7 @@ class_activities: |
 
   Today we build the **skeleton** of your investigation report together, one section at a time. Then you fill in **your own findings** from Week 6 and wire in your demo. After each stage, **run your code** and give a **thumbs up** 👍 when it works.
 
-  > 📁 **First:** create a new Trinket and name it **`Y2-T5-W7-Investigation`**. This is your term-project file — you present it next week at the AI Summit!
+  > 📁 **First:** create a new Pickcode project and name it **`Y2-T5-W7-Investigation`**. This is your term-project file — you present it next week at the AI Summit!
 
   ### Stage 1 — The Findings Box (⭐)
   At the very top, create the `ai_system` dictionary and the `data_used` list. Use YOUR system from Week 6.
@@ -253,14 +253,14 @@ class_activities: |
 
   ### Stage 5 — Wire In Your Demo (⭐⭐⭐)
   Paste in `classify_video(title)` and `run_demo()`, then call `run_demo()` last. This is your Week 3 classifier, reused to PROVE a point from your report.
-  ✅ **Final checkpoint:** Feed it the title `"Scary Horror Story at Midnight"` — do you get `NOT for kids 🔞`? 🎉 Thumbs up and **save your Trinket!**
+  ✅ **Final checkpoint:** Feed it the title `"Scary Horror Story at Midnight"` — do you get `NOT for kids 🔞`? 🎉 Thumbs up and **save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Finish Your AI Investigation Report
 
   Make your report **presentation-ready** for next week's AI Summit! 🎤
 
   **Requirements:**
-  1. Open your **`Y2-T5-W7-Investigation`** Trinket
+  1. Open your **`Y2-T5-W7-Investigation`** Pickcode
   2. Fill in ALL five sections with **your own research** from Week 6:
      - What is it & what does it do?
      - What data does it use / learn from?
@@ -277,13 +277,13 @@ take_home_assignment: |
 
   > ⚠️ Only write facts you can back up. If something is your opinion, say so — write "I think..." not "This is true."
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks. **Bring it ready to present next week!**
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks. **Bring it ready to present next week!**
 ai_activities: |
   ## 🤖 Reflection: What Investigating a Real AI Taught Me
 
   You just spent two weeks as an **AI detective** — you picked a real system, dug into its data, its decisions, and its dangers, and turned all of that into a working program. That's exactly what real AI researchers and journalists do.
 
-  Take five quiet minutes and write **three or four sentences** (in a comment at the bottom of your Trinket, or in your notebook):
+  Take five quiet minutes and write **three or four sentences** (in a comment at the bottom of your Pickcode project, or in your notebook):
 
   - 🔎 What **surprised** you most about the AI system you investigated?
   - 🧠 Before this term, did you think it used **rules or learning**? Were you right?
@@ -341,7 +341,7 @@ Here's the five-question checklist from Week 6 — every question becomes a **se
 | 4 | What could go wrong? | What are the risks? Who might it be unfair to? |
 | 5 | Used responsibly? | Is it being used in a fair, honest way? |
 
-> 📁 **BEFORE WE START:** Open Trinket, create a **new** Python trinket, and name it exactly **`Y2-T5-W7-Investigation`**. This is your term-project file — you present it next week!
+> 📁 **BEFORE WE START:** Open Pickcode, create a **new** Python Pickcode project, and name it exactly **`Y2-T5-W7-Investigation`**. This is your term-project file — you present it next week!
 
 ---
 
@@ -657,7 +657,7 @@ Look at the third title — *"My Trip to the Market"*. It's a perfectly innocent
 
 ## ✅ The Whole Program — Run It!
 
-Here is your complete AI Investigation Report. This is what should be in your `Y2-T5-W7-Investigation` Trinket (swap in **your own** findings):
+Here is your complete AI Investigation Report. This is what should be in your `Y2-T5-W7-Investigation` Pickcode (swap in **your own** findings):
 
 ```python
 # 🔍 Y2-T5-W7-Investigation — AI Investigation Report
@@ -775,7 +775,7 @@ print("Report by: Amara Okafor — KidsLearnAI AI Scholar 🎓")
 print("=" * 56)
 ```
 
-🎉 **You built a real investigation report — as a program!** Save your Trinket now.
+🎉 **You built a real investigation report — as a program!** Save your Pickcode project now.
 
 ---
 
@@ -895,7 +895,7 @@ Next week is the big one — **Week 8: the AI Summit!** 🎓🎉
 Make your report **presentation-ready** for the AI Summit!
 
 **Requirements:**
-1. Open your **`Y2-T5-W7-Investigation`** Trinket
+1. Open your **`Y2-T5-W7-Investigation`** Pickcode
 2. Fill in ALL five sections with **your own** Week 6 research
 3. Make sure the demo (`classify_video` + `run_demo`) **runs** and connects to your report
 4. Put YOUR name in the footer line
@@ -907,7 +907,7 @@ Make your report **presentation-ready** for the AI Summit!
 
 > ⚠️ Only write facts you can back up. If something is your opinion, say so.
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email. **Bring it ready to present next week!**
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email. **Bring it ready to present next week!**
 
 ---
 

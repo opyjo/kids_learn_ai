@@ -19,7 +19,7 @@ interface Submission {
 	lessonTitle: string;
 	lessonOrderIndex: number;
 	courseSlug: string;
-	trinketUrl: string;
+	projectUrl: string;
 	status: "submitted" | "reviewed" | "graded";
 	feedback: string | null;
 	grade: string | null;
@@ -63,7 +63,7 @@ export const MyAssignmentsSection = ({
 						)}
 					</h3>
 					<p className="text-sm text-muted-foreground mt-1">
-						Submit your Trinket code and view teacher feedback
+						Submit your Pickcode projects and view teacher feedback
 					</p>
 				</div>
 				<Button
@@ -93,7 +93,7 @@ export const MyAssignmentsSection = ({
 							No Assignments Yet
 						</CardTitle>
 						<CardDescription>
-							Complete a lesson and submit your Trinket code to get started!
+							Complete a lesson and submit your Pickcode project to get started!
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
@@ -106,7 +106,7 @@ export const MyAssignmentsSection = ({
 							</h4>
 							<p className="text-sm text-muted-foreground max-w-md mx-auto mb-6">
 								After completing a lesson, click "Submit Assignment" to share
-								your Trinket code. Your teacher will review it and provide
+								your Pickcode project. Your teacher will review it and provide
 								helpful feedback!
 							</p>
 							<div className="flex flex-col sm:flex-row gap-3 justify-center">

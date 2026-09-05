@@ -9,7 +9,7 @@ requires_trinket: true
 starter_code: |
   # 🗺️ Y2-T3-W6-Adventure — Designing Your Adventure
   # Made by: [YOUR NAME]
-  # IMPORTANT: Save this Trinket! Next week (Week 7) you finish the full engine.
+  # IMPORTANT: Save this Pickcode! Next week (Week 7) you finish the full engine.
 
   # --- The shared inventory (starts empty) ---
   inventory = []
@@ -127,9 +127,9 @@ solution_code: |
 class_activities: |
   ## 🗺️ Class Activity: Story-Map It, Then Build It — Live, Together!
 
-  Two halves today. **First we PLAN on paper. Then we BUILD in Trinket** — one scene at a time. After each scene, **run your code** and give a **thumbs up** 👍 when it works. We move together, scene by scene.
+  Two halves today. **First we PLAN on paper. Then we BUILD in Pickcode** — one scene at a time. After each scene, **run your code** and give a **thumbs up** 👍 when it works. We move together, scene by scene.
 
-  > 📁 **First:** create a new Trinket and name it **`Y2-T3-W6-Adventure`**. You will KEEP this file and finish the full engine next week!
+  > 📁 **First:** create a new Pickcode project and name it **`Y2-T3-W6-Adventure`**. You will KEEP this file and finish the full engine next week!
 
   ### Part A — Story-Map on Paper (⭐)
   Grab paper (or the Zoom whiteboard). Draw a box for each scene and an arrow for each choice:
@@ -210,14 +210,14 @@ class_activities: |
   else:
       print("💀 Game over.")
   ```
-  ✅ **Final checkpoint:** Run it. Play `left` → `follow` → do you WIN? Play `right` → do you LOSE (no map)? 🎉 Thumbs up and **save your Trinket!**
+  ✅ **Final checkpoint:** Run it. Play `left` → `follow` → do you WIN? Play `right` → do you LOSE (no map)? 🎉 Thumbs up and **save your Pickcode project!**
 take_home_assignment: |
   ## 📚 Homework: Grow Your Adventure
 
   Your class adventure has 3 scenes. Make it a real quest — **4 or 5 scenes** and a **meaningful item**.
 
   **Requirements:**
-  1. Open your **`Y2-T3-W6-Adventure`** Trinket (the one from class)
+  1. Open your **`Y2-T3-W6-Adventure`** Pickcode (the one from class)
   2. Add **at least one new scene** as a function (so you have 4-5 scenes total)
   3. Add a matching `elif current == "yourscene":` branch to the main loop
   4. Add **at least one inventory item** using `inventory.append("something")`
@@ -245,7 +245,7 @@ take_home_assignment: |
 
   > ⚠️ Remember: every scene function must **`return` a string** — the next scene's name, or `"win"`/`"lose"`. A scene with no `return` hands back `None` and the loop breaks!
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? Your Story-Map Is a Decision Tree
 
@@ -317,7 +317,7 @@ Three simple rules run the entire game:
 2. **A main loop keeps a variable called `current`** — the name of the scene the player is in. It calls the matching scene function and stores the returned name back in `current`.
 3. **A shared `inventory` list** starts empty. Scenes can `append` items to it, and later scenes can check what's inside to change the story.
 
-> 📁 **BEFORE WE START:** Open Trinket, create a **new** Python trinket, and name it exactly **`Y2-T3-W6-Adventure`**. This is important — next week you finish THIS EXACT file into your full Text Adventure Engine. Do not delete it!
+> 📁 **BEFORE WE START:** Open Pickcode, create a **new** Python Pickcode project, and name it exactly **`Y2-T3-W6-Adventure`**. This is important — next week you finish THIS EXACT file into your full Text Adventure Engine. Do not delete it!
 
 ---
 
@@ -459,7 +459,7 @@ else:
 
 ## ✅ Part 6: The Whole Program — Run It!
 
-Here is your complete 3-scene adventure. This is what should be in your `Y2-T3-W6-Adventure` Trinket:
+Here is your complete 3-scene adventure. This is what should be in your `Y2-T3-W6-Adventure` Pickcode:
 
 ```python
 # 🗺️ Y2-T3-W6-Adventure — The Misty Wood
@@ -564,7 +564,7 @@ You nap too long and miss your chance...
 💀 Game over.
 ```
 
-🎉 **You built a real, working adventure engine!** Save your Trinket now.
+🎉 **You built a real, working adventure engine!** Save your Pickcode project now.
 
 ---
 
@@ -604,7 +604,7 @@ def cave_scene():
     print("🕳️ You are in the cave.")
     return "cave"     # 🔁 sends us straight back here!
 ```
-The loop calls `cave_scene()`, `current` becomes `"cave"`, so it calls `cave_scene()` again... and again... The screen fills with the same line and never stops. In Trinket you'll have to press **Stop**.
+The loop calls `cave_scene()`, `current` becomes `"cave"`, so it calls `cave_scene()` again... and again... The screen fills with the same line and never stops. In Pickcode you'll have to press **Stop**.
 
 ✅ Correct — return a DIFFERENT scene, or an ending:
 ```python
@@ -667,7 +667,7 @@ Next week — **Week 7: Build the Text Adventure Engine** — we turn your scaff
 - 🏆 **Multiple win and lose endings** so every playthrough feels different
 - ✨ **Polish** — tidy banners, a "your backpack contains..." display, and replayability
 
-> Keep your `Y2-T3-W6-Adventure` Trinket safe — next week we finish THIS EXACT program into a full Text Adventure Engine you'll show off in Week 8!
+> Keep your `Y2-T3-W6-Adventure` Pickcode safe — next week we finish THIS EXACT program into a full Text Adventure Engine you'll show off in Week 8!
 
 ---
 
@@ -690,7 +690,7 @@ Next week — **Week 7: Build the Text Adventure Engine** — we turn your scaff
 Your class adventure has 3 scenes. Make it a real quest — **4 or 5 scenes** and a **meaningful item**.
 
 **Requirements:**
-1. Open your **`Y2-T3-W6-Adventure`** Trinket (the one from class)
+1. Open your **`Y2-T3-W6-Adventure`** Pickcode (the one from class)
 2. Add **at least one new scene** as a function (so you have 4-5 scenes total)
 3. Add a matching `elif current == "yourscene":` branch to the main loop
 4. Add **at least one inventory item** using `inventory.append("something")`
@@ -718,7 +718,7 @@ def river_scene():
 
 > ⚠️ Remember: every scene function must **`return` a string** — the next scene's name, or `"win"`/`"lose"`. A scene with no `return` hands back `None` and the loop breaks!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

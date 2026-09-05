@@ -83,7 +83,7 @@ take_home_assignment: |
   - Add decorative borders and emojis
   - Create a themed adventure (space, fantasy, mystery)
 
-  **Submit:** Share your Trinket link. Be ready to present at the Week 8 Showcase!
+  **Submit:** Share your Pickcode project link. Be ready to present at the Week 8 Showcase!
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -395,4 +395,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor for help. This is your project—make it amazing!_ 🎮
-

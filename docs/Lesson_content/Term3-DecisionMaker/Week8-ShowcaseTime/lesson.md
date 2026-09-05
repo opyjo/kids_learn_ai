@@ -23,7 +23,7 @@ class_activities: |
   - Each student shares their screen and presents their adventure game
   - Show what it does
   - Share what you're proud of
-  - Drop your Trinket link in the Zoom chat so everyone can play each other's adventures!
+  - Drop your Pickcode project link in the Zoom chat so everyone can play each other's adventures!
 
   **Part 2: Celebration & Reflection (15 min)**
   - Share favorite moments from Term 3
@@ -314,4 +314,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Congratulations on completing Term 3! You're amazing! 🎉_
-

@@ -9,7 +9,7 @@ requires_trinket: true
 starter_code: |
   # 🎮 Y2-T2-W6-MiniGames — Mini-Game Lab
   # Made by: [YOUR NAME]
-  # IMPORTANT: Save this Trinket! Next week we combine these games into an Arcade.
+  # IMPORTANT: Save this Pickcode! Next week we combine these games into an Arcade.
 
   import random
 
@@ -151,9 +151,9 @@ solution_code: |
 class_activities: |
   ## 🏗️ Class Activity: Build TWO Games — Live, Together!
 
-  Today we build **two** complete games in **one** Trinket. First **Dice Duel**, then **Guess-the-Number Deluxe**. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move together — do NOT race ahead.
+  Today we build **two** complete games in **one** Pickcode. First **Dice Duel**, then **Guess-the-Number Deluxe**. After each stage, **run your code** and give a **thumbs up** 👍 when it works. We move together — do NOT race ahead.
 
-  > 📁 **First:** create a new Trinket and name it **`Y2-T2-W6-MiniGames`**. You KEEP this file — next week we combine both games into an Arcade!
+  > 📁 **First:** create a new Pickcode project and name it **`Y2-T2-W6-MiniGames`**. You KEEP this file — next week we combine both games into an Arcade!
 
   Type this at the very top, once, for BOTH games:
   ```python
@@ -222,7 +222,7 @@ class_activities: |
   else:
       print("🤝 It's a draw — evenly matched!")
   ```
-  ✅ **Checkpoint:** Game 1 done! Thumbs up and **save your Trinket**. 🎉
+  ✅ **Checkpoint:** Game 1 done! Thumbs up and **save your Pickcode project**. 🎉
 
   ### 🔢 Guess-the-Number — Stage 5: The Secret Number (⭐)
   Add this BELOW Dice Duel:
@@ -260,11 +260,11 @@ class_activities: |
           print(f"You got it in {attempts} attempts.")
           break
   ```
-  ✅ **Final checkpoint:** Play it! The `break` stops the loop when you're right. Thumbs up and **save your Trinket**! 🎉
+  ✅ **Final checkpoint:** Play it! The `break` stops the loop when you're right. Thumbs up and **save your Pickcode project**! 🎉
 take_home_assignment: |
   ## 📚 Homework: Polish a Game (or Add a Twist!)
 
-  Pick **ONE** of your two games and make it even better. Open your **`Y2-T2-W6-MiniGames`** Trinket — the one from class.
+  Pick **ONE** of your two games and make it even better. Open your **`Y2-T2-W6-MiniGames`** Pickcode — the one from class.
 
   > ⚠️ **SAVE your finished games!** Next week (Week 7) we combine Dice Duel and Guess-the-Number into one **Arcade Collection**. You'll need this exact file.
 
@@ -281,7 +281,7 @@ take_home_assignment: |
 
   > ⚠️ Remember: guesses from `input()` are **text** — always wrap them in `int()` before comparing! And every `while True` loop MUST have a `break` or it runs forever.
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Did You Know? How Game Computers "Choose" Their Moves
 
@@ -370,7 +370,7 @@ Your guess (1-20): 15
 You got it in 2 attempts.
 ```
 
-> 📁 **BEFORE WE START:** Open Trinket, create a **new** Python trinket, and name it **`Y2-T2-W6-MiniGames`**. Both games live in this ONE file. Next week we combine them into an Arcade — do not delete it!
+> 📁 **BEFORE WE START:** Open Pickcode, create a **new** Python Pickcode project, and name it **`Y2-T2-W6-MiniGames`**. Both games live in this ONE file. Next week we combine them into an Arcade — do not delete it!
 
 At the very top of the file, type this **once** — both games use it:
 
@@ -523,7 +523,7 @@ You: 1   Computer: 1
 🤝 It's a draw — evenly matched!
 ```
 
-🎉 **Game 1 complete!** Save your Trinket now. Ama, Kofi, everyone — thumbs up when Dice Duel runs!
+🎉 **Game 1 complete!** Save your Pickcode project now. Ama, Kofi, everyone — thumbs up when Dice Duel runs!
 
 > 💡 **Why is it different every time?** Because `random.randint` rolls fresh numbers on every run. That's what makes a game fun — no two duels are the same!
 
@@ -629,13 +629,13 @@ You got it in 3 attempts.
 ⭐⭐⭐ Incredible guessing!
 ```
 
-🎉 **Game 2 complete!** Save your Trinket. You built TWO games today!
+🎉 **Game 2 complete!** Save your Pickcode project. You built TWO games today!
 
 ---
 
 ## ✅ Part 9: The Whole Lab — Both Games Together
 
-Here is everything in your `Y2-T2-W6-MiniGames` Trinket, top to bottom:
+Here is everything in your `Y2-T2-W6-MiniGames` Pickcode, top to bottom:
 
 ```python
 # 🎮 Y2-T2-W6-MiniGames — Mini-Game Lab
@@ -732,7 +732,7 @@ else:
     print("⭐ You got there in the end — great persistence!")
 ```
 
-🎉 **Two working games, one Trinket. Save it — Week 7 needs it!**
+🎉 **Two working games, one Pickcode. Save it — Week 7 needs it!**
 
 ---
 
@@ -836,7 +836,7 @@ for round_number in range(1, rounds + 1):
 
 ## 🏗️ Class Activity: Build Both Games Live!
 
-We build **Dice Duel** in four stages, then **Guess-the-Number Deluxe** in three, all in one Trinket named `Y2-T2-W6-MiniGames`. Run after every stage and give a thumbs up 👍. Use the Zoom chat for each checkpoint. Full step-by-step code is in the Class Activities panel — we move together, stage by stage!
+We build **Dice Duel** in four stages, then **Guess-the-Number Deluxe** in three, all in one Pickcode named `Y2-T2-W6-MiniGames`. Run after every stage and give a thumbs up 👍. Use the Zoom chat for each checkpoint. Full step-by-step code is in the Class Activities panel — we move together, stage by stage!
 
 ---
 
@@ -851,7 +851,7 @@ Next week — **Week 7: Arcade Game Collection** — we combine everything:
 - 🎮 We reuse your EXACT `Y2-T2-W6-MiniGames` code — `player_score`, `computer_score`, `secret`, `guess`, `attempts` — and wire it all behind one menu
 - 🏆 The whole thing becomes your term's **Arcade Game Collection**
 
-> Keep your `Y2-T2-W6-MiniGames` Trinket safe — next week we plug both of today's games straight into the Arcade!
+> Keep your `Y2-T2-W6-MiniGames` Pickcode safe — next week we plug both of today's games straight into the Arcade!
 
 ---
 
@@ -871,7 +871,7 @@ Next week — **Week 7: Arcade Game Collection** — we combine everything:
 
 ## 📚 Homework: Polish a Game (or Add a Twist!)
 
-Pick **ONE** of your two games and make it better. Open your **`Y2-T2-W6-MiniGames`** Trinket from class.
+Pick **ONE** of your two games and make it better. Open your **`Y2-T2-W6-MiniGames`** Pickcode from class.
 
 **Choose ONE twist:**
 - 🎲 **Best of 5:** change `rounds = 3` to `rounds = 5` in Dice Duel
@@ -884,9 +884,9 @@ Pick **ONE** of your two games and make it better. Open your **`Y2-T2-W6-MiniGam
 - ⭐⭐ Add TWO twists to the same game
 - ⭐⭐⭐ Add a "play again?" question that loops the whole game (a `while` loop with `break` when they type `no`)
 
-> ⚠️ Remember: `int()` every guess, and every `while True` needs a `break`. **SAVE your Trinket** — Week 7 combines both games into an Arcade!
+> ⚠️ Remember: `int()` every guess, and every `while True` needs a `break`. **SAVE your Pickcode project** — Week 7 combines both games into an Arcade!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

@@ -39,7 +39,7 @@ By the end of this lesson, students will be able to:
 ### Key Success Metrics
 
 - [ ] Every student's program runs end to end without errors
-- [ ] Every student has a Trinket named `Y2-T5-W7-Investigation` with all five section functions
+- [ ] Every student has a Pickcode named `Y2-T5-W7-Investigation` with all five section functions
 - [ ] Section 1 (at least) contains the student's own system, not the example
 - [ ] Students can say whether their system uses rules or learning, and why
 - [ ] Students understand the homework IS their Summit presentation
@@ -47,14 +47,14 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
-- Zoom with screen share; teacher's Trinket visible throughout
-- Students' Trinket accounts and their **Week 6 investigation notes** (the chosen system + any facts gathered)
+- Zoom with screen share; teacher's Pickcode visible throughout
+- Students' Pickcode accounts and their **Week 6 investigation notes** (the chosen system + any facts gathered)
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Type the full solution yourself once** in a fresh Trinket named `Y2-T5-W7-Investigation` — you build it live and it must be flawless.
+1. **Type the full solution yourself once** in a fresh Pickcode named `Y2-T5-W7-Investigation` — you build it live and it must be flawless.
 2. **Run it and check the output** matches the lesson traces exactly (banner, five sections, demo, footer).
 3. **Have a second example system ready** (e.g. a maps app that predicts traffic, or a photo app that tags faces) so students who chose different systems see the structure is universal.
 4. **Prepare a "catch-up" pasteable** for each stage in case someone falls behind — paste into Zoom chat, don't stall the class.
@@ -92,7 +92,7 @@ Screen-share the **five-question checklist table**. Point out that each question
 
 Then the non-negotiable setup:
 
-> "Create a NEW Trinket. Name it exactly `Y2-T5-W7-Investigation`. Type it in the chat when done. This is the file you present next week — do not lose it."
+> "Create a NEW Pickcode. Name it exactly `Y2-T5-W7-Investigation`. Type it in the chat when done. This is the file you present next week — do not lose it."
 
 #### Teaching Tips
 
@@ -137,7 +137,7 @@ For `print_decision`, connect back to the whole term:
 
 - **Build branch by branch; don't paste whole functions.** Students who fall behind can't recover from a pasted wall.
 - Point out dictionary access inside f-strings: `{system['name']}` — single quotes inside, because the f-string uses double quotes.
-- Trinket auto-indents after a colon — tell them not to fight it.
+- Pickcode auto-indents after a colon — tell them not to fight it.
 
 ---
 
@@ -204,7 +204,7 @@ Walk the tiers: ⭐ all sections filled; ⭐⭐ add `print_sources()`; ⭐⭐⭐
 
 #### Wrap-Up + Week 8 Teaser (3 minutes)
 
-> "Next week is the AI Summit. You present your report — banner, five sections, live demo — share one surprising discovery, and earn your AI Scholar Badge. Save your Trinket and practise. See you on stage."
+> "Next week is the AI Summit. You present your report — banner, five sections, live demo — share one surprising discovery, and earn your AI Scholar Badge. Save your Pickcode project and practise. See you on stage."
 
 Point students to the **reflection** in the AI Activities panel — a short written reflection on what investigating a real system taught them; one sentence shared in chat.
 

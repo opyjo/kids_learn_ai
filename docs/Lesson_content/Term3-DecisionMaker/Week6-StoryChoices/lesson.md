@@ -26,7 +26,7 @@ class_activities: |
 
   1. Your teacher puts you in a breakout room with a partner
   2. Brainstorm story ideas together
-  3. Create a simple interactive story with at least 2 choices in a shared Trinket (one person shares their screen)
+  3. Create a simple interactive story with at least 2 choices in a shared Pickcode (one person shares their screen)
   4. Test your story with different choices
   5. Back in the main room, share your screen and read your story to the class!
 
@@ -50,7 +50,7 @@ take_home_assignment: |
   - A magical forest
   - A mystery to solve
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -327,4 +327,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
-

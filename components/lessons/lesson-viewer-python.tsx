@@ -15,7 +15,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 import { PythonEditor } from "@/components/code/python-editor";
-import { TrinketEditor } from "@/components/code/trinket-editor";
+import { PickcodeEditor } from "@/components/code/pickcode-editor";
 import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -887,7 +887,7 @@ export function LessonViewer({
 						{courseSlug === "python-foundations" ? (
 							<div className="sticky top-24 self-start w-full max-h-[calc(100vh-140px)]">
 								{lesson.requires_trinket ? (
-									<TrinketEditor
+									<PickcodeEditor
 										initialCode={lesson.starter_code}
 										className="h-full flex flex-col rounded-2xl shadow-xl border-0 ring-1 ring-gray-200/60 dark:ring-white/10 overflow-hidden"
 									/>

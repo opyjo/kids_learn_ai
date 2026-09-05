@@ -46,14 +46,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share enabled
-- Students' Trinket accounts; new script named `Y2-T7-W3-NumberCrunching`
+- Students' Pickcode accounts; new script named `Y2-T7-W3-NumberCrunching`
 - This teaching guide open during class
 - The Part 1 scores dataset ready to paste into the Zoom chat
 - Class WhatsApp/email thread for homework links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
 2. **Pre-load the dataset** — have the Part 1 `data` string ready to paste so no one loses time typing it
 3. **Rehearse the traces** — be fluent on `508 / 6 = 84.6666...`, `round(..., 1) = 84.7`, and `sum([10,20,30])/3 = 20.0`; students trust confident live maths
 4. **Stage the three crashes** — have the `ZeroDivisionError` and the string-`sum` `TypeError` ready to run live; the lesson depends on students *seeing* the real messages
@@ -191,7 +191,7 @@ Show the snack-shop dataset and the target output. Trace the expected numbers so
 - sold = `[24, 18, 30, 15, 22]` → total `109`, average `109/5 = 21.8`, max `30`, min `15`
 - type counts → `{'Fried': 2, 'Baked': 2, 'Raw': 1}`
 
-Point out the tiers; remind them ⭐⭐⭐ adds the best-seller-by-name loop and the divide-by-zero guard. Any tier counts as done. Submission via the named Trinket.
+Point out the tiers; remind them ⭐⭐⭐ adds the best-seller-by-name loop and the divide-by-zero guard. Any tier counts as done. Submission via the named Pickcode.
 
 #### Week 4 Teaser + Wrap-Up (3 minutes)
 

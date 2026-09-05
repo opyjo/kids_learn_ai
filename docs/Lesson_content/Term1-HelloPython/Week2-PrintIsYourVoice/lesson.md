@@ -41,7 +41,7 @@ take_home_assignment: |
   5. Use print("") for blank lines to separate sections
   6. Code must run without errors
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 
   **Note:** If you can't type emojis on your device, you can use:
   - Symbols: *, !, @, #, $, %, ^, &, ~
@@ -597,7 +597,7 @@ print("+" + "-" * 10 + "+")  # +----------+
 
 ## 🏠 Homework: My Mini Poem
 
-**Platform:** Complete this assignment on [Trinket](https://trinket.io/python)
+**Platform:** Complete this assignment on [Pickcode](https://app.pickcode.io/home)
 
 ### The Assignment
 
@@ -652,7 +652,7 @@ print("*" * 30)
 
 ### How to Submit
 
-1. Write your code on Trinket
+1. Write your code on Pickcode
 2. Save your work (click the 💾 Save button)
 3. Click the **Share** button
 4. Copy the link
@@ -701,7 +701,7 @@ Want to practice more? Try these:
 
 - **Emoji Finder:** getemoji.com - Copy and paste emojis for your code!
 - **ASCII Art:** asciiart.eu - Get inspired by text art
-- **Trinket Challenges:** trinket.io/challenges - More coding practice
+- **Pickcode Challenges:** app.pickcode.io/challenges - More coding practice
 
 ---
 

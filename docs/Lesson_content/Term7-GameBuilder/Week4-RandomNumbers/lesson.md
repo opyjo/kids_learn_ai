@@ -47,7 +47,7 @@ take_home_assignment: |
   - Create a random number guessing game
   - Create a random picker (picks random items from a list)
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -445,4 +445,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: random numbers make games exciting!_ 🎲
-

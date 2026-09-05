@@ -15,8 +15,8 @@
 
 The penultimate lesson. Students assemble a portfolio of all eight Year 2 projects and rehearse their graduation presentation. This is where a year of work becomes a body of work they can show anyone. Goals:
 
-1. **Assemble the portfolio** — gather all 8 project Trinket links with titles and one-line descriptions, built as a "Portfolio Index" program
-2. **Make everything shareable** — check every Trinket's sharing is on (dead links are the #1 portfolio failure)
+1. **Assemble the portfolio** — gather all 8 project Pickcode links with titles and one-line descriptions, built as a "Portfolio Index" program
+2. **Make everything shareable** — check every Pickcode's sharing is on (dead links are the #1 portfolio failure)
 3. **Rehearse the demo** — practise the 5-step capstone demo for graduation
 4. **Build presentation confidence** — short, live, proud, calm under a live bug
 
@@ -24,19 +24,19 @@ The penultimate lesson. Students assemble a portfolio of all eight Year 2 projec
 
 Students will be able to:
 1. Build a Portfolio Index program (list of dicts → f-string loop) listing their 8 projects
-2. Verify each project's Trinket link is shareable
+2. Verify each project's Pickcode link is shareable
 3. Deliver the 5-step demo (introduce → run → show → explain one proud feature → take a question)
 4. Give a short, confident presentation
 
 ### Key Success Metrics
 - [ ] Every student has a Portfolio Index listing all 8 projects
-- [ ] Every Trinket link is confirmed shareable
+- [ ] Every Pickcode link is confirmed shareable
 - [ ] Every student rehearses their capstone demo at least once
 - [ ] Students feel ready (not nervous) for graduation
 
 ### Materials Needed
 - Zoom with screen share and breakout rooms (rehearsal pairs)
-- Students' 8 Year 2 project Trinkets + the capstone
+- Students' 8 Year 2 project Pickcode projects + the capstone
 - This guide; class WhatsApp/email
 
 ### Pre-Lesson Preparation
@@ -52,7 +52,7 @@ Students will be able to:
 ```
 ⏱️  0-6 min   → Welcome + what a portfolio is and why it matters
 ⏱️  6-16 min  → The eight Year 2 projects — recap the journey
-⏱️ 16-26 min  → Trinket check: make everything shareable
+⏱️ 16-26 min  → Pickcode check: make everything shareable
 ⏱️ 26-45 min  → Build the Portfolio Index program (list of dicts + loop)
 ⏱️ 45-62 min  → The 5-step demo + rehearsal in pairs
 ⏱️ 62-75 min  → Homework + Week 8 GRADUATION teaser + wrap-up
@@ -68,8 +68,8 @@ Students will be able to:
 ### Part 2: Your Eight Year 2 Projects (10 min)
 Walk the eight projects together as a journey — from the Smart Calculator to the Capstone. Let students feel the scale of what they built.
 
-### Part 3: Trinket Check — Make Everything Shareable (10 min)
-The critical practical step: every Trinket must be shared/public or the link is dead. Walk through checking the share setting.
+### Part 3: Pickcode Check — Make Everything Shareable (10 min)
+The critical practical step: every Pickcode must be shared/public or the link is dead. Walk through checking the share setting.
 - **Teaching tip:** dead links are the most common portfolio failure — budget real time here and verify with a partner.
 
 ### Part 4: Build the Portfolio Index (19 min)
@@ -89,7 +89,7 @@ Homework: finish the portfolio (all 8 links + descriptions) and rehearse. Tease 
 
 **Observe:**
 - [ ] Portfolio Index runs and lists all 8 projects
-- [ ] All Trinket links verified shareable
+- [ ] All Pickcode links verified shareable
 - [ ] Rehearsed the demo at least once
 - [ ] Presentation is short, clear, confident
 
@@ -102,7 +102,7 @@ Homework: finish the portfolio (all 8 links + descriptions) and rehearse. Tease 
 
 | Problem | Solution |
 |---|---|
-| A Trinket link doesn't open | Sharing is off — walk through the share/public setting |
+| A Pickcode link doesn't open | Sharing is off — walk through the share/public setting |
 | Student lost a project | Help locate it in their account, or note it as "rebuilt" — don't let it derail the portfolio |
 | Portfolio Index crashes | Check the list-of-dicts syntax and that the loop reads the right keys |
 | Demo runs too long | Coach "short and proud" — two minutes, one proud feature |

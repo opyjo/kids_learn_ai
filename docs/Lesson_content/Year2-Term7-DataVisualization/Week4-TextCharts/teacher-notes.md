@@ -13,7 +13,7 @@
 
 ### Purpose
 
-This is the pivot of Term 7: students stop *analysing* data (Weeks 1-3 — parsing CSV, counting, computing stats) and start *visualising* it. It's their first data visualisation of the whole course, and it's built entirely from text characters — no matplotlib, no libraries, nothing that Trinket can't run. The session has three core goals:
+This is the pivot of Term 7: students stop *analysing* data (Weeks 1-3 — parsing CSV, counting, computing stats) and start *visualising* it. It's their first data visualisation of the whole course, and it's built entirely from text characters — no matplotlib, no libraries, nothing that Pickcode can't run. The session has three core goals:
 
 1. **Land the "why" of visualisation** — a chart lets a human eye spot in one glance what raw numbers hide. This is the emotional hook and the reason the whole term exists.
 2. **Master the mechanics** — `"█" * value` for the bar, f-string padding for alignment, a loop over a dict for the whole chart.
@@ -42,14 +42,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Students' Trinket accounts; today's Trinket name: `Y2-T7-W4-TextCharts`
+- Students' Pickcode accounts; today's Pickcode name: `Y2-T7-W4-TextCharts`
 - The `█` block character ready to copy-paste into chat (it isn't on keyboards!)
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, and confirm `"█" * 5` renders cleanly in Trinket's output (font width matters).
+1. **Test Zoom and Pickcode** — audio, video, screen share, and confirm `"█" * 5` renders cleanly in Pickcode's output (font width matters).
 2. **Paste the block character** into a note you can drop into Zoom chat instantly — this single step prevents the biggest time-sink of the lesson.
 3. **Have a fallback character ready** (`*` or `#`) for any student whose setup mangles `█`.
 4. **Re-read Week 3** — students arrive with dicts of category → count from the counting lessons; use their own vocabulary ("remember the tally dict?").
@@ -242,7 +242,7 @@ Stay on 2-3 minutes for questions.
 
 | Problem | Solution |
 |---|---|
-| `█` shows as a box, `?`, or misaligns in Trinket | Switch the class to `"*"` or `"#"` — the concept is identical; alignment stays true in a monospace output panel |
+| `█` shows as a box, `?`, or misaligns in Pickcode | Switch the class to `"*"` or `"#"` — the concept is identical; alignment stays true in a monospace output panel |
 | Students can't type `█` | Paste it in Zoom chat at the start; tell them to copy from the starter code |
 | Bars don't line up | Padding width is smaller than the longest label — increase it (e.g. `:<12`) |
 | `TypeError: can't multiply sequence by non-int of type 'float'` | A value was divided but not wrapped — add `int(round(...))` around the length |
@@ -256,7 +256,7 @@ Stay on 2-3 minutes for questions.
 **After class, spend 5 minutes noting:**
 
 - **Concept check:** did the class grasp scaling, or just the simple bars? (Scaling is the load-bearing skill for Weeks 5 and 7.)
-- **The block character:** did `█` work in Trinket, or should you default the whole cohort to `*` next time?
+- **The block character:** did `█` work in Pickcode, or should you default the whole cohort to `*` next time?
 - **Padding fluency:** how rusty were f-strings? Adjust how much you scaffold in Week 5.
 - **Homework tiers:** who's ready to write functions (⭐⭐⭐)? Note them for the Data Story project team-ups.
 

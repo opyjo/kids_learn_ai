@@ -7,6 +7,7 @@ import {
 	BookOpen,
 	Brain,
 	ChevronDown,
+	Code2,
 	DollarSign,
 	Download,
 	ExternalLink,
@@ -190,6 +191,28 @@ const NAV_ITEMS = {
 			description: "Build your portfolio",
 		},
 	],
+	webCreatorTerms: [
+		{
+			href: "/lessons/web-creator-term-1-foundations",
+			label: "Term 1: Website Foundations",
+			Icon: Code2,
+			description: "HTML, CSS, accessibility, and first interactions",
+		},
+		{
+			href: "/lessons/web-creator-term-2-interactive",
+			label: "Term 2: Interactive Websites",
+			Icon: Code2,
+			description: "JavaScript, events, forms, and page data",
+			comingSoon: true,
+		},
+		{
+			href: "/lessons/web-creator-term-3-ai-apps",
+			label: "Term 3: AI Web Applications",
+			Icon: Sparkles,
+			description: "Responsible AI-powered web experiences",
+			comingSoon: true,
+		},
+	],
 	learn: [
 		{
 			href: "/playground",
@@ -230,10 +253,10 @@ const NAV_ITEMS = {
 			description: "Download Thonny IDE",
 		},
 		{
-			href: "/get-trinket",
-			label: "Get Trinket.io",
+			href: "/get-pickcode",
+			label: "Get Pickcode",
 			Icon: ExternalLink,
-			description: "Access Trinket online",
+			description: "Set up your coding workspace",
 		},
 		...(CAREERS_OPEN
 			? [
@@ -465,7 +488,7 @@ const MobileNavLink = ({
 	);
 };
 
-type YearTab = "year1" | "year2";
+type YearTab = "year1" | "year2" | "web-creator";
 
 export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 	const pathname = usePathname();
@@ -495,7 +518,8 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 		NAV_ITEMS.year1Terms1to4.some((item) => isActive(item.href)) ||
 		NAV_ITEMS.year1Terms5to8.some((item) => isActive(item.href)) ||
 		NAV_ITEMS.year2Terms1to4.some((item) => isActive(item.href)) ||
-		NAV_ITEMS.year2Terms5to8.some((item) => isActive(item.href));
+		NAV_ITEMS.year2Terms5to8.some((item) => isActive(item.href)) ||
+		NAV_ITEMS.webCreatorTerms.some((item) => isActive(item.href));
 
 	const closeMobileMenu = () => {
 		setMobileMenuOpen(false);
@@ -750,6 +774,23 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 															Year 2
 														</span>
 													</button>
+													<button
+														onClick={() => setActiveYearTab("web-creator")}
+														className={cn(
+															"px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all cursor-pointer",
+															"border-b-2 -mb-px",
+															activeYearTab === "web-creator"
+																? "border-sky-600 text-sky-700 dark:border-sky-400 dark:text-sky-300 bg-sky-50 dark:bg-sky-950/30"
+																: "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50",
+														)}
+														aria-label="View Web Creator courses"
+														tabIndex={0}
+													>
+														<span className="flex items-center gap-2">
+															<Code2 className="h-4 w-4" />
+															Web Creator
+														</span>
+													</button>
 												</div>
 
 												{/* Tab Content */}
@@ -770,7 +811,7 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 																iconColor="text-purple-600 dark:text-purple-400"
 															/>
 														</>
-													) : (
+													) : activeYearTab === "year2" ? (
 														<>
 															<MegaMenuSection
 																title="Terms 1-4: Python Mastery"
@@ -787,6 +828,14 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 																iconColor="text-purple-600 dark:text-purple-400"
 															/>
 														</>
+													) : (
+														<MegaMenuSection
+															title="Three-Term Creator Path"
+															icon={Code2}
+															items={NAV_ITEMS.webCreatorTerms}
+															isActive={isActive}
+															iconColor="text-sky-600 dark:text-sky-400"
+														/>
 													)}
 													<MegaMenuSection
 														title="Tools & Activities"
@@ -1009,6 +1058,20 @@ export const SiteHeader = ({ leftExtras }: SiteHeaderProps) => {
 															Terms 5-8: AI & Data
 														</div>
 														{NAV_ITEMS.year2Terms5to8.map((navItem) => (
+															<MobileNavLink
+																key={navItem.href}
+																item={navItem}
+																isActive={isActive(navItem.href)}
+																onClick={closeMobileMenu}
+															/>
+														))}
+
+														{/* Web Creator Section */}
+														<div className="px-4 py-2 text-xs font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wider flex items-center gap-2 mt-4 border-t border-border pt-4">
+															<Code2 className="h-3.5 w-3.5" />
+															AI Web Creator
+														</div>
+														{NAV_ITEMS.webCreatorTerms.map((navItem) => (
 															<MobileNavLink
 																key={navItem.href}
 																item={navItem}

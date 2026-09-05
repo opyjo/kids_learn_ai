@@ -19,7 +19,7 @@ Three core goals:
 
 1. **Make the break/continue distinction rock-solid** — this is the single most-confused pair in the whole term. Students must be able to say, in their own words, that `break` leaves the loop and `continue` skips one turn.
 2. **Introduce `while True:` + `break` without fear** — students have been (correctly) warned about infinite loops, so `while True:` feels dangerous. Reframe it: `while True:` is safe *precisely because* it has a guaranteed `break`. This is the arcade-menu engine (Week 7).
-3. **Demystify infinite loops** — show one deliberately, stop it with the Trinket Stop button, and give students the "what makes this stop?" habit so they never fear the freeze.
+3. **Demystify infinite loops** — show one deliberately, stop it with the Pickcode Stop button, and give students the "what makes this stop?" habit so they never fear the freeze.
 
 Keep energy high and hands-on. The Number Bouncer activity is the heart of the lesson — get them there with time to spare.
 
@@ -32,26 +32,26 @@ By the end of this lesson, students will be able to:
 3. Explain the difference between `break` and `continue` in their own words
 4. Search a list with a `for` loop + `if` + `break`, stopping early on a match
 5. Write a `while True:` loop with a sentinel-value `break` (e.g. `quit`, `-1`)
-6. Identify what causes an infinite loop, stop one with Trinket's Stop button, and fix it
+6. Identify what causes an infinite loop, stop one with Pickcode's Stop button, and fix it
 
 ### Key Success Metrics
 
 - [ ] Every student runs a working `break` example and a working `continue` example
 - [ ] Most students complete Part 1 of the Number Bouncer with correct output
-- [ ] Every student can locate and use the Trinket Stop button
+- [ ] Every student can locate and use the Pickcode Stop button
 - [ ] Students correctly answer the "continue for negatives, break for 999" discussion
 
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share and reactions enabled
-- Students' Trinket accounts; today's Trinket name: `Y2-T2-W3-LoopControl`
+- Students' Pickcode accounts; today's Pickcode name: `Y2-T2-W3-LoopControl`
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, and confirm you can trigger AND stop an infinite loop live (you WILL demo this).
+1. **Test Zoom and Pickcode** — audio, video, screen share, and confirm you can trigger AND stop an infinite loop live (you WILL demo this).
 2. **Rehearse the infinite-loop demo** — run the "forgotten `count` update" example, let it spam a few lines, then hit **Stop**. Practise so it looks calm and controlled, not scary.
 3. **Have the Number Bouncer solution open** in a separate tab for live-coding if the class stalls.
 4. **Prepare the break/continue analogy** — cinema emergency exit (break) vs skip-the-song button (continue). Have a one-line version ready to paste in chat.
@@ -127,7 +127,7 @@ This is the demo they'll remember. Screen-share and run the **broken** counting 
 
 > "See how it never stops? This is an infinite loop. Every coder makes one. Here's the magic button —"
 
-Click the Trinket **Stop** button live. Make sure every student knows where it is — have them find it in their own Trinket now.
+Click the Pickcode **Stop** button live. Make sure every student knows where it is — have them find it in their own Pickcode now.
 
 Then add the missing `count = count + 1` line and re-run to show the fix. Teach the golden question:
 
@@ -138,7 +138,7 @@ Walk through the "how each loop type ends" table quickly.
 #### Teaching Tips
 
 - **Normalise it.** The demo's real purpose is emotional: infinite loops are ordinary and fixable, not disasters. A student who isn't scared of the freeze will experiment more freely.
-- **Trinket specifics:** the Run button (▶) turns into a Stop button (⏹️) while code runs. Point at it explicitly on your shared screen.
+- **Pickcode specifics:** the Run button (▶) turns into a Stop button (⏹️) while code runs. Point at it explicitly on your shared screen.
 
 ### Part 5: Number Bouncer Activity (~16 minutes)
 
@@ -181,7 +181,7 @@ Run the short `ai_activities` prompt: why is stopping early good? Connect it bac
 - [ ] Ran a `continue` example and explained why a value was skipped
 - [ ] Completed Number Bouncer Part 1 with matching output
 - [ ] Wrote a `while True:` + `break` loop (Part 2) that actually stops
-- [ ] Located and used the Trinket Stop button
+- [ ] Located and used the Pickcode Stop button
 
 **Understanding:**
 - [ ] Answered the exam-scores discussion correctly (continue vs break)
@@ -202,13 +202,13 @@ Run the short `ai_activities` prompt: why is stopping early good? Connect it bac
 
 | Problem | Solution |
 |---|---|
-| Student's loop runs forever / Trinket freezes | Show the Stop (⏹️) button; then ask "what makes this stop?" and find the missing update or break together |
+| Student's loop runs forever / Pickcode freezes | Show the Stop (⏹️) button; then ask "what makes this stop?" and find the missing update or break together |
 | `break`/`continue` mixed up (stops when it should skip) | Analogy reset: break = leave the cinema, continue = skip a song. Trace one iteration aloud together |
 | `SyntaxError: 'break' outside loop` | Their `break` isn't indented inside a loop — check indentation |
 | `while True:` never stops for a student | Their `break` line is missing or unreachable; have them write the `break` FIRST, then the rest |
 | Number Bouncer prints the `9` | They forgot `break` on the `0` case — it's skipping (continue) instead of stopping |
 | Class finds it too easy | Add a rule: also `continue` on numbers > 100, and `break` on the first number that ends in a chosen digit |
-| Zoom/Trinket technical issues | Standard playbook: repl.it backup link, browser-only screen share, private-chat triage |
+| Zoom/Pickcode technical issues | Standard playbook: repl.it backup link, browser-only screen share, private-chat triage |
 
 ---
 

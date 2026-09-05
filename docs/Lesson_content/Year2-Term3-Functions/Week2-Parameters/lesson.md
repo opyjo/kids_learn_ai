@@ -47,7 +47,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: The Personalised Greeter 📥
 
-  Three rounds. Each round, build the function in Trinket, run it, and give a **thumbs up** in Zoom when it works!
+  Three rounds. Each round, build the function in Pickcode, run it, and give a **thumbs up** in Zoom when it works!
 
   ### Round 1 — Greet Anyone (⭐)
   Change the stuck `greet()` so it takes a `name` parameter, then call it twice with two different names:
@@ -77,7 +77,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Custom Card Maker 💌
 
-  Write a **Custom Card Maker** in Trinket. Build ONE function that prints a personalised card, then call it several times with different arguments.
+  Write a **Custom Card Maker** in Pickcode. Build ONE function that prints a personalised card, then call it several times with different arguments.
 
   **Requirements:**
   1. Write a function `make_card(name, message, emoji)` with **three parameters**
@@ -102,9 +102,9 @@ take_home_assignment: |
   - ⭐⭐ Make the border and layout beautiful (borders that fit the message)
   - ⭐⭐⭐ Add a `loop` that calls `make_card` for a list of names, all with the same message
 
-  **Trinket name:** `Y2-T3-W2-Parameters`
+  **Pickcode name:** `Y2-T3-W2-Parameters`
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Thought: Parameters Are Like AI Settings
 
@@ -435,7 +435,7 @@ Hello, Ama!
 
 ## 🎮 Class Activity: The Personalised Greeter 📥
 
-Time to build! Open **Trinket** and name your project `Y2-T3-W2-Parameters`. Three rounds — thumbs up in Zoom when each one runs. 👍
+Time to build! Open **Pickcode** and name your project `Y2-T3-W2-Parameters`. Three rounds — thumbs up in Zoom when each one runs. 👍
 
 ### Round 1 — Greet Anyone (⭐)
 
@@ -549,7 +549,7 @@ Next week (**Week 3: Return Values**) we learn the magic word `return` — how a
 
 ## 📚 Homework: Custom Card Maker 💌
 
-Write a **Custom Card Maker** in Trinket. Build ONE function that prints a personalised card, then call it several times with different arguments.
+Write a **Custom Card Maker** in Pickcode. Build ONE function that prints a personalised card, then call it several times with different arguments.
 
 **Requirements:**
 1. Write a function `make_card(name, message, emoji)` with **three parameters**
@@ -574,9 +574,9 @@ Write a **Custom Card Maker** in Trinket. Build ONE function that prints a perso
 - ⭐⭐ Make the border and layout beautiful (borders that fit the message)
 - ⭐⭐⭐ Add a `loop` that calls `make_card` for a list of names, all with the same message
 
-**Trinket name:** `Y2-T3-W2-Parameters`
+**Pickcode name:** `Y2-T3-W2-Parameters`
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 
 ---
 

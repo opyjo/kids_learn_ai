@@ -4,7 +4,6 @@ import { LessonBreadcrumbs } from "@/components/lessons/lesson-breadcrumbs";
 import type {
 	Lesson,
 	LessonNavigation,
-	LessonVariant,
 } from "@/components/lessons/viewer/lesson-viewer.types";
 import { SiteHeader } from "@/components/site-header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,7 +14,6 @@ interface LessonViewerShellProps {
 	courseSlug?: string;
 	courseTitle?: string;
 	navigation: LessonNavigation;
-	variant: LessonVariant;
 	mainPanel: React.ReactNode;
 	codePanel?: React.ReactNode;
 	outline?: React.ReactNode;
@@ -26,7 +24,6 @@ export function LessonViewerShell({
 	courseSlug,
 	courseTitle,
 	navigation,
-	variant,
 	mainPanel,
 	codePanel,
 	outline,
@@ -34,7 +31,7 @@ export function LessonViewerShell({
 	const [isWideDesktop, setIsWideDesktop] = useState(false);
 	const [isHeaderHidden, setIsHeaderHidden] = useState(false);
 	const lastScrollYRef = useRef(0);
-	const hasCodePanel = variant === "level-term" && Boolean(codePanel);
+	const hasCodePanel = Boolean(codePanel);
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia("(min-width: 1280px)");

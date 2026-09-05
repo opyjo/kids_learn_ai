@@ -60,7 +60,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: Lucky Dice 🎲🏆
 
-  Time to build a real dice game! Each round adds a new layer of luck. Type it in Trinket, run it, and give a **thumbs up** in Zoom when your code works. Remember: `import random` goes at the very top!
+  Time to build a real dice game! Each round adds a new layer of luck. Type it in Pickcode, run it, and give a **thumbs up** in Zoom when your code works. Remember: `import random` goes at the very top!
 
   ### Round 1 — First Roll (⭐)
   1. Add `import random` at the top
@@ -88,7 +88,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Lucky Score 🎲🏆
 
-  Build a **"Lucky Score"** game in Trinket — a dice game with a running score AND lives, all powered by `random`.
+  Build a **"Lucky Score"** game in Pickcode — a dice game with a running score AND lives, all powered by `random`.
 
   **Requirements:**
   1. `import random` at the very top
@@ -116,7 +116,7 @@ take_home_assignment: |
   - ⭐⭐ Add `lives` that go down on a roll of 1, and stop the game when lives reach 0
   - ⭐⭐⭐ Add a `random.choice()` reward list — every time the score passes 20, the player wins a random bonus item, printed with an emoji
 
-  **Submit:** Save your Trinket (name it `Y2-T2-W5-Randomness`), click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project (name it `Y2-T2-W5-Randomness`), choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: Does AI Roll Dice Too?
 
@@ -192,7 +192,7 @@ print("You rolled:", roll)
 
 ### 🖥️ Try It Now (Zoom Checkpoint)
 
-Open **Trinket** and name your project `Y2-T2-W5-Randomness`. Type the dice roll above and click **▶ Run** — then run it **five times**. Different numbers each time? Give a **thumbs up** in Zoom! 👍
+Open **Pickcode** and name your project `Y2-T2-W5-Randomness`. Type the dice roll above and click **▶ Run** — then run it **five times**. Different numbers each time? Give a **thumbs up** in Zoom! 👍
 
 ---
 
@@ -374,7 +374,7 @@ while lives > 0:
 
 ## 🎮 Part 5: Class Activity — Lucky Dice
 
-Time to build it live! Follow along in Trinket (`Y2-T2-W5-Randomness`). Full instructions are in the activity panel — here's the map:
+Time to build it live! Follow along in Pickcode (`Y2-T2-W5-Randomness`). Full instructions are in the activity panel — here's the map:
 
 - **Round 1 (⭐):** Roll one dice and print it. Run it five times for five different results.
 - **Round 2 (⭐⭐):** A `for` loop that rolls **two dice** three times, keeping a **running total**.
@@ -411,7 +411,7 @@ Both games run on exactly the skills you mastered today: `random`, a loop, and s
 
 ## 📚 Homework: Lucky Score 🎲🏆
 
-Build a **"Lucky Score"** game in Trinket — a dice game with a running score AND lives, all powered by `random`.
+Build a **"Lucky Score"** game in Pickcode — a dice game with a running score AND lives, all powered by `random`.
 
 **Requirements:**
 1. `import random` at the very top
@@ -426,7 +426,7 @@ Build a **"Lucky Score"** game in Trinket — a dice game with a running score A
 - ⭐⭐ Add `lives` that go down on a roll of 1, and stop the game when lives reach 0
 - ⭐⭐⭐ Add a `random.choice()` reward list — every time the score passes 20, win a random bonus item, printed with an emoji
 
-**Submit:** Save your Trinket (name it `Y2-T2-W5-Randomness`), click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project (name it `Y2-T2-W5-Randomness`), choose **Share → Anyone with link → View Code**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

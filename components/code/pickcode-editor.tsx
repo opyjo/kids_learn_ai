@@ -7,74 +7,78 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { PICKCODE_ORIGIN } from "@/lib/pickcode";
 
-interface TrinketEditorProps {
+interface PickcodeEditorProps {
 	initialCode?: string;
 	className?: string;
 }
 
-export function TrinketEditor({
+export function PickcodeEditor({
 	initialCode = "",
 	className,
-}: Readonly<TrinketEditorProps>) {
+}: Readonly<PickcodeEditorProps>) {
 	const [copied, setCopied] = useState(false);
 
-	const handleCopyCode = () => {
-		navigator.clipboard.writeText(initialCode);
+	const handleCopyCode = async () => {
+		await navigator.clipboard.writeText(initialCode);
 		setCopied(true);
 		setTimeout(() => setCopied(false), 2000);
 	};
 
-	const handleOpenTrinket = () => {
-		window.open("https://trinket.io/python", "_blank", "noopener,noreferrer");
+	const handleOpenPickcode = () => {
+		window.open(`${PICKCODE_ORIGIN}/home`, "_blank", "noopener,noreferrer");
 	};
 
 	return (
-		<Card className={`flex flex-col ${className}`}>
+		<Card className={`flex flex-col ${className || ""}`}>
 			<CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
-				{/* Footer Info */}
 				<div className="p-3 bg-gray-950 border-t border-gray-800">
 					<p className="text-xs text-gray-400 text-center">
-						💡 Tip: Save your Trinket.io projects to share with friends and
-						teachers!
+						💡 Save your Pickcode project, then share a View Code link with your
+						teacher.
 					</p>
 				</div>
 
-				{/* Starter Code Section */}
 				{initialCode ? (
 					<>
 						<div className="p-3 bg-gray-50 dark:bg-gray-900/50 border-b">
-							<div className="flex items-center justify-between">
+							<div className="flex items-center justify-between gap-3">
 								<p className="font-semibold text-sm text-gray-900 dark:text-gray-100 flex items-center gap-2">
-									<Code2 className="h-4 w-4" />
-									Starter Code:
+									<Code2 className="h-4 w-4" aria-hidden="true" />
+									Starter Code
 								</p>
-								<div className="flex items-center gap-2">
+								<div className="flex flex-wrap items-center justify-end gap-2">
 									<Button
 										variant="outline"
 										size="sm"
-										onClick={handleOpenTrinket}
+										onClick={handleOpenPickcode}
 										className="rounded-full text-xs h-7"
-										aria-label="Open Trinket.io in new tab"
 									>
-										<ExternalLink className="h-3 w-3 mr-1.5" />
-										Open Trinket.io
+										<ExternalLink
+											className="h-3 w-3 mr-1.5"
+											aria-hidden="true"
+										/>
+										Open Pickcode
 									</Button>
 									<Button
 										variant="outline"
 										size="sm"
 										onClick={handleCopyCode}
 										className="rounded-full text-xs h-7"
-										aria-label={copied ? "Code copied!" : "Copy code"}
+										aria-label={copied ? "Code copied" : "Copy starter code"}
 									>
 										{copied ? (
 											<>
-												<Check className="h-3 w-3 mr-1.5 text-green-600" />
+												<Check
+													className="h-3 w-3 mr-1.5 text-green-600"
+													aria-hidden="true"
+												/>
 												Copied!
 											</>
 										) : (
 											<>
-												<Copy className="h-3 w-3 mr-1.5" />
+												<Copy className="h-3 w-3 mr-1.5" aria-hidden="true" />
 												Copy Code
 											</>
 										)}
@@ -86,7 +90,7 @@ export function TrinketEditor({
 							<div className="p-4 h-full overflow-auto">
 								<SyntaxHighlighter
 									language="python"
-									style={vscDarkPlus as any}
+									style={vscDarkPlus}
 									customStyle={{
 										margin: 0,
 										padding: 0,
@@ -111,23 +115,17 @@ export function TrinketEditor({
 					</div>
 				)}
 
-				{/* Instructions - Below Starter Code */}
 				<div className="p-4 bg-gray-50 dark:bg-gray-900/50 border-b">
 					<div className="space-y-3">
 						<p className="font-semibold text-sm text-gray-900 dark:text-gray-100 flex items-center gap-2">
-							<Play className="h-4 w-4" />
-							Quick Start Guide:
+							<Play className="h-4 w-4" aria-hidden="true" />
+							Quick Start Guide
 						</p>
 						<ol className="list-decimal list-inside space-y-2 text-sm text-gray-700 dark:text-gray-300">
-							<li>
-								Copy the starter code above (click the "Copy Code" button)
-							</li>
-							<li>
-								Click the "Open Trinket.io" button above to open it in a new tab
-							</li>
-							<li>Paste the code into the Trinket.io editor</li>
-							<li>Click "Run" to execute your code</li>
-							<li>Experiment, modify, and have fun!</li>
+							<li>Copy the starter code above.</li>
+							<li>Open Pickcode and create a Python project.</li>
+							<li>Paste the code into main.py and press Play.</li>
+							<li>Experiment, save, and share a View Code project link.</li>
 						</ol>
 					</div>
 				</div>

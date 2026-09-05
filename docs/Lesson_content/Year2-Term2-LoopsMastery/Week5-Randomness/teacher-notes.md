@@ -44,14 +44,14 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' Trinket accounts — today's project name is `Y2-T2-W5-Randomness`
+- Students' Pickcode accounts — today's project name is `Y2-T2-W5-Randomness`
 - This teaching guide open during class
 - A physical dice (or dice emoji) on screen share — a lovely tactile hook for the randomness idea
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Trinket runs `import random`** — confirm the module works in Trinket (it does; it's built into Python 3, no install needed)
+1. **Test Pickcode runs `import random`** — confirm the module works in Pickcode (it does; it's built into Python 3, no install needed)
 2. **Pre-write the three "Common Mistakes" snippets** so you can live-run them and let them crash on cue — the `NameError` from a missing import is the most valuable demo of the lesson
 3. **Have a real dice handy** to roll on camera when introducing `randint(1, 6)` — connects the code to something physical
 4. **Prepare the accumulator analogy** — a score card / piggy bank that you keep adding to, not a fresh card each turn
@@ -92,7 +92,7 @@ Introduce the `random` module as a **locked toolbox** that `import random` unloc
 #### Teaching Tips
 
 - **Say it early and often:** "`import random` at the TOP." Repetition now saves a dozen `NameError`s later.
-- Trinket has `random` built in — reassure students there's nothing to install.
+- Pickcode has `random` built in — reassure students there's nothing to install.
 
 ---
 
@@ -200,7 +200,7 @@ Walk through the requirements and the example run. Point out the tiers:
 
 > "⭐ is a score in a loop. ⭐⭐ adds lives and a game-over. ⭐⭐⭐ adds random rewards past 20 points. Any tier counts as done — but try to reach ⭐⭐, because that's exactly the skeleton we build on next week."
 
-Remind them: `import random` at the top, `score` and `lives` set up **before** the loop. Trinket name: `Y2-T2-W5-Randomness`.
+Remind them: `import random` at the top, `score` and `lives` set up **before** the loop. Pickcode name: `Y2-T2-W5-Randomness`.
 
 #### Week 6 Teaser + Wrap-Up (3 minutes)
 
@@ -246,7 +246,7 @@ Stay on 2-3 minutes for questions.
 | Score always shows the same small number | `score = 0` is inside the loop, resetting each turn — move it above the loop |
 | The game loops forever | `lives` is never decreased — check the `if roll == 1:` branch actually has `lives -= 1` |
 | `random.choice` errors | They passed separate items instead of a list — it needs one list argument: `random.choice(["a", "b"])` |
-| Trinket won't run `import random` | It's built in; if it fails, refresh the page or use the repl.it backup |
+| Pickcode won't run `import random` | It's built in; if it fails, refresh the page or use the repl.it backup |
 
 ---
 

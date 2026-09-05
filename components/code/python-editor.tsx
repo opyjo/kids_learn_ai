@@ -126,7 +126,7 @@ export function PythonEditor({
 		if (codeCallsInput(submittedCode)) {
 			setOutput(
 				"Heads up: input() isn't supported in the browser editor.\n" +
-					'Give your variables values directly (e.g. name = "Ada"), or run this program in Trinket or Thonny instead.',
+					'Give your variables values directly (e.g. name = "Ada"), or run this program in Pickcode or Thonny instead.',
 			);
 			setError("");
 			setDebugInfo(null);

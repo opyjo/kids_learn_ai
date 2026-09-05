@@ -44,15 +44,15 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom account with screen share enabled
-- Students' Trinket accounts (Trinket = online Python 3 editor)
+- Students' Pickcode accounts (Pickcode = online Python 3 editor)
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 - A short pre-made list of votes/words to paste into chat if you want a live demo
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, code runs
-2. **Pre-type the Vote Counter** in your own Trinket so you can live-trace it if the class struggles
+1. **Test Zoom and Pickcode** — audio, video, screen share, code runs
+2. **Pre-type the Vote Counter** in your own Pickcode so you can live-trace it if the class struggles
 3. **Prepare the three "surprise" outputs** — the keys-not-values loop, the `ValueError` unpack, and the `KeyError` tally — you'll run these live and let them fail on purpose
 4. **Have the Twi translator ready** — double-check spellings (akwaaba = welcome, medaase = thank you, adamfo = friend); invite students to suggest words in their own languages
 5. **Recall last week** — be ready to remind them that `in` checks keys and `.get()` avoids errors; both return this week
@@ -227,7 +227,7 @@ Stay on the call 2-3 minutes for questions.
 | `ValueError: too many values to unpack` | They forgot `.items()`. A plain loop gives one key; two variables need `.items()`. |
 | `KeyError` in the tally | The `if key in d` check is missing. On the first sighting the slot doesn't exist. Show check-first pattern (or `.get(k, 0)`). |
 | Tally counts letters/spaces oddly | For the word counter, remind them `.split()` breaks on spaces into words; letter-tallies will include repeats — that's correct! |
-| Emoji won't display in Trinket | Occasionally a font issue; have them use plain text values instead — the logic is identical. |
+| Emoji won't display in Pickcode | Occasionally a font issue; have them use plain text values instead — the logic is identical. |
 | Class racing ahead | Push the `.get()` shortcut and the ⭐⭐⭐ "find the highest count" challenge early. |
 
 ---

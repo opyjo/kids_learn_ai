@@ -39,21 +39,21 @@ By the end of this lesson, students will be able to:
 
 - [ ] Every student writes at least one number-backed headline during the Data Journalists activity
 - [ ] The class can correctly explain, out loud, why "umbrellas cause rain" is wrong (correlation ≠ cause)
-- [ ] Every student leaves with a chosen Data Story topic written in their Trinket planner
+- [ ] Every student leaves with a chosen Data Story topic written in their Pickcode planner
 - [ ] Students can point to the exact number that backs each headline they write
 
 ### Materials Needed
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Trinket accounts; today's trinket: `Y2-T7-W6-FindingTheStory`
+- Pickcode accounts; today's Pickcode project: `Y2-T7-W6-FindingTheStory`
 - The screen-time dataset and the reading-club dataset ready to paste
 - This teaching guide open during class
 - A running list (private) of each student's chosen Data Story topic — you'll need it for Week 7
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, and that the solution code runs and prints `42.0` / `115.0`
+1. **Test Zoom and Pickcode** — audio, video, screen share, and that the solution code runs and prints `42.0` / `115.0`
 2. **Have both datasets ready to paste** (screen-time and reading-club) so no live typing eats time
 3. **Prepare 2–3 real headlines** from something students care about (a football result, a music chart) as warm examples
 4. **Rehearse the correlation example** — cold drinks vs sunburn, or umbrellas vs rain — so you can deliver it crisply
@@ -175,7 +175,7 @@ Numbers to nudge with if students stall: Ngozi (8) = double the average (4.0) an
 
 ### Part 6: Plan Your Data Story (13 minutes) — the Week 7 Bridge
 
-This is the second must-not-skip. Every student leaves with a topic. Screen-share the planner comment block and have them fill it in their own Trinket live.
+This is the second must-not-skip. Every student leaves with a topic. Screen-share the planner comment block and have them fill it in their own Pickcode live.
 
 Walk the room (chat/breakouts) and get a topic from each student. **Log every topic privately** — you'll open Week 7 with "Kofi, you picked football goals — ready?"
 

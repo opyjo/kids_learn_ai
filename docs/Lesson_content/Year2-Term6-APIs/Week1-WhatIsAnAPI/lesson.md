@@ -9,7 +9,7 @@ requires_trinket: true
 starter_code: |
   # 🔌 What Is an API? — Your First Mock API!
   # In real apps, programs ask a SERVER on the internet for data.
-  # Trinket can't reach the internet, so today OUR "server" is
+  # Pickcode can't reach the internet, so today OUR "server" is
   # a Python function that gives back a dictionary. Same idea!
 
   # Step 1: Here is a tiny mock API. It takes no request and
@@ -49,7 +49,7 @@ solution_code: |
 class_activities: |
   ## 🎭 Class Activity: Be the API!
 
-  Two activities: first we role-play a request and response with NO computers, then we write and call a real mock API in Trinket.
+  Two activities: first we role-play a request and response with NO computers, then we write and call a real mock API in Pickcode.
 
   ### Part A — "Be the API" Role-Play (⭐)
   Your teacher pairs up the class. One person is the **App** (like a weather app on a phone), the other is the **API** (the server).
@@ -60,7 +60,7 @@ class_activities: |
   Post in the **Zoom chat**: one request you sent and the response you got back.
 
   ### Part B — Write Your First Mock API (⭐⭐)
-  In Trinket, write a mock API function that returns a dictionary, then call it:
+  In Pickcode, write a mock API function that returns a dictionary, then call it:
   1. Write `def get_fact():` that returns `{"fact": "..."}` with your own fun fact
   2. Call it and store the answer in a variable called `response`
   3. Print the whole response, then print just the fact using its key
@@ -94,7 +94,7 @@ take_home_assignment: |
   - ⭐⭐ 3 mock APIs, and one of them takes a *request* (a parameter) like `get_weather(city)`
   - ⭐⭐⭐ Write `get_menu()` that returns a dictionary listing the names of all the other APIs you built — an API that describes your API!
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 ai_activities: |
   ## 🤖 Class Discussion: How AI Assistants Get Real Information
 
@@ -119,7 +119,7 @@ ai_activities: |
 - What an **API** really is: how one program talks to another program
 - The **request → response** cycle (you ask, you get data back)
 - Why an API is like a **menu** — a list of things you're allowed to ask for
-- The honest truth: real APIs talk over the **internet**, but Trinket can't — so this term we build **mock APIs** (Python functions that act like a server and return a dictionary)
+- The honest truth: real APIs talk over the **internet**, but Pickcode can't — so this term we build **mock APIs** (Python functions that act like a server and return a dictionary)
 - How to **write and call** your very first mock API
 
 ---
@@ -201,7 +201,7 @@ Here's where we're going to be completely honest with you.
 
 **Real apps call a server somewhere on the internet.** The weather app on a phone sends its request across the world to a computer in a data centre, which sends the response back. That needs a real network connection.
 
-**Trinket cannot reach the internet.** It runs Python safely in your browser with no network access. So it *cannot* make a real request to a real server.
+**Pickcode cannot reach the internet.** It runs Python safely in your browser with no network access. So it *cannot* make a real request to a real server.
 
 Does that stop us? Not at all. This term we build **mock APIs**.
 
@@ -213,7 +213,7 @@ Does that stop us? Not at all. This term we build **mock APIs**.
 | How you send a request | Over the **internet** | By **calling the function** |
 | What comes back | A response (usually a dictionary/JSON) | A **returned dictionary** |
 | Where the data comes from | A live database | Values **we write** in the function |
-| Works in Trinket? | ❌ No (needs the network) | ✅ Yes! |
+| Works in Pickcode? | ❌ No (needs the network) | ✅ Yes! |
 
 The skills are the *same*. When you later write real programs on a computer with internet, you'll swap the mock function for a real request — and everything you learned this term still applies. Today we learn the pattern; the internet is just plumbing we add later.
 
@@ -221,7 +221,7 @@ The skills are the *same*. When you later write real programs on a computer with
 
 ## 🔧 Part 5: Your First Mock API
 
-Let's build the smallest possible API — one that hands back a fun fact. Open **Trinket** and name it `Y2-T6-W1-WhatIsAnAPI`.
+Let's build the smallest possible API — one that hands back a fun fact. Open **Pickcode** and name it `Y2-T6-W1-WhatIsAnAPI`.
 
 ```python
 # A mock API: a function that returns a dictionary "response"
@@ -421,7 +421,7 @@ This week every response came back as a **dictionary**. Next week we meet **JSON
 
 - ✅ You can explain what an API is (one program asking another for data)
 - ✅ You know the **request → response** cycle — you ask, you get data back
-- ✅ You understand why we use **mock APIs** in Trinket (no internet — but the same pattern!)
+- ✅ You understand why we use **mock APIs** in Pickcode (no internet — but the same pattern!)
 - ✅ You wrote and called your first mock API returning a dictionary
 - ✅ You built an API that takes a **request** (a parameter) and read the response by its **key**
 
@@ -451,7 +451,7 @@ Today's advice: Save your work often 💾
 - ⭐⭐ 3 mock APIs, and one of them takes a *request* (a parameter) like `get_weather(city)`
 - ⭐⭐⭐ Write `get_menu()` that returns a dictionary listing the names of all the other APIs you built — an API that describes your API!
 
-**Submit:** Save your Trinket, click **Share**, copy the link, and paste it in the class WhatsApp/email or wherever your teacher asks.
+**Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it in the class WhatsApp/email or wherever your teacher asks.
 
 ---
 

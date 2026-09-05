@@ -16,7 +16,7 @@
 This is the opening class of Term 6, the term that ends in the **AI-Powered Assistant** project and the **API Master Badge**. Students arrive fluent in functions, dictionaries, lists of dicts, loops, and try/except — everything an API needs — but they have never framed those tools as "programs talking to programs." This lesson does one big conceptual job: install the **request → response** mental model, and make the honest deal about mock APIs up front. Three core goals:
 
 1. **Build the mental model with a metaphor** — the restaurant (menu → order → kitchen → food) maps perfectly onto app → request → server → response. Students should be able to re-tell it by the end.
-2. **Be scrupulously honest about mock APIs** — students are 11-13 and sharp; if we pretend Trinket calls the internet, they'll catch us. Say plainly: real APIs use the network, Trinket can't, so our "server" is a function that returns a dictionary. Same pattern, no network.
+2. **Be scrupulously honest about mock APIs** — students are 11-13 and sharp; if we pretend Pickcode calls the internet, they'll catch us. Say plainly: real APIs use the network, Pickcode can't, so our "server" is a function that returns a dictionary. Same pattern, no network.
 3. **Get a real mock API written and called** — every student should call a function, receive a dictionary, and read a value by key before the hour is out.
 
 The heavy lifting here is *conceptual*, not syntactic — they already know how to write a function that returns a dict. The win is that they now see WHY that shape matters.
@@ -27,7 +27,7 @@ By the end of this lesson, students will be able to:
 
 1. Explain in their own words what an API is (one program requesting data from another)
 2. Describe the request → response cycle and identify each half in an example
-3. Explain why this term uses mock APIs (no network in Trinket) and how a mock API differs from a real one
+3. Explain why this term uses mock APIs (no network in Pickcode) and how a mock API differs from a real one
 4. Write a mock API: a function that returns a dictionary
 5. Call a mock API, store the response, and read a value out of it by its key
 
@@ -42,16 +42,16 @@ By the end of this lesson, students will be able to:
 
 - Computer with internet access (teacher and each student)
 - Zoom with screen share and reactions enabled
-- Students' Trinket accounts; today's Trinket name: `Y2-T6-W1-WhatIsAnAPI`
+- Students' Pickcode accounts; today's Pickcode name: `Y2-T6-W1-WhatIsAnAPI`
 - This teaching guide open during class
-- Class WhatsApp group or email thread for sharing Trinket links
+- Class WhatsApp group or email thread for sharing Pickcode links
 - Two volunteers ready for the "Be the API" role-play (or pair the whole class)
 
 ### Pre-Lesson Preparation (15 minutes before class)
 
-1. **Test Zoom and Trinket** — audio, video, screen share, and confirm a `def ... return {}` snippet runs
+1. **Test Zoom and Pickcode** — audio, video, screen share, and confirm a `def ... return {}` snippet runs
 2. **Rehearse the restaurant analogy** so it's crisp — this is the spine of the whole lesson
-3. **Prepare the honesty moment** — decide your exact wording for "Trinket can't reach the internet, so our server is a function." Owning this early earns trust.
+3. **Prepare the honesty moment** — decide your exact wording for "Pickcode can't reach the internet, so our server is a function." Owning this early earns trust.
 4. **Line up the role-play** — either two confident volunteers or a plan to pair the whole class in breakout rooms
 5. **Have the Term 6 roadmap ready** — W2 JSON, W3 build your own mock API, W4 status codes/errors, W5 chatbot intents, W6-7 assemble the assistant, W8 showcase + **API Master Badge**
 6. **Pre-load the common `KeyError` demo** — you'll want to trigger it live
@@ -118,7 +118,7 @@ Screen-share the request→response diagram from the lesson and walk one arrow a
 
 This is the integrity moment. Do not skip or soften it.
 
-> "Here's the honest truth. Real apps send their request across the INTERNET to a server far away. Trinket runs Python safely in your browser and cannot reach the internet — so it can't make a real request. Does that stop us? No. This term our 'server' is a Python FUNCTION that returns a dictionary. We call that a MOCK API. The internet is just plumbing we add later — the pattern is identical."
+> "Here's the honest truth. Real apps send their request across the INTERNET to a server far away. Pickcode runs Python safely in your browser and cannot reach the internet — so it can't make a real request. Does that stop us? No. This term our 'server' is a Python FUNCTION that returns a dictionary. We call that a MOCK API. The internet is just plumbing we add later — the pattern is identical."
 
 Screen-share the "Real API vs Mock API" comparison table and walk each row. The key takeaway students must leave with: **the skills are the same; only the delivery (network vs function call) differs.**
 
@@ -150,7 +150,7 @@ Then have pairs post one request/response they exchanged in the Zoom chat.
 
 ### Part 5: Write & Call Your First Mock API (17 minutes)
 
-Now to Trinket (`Y2-T6-W1-WhatIsAnAPI`). Live-code alongside the class.
+Now to Pickcode (`Y2-T6-W1-WhatIsAnAPI`). Live-code alongside the class.
 
 **Part B (⭐⭐):** Build `get_fact()` returning a dictionary, call it into `response`, print the whole dict, then print `response["fact"]`. Make the two prints explicit so students SEE the difference between the full response and one value.
 
@@ -237,12 +237,12 @@ Stay on 2-3 minutes for questions.
 
 | Problem | Solution |
 |---|---|
-| "Is this a REAL API?" (sharp student) | Celebrate it. "No — it's a *mock*. Real pattern, made-up data, no internet. That's the honest deal for Trinket." |
+| "Is this a REAL API?" (sharp student) | Celebrate it. "No — it's a *mock*. Real pattern, made-up data, no internet. That's the honest deal for Pickcode." |
 | Student prints inside the function, gets `None` back | Show `return` vs `print`; use the waiter analogy: the API must hand the data back |
 | `<function get_fact at 0x...>` in output | They forgot `()`. "Brackets mean 'send the request'." |
 | `KeyError` everywhere | Have them print the WHOLE response first to see the real keys, then read by an existing key |
 | Role-play feels awkward on Zoom | Do it as a whole-class call-and-response instead of pairs: you're the App, class is the API |
-| Trinket down | repl.it backup link in chat; the code is plain Python 3 and runs anywhere |
+| Pickcode down | repl.it backup link in chat; the code is plain Python 3 and runs anywhere |
 
 ---
 

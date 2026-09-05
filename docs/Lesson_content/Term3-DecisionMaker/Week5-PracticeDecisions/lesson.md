@@ -24,7 +24,7 @@ class_activities: |
 
   1. Your teacher puts you in a breakout room with a partner
   2. Choose a problem to solve with if/else (password, age, score, etc.)
-  3. Build a decision-making program together in a shared Trinket (one person shares their screen)
+  3. Build a decision-making program together in a shared Pickcode (one person shares their screen)
   4. Test it with different inputs
   5. Back in the main room, share your screen and present your program to the class!
 
@@ -48,7 +48,7 @@ take_home_assignment: |
   - Score checker (pass/fail)
   - Yes/No game
 
-  **Submit:** Share your Trinket link with your instructor.
+  **Submit:** Share your Pickcode project link with your instructor.
 ai_activities: |
   ## 🤖 Did You Know? AI Connection
 
@@ -317,4 +317,3 @@ _Instagram: @kids_learn_ai_
 ---
 
 _Questions? Stuck on something? Don't worry! Ask your instructor or parent for help. Remember: asking questions is how all great coders learn!_
-

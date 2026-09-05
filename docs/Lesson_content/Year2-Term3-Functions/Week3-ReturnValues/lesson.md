@@ -61,7 +61,7 @@ solution_code: |
 class_activities: |
   ## 🎮 Class Activity: The Answer Machine 🤖📤
 
-  Today you build functions that **give answers back**, then USE those answers. Run each in Trinket and give a **thumbs up** in Zoom when it works!
+  Today you build functions that **give answers back**, then USE those answers. Run each in Pickcode and give a **thumbs up** in Zoom when it works!
 
   ### Round 1 — area() (⭐)
   Write a function `area(w, h)` that **returns** `w * h`. Then store the result and print it:
@@ -90,7 +90,7 @@ class_activities: |
 take_home_assignment: |
   ## 📚 Homework: Calculator Functions
 
-  Build a **Calculator Functions** program in Trinket. This time every calculation lives in a function that **returns** its answer — then your program combines the returned answers.
+  Build a **Calculator Functions** program in Pickcode. This time every calculation lives in a function that **returns** its answer — then your program combines the returned answers.
 
   **Requirements:**
   1. Write at least **3 functions that RETURN** a result (e.g. `add(a, b)`, `subtract(a, b)`, `multiply(a, b)`)
@@ -110,7 +110,7 @@ take_home_assignment: |
   - ⭐⭐ Feed one function's return straight into another (e.g. `multiply(add(10, 5), 2)`)
   - ⭐⭐⭐ Add an `average(a, b, c)` function that returns the mean, and a function that returns `True`/`False` for "is the total over 100?"
 
-  **Submit:** Save your Trinket, click **Share**, copy the link, and paste it wherever your teacher asks.
+  **Submit:** Save your Pickcode project, choose **Share → Anyone with link → View Code**, copy the project link, and paste it wherever your teacher asks.
 ai_activities: |
   ## 🤖 Quick Think: An AI Model Is a Giant Function
 
@@ -424,7 +424,7 @@ def greet(name):
 
 ## 🎮 Class Activity: The Answer Machine 🤖
 
-Time to build functions that hand answers back — and then USE those answers. Run each in Trinket; **thumbs up** in Zoom when it works!
+Time to build functions that hand answers back — and then USE those answers. Run each in Pickcode; **thumbs up** in Zoom when it works!
 
 ### Round 1 — area() (⭐)
 
@@ -530,7 +530,7 @@ Next week we solve exactly why that happens — and you'll learn how to design c
 
 ## 📚 Homework: Calculator Functions
 
-Build a **Calculator Functions** program in Trinket. Every calculation lives in a function that **returns** its answer — then your program combines the returned answers.
+Build a **Calculator Functions** program in Pickcode. Every calculation lives in a function that **returns** its answer — then your program combines the returned answers.
 
 **Requirements:**
 1. Write at least **3 functions that RETURN** a result (e.g. `add(a, b)`, `subtract(a, b)`, `multiply(a, b)`)
@@ -550,7 +550,7 @@ Final answer: 30
 - ⭐⭐ Feed one function's return straight into another (e.g. `multiply(add(10, 5), 2)`)
 - ⭐⭐⭐ Add an `average(a, b, c)` function that returns the mean, and a function that returns `True`/`False` for "is the total over 100?"
 
-**Submit:** Save your Trinket (`Y2-T3-W3-ReturnValues`), click **Share**, copy the link, and paste it wherever your teacher asks.
+**Submit:** Save your Pickcode project (`Y2-T3-W3-ReturnValues`), choose **Share → Anyone with link → View Code**, copy the link, and paste it wherever your teacher asks.
 
 ---
 

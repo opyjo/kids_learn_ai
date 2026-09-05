@@ -43,7 +43,7 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share enabled for students
-- Students' finished `Y2-T7-W7` Data Story Trinkets (remind them in advance!)
+- Students' finished `Y2-T7-W7` Data Story Pickcode projects (remind them in advance!)
 - The quiz questions (in the lesson) — decide whether to screen-share or read aloud
 - This teaching guide
 - Class WhatsApp group/email for sharing links and celebration
@@ -104,7 +104,7 @@ The heart of the lesson. Each student reports like a **news journalist** using t
 - **Model the first report yourself** or have a confident volunteer go first, so the news-reporter format is clear. Really lean into the "Breaking news!" framing — it makes shy students smile and lowers the pressure.
 - **Push for insight, not just numbers.** If a student says "mango got 3 votes," prompt: "And what does that MEAN? Out of how many?" Coach them toward "half the class."
 - **Coach the feedback.** The first time someone types "it's good", redirect: "Be specific — what exactly did you like about their finding or chart?" Reinforce: kind, specific, helpful.
-- **Protect nervous students.** Offer options: share screen, OR you run their shared Trinket link while they narrate, OR they just read their headline and one insight. Never force screen-sharing.
+- **Protect nervous students.** Offer options: share screen, OR you run their shared Pickcode link while they narrate, OR they just read their headline and one insight. Never force screen-sharing.
 - **Celebrate every report by name.** "Let's get a 🔥 in the chat for Chidi's finding!" Every student should feel seen.
 - **Handle live bugs warmly:** "Ooh, a live bug — breaking news! Real data scientists debug in public all the time." Model calm debugging.
 
@@ -189,7 +189,7 @@ Use today to finalise your term picture of each student:
 | Feedback chat goes quiet | Prompt specifically: "Drop a 🔥 and one thing you liked about Amara's insight!" |
 | Quiz too easy / too hard | Skip ahead or slow down; add a bonus "explain WHY" for fast classes |
 | Large class, not enough time for all reports | Two rounds, cap at 90 seconds each, or group reports into breakout rooms with a spokesperson |
-| Student forgot their Trinket | Have them open the class solution and walk through it as if it were theirs — still a valid reporting experience |
+| Student forgot their Pickcode | Have them open the class solution and walk through it as if it were theirs — still a valid reporting experience |
 
 ---
 

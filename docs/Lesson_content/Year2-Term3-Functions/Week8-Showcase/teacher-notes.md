@@ -43,7 +43,7 @@ By the end of this lesson, students will be able to:
 ### Materials Needed
 
 - Computer with internet, Zoom with screen share enabled for students
-- Students' finished `Y2-T3-W7` Text Adventure Trinkets (remind them in advance!)
+- Students' finished `Y2-T3-W7` Text Adventure Pickcode projects (remind them in advance!)
 - The quiz questions (in the lesson) — decide whether to screen-share or read aloud
 - This teaching guide
 - Class WhatsApp group/email for sharing links and celebration
@@ -104,7 +104,7 @@ The heart of the lesson — and the highlight for students. Each coder shares th
 - **Model the first play-test yourself** or have a confident volunteer go first, so the format is clear (author drives, a classmate chooses).
 - **Playtesting others' games is the joy — lean into it.** Rotate who calls out the choices so everyone gets to "play". This is what students will remember.
 - **Coach the feedback.** The first time someone types "it's good", redirect: "Be specific — which scene, which choice?" Reinforce the golden rule: kind, specific, helpful.
-- **Protect nervous students.** Offer options: share screen, OR you run their shared Trinket link, OR they just describe one scene and one function. Never force screen-sharing.
+- **Protect nervous students.** Offer options: share screen, OR you run their shared Pickcode link, OR they just describe one scene and one function. Never force screen-sharing.
 - **Celebrate every adventure by name.** "Let's get a 🔥 in the chat for Ama's temple!" Every student should feel seen.
 - **Handle live bugs warmly:** "Ooh, a live bug — real programmers debug in public all the time!" Model calm debugging (often a wrong `return` value).
 
@@ -189,7 +189,7 @@ Use today to finalise your term picture of each student:
 | Feedback chat goes quiet | Prompt specifically: "Drop a 🔥 and name your favourite choice in Kofi's adventure!" |
 | Quiz too easy / too hard | Skip ahead or slow down; for fast classes add a bonus "explain WHY" on Q9, Q10, Q12 |
 | Large class, not enough time for all play-tests | Two rounds, cap at ~2 minutes each, or group play-tests into breakout rooms with a spokesperson |
-| Student forgot their Trinket | Have them open the class solution and walk through its functions as if it were theirs — still a valid experience |
+| Student forgot their Pickcode | Have them open the class solution and walk through its functions as if it were theirs — still a valid experience |
 
 ---
 
